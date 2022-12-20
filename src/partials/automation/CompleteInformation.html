@@ -1,0 +1,118 @@
+<div id="modal" class="modal modal--is-dialog modal--visible modal--full-height" >
+	<div class="modal__wrapper modal--medium">
+		<a class="icon-close modal--do-close "  ng-click="close()"></a>
+		<div class="modal__content">
+			<h1>{{ 'CompleteInformation_Title' | translate }}</h1>
+			<p>{{ 'CompleteInformation_Subtitle' | translate }}</p>
+		</div>
+
+		<!-- form -->
+		<form name="CompleteInformation" class="userinformation--section">
+			<div class="email--container">
+				<input type="hidden"  ng-model="model.Email" />
+				<p class="item-title">Email: {{ model.Email }}</p>
+			</div>
+    		<div class="container">
+				<div >
+					<label class="label" for="FirstName">*{{ 'CompleteInformation_FirstName' | translate }}:</label>
+					<input name="FirstName" type="text" class="input--text"  ng-model="model.FirstName" data-required ng-maxlength="50" ng-pattern="NameAttributePattern" ng-class="{ 'hasErrors':submitted && CompleteInformation.FirstName.$invalid }"/>
+					<div ng-messages="CompleteInformation.FirstName.$error" ng-if='submitted' class="error-messages--container" >
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label" for="LastName">*{{ 'CompleteInformation_LastName' | translate }}:</label>
+					<input name="LastName" type="text" class="input--text"  ng-model="model.LastName" data-required ng-maxlength="50" ng-pattern="NameAttributePattern" ng-class="{ 'hasErrors':submitted && CompleteInformation.LastName.$invalid }"/>
+					<div ng-messages="CompleteInformation.LastName.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label" for="Address">*{{ 'CompleteInformation_Address' | translate }}:</label>
+					<input name="Address" type="text" class="input--text" ng-model="model.Address" data-required ng-maxlength="100" ng-pattern="AddressPattern" ng-class="{ 'hasErrors': submitted && CompleteInformation.Address.$invalid }"/>
+					<div ng-messages="CompleteInformation.Address.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{'General_Required_Field' | translate}}</div>
+						<div ng-message="maxlength" class="error">{{'General_MaxLength_Field' | translate}}</div>
+						<div ng-message="pattern" class="error">{{'General_Invalid_Field' | translate}}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label">*{{ 'CompleteInformation_Country' | translate }}:</label>
+					<dropdown class="dropdown dropdown--full" id="dd-countries" list="model.Countries" name="IdCountry" ng-model="model.IdCountry" ng-required="true" ng-change="loadStates()" property="Name" id-value="IdCountry"></dropdown>
+					<div ng-messages="CompleteInformation.IdCountry.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label ">*{{ 'CompleteInformation_State' | translate }}:</label>
+					<dropdown class="dropdown dropdown--full" id="ss-states" name="IdState" list="model.States" ng-model="model.IdState" ng-required="true" ng-change="model.StateDirty=true;" property="Name" id-value="IdState"></dropdown>
+					<div ng-messages="CompleteInformation.IdState.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label" for="CityName">*{{ 'CompleteInformation_City' | translate }}:</label>
+					<input name="CityName" type="text" class="input--text" ng-model="model.CityName" data-required="true" ng-maxlength="200" ng-pattern="NameAttributePattern" ng-class="{ 'hasErrors': submitted && CompleteInformation.CityName.$invalid }"/>
+					<div ng-messages="CompleteInformation.CityName.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label" for="PhoneNumber">*{{ 'CompleteInformation_PhoneNumber' | translate }}</label>
+					<input name="PhoneNumber" type="text" class="input--text" ng-model="model.PhoneNumber" data-required ng-maxlength="25" ng-pattern="PhoneNumberPattern" ng-class="{ 'hasErrors': submitted && CompleteInformation.PhoneNumber.$invalid }"/>
+					<div ng-messages="CompleteInformation.PhoneNumber.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label" for="ZipCode">*{{ 'CompleteInformation_ZipCode' | translate }}</label>
+					<input name="ZipCode" type="text" class="input--text" ng-model="model.ZipCode"  data-required="true" ng-maxlength="100" ng-pattern="NameAttributePattern" ng-class="{ 'hasErrors': submitted && CompleteInformation.ZipCode.$invalid}"/>
+					<div ng-messages="CompleteInformation.ZipCode.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+					</div>
+				</div>
+
+				<div>
+					<label class="label" for="Company" >*{{ 'CompleteInformation_Company' | translate }}</label>
+					<input name="Company" type="text" class="input--text" ng-class="{ 'hasErrors': submitted && CompleteInformation.Company.$invalid }"  ng-model="model.Company" data-required="true" ng-maxlength="50" ng-pattern="CompanyNamePattern" />
+					<div ng-messages="CompleteInformation.Company.$error" ng-if='submitted' class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+					</div>
+				</div>
+				<div>
+					<label class="label">*{{ 'CompleteInformation_Industry' | translate }}:</label>
+					<dropdown class="dropdown dropdown--full" id="dd-industry" name="IdIndustry" list="model.Industries" dropup="true" ng-model="model.IdIndustry" ng-change="model.IndustryDirty=true;" ng-required="true" property="Description" id-value="IdIndustry"></dropdown>
+					<div ng-messages="CompleteInformation.IdIndustry.$error" ng-if='submitted'  class="error-messages--container">
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+					</div>
+				</div>
+			</div>
+			<span class="note">{{ 'CompleteInformation_RequiredMessage' | translate }}</span>
+			<div class="modal__action-btn">
+				<button class="button button--alternative button--small" ng-click="close()" data-dismiss="modal">Cancelar</button>
+				<button class="button button--primary button--small"  ng-click="submitted=true;saveContactInfo();">{{ 'CompleteInformation_SaveButton' | translate }}</button>
+			</div>
+
+		</form>
+		<!-- form -->
+	</div>
+</div>

@@ -1,0 +1,43 @@
+{
+  "mercado_libre_integration": {
+    "name": "Mercado Libre",
+    "disconnected": {
+      "title": "Conecta Doppler con Mercado Libre",
+      "subtitle": "Así podrás sincronizar tus productos con las Plantillas de Doppler y enviar Campañas promocionales a tus Contactos. ¿Tienes dudas? Revisa el",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-doppler-con-mercado-libre",
+      "connection_error": "Ouch! No pudimos conectar con Mercado Libre vuelve a intentarlo luego.",
+      "select_country_text": "Selecciona el país de tu cuenta de Mercado Libre:",
+      "countries": {
+        "ar": "Argentina",
+        "bo": "Bolivia",
+        "br": "Brasil",
+        "cl": "Chile",
+        "co": "Colombia",
+        "cr": "Costa Rica",
+        "do": "Dominicana",
+        "ec": "Ecuador",
+        "sv": "El Salvador",
+        "gt": "Guatemala",
+        "hn": "Honduras",
+        "mx": "México",
+        "ni": "Nicaragua",
+        "pa": "Panamá",
+        "py": "Paraguay",
+        "pe": "Perú",
+        "uy": "Uruguay",
+        "ve": "Venezuela"
+      }
+    },
+    "connected": {
+      "title": "Tu tienda de Mercado Libre está conectada con Doppler",
+      "subtitle": "Ya puedes sincronizar tus productos con las Plantillas de Doppler y enviar Campañas promocionales a tus Contactos.",
+      "store": "Cuenta conectada:",
+      "disconnect": "Desconectar",
+      "disconnect_popup": {
+        "title": "Confirma que quieres desconectar la integración",
+        "description": "Si lo haces, ya no podrás importar tus productos de Mercado Libre en las Plantillas de Doppler."
+      }
+    }
+  }
+}

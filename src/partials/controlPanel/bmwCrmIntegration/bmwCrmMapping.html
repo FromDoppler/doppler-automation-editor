@@ -1,0 +1,64 @@
+<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="bmwCrm.connected && bmwCrm.showMapping">
+    <div>
+        <div class="authentication-container connected">
+            <div>
+                <span class="control-panel-section-title">{{ 'bmwcrm_integration.mapping.title' | translate }}</span>
+                <span class="control-panel-section-subtitle">{{ 'bmwcrm_integration.mapping.subtitle' | translate }}</span>
+            </div>
+        </div>
+        <hr class="full" style="width: calc(100% + 40px);" />
+        <p class="integration-information-text">{{ 'bmwcrm_integration.mapping.selected_data_entity' | translate }}: <strong>{{ bmwCrm.selectedEntity.description }}</strong>
+        </p>
+        <p class="integration-information-text">{{ 'bmwcrm_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ bmwCrm.selectedList.ListName }}</strong></p>
+        <div class="dp-library margin-t-20 margin-b-20">
+          <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+            <span class="dp-message-icon"></span>
+            <div class="dp-content-message">
+              <span id="messageBar" class="text--small">
+                {{ 'bmwcrm_integration.mapping.email_field_message' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="mapping-container">
+            <div class="grayPanel-box flex-grid" ng-repeat="field in bmwCrm.bmwCrmFields" dp-on-finish-ng-repeat>
+                <div>
+                  <p>{{ 'bmwcrm_integration.mapping.data_entity_field' | translate }}: <b>{{ bmwCrm.getFiledName(field.Name) }}</b></p>
+                </div>
+                <div>
+                    <dropdown class="dropdown dropdown--big"
+                        placeholder="{{'bmwcrm_integration.mapping.select_field_placeholder' | translate}}"
+                        id="dd-userFields{{$index}}"
+                        list="bmwCrm.availablesFields"
+                        name="bmwCrm.userFields"
+                        ng-model="field.idDopplerField"
+                        ng-required="true"
+                        property="name"
+                        id-value="idField"
+                        ng-change="bmwCrm.setAvailablesFields()"
+                        ng-disabled="bmwCrm.availablesFields && bmwCrm.availablesFields.length == 0"
+                        ng-click="bmwCrm.errorMessage=''"></dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="!!bmwCrm.errorMessage.length">
+      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span>{{ bmwCrm.errorMessage }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex-grid-v-center--s-between">
+        <button ng-click="bmwCrm.goBack()" class="button button--alternative">
+                {{ 'bmwcrm_integration.mapping.back' | translate }}
+        </button>
+        <button ng-class="{'button--spinner' : bmwCrm.isMapping}" ng-click="bmwCrm.mapFields()"
+                class="button button--primary">
+          {{ 'bmwcrm_integration.mapping.synchronize' | translate }}
+          <span class="icon-editor-saving hide"></span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+// *************************************
+//
+//   Normalizer
+//   -> Thanks to Nicolas Gallagher's Normalize.css - http://necolas.github.io/normalize.css/
+//
+// *************************************
+$gulp: true !default;
+
+%loadGulpPath {
+    @import '../../node_modules/normalize.css/normalize.css';
+}
+
+%loadWebpackPath {
+    @import '/node_modules/normalize.css/normalize.css';
+}
+
+html {
+    @if $gulp == true {
+      @extend %loadGulpPath;
+    }
+    @else {
+      @extend %loadWebpackPath;
+    }
+}
+
+

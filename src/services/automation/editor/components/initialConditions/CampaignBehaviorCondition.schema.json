@@ -1,0 +1,12 @@
+{
+  "uid": 0,
+  "type": "",
+  "parentUid": 0,
+  "completed": false,
+  "touched" : false,
+  "suscriptionLists": [],
+  "frequency": {},
+  "allSubscribers": false,
+  "confirmationEmailList": [],
+  "sendType": true
+}

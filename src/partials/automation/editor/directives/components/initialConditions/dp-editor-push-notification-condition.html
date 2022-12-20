@@ -1,0 +1,64 @@
+<div class="initial-step--container relative component" ng-class="{'is-error' : hasErrors() }">
+  <span class="icon-pointer"></span>
+  <p ng-if="!isInitialConditionComplete()">
+    {{ 'automation_editor.components.initial_condition.push_notification.scheduled_day' | translate }}
+    <span class="brackets">[[[...]]]</span>
+    {{ 'automation_editor.components.initial_condition.push_notification.domains_sg' | translate }}
+    <span class="brackets">[[[...]]]</span>
+  </p>
+  <span ng-if="component.domains.length >= 1">
+    <p ng-if="component.sendType === SEND_TYPE.INMEDIATE">
+      {{ 'automation_editor.components.initial_condition.push_notification.inmediately_send' | translate }}
+      <strong> {{ 'automation_editor.components.initial_condition.push_notification.inmediately_frequency' | translate }}</strong>
+      <span ng-if="component.domains.length === 1">
+        {{ 'automation_editor.components.initial_condition.push_notification.domains_sg' | translate }}
+      </span>
+      <span ng-if="component.domains.length > 1">
+        {{ 'automation_editor.components.initial_condition.push_notification.domains_pl' | translate }}
+      </span>
+      <strong ng-repeat="domainItem in component.domains">
+        <span ng-if="$index <= 3">
+          <span ng-show="$last && !$first">{{'automation_editor.components.initial_condition.push_notification.and' | translate }}&nbsp;</span>
+          {{ domainItem.Domain}}
+          <span ng-if="!$last && $index < (component.domains.length - 2)">, </span>
+        </span>
+      </strong>
+      <strong ng-if="component.domains.length > 3">...</strong>
+    </p>
+
+    <p ng-if="component.sendType === SEND_TYPE.SCHEDULED">
+      {{ 'automation_editor.components.initial_condition.push_notification.scheduled_day' | translate }}
+      <strong> {{ 'automation_editor.components.initial_condition.push_notification.scheduled_day_frequency' | translate }}</strong>
+      {{ 'automation_editor.components.initial_condition.push_notification.scheduled_day_part2' | translate }}
+      <strong ng-if="component.frequency && component.frequency.date">{{ date }}</strong>
+      {{ component.frequency.time.hour === 1 ? 'automation_editor.components.initial_condition.push_notification.hours_sg' : 'automation_editor.components.initial_condition.push_notification.hours_pl' | translate }}
+      <strong>
+        {{ component.frequency.time.hour > 9 ? component.frequency.time.hour : '0' + component.frequency.time.hour }}:{{ component.frequency.time.minute > 9 ? component.frequency.time.minute : '0' + component.frequency.time.minute }}
+        {{ timeZone }}
+      </strong>
+      <span ng-if="component.domains.length > 1">
+        {{ 'automation_editor.components.initial_condition.push_notification.domains_pl' | translate }}
+      </span>
+      <span ng-if="component.domains.length == 1">
+        {{ 'automation_editor.components.initial_condition.push_notification.domains_sg' | translate }}
+      </span>
+      <strong ng-repeat="domainItem in component.domains">
+        <span ng-if="$index <= 3">
+          <span ng-show="$last && !$first">{{'automation_editor.components.initial_condition.push_notification.and' | translate}}&nbsp;</span>
+          {{ domainItem.Domain}}
+          <span ng-if="!$last && $index < (component.domains.length - 2)">, </span>
+        </span>
+      </strong>
+      <strong ng-if="component.domains.length > 3">...</strong>
+    </p>
+  </span>
+
+  <div class="tip-help--container initial-condition" ng-show="!component.completed || component.hasStartDateExpired">
+    <span class="icon-arrow-friendly"></span>
+    <span class="tip-help" ng-bind-html="'automation_editor.components.initial_condition.push_notification.tip_initial_condition' | translate"></span>
+  </div>
+</div>
+
+<div class="dp-editor-new-step-push">
+    <span class="add-element-line"></span>
+</div>

@@ -1,0 +1,106 @@
+<div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-if="vtex.connected && !vtex.showMapping">
+    <div>
+        <div class="authentication-container connected">
+            <div>
+                <span class="control-panel-section-title">{{ 'vtex_integration.connected.title' | translate }}</span>
+                <span class="control-panel-section-subtitle">
+                  {{ 'vtex_integration.connected.subtitle_list_count' | translate:{ 'availableLists' : zohoCrm.integratedListsAvailable} }}
+                </span>
+            </div>
+            <div class="button--frame">
+                <button type="button" ng-click="vtex.synchronizeAllLists();"
+                    ng-class="{'spin': vtex.importingList && !vtex.disableSync}" ng-disabled="vtex.disableSync"
+                    class="button reload-icon"></button>
+            </div>
+        </div>
+        <div class="dp-library">
+          <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope margin-b-20">
+            <span class="dp-message-icon"></span>
+            <div class="dp-content-message">
+              <span id="messageBar" class="text--small">
+                {{ 'vtex_integration.connected.select_list_warning' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <hr class="full" style="width: calc(100% + 40px);" />
+        <div class="entity-selector-container flex-grid">
+            <dropdown class="dropdown dropdown--big"
+                placeholder="{{vtex.entityPlaceholder}}" id="dd-entities"
+                list="vtex.vtexEntitiesList" name="vtex.selectedEntityId" ng-model="vtex.selectedEntityId"
+                ng-required="true" property="description" id-value="id" ng-disabled="!!vtex.vtexEntitiesList && vtex.vtexEntitiesList.length === 0 || vtex.isLoadingVtexFields"></dropdown>
+
+            <dropdown class="dropdown dropdown--big"
+                placeholder="{{vtex.listPlaceholder}}" id="dd-lists"
+                list="vtex.userList" name="vtex.selectedListId" ng-model="vtex.selectedListId" ng-required="true"
+                property="ListName" id-value="IdList" ng-disabled="!!vtex.userList && vtex.userList.length === 0 || vtex.isLoadingVtexFields"></dropdown>
+            <div>
+                <button type="submit" ng-click="vtex.showMappingSection();" class="button button--primary"
+                    ng-disabled="!vtex.selectedEntityId || !vtex.selectedListId" ng-class="{'button--spinner' : vtex.isLoadingVtexFields}">
+                    {{ 'vtex_integration.connected.synchronize' | translate }}
+                    <span class="icon-editor-saving hide"></span>
+                </button>
+            </div>
+        </div>
+        <div ng-if="vtex.integratedLists.length">
+            <p class="select-list-text">{{ 'vtex_integration.connected.grid_title' | translate }}:</p>
+            <table class="grid">
+                <thead>
+                    <th>{{ 'vtex_integration.connected.entity_name_grid' | translate }}</th>
+                    <th>{{ 'vtex_integration.connected.list_name_grid' | translate }}</th>
+                    <th>{{ 'vtex_integration.connected.last_synchronization_grid' | translate }}</th>
+                    <th>{{ 'vtex_integration.connected.subscribers_count_grid' | translate }}</th>
+                    <th>{{ 'vtex_integration.connected.actions_grid' | translate }}</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="!vtex.importingList && integratedList.SubscribersListStatus !== 5" ng-repeat="integratedList in vtex.integratedLists">
+                        <td ng-show="vtex.integrationToDelete != $index">{{ integratedList.ThirdPartyName }} ({{ integratedList.ThirdPartyAccountName }})</td>
+                        <td class="list-name" ng-show="vtex.integrationToDelete != $index"><ellipsis-with-tooltip text="integratedList.Name" class="stand-alone"></ellipsis-with-tooltip></td>
+                        <td ng-show="vtex.integrationToDelete != $index">{{ integratedList.LastUpdateFormatted ? integratedList.LastUpdateFormatted : '-'  }}</td>
+                        <td ng-show="vtex.integrationToDelete != $index">{{ integratedList.SubscribersCount }}</td>
+                        <td ng-show="vtex.integrationToDelete != $index" class="actions">
+                            <span data-static-tooltip="{{ 'vtex_integration.connected.edit_tooltip' | translate }}">
+                                <a target="_self" class="icon-grid-edit" ng-click="vtex.editMap(integratedList.IdList, integratedList.ThirdPartyId)"></a>
+                            </span>
+                            <span data-static-tooltip="{{ 'vtex_integration.connected.delete_mode_grid.tooltip' | translate }}" class="to-left">
+                                <a ng-click="!vtex.isLoadingVtexFields ? vtex.integrationToDelete = $index : false"><img src="../../../images/grid-delete.svg"></a>
+                            </span>
+                        </td>
+
+                        <td ng-show="vtex.integrationToDelete == $index" class="delete-confirmation-text" colspan="3">
+                            <span class="deleteConfirmationIcon"></span>
+                            <span>{{ 'vtex_integration.connected.delete_mode_grid.message' | translate }}</span>
+                        </td>
+                        <td ng-show="vtex.integrationToDelete == $index" class="delete-confirmation-actions" colspan="2">
+                            <span>
+                                <a ng-click="!vtex.isLoadingVtexFields ? vtex.integrationToDelete = null : false">
+                                    {{ 'vtex_integration.connected.delete_mode_grid.cancel' | translate }}
+                                </a>
+                                |
+                                <a class="delete-text" ng-click="!vtex.isLoadingVtexFields ? vtex.deleteList(integratedList.IdList) : false">
+                                    {{ 'vtex_integration.connected.delete_mode_grid.delete' | translate }}
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr ng-show="vtex.importingList || integratedList.SubscribersListStatus === 5" class="exportingList" ng-repeat="integratedList in vtex.integratedLists">
+                        <td>{{ integratedList.ThirdPartyName }} ({{ integratedList.ThirdPartyAccountName }})</td>
+                        <td class="list-name sync">{{ integratedList.Name }}</td>
+                        <td colspan="3" class="status">
+                            <span class="icon-clock"></span>
+                            <span>&nbsp;{{ 'vtex_integration.connected.synchronizing_grid' | translate }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dp-library margin-t-20 margin-b-20" ng-show="!!vtex.errorMessage.length">
+          <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+            <span class="dp-message-icon"></span>
+            <div class="dp-content-message dp-content-full">
+              <span>{{ vtex.errorMessage }}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,175 @@
+.section--default {
+  background-color: $background-base;
+  padding: 0 $padding-wrapper;
+}
+
+.section--content {
+  padding: 0 7%;
+}
+
+.wrapper {
+    display: block;
+    margin: 0 auto;
+}
+
+.wrapper--default {
+  max-width: $wrapper-max-width;
+}
+
+.background--white {
+  background: $color-white;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--left {
+  text-align: left;
+}
+
+.text--right {
+  text-align: right;
+}
+
+.text--underline {
+  text-decoration: underline;
+}
+
+.text--uppercase {
+  text-transform: uppercase;
+}
+
+.text-emphasis {
+  font-weight: $font_weight-bold;
+  color: $color-darkgrey;
+}
+
+.components--center {
+  & > * {
+    margin: 0 auto;
+  }
+}
+
+.link--default {
+  color: $color-green;
+  &:hover {
+    color: $color-darkgreen;
+  }
+  &.disabled {
+    color:$color-sylver;
+    cursor: text;
+    &:hover {
+      color:$color-sylver;
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.hide--important {
+  display: none !important;
+}
+
+.app {
+  height: $size-full;
+}
+
+.icon-close {
+  cursor: pointer;
+}
+
+.relative {
+  position: relative;
+}
+
+/* Angular ng-cloack style to hide mvc content until load */
+.ng-cloak {
+  display: none !important;
+}
+
+.icon-tip {
+  color: $color-primary;
+  font-size: 16px;
+}
+
+
+.text--small {
+  font-size: $font-size--small;
+}
+
+.text--tiny {
+  font-size: $font-size--tiny;
+}
+.text--base {
+  font-size: $font-size--base;
+}
+.text--medium {
+  font-size: $font-size--medium-alt;
+}
+
+.text--darkgrey {
+  color: $color-darkgrey;
+}
+
+.text--lightgrey {
+  color: $color-lightgrey;
+}
+
+.text--bold {
+  font-weight: $font_weight-bold;
+}
+
+.text--framed {
+  border: 1px solid $color-base;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.h-break-word {
+  overflow-wrap: break-word;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.flex-grid {
+  display: flex;
+}
+
+.flex-grid-v-center {
+  align-items: center;
+  display: flex;
+}
+
+.display-flex-force {
+  display: flex !important;
+}
+
+.flex-grid-v-center--s-between {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.panel-box-app {
+  background-color: #F1F1F1;
+  border: 1px solid #E8E8E8;
+  border-radius: $border-radius--default;
+  box-shadow: 0 0 0 4px $color-white;
+  max-width: $wrapper-max-width;
+  padding: 20px;
+}
+
+.color--yellow {
+  color: $color-yellow;
+}
+
+.display-flex {
+  display: flex;
+}
+
+@include scrollbars(5px, $color-dark, $color-dark);
+

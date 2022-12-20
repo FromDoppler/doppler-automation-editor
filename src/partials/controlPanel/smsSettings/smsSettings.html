@@ -1,0 +1,122 @@
+<h3 class="control-panel-section-title">{{ 'sms_settings.settings_screen.title' | translate }}</h3>
+<p class="description text--small">{{ 'sms_settings.settings_screen.subtitle' | translate }} <a target="_blank" href="{{ 'sms_settings.settings_screen.help_link' | translate }}">{{ 'help_link_text' | translate }}</a>.</p>
+<div class="sms-dashboard--container grid-display two-columns gap-30">
+  <div class="left-container">
+    <h3 class="control-panel-section-title">{{ 'sms_settings.settings_screen.price_container.title' | translate }}</h3>
+    <p class="bigHeading" ng-class="smsSettings.balance === 0 ? 'base-color-font' : smsSettings.balance > 0 ? 'green-color-font' : 'red-color-font'"><span class="currency">US$</span> {{ smsSettings.balance | number:2}}<span ng-show="smsSettings.paymentInProccess">*</span></p>
+    <hr/>
+    <p ng-hide="smsSettings.balance >= 0" class="text--small red-color-font margin-b-20 margin-t-15">{{ 'sms_settings.settings_screen.price_container.alert' | translate }}</p>
+    <p ng-show="smsSettings.paymentInProccess" class="text--small margin-t-15 margin-b-30 text-italic">{{ 'sms_settings.settings_screen.price_container.transfer_in_process' | translate }}</p>
+    <p class="text--small margin-b-20 margin-t-25">{{ 'sms_settings.settings_screen.price_container.legend_1' | translate }}</p>
+    <p class="text--small margin-b-20">{{ 'sms_settings.settings_screen.price_container.legend_2' | translate }}</p>
+    <p class="text--small margin-b-20">{{ 'sms_settings.settings_screen.price_container.legend_3' | translate }}</p>
+    <div class="price-calc--container">
+      <a class="text--small padding-t-15" ng-click="smsSettings.showCalcCreditScreen()"><span class="icon-money"></span> <strong>{{ 'sms_settings.settings_screen.price_container.estimate_purchase' | translate }}</strong></a>
+    </div>
+  </div>
+  <div class="grid-display">
+    <div class="margin-b-20">
+      <h3 class="control-panel-section-title">{{ 'sms_settings.settings_screen.country_list.title' | translate }}</h3>
+      <p class="padding-t-15 text--small">{{ 'sms_settings.settings_screen.country_list.subtitle' | translate }}</p>
+      <div class="margin-t-20 margin-b-20">
+        <div class="grid-display three-columns-grid country-list remove--container" ng-repeat="country in smsSettings.selectedCountries">
+          <div class="margin-l-10">
+            <p class="text--small align-vertical-center">{{country.name}}</p>
+          </div>
+          <div>
+            <p class="text--small align-vertical-center">{{ 'sms_settings.settings_screen.country_list.price_legend' | translate }} US$ {{ country.price | number:5 }}</p>
+          </div>
+          <div class="margin-r-10">
+            <a ng-click="smsSettings.deleteCountryToSendSMS(country.regionCode)"><img class="float-right" src="../../../images/grid-delete.svg"/></a>
+          </div>
+        </div>
+      </div>
+      <hr ng-show="smsSettings.selectedCountries.length === 0"/>
+      <a ng-click="smsSettings.showAddCountry = !!smsSettings.availableCountries.length" ng-show="!smsSettings.showAddCountry && smsSettings.availableCountries.length" class="text--small">
+        <span class="icon-add-element"></span>
+        <strong class="text-uppercase">{{ 'sms_settings.settings_screen.add_country' | translate }}</strong>
+      </a>
+      <span class="text--small text-italic disabled" ng-show="!smsSettings.availableCountries.length">{{ 'sms_settings.settings_screen.no_more_countries' | translate }}</span>
+      <div click-outside="smsSettings.cancelAddCountryToSendSMS()" id="addCountryContainer" ng-show="smsSettings.showAddCountry" class="add-item--box">
+        <div>
+            <dropdown class="dropdown"
+            placeholder="{{smsSettings.countryPlaceholder}}" id="dd-countries"
+            list="smsSettings.availableCountries" name="smsSettings.selectedCountryId" ng-model="smsSettings.selectedCountryId"
+            ng-required="true" property="name" id-value="regionCode"></dropdown>
+        </div>
+        <div class="self-align-center self-justify-center">
+          <a ng-click="smsSettings.cancelAddCountryToSendSMS()" class="base-color-font text--small"><strong class="text-uppercase">{{ 'actions.cancel' | translate }}</strong></a>
+          |
+          <a class="green-color-font text--small text-uppercase" ng-class="smsSettings.selectedCountryId !== null ? '' : 'disabled'" ng-click="smsSettings.addCountryToSendSMS()"><strong>{{ 'actions.add' | translate }}</strong></a>
+        </div>
+      </div>
+    </div>
+    <div class="dp-library">
+      <div class="margin-t-20">
+        <h3 class="control-panel-section-title">{{ 'sms_settings.settings_screen.delivery_options.title' | translate }}</h3>
+      </div>
+      <div class="dp-rowflex">
+        <div class="dp-text-switch m-b-12 m-t-24">
+          <div class="dp-switch">
+            <input
+              type="checkbox"
+              id="checkEnableShippingSchedules"
+              checked={{smsSettings.smsDelivery.EnableShippingSchedules}}
+              ng-model="smsSettings.smsDelivery.EnableShippingSchedules"
+              ng-change="smsSettings.SetAllowSave()" />
+            <label for="checkEnableShippingSchedules">
+              <span></span>
+            </label>
+          </div>
+          <span class="text--small">{{ 'sms_settings.settings_screen.delivery_options.EnableShippingSchedules' | translate }}</span>
+        </div>
+      </div>
+      <div class="dp-rowflex">
+        <ul class="field-group m-l-96 m-r-96">
+          <li class="field-item field-item--50">
+            <label for="hourFrom-1">{{ 'sms_settings.settings_screen.delivery_options.RangeFrom' | translate }}</label>
+            <input
+              dp-integer-input
+              id="hourFrom-1"
+              value={{smsSettings.smsDelivery.ShippingSchedulesFrom}}
+              ng-model="smsSettings.smsDelivery.ShippingSchedulesFrom"
+              ng-blur="smsSettings.validDeliveryFrom()"
+              ng-disabled="!smsSettings.smsDelivery.EnableShippingSchedules"
+              ng-change="smsSettings.SetAllowSave()"
+              style="width:80px;"/>
+            <span> hs</span>
+          </li>
+          <li class="field-item field-item--50">
+            <label for="hourTo-1">{{ 'sms_settings.settings_screen.delivery_options.RangeTo' | translate }}</label>
+            <input
+              dp-integer-input
+              id="hourTo-1"
+              value={{smsSettings.smsDelivery.ShippingSchedulesTo}}
+              ng-model="smsSettings.smsDelivery.ShippingSchedulesTo"
+              ng-blur="smsSettings.validDeliveryTo()"
+              ng-disabled="!smsSettings.smsDelivery.EnableShippingSchedules"
+              ng-change="smsSettings.SetAllowSave()"
+              style="width:80px;"/>
+            <span> hs</span>
+          </li>
+        </ul>
+      </div>
+      <div class="dp-rowflex">
+        <div class="dp-text-switch m-b-12 m-t-12">
+          <div class="dp-switch">
+            <input
+              type="checkbox"
+              id="checkOnlyEnabledWeekdays"
+              checked={{smsSettings.smsDelivery.OnlyEnabledWeekdays}}
+              ng-model="smsSettings.smsDelivery.OnlyEnabledWeekdays"
+              ng-change="smsSettings.SetAllowSave()" />
+            <label for="checkOnlyEnabledWeekdays">
+              <span></span>
+            </label>
+          </div>
+          <span class="text--small">{{ 'sms_settings.settings_screen.delivery_options.OnlyEnabledWeekdays' | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

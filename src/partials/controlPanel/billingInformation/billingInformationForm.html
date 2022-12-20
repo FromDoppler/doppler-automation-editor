@@ -1,0 +1,135 @@
+<script src="/angularjs/intlTelInput.min.js?1566391628801"></script>
+
+<div class="grid-display payment-two-columns margin-t-20 row-gap-10">
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.name' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.firstname"
+      name="name"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.name.$invalid }"
+      ng-required="billingInformationForm.name.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.name.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.lastname' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.lastname"
+      name="lastname"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.lastname.$invalid }"
+      ng-required="billingInformationForm.lastname.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.lastname.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div class="phone-container">
+    <label class="label label--panel">* {{ 'form_labels.phone' | translate }}</label>
+    <input
+      id="billing-phone" type="tel" class="phone-input input--text"
+      ng-model="billingInformation.billingInformationData.phone"
+      ng-required="billingInformationForm.phone.$dirty || billingInformationForm.$submitted"
+      name="phone"
+      ng-class="{'hasErrors': billingInformationForm.phone.$error && billingInformationForm.phone.$dirty}"
+      ng-disabled="isReadOnly();"/>
+  <div ng-messages="billingInformationForm.phone.$error" class="error-messages--container">
+    <div ng-message="isPhoneNumberInvalid" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
+    <div ng-message="isPhoneNumberInvalidTooShort" class="error">{{ 'validation_messages.phone_pattern_too_short' | translate }}</div>
+    <div ng-message="isPhoneNumberInvalidTooLong" class="error">{{ 'validation_messages.phone_pattern_too_long' | translate }}</div>
+    <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    <div ng-show="isPhoneNumberInvalidByChangeCountry" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
+  </div>
+  </div>
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.address' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.address"
+      name="address"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.address.$invalid }"
+      ng-required="billingInformationForm.address.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.address.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.zip_code' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.zipCode"
+      name="zipCode"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.zipCode.$invalid }"
+      ng-required="billingInformationForm.zipCode.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.zipCode.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.country' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="country"
+      list="billingInformation.billingInformationData.countriesList"
+      name="country"
+      ng-class="{ 'hasErrors' : billingInformationForm.country.$invalid }"
+      ng-model="billingInformation.billingInformationData.idCountry"
+      ng-required="billingInformationForm.country.$dirty || billingInformationForm.$submitted"
+      ng-change="billingInformation.onCountryChange(billingInformation.billingInformationData.idCountry)"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.country.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.state' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="state"
+      list="billingInformation.billingInformationData.statesList"
+      name="state"
+      ng-class="{ 'hasErrors' : billingInformationForm.state.$invalid }"
+      ng-model="billingInformation.billingInformationData.idState"
+      ng-required="billingInformationForm.state.$dirty || billingInformationForm.$submitted"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.state.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div>
+    <label class="label label--panel">* {{ 'form_labels.city' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.city"
+      name="city"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.city.$invalid }"
+      ng-required="billingInformationForm.city.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.city.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div>
+    <label class="label label--panel">{{ 'billing_information.billing_email' | translate }}</label>
+    <span class="quote-label padding-b-10">({{ 'billing_information.billing_email_description' | translate }})</span>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.billingEmails"
+      name="billingEmail"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.billingEmail.$invalid }"
+      ng-pattern="billingInformation.billingEmailsRegExp"/>
+    <div ng-messages="billingInformationForm.billingEmail.$error" class="error-messages--container">
+      <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
+    </div>
+  </div>
+</div>

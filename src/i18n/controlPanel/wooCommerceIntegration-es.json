@@ -1,0 +1,26 @@
+{
+  "wooCommerce_integration": {
+    "name": "WooCommerce",
+    "disconnected": {
+      "title": "Conecta Doppler con tu tienda WooCommerce",
+      "subtitle": "Envía automáticamente los Contactos de tu tienda y toda su información a una Lista de Doppler. Además, podrás importar los productos de tu tienda en Plantillas de Email y crear Automations de Carrito Abandonado y Producto Visitado. ¿Tienes dudas? Presiona ",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-formularios-de-wordpress-con-doppler/",
+      "info": "Al presionar \"Conectar\" serás redirigido a WooCommerce, donde podrás realizar todos los pasos necesarios para integrar."
+    },
+    "connected": {
+      "disconnect": "Desconectar",
+      "disconnect_popup": {
+        "title": "¿Estás seguro que deseas desconectar la integración?",
+        "description": "Si desconectas, tu Lista dejará de actualizarse con Suscriptores obtenidos desde WooCommerce y los Automations asociados a la integración se pausarán. De todos modos, no perderás los contactos sincronizados hasta el momento."
+      }
+    },
+    "status": {
+      "title": "Tu tienda WooCommerce ya se encuentra conectada con Doppler",
+      "subtitle": "Ya se están enviando automáticamente los Contactos de tu tienda desde la extensión Doppler para WooCommerce. Además puedes importar los productos de tu tienda en Plantillas de Email y crear Automations de Carrito Abandonado y Producto Visitado. ¿Tienes dudas? Presiona ",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-formularios-de-wordpress-con-doppler/",
+      "back": "Atrás"
+    }
+  }
+}

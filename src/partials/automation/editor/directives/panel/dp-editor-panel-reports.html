@@ -1,0 +1,36 @@
+<div class="automation-reports--panel">
+  <p class="text--tiny text--darkgrey"><strong>{{ 'automation_editor.reports.title' | translate }}</strong></p>
+  <a ng-href="{{getFullReportLink(reports.id, reports.idAction)}}" class="text--tiny link--default">{{ 'automation_editor.reports.full_report' | translate }}</a>
+  <div class="automation-reports--panel-details flex-grid-v-center--s-between">
+    <div class="automation-reports--panel-items">
+      <p class="text--lightgrey text--tiny">{{ 'automation_editor.reports.delivered_mails' | translate }}</p>
+      <p class="text--darkgrey text--medium">{{ reports.deliveredEmails }}</p>
+    </div>
+    <div class="automation-reports--panel-items">
+      <p class="text--lightgrey text--tiny alt">{{ 'automation_editor.reports.open_rate' | translate }}</p>
+      <p class="text--darkgrey text--medium">{{ reports.openRate | number :1 }}%</p>
+    </div>
+    <div class="automation-reports--panel-items">
+      <p class="text--lightgrey text--tiny">{{ 'automation_editor.reports.click_rate' | translate }}</p>
+      <p class="text--darkgrey text--medium">{{ reports.clickRate | number :1 }}%</p>
+    </div>
+  </div>
+  <p class="text--tiny text--lightgrey">{{ 'automation_editor.reports.last_activity' | translate }} <span class="text--darkgrey">{{ reports.lastActivity }}</span></p>
+  <p ng-if="rootComponent.state === AUTOMATION_STATE.PAUSED" class="text--tiny text--lightgrey">
+    {{ 'automation_editor.reports.paused_date' | translate }} <span class="text--darkgrey">{{ pausedDate }}</span>
+  </p>
+  <p ng-if="rootComponent.state === AUTOMATION_STATE.STOPPED" class="text--tiny text--lightgrey">
+    {{ 'automation_editor.reports.stopped_date' | translate }} <span class="text--darkgrey">{{ stoppedDate }}</span>
+  </p>
+</div>
+<hr class="automation-reports--panel-border" />
+<div class="automation-reports--messages" ng-if="!selectedComponent && (rootComponent.state === AUTOMATION_STATE.STOPPED || rootComponent.state === AUTOMATION_STATE.PAUSED)">
+  <p ng-if="rootComponent.state === AUTOMATION_STATE.PAUSED" class="text--small"><strong class="text--uppercase">
+    {{ 'automation_editor.reports.paused_title' | translate }}</strong> <br /> {{ 'automation_editor.reports.paused_description' | translate }}
+  </p>
+  <!-- This code is commented until we have the Stopped reports finished -->
+  <p class="text--small" ng-if="rootComponent.state === AUTOMATION_STATE.STOPPED">
+    <strong class="text--uppercase">{{ 'automation_editor.reports.stopped_title' | translate }}</strong> <br /><span ng-bind-html="'automation_editor.reports.stopped_description_one' | translate"></span> <br />
+    <!--span class="text-alt">{{ 'automation_editor.reports.stopped_description_two' | translate }}</span-->
+  </p>
+</div>

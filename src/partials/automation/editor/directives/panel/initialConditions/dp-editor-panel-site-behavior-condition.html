@@ -1,0 +1,160 @@
+<div class="dp-library margin-b-20" ng-show="showInitConditionMessage()">
+  <div class="dp-wrap-message dp-wrap-info">
+    <span class="dp-message-icon"></span>
+    <div class="dp-content-message">
+      <p>{{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}</p>
+    </div>
+  </div>
+</div>
+<div class="automation-site-behavior--panel">
+  <form name="siteBehaviorForm" class="form--container">
+    <div class="input--group input--group--alt">
+      <p class="title title-with-description">
+        {{'automation_editor.components.initial_condition.site_behavior.panel.title' | translate}}
+      </p>
+      <p class="text--small">
+        {{ 'automation_editor.components.initial_condition.site_behavior.panel.url_tooltip' | translate }}
+      </p>
+    </div>
+    <div ng-repeat="(index, domain) in selectedComponent.domains track by $index">
+      <div class="box-type--container relative" ng-class="{'incomplete' : !siteBehaviorForm['url' + index].$valid, 'focus' : index === selectedIndex }" ng-click="selectedItem($index)">
+        <input class="input--text" type="text"
+          name="url{{index}}"
+          ng-maxlength="200"
+          required="true"
+          ng-class="{'hasErrors': validateUrlDomain(domain,index) }"
+          ng-model="domain.url"
+          ng-change="verifyIfDuplicated(domain, $index)"
+          ng-blur="onDomainBlur($event,domain)"
+          ng-disabled="isReadOnly();"
+          placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.placeholder' | translate}}" />
+        <div ng-show="showErrors" class="error-messages--container" ng-messages="siteBehaviorForm['url' + index].$error">
+          <div ng-message="required"></div>
+          <div ng-message="domain" class="error">
+            <span ng-if="domainVerifiedError">{{'automation_editor.components.initial_condition.site_behavior.panel.validation_messages.domain_non_verified' | translate}} <a class="text--underline" href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings">{{'automation_editor.components.initial_condition.site_behavior.panel.validation_messages.domain_non_verified_link' | translate }}</a></span>
+            <span ng-if="domainRegistrationError">{{'automation_editor.components.initial_condition.site_behavior.panel.validation_messages.domain_non_registered' | translate }} <a class="text--underline" href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings">{{'automation_editor.components.initial_condition.site_behavior.panel.validation_messages.domain_non_registered_link' | translate }}</a></span>
+            <br ng-if="domainVerifiedError || domainRegistrationError" />
+            <span ng-if="urlHasParameters">{{'automation_editor.components.initial_condition.site_behavior.panel.validation_messages.url_has_parameters' | translate }}</span>
+          </div>
+          <div ng-message="duplicated" class="error">
+             {{'automation_editor.components.initial_condition.site_behavior.panel.validation_messages.duplicated_domain' | translate }}
+          </div>
+          <div ng-message="maxlength" class="error">{{'validation_messages.maxlength' | translate}}</div>
+        </div>
+        <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
+        <div class="flex-grid-v-center--s-between" ng-if="siteBehaviorForm['url' + index].$valid">
+          <div class="flex-grid visits-page--box">
+              <dp-editor-dropdown class="dropdown dropdown--tiny"
+              ng-class="{'is-disabled': true}"
+              id="boolean{{index}}"
+              name="boolean{{index}}"
+              property="boolean{{index}}"
+              options="booleanOptions"
+              label="'automation_editor.components.condition.conditionals.subscriber_information.boolean.' + (domain.visitedPage ? 'yes' : 'no') | translate"
+              on-select-option="onVisitedPageSelected(option.value, domain, 'visitedPage')"
+              value-selected="domain.visitedPage"
+              ng-disabled="!isEnableVisitedPage(index) || isReadOnly()">
+              </dp-editor-dropdown>
+              <div class="info text--small">{{'automation_editor.components.initial_condition.site_behavior.panel.visited_page' | translate}}</div>
+          </div>
+          <div class="flex-grid visits-page--box alt" ng-if="domain.visitedPage">
+              <dp-editor-dropdown class="dropdown dropdown--tiny-alt"
+              id="visitedTimes{{index}}"
+              name="visitedTimes{{index}}"
+              property="visitedTimes{{index}}"
+              options="visitedTimes"
+              label="domain.visitedTimes"
+              on-select-option="onVisitedPageSelected(option.value, domain, 'visitedTimes')"
+              value-selected="domain.visitedTimes"
+              ng-disabled="isReadOnly()">
+              </dp-editor-dropdown>
+              <div class="info text--small">{{'automation_editor.components.initial_condition.site_behavior.panel.visited_count' | translate}}</div>
+          </div>
+        </div>
+        <div class="actions-element--container actions-element-top-position disable--toggler" ng-if="selectedComponent.domains.length > 1 && (!$first || selectedComponent.operator === CONDITION_OPERATOR.OR)">
+          <dp-editor-delete-component on-delete-component="onDeleteComponent(index)"></dp-editor-delete-component>
+        </div>
+      </div>
+      <!-- operator AND OR -->
+      <div class="and-element--container relative" ng-if="(selectedComponent.domains.length > 1 && selectedComponent.domains.length > index + 1)">
+        <div class="switch-element" ng-click="toggleOperator()" ng-class="{'state-or': selectedComponent.operator === CONDITION_OPERATOR.OR}">
+          <span class="circle"></span>
+          <span class="text">{{selectedComponent.operator}}</span>
+        </div>
+        <div class="tip-help" ng-if="index === 0">
+          <span class="icon-arrow-friendly"></span>
+          <span class="text" ng-show="selectedComponent.operator === CONDITION_OPERATOR.AND">{{ 'automation_editor.sidebar.condition_and_tip' | translate }}</span>
+          <span class="text" ng-show="selectedComponent.operator === CONDITION_OPERATOR.OR">{{ 'automation_editor.sidebar.condition_or_tip' | translate }}</span>
+        </div>
+      </div>
+    </div>
+    <!-- add new conditional button -->
+    <div class="add-condition--container relative site-behavior">
+      <span class="icon-add-element" ng-class="{'disabled': !selectedComponent.domains.length || selectedComponent.domains[selectedComponent.domains.length - 1].status !== DOMAIN_STATUS.VERIFIED || isReadOnly()}" ng-click="addNewDomain()"></span>
+      <span class="tip-help">
+        <span class="icon-arrow-friendly"></span>
+        <span class="text">{{ 'automation_editor.sidebar.condition_add_tip' | translate }}</span>
+      </span>
+    </div>
+
+    <div ng-if="isEnabledVerificationTime()">
+      <div class="input--group input--group--alt">
+        <p class="title title-with-description">{{'automation_editor.components.initial_condition.site_behavior.panel.verification_time_title' | translate }}</p>
+        <p class="text--small">{{'automation_editor.components.initial_condition.site_behavior.panel.verification_time_description' | translate }} <a class="link--default" href="{{'automation_editor.components.initial_condition.site_behavior.tip_url' | translate}}">HELP</a></p>
+      </div>
+      <label class="label label--panel">{{'automation_editor.components.initial_condition.site_behavior.panel.verification_time' | translate }}</label>
+      <div class="input--group">
+        <div class="flex-grid-v-center--s-between">
+          <input class="number input--text input-size--medium" name="verificationTime" type="text" pattern="\d*" maxlength="3"
+          ng-pattern="verificationTimePattern"
+          ng-class="{ 'hasErrors': siteBehaviorForm.verificationTime.$invalid}"
+          ng-required="siteBehaviorForm.verificationTime.$dirty || selectedComponent.touched"
+          placeholder="{{ 'automation_editor.components.initial_condition.site_behavior.panel.verification_time_placeholder' | translate }}"
+          ng-model="selectedComponent.verificationTime" />
+          <dp-editor-dropdown class="dropdown dropdown--medium" id="dd-unit" name="unit"
+            property="timeUnit"
+            options="timeUnitOptions"
+            label="'automation_editor.sidebar.time_unit.' + selectedComponent.timeUnit | translate"
+            on-select-option="onTimeUnitSelected(option.value)"
+            value-selected="selectedComponent.timeUnit"
+            ng-disabled="isReadOnly();">
+          </dp-editor-dropdown>
+        </div>
+        <div ng-messages="siteBehaviorForm.verificationTime.$error" class="error-messages--container">
+          <div class="error" ng-message="pattern">
+            {{'automation_editor.components.condition.verification_time.error_' + selectedComponent.timeUnit | translate}}
+          </div>
+          <div class="error" ng-message="required">
+            {{'automation_editor.components.condition.verification_time.error_' + selectedComponent.timeUnit | translate}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="input--group input--group--alt">
+      <p class="title title-with-description">{{'automation_editor.components.initial_condition.site_behavior.panel.title2' | translate }}</p>
+      <p class="text--small">{{'automation_editor.components.initial_condition.site_behavior.panel.description' | translate }}</p>
+    </div>
+
+    <div class="input--group">
+      <label class="label label--panel">{{'automation_editor.components.initial_condition.site_behavior.panel.times_label' | translate}}</p></label>
+      <dp-editor-dropdown
+      options="timesBackAutomation"
+      label="'automation_editor.components.initial_condition.site_behavior.panel.times_value' + selectedComponent.timesBackAutomation | translate"
+      value-selected="selectedComponent.timesBackAutomation"
+      on-select-option="onTimesBackChange(option)"
+      class="dropdown dropdown--full"
+      ng-disabled="isReadOnly()"></dp-editor-dropdown>
+      <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
+    </div>
+  </form>
+  <span class="icon-globo"></span>
+  <p class="help-tip">
+    <strong>{{'automation_editor.components.initial_condition.site_behavior.tip_strong' | translate}}</strong>
+    <span>{{'automation_editor.components.initial_condition.site_behavior.tip_normal' | translate}}</span>
+    <a class="link--default" ng-href="{{'automation_editor.components.initial_condition.site_behavior.tip_url' | translate}}" target="_blank">
+      {{'help_link_text' | translate}}
+    </a>.
+  </p>
+</div>

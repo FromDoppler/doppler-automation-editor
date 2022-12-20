@@ -1,0 +1,36 @@
+<div class="form-aplication-types">
+  <section class="section--default background--white">
+    <div class="wrapper wrapper--default ">
+      <header class="grid-title-section">
+        <h2>{{'form_types.header.title' | translate}}</h2>
+        <p>
+          {{'form_types.header.description' | translate}}
+          <a href="{{'form_types.header.help_link' | translate}}" target="_blank">
+            {{'help_link_text' | translate}}
+          </a>
+          &#46;
+        </p>
+      </header>
+      <div class="dp-library aplication-types--container flex-grid-v-center" ng-show="!isLoading">
+        <div class="flex-grid-v-center--s-between aplication-types--items aplication-types--active"
+          ng-repeat="formType in FORM_TYPE"
+          ng-click="goToFormEditor(formType)">
+          <div class="dp-ribbon dp-ribbon-top-right dp-ribbon-violet" ng-show="isNewFeature.includes(formType)">
+            <span>{{'form_types.new_feature' | translate}}</span>
+          </div>
+          <img ng-src="../../../images/form-type-{{ formType }}.svg" />
+          <div>
+            <p class="title">
+              {{'form_types.type.' + formType + '.title' | translate}}
+            </p>
+            <p class="text--small">
+              {{'form_types.type.' + formType + '.description' | translate}}
+            </p>
+          </div>
+        </div>
+        <div class="loading--container components--center" ng-show="isLoading">
+          <span class="loading-icon"></span>
+        </div>
+    </div>
+  </section>
+</div>

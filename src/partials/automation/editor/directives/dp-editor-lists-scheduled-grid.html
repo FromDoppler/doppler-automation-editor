@@ -1,0 +1,100 @@
+<section class="background--white section--grid-empty section--content" ng-if="gridModel.isEmptyGrid">
+  <h2>{{ 'automation_editor.lists_grid_empty.title' | translate }}</h2>
+  <p>{{ 'automation_editor.lists_grid_empty.description' | translate }}</p>
+  <button ng-click="saveAndRedirect('/Lists/List');" class="button button--small button--alternative button--link">{{ 'automation_editor.lists_grid_empty.action' | translate }}</button>
+</section>
+<section class="section--content section--default background--white" id="editorListsScheduledGrid" ng-if="!gridModel.isEmptyGrid">
+	<div class="dp-library">
+		<header class="hero-banner" ng-show="showHeader">
+		  <div class="dp-container">
+			<div class="dp-rowflex">
+			  <div class="col-sm-12 col-md-12 col-lg-12">
+				<h2>{{ listTitle }}</h2>
+			  </div>
+			  <div class="col-sm-7">
+				<p>{{ listSubtitle }} <span ng-if="showSelectAll" data-static-tooltip="{{ 'automation_editor.lists_scheduled_grid.doppler_tip' | translate }}" class="all medium"><span class="icon-tip"></span></span></p>
+			  </div>
+			</div>
+		  <span class="arrow"></span>
+		  </div>
+		</header>
+	  </div>
+	<section class="section--default ng-hide" ng-show="!gridModel.firstTimeLoad">
+		<div class="wrapper wrapper--default">
+			<div class="container">
+				<div class="search-container">
+					<input class="input--text input--search" ng-model="gridModel.searchText" type="text" placeholder="{{ 'automation_grid_search' | translate }}" ng-change="gridModel.search(gridModel.searchText, gridModel.labelSelected)"/>
+					<span class="icon-search" ng-show="!gridModel.searchText"></span>
+					<span class="icon-close" ng-show="gridModel.searchText" ng-click="gridModel.cleanSearch()"></span>
+				</div>
+				<dropdown class="dropdown dropdown--full" id="dd-filter-subscribers-lists" list="gridModel.labelFilters" ng-model="gridModel.labelSelected" ng-change="gridModel.search(gridModel.searchText, gridModel.labelSelected, true)" property="name" id-value="id"></dropdown>
+			</div>
+			<div ng-show="showSelectAll" class="checkbox--container relative">
+				<input type="checkbox" class="check-custom" id="sendToAllContacts" ng-model="gridModel.selectAllSubscribers" ng-class="{'checked': gridModel.selectAllSubscribers }" />
+				<label for="sendToAllContacts"></label>
+				<span class="text--small">{{ 'automation_editor.lists_scheduled_grid.all_contacts' | translate }}</span>
+			</div>
+			<table class="grid--default" ng-class="{'disabled' : gridModel.selectAllSubscribers}" infinite-scroll="gridModel.onScroll" infinite-scroll-element="editorListsScheduledGrid" infinite-scroll-distance="200" ng-show="gridModel.displayed.length > 0">
+				<thead>
+					<tr>
+						<th><span class="icon-grid-check title"></span></th>
+						<th ng-click="gridModel.sort('LABEL_NAME')" ng-class="{'active' : gridModel.currentSort == 'LABEL_NAME'}">
+							<a>{{ 'automation_editor.lists_grid_headers.label' | translate }} <span ng-class="gridModel.setArrowClass('LABEL_NAME')"></span></a>
+						</th>
+						<th ng-class="{'active' : gridModel.currentSort == 'LIST_NAME'}" ng-click="gridModel.sort('LIST_NAME')">
+							<a>{{ 'automation_editor.lists_grid_headers.list_segments_name' | translate }} <span ng-class="gridModel.setArrowClass('LIST_NAME')"></span></a>
+						</th>
+						<th ng-class="{'active' : gridModel.currentSort == 'LAST_SENT_DATE'}" ng-click="gridModel.sort('LAST_SENT_DATE')">
+							<a>{{ 'automation_editor.lists_grid_headers.last_send' | translate }} <span ng-class="gridModel.setArrowClass('LAST_SENT_DATE')"></span></a>
+						</th>
+						<th ng-class="{'active' : gridModel.currentSort == 'SUBSCRIBER_COUNT'}" ng-click="gridModel.sort('SUBSCRIBER_COUNT')">
+							<a>{{ 'automation_editor.lists_grid_headers.subscribers' | translate }} <span ng-class="gridModel.setArrowClass('SUBSCRIBER_COUNT')"></span></a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdSubscribersList}}" ng-click="selectRow(row)">
+						<td class="status-column relative">
+							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdSubscribersList}}" name="selectList" ng-checked="row.IsChecked" ng-disabled="row.ListStatus == blockedStatus"/>
+							<label></label>
+						</td>
+						<td class="type-column"><span ng-if="row.DtoLabel"><span class="list-label {{ row.DtoLabel.Colour }}">{{ row.DtoLabel.LabelName }}</span></span></td>
+						<td class="name-column dp-library" ng-class="{'active' : gridModel.currentSort === 'LIST_NAME'}">
+							<div class="dp-icon-wrapper">
+								<ellipsis-with-tooltip text="row.ListName"></ellipsis-with-tooltip>
+								<div class="tooltiptext dp-tooltip-container" ng-if="row.ListStatus === blockedStatus">
+									<span class="dp-icon-blocked" aria-label="blocked list">{{ row.IdSegment === 0 ? 'automation_editor.lists_scheduled_grid.blocked_list_text' : 'automation_editor.lists_scheduled_grid.blocked_segment_text' | translate }}</span>
+									<div class="dp-tooltip-top blocked-segment-tooltip">
+										<span>	
+											{{ row.IdSegment === 0 ? 'automation_editor.lists_scheduled_grid.blocked_list' : 'automation_editor.lists_scheduled_grid.blocked_segment' | translate }}
+											<a class="color--green" target="_blank" href="{{ row.IdSegment === 0 ? 'automation_editor.lists_scheduled_grid.blocked_list_href' : 'automation_editor.lists_scheduled_grid.blocked_segment_href' | translate }}">
+												{{ 'automation_editor.blocked_list.link_text' | translate }}
+											</a>
+										</span>
+									</div>
+								</div>
+							</div>
+
+						</td>
+						<td class="date-column--small" ng-class="{'active' : gridModel.currentSort == 'LAST_SENT_DATE'}">{{ row.LastSentDate | date: gridModel.dateFormat }}</td>
+						<td ng-class="{'active' : gridModel.currentSort == 'SUBSCRIBER_COUNT'}">{{ row.SubscribersCount }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="no-search-results" ng-show="gridModel.displayed.length == 0"> {{ 'empty_search' | translate }} </div>
+
+		</div>
+	</section>
+  <div class="loading--container components--center loading--container--editor-grid" ng-show="gridModel.firstTimeLoad">
+      <span class="loading-icon"></span>
+  </div>
+</section>
+<div class="dp-editor-footer">
+  <div class="item">
+    <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.buttons.back_to_editor' | translate }}</button>
+    <div class="right">
+      <span class="tip-help">{{'automation_editor.lists_scheduled_grid.footer_tip' | translate}}<span class="icon-arrow-friendly"></span></span>
+      <button class="button button--small button--primary" ng-disabled="gridModel.selectedItems.length === 0 && !gridModel.selectAllSubscribers" ng-click="saveSelectedItems();">{{ 'automation_editor.buttons.confirm_selection' | translate }}</button>
+    </div>
+  </div>
+</div>

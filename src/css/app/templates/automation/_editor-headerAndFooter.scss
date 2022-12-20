@@ -1,0 +1,85 @@
+.automation-editor--container {
+  dp-editor-header {
+    box-shadow: 0 4px 0 0 $color-snow;
+    border-bottom: 1px solid $color-sylver;
+    margin-bottom: 4px;
+    z-index: 11;
+    .icon-doppler-logo {
+      color: $color-primary;
+      font-size: 40px;
+      width: 40px;
+    }
+    .column--left,
+    .column--right {
+      display: flex;
+      align-items: center;
+    }
+    .column--right {
+      .icon-arrow-friendly {
+        height: 21px;
+        transform: scaleX(-1);
+        margin-right: 15px;
+      }
+    }
+    .icon-editor-saving {
+      color: $color-green-light;
+    }
+  }
+}
+dp-editor-header,
+.dp-editor-footer {
+  flex: 1 $size-full;
+  height: $header-footer-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $padding-header-footer;
+  background: $color-white;
+  z-index: 6;
+}
+
+dp-editor-header {
+  z-index: 6;
+}
+
+.dp-editor-footer {
+  box-shadow: 0 -4px 0 0 $color-snow;
+  border-top: 1px solid $color-sylver;
+  .tip-help {
+    margin-right: 10px;
+    position: relative;
+      top: 5px;
+      &.warning {
+        color: $color-primary;
+        .icon-arrow-friendly {
+          color: $color-primary;
+        }
+      }
+  }
+  .icon-arrow-friendly {
+    transform: scaleX(-1);
+    position: relative;
+    bottom: 5px;
+    font-size: 21px;
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: $size-full;
+  }
+  .button--space {
+    margin-right: 10px;
+  }
+}
+
+.tip-help {
+    color: $color-base;
+    font-size: 18px;
+    line-height: 23px;
+    font-family: HandOfSeanPro, Arial, Helvetica, sans-serif;
+    letter-spacing: .5px;
+    &.error {
+      color:$color-red;
+    }
+  }

@@ -1,0 +1,89 @@
+<form name="mercadoLibre.form" ng-submit="mercadoLibre.connect(mercadoLibre);" novalidate>
+  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="mercadoLibre.daysToDisconnection < 14 && mercadoLibre.connected">
+    <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div class="dp-library margin-t-20 margin-b-20">
+      <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <span id="messageBar" class="text--small">
+            {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'mercado_libre_integration.name' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+    <ul>
+      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
+      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
+      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+    </ul>
+    <br />
+    <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+    <hr class="full connection-issues-separator" />
+    <p>
+      {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
+      {{ mercadoLibre.firstValidationErrorDate}}
+    </p>
+    <strong>
+      <span ng-if="mercadoLibre.daysToDisconnection > 1">
+        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
+        {{ mercadoLibre.daysToDisconnection }}
+        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+      </span>
+      <span ng-if="mercadoLibre.daysToDisconnection <= 1">
+        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+      </span>
+    </strong>
+  </div>
+  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="!mercadoLibre.connected">
+    <span class="control-panel-section-title">{{ 'mercado_libre_integration.disconnected.title' | translate }} </span>
+    <span class="control-panel-section-subtitle">
+      {{ 'mercado_libre_integration.disconnected.subtitle' | translate }}
+      <a href="{{ 'mercado_libre_integration.disconnected.help_link' | translate }}"
+         target="_blank" ng-trim="false">{{ 'mercado_libre_integration.disconnected.help_text' | translate }}</a>
+    </span>
+    <hr class="full" style="width: calc(100% + 40px);" />
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="mercadoLibre.connectionError">
+      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span>{{ mercadoLibre.errorMsg }}</span>
+        </div>
+      </div>
+    </div>
+    <div id="connection-error-mercado-libre" class="message-validation validation-error ng-hide">
+      <span id="connection-error-mercado-libre-span"></span>
+    </div>
+    <span class="control-panel-section-subtitle select-list-text" ng-class="display-flex-force">
+      {{ 'mercado_libre_integration.disconnected.select_country_text' | translate }}
+    </span>
+    <div class="country-selector-container">
+      <ul>
+        <li ng-repeat="country in mercadoLibre.countries"><a class="{{ 'ctry-' + country }}" href="" ng-click="mercadoLibre.connect(country)">{{ 'mercado_libre_integration.disconnected.countries.' + country  | translate }}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="mercadoLibre.connected">
+    <span class="control-panel-section-title">{{ 'mercado_libre_integration.connected.title' | translate }} </span>
+    <span class="control-panel-section-subtitle">
+      {{ 'mercado_libre_integration.connected.subtitle' | translate }}
+    </span>
+    <section class="authentication-container connected">
+      <div class="authentication-elements">
+        <p>
+          {{ 'mercado_libre_integration.connected.store' | translate }} <strong>{{ mercadoLibre.connectedAccount }}</strong>
+        </p>
+      </div>
+      <button type='button' class="button button--alternative" ng-click="mercadoLibre.disconnectWarning()" ng-disabled="mercadoLibre.importingAllLists">
+        {{ 'mercado_libre_integration.connected.disconnect' | translate }}
+      </button>
+    </section>
+  </div>
+
+  <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !mercadoLibre.connected}" ng-show="!mercadoLibre.connected">
+    <a class="button button--alternative" ng-disabled="mercadoLibre.connecting"
+       href="/ControlPanel/ControlPanel?section=Integration"
+       id="back-button">{{ 'actions.cancel' | translate }}</a>
+  </div>
+</form>

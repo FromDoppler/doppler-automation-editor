@@ -1,0 +1,177 @@
+button {
+  -webkit-font-smoothing: antialiased;
+  &:focus {
+    outline: none;
+  }
+}
+
+.button {
+  border: 0;
+  border-radius: $border-radius--default;
+  color: $color-white;
+  cursor: pointer;
+  font-size: $font-size--base;
+  line-height: 45px;
+  @include soft--sides(35px);
+  height: 45px;
+  text-align: center;
+  transition: $transition-default;
+  display: inline-block;
+  &[disabled] {
+    opacity: .4;
+    pointer-events: none;
+  }
+}
+
+/****************************
+*********Button sizes********
+****************************/
+
+.button--small,
+.button--small-alt {
+  font-size: $font-size--small;
+  height: 40px;
+  line-height: 40px;
+  @include soft--sides(25px);
+}
+
+.button--small-alt {
+  @include soft--sides(15px);
+}
+
+.button--tiny {
+  font-size: $font-size--small;
+  height: 30px;
+  line-height: 30px;
+  @include soft--sides(20px);
+}
+
+.button--tiny-alt {
+  font-size: $font-size--small;
+  height: 30px;
+  @include soft--sides(5px);
+}
+
+/****************************
+******Button variants********
+****************************/
+
+.button--primary {
+  background: $color-green;
+  &:hover,
+  &:active {
+    background: #00853a;
+  }
+}
+
+.button--alternative {
+  background: $color-base;
+  &:hover {
+    background: $color-lightgrey;
+  }
+}
+
+.button--error,
+.button--delete {
+  background: $color-red;
+  &:hover {
+    background: $color-red;
+  }
+}
+
+.button--light {
+  background: $color-white;
+  border: 1px solid $color-white;
+  color: $color-base;
+}
+
+.button--warning {
+  background: $color-primary;
+  &:hover {
+    background: $color-darkyellow;
+  }
+}
+
+[class*=button-outline-] {
+  background: transparent;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.button-outline--light {
+  border-color: $color-sylver;
+  color: $color-base;
+  &:hover {
+    background: $color-snow;
+  }
+}
+
+.button-outline--white {
+  border-color: $color-white;
+  color: $color-white;
+  &:hover {
+    opacity: .6;
+  }
+}
+
+.button-outline--primary {
+  border-color: $color-green;
+  color: $color-green;
+  &:hover {
+    background: rgba(51,173,115,.2);
+  }
+}
+
+.button-outline--red {
+  border-color: $color-red;
+  color: $color-red;
+  &:hover {
+    background: rgba(227,79,69,.2);
+  }
+}
+
+
+///Spinner button
+///example
+/// <button class="button button--secondary button--spinner">
+///   Guardar <span class="icon-editor-saving hide"></span>
+/// </button>
+.button--spinner {
+  color: transparent;
+  position: relative;
+  .icon-editor-saving {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -6.5px;
+    margin-top: -6.5px;
+    font-size: $font-size--small;
+    color: $color-white;
+  }
+}
+
+//Transparent button to hold an icon with after from icon font
+.icon--button {
+  border: none;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+}
+
+.button--link {
+  display: inline-block;
+}
+
+//button with notification as in facebook
+///example
+/// <button class="notification--button">
+///
+/// </button>
+.notification--button {
+}
+
+  div.checker.disabled span {
+    background: $color-sylver;
+  }

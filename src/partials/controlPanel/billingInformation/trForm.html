@@ -1,0 +1,246 @@
+<div class="grid-display payment-two-columns margin-t-20">
+  <div ng-if="billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.ARGENTINA">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.consumer_type' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="dd-consumerTypes"
+      list="billingInformation.billingInformationData.consumerTypesArgentinaList"
+      name="idConsumerTypeAR"
+      ng-class="{ 'hasErrors' : billingInformationForm.idConsumerTypeAR.$invalid }"
+      ng-model="billingInformation.billingInformationData.idConsumerTypeArgentina"
+      ng-required="billingInformationForm.idConsumerTypeAR.$dirty || billingInformationForm.$submitted"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.idConsumerTypeAR.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.consumer_type' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="dd-consumerTypes"
+      list="billingInformation.billingInformationData.consumerTypesMexicoList"
+      name="idConsumerTypeMX"
+      ng-class="{ 'hasErrors' : billingInformationForm.idConsumerTypeMX.$invalid }"
+      ng-model="billingInformation.billingInformationData.idConsumerTypeMexico"
+      ng-required="billingInformationForm.idConsumerTypeMX.$dirty || billingInformationForm.$submitted"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.idConsumerTypeMX.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-include="'angularjs/partials/controlPanel/billingInformation/dni.html'"
+      ng-if="billingInformation.showDNI(
+            billingInformation.billingInformationData.idCountry,
+            billingInformation.billingInformationData.idPaymentMethod,
+            billingInformation.billingInformationData.idConsumerTypeArgentina
+            )">
+  </div>
+  <div ng-if="(billingInformation.showCuit(billingInformation.billingInformationData.idConsumerTypeArgentina)
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.ARGENTINA)">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.cuit' | translate }}</label>
+    <input
+      type="text"
+      dp-integer-input
+      dp-cuit-validator
+      ng-model="billingInformation.billingInformationData.cuit"
+      name="cuit"
+      class="input--text"
+      ng-maxlength="11",
+      ng-minlength="11",
+      maxlength="11",
+      minlength="11",
+      ng-class="{ 'hasErrors' : billingInformationForm.cuit.$invalid }"
+      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.cuit.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate }}</div>
+      <div ng-message="invalidCuit" class="error">{{ 'validation_messages.invalid_cuit' | translate }}</div>
+    </div>
+  </div>
+  <!-- COLOMBIA NIT--->
+  <div ng-if="billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.COLOMBIA">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.NIT' | translate }}</label>
+    <input
+      type="text"
+      dp-integer-input
+      dp-nit-validator
+      ng-model="billingInformation.billingInformationData.cuit"
+      name="cuit"
+      class="input--text"
+      ng-maxlength="16",
+      ng-minlength="6",
+      maxlength="16",
+      minlength="6",
+      ng-class="{ 'hasErrors' : billingInformationForm.cuit.$invalid }"
+      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.cuit.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+      <div ng-message="minlength" class="error">{{ 'validation_messages.minlength' | translate }}</div>
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate }}</div>
+      <div ng-message="invalidNit" class="error">{{ 'validation_messages.invalid_nit' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="(billingInformation.showCuit(billingInformation.billingInformationData.idConsumerTypeArgentina)
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.ARGENTINA)
+    || billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.COLOMBIA">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.company_name' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.companyNameAr"
+      name="companyNameAr"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.companyNameAr.$invalid }"
+      ng-required="billingInformationForm.companyNameAr.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.companyNameAr.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.COLOMBIA">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.ResponsableIVA' | translate }}</label>
+    <input
+      class="radio-custom"
+      type="radio"
+      id="responsableIVAYes"
+      name="ResponsableIVA"
+      ng-checked="billingInformation.billingInformationData.responsableIVA === true"/>
+    <label for="responsableIVAYes" ng-click="billingInformation.billingInformationData.responsableIVA = true"></label>
+    <span class="text--small margin-l-25 margin-r-30">
+      {{ 'button_yes' | translate }}
+    </span>
+    <input
+      class="radio-custom"
+      type="radio"
+      id="responsableIVANo"
+      name="ResponsableIVA"
+      ng-checked="billingInformation.billingInformationData.responsableIVA === false"/>
+    <label for="responsableIVANo" ng-click="billingInformation.billingInformationData.responsableIVA = false"></label>
+    <span class="text--small margin-l-25 margin-r-30">
+      {{ 'button_no' | translate }}
+    </span>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idConsumerTypeMexico === billingInformation.CONSUMER_TYPE.RFC
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.rfc' | translate }}</label>
+    <input
+      type="text"
+      dp-rfc-validator
+      ng-model="billingInformation.billingInformationData.rfc"
+      name="rfcCode"
+      ng-maxlength="16",
+      maxlength="16",
+      class="input--text text-uppercase"
+      ng-class="{ 'hasErrors' : billingInformationForm.rfcCode.$invalid }"
+      ng-required="billingInformationForm.rfcCode.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.rfcCode.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate }}</div>
+      <div ng-message="invalidRFC" class="error">{{ 'validation_messages.invalid_rfc' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idConsumerTypeMexico === billingInformation.CONSUMER_TYPE.RFC
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.company_name' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.companyNameMx"
+      name="companyNameMx"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.companyNameMx.$invalid }"
+      ng-required="billingInformationForm.companyNameMx.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.companyNameMx.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idConsumerTypeMexico === billingInformation.CONSUMER_TYPE.RFC
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.cdfi' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="dd-CFDI"
+      list="billingInformation.billingInformationData.cdfiUsesList"
+      name="CFDIUse"
+      ng-class="{ 'hasErrors' : billingInformationForm.CFDIUse.$invalid }"
+      ng-model="billingInformation.billingInformationData.idCdfiUse"
+      ng-required="billingInformationForm.CFDIUse.$dirty || billingInformationForm.$submitted"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.CFDIUse.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idConsumerTypeMexico === billingInformation.CONSUMER_TYPE.RFC
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.payment_method' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="dd-paymentTypes"
+      list="billingInformation.billingInformationData.paymentTypesList"
+      name="paymentType"
+      ng-class="{ 'hasErrors' : billingInformationForm.paymentType.$invalid }"
+      ng-model="billingInformation.billingInformationData.idPaymentType"
+      ng-required="billingInformationForm.paymentType.$dirty || billingInformationForm.$submitted"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.paymentType.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idConsumerTypeMexico === billingInformation.CONSUMER_TYPE.RFC
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.payment_type' | translate }}</label>
+    <dropdown
+      class="dropdown"
+      placeholder="{{billingInformation.generalPlaceholder}}"
+      id="dd-paymentWays"
+      list="billingInformation.billingInformationData.paymentWaysList"
+      name="paymentWay"
+      ng-class="{ 'hasErrors' : billingInformationForm.paymentWay.$invalid }"
+      ng-model="billingInformation.billingInformationData.idPaymentWay"
+      ng-required="billingInformationForm.paymentWay.$dirty || billingInformationForm.$submitted"
+      property="name"
+      id-value="id"></dropdown>
+    <div ng-messages="billingInformationForm.paymentWay.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idPaymentWay === billingInformation.MX_TYPE_OF_PAYMENT.TRANSFER
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.bank_name' | translate }}</label>
+    <input
+      type="text"
+      ng-model="billingInformation.billingInformationData.bankName"
+      name="bankName"
+      class="input--text"
+      ng-class="{ 'hasErrors' : billingInformationForm.bankName.$invalid }"
+      ng-required="billingInformationForm.bankName.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.bankName.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+  <div ng-if="billingInformation.billingInformationData.idPaymentWay === billingInformation.MX_TYPE_OF_PAYMENT.TRANSFER
+    && billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO">
+    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.last_4_digits' | translate }}</label>
+    <input
+      type="text"
+      dp-integer-input
+      ng-model="billingInformation.billingInformationData.bankAccount"
+      name="bankAccount"
+      class="input--text"
+      ng-maxlength="4",
+      ng-minlength="4",
+      maxlength="4",
+      minlength="4",
+      ng-class="{ 'hasErrors' : billingInformationForm.bankAccount.$invalid }"
+      ng-required="billingInformationForm.bankAccount.$dirty || billingInformationForm.$submitted"/>
+    <div ng-messages="billingInformationForm.bankAccount.$error" class="error-messages--container" >
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    </div>
+  </div>
+</div>

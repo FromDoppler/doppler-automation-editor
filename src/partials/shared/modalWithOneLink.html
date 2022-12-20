@@ -1,0 +1,13 @@
+<div id="modal" class="modal modal--is-dialog modal-one-link--container">
+  <div class="modal__wrapper">
+    <a class="icon-close modal--do-close " ng-click="close(false)" data-dismiss="modal"></a>
+    <div class="modal__content">
+      <h1>{{ data.title }}</h1>
+      <p>{{ data.description }}</p>
+      <p>{{ data.description2 }}</p>
+    </div>
+    <div class="modal__action-btn {{ data.buttonContainerClass }}">
+      <a class="button {{ data.buttonClass }}" href="{{ data.actionLink }}" data-dismiss="modal">{{ data.buttonLabel }}</a>
+    </div>
+  </div>
+</div>

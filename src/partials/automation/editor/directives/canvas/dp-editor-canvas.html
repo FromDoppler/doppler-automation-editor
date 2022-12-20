@@ -1,0 +1,12 @@
+<div class="container-elements relative" id="canvas-elements--container">
+  <dp-editor-component-renderer
+    ng-if="rootComponent.initialCondition" ng-class="{'selected-border': selectedComponentUid === rootComponent.initialCondition.uid}"
+    component="rootComponent.initialCondition">
+  </dp-editor-component-renderer>
+
+  <dp-editor-component-renderer ng-repeat="component in rootComponent.children"
+    ng-class="{'focus': selectedComponent && selectedComponentUid === component.uid, 'incomplete': !component.completed, 'touched': component.touched}"
+    component="component"
+    parent-uid="component.parentUid" class="editor-component-renderer">
+  </dp-editor-component-renderer>
+</div>

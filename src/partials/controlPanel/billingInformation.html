@@ -1,0 +1,110 @@
+<form name="billingInformationForm" ng-submit="billingInformationForm.$valid && billingInformation.save(billingInformationForm)" novalidate>
+  <div class="billingInformation-dashboard">
+    <div class="panel-box-app panel-box-app--ctrlpanel">
+      <div class="flex-grid-v-center--s-between">
+        <div class="nowrap">
+          <h3 class="control-panel-section-title">{{ 'billing_information.title' | translate }}</h3>
+          <p class="margin-t-15 text--small margin-b-20">{{ 'billing_information.description' | translate }}</p>
+        </div>
+        <div class="buttonRight">
+          <a ng-if="billingInformation.billingInformationData.idResponsibleBilling === billingInformation.BILLING_SYSTEM.GB ||
+             billingInformation.billingInformationData.idResponsibleBilling === billingInformation.BILLING_SYSTEM.GB_BISIDE ||
+             billingInformation.billingInformationData.idResponsibleBilling === billingInformation.BILLING_SYSTEM.MERCADO_PAGO ||
+             billingInformation.billingInformationData.idResponsibleBilling === billingInformation.BILLING_SYSTEM.QBL ||
+             billingInformation.billingInformationData.idResponsibleBilling === billingInformation.BILLING_SYSTEM.QUICKBOOK_USA"
+             class="button button--primary" href="{{billingInformation.billingInformationData.invoicesUrl}}">
+          {{ 'billing_information.invoices' | translate }}
+          </a>
+        </div>
+      </div>
+      <hr/>
+      <div class="paymentSettings">
+        <!-- Billing Information -->
+        <div
+          ng-include="'angularjs/partials/controlPanel/billingInformation/billingInformationForm.html'">
+        </div>
+        <div class="margin-t-25 padding-b-20">
+          <h4 class="control-panel-section-title padding-b-20 padding-t-20">{{ 'billing_information.payment_ways.title' | translate }}</h4>
+          <div class="flex-display">
+            <div>
+              <input
+                class="radio-custom"
+                type="radio"
+                id="paymentCC"
+                name="paymentMethod"
+                ng-checked="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.CC"/>
+              <label
+                for="paymentCC"
+                ng-click="billingInformation.changePaymentMethod(billingInformation.PAYMENT_METHOD.CC)">
+              </label>
+              <span class="text--small margin-l-25 margin-r-30">{{ 'billing_information.payment_ways.credit_card' | translate }}</span>
+            </div>
+            <div ng-if="billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.ARGENTINA
+              || billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.MEXICO
+              || billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.COLOMBIA">
+              <input
+                class="radio-custom"
+                type="radio"
+                id="paymentTransfer"
+                name="paymentMethod"
+                ng-checked="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.TR"
+                ng-disabled="billingInformation.PaymentMethodOrigin !== billingInformation.PAYMENT_METHOD.TR"/>
+              <label
+                for="paymentTransfer"
+                ng-click="billingInformation.changePaymentMethod(billingInformation.PAYMENT_METHOD.TR)">
+              </label>
+              <span class="text--small margin-l-25 margin-r-30">
+                  {{ 'billing_information.payment_ways.transfer' | translate }}
+              </span>
+            </div>
+            <div ng-if="billingInformation.billingInformationData.idCountry === billingInformation.COUNTRIES_WITH_TRANSFER.ARGENTINA">
+              <input
+                class="radio-custom"
+                type="radio"
+                id="paymentMP"
+                name="paymentMethod"
+                ng-checked="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.MP"/>
+              <label
+                for="paymentMP"
+                ng-click="billingInformation.changePaymentMethod(billingInformation.PAYMENT_METHOD.MP)">
+              </label>
+              <img class="margin-l-25 mercado-pago--icon" src="/img/mercadopago.png"/>
+            </div>
+          </div>
+        </div>
+        <!-- Credit Card Method -->
+        <div
+          ng-include="'angularjs/partials/controlPanel/billingInformation/ccForm.html'"
+          ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.CC ||
+            billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.MP">
+        </div>
+        <!-- Transfer Method -->
+        <div
+          ng-include="'angularjs/partials/controlPanel/billingInformation/trForm.html'"
+          ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.TR">
+        </div>
+      </div>
+      <!-- Error Message -->
+      <div ng-show="billingInformation.errorMsg" class="message-validation validation-error">
+        <div id="messageBar">
+          {{ billingInformation.errorMsg }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-button-bar flex-grid-v-center--s-between">
+    <a class="button button--alternative"
+      ng-disabled="billingInformation.saving"
+      href="/ControlPanel/ControlPanel?section=AdvancedPreferences">
+      {{ 'actions.back' | translate }}
+    </a>
+    <button class="button button--primary"
+      type="submit"
+      ng-disabled="billingInformation.saving"
+      ng-class="{'button--spinner' : billingInformation.saving}">
+      {{ 'actions.save' | translate }}
+      <span class="icon-editor-saving" ng-show="billingInformation.saving"></span>
+    </button>
+  </div>
+</form>

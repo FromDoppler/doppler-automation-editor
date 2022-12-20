@@ -1,0 +1,107 @@
+{
+  "sms_settings": {
+    "settings_screen": {
+      "title": "SMS Dashboard",
+      "subtitle": "Here's where you can buy your SMS and set up your Campaigns. Any doubts? Press ",
+      "help_link": "https://help.fromdoppler.com/en/how-to-send-sms",
+      "country_list": {
+        "title": "SMS Campaign active countries",
+        "subtitle": "Add every country you will send SMS to. If you do not add any countries, you will not be able to send SMS campaigns.",
+        "price_legend": "Avg. cost per message"
+      },
+      "price_container": {
+        "title": "Available funds",
+        "alert": "Your account's negative balance will be deducted from your next payment.",
+        "transfer_in_process": "*We are still processing your transfer.",
+        "legend_1": "These funds will only be available tu use in SMS Campaigns.",
+        "legend_2": "The cost for each SMS will depend on which country you send it to. Be aware that actual costs may be different than shown.",
+        "legend_3": "Estimate every SMS cost before purchase.",
+        "estimate_purchase": "ESTIMATE PURCHASE"
+      },
+      "delivery_options": {
+        "title": "Delivery options",
+        "EnableShippingSchedules": "Only in a certain time interval (considering the time zone of the destination country)",
+        "OnlyEnabledWeekdays": "Monday to Friday only",
+        "RangeFrom": "From",
+        "RangeTo": "To"
+      },
+      "add_country": "Add country",
+      "no_more_countries": "You've selected all the available countries."
+    },
+    "calc_credit_screen": {
+      "title": "Cost estimator",
+      "subtitle": "Before your purchase, you can estimate the total cost of your SMS campaign by indicating the destination countries and how many SMS you want to send. Any doubts? Press ",
+      "help_link": "https://help.fromdoppler.com/en/how-to-send-sms",
+      "country_grid": {
+        "country_placeholder": "Select country",
+        "country": "Destination country",
+        "count": "Amount of SMS",
+        "average": "Avg. cost per message",
+        "total": "Total"
+      },
+      "add_country": "Add country",
+      "legal_1": "SMS prices are only estimates and don't include taxes. Actual prices will be displayed at the time of sending.",
+      "legal_2_part1": "Review our",
+      "legal_2_link_text": "Terms and Conditions",
+      "legal_2_link": "https://www.fromdoppler.com/en/legal/terms/",
+      "legal_2_part2": "for more information on how billing for this service works.",
+      "contact_us": "Are you interested in a Custom Plan?",
+      "contact_us_link_text":"Tell us.",
+      "contact_us_link": "mailto:dopplerinbound@makingsense.com",
+      "total_price": "Total cost",
+      "min_purchase": "Total minimum purchase",
+      "button_next": "Next"
+    },
+    "buy_screen": {
+      "title": "Select payment method",
+      "subtitle": "Choose how you want to pay for your SMS.",
+      "credit_card": {
+        "description": "Credit Card",
+        "firstname_lastname": "First Name and Last Name",
+        "select_option_placehoder": "Select an option",
+        "credit_card_type": "Credit Card Type",
+        "card_number": "Card Number",
+        "month_placeholder": "Month",
+        "year_placeholder": "Year",
+        "expiration_date": "Expiration Date",
+        "verification_code": "Verification Code"
+      },
+      "transfer": {
+        "description": "Transfer",
+        "consumer_type": "Consumer Type",
+        "cuit": "CUIT",
+        "company_name": "Company Name",
+        "RFC": "RFC",
+        "CFDI": "Use of CFDI",
+        "payment_method": "Payment Method",
+        "payment_type": "Type of Payment",
+        "bank_name": "Bank Name",
+        "last_4_digits": "Last 4 numbers of your account"
+      },
+      "error_msg": "Oops! Something went wrong. Please try again.",
+      "billing": {
+        "title": "Billing details",
+        "description": "Cost for sending SMS",
+        "total": "Total",
+        "taxes": "No taxes included."
+      },
+      "buy_button": "Buy",
+      "modal": {
+        "processing": {
+          "title": "We are processing your purchase",
+          "description": "This process may take a few minutes. Remember that patience is a virtue."
+        },
+        "processed": {
+          "title": "Your purchase was successful!",
+          "tr": {
+            "description": "We are verifying your funds transfer. We'll notify you by Email when they are credited in your account."
+          },
+          "cc": {
+            "description": "Funds were credited in your account. You are set to send SMS Campaigns."
+          }
+        },
+        "button": "Great"
+      }
+    }
+  }
+}

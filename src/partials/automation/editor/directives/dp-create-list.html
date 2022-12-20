@@ -1,0 +1,76 @@
+<section class="section--default background--white">
+	<div class="dp-library">
+		<header class="hero-banner">
+			<div class="dp-container">
+				<div class="dp-rowflex">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<h2>{{ 'automation_editor.create_list.title' | translate }}</h2>
+					</div>
+					<div class="col-sm-7">
+						<p>{{ 'automation_editor.create_list.description' | translate }}</p>
+					</div>
+				</div>
+				<span class="arrow"></span>
+			</div>
+		</header>
+	</div>
+	<div class="wrapper wrapper--default">
+		<form name="validationForm" novalidate>
+			<div class="input--group">
+				<label class="label--panel" label="listName">* {{ 'automation_editor.create_list.list_name' | translate }}</label>
+				<input type="text" name="listName" class="input--text" ng-model="list.ListName" ng-required="true" ng-maxlength="100" ng-class="{ 'hasErrors': submitted && validationForm.Firstname.$invalid }" ng-blur="validateListName(list.ListName)">
+				<div ng-messages="validationForm['listName'].$error" ng-if='submitted' class="error-messages--container" >
+					<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+					<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+					<div ng-message="duplicateListName" class="error">{{ 'automation_editor.create_list.duplicate_listname' | translate }}</div>
+					<div ng-message="createListFailed" class="error">{{ createListFailedMsg }}</div>
+				</div>
+			</div>
+			<div class="container" ng-repeat="subscriber in list.SubscribersList track by $index">
+				<div class="input--group column">
+					<label class="label--panel" for="Email">* {{ 'form_labels.email' | translate }}</label>
+					<input ng-pattern="REGEX_EMAIL" type="email" name="Email{{$index}}" class="input--text" ng-model="subscriber.Email" ng-class="{ 'hasErrors': submitted && validationForm.Email.$invalid }" ng-required="true" ng-maxlength="50" ng-blur="validateSubscriber($index)">
+					<div ng-messages="validationForm['Email'+$index].$error" ng-if='submitted' class="error-messages--container" >
+						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+						<div ng-message="pattern" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+						<div ng-message="maxlength" class="error">{{ 'General_Invalid_Field' | translate }}</div>
+						<div ng-message="duplicateEmail" class="error">{{ 'automation_editor.create_list.duplicate_email' | translate }}</div>
+						<div ng-message="unsubscribedUser" class="error">{{ unsubscribedUserMsg }}</div>
+					</div>
+				</div>
+				<div class="input--group column">
+					<label class="label--panel" for="name">{{ 'form_labels.name' | translate }}</label>
+					<input type="text" name="name{{$index}}" class="input--text" ng-model="subscriber.Firstname" ng-maxlength="100" ng-class="{ 'hasErrors': submitted && validationForm.Firstname.$invalid }">
+					<div ng-messages="validationForm['name'+$index].$error" ng-if='submitted' class="error-messages--container" >
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+					</div>
+				</div>
+				<div class="input--group column">
+					<label class="label--panel" for="lastname">{{ 'form_labels.lastname' | translate }}</label>
+					<input type="text" name="lastname{{$index}}" class="input--text" ng-model="subscriber.Lastname" ng-maxlength="100" ng-class="{ 'hasErrors': submitted && validationForm.Firstname.$invalid }">
+					<div ng-messages="validationForm['lastname'+$index].$error" ng-if='submitted' class="error-messages--container" >
+						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>
+					</div>
+				</div>
+				<div class="remove--container" ng-click="removeSubscriptList($index)" ng-if="$index > 0">
+					<span class="icon-delete"></span>
+				</div>
+			</div>
+			<div class="input--group add-subscriber" ng-class="{ 'disabled' : list.SubscribersList.length >= maxSubsInList }">
+				<a class="link--default text--small" ng-click="addSubscriberList()">
+					<span class="icon-add-element"></span>
+					{{ 'automation_editor.create_list.add_suscriber' | translate }}
+				</a>
+			</div>
+		</form>
+	</div>
+</section>
+<div class="dp-editor-footer">
+  <div class="item">
+    <button class="button button--small button-outline--primary" ng-click="toggleCreateListTemplate(false)">{{ 'automation_editor.buttons.back_to_editor' | translate }}</button>
+    <div class="right">
+      <span class="tip-help">{{getMaxSubscriberLabel()}}<span class="icon-arrow-friendly"></span></span>
+      <button class="button button--small button--primary" ng-click="submitted=true;createList()" ng-disabled="!isValidForm()">{{ 'automation_editor.create_list.button_create' | translate }}</button>
+    </div>
+  </div>
+</div>

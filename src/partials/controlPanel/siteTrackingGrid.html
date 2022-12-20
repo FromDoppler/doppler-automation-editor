@@ -1,0 +1,77 @@
+<table class="grid relative" ng-show="domains.length > 0">
+  <tr>
+    <th>{{ 'site_tracking.grid_headers.domain' | translate }}</th>
+    <th>{{ 'site_tracking.grid_headers.site_tracking_domain_status' | translate }}</th>
+    <th ng-show="isPushEnable" >{{ 'site_tracking.grid_headers.push_domain_status' | translate }}</th>
+    <th>{{ 'site_tracking.grid_headers.verification_date' | translate }}</th>
+    <th>{{ 'grid.headers.actions' | translate }}</th>
+  </tr>
+  <tr ng-repeat="item in domains">
+    <td>{{ item.Domain }}</td>
+    <td class="status--column">
+      <div class="inline-block" data-static-tooltip="{{ 'site_tracking.domain_status.' + item.Status | translate }}">
+        <span class="{{getIconStatus(item.Status)}}"></span>
+      </div>
+    </td>
+    <td class="status--column" ng-show="isPushEnable" ng-if="isPushEnable">
+      <div class="dp-tooltip-container">
+          <div class="dp-library" >
+            <div class="dp-tooltip-container">
+              <span class="{{getIconStatusPush(item.statusPush)}}"></span>
+                <div class="dp-tooltip-top" ng-if="item.errorStatePush">
+                  <p>Revisa los siguientes items</p>
+                  <p>para poder usar la funcionalidad de</p>
+                  <p>Notificaciones Push:</p>
+                  <p><a ng-click="openTrackingCode({domain:item})" class="dp-color-green">REVISAR CONFIGURACION</a></p>
+                </div>
+                <div class="dp-tooltip-top" ng-if="!item.errorStatePush">
+                  <p>
+                    {{ 'site_tracking.domain_status.' + (item.statusPush || 'pending') | translate }}
+                  </p>
+                </div>
+            </div>
+          </div>
+          
+        </div>
+    </td>
+    <td>{{ item.ValidationDate }}</td>
+    <td class="actions-column">
+        <button ng-click="verifyDomain({domain:item})" class="button button--primary button--tiny" ng-class="{'button--spinner' : item.isPendingVerify}">{{ 'site_tracking.verification_button' | translate | translate }} <span class="icon-editor-saving hide"></span></button>
+        <span data-static-tooltip="{{ 'actions.configure' | translate }}">
+          <span class="icon-configure" ng-click="openTrackingCode({domain:item})"></span>
+        </span>
+        <span ng-class="{'is--disabled': item.Status === 'verified'}" data-static-tooltip="{{ 'actions.edit' | translate }}">
+          <a target="_self" ng-click="openEditDomain({domain:item})" class="icon-grid-edit" ></a>
+        </span>
+        <span data-static-tooltip="{{ 'actions.delete' | translate }}" class="to-left">
+          <a ng-click="openDeleteDomain(item)"><img src="../../../images/grid-delete.svg" /></a>
+        </span>
+      <div ng-show="item.hasError" class="error--message flex-grid-v-center--s-between">
+        <div>
+          {{ 'site_tracking.verify_domain.error_message_1' | translate }} <strong>{{ item.Domain }}</strong> {{ 'site_tracking.verify_domain.error_message_2' | translate }}
+          <a target="_blank" href="{{ 'site_tracking.verify_domain.help_link' | translate }}">{{ 'help_link_text' | translate }}</a>
+        </div>
+        <a class="content--right" ng-click="closeErrorMessage(item)">{{ 'button_accept' | translate }}</a>
+      </div>
+      <div ng-show="item.cantDelete" class="error--message flex-grid-v-center--s-between">
+        <div>
+          {{ 'site_tracking.delete_domain.error_message_1' | translate }} <strong>{{ item.Domain }}</strong> {{ 'site_tracking.delete_domain.error_message_2' | translate }}
+        </div>
+        <a class="content--right" ng-click="closeErrorMessage(item)">{{ 'button_accept' | translate }}</a>
+      </div>
+      <div ng-show="item.showConfirmDelete" class="error--message flex-grid-v-center--s-between">
+        <div>
+          {{ 'site_tracking.delete_domain.confirmation_1' | translate }} <strong>{{ item.Domain }}</strong> {{ 'site_tracking.delete_domain.confirmation_2' | translate }}
+        </div>
+        <div class="content--right" >
+        <a ng-click="closeErrorMessage(item)">{{ 'button_cancel' | translate }}</a>
+        |
+        <a ng-click="deleteDomain(item)">{{ 'actions.delete' | translate }}</a>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+<div ng-if="domains.length === 0" class="non-results text--center">
+  {{ 'site_tracking.non_domains' | translate }}
+</div>

@@ -1,0 +1,82 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper modal--medium" id="modalConfigureDkim" click-outside="close(row)" outside-if-not="submit,verify-text">
+    <a class="icon-close modal--do-close"  ng-click="close(false)"></a>
+    <div>
+      <div ng-show="!loadingTexts"  class="modal__content">
+        <p class="control-panel-section-subtitle">{{ data.title }}: <strong>{{ data.description }}</strong></p>
+      </div>
+
+      <!-- scrollable container for smaller screens -->
+      <div class='scrollable--vertical-content' ng-nicescroll nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}">
+        <div ng-show="!loadingTexts" class="container">
+          <span class="control-panel-section-title">{{ 'control_panel.dkim.configure_domain.dkim_title' | translate}}</span>
+          <p class="control-panel-section-subtitle">{{ 'control_panel.dkim.configure_domain.dkim_subtitle' | translate}}
+            <a href="{{ 'control_panel.dkim.configure_domain.dkim_help_link' | translate}}" target="_blank">{{ 'help_link_text' | translate }}</a>
+          </p>
+
+          <label class="label" for="dkimSelector">{{ 'control_panel.dkim.configure_domain.dkim_selector' | translate}}</label>
+          <div class="configure-controls--container">
+            <div class="input--container">
+              <input name="dkimSelector" disabled="disabled" ng-model="dkimSelector" type="text"/>
+            </div>
+            <a class="save-button submit main_buttons_green_small copyToClipboard" id="CopyDkimField" data-clipboard-text="{{ dkimSelector }}">{{ 'actions.copy' | translate}}</a>
+          </div>
+
+          <label class="label" for="dkimPublicKey">{{ 'control_panel.dkim.configure_domain.dkim_public_key' | translate}}</label>
+          <div class="configure-controls--container">
+            <div class="input--container">
+              <textarea name="dkimPublicKey" disabled="disabled" ng-model="dkimPublicKey"></textarea>
+            </div>
+            <a class="save-button submit main_buttons_green_small copyToClipboard" id="CopyPublicKey" data-clipboard-text="{{ dkimPublicKey }}">{{ 'actions.copy' | translate}}</a>
+          </div>
+          <br/>
+          <label class="label">{{ 'control_panel.dkim.grid_columns.dkim_state' | translate }}:</label>
+
+          <span ng-show="row.DkimStatus === 1" class="icon-warning"></span>
+
+          <span ng-show="row.DkimStatus === 2" class="icon-check"></span>
+          <span ng-show="row.DkimStatus === 3" class="icon-grid-draft"></span>
+          <span ng-show="row.DkimStatus === 4 && row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION" class="icon-clock"></span>
+          <span ng-show="row.DkimStatus === 4 && row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION">&bull;&bull;&bull;</span>
+          <span class="validate--text" ng-class="{'ok': row.DkimStatus === 2, 'error':row.DkimStatus === 1,'warning':row.DkimStatus === 3}">{{ 'control_panel.dkim.validation_states.message-'+ DkimStatus | translate }} </span>
+
+          <span ng-bind-html="dkimStatusDescription"></span>
+
+        </div>
+
+        <div ng-show="!loadingTexts"  class="container">
+          <br/><br/>
+          <span class="control-panel-section-title">{{ 'control_panel.dkim.configure_domain.spf_title' | translate}}</span>
+          <p class="control-panel-section-subtitle">{{ 'control_panel.dkim.configure_domain.spf_subtitle' | translate}} </p>
+          <br/>
+          <label class="label" for="spfField">{{ 'control_panel.dkim.configure_domain.spf_field' | translate}}</label>
+          <div class="configure-controls--container">
+            <div class="input--container">
+              <input name="spfField" disabled="disabled" ng-model="spfField" type="text"/>
+            </div>
+            <a class="save-button submit main_buttons_green_small copyToClipboard" id="CopySpfField" data-clipboard-text="{{ spfField }}">{{ 'actions.copy' | translate}}</a>
+          </div>
+          <br/>
+          <label class="label">{{ 'control_panel.dkim.grid_columns.spf_state' | translate }}:</label>
+          <span ng-show="row.SpfStatus === 1" class="icon-warning"></span>
+          <span ng-show="row.SpfStatus === 2" class="icon-check"></span>
+          <span ng-show="row.SpfStatus === 3" class="icon-grid-draft"></span>
+          <span ng-show="row.SpfStatus === 4 && row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION" class="icon-clock"></span>
+          <span ng-show="row.SpfStatus === 4 && row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION">&bull;&bull;&bull;</span>
+          <span class="validate--text" ng-class="{'ok': row.SpfStatus === 2, 'error':row.SpfStatus === 1,'warning':row.SpfStatus === 3}">{{ 'control_panel.dkim.validation_states.message-'+ SpfStatus | translate }}</span>
+          <span ng-bind-html="spfStatusDescription"></span>
+        </div>
+      </div>
+      <hr/>
+      <div ng-show="!loadingTexts" class="buttons--container">
+        <a id="verify_btn" class="submit extra_small main_buttons_gray_small" ng-click="verify()">
+          <span class="verify-text ng-hide" ng-show="!domainValidating">
+            {{'actions.verify' | translate}}
+          </span>
+          <span class="loading-icon loading-icon--small loading-icon--alternative" ng-show="domainValidating"></span>
+        </a>
+        <a class="submit extra_small main_buttons_green_small" ng-click="close(row)">{{ 'button_accept' | translate}}</a>
+      </div>
+      <div ng-show="loadingTexts" class="loading--container" dp-partial="/angularjs/partials/shared/loading.html"></div>
+  </div>
+</div>

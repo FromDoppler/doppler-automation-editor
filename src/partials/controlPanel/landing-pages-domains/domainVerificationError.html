@@ -1,0 +1,30 @@
+﻿<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper" id="domainVerificationError"
+    click-outside="closeModal()" outside-if-not="submit,verify-text">
+    <a class="icon-close modal--do-close" ng-click="closeModal()"></a>
+    <div class="modal__content verification-error-modal">
+      <h1>
+        <span class="icon-warning"></span>
+        {{'landing_pages_domains.verification_error.title' | translate }}
+      </h1>
+      <p>
+        {{'landing_pages_domains.verification_error.description' | translate}}
+      </p>
+      <br>
+      <p ng-bind-html="'landing_pages_domains.verification_error.first_suggest' | translate: { formDopplerPagesDomain }"></p>
+      <br>
+      <p ng-bind-html="'landing_pages_domains.verification_error.second_suggest' | translate"></p>
+      <hr>
+      <!-- note -->
+      <p ng-bind-html="'landing_pages_domains.verification_error.note' | translate"></p>
+      <!-- footer -->
+      <div class="modal__action-btn">
+        <button class="button button--primary button--small btn-verify"
+          data-dismiss="modal"
+          ng-click="closeModal()">
+          {{'landing_pages_domains.verification_error.button' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{
+  "uid": 0,
+  "type": "",
+  "automationType": "",
+  "completed": 0,
+  "id": 0,
+  "name": "",
+  "lastEmailIdName": "",
+  "lastSmsIdName": "",
+  "subject": "",
+  "fromName": "",
+  "fromEmail": "",
+  "replyEmail": "",
+  "state": 0,
+  "initialCondition": {},
+  "isReplica": false,
+  "children": []
+}

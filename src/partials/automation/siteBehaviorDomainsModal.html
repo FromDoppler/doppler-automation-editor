@@ -1,0 +1,15 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper" id="siteTrackingModal" click-outside="close(false)">
+    <a class="icon-close modal--do-close" href="/Automation/EditorConfig?idTaskType=0" data-dismiss="modal"></a>
+    <div class="modal__content">
+      <h5>{{ 'automationTypes.modal_domains.title' | translate }}</h5>
+      <p class="text--light content--block" ng-bind-html="'automationTypes.modal_domains.description' | translate"></p>
+      <p><strong>{{ 'automationTypes.modal_domains.title2' | translate }}</strong></p>
+      <p class="text--light content--block">{{ 'automationTypes.modal_domains.description2' | translate }}</p>
+    </div>
+    <div class="modal__action-btn">
+       <a class="button button--alternative button--small button--link" href="/Automation/EditorConfig?idTaskType=0" data-dismiss="modal">{{ 'actions.cancel' | translate }}</a>
+       <a class="button button--primary button--small button--link" href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings" data-dismiss="modal">{{ 'automationTypes.modal_domains.enableDomain' | translate }}</a>
+    </div>
+  </div>
+</div>

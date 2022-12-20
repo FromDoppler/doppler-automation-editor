@@ -1,0 +1,54 @@
+﻿<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper" id="modalConfigureCustomDomain"
+    click-outside="closeModal()" outside-if-not="submit,verify-text">
+    <a class="icon-close modal--do-close" ng-click="closeModal()"></a>
+    <div class="modal__content configure-custom-domain-modal">
+      <h1>{{'landing_pages_domains.configure_domain.title' | translate}}</h1>
+      <p>
+        <span ng-bind-html="'landing_pages_domains.configure_domain.description' | translate"></span>
+        <a href="{{'landing_pages_domains.configure_domain.help.url' | translate}}" target="_blank">
+          {{'landing_pages_domains.configure_domain.help.text' | translate}}
+        </a>
+        &#46;
+      </p>
+      <hr>
+      <p>
+        {{'landing_pages_domains.configure_domain.record_type' | translate}}
+        <strong>{{'landing_pages_domains.configure_domain.cname' | translate}}</strong>
+      </p>
+      <p>
+        {{'landing_pages_domains.configure_domain.hostname' | translate}}
+        <strong class="hostname">{{customDomain.Domain}}</strong>
+      </p>
+      <!-- form -->
+      <div class="configure-domain-form">
+        <div class="input--container">
+          <label class="label" for="customDomain">
+            {{'landing_pages_domains.configure_domain.cname_value' | translate}}
+          </label>
+          <input type="text" name="customDomain"
+            ng-value="formDopplerPagesDomain"
+            disabled="disabled"
+          />
+        </div>
+        <button class="button button--alternative button--small copyToClipboard"
+          id="copy-custom-domain"
+          data-clipboard-text="{{formDopplerPagesDomain}}">
+          {{'actions.copy' | translate}}
+        </button>
+      </div>
+      <!-- note -->
+      <p>{{'landing_pages_domains.configure_domain.note' | translate}}</p>
+      <!-- footer -->
+      <div class="modal__action-btn">
+        <button class="button button--primary button--small btn-verify"
+          data-dismiss="modal"
+          ng-click="verify()"
+          ng-disabled="processing">
+          <span ng-show="!processing">{{'actions.verify' | translate}}</span>
+          <span class="loading-icon loading-icon--small loading-icon--alternative" ng-show="processing"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<section class="section--default background--white" ng-init="isLoading = true;" ng-show="!isLoading">
+  <div class="wrapper wrapper--default">
+    <div class="dp-library">
+      <header class="hero-banner">
+        <div class="dp-container">
+          <div class="dp-rowflex">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <h2>{{ 'automation_editor.tiny_editor.title' | translate }}</h2>
+            </div>
+            <div class="col-sm-7">
+              <p>{{ 'automation_editor.tiny_editor.subtitle' | translate }}
+                <span class="html-tooltip--container">
+                  <span class="html-tooltip to--left medium">
+                    {{ 'help_link_text' | translate }}
+                    <a class="link--default" target="_blank" href="{{ 'automation_editor.tiny_editor.dopplerTipLink' | translate }}">{{ 'automation_editor.tiny_editor.dopplerTipLinkText' | translate }}</a>
+                  </span>
+                  <span class="icon-tip"></span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="editorHTML-container">
+      <textarea class="editor-textarea ng-hide" dp-editor-tinymce="{{tinyOptions}}" name="content" id="editorTextarea" ng-model="html.val"></textarea>
+      <div class="search-box">
+        <div class="search-box-title">{{'automation_editor.tiny_editor.custom_fields_title' | translate}}</div>
+        <div class="search-box-content">
+          <div class="searchText-container relative">
+            <input class="input--text input--search" type="text" ng-keyup="updateScroll();" ng-model="fieldSearchText" id="searchField"/>
+            <span class="icon-search"></span>
+            <div class="cleanSearchSmall" id="clearSearch" ng-show="fieldSearchText.length > 0">
+              <a class="cleanSearch-icon" id="cleanSearchIconField" ng-click="fieldSearchText= '';"></a>
+            </div>
+          </div>
+          <div id="fieldList" class="search-box-customFieldList">
+            <span class="fieldTag" ng-repeat="field in customFields | filter: fieldSearchText" id="field-{{field.id}}" ng-click="addFieldToEditor('[[[' + field.label + ']]]');">
+              {{'[[[' + field.label + ']]]'}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="dp-editor-footer" ng-show="!isLoading">
+  <div class="item" >
+    <button class="button button--small button-outline--primary" ng-click="toogleTinyEditorView(false)">{{ 'automation_editor.tiny_editor.return_button' | translate }}</button>
+    <div class="right">
+      <button class="button button--small button--primary" ng-disabled="html.val === null || !validHTML(html.val)" ng-click="saveTinyEditorContent();">{{ 'automation_editor.tiny_editor.confirm_button' | translate }}</button>
+    </div>
+  </div>
+</div>
+<div ng-show="isLoading" class="loading--container components--center ng-hide" dp-partial="angularjs/partials/shared/loading.html"><span class="loading-icon"></span></div>
+

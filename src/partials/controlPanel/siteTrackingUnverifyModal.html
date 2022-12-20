@@ -1,0 +1,20 @@
+<div id="modal" class="modal modal--is-dialog site-trackings--unverify">
+  <div class="modal__wrapper" id="siteTracking-modal" click-outside="close(false)">
+    <a class="icon-close modal--do-close " ng-click="close(false)" data-dismiss="modal"></a>
+    <div class="modal__content">
+      <span class="icon-warning"></span>
+      <div class="block--separator">
+        <h1>{{ 'site_tracking.unverify_modal.title' | translate }}</h1>
+        <p>{{ 'site_tracking.unverify_modal.description' | translate }} <strong>{{ 'site_tracking.unverify_modal.description2' | translate }}</strong></p>
+      </div>
+      <ul>
+        <li><strong>1.</strong> {{ 'site_tracking.unverify_modal.item1' | translate }}</li>
+        <li><strong>2.</strong> {{ 'site_tracking.unverify_modal.item2' | translate }}</li>
+        <li><strong>3.</strong> {{ 'site_tracking.unverify_modal.item3' | translate }}</li>
+      </ul>
+    </div>
+    <div class="modal__action-btn">
+       <button class="button button--small button--primary"  ng-click="close(false)" data-dismiss="modal">{{ 'actions.understand' | translate }}</button>
+    </div>
+  </div>
+</div>

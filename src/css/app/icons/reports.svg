@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>icons/actions-reports-icon-dark</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M16,0 L16,16 L12,16 L12,0 L16,0 Z M10,5 L10,16 L6,16 L6,5 L10,5 Z M4,10 L4,16 L0,16 L0,10 L4,10 Z" id="path-1"></path>
+    </defs>
+    <g id="icons/actions-reports-icon-dark" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#333333" xlink:href="#path-1"></use>
+    </g>
+</svg>

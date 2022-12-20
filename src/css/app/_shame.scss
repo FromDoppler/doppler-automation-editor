@@ -1,0 +1,24 @@
+#livedeskchat,
+#livedeskchat-footer {
+  z-index: 99;
+}
+
+@keyframes loading{
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+/*Old Classes*/
+
+
+.wrapper--old {
+  max-width: 940px;
+}
+
+/* Show and Hidden page */
+/* See https://github.com/FromDoppler/doppler-style-guide/pull/137 */
+.dp-hidden-page {
+  opacity: 0;
+  visibility: hidden;
+}

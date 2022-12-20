@@ -1,0 +1,11 @@
+﻿<div id="modal" class="modal modal--preview">
+  <div class="modal__wrapper" click-outside="close(false)">
+    <a class="icon-close modal--do-close" ng-click="close()"></a>
+    <div class="preview__content" ng-show="!isPreviewLoading" >
+    	<iframe id="preview-html"  iframe-onload="iframeLoadedCallBack()"></iframe>
+    </div>
+    <div class="loading" ng-show="isPreviewLoading">
+    	<span class="loading-icon"></span>
+    </div>
+  </div>
+</div>

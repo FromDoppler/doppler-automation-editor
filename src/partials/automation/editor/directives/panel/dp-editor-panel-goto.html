@@ -1,0 +1,32 @@
+<p class="title">
+  {{'automation_editor.sidebar.goto_title' | translate}}
+</p>
+
+<p>
+  {{ 'automation_editor.sidebar.goto_title_tip' | translate }}
+</p>
+
+
+<form name="goForm" class="goto--form relative">
+  <div class="margin-t-25">
+    <dp-editor-dropdown class="dropdown dropdown--full" id="dd-goto" name="goto" property="name"
+      options="gotoComponents"
+      label="getDropDownLabel()"
+      on-select-option="gotoSelected(option.value)"
+      value-selected="selectedComponent.goto"
+      ng-disabled="isReadOnly();">
+    </dp-editor-dropdown>
+  </div>
+</form>
+
+<p class="margin-t-25">
+  {{ 'automation_editor.sidebar.goto_bottom_detail' | translate }}
+</p>
+
+<div>
+  <span class="icon-globo"></span>
+  <p class="help-tip">
+    <span>{{ 'automation_editor.sidebar.goto_help_tip' | translate }} </span> 
+    <a ng-href="{{ 'automation_editor.sidebar.goto_help_tip_link' | translate }}" class="link--default" target="_blank">{{ 'automation_editor.sidebar.goto_help_tip_link_text' | translate }}</a>.
+  </p>
+</div>

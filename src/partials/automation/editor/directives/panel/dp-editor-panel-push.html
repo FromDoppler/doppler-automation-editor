@@ -1,0 +1,109 @@
+<p class="title">{{ 'automation_editor.sidebar.push_title' | translate }}</p>
+<form name="pushForm" class="form--container" id="form-panel-push" novalidate>
+  <div class="input--group">
+    <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_title' | translate }}</label>
+    <input type="text" class="input--text"
+           name="pushMessageTitle"
+           id="pushMessageTitle"
+           ng-model="selectedComponent.pushMessageTitle"
+           ng-class="{ 'hasErrors': pushForm.pushMessageTitle.$invalid }"
+           ng-required="pushForm.pushMessageTitle.$dirty || selectedComponent.touched"
+           maxlength="50"
+           ng-change="charactersCountTitleChange(selectedComponent.pushMessageTitle);"
+           ng-disabled="isReadOnly();"/>
+    <div class="dp-button-group">
+      <div class="dp-bd-box">
+        <button type="button" class="dp-button button-medium dp-button-bd" aria-controls="dp-menu-emojis" id="emoji-button-pushMessageTitle">
+          <img src="/img/icons/emoji.svg">
+        </button>
+      </div>
+    </div>
+    <div class="flex-display flex-justify-between">
+      <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
+    </div>
+    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+    <div ng-messages="pushForm.pushMessageTitle.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate}}</div>
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+    </div>
+  </div>
+  <div class="input--group">
+    <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_body' | translate }}</label>
+    <span class="span--push">{{ 'automation_editor.sidebar.push_message_body_desc' | translate }}</span>
+    <textarea type="text" class="textarea input--text width-full"
+              name="pushMessageBody"
+              id="pushMessageBody"
+              ng-model="selectedComponent.pushMessageBody"
+              ng-change="charactersCountBodyChange(selectedComponent.pushMessageBody);"
+              ng-class="{ 'hasErrors': pushForm.pushMessageBody.$invalid }"
+              ng-required="pushForm.pushMessageBody.$dirty || selectedComponent.touched"
+              maxlength="250"
+              ng-disabled="isReadOnly();">
+    </textarea>
+    <div class="dp-button-group">
+      <div class="dp-bd-box">
+        <button type="button" class="dp-button button-medium dp-button-bd" aria-controls="dp-menu-emojis" id="emoji-button-pushMessageBody">
+          <img src="/img/icons/emoji.svg">
+        </button>
+      </div>
+    </div>
+    <div class="flex-display flex-justify-between">
+      <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/250.</span>
+    </div>
+    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+    <div ng-messages="pushForm.pushMessageBody.$error" class="error-messages--container">
+      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate}}</div>
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+    </div>
+  </div>
+  <div class="input--group">
+    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_on_click_link' | translate }}</label>
+    <input type="text" class="input--text"
+           name="pushMessageOnClickLink"
+           ng-model="selectedComponent.pushMessageOnClickLink"
+           ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
+           ng-maxlength="300"
+           ng-pattern="validationLinkUrl"
+           ng-change="clearErrorsOnEmptyLink();"
+           ng-disabled="isReadOnly();"/>
+    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+    <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+      <div ng-show="invalidUrl" class="error">{{ 'validation_messages.url_pattern_error_message' | translate }}</div>
+      <div ng-show="invalidHttpsStart" class="error">{{ 'validation_messages.https_url_pattern_error_message' | translate }}</div>
+    </div>
+  </div>
+  <div class="input--group">
+    <label class="label label--panel">{{ 'automation_editor.sidebar.push_uploader_title' | translate }}</label>
+      <div class="container-uploader" id="containerUploader">
+        <div class="panel-uploader">
+          <div class="progress-bar" ng-show="statusUploader === 'pending'">
+            <progress value="{{progressCounter}}" max="100" ></progress>
+          </div>
+          <button ng-disabled="isReadOnly();" class="button button--error" ng-show="statusUploader === 'error'" ng-click="openSelectFileModal()">{{ 'automation_editor.sidebar.push_uploader_retry_button' | translate }}</button>
+          <div ng-show="selectedComponent.imageSrc || selectedComponent.pushMessageImageUrl" class="dp-library">
+            <button ng-disabled="isReadOnly();" class="button button--error" ng-click="clearUploader()">
+              <span class="dpicon iconapp-trash-bin" style="font-size: 27px;vertical-align: sub;"></span>
+            </button>
+          </div>
+        </div>
+        <div ng-click="openSelectFileModal()">
+          <div ng-if="!selectedComponent.imageSrc  && !selectedComponent.pushMessageImageUrl" class="init-image-box">
+                  <img src="../../images/automation-editor-upload-html.svg">
+                  {{ 'automation_editor.sidebar.push_uploader_drag_title' | translate }}
+                  <button class="button button--primary" ng-disabled="isReadOnly();">{{ 'automation_editor.sidebar.push_uploader_button' | translate }}</button>
+          </div>
+          <img 
+            ng-if="selectedComponent.imageSrc || selectedComponent.pushMessageImageUrl"
+            ng-src="{{selectedComponent.pushMessageImageUrl || selectedComponent.imageSrc}}" 
+          />
+        </div>
+      </div>
+      <input hidden 
+        type="file" 
+        id="fileInput" 
+        accept="{{acceptedFileTypes}}"
+        ng-disabled="isReadOnly();"
+      >
+  </div>
+</form>

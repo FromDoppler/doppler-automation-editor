@@ -1,0 +1,38 @@
+<div class="component">
+  <div class="dp-tooltip-top">
+    <span ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate">
+    </span>
+  </div>
+
+  <div class="uid-label-component">{{component.uid}}</div>
+  <img class="image-complete" src="/../images/automation-action.svg" />
+  <img class="image-incomplete" src="/../images/automation-action-grey.svg" />
+  <p>
+	  <span ng-show="!component.operation" ng-bind-html="'automation_editor.canvas.action_placeholder' | translate"></span>
+	  <span ng-show="component.operation && component.operation.type === ACTION_TYPE.ASSOCIATE_SUBSCRIBER_TO_LIST" ng-bind-html="'automation_editor.canvas.action_list_placeholder' | translate"></span>
+    <span ng-if="component.operation && component.operation.type === ACTION_TYPE.REMOVE_SUBSCRIBER_FROM_LIST">
+      <span ng-bind-html="'automation_editor.canvas.action_remove_suscriber_placeholder' | translate"></span>
+      <span ng-bind-html="getRemoveSubscriberSummary()"></span>
+    </span>
+    <span ng-show="component.operation && component.operation.type === ACTION_TYPE.RESEND_EMAIL" ng-bind-html="'automation_editor.canvas.action_resend_email_palceholder' | translate"></span>
+		<span ng-show="showBrackets()" class="brackets">[[[...]]]</span>
+    <span ng-if="component.operation && component.operation.type === ACTION_TYPE.CHANGE_SUBSCRIBER_FIELD">
+      {{ 'automation_editor.canvas.action_change_field_placeholder' | translate }}
+      <strong ng-show="!component.operation.field" class="brackets">[[[...]]]</strong>
+      <strong ng-show="component.operation.field">{{ component.operation.field.name }}</strong>
+      {{ 'automation_editor.canvas.action_change_field_with_value' | translate }}
+      <strong ng-show="!component.operation.field" class="brackets">[[[...]]]</strong>
+      <strong ng-show="component.operation.field && component.operation.field.value && component.operation.field.type !== FIELD_TYPE.BOOLEAN">{{ component.operation.field.value }}</strong>
+      <strong ng-show="component.operation.field && component.operation.field.date" ng-bind-html="formatDate(component.operation.field.date)"></strong>
+      <strong ng-show="component.operation.field && component.operation.field.type === FIELD_TYPE.BOOLEAN">
+      {{ 'automation_editor.components.condition.conditionals.subscriber_information.boolean.' + (component.operation.field.value ? 'yes' : 'no') | translate }}
+      </strong>
+    </span>
+    <strong class="selected" ng-show="component.operation.email && component.operation.email.label">{{component.operation.email.label}}</strong>
+		<strong class="selected" ng-show="component.operation.suscriptionList && component.operation.suscriptionList.ListName">{{component.operation.suscriptionList.ListName}}</strong>
+  </p>
+  <div class="actions-element--container">
+    <dp-editor-delete-component on-delete-component="deleteAction()"></dp-editor-delete-component>
+  </div>
+</div>
+<dp-editor-new-step component="component" branch="branch"></dp-editor-new-step>

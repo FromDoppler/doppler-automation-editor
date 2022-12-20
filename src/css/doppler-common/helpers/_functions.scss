@@ -1,0 +1,53 @@
+/// Convert to EMs function
+/// @param {Number} target - The value to be converted
+/// @param {Number} context [$font-size--base] The base font size
+/// @return {Em} value
+@function toem($target, $context: $font-size--base) {
+   @if $target == 0 { @return 0 }
+   @return $target / $context + 0em;
+}
+
+/// Convert to REMs function
+/// @param {Number} target - The value to be converted
+/// @param {Number} context [$font-size--base] - The base font size
+/// @return {Rem} value
+@function torem($target, $context: $font-size--base) {
+   @if $target == 0 { @return 0 }
+   @return $target / $context + 0rem;
+}
+
+
+/// Create a single media condition out of a map of queries
+/// @param {String} queries - The queries
+@mixin media($queries) {
+  @if length($queries) == 0 {
+    @content;
+  } @else {
+    $first-key: nth(map-keys($queries), 1);
+
+    @media ($first-key: map-get($queries, $first-key)) {
+      $queries: map-remove($queries, $first-key);
+
+      @include media($queries) {
+        @content;
+      }
+    }
+  }
+}
+
+/// Gets the media query from the Media Queries List Configured in `$doppler-breakpoints`
+/// @param {String} breakpoint - The breakpoint to search on `$doppler-breakpoints` List
+@mixin respond-to($breakpoint) {
+  // Get the query map for $doppler-breakpoints map
+  $queries: map-get($doppler-breakpoints, $breakpoint);
+
+  // If there is no query called $breakpoint in map, throw an error
+  @if not $queries {
+    @error "No value could be retrieved from `#{$breakpoint}`. Please make sure it is defined in `$doppler-breakpoints` map.";
+  }
+
+  // Include the media mixin with $queries
+  @include media($queries) {
+    @content;
+  }
+}

@@ -1,0 +1,43 @@
+/*TODO remove .app when refactor the application*/
+.app {
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $color-darkgrey;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: $font-size--big;
+    line-height: 28px;
+  }
+
+  h3 {
+    font-size: $font-size--medium;
+    font-weight: 600;
+  }
+
+  h4 {
+    margin: inherit;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
+
+  p {
+    line-height: 1.5;
+    &.small {
+      font-size: $font-size--small;
+    }
+  }
+
+}

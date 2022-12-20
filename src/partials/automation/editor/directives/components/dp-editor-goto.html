@@ -1,0 +1,22 @@
+<div class="component concat-none goto-source" ng-class="{'delete-warning': showDeleteWarning, 'goto-connected': component.wasCreatedClickingNewStep}">
+
+  <div class="dp-tooltip-top">
+    <span ng-bind-html="'automation_editor.canvas.goto_tooltip_invalid_connection_to_goto' | translate">
+    </span>
+  </div>
+
+  <img class="image-complete" src="/../images/automation-goto.svg" />
+  <img class="image-incomplete" src="/../images/automation-goto-grey.svg" />
+
+  <div class="goto-component-label-container">
+    <p class="text-align-c goto-label-connection-inprogress" ng-class="{'goto-selection-done': component.goto }">
+      <span ng-show="true" ng-bind-html="'automation_editor.canvas.goto_step_placeholder' | translate"></span>
+    </p>
+    <p class="goto-label-connection-finished" ng-class="{'goto-selection-done': component.goto }">
+      {{'automation_editor.canvas.goto_step_connection_label' | translate}}
+    </p>
+  </div>
+  <div class="actions-element--container">
+    <dp-editor-delete-component on-delete-component="removeGotoComponent(component)"></dp-editor-delete-component>
+  </div>
+</div>

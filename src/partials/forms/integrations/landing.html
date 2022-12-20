@@ -1,0 +1,152 @@
+<div class="form-integration-header">
+  <p class="title">{{'forms_integrate.headers.integration_landing.title' | translate}}</p>
+  <span>{{'forms_integrate.headers.integration_landing.text' | translate}}</span>
+</div>
+
+<form name="landing.landingForm" novalidate>
+  <!-- doppler domain option -->
+  <div class="form-integration-landing-item" ng-class="{'no-events': landing.selectedDomainType !== 'doppler'}">
+    <div class="form-integration-radio" ng-click="landing.onDomainTypeSelected('doppler')">
+      <input class="radio-custom" id="doppler-domain-radio" type="radio"
+        name="domainOption"
+        ng-checked="landing.selectedDomainType === 'doppler'"
+      />
+      <label for="doppler-domain-radio"></label>
+    </div>
+    <div class="form-integration-content">
+      <div class="form-integration-header" ng-click="landing.onDomainTypeSelected('doppler')">
+        <p class="title">{{'forms_integrate.headers.integration_landing.doppler_domain.title' | translate}}</p>
+      </div>
+      <div class="form-integration-body">
+        <span class="text--small">
+          {{landing.baseDopplerUrl}}
+        </span>
+        <span class="slash">&#47;</span>
+        <div class="input--container">
+          <input class="input--text" type="text" name="pageNameDoppler" maxlength="100"
+            ng-class="{'hasErrors': landing.landingForm.pageNameDoppler.$invalid && landing.landingForm.pageNameDoppler.$dirty}"
+            ng-pattern="landing.REGEX_PAGENAME"
+            ng-model="landing.pageNameDoppler"
+            ng-change="landing.clearDuplicateError('pageNameDoppler')"
+            ng-focus="landing.onFocus()"
+          />
+          <div class="error-messages--container" ng-messages="landing.landingForm.pageNameDoppler.$error">
+            <div class="error" ng-message="pattern">
+              {{'forms_integrate.headers.integration_landing.error.pattern' | translate}}
+            </div>
+            <div class="error" ng-message="duplicate">
+              {{'forms_integrate.headers.integration_landing.error.duplicate' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="actions" ng-show="landing.focusedPageNameInput && landing.selectedDomainType === 'doppler'">
+          <span class="grayCancelCross-icon" ng-click="landing.cancelPageNameEdition()"></span>
+          <span class="greenConfirmRounded-icon"
+            ng-class="{'disabled': landing.landingForm.pageNameDoppler.$invalid}"
+            ng-click="landing.confirmUsingDopplerDomain()">
+          </span>
+        </div>
+        <button class="button button--small button-outline--primary copyToClipboard" id="copyLinkDoppler"
+          ng-show="landing.selectedDomainType === 'custom'
+           || (landing.landingForm.pageNameDoppler.$valid && !landing.focusedPageNameInput)"
+          data-clipboard-text="{{ landing.getUrlWithDopplerDomain() }}">
+          {{'forms_integrate.headers.integration_landing.copy_url' | translate}}
+        </button>
+        <span class="titip-top" data-title="{{'forms_integrate.headers.integration_landing.open_new_tab' | translate}}">
+          <span class="openNewTab-icon"
+            ng-show="landing.selectedDomainType === 'custom'
+              || (landing.landingForm.pageNameDoppler.$valid && !landing.focusedPageNameInput)"
+            ng-click="landing.openNewTab(landing.getUrlWithDopplerDomain())">
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- custom domain option -->
+  <div class="form-integration-landing-item" ng-class="{
+      'no-events': landing.selectedDomainType !== 'custom',
+      'disabled': !landing.customDomains.length
+    }">
+    <div class="form-integration-radio" ng-click="landing.onDomainTypeSelected('custom')">
+      <input class="radio-custom" id="custom-domain-radio" type="radio"
+        name="domainOption"
+        ng-checked="landing.selectedDomainType === 'custom'"
+      />
+      <label for="custom-domain-radio"></label>
+    </div>
+    <div class="form-integration-content">
+      <div class="form-integration-header" ng-click="landing.onDomainTypeSelected('custom')">
+        <p class="title">{{'forms_integrate.headers.integration_landing.custom_domain.title' | translate}}</p>
+      </div>
+      <div class="form-integration-body">
+        <dp-editor-dropdown class="dropdown dropdown--large" id="custom-domain-dropdown"
+          name="domainSelector"
+          options="landing.customDomains"
+          key-label="'Domain'"
+          key-value="'IdCustomDomain'"
+          label="landing.getCustomDomainsSelectorLabel()"
+          on-select-option="landing.confirmUsingCustomDomain(option)"
+          value-selected="landing.currentCustomDomain.IdCustomDomain">
+        </dp-editor-dropdown>
+        <span class="slash">&#47;</span>
+        <div class="input--container">
+          <input class="input--text" type="text" name="pageNameCustom" maxlength="100"
+            ng-class="{'hasErrors': landing.landingForm.pageNameCustom.$invalid && landing.landingForm.pageNameCustom.$dirty}"
+            ng-pattern="landing.REGEX_PAGENAME"
+            ng-model="landing.pageNameCustom"
+            ng-change="landing.clearDuplicateError('pageNameCustom')"
+            ng-focus="landing.onFocus()"
+          />
+          <div class="error-messages--container" ng-messages="landing.landingForm.pageNameCustom.$error">
+            <div class="error" ng-message="pattern">
+              {{'forms_integrate.headers.integration_landing.error.pattern' | translate}}
+            </div>
+            <div class="error" ng-message="duplicate">
+              {{'forms_integrate.headers.integration_landing.error.duplicate' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="actions" ng-show="landing.focusedPageNameInput && landing.selectedDomainType === 'custom'">
+          <span class="grayCancelCross-icon" ng-click="landing.cancelPageNameEdition()"></span>
+          <span class="greenConfirmRounded-icon"
+            ng-class="{'disabled': landing.landingForm.pageNameCustom.$invalid}"
+            ng-click="landing.confirmUsingCustomDomain()">
+          </span>
+        </div>
+        <button class="button button--small button-outline--primary copyToClipboard" id="copyLinkCustom"
+          ng-class="{'disabled': !landing.currentCustomDomain && landing.selectedDomainType === 'custom'}"
+          ng-show="landing.selectedDomainType === 'doppler'
+            || (landing.landingForm.pageNameCustom.$valid && !landing.focusedPageNameInput)"
+          data-clipboard-text="{{landing.getUrlWithCustomDomain()}}">
+          {{'forms_integrate.headers.integration_landing.copy_url' | translate}}
+        </button>
+        <span class="titip-top" data-title="{{'forms_integrate.headers.integration_landing.open_new_tab' | translate}}">
+          <span class="openNewTab-icon"
+            ng-class="{'disabled': !landing.currentCustomDomain && landing.selectedDomainType === 'custom'}"
+            ng-show="landing.selectedDomainType === 'doppler'
+              || (landing.landingForm.pageNameCustom.$valid && !landing.focusedPageNameInput)"
+            ng-click="landing.openNewTab(landing.getUrlWithCustomDomain())">
+          </span>
+        </span>
+      </div>
+      <div class="form-integration-note">
+        <span ng-show="!landing.customDomains.length">
+          {{'forms_integrate.headers.integration_landing.note.no_verified_domains' | translate}}
+          <a href="{{landing.customDomainsUrl}}">
+            {{'forms_integrate.headers.integration_landing.note.click_here' | translate}}
+          </a>
+        </span>
+        <span ng-show="landing.customDomains.length">
+          {{'forms_integrate.headers.integration_landing.note.add_new_domain' | translate}}
+          <a href="{{landing.customDomainsUrl}}">
+            {{'forms_integrate.headers.integration_landing.note.click_here' | translate}}
+          </a>
+        </span>
+        &#46;
+      </div>
+    </div>
+  </div>
+</form>

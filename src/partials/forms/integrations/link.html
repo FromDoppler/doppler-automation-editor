@@ -1,0 +1,6 @@
+<div class="form-integration-header">
+  <p class="title">{{ 'forms_integrate.headers.integration_link.title' | translate }}</p>
+  <span>{{ 'forms_integrate.headers.integration_link.text' | translate }}</span><br>
+</div>
+<input class="form-integration-link" type="text" readonly="readonly" ng-model="form.integrationLink"/>
+<button class="button button--small button-outline--primary copyToClipboard form-integration-copy-link" id="copyLink" data-clipboard-text="{{ form.integrationLink }}">{{ 'forms_integrate.headers.integration_link.button_text_1' | translate }}</button>

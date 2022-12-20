@@ -1,0 +1,46 @@
+<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+     ng-show="miTienda.connected && miTienda.showMapping">
+  <div>
+    <div class="authentication-container connected">
+      <div>
+        <span class="control-panel-section-title">{{ 'miTienda_integration.mapping.title' | translate }}</span>
+        <span class="control-panel-section-subtitle">{{ 'miTienda_integration.mapping.subtitle' | translate }}</span>
+      </div>
+    </div>
+    <hr class="full" style="width: calc(100% + 40px);" />
+    <p class="integration-information-text">{{ 'miTienda_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ miTienda.selectedList.ListName }}</strong></p>
+    <div class="mapping-container">
+      <div class="grayPanel-box flex-grid" ng-repeat="field in miTienda.miTiendaFields" dp-on-finish-ng-repeat>
+        <div>
+          <p>{{ 'miTienda_integration.mapping.data_entity_field' | translate }}: <b>{{ miTienda.getFiledName(field.Name) }}</b></p>
+        </div>
+        <div>
+          <dropdown class="dropdown dropdown--big"
+                    placeholder="{{'miTienda_integration.mapping.select_field_placeholder' | translate}}"
+                    id="dd-userFields{{$index}}" list="miTienda.availablesFields"
+                    name="miTienda.userFields" ng-model="field.idDopplerField" ng-required="true"
+                    property="name" id-value="idField" ng-change="miTienda.setAvailablesFields()"
+                    ng-disabled="miTienda.availablesFields && miTienda.availablesFields.length == 0" ng-click="miTienda.errorMessage=''"></dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dp-library margin-t-20 margin-b-20" ng-show="!!miTienda.errorMessage.length">
+    <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <span class="dp-message-icon"></span>
+      <div class="dp-content-message dp-content-full">
+        <span>{{ miTienda.errorMessage }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grid-v-center--s-between">
+    <button ng-click="miTienda.goBack()" class="button button--alternative">
+      {{ 'miTienda_integration.mapping.back' | translate }}
+    </button>
+    <button ng-class="{'button--spinner' : miTienda.isMapping}" ng-click="miTienda.mapFields()"
+            class="button button--primary">
+      {{ 'miTienda_integration.connected.synchronize' | translate }}
+      <span class="icon-editor-saving hide"></span>
+    </button>
+  </div>
+</div>

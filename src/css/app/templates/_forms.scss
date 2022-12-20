@@ -1,0 +1,441 @@
+.form-integration-main-container {
+  width: 100%;
+  position: absolute;
+
+  .integration-body {
+    min-height: calc(100% - 80px);
+  }
+}
+
+.form-integration-info{
+  margin-bottom: 25px;
+  font-size: $font-size--small;
+}
+
+.form-integration-tab--container {
+  padding: 40px $padding-wrapper 120px;
+
+  .wrapper {
+    max-width: 1285px;
+  }
+
+  .text--small {
+    .icon-warning {
+      font-size: $font-size--small;
+      margin-right: 3px;
+    }
+  }
+
+  .text--error-inline {
+    height: 40px;
+  }
+
+  .label{
+    color: $color-base;
+    display: block;
+    font-size: $font-size--small;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .text-error{
+    color: $color-red;
+  }
+
+  .form-integration-container{
+    margin-top: 35px;
+
+    .small-spinner-container {
+      min-height: 170px;
+    }
+
+    .form-integration-link{
+      margin-right: 5px;
+      max-width: 870px;
+      width: $size-full;
+      padding: 0 20px;
+      font-size: $font-size--small;
+      color: inherit;
+    }
+
+    .form-integration-box{
+      display: inline-flex;
+      margin-right: 10px;
+      max-width: 870px;
+      width: $size-full;
+      height: auto;
+      line-height: 1.8;
+      padding: 10px 20px;
+      font-size: $font-size--small;
+      border: 1px solid $color-sylver;
+      border-radius: $border-radius--default;
+      box-sizing: border-box;
+    }
+
+    .monospace-font{
+      white-space: pre-line;
+      font-family: monospace;
+    }
+  }
+
+  .form-integration-copy-link{
+    margin-bottom: 2px;
+    height: 42px;
+  }
+
+  .form-integration-copy-embed{
+    margin-bottom: 5px;
+    height: 42px;
+  }
+
+  .icon-check{
+    color: $color-green;
+    font-size: $font-size--small;
+    position: relative;
+    bottom: 2px;
+  }
+
+  .icon-grid-edit{
+    font-size: 16px;
+    color: $color-base;
+    margin-bottom: 3px;
+  }
+
+  .icon-delete{
+    font-size: $font-size--base;
+    color: $color-base;
+    margin-bottom: 3px;
+  }
+
+  .icon-view{
+    font-size: 16px;
+    color: $color-base;
+    margin-bottom: 3px;
+  }
+
+  .icon-warning{
+    font-size: 18px;
+    color: $color-red;
+    margin-bottom: 3px;
+  }
+
+  .icon-element-image{
+    font-size: 35px;
+    color: $color-lightgrey;
+  }
+
+  .form-integration-header{
+    margin-bottom: 20px;
+
+    .regular {
+      color: $color-base;
+    }
+
+    div {
+      display: inline-block;
+    }
+
+    .text--framed {
+      margin-top: 20px;
+    }
+
+    span{
+      font-size: $font-size--small;
+    }
+
+    .title{
+      color: $color-darkgrey;
+      line-height: 22px;
+      font-weight: normal;
+      margin: 35px 0 10px 0;
+      font-weight: $font_weight-bolder;
+    }
+  }
+
+  .form-integration-body{
+    a {
+      color: $color-base;
+      &.text-error {
+        color: $color-red;
+      }
+    }
+
+    dp-editor-dropdown{
+      width: 100%;
+      margin: 10px 0 25px;
+    }
+
+    .button-config{
+      margin-top: 20px;
+    }
+
+    input{
+      margin: 10px 0 25px;
+      width: 100%;
+      font-size: 13px;
+      color: inherit;
+    }
+
+    .form-integration-box{
+      margin-top: 10px;
+      height: 132px;
+      padding: 10px;
+
+      .image-settings-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .image-container{
+          flex: 4;
+          margin-right: 15px;
+          max-width: 111px;
+          height: 74px;
+          overflow: hidden;
+          background: $color-snow;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .actions-container{
+          flex: 7;
+
+          button{
+            border: 0;
+            padding: 0;
+            background: transparent;
+          }
+
+          span{
+            min-width: 15px;
+          }
+
+          :nth-child(2){
+            margin-top: 10px;
+            display: block;
+          }
+
+          .icon-grid-edit{
+            font-size: 14px;
+          }
+        }
+      }
+
+      .footer-container{
+        width: 100%;
+        padding-top: 15px;
+
+        p{
+          font-size: 11px;
+          font-style: italic;
+        }
+      }
+    }
+
+    .installed_tab_details{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 25px 0;
+
+      .image-container{
+        flex: 1;
+        margin-right: 15px;
+        background: $color-snow;
+        max-width: 111px;
+        height: 74px;
+        overflow: hidden;
+        background: $color-snow;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .actions-container{
+        flex: 10;
+
+        :nth-child(1n+2){
+          margin-top: 5px;
+        }
+      }
+    }
+
+    .form-integration-settings{
+      width: 60%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 40px;
+
+      > div{
+        width: 48.5%;
+      }
+
+      .form-integration-box{
+        display: block;
+      }
+    }
+  }
+
+  .form-integration-footer{
+    width: 60%;
+    overflow: hidden;
+
+    .text-red{
+      color: $color-red;
+    }
+
+    .form-integration-divider{
+      margin: 0 0 15px;
+      width: 100%;
+    }
+
+    .facebook_tab_actions{
+      float: right;
+    }
+
+    p{
+      padding-left: 30px;
+      font-size: 12px;
+    }
+
+    button{
+      margin-left: 30px;
+    }
+
+    a{
+      color: $color-base;
+    }
+
+    .icon-grid-edit{
+      font-size: 14px;
+    }
+  }
+
+  .form-integration-footer > *{
+    float: right;
+    display: flex;
+  }
+
+  .form-integration-divider{
+    border-top: 1px solid $color-sylver;
+    text-align: left;
+    width: 60%;
+    margin: 25px 0 25px 0;
+  }
+
+  .form-integration-custom-link{
+    button{
+      margin-top: 20px;
+    }
+
+    span{
+      font-size: $font-size--small;
+      color: $color-base;
+    }
+
+    .title{
+      color: #333;
+      line-height: 22px;
+      font-weight: normal;
+      margin: 35px 0 10px 0;
+      font-weight: bold;
+      font-size:15px;
+    }
+  }
+}
+
+.form-integration-header-main{
+  background:$color-white;
+  box-shadow: 0 2px 0 0 #EBEBEB;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #D9D9D9;
+  padding-left: 0;
+  padding-right: 0;
+
+  .nav-container {
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+  }
+
+  .nav-main {
+    flex: 2;
+    position: relative;
+    padding-top: 27.5px;
+    li {
+      display: inline-block;
+      transition: margin-bottom .3s ease;
+      margin-right: 35px;
+      &.nav-main--item {
+        &.active-withoutsub {
+          margin-bottom: 5px;
+        }
+        &.active-withsub {
+          margin-bottom: 5px;
+        }
+        margin-bottom: 5px;
+      }
+    }
+    a {
+      color: $color-base;
+      font-size: $font-size--small;
+      &.active {
+        color: $color-darkgrey;
+        font-weight: bold;
+        border-bottom: 3px solid $color-primary;
+        padding-bottom: 5px;
+        &:hover {
+          color: $color-darkgrey;
+        }
+        & + ul a {
+          color: $color-base;
+          &:hover {
+            color: $color-lightgrey;
+          }
+          &.active:hover {
+            color: $color-base;
+          }
+        }
+      }
+      &:hover {
+        color: $color-lightgrey;
+        & + ul {
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+      }
+    }
+  }
+}
+
+.form-integration-error--container {
+  height: calc( 100vh - 190px);
+}
+.footer--form {
+  .dp-editor-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+}
+
+.form-aplication-types {
+  background: $color-white;
+  height: calc(100% - 66px);
+  position: absolute;
+  padding-top: 75px;
+  left: 0;
+  width: 100%;
+  overflow-y: auto;
+  z-index: 10;
+  header {
+    padding: 0 0 30px 0;
+    box-shadow: none;
+    border: none;
+  }
+}

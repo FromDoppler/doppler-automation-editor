@@ -1,0 +1,42 @@
+.massiveSubscribersNewList {
+  .text--yellow {
+    color: $color-yellow;
+  }
+  .title--box {
+    margin: 0 0 0.67em 0;
+    font-size: 22px !important;
+  }
+  .input--list {
+    width : 100%;
+  }
+  .input--error {
+    border: 1px solid #e34f45 !important;
+  }
+  .newSubscriber--box {
+    margin-top: 10px;
+  }
+  .addNewSubscriberList-content span {
+    line-height: 1.6;
+  }
+  .subscriber-navigation--header {
+    color: #999;
+  }
+  .activationLink {
+    color: $color-yellow !important;
+    text-decoration: underline !important;
+  }
+  .error--message {
+    padding-top: 5px;
+    color: #e34f45;
+    font-size: 13px;
+  }
+}
+
+.searchMasterSubscribers-container {
+  .selectBox-label {
+    display: block !important;
+    text-overflow: ellipsis;
+    width: 150px;
+  }
+}
+

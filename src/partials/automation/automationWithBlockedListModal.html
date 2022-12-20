@@ -1,0 +1,13 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper">
+    <a class="icon-close modal--do-close" data-dismiss="modal" ng-click="close()"></a>
+    <div class="modal__content">
+      <h1 ng-bind-html="'modal_blocked_lists.title' | translate"></h1>
+      <p ng-bind-html="'modal_blocked_lists.description' | translate"></p>
+    </div>
+    <div class="modal__action-btn">
+      <button class="button button--alternative button--small float-left" data-dismiss="modal" ng-click="close()">{{ 'modal_blocked_lists.button_cancel' | translate }}</button>
+      <a class="button button--primary button--small" href="/Lists/SubscribersList" target="_self">{{ 'modal_blocked_lists.button_action' | translate }}</a>
+    </div>
+  </div>
+</div>

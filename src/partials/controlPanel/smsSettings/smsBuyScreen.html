@@ -1,0 +1,84 @@
+<form name="billingInformationForm" ng-submit="smsSettings.buy(billingInformationForm)" novalidate>
+  <div class="sms-dashboard">
+    <div class="panel-box-app panel-box-app--ctrlpanel">
+      <h3 class="control-panel-section-title">{{ 'sms_settings.buy_screen.title' | translate }}</h3>
+      <p class="description text--small margin-b-20">{{ 'sms_settings.buy_screen.subtitle' | translate }}</p>
+      <hr/>
+      <div class="paymentSettings">
+        <input
+          class="radio-custom"
+          type="radio"
+          id="paymentCC"
+          name="selectList"
+          ng-checked="smsSettings.selectedPaymentMethod === smsSettings.PAYMENT_METHOD.CC"/>
+        <label
+          for="paymentCC"
+          ng-click="smsSettings.changePaymentMethod(smsSettings.PAYMENT_METHOD.CC, billingInformationForm)">
+        </label>
+        <span class="text--small margin-l-20 margin-r-30">{{ 'sms_settings.buy_screen.credit_card.description' | translate }}</span>
+        <span ng-if="smsSettings.isTransferCountry(smsSettings.paymentData.billingInformation.idCountry)">
+          <input
+            class="radio-custom"
+            type="radio"
+            id="paymentTransfer"
+            name="selectList"
+            ng-checked="smsSettings.selectedPaymentMethod === smsSettings.PAYMENT_METHOD.TR"/>
+          <label
+            for="paymentTransfer"
+            ng-click="smsSettings.changePaymentMethod(smsSettings.PAYMENT_METHOD.TR, billingInformationForm)">
+          </label>
+          <span class="text--small margin-l-20">{{ 'sms_settings.buy_screen.transfer.description' | translate }}</span>
+        </span>
+        <!-- Credit Card Method -->
+        <div
+          ng-include="'angularjs/partials/controlPanel/smsSettings/smsPaymentMethods/smsCCMethod.html'"
+          ng-if="smsSettings.selectedPaymentMethod === smsSettings.PAYMENT_METHOD.CC">
+        </div>
+        <!-- Transfer Method -->
+        <div
+          ng-include="'angularjs/partials/controlPanel/smsSettings/smsPaymentMethods/smsTRMethod.html'"
+          ng-if="smsSettings.selectedPaymentMethod === smsSettings.PAYMENT_METHOD.TR">
+        </div>
+      </div>
+      <!-- Error Message -->
+      <div ng-show="smsSettings.errorMsg" class="message-validation validation-error">
+        <div id="messageBar">
+          {{ smsSettings.errorMsg }}
+        </div>
+      </div>
+    </div>
+    <div class="sms-billing-information--container grayPanel-box">
+        <div class="white-color-bg">
+          <p class="paymentMethod-title grayPanelPadding-box">{{ 'sms_settings.buy_screen.billing.title' | translate }}</p>
+          <hr>
+        </div>
+        <div>
+          <div class="sms-billing-information grid-display grayPanelPadding-box">
+              <div>
+                <p class="description-text">{{ 'sms_settings.buy_screen.billing.description' | translate }}</p>
+              </div>
+              <div></div>
+              <div>
+                <p class="description-text price">US$ {{ smsSettings.creditToBuy | currency:"":2 }}</p>
+              </div>
+          </div>
+          <div class="sms-billing-information grid-display grayPanelPadding-box total white-color-bg">
+              <div>
+                <p class="description-text"><strong>{{ 'sms_settings.buy_screen.billing.total' | translate }}</strong></p>
+                <p class="text--small light-grey-color-font text-italic" ng-if="smsSettings.selectedPaymentMethod === smsSettings.PAYMENT_METHOD.TR">{{ 'sms_settings.buy_screen.billing.taxes' | translate }}</p>
+              </div>
+              <div>
+                <p class="total-price"><strong>US$ {{ smsSettings.creditToBuy | currency:"":2 }}</strong></p>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div>
+    <a class="button button--alternative" ng-show="smsSettings.screenToShow === 'buyScreen'" ng-click="smsSettings.screenToShow ='calcCreditScreen'">{{ 'actions.back' | translate }}</a>
+    <input
+      class="button button--primary floatRight"
+      ng-show="smsSettings.screenToShow === 'buyScreen'"
+      type="submit" ng-value="smsSettings.purchaseButton"/>
+  </div>
+</form>

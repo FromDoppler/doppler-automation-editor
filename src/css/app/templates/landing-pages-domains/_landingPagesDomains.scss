@@ -1,0 +1,170 @@
+﻿.landing-pages-domains-wrapper {
+  background: $color-white;
+
+  header {
+    .custom-domains-breadcrumb {
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+    .container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      .right {
+        flex: 45%;
+        text-align: right;
+        @include respond-to('ismobile') {
+          flex: 75%;
+        }
+      }
+    }
+  }
+  .grid--container {
+    .no-custom-domains {
+      color: $color-lightgrey;
+      font-size: 15px;
+      font-style: italic;
+      height: 140px;
+    }
+  }
+  .grid--default {
+    margin-top: 0;
+
+    th {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &#domain-name {
+        width: 35%;
+      }
+      &#domain-status {
+        width: 25%;
+      }
+      &#domain-date {
+        width: 25%;
+      }
+      &#domain-actions {
+        min-width: 185px;
+        width: 15%;
+      }
+    }
+
+    td {
+      height: 48px;
+
+      &.domain-name {
+        max-width: 1px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &.domain-status .icon-configure {
+        bottom: 1px;
+        position: relative;
+      }
+      &.action-icons--container {
+        text-align: left;
+
+        .titip-top {
+          display: inline;
+          margin-left: 12px;
+        }
+        .domain-action {
+          font-size: 16px;
+          line-height: 30px;
+
+          &.disabled {
+            cursor: default;
+            color: $color-lightgrey;
+            pointer-events: none;
+            line-height: 30px;
+          }
+        }
+        .btn-verify .loading-icon {
+          margin-top: 0;
+        }
+      }
+    }
+
+    .icon-warning,
+    .icon-clock,
+    .icon-check {
+      font-size: 16px;
+    }
+    .icon-warning {
+      color: $color-red;
+    }
+    .icon-pending {
+      font-size: 3px;
+    }
+  }
+
+  /*
+  * delete custom domain
+  */
+  .delete--container {
+    display: inline-block;
+    position: relative;
+
+    .delete-confirm {
+      background: $color-white;
+      border: 1px solid $color-red;
+      border-radius: 3px;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+      color: $color-red;
+      cursor: default;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      right: -16px;
+      line-height: 16px;
+      min-width: 295px;
+      max-width: 325px;
+      padding: 15px;
+      position: absolute;
+      top: 35px;
+      word-break: break-word;
+      z-index: 1;
+
+      &:after,
+      &:before {
+        border-style: solid;
+        border-width: 7px;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 15px;
+        top: -14px;
+        width: 0;
+      }
+      &:after {
+        border-color: transparent transparent $color-white transparent;
+        top: -13px;
+      }
+      &:before {
+        border-color: transparent transparent $color-red transparent;
+      }
+      span {
+        margin: 0;
+      }
+      .actions--container {
+        color: $color-base;
+        font-size: 11px;
+        font-weight: bold;
+        margin-top: 10px;
+
+        .confirm {
+          color: $color-red;
+        }
+        .divider {
+          margin: 0 5px;
+        }
+      }
+    }
+  }
+}
+
+.c-pointer {
+  cursor: pointer;
+}

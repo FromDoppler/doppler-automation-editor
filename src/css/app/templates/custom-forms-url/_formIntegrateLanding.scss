@@ -1,0 +1,110 @@
+﻿.form-integration-landing-item {
+  align-items: flex-start;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 35px;
+
+  .form-integration-radio {
+    margin-right: 25px;
+    margin-top: 2px;
+
+    label {
+      cursor: pointer;
+    }
+  }
+  .form-integration-content {
+    margin-bottom: 30px;
+
+    .form-integration-header p {
+      cursor: pointer;
+      font-size: 13px;
+      margin-top: 0;
+    }
+
+    .form-integration-body {
+      align-items: center;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+
+      input {
+        margin: 0 10px;
+        width: 355px;
+      }
+      .input--container {
+        position: relative;
+      }
+      .slash {
+        margin-left: 10px;
+      }
+      .error-messages--container {
+        margin-left: 10px;
+        position: absolute;
+
+        .error {
+          padding-top: 5px;
+        }
+      }
+      .copyToClipboard {
+        margin-right: 10px;
+      }
+      .actions {
+        height: 16px;
+      }
+      dp-editor-dropdown {
+        margin: 0;
+        width: 235px;
+      }
+    }
+    .form-integration-note {
+      font-size: 13px;
+      margin-top: 25px;
+    }
+  }
+
+  .copyToClipboard.disabled,
+  .openNewTab-icon.disabled,
+  .greenConfirmRounded-icon.disabled {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.no-events {
+    .form-integration-body {
+      cursor: default;
+      color: $color-lightgrey;
+      pointer-events: none;
+
+      .copyToClipboard,
+      .openNewTab-icon,
+      .dropdown-label {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &.disabled {
+    .form-integration-radio,
+    .form-integration-header,
+    .form-integration-body {
+      cursor: default;
+      color: $color-lightgrey;
+      pointer-events: none;
+
+      .copyToClipboard,
+      .openNewTab-icon,
+      .dropdown-label {
+        opacity: 0.5;
+      }
+    }
+    .form-integration-header .title {
+      color: $color-lightgrey;
+    }
+  }
+}

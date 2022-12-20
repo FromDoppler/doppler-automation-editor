@@ -1,0 +1,14 @@
+{
+  "uid": 0,
+  "type": "",
+  "parentUid": 0,
+  "completed": false,
+  "touched": false,
+  "name": "",
+  "conditionals": [],
+  "operator": "",
+  "time": "",
+  "timeUnit": "",
+  "positiveSiblings": [],
+  "negativeSiblings": []
+}

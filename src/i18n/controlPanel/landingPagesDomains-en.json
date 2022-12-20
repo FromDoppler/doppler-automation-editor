@@ -1,0 +1,80 @@
+{
+  "landing_pages_domains": {
+    "breadcrumb": {
+      "control_panel": "Control Panel",
+      "section": "Landing Pages domains"
+    },
+    "configure_domain": {
+      "cname": "CNAME",
+      "cname_value": "Value",
+      "description": "Configure the following DNS record, along with your subdomain, with your domain provider.<br/><br/>After entering the subdomain and CNAME registration, come back to this page and click &#34;Verify&#34;.<br/>Any doubts? Press ",
+      "help": {
+        "text": "HELP",
+        "url": "https://help.fromdoppler.com/en/how-to-set-up-landing-pages-domain"
+      },
+      "hostname": "Host:",
+      "note": "Verification may take up to 24 hours, depending on your provider. Meanwhile, you can continue working on your Landing Pages.",
+      "record_type": "Type of register:",
+      "title": "Domain verification"
+    },
+    "create_button": "Add domain",
+    "create_domain": {
+      "title": "Create your domain",
+      "description": "If your Website uses your root domain <i>(for example, www.mysite.com)</i>, you must create a subdomain that contains it <i>(for example, promo.mysite.com)</i>. We can't show your Landing Pages in the same URL as your Website.<br/>Remember that you can only include numbers, letters and middle hyphen.",
+      "domain_placeholder": "mysite.com",
+      "error": {
+        "default": "An error has occurred, please try again later.",
+        "duplicate": "This domain has been previously added.",
+        "invalid": "Ouch! The domain name is not valid.",
+        "required": "Ouch! You have to complete all the fields.",
+        "used_by_other": "This domain is being used by another User. Write us at support@fromdoppler.com and we will let you know how to proceed."
+      },
+      "subdomain_placeholder": "promo"
+    },
+    "delete": {
+      "cancel": "CANCEL",
+      "confirm": "DELETE",
+      "error": {
+        "agreed": "OK, GOT IT",
+        "default": "Ouch! Something was wrong when trying to delete domain.",
+        "form_associated": "Ouch! You can't remove this domain because it has published Forms associated."
+      },
+      "text": "The domain &quot;{{domain}}&quot; will be removed permanently. Are you sure?"
+    },
+    "grid": {
+      "actions": {
+        "configure": "Settings",
+        "delete": "Remove"
+      },
+      "headers": {
+        "actions": "Actions",
+        "domain_name": "Domain",
+        "domain_status": "Status",
+        "validation_date": "Last validation"
+      },
+      "status": {
+        "configuration_error": "<strong>Ouch! Verified with error.</strong> Click on <span class='icon-configure'></span> and follow the steps to fix it.",
+        "pending": "Pending",
+        "unconfigured": "Not configured",
+        "verified": "<strong>Verified.</strong> You may start using your domain."
+      }
+    },
+    "no_domains": "You haven't added any domain yet.",
+    "subhead": "Add domains for those Forms you want to display as Landing Pages.",
+    "title": "Landing Pages domains",
+    "validation_states": {
+      "message-1": "Verified with error. ",
+      "message-2": "Verified. ",
+      "message-3": "Not configured. ",
+      "message-4": "Pending. "
+    },
+    "verification_error": {
+      "button": "Ok, got it",
+      "description": "Check these options to fix it:",
+      "first_suggest": "<strong>1)</strong> Verify that your CNAME goes to <strong>{{formDopplerPagesDomain}}</strong> and check for spelling or typing errors.",
+      "note": "If you have already verified that there are no problems with the CNAME settings and waited at least 24 hours for your update, write us at <strong>support@fromdoppler.com</strong>.<br>Remember to include a screenshot of your host's CNAME Control Panel so we can fix it quickly.",
+      "second_suggest": "<strong>2)</strong> Expect some delay from your host to update the CNAME.<br>If it is set correctly, wait at least 2 hours for it to start working.",
+      "title": "Verified with error"
+    }
+  }
+}

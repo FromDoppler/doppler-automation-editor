@@ -1,0 +1,107 @@
+// -------------------------------------
+//   Font sizes
+// -------------------------------------
+
+$font-size--base: 15px;
+$font-size--big: 24px;
+$font-size--medium: 22px;
+$font-size--medium-alt: 18px;
+$font-size--small: 13px;
+$font-size--tiny: 11px;
+
+// -------------------------------------
+//   Font Weight
+// -------------------------------------
+
+$font-weight--base: 400;
+$font_weight-light: 300;
+$font_weight-semibold: 600;
+$font_weight-bold: 700;
+$font_weight-bolder: bold;
+
+// -------------------------------------
+//   Font Family
+// -------------------------------------
+
+$font-family--base: "proxima-nova", helvetica, arial, sans-serif;
+
+// -------------------------------------
+//   @font-face
+// -------------------------------------
+
+$font-base: $font-weight--base $font-size--base $font-family--base;
+
+// -------------------------------------
+//   Base Colors
+// -------------------------------------
+
+$color-base: #666;
+$color-darkgrey: #333;
+$color-lightgrey: #999;
+$color-grey-border: #e8e8e8;
+$color-primary: #fbb224;
+$color-yellow: #e69333;
+$color-lightyellow: #fde577;
+$color-darkyellow: #e58900;
+$color-green : #33ad73;
+$color-green-light: #65c192;
+$color-darkgreen: #008046;
+$color-lightred: #ec8a83;
+$color-red: #e34f45;
+$color-darkred: #a63a33;
+$color-sylver : #ccc;
+$color-snow: #eaeaea;
+$color-dark: #000;
+$color-white: #fff;
+$color-ghostwhite: #f2f2f2;
+$color-old-ghostwhite: #F0F0F0;
+$color-old-gray-border: #E0E0E0;
+$color-lightgray-line: #E5E5E5;
+$color-lightgreen: #EBF7F1;
+$color-grey-alpha-15: rgba(105,105,105,.15);
+$color-blue: #0172CB;
+
+// -------------------------------------
+//   Backgrounds
+// -------------------------------------
+
+$background-base: $color-white;
+
+// -------------------------------------
+//   Sizes
+// -------------------------------------
+
+$size-full: 100%;
+
+// -------------------------------------
+//   Transition
+// -------------------------------------
+
+$transition-default :all .3s ease;
+
+// -------------------------------------
+//   Breakpoints
+// -------------------------------------
+
+$doppler-breakpoints: (
+  'desktop-fhd': (max-width: 1920px),
+  'desktop': (max-width: 1366px),
+  'ipad': (min-width: 1023px, max-width: 1024px),
+  'isdesktop': (min-width: 1024px),
+  'ismobile': (max-width: 1024px),
+  'iphone': (max-width: 980px)
+);
+
+// -------------------------------------
+//   Other
+// -------------------------------------
+
+$border-radius--default : 3px;
+$wrapper-max-width : 1300px;
+$padding-wrapper: 6.5%;
+$padding-header-footer: 2%;
+$header-footer-height: 70px;
+%disable-element {
+  opacity: .5;
+  pointer-events: none;
+};

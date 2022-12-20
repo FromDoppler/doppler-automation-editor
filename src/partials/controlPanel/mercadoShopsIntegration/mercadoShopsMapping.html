@@ -1,0 +1,46 @@
+<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="mercadoShops.connected && mercadoShops.showMapping">
+    <div>
+        <div class="authentication-container connected">
+            <div>
+                <span class="control-panel-section-title">{{ 'mercado_shops_integration.mapping.title' | translate }}</span>
+                <span class="control-panel-section-subtitle">{{ 'mercado_shops_integration.mapping.subtitle' | translate }}</span>
+            </div>
+        </div>
+        <hr class="full" style="width: calc(100% + 40px);" />
+        <p class="integration-information-text">{{ 'mercado_shops_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ mercadoShops.selectedList.ListName }}</strong></p>
+        <div class="mapping-container">
+            <div class="grayPanel-box flex-grid" ng-repeat="field in mercadoShops.mercadoShopsFields" dp-on-finish-ng-repeat>
+                <div>
+                  <p>{{ 'mercado_shops_integration.mapping.data_entity_field' | translate }}: <b>{{ mercadoShops.getFiledName(field.Name) }}</b></p>
+                </div>
+                <div>
+                    <dropdown class="dropdown dropdown--big"
+                        placeholder="{{'mercado_shops_integration.mapping.select_field_placeholder' | translate}}"
+                        id="dd-userFields{{$index}}" list="mercadoShops.availablesFields"
+                        name="mercadoShops.userFields" ng-model="field.idDopplerField" ng-required="true"
+                        property="name" id-value="idField" ng-change="mercadoShops.setAvailablesFields()"
+                        ng-disabled="mercadoShops.availablesFields && mercadoShops.availablesFields.length == 0" ng-click="mercadoShops.errorMessage=''"></dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="!!mercadoShops.errorMessage.length">
+      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <span>{{ mercadoShops.errorMessage }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex-grid-v-center--s-between">
+        <button ng-click="mercadoShops.goBack()" class="button button--alternative">
+                {{ 'mercado_shops_integration.mapping.back' | translate }}
+        </button>
+        <button ng-class="{'button--spinner' : mercadoShops.isMapping}" ng-click="mercadoShops.mapFields()"
+                class="button button--primary">
+          {{ 'mercado_shops_integration.connected.synchronize' | translate }}
+          <span class="icon-editor-saving hide"></span>
+        </button>
+    </div>
+</div>

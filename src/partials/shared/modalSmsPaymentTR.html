@@ -1,0 +1,16 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper">
+    <div class="modal__content" ng-if="smsSettingsService.loadingModal">
+      <h1>{{ 'sms_settings.buy_screen.modal.processing.title' | translate }}</h1>
+      <p>{{ 'sms_settings.buy_screen.modal.processing.description' | translate }}</p>
+    </div>
+    <div class="modal__content" ng-if="!smsSettingsService.loadingModal">
+      <h1>{{ 'sms_settings.buy_screen.modal.processed.title' | translate }}</h1>
+      <p>{{ 'sms_settings.buy_screen.modal.processed.tr.description' | translate }}</p>
+    </div>
+    <div class="modal__action-btn loading">
+      <div class="components--center"  ng-if="smsSettingsService.loadingModal" dp-partial="angularjs/partials/shared/loading.html"></div>
+      <button class="button button--primary button--small" ng-if="!smsSettingsService.loadingModal" ng-click="close(false)" data-dismiss="modal">{{ 'sms_settings.buy_screen.modal.button' | translate }}</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,257 @@
+@mixin calc($property, $expression) {
+    #{$property}: -moz-calc(#{$expression});
+    #{$property}: -webkit-calc(#{$expression});
+    #{$property}: calc(#{$expression});
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin center-block($orientation: all) {
+  position: relative;
+
+  @if ($orientation == all) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @else if ($orientation == vertical) {
+    top: 50%;
+    left: auto;
+    transform: translate(0, -50%);
+  }
+  @else if ($orientation == horizontal) {
+    top: auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  @else if ($orientation == top) {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  @else if ($orientation == none) {
+    top: 0;
+    left: 0;
+    transform: translate(0);
+  }
+}
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin arrow($width, $height, $direction, $color) {
+  border-style: solid;
+  height:0;
+  width:0;
+  @if $direction == "top"{
+    border-width: 0 $width/2 $height $width/2;
+    border-color: transparent transparent $color transparent;
+  }
+  @else if $direction == "bottom" {
+    border-width: $height $width/2 0 $width/2;
+    border-color: $color transparent transparent transparent;
+  }
+  @else if $direction == "right" {
+    border-width: $height/2 0 $height/2 $width;
+    border-color: transparent transparent transparent $color;
+  }
+  @else if $direction == "left" {
+    border-width: $height/2 $width $height/2 0;
+    border-color: transparent $color transparent transparent;
+  }
+}
+
+@mixin arrow-after($width, $height, $direction, $color) {
+  content:'';
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+    transform: translateX(-50%);
+    @if $direction == "bottom"{
+        bottom: calc(100% - #{$height});
+    }
+    @else if $direction == "top" {
+        top: calc(0 - #{$height});
+    }
+
+  @include arrow($width, $height, $direction, $color);
+}
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  ::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+      border-radius: 10px;
+      margin: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:window-inactive {
+      background: rgba(0,0,0,0);
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: rgba($foreground-color,1);
+    scrollbar-track-color: rgba($background-color,1);
+  }
+}
+
+@include scrollbars(5px, $color-dark, $color-dark);
+
+@mixin margin-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin clearfix($extend: true) {
+  @if $extend {
+    @extend %clearfix;
+  } @else {
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+%clearfix,
+.clearfix {
+  @include clearfix($extend: false);
+}
+
+/*
+  Margin / Padding Quick Resets
+  example: top & bottom margin set to $spacing-unit
+  .element {
+    @include push--ends;
+  }
+  example: left & right padding set to $spacing-unit--small
+  .element {
+    @include soft--sides($spacing-unit--small);
+  }
+*/
+
+$spacing-unit: 0;
+
+// add/remove margins
+@mixin push--ends($spacing:$spacing-unit) {
+  margin: {
+    top: $spacing;
+    bottom: $spacing;
+  }
+
+}
+
+@mixin push--sides($spacing:$spacing-unit) {
+  margin: {
+    left: $spacing;
+    right: $spacing;
+  }
+
+}
+
+@mixin push--auto {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+
+}
+
+@mixin offset--sides($spacing:$spacing-unit) {
+  margin: {
+    left: -$spacing;
+    right: -$spacing;
+  }
+
+}
+
+@mixin flush--ends {
+  margin: {
+    top: 0;
+    bottom: 0;
+  }
+
+}
+
+@mixin flush--sides {
+  margin: {
+    left: 0;
+    right: 0;
+  }
+
+}
+
+// add/remove paddings
+
+@mixin soft--ends($spacing:$spacing-unit) {
+  padding: {
+    top: $spacing;
+    bottom: $spacing;
+  }
+
+}
+
+@mixin soft--sides($spacing:$spacing-unit) {
+  padding: {
+    left: $spacing;
+    right: $spacing;
+  }
+
+}
+
+@mixin hard--ends {
+  padding: {
+    top: 0;
+    bottom: 0;
+  }
+
+}
+
+@mixin hard--sides {
+  padding: {
+    left: 0;
+    right: 0;
+  }
+
+}

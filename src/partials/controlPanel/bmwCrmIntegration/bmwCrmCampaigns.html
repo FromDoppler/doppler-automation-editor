@@ -1,0 +1,46 @@
+<div id="connectedCont" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-if="bmwCrm.connected && !bmwCrm.showMapping">
+    <div>
+        <div class="authentication-container connected">
+            <div>
+              <span class="control-panel-section-title">{{ 'bmwcrm_integration.campaigns.title' | translate }}</span>
+              <span class="control-panel-section-subtitle">{{ 'bmwcrm_integration.campaigns.subtitle' | translate }}</span>
+            </div>
+            <div class="button--frame">
+                <button type="button" ng-click="bmwCrm.synchronizeCampaings();"
+                    ng-class="{'spin': bmwCrm.importingCampaings}" ng-disabled="bmwCrm.importingCampaings"
+                    class="button reload-icon"></button>
+            </div>
+        </div>
+        <div>
+          <table class="grid">
+            <thead>
+              <th>{{ 'bmwcrm_integration.campaigns.campaign_name_grid' | translate }}</th>
+              <th>{{ 'bmwcrm_integration.campaigns.campaign_origin_grid' | translate }}</th>
+              <th>{{ 'bmwcrm_integration.campaigns.campaign_update_grid' | translate }}</th>
+              <th>{{ 'bmwcrm_integration.connected.actions_grid' | translate }}</th>
+            </thead>
+            <tbody>
+              <tr ng-show="!bmwCrm.importingCampaings" ng-repeat="campaign in bmwCrm.campaigns">
+                <td>{{ campaign.ObjectModel.name }}</td>
+                <td>{{ campaign.ObjectModel.origin }}</td>
+                <td>{{ campaign.LastUpdateDateFormatted }}</td>
+                <td class="actions" style="text-align:center">
+                  <span data-static-tooltip="{{ 'bmwcrm_integration.campaigns.campaign_tooltip' | translate }}" ng-if="bmwCrm.entitiesList.length == 0">
+                    <a target="_self" href="SendBmwCrmCampaign?idObject={{ campaign.IdObject }}"><img style="width:17px" src="../../../images/automation-campaign.svg"></a>
+                  </span>
+                  <span class="to-left all medium" data-static-tooltip="{{ 'bmwcrm_integration.campaigns.campaign_tooltip_disabled' | translate }}" ng-if="bmwCrm.entitiesList.length > 0">
+                    <img style="width:17px" src="../../../images/automation-campaign-grey.svg">
+                  </span>
+                </td>
+              </tr>
+              <tr ng-show="bmwCrm.importingCampaings" class="exportingList">
+                <td colspan="4" class="status">
+                  <span class="icon-clock"></span>
+                  <span>&nbsp;{{ 'bmwcrm_integration.connected.synchronizing_grid' | translate }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>

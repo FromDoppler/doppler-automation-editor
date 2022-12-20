@@ -1,0 +1,15 @@
+<div class="uncollapse-panel" ng-class="{'show' : isCollapsed()}" ng-click="toggleCollapsePanel(false);">
+  <span class="icon-colapse"></span>
+</div>
+<div class="panel" ng-class="{'non-selected' : !selectedComponent, 'collapsed' : isCollapsed()}">
+  <div class="collapse-icons--container" ng-click="toggleCollapsePanel(true);">
+    <span class="icon-colapse"></span>
+  </div>
+  <div class="scroll-container" ng-class="{'with-border' : !isScrollOnTop}" scroll-on-top scroll-callback="scrollBehaviour">
+    <div class="selected-component" ng-class="{'read-only-mode' : rootComponent.state === AUTOMATION_STATE.ACTIVE, 'is-paused' : rootComponent.state === AUTOMATION_STATE.PAUSED}">
+      <div ng-if="(rootComponent.state === AUTOMATION_STATE.ACTIVE || rootComponent.state === AUTOMATION_STATE.STOPPED || rootComponent.state === AUTOMATION_STATE.PAUSED) && !hasSelectedElement() && hasReports()" dp-editor-panel-reports></div>
+      <div class="component-panel-container"></div>
+      <div ng-if="!selectedComponent && rootComponent.state !== AUTOMATION_STATE.ACTIVE && rootComponent.state !== AUTOMATION_STATE.STOPPED && rootComponent.state !== AUTOMATION_STATE.PAUSED" dp-editor-panel-step-tip></div>
+    </div>
+  </div>
+</div>

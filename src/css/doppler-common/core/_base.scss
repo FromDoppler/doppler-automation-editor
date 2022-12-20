@@ -1,0 +1,61 @@
+/*TODO remove .app when refactor the application*/
+.app {
+  font: $font-base;
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  img {
+    display: block;
+    height: auto;
+    max-width: $size-full;
+    outline: 0;
+  }
+}
+
+html,
+body {
+  height: $size-full;
+  width: $size-full;
+  color: $color-base;
+}
+
+html {
+  overflow-y: auto;
+}
+
+strong {
+  font-weight: $font_weight-bolder;
+}
+
+menu,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 0;
+}
+
+
+fieldset {
+  border: inherit;
+  margin: inherit;
+  padding: inherit;
+}
+
+.align-left {
+  text-align: left !important;
+}

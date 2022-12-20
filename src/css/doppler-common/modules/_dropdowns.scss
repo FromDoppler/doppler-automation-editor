@@ -1,0 +1,239 @@
+.dropdown,
+dropdown,
+dp-editor-dropdown {
+  display: block;
+  cursor: pointer;
+  &.is-error,
+  &.hasErrors {
+    .dropdown-display {
+      border: 1px solid $color-red;
+    }
+  }
+  &.with-placeholder {
+    .dropdown-label {
+      font-style: italic;
+      color: $color-lightgrey;
+    }
+  }
+  &[disabled] {
+    cursor: inherit;
+  }
+  &.placeholder {
+    .dropdown-label {
+      font-style: italic;
+      color: $color-lightgrey !important;
+    }
+  }
+}
+
+dropdown {
+  &[disabled] {
+    pointer-events: none;
+    .dropdown-display {
+      border: 1px solid $color-sylver;
+      background-color: $color-snow;
+      span {
+        color: $color-sylver;
+      }
+    }
+  }
+}
+
+.dropdown--container {
+  position: relative;
+  &.is-visible {
+    .dropdown-display {
+      box-shadow: 0 0 0 2px $color-snow;
+    }
+    .dropdown-list {
+      display: block;
+    }
+  }
+  &.is-disabled {
+    .dropdown-display {
+      background: $color-snow;
+    }
+    .dropdown-label {
+      color: $color-lightgrey;
+    }
+  }
+}
+
+.dropdown-display {
+  background-color: $color-white;
+  border: 1px solid $color-sylver;
+  color: $color-lightgrey;
+  border-radius: $border-radius--default;
+  font-size: $font-size--small;
+  padding: 0 40px 0 10px;
+  position: relative;
+  text-align: left;
+  height: 40px;
+  line-height: 40px;
+}
+
+.dropdown-label {
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+  color: $color-base;
+  display: flex;
+  text-overflow: ellipsis;
+  &.placeholder {
+    color: $color-lightgrey;
+    font-style: italic;
+  }
+}
+
+.dropdown-arrow {
+  @include arrow(11px , 7px, "bottom", $color-lightgrey);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.dropdown-arrow-up,
+.dropdown-arrow-down {
+  height: 19px;
+  position: absolute;
+  right: 0px;
+  width: 30px;
+  bottom: 0;
+  &:after{
+    @include arrow-after(11px, 7px, "bottom", $color-lightgrey);
+    top: 40%;
+    transform: translate(-50%,-50%);
+    left: 50%;
+  }
+}
+
+.dropdown-arrow-up {
+  top: 0;
+  bottom: inherit;
+  &:after {
+    @include arrow-after(11px, 7px, "top", $color-lightgrey);
+    top: 60%;
+  }
+}
+
+.dropdown-list {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  background-color: $color-white;
+  border: solid 1px $color-primary;
+  box-shadow: 0 0 0 2px $color-snow;
+  border-radius: $border-radius--default;
+  overflow-x: auto;
+  margin-top: 5px;
+  width: $size-full;
+  max-height: 190px;
+}
+
+.dropdown-list-item {
+  display: block;
+  line-height: 16px;
+  color: $color-base;
+  padding: 10px 15px 10px 20px;
+  text-align: left;
+  font-size: $font-size--small;
+  position: relative;
+  &[disabled] {
+    pointer-events:none;
+    opacity:0.6;
+  }
+  &:hover {
+    background-color: $color-snow;
+  }
+  &.is-selected:after {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 6px;
+    border: solid $color-primary;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 12px;
+    left: 10px;
+  }
+  &.non-selected {
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    color: #999;
+    .blocked{
+      color: #E34F45;
+    }
+  }
+}
+
+.dropdown-list-item--text {
+  word-break: break-all;
+  display: flex;
+  max-height: 50px;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+}
+
+.dropdown-input,
+.dropdown-input:focus {
+  border: none;
+  outline: none;
+}
+
+.dropdown--full {
+  width: $size-full;
+}
+
+.dropdown--big {
+  width: 400px;
+}
+
+.dropdown--large {
+  width: 235px;
+}
+
+.dropdown--medium {
+  width: 140px;
+}
+
+.dropdown--small {
+  width: 98px;
+}
+
+.dropdown--tiny {
+  width: 65px;
+  .dropdown-display {
+    padding-right: 15px;
+  }
+}
+
+/* START: overwritten "UI library" section */
+
+/* dropdown */
+.dp-library .dropdown--medium.dp-dropdown-replicate-automation {
+  width: 330px;
+  & > div > ul {
+    max-height: 150px;
+  }
+  & > div > div {
+    & > input {
+      height: 30px;
+      border: none;
+      &:focus {
+        border: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+    & > span.dropdown-arrow {
+      top: 1.5em;
+    }
+  }
+}
+
+/* END: overwritten "UI library" section */

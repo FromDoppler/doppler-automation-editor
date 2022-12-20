@@ -1,0 +1,26 @@
+{
+  "wooCommerce_integration": {
+    "name": "WooCommerce",
+    "disconnected": {
+      "title": "Connect Doppler with your WooCommerce store",
+      "subtitle": "Automatically send all your E-commerce Contacts and their purchase data to a Doppler List. Also you can import your store products in Email Templates and create Abandoned Cart and Retargeting Product Automations. Any questions? Press ",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-wordpress-forms-with-doppler/",
+      "info": "By pressing \"Connect\" you will be redirected to WooCommerce, where you can carry out the necessary steps to integrate."
+    },
+    "connected": {
+      "disconnect": "Disconnect",
+      "disconnect_popup": {
+        "title": "Are you sure you want to disconnect this integration?",
+        "description": "If you disconnect, your List will no longer receive new Subscribers from your WooCommerce account and the Automations associated with the integration will be paused. Anyhow, you won't lose the contacts synced up to this moment."
+      }
+    },
+    "status": {
+      "title": "Your WooCommerce store is already connected to Doppler",
+      "subtitle": "Your Contacts were integrated automatically from your store by the Doppler extension for WooCommerce. You can also import your products into Email Templates and create Abandoned Cart and Product Retargeting Automations. Any doubts? Press ",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-wordpress-forms-with-doppler/",
+      "back": "Back"
+    }
+  }
+}

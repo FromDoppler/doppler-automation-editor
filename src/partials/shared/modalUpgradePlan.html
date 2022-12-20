@@ -1,0 +1,40 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper upgrade-plan-popup" id="modalUpgradePlan">
+    <a class="icon-close modal--do-close"  ng-click="close(false)"></a>
+    <div class="modal__content">
+      <h1>{{ data.title }}</h1>
+      <p>{{ data.description }}</p>
+    </div>
+    <form class="modal--form" name="upgradePlanForm" novalidate>
+      <input type="hidden" ng-model="model.UrlReferrer" />
+    	<div class="container">
+        <div ng-if="model.ClientTypePlans.length > 0">
+          <dropdown class="dropdown dropdown--full" placeholder="{{'modal_upgrade_plan.label_plans' | translate}}" id="plans" list="model.ClientTypePlans" name="IdUserTypePlan" ng-model="model.IdClientTypePlanSelected" ng-required="true" property="Description" id-value="IdUserTypePlan" ng-class="{ 'hasErrors':submitted && upgradePlanForm.IdUserTypePlan.$invalid }"></dropdown>
+          <div ng-messages="upgradePlanForm.IdUserTypePlan.$error" ng-if='submitted' class="error-messages--container" >
+            <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+          </div>
+        </div>
+        <div ng-if="model.ClientTypePlans.length === 0">
+          <label class="label" for="message">{{ 'modal_upgrade_plan.label_message' | translate }}</label>
+          <textarea name="message" ng-model="model.Detail" ng-required="true" ng-maxlength="{{data.maxlength}}" class="textarea" ng-class="{ 'hasErrors':submitted && upgradePlanForm.message.$invalid }"></textarea>
+          <div ng-messages="upgradePlanForm.message.$error" ng-if='submitted' class="error-messages--container" >
+            <div ng-message="required" class="error">{{ 'validation_messages.required' | translate}}</div>
+            <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="success-message-container" ng-if="sentEmail === true">
+      <div class="success-message-frame">
+        <img src="../../../assets/app/icons/check.svg" />
+        <div class="success-message">
+          <label>{{ 'modal_upgrade_plan.success_message' | translate }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal__action-btn button-container" ng-if="sentEmail === false">
+      <button class="button button--alternative button--small" ng-click="close(false)" data-dismiss="modal">{{ 'button_cancel' | translate}}</button>
+      <button class="button button--primary button--small" ng-click="!isLoading ? upgradePlan() : false" ng-class="isLoading ? 'button--loading' : ''" ng-disabled="upgradePlanForm.$invalid && submitted" data-dismiss="modal">{{ data.buttonLabel}}</button>
+    </div>
+  </div>
+</div>

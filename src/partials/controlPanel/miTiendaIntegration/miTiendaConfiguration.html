@@ -1,0 +1,104 @@
+<div id="connectedCont" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-if="miTienda.connected && !miTienda.showMapping">
+  <div>
+    <div class="authentication-container connected">
+      <div>
+        <span class="control-panel-section-title">{{ 'miTienda_integration.connected.list_title' | translate }}</span>
+        <span class="control-panel-section-subtitle">{{ 'miTienda_integration.connected.list_subtitle' | translate }}</span>
+      </div>
+      <div class="button--frame">
+        <button type="button" ng-click="miTienda.synchronizeAllLists();"
+                ng-class="{'spin': miTienda.importingList && !miTienda.disableSync}" ng-disabled="miTienda.disableSync"
+                class="button reload-icon"></button>
+      </div>
+    </div>
+    <div ng-if="miTienda.entitiesList.length > 0">
+      <div class="dp-library">
+        <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope margin-b-20">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message">
+            <span id="messageBar" class="text--small">
+              {{ 'miTienda_integration.connected.select_list_warning' | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <hr class="full" style="width: calc(100% + 40px);" />
+      <div style="min-height:74px" class="loading--container components--center" dp-partial="angularjs/partials/shared/loading.html" ng-if="miTienda.importingListDropdown && !miTienda.isLoading"></div>
+      <div class="entity-selector-container flex-grid" ng-if="!miTienda.importingListDropdown">
+        <dropdown class="dropdown dropdown--big"
+                  placeholder="{{ 'miTienda_integration.connected.select_entity_placeholder' | translate }}" id="dd-entities"
+                  list="miTienda.entitiesList" name="miTienda.selectedEntityId" ng-model="miTienda.selectedEntityId"
+                  ng-required="true" property="description" id-value="id" ng-disabled="!!miTienda.entitiesList && miTienda.entitiesList.length === 0 || miTienda.isLoadingFields"
+                  ng-click="miTienda.onEntitySelected();"></dropdown>
+        <dropdown class="dropdown dropdown--big" placeholder="{{ 'miTienda_integration.connected.select_list_placeholder' | translate }}" id="dd-lists"
+                  list="miTienda.allUserList" name="miTienda.selectedListId" ng-model="miTienda.selectedListId" ng-required="true"
+                  property="ListName" id-value="IdList" ng-disabled="!!miTienda.allUserList && miTienda.allUserList.length === 0 || miTienda.isLoadingFields"></dropdown>
+        <button type="submit" ng-click="miTienda.showMappingSection();" class="button button--primary"
+                ng-disabled="!miTienda.selectedListId || !miTienda.selectedEntityId " ng-class="{'button--spinner' : miTienda.isLoadingFields}">
+          {{ 'miTienda_integration.connected.next' | translate }}
+          <span class="icon-editor-saving hide"></span>
+        </button>
+      </div>
+    </div>
+    <div ng-if="miTienda.integratedLists.length">
+      <p class="select-list-text">{{ 'miTienda_integration.connected.grid_title' | translate }}:</p>
+      <span class="control-panel-section-subtitle">  </span>
+      <table class="grid">
+        <thead>
+          <th>{{ 'miTienda_integration.connected.entity_name_grid' | translate }}</th>
+          <th>{{ 'miTienda_integration.connected.list_name_grid' | translate }}</th>
+          <th>{{ 'miTienda_integration.connected.last_synchronization_grid' | translate }}</th>
+          <th>{{ 'miTienda_integration.connected.subscribers_count_grid' | translate }}</th>
+          <th>{{ 'miTienda_integration.connected.actions_grid' | translate }}</th>
+        </thead>
+        <tbody>
+          <tr ng-show="!miTienda.importingList && integratedList.SubscribersListStatus !== 5" ng-repeat="integratedList in miTienda.integratedLists">
+            <td ng-show="miTienda.integrationToDelete != $index">{{ integratedList.ThirdPartyName }}</td>
+            <td class="list-name" ng-show="miTienda.integrationToDelete != $index"><ellipsis-with-tooltip text="integratedList.Name" class="stand-alone"></ellipsis-with-tooltip></td>
+            <td ng-show="miTienda.integrationToDelete != $index">{{ integratedList.LastUpdateFormatted ? integratedList.LastUpdateFormatted : '-'  }}</td>
+            <td ng-show="miTienda.integrationToDelete != $index">{{ integratedList.SubscribersCount }}</td>
+            <td ng-show="miTienda.integrationToDelete != $index" class="actions">
+              <span data-static-tooltip="{{ 'miTienda_integration.connected.edit_tooltip' | translate }}">
+                <a target="_self" class="icon-grid-edit" ng-click="miTienda.editMap(integratedList.IdList, integratedList.ThirdPartyId)"></a>
+              </span>
+              <span data-static-tooltip="{{ 'miTienda_integration.connected.delete_mode_grid.tooltip' | translate }}" class="to-left">
+                <a ng-click="!miTienda.isLoadingVtexFields ? miTienda.integrationToDelete = $index : false"><img src="../../../images/grid-delete.svg"></a>
+              </span>
+            </td>
+            <td ng-show="miTienda.integrationToDelete == $index" class="delete-confirmation-text" colspan="3">
+              <span class="deleteConfirmationIcon"></span>
+              <span>{{ 'miTienda_integration.connected.delete_mode_grid.message' | translate }}</span>
+            </td>
+            <td ng-show="miTienda.integrationToDelete == $index" class="delete-confirmation-actions" colspan="2">
+              <span>
+                <a ng-click="!miTienda.isLoadingFields ? miTienda.integrationToDelete = null : false">
+                  {{ 'miTienda_integration.connected.delete_mode_grid.cancel' | translate }}
+                </a>
+                |
+                <a class="delete-text" ng-click="!miTienda.isLoadingFields ? miTienda.deleteList(integratedList.IdList) : false">
+                  {{ 'miTienda_integration.connected.delete_mode_grid.delete' | translate }}
+                </a>
+              </span>
+            </td>
+          </tr>
+          <tr ng-show="miTienda.importingList || integratedList.SubscribersListStatus === 5" class="exportingList" ng-repeat="integratedList in miTienda.integratedLists">
+            <td>{{ integratedList.ThirdPartyName }}</td>
+            <td class="list-name sync">{{ integratedList.Name }}</td>
+            <td colspan="3" class="status">
+              <span class="icon-clock"></span>
+              <span>&nbsp;{{ 'miTienda_integration.connected.synchronizing_grid' | translate }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="!!miTienda.errorMessage.length">
+      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span>{{ miTienda.errorMessage }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

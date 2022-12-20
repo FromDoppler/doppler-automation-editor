@@ -1,0 +1,22 @@
+<div class="dropdown--container" ng-click="toggleVisibility();" ng-class="{ 'is-visible': expanded, 'is-disabled': disabled }">
+  <div class="dropdown-display" ng-class="{ clicked: expanded }">
+    <input class="search-text dropdown-input" type="text"
+      ng-show="!!allowSearch && expanded"
+      ng-model="searchQuery"
+      ng-change="onSearchQueryChanged()"/>
+    <span ng-show="!allowSearch || !expanded" class="dropdown-label" ng-bind-html="label"></span>
+    <span class="dropdown-arrow" ng-if="!arrowSelection"></span>
+    <div ng-if="arrowSelection && !disabled">
+      <div class="dropdown-arrow-up" ng-click="prevOption()">
+      </div>
+      <div class="dropdown-arrow-down" ng-click="nextOption()">
+      </div>
+    </div>
+  </div>
+  <ul class="dropdown-list" ng-show="expanded && filteredOptions.length">
+    <li class="dropdown-list-item" ng-repeat="(index, option) in filteredOptions" id="item{{index}}" ng-disabled="option.disabled" ng-class="{'is-selected': isSelected(option)}" ng-style="option.style" ng-click="onSelectOption({option: option})">
+      <span class="dropdown-list-item--text" ng-if="!keyLabel" ng-bind-html="option.label"></span>
+      <span class="dropdown-list-item--text" ng-if="keyLabel" ng-bind-html="option[keyLabel]"></span>
+    </li>
+  </ul>
+</div>

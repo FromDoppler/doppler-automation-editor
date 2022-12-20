@@ -1,0 +1,138 @@
+.grid-display {
+  display: grid;
+}
+.white-color-bg {
+  background-color: white;
+}
+.red-color-font {
+  color: $color-red;
+}
+.green-color-font {
+  color: $color-green;
+}
+.light-grey-color-font {
+  color: $color-lightgrey;
+}
+.base-color-font {
+  color: $color-base;
+}
+.justify-right {
+  justify-content: end;
+}
+.align-vertical-center {
+  align-items:center;
+}
+.margin-t-10 {
+  margin-top: 10px;
+}
+.margin-t-15 {
+  margin-top: 15px;
+}
+.margin-t-20 {
+  margin-top: 20px;
+}
+.margin-t-25 {
+  margin-top: 25px;
+}
+.margin-b-20 {
+  margin-bottom: 20px;
+}
+.margin-b-30 {
+  margin-bottom: 30px;
+}
+.margin-r-10 {
+  margin-right: 10px;
+}
+.margin-r-20 {
+  margin-right: 20px;
+}
+.margin-r-30 {
+  margin-right: 30px;
+}
+.margin-l-10 {
+  margin-left: 10px;
+}
+.margin-l-20 {
+  margin-left: 20px;
+}
+.margin-l-25 {
+  margin-left: 25px;
+}
+.margin-right-15 {
+  margin-right: 15px;
+}
+.padding-t-10 {
+  padding-top: 10px;
+}
+.padding-t-15 {
+  padding-top: 15px;
+}
+.padding-t-20 {
+  padding-top: 20px;
+}
+.padding-t-30 {
+  padding-top: 30px;
+}
+.padding-b-10 {
+  padding-bottom: 10px;
+}
+.padding-b-20 {
+  padding-bottom: 20px;
+}
+.padding-b-50 {
+  padding-bottom: 50px;
+}
+.flex-display {
+  display: flex;
+}
+.flex-justify-between {
+  justify-content:space-between;
+}
+.border-b-grey {
+  border-bottom:1px solid $color-sylver;
+}
+.float-right {
+  float: right;
+}
+.self-align-center {
+  align-self: center;
+}
+.self-justify-center {
+  justify-self: center;
+}
+.self-justify-right {
+  justify-self: right;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-italic {
+  font-style: italic;
+}
+.text-bold {
+  font-weight: bold;
+}
+.pointer-none {
+  pointer-events: none;
+}
+.grid-template-columns-table {
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  .row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(50px, 1fr));
+    padding: 8px 0;
+  }
+}
+.text-underline {
+  text-decoration:underline;
+}
+.text-align-r {
+    text-align: right;
+}
+.text-align-c {
+  text-align: center;
+}
+.pointer {
+  cursor: pointer;
+}

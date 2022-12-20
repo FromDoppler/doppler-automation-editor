@@ -1,0 +1,32 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper" id="disconnect-modal" click-outside="close(false)">
+    <a class="icon-close modal--do-close " ng-click="close(false)" data-dismiss="modal"></a>
+    <div class="modal__content">
+      <h1>{{data.title}}</h1>
+      <p>{{data.description}}</p>
+      <div ng-show="errorMsg" class="message-validation validation-error">
+        <div id="messageBar">
+          {{ errorMsg }}
+        </div>
+      </div>
+    </div>
+    <div class="modal__action-btn">
+        <button
+        type="button"
+        ng-disabled="disconnecting"
+        class="button button--alternative button--small"
+        ng-click="close(false)"
+        data-dismiss="modal">{{data.buttonCancelLabel}}</button>
+        <button
+        ng-disabled="disconnecting"
+        type="button"
+        class="button {{data.buttonPrimaryClass}}"
+        ng-class="{'button--spinner' : disconnecting}"
+        ng-click="disconnect()" data-dismiss="modal">
+        {{data.buttonPrimaryLabel}}
+        <span class="icon-editor-saving ng-hide" ng-show="disconnecting"></span>
+        </button>
+
+    </div>
+  </div>
+</div>

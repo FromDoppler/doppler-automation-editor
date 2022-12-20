@@ -1,0 +1,17 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div id="modalSiteBehavior" class="modal__wrapper" click-outside="close(false)">
+    <a class="icon-close modal--do-close " ng-click="close(false)" data-dismiss="modal"></a>
+    <div class="modal__content">
+      <h5>{{ 'automationTypes.modal_trial.title' | translate }}</h5>
+      <p class="text--light content--block">{{ 'automationTypes.modal_trial.description' | translate }}</p>
+      <p><strong>{{ 'automationTypes.modal_trial.title2' | translate }}</strong></p>
+      <p class="text--light content--block">{{ 'automationTypes.modal_trial.description2' | translate }}</p>
+      <p><strong>{{ 'automationTypes.modal_trial.title3' | translate }}</strong></p>
+      <p class="text--light">{{ 'automationTypes.modal_trial.description3' | translate }}</p>
+    </div>
+    <div class="modal__action-btn">
+       <button class="button button--alternative button--small" ng-click="close(false)" data-dismiss="modal">{{ 'actions.cancel' | translate }}</button>
+       <button class="button button--primary button--small"  ng-click="close(true)" data-dismiss="modal">{{ 'automationTypes.modal_trial.activateAutomation' | translate }}</button>
+    </div>
+  </div>
+</div>

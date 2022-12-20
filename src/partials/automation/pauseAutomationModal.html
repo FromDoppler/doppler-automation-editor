@@ -1,0 +1,12 @@
+<div id="modal-pause" class="modal--pause" click-outside="close()">
+  <p class="text--small"><strong>{{ 'automation_editor.pause_modal.title' | translate }}</strong></p>
+  <p class="text--small" ng-bind-html="'automation_editor.pause_modal.description_one' | translate"></p>
+  <p class="text--small alt">{{ 'automation_editor.pause_modal.description_two' | translate }}</p>
+  <p class="text--small alt" ng-bind-html="'automation_editor.pause_modal.description_three' | translate"></p>
+  <p class="text--small alt">{{ 'automation_editor.pause_modal.description_four' | translate }}</p>
+  <p class="text--tiny text--bold text--uppercase">
+    <a class="action" ng-click="close(true)">{{ 'automation_editor.pause_modal.stop' | translate }}</a>
+    |
+    <a ng-click="close()">{{ 'automation_editor.pause_modal.cancel' | translate }}</a>
+  </p>
+</div>

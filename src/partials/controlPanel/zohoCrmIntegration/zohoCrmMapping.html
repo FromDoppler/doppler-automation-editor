@@ -1,0 +1,54 @@
+<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+     ng-show="zohoCrm.connected && zohoCrm.showMapping">
+  <div>
+    <div class="authentication-container connected">
+      <div>
+        <span class="control-panel-section-title">{{ 'zoho_crm_integration.mapping.title' | translate }}</span>
+        <span class="control-panel-section-subtitle">{{ 'zoho_crm_integration.mapping.subtitle' | translate }}</span>
+      </div>
+    </div>
+    <hr class="full" style="width: calc(100% + 40px);" />
+    <p class="integration-information-text">
+      {{ 'zoho_crm_integration.mapping.selected_data_entity' | translate }}: <strong>{{ zohoCrm.selectedEntity.description }}</strong>
+    </p>
+    <p class="integration-information-text">{{ 'zoho_crm_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ zohoCrm.selectedList.ListName }}</strong></p>
+    <div class="mapping-container">
+      <div class="grayPanel-box flex-grid" ng-repeat="field in zohoCrm.zohoCrmFields" dp-on-finish-ng-repeat>
+        <div>
+          <p>{{ 'zoho_crm_integration.mapping.data_entity_field' | translate }}: <b>{{field.DisplayLabel.length > 20 ? field.DisplayLabel.substring(0,17) + '...' : field.DisplayLabel}}</b> ({{field.DataType}})</p>
+        </div>
+        <div>
+          <select id="dd-userFields{{$index}}"
+                  name="select-field{{$index}}"
+                  ng-model="field.idDopplerField"
+                  property="name"
+                  id-value="idField"
+                  ng-options="field.idField as field.name for field in zohoCrm.userFields | filter:zohoCrm.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+                  ng-click="zohoCrm.errorMessage=''"
+                  class="field-selector"
+                  ng-required="true">
+            <option value="" disabled="disabled">{{'zoho_crm_integration.mapping.select_field_placeholder' | translate}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dp-library margin-t-20 margin-b-20" ng-show="!!zohoCrm.errorMessage.length">
+    <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <span class="dp-message-icon"></span>
+      <div class="dp-content-message dp-content-full">
+        <span>{{ zohoCrm.errorMessage }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="nav-button-bar flex-grid-v-center--s-between">
+    <button ng-click="zohoCrm.goBack()" class="button button--alternative">
+      {{ 'zoho_crm_integration.mapping.back' | translate }}
+    </button>
+    <button ng-class="{'button--spinner' : zohoCrm.isMapping}" ng-click="zohoCrm.mapFields()"
+            class="button button--primary">
+      {{ 'zoho_crm_integration.connected.synchronize' | translate }}
+      <span class="icon-editor-saving hide"></span>
+    </button>
+  </div>
+</div>

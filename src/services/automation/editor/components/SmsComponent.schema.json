@@ -1,0 +1,9 @@
+{
+  "uid": 0,
+  "phoneType": "",
+  "parentUid": 0,
+  "completed": false,
+  "touched" : false,
+  "smsText": 0,
+  "name":  ""
+}

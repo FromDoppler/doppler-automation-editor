@@ -1,0 +1,124 @@
+{
+  "forms_integrate" : {
+    "error": {
+      "install": "No hemos podido instalar tu Tab.",
+      "install_tab": "El mínimo requerido por Facebook para instalar Tabs es de 2.000 fans.",
+      "connectionError": "No hemos podido conectar con tu cuenta de Facebook.",
+      "disabledFanPages": "Todas las Fan Pages ya tienen asociado un Formulario.",
+      "delete": "Tu Facebook Tab {{tabName}} no pudo ser borrada.",
+      "edit": "No hemos podido editar tu Facebook Tab.",
+      "no_fanPage": "La cuenta conectada no posee ninguna página de Facebook asociada.",
+      "cancel": "cancelar",
+      "retry": "reintentar"
+    },
+    "footer": {
+      "back": "Editar Formulario",
+      "finish": "Cerrar",
+      "arrow_help": "¡Los cambios ya fueron publicados! Elige una nueva forma de distribución o haz clic en cerrar",
+      "finish_first_time": "Finalizar",
+      "arrow_help_first_time": "Una vez que hayas elegido una forma de distribución haz clic para finalizar"
+    },
+    "header": {
+      "title": "Selecciona cómo quieres distribuir tu Formulario",
+      "subtitle": "Decide en qué lugar mostrarás tu Formulario. ¿Necesitas ayuda? Solo presiona ",
+      "subtitle_help_link": "https://help.fromdoppler.com/es/formulario-de-suscripcion/",
+      "back_grid_link": "Todos mis Formularios",
+      "error_title": "¡Ouch! El ID del Formulario no es válido",
+      "error_subtitle": "Por favor, revisa que esté escrito correctamente"
+    },
+    "headers": {
+      "integration_embed": {
+        "title": "Inserta el formulario en tu sitio web",
+        "text": "Pega el siguiente fragmento de HTML en el lugar del código de tu web o blog donde quieres que aparezca tu Formulario.",
+        "description": "Embed",
+        "button_text": "Copiar código"
+      },
+      "integration_link": {
+        "description": "Link",
+        "title": "Comparte la URL pública de tu Formulario",
+        "text": "Usa esta opción si no tienes un sitio web pero quieres que tu Formulario aparezca visible de modo público.",
+        "button_text_1" : "Copiar URL"
+      },
+      "integration_landing": {
+        "title": "Muestra tu Formulario como Landing Page",
+        "text": "Puedes utilizar un dominio propio, o uno dentro de Doppler si no tienes un sitio web. Solo se verá publicada la opción elegida.",
+        "copy_url": "Copiar URL",
+        "custom_domain": {
+          "dropdown_placeholder": "Selecciona tu dominio",
+          "title": "Utilizar un dominio propio"
+        },
+        "description": "Landing",
+        "doppler_domain": {
+          "title": "Utilizar un dominio de Doppler"
+        },
+        "note": {
+          "add_new_domain": "Si quieres agregar otro diferente, haz clic",
+          "buy_now": "CONTRATAR AHORA",
+          "click_here": "aquí",
+          "upgrade_plan": "Esta funcionalidad está disponible solo con Planes Pagos.",
+          "no_verified_domains": "Aún no tienes dominios verificados para utilizar. ¿Quieres agregar uno? Haz clic"
+        },
+        "open_new_tab": "Visualiza tu Landing Page en una nueva pestaña.",
+        "error": {
+          "duplicate": "¡Ouch! Ya has utilizado esta URL en otro Formulario",
+          "pattern": "¡Ouch! No puedes incluir espacios ni caracteres especiales.",
+          "required" : "¡Ouch! Este es un campo requerido."
+        }
+      },
+      "integration_wordpress": {
+        "description": "Wordpress"
+      },
+      "integration_iframe": {
+        "description": "IFrame",
+        "title": "Inserta el formulario como iframe en tu sitio web",
+        "text": "Pega el siguiente fragmento de HTML en el lugar del código de tu web o blog donde quieres que aparezca tu Formulario."
+      },
+      "integration_facebook": {
+        "description": "Facebook",
+        "header": {
+          "title": "Publica tu Formulario en una Tab de tu página de Facebook",
+          "text_1": "Para poder hacerlo debes estar logueado en ",
+          "bold_text": "tu cuenta de Facebook.",
+          "text_2": "¿Necesitas ayuda? Solo presiona",
+          "help_link_text": "HELP",
+          "help_link": "https://help.fromdoppler.com/es/como-publicar-un-formulario-en-una-facebook-tab",
+          "text_3": "Cuenta conectada:",
+          "text_4": "| ¿Necesitas ayuda para configurar los siguientes pasos? Solo presiona",
+          "edit_text": "editar"
+        },
+        "body": {
+          "subtitle_1": "Configura la Tab que deseas instalar en tu página de Facebook",
+          "subtitle_2": "Configura tu Facebook Tab",
+          "button_integrate": "Conectar con Facebook",
+          "button_configure": "Configurar Facebook Tab",
+          "button_configure_again": "Configurar nueva Tab",
+          "tab_deleted_text_1": "La Tab",
+          "tab_deleted_text_2": "ha sido eliminada con éxito de la Fan Page",
+          "label_select_fan_page": "Selecciona una página de Facebook:",
+          "placeholder_select_fan_page": "Selecciona...",
+          "label_fb_tab_name": "Nombra tu Facebook Tab",
+          "label_miniature": "Elige una miniatura para tu Facebook Tab",
+          "label_add_image": "Añadir imagen",
+          "label_delete": "Eliminar",
+          "footer_text": "* Tamaño recomendando 111 x 74px. Peso máximo 100 KB.",
+          "success_text_1": "La Facebook Tab",
+          "success_text_2": "ha sido instalada con éxito.",
+          "label_integrated_account": "Cuenta conectada: ",
+          "label_fan_page": "Página de Facebook:",
+          "label_fb_tab": "Facebook Tab:"
+        },
+        "footer": {
+          "button_install": "Instalar Facebook Tab",
+          "action_preview": "PREVISUALIZAR",
+          "action_edit_tab": "EDITAR TAB",
+          "action_delete_tab": "ELIMINAR TAB",
+          "message_confirmate": "¿Estás seguro de que deseas eliminar la Tab de tu página de Facebook",
+          "action_cancel": "Cancelar",
+          "action_confirm_delete": "Eliminar",
+          "action_save": "Guardar cambios",
+          "action_discard": "Descartar cambios"
+        }
+      }
+    }
+  }
+}

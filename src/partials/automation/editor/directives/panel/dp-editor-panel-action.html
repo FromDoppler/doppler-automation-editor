@@ -1,0 +1,144 @@
+<p class="title">{{ 'automation_editor.sidebar.action_title' | translate }}</p>
+<div class="form--container action--container" ng-class="{'hasErrors': showErrorFor('subscriptionList')}">
+  <div class="define-actions">
+    <dp-editor-dropdown class="full" name="defineActions"
+      options="actionOptions"
+      label="'automation_editor.components.action.options.' + (selectedComponent.operation ? selectedComponent.operation.type : 'placeholder') | translate"
+      on-select-option="onActionSelected(option)"
+      value-selected="selectedComponent.operation.type"
+      ng-disabled="isReadOnly();">
+    </dp-editor-dropdown>
+    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+  </div>
+
+
+  <div class="add-subscriber--container" ng-if="selectedComponent.operation.type === ACTION_TYPE.ASSOCIATE_SUBSCRIBER_TO_LIST">
+  	<div class="selected-list alt conditions" ng-if="selectedComponent.operation.suscriptionList.ListName">
+      <span class="text"><strong>{{ 'automation_editor.sidebar.list_selected' | translate }}</strong></span>
+      <div>
+        <span class="icon-check"></span>
+        <span class="name">{{ selectedComponent.operation.suscriptionList.ListName }}</span>
+      </div>
+    </div>
+    <button class="button button--primary button--small" ng-click="showListSelectionSimple()" ng-disabled="isReadOnly();">
+      {{selectedComponent.operation.suscriptionList.ListName ? 'automation_editor.sidebar.list_replace_button' : 'automation_editor.sidebar.list_select_button' | translate}}
+    </button>
+  </div>
+  <div class="resend-email--container" ng-if='selectedComponent.operation.type === ACTION_TYPE.RESEND_EMAIL'>
+    <form name="actionForm">
+      <!-- email components selector -->
+      <div class="input--group">
+        <label class="label label--panel">*{{ 'automation_editor.sidebar.action_email_title' | translate }} </label>
+        <dp-editor-dropdown class="full" id="campaignName" name="campaignName" property="campaignName"
+            ng-class="{'placeholder': selectedComponent.operation.email.uidEmail === 0, 'hasError': showErrorFor('action_emails')}"
+            options="emailComponentsToBind"
+            label="selectedComponent.operation.email.uidEmail !== 0 ? selectedComponent.operation.email.label : ('automation_editor.components.condition.conditionals.campaign_behavior.label_email' | translate)"
+            on-select-option="onEmailSelected(option, selectedComponent.operation.email)"
+            key-value="'idEmail'"
+            value-selected="selectedComponent.operation.email.idEmail"
+            ng-disabled="isReadOnly();">
+        </dp-editor-dropdown>
+        <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+        <div class="error-messages--container" ng-show="areEmailsAvailable && !emailComponentsToBind.length">
+          <div class="error">{{'automation_editor.components.condition.conditionals.error.no_email' | translate}}</div>
+        </div>
+      </div>
+      <!-- subject -->
+      <div class="input--group">
+        <label class="label label--panel">*{{ 'automation_editor.sidebar.campaign_subject' | translate }} </label>
+        <input class="input--text" type="text" name="subject" id="subject_property" maxlength="100"
+          ng-class="{'hasErrors': actionForm.subject.$invalid}"
+          ng-required="actionForm.subject.$dirty || selectedComponent.touched"
+          ng-model="selectedComponent.operation.subject"
+          ng-disabled="isReadOnly();"/>
+          <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+      </div>
+    </form>
+  </div>
+  <div class="add-subscriber--container" ng-if="selectedComponent.operation.type === ACTION_TYPE.REMOVE_SUBSCRIBER_FROM_LIST">
+    <div class="selected-list alt" ng-if="selectedComponent.operation.suscriptionLists.length > 0 || selectedComponent.operation.allSubscribers">
+      <span class="text"><strong>{{ 'automation_editor.sidebar.list_selected' | translate }}</strong></span>
+      <div ng-repeat="item in selectedComponent.operation.suscriptionLists" ng-if="selectedComponent.operation.suscriptionLists.length > 0 && !selectedComponent.operation.allSubscribers">
+        <span class="icon-check"></span>
+        <span class="name">{{ item.ListName }}</span>
+      </div>
+      <div ng-if="!selectedComponent.operation.suscriptionLists.length && selectedComponent.operation.allSubscribers">
+        <span class="icon-check"></span>
+        <span class="name">{{ 'automation_editor.sidebar.list_all_my_contacts_selected' | translate }}</span>
+      </div>
+    </div>
+    <button class="button button--primary button--small" ng-click="showListSelectionMultiple()" ng-disabled="isReadOnly()">
+      {{selectedComponent.operation.suscriptionLists.length > 0 ? 'automation_editor.sidebar.list_replace_button' : 'automation_editor.sidebar.list_select_button' | translate}}
+    </button>
+  </div>
+  <div class="change-subscriber-fied--container" ng-if='selectedComponent.operation.type === ACTION_TYPE.CHANGE_SUBSCRIBER_FIELD'>
+    <form name="changeField">
+      <div class="input--group">
+        <label class="label label--panel">*{{ 'automation_editor.sidebar.action_field' | translate }} </label>
+        <dp-editor-dropdown class="dropdown dropdown--full" id="subscriberField" name="subscriberField" property="subscriberField"
+        ng-class="{'placeholder': selectedComponent.operation.field, 'hasError': userFields.length === 0}"
+        options="userFields"
+        label="selectedComponent.operation.field ? selectedComponent.operation.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
+        on-select-option="onSubscriberFieldSelected(option, selectedComponent.operation.field)"
+        key-value="'id'"
+        value-selected="selectedComponent.operation.field.id"
+        ng-disabled="isReadOnly();">
+        </dp-editor-dropdown>
+        <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+        <div class="error-messages--container" ng-if="userFields.length === 0">
+          <div class="error">
+          {{ 'automation_editor.sidebar.non_customs_error' | translate }}
+          <a href="/Lists/MasterCustomFields/">{{ 'automation_editor.sidebar.non_customs_error_link' | translate }}</a>
+          </div>
+        </div>
+      </div>
+      <div ng-if="!!selectedComponent.operation.field || isSelectedField" class="group--container relative">
+        <label class="label label--panel">*{{ 'automation_editor.sidebar.action_value' | translate }} </label>
+        <input class="input--text" type="text" maxlength="400"
+          ng-class="{'hasErrors': false}"
+          ng-if="selectedComponent.operation.field.type === FIELD_TYPE.STRING || selectedComponent.operation.field.type === FIELD_TYPE.EMAIL || selectedComponent.operation.field.type === FIELD_TYPE.PHONE"
+          ng-model="selectedComponent.operation.field.value"
+          ng-disabled="isReadOnly();"/>
+        <input class="input--text" name="number" type="text" maxlength="26"
+          ng-class="{'hasErrors': changeField.number.$invalid}"
+          ng-pattern="REGEX_NUMBER"
+          dp-editor-parser-formatter="FORMAT_TYPE.FLOAT"
+          ng-if="selectedComponent.operation.field.type === FIELD_TYPE.REAL"
+          ng-model="selectedComponent.operation.field.value"
+          ng-disabled="isReadOnly();"/>
+        <div class="error-messages--container" ng-messages="changeField.number.$error">
+          <div ng-message="pattern" class="error">{{'automation_editor.components.condition.conditionals.error.number_pattern' | translate}}</div>
+        </div>
+          <!-- boolean selector -->
+        <dp-editor-dropdown class="dropdown dropdown--full" id="boolean{{index}}" name="boolean{{index}}" property="boolean{{index}}"
+          ng-class="{'hasError': false"
+          ng-if="selectedComponent.operation.field.type === FIELD_TYPE.BOOLEAN"
+          options="booleanOptions"
+          label="'automation_editor.components.condition.conditionals.subscriber_information.boolean.' + (selectedComponent.operation.field.value ? 'yes' : 'no') | translate"
+          on-select-option="onConditionalAttributeSelected(option.value)"
+          value-selected="selectedComponent.operation.field.value"
+          ng-disabled="isReadOnly();">
+        </dp-editor-dropdown>
+        <!-- datepicker selector -->
+        <div class="input-datepicker--container relative" ng-if="selectedComponent.operation.field.type === FIELD_TYPE.DATE" ng-click="datePickerPopup.visible = true;">
+          <input class="form-control input--text" type="text" name="date" ng-required="true"
+            ng-class="{'hasErrors': changeField.date.$invalid}"
+            ng-model="datePickerPopup.value"
+            uib-datepicker-popup="{{format}}"
+            datepicker-options="datePickerOptions"
+            is-open="datePickerPopup.visible"
+            close-text="Close"
+            current-text="{{ 'automation_editor.sidebar.date_picker_current_text' | translate }}"
+            ng-disabled="isReadOnly();"/>
+          <span class="icon-calendar"></span>
+        </div>
+        <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div>
+	<span class="icon-globo"></span>
+	<p class="help-tip"><strong>{{ 'automation_editor.sidebar.action_help_tip' | translate }}</strong> <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span>
+    <a ng-href="{{ 'automation_editor.sidebar.action_help_tip_link' | translate }}" class="link--default" target="_blank">{{ 'help_link_text' | translate }}</a>.</p>
+</div>

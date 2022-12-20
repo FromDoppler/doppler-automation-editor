@@ -1,0 +1,5 @@
+<!--dp-editor-header-->
+<dp-editor-header  ng-if="!isProcessing()"></dp-editor-header>
+
+<!-- loader -->
+<div ng-show="isProcessing()" class="loading--container loading--full components--center" dp-partial="angularjs/partials/shared/loading.html"></div>

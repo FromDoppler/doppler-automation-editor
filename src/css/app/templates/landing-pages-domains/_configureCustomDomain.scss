@@ -1,0 +1,33 @@
+﻿.modal--is-dialog .modal__wrapper .configure-custom-domain-modal {
+  p {
+    line-height: 1.4;
+  }
+  hr {
+    border-bottom: 1px solid $color-old-gray-border;
+    margin: 20px 0;
+  }
+  .hostname {
+    word-break: break-all;
+  }
+  .configure-domain-form {
+    align-items: flex-end;
+	  display: flex;
+    margin: 20px 0;
+
+    .input--container,
+    input[type='text'] {
+      width: 100%;
+    }
+    .button {
+      margin-bottom: 1px;
+      margin-left: 10px;
+    }
+  }
+  .btn-verify {
+    min-width: 98px;
+
+    .loading-icon {
+      vertical-align: middle;
+    }
+  }
+}

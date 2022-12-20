@@ -1,0 +1,87 @@
+<div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box app" ng-if="vtex.rfm.visible && vtex.connected && !vtex.showMapping">
+  <span class="control-panel-section-title">{{ 'rfm_settings.title' | translate }}</span>
+  <span class="control-panel-section-subtitle">
+    {{ 'rfm_settings.subtitle' | translate }}
+  </span>
+  <div class="dp-library">
+    <ul class="dp-list-detail m-b-12">
+      <li>
+        <span class="dp-icodot">.</span>
+        <span><b>{{ 'rfm_settings.list_item_first' | translate }}</b> {{ 'rfm_settings.list_item_first_description' | translate }}</span>
+      </li>
+      <li>
+        <span class="dp-icodot">.</span>
+        <span><b>{{ 'rfm_settings.list_item_second' | translate }}</b> {{ 'rfm_settings.list_item_second_description' | translate }}</span>
+      </li>
+      <li>
+        <span class="dp-icodot">.</span>
+        <span><b>{{ 'rfm_settings.list_item_third' | translate }}</b> {{ 'rfm_settings.list_item_third_description' | translate }}</span>
+      </li>
+    </ul>
+    <p class="text--lightgrey m-b-12">{{ 'rfm_settings.more_information' | translate }} <a href="#">{{ 'rfm_settings.help_link_1' | translate }}</a></p>
+  </div>
+  <div class="rfm-settings--box">
+    <div class="flex-grid">
+      <div class="switch">
+        <span class="titip-top titip-fade">
+          <input id="activeRfm" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-checked="vtex.rfm.active" ng-model="vtex.rfm.active" ng-change="vtex.rfm.changed=true"><label for="activeRfm"></label>
+        </span>
+      </div>
+      <label class="text--small"><strong>{{ vtex.rfm.active ? 'rfm_settings.rfm_on' : 'rfm_settings.rfm_off' | translate }}</strong></label>
+    </div>
+    <hr class="full" style="width: calc(100% + 40px); margin-top:20px" />
+    <div class="flex-grid-v-center">
+      <div>
+        <label class="text--small"><strong>{{ 'rfm_settings.period_start' | translate }}</strong></label>
+        <select id="select-period" name="select-period" ng-disabled="!vtex.rfm.active" ng-model="vtex.rfm.period" ng-change="vtex.rfm.changed=true">
+          <option value="120">120</option>
+          <option value="60">60</option>
+          <option value="30">30</option>
+        </select>
+        <label class="text--small"><strong>{{ 'rfm_settings.period_end' | translate }}</strong></label>
+      </div>
+      <div ng-show="vtex.rfm.date" class="dp-library">
+        <p class="m-l-12 text--small text--lightgrey">({{ 'rfm_settings.calculation_date' | translate }}{{ vtex.rfm.date }})</p>
+      </div>
+    </div>
+  </div>
+  <div class="dp-library">
+    <p class="m-t-12 m-b-6">{{ 'rfm_settings.user_notification' | translate }}</p>
+    <p class="text--lightgrey">{{ 'rfm_settings.more_information' | translate }} <a href="#">{{ 'rfm_settings.help_link_2' | translate }}</a></p>
+    <div class="nav-button-bar flex-grid flex-justify-between">
+      <div class="m-b-12 dp-wrap-message dp-wrap-info ng-binding ng-scope">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <span id="messageBar" class="text--small">
+            {{ 'rfm_settings.info' | translate }}
+          </span>
+        </div>
+      </div>
+      <button ng-class="{'button--spinner' : vtex.rfm.updating}" ng-click="vtex.updateRfmSettings()"
+              class="button button--primary" ng-disabled="!vtex.rfm.changed">
+        {{ 'rfm_settings.button' | translate }}
+        <span class="icon-editor-saving hide"></span>
+      </button>
+    </div>
+    <div class="flex-grid">
+      <div class="m-b-12 dp-wrap-message dp-wrap-success ng-binding ng-scope" ng-show="vtex.rfm.success">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <span id="messageBar" class="text--small">
+            {{ 'rfm_settings.save_success' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="flex-grid">
+      <div class="dp-wrap-message dp-wrap-cancel ng-binding ng-scope" ng-show="vtex.rfm.error">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <span id="messageBar" class="text--small">
+            {{ vtex.rfm.error }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

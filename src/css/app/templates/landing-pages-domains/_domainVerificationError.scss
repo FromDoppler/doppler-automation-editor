@@ -1,0 +1,14 @@
+﻿.modal--is-dialog .modal__wrapper .verification-error-modal {
+  p {
+    line-height: 1.4;
+  }
+  hr {
+    border-bottom: 1px solid $color-old-gray-border;
+    margin: 20px 0;
+  }
+  .icon-warning {
+    color: $color-red;
+    font-size: 18px;
+    margin-right: 5px;
+  }
+}

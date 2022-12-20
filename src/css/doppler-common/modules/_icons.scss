@@ -1,0 +1,206 @@
+[class^=icon-] {
+  font-family:"icon-font";
+  display:inline-block;
+  vertical-align:middle;
+  line-height:1;
+  font-weight:normal;
+  font-style:normal;
+  speak:none;
+  text-decoration:inherit;
+  text-transform:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* close icon button */
+.cross-circle {
+  width:16px;
+  height:16px;
+  background: $color-base;
+  border: 0;
+  @include border-radius(50%);
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  margin: 2px 5px;
+
+  &:after {
+    background-color: $color-white;
+    width: 10px;
+    height: 2px;
+    background-color: #FFF;
+    content: "";
+    left: 50%;
+    top: 50%;
+    margin-left: -5px;
+    margin-top: -1px;
+    position: absolute;
+    @include transform(rotate(-45deg));
+  }
+
+  &:before {
+    left: 50%;
+    top: 50%;
+    margin-left: -5px;
+    margin-top: -1px;
+    width: 10px;
+    height: 2px;
+    background-color: $color-white;
+    content: "";
+    position: absolute;
+    @include transform(rotate(45deg));
+  }
+}
+/* close icon button */
+/* stop icon button */
+.stop-circle {
+  width: 16px;
+  height: 16px;
+  background: $color-base;
+  border: 0;
+  @include border-radius(50%);
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  margin: 2px 5px;
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  &:before {
+    left: 50%;
+    top: 50%;
+    margin-left: -4px;
+    margin-top: -1px;
+    width: 8px;
+    height: 2px;
+    background-color: $color-white;
+    content: "";
+    position: absolute;
+    @include transform(rotate(0deg));
+  }
+}
+/* stop icon button */
+.tooltiptext {
+  padding-left: 5px;
+  height: 18px;
+  color: #E34F45;
+  font-weight: bold;
+  background: #FFC3BF;
+  font-size: 9px;
+  border-radius: 2px;
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  cursor: default;
+  padding: 5px 0;
+  display: flex !important;
+  align-items: center;
+
+  .txt {
+    margin-left: 5px;
+  }
+}
+
+.float-right {
+  float: right;
+  margin-left: 10px;
+}
+
+.float-left {
+  float: left;
+  margin-right: 10px;
+}
+
+.blocked-list-tooltip, .blocked-segment-tooltip {
+  top: -5px !important;
+}
+
+.blocked-list-tooltip span {
+  white-space: pre-wrap;
+  min-width: 203px;
+}
+
+.blocked-segment-tooltip span {
+  white-space: pre-wrap;
+  min-width: 230px;
+}
+
+dp-editor-lists-grid {
+  .radio-custom.first-selected[disabled="disabled"] + label {
+    background-color: $color-white;
+  }
+
+  .radio-custom[disabled="disabled"][checked="checked"] + label {
+    background-color: $color-green-light;
+  }
+
+  .radio-custom[disabled="disabled"] + label {
+    background-color: $color-sylver;
+  }
+
+  .dp-tooltip-container .color--green {
+    color: $color-green;
+  }
+}
+
+/* Blocked icon */
+.i-block {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 12px;
+  height: 12px;
+  border: 2px solid;
+  border-radius: 100%;
+  color: $color-white;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+  .i-block::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: $color-white;
+    border-radius: 5px;
+    transform: rotate(-45deg);
+    top: 3px;
+    left: -1px
+  }
+
+.tooltip-icon {
+  margin-left: 3px;
+  background: red;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  display: inline-block;
+  border-radius:0px 3px 3px 0px;
+}
+
+.tooltip-icon-clean {
+  margin-left: 3px;
+  background: red;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  display: inline-block;
+  border-radius: 3px;
+  top: 4px;
+}
+
+  /* Blocked Icon */
+

@@ -1,0 +1,33 @@
+<div class="grayPanel-box grayPanel-box-relative automation-box--container sms-details--container">
+  <div class="reports-elements-container">
+    <h2 id="task_name_title" class="sectionBox-title-secondary">{{'ScheduledTask_Push_Title' | translate}}</h2>
+    <p id="task_name_subtitle" class="task-section-subtitle">{{'ScheduledTask_Reports_Push_subtitle' | translate}}</p>
+    <hr />
+    <div class="flex-two-columns flex">
+      <div class="flex-two">
+        <div class="openClickGraphic--container clean">
+          <dpgraph c3config="donutGraphDataPush" type="'c3'" ng-if="loaded && donutGraphDataPush"></dpgraph>
+          <div class="donut-data">
+
+            <div class="percent-rect open">{{(pushData.delivered > 0)? pushData.deliveredPerc: '0.0' }} %</div>
+            <span class="percent-text">{{(pushData.delivered > 0)?  pushData.delivered: 0}}</span><span class="percent-text-desc">{{'ScheduledTask_Reports_Push_Reached_Subscriptors' | translate}} </span>
+
+            <div class="percent-rect bounced">{{(pushData.undelivered > 0)? pushData.undeliveredPerc: '0.0' }} %</div>
+            <span class="percent-text">{{pushData.undelivered? pushData.undelivered: 0}}</span><span class="percent-text-desc">{{'ScheduledTask_Reports_Push_Not_Reached_Subscriptors' | translate}}</span>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="flex-one openClickData--container">
+        <h4 id="task_name_title">Resultados Totales</h4>
+        <h2>{{pushData.total}}</h2>
+        <p class="task-section-subtitle text-descriptor">{{'ScheduledTask_Reports_Total_Push' | translate}}</p>
+        <h2 class="sectionBox-title-secondary">{{pushData.delivered}}</h2>
+        <p class="task-section-subtitle text-descriptor">{{'ScheduledTask_Reports_Push_Reached_Subscriptors' | translate}}</p>
+        <h2 class="sectionBox-title-secondary">{{pushData.undelivered}}</h2>
+        <p class="task-section-subtitle text-descriptor">{{'ScheduledTask_Reports_Push_Not_Reached_Subscriptors' | translate}}</p>
+      </div>
+    </div>
+  </div>
+</div>

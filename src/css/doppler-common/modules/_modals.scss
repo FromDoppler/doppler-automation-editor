@@ -1,0 +1,338 @@
+/*TODO Refactor*/
+.modal {
+  box-sizing: border-box; /*TO DO Remove when app has new styles*/
+  background-color: rgba(34,34,34,.95);
+  width: $size-full;
+  height: $size-full;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  .modal__wrapper {
+    background-color: #f7f7f7;
+    left: 0;
+    margin: auto;
+    position: relative;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &.modal--visible,
+  &:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+
+  &.modal--is-dialog {
+    &.modal-one-link--container {
+      .modal__content {
+        p:last-child {
+          margin-top: 1.5em;
+        }
+      }
+    }
+    .modal__wrapper {
+      max-width: 560px;
+      padding: 20px;
+      &.modal--medium {
+        max-width:780px;
+      }
+    }
+    &.modal-two-options-input--container{
+      .form--container {
+        background-color: $color-old-ghostwhite;
+        padding: 20px;
+      }
+      .radio--container .radio-item {
+        margin: 0 15px 0 3px;
+        label {
+          color: $color-base;
+          font-size: 15px;
+          margin: 0 15px 0 3px;
+          font-weight: 100;
+        }
+      }
+      label.label--one-input {
+        color: $color-darkgrey;
+        margin: 20px 0 15px 0;
+      }    
+    }
+    .modal__content {
+      padding: 0 10px;
+
+      h1 {
+        margin: 0 0 15px 0 ;
+        font-size: 20px;
+        text-align: left;
+      }
+      h5 {
+        font-size: $font-size--base;
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 0;
+        color: $color-base;
+        font-size: $font-size--small;
+        line-height: 1.8;
+      }
+      .content--block {
+        margin-bottom: 25px;
+      }
+      .text--light {
+        color: $color-lightgrey;
+      }
+    }
+
+    .modal__action-btn {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #E5E5E5;
+      text-align: right;
+
+      .button + .button {
+        margin-right: 0;
+      }
+
+      .button--alternative {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  &.modal--full-height {
+    padding: torem(20px);
+    .modal__wrapper {
+      max-height: $size-full;
+      overflow-y: auto;
+    }
+  }
+
+  &.modal--preview {
+    padding: torem(20px);
+    .modal__wrapper {
+      height: $size-full;
+      padding: torem(35px) torem(35px) torem(40px) torem(35px);
+    }
+  }
+  .loading {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: $size-full;
+  }
+  form {
+    padding: 20px 10px 0;
+  }
+
+  .modal--do-close {
+    color: $color-lightgrey;
+    cursor: pointer;
+    font-size: $font-size--medium-alt;
+    position: absolute;
+    top: 10px;
+    transition:$transition-default;
+    right: 15px;
+    &:hover {
+      color: #444;
+    }
+  }
+
+  .preview__content {
+    height: $size-full;
+  }
+
+  iframe {
+    border: 0;
+    overflow-y: auto;
+    height: $size-full;
+    width: $size-full;
+  }
+
+  .modal--footer-text {
+    margin-top: 20px;
+    p {
+      color: $color-darkgrey;
+      font-size: $font-size--small;
+    }
+  }
+
+  /*TO DO Remove when app has new styles*/
+  *,
+  *:before,
+  *:after {
+      box-sizing: border-box;
+  }
+
+  .label--one-input {
+    margin-bottom: 5px;
+    display: inline-block;
+    color: $color-base;
+    font-weight:bold;
+  }
+
+}
+
+
+.modal--big-form {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & > div {
+      flex: 50%;
+      margin-bottom: torem(20px);
+      &:nth-child(odd) {
+        padding-right: 20px;
+        &.no-padding {
+          padding-right: 0;
+        }
+      }
+      &.full {
+        flex: $size-full;
+      }
+    }
+  }
+
+  .checkbox--container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    & > div {
+      flex: 50%;
+      margin-bottom: torem(20px);
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .radios--container {
+    margin-top: 15px;
+  }
+}
+
+.modal--form {
+  .container > div {
+    margin-bottom: 20px;
+  }
+}
+
+.modal--post {
+  text-align: center;
+  padding-top: 20px;
+  .button {
+    margin-top: 20px;
+  }
+}
+
+html.open-popup {
+  overflow: hidden;
+}
+
+.upgrade-plan-popup {
+  .success-message-container {
+    border-top: 1px solid $color-lightgray-line;
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+
+    .success-message-frame {
+      padding: 14px 15px;
+      width: 280px;
+      height: 46px;
+      background: $color-lightgreen;
+      border-radius: 3px;
+      display: flex;
+      border: 1px solid lightgray;
+      margin-top: 20px;
+    }
+
+    .success-message {
+      padding-left: 10px;
+      padding-top: 2px;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .button--loading {
+    padding-left: 3em;
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+
+  .button--loading:after {
+    content: '';
+    width: 1.5em;
+    height: 1.5em;
+    position: absolute;
+    border-radius: 50%;
+    border: 5px solid;
+    border-color: rgba(255,255,255,.3);
+    border-top-color: #fff;
+    -webkit-animation: dp-preloader-spin .7s infinite linear;
+    animation: dp-preloader-spin .7s infinite linear;
+    left: 1em;
+  }
+}
+
+.confirmation-upgrade-plan-popup {
+  height: 312px;
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  border-radius: 4px;
+
+  .container {
+    margin-top: 40px;
+    width: 100%;
+
+    .icon {
+      text-align: center;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 24px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .subtitle {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 50px;
+    }
+  }
+}
+
+.help-text {
+  color: #33ad73;
+}
+
+/* START: overwritten "UI library" section */
+
+/* modal */
+.dp-library .modal-content--large.replicate-automation-modal {
+  max-width: 700px;
+  .container-buttons .dp-button.button-medium {
+    font-weight: 300;
+  }
+}
+
+/* END: overwritten "UI library" section */

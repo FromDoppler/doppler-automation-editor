@@ -1,0 +1,9 @@
+﻿<div class="undoRedo--container">
+  <span class="to-bottom" data-static-tooltip="{{ 'automation_editor.header.undo' | translate }}">
+    <span class="icon-undo" ng-click="undoChanges()" ng-class="{'disabled': !canUndo()}"></span>
+  </span>
+  |
+  <span class="to-bottom" data-static-tooltip="{{ 'automation_editor.header.redo' | translate }}">
+    <span class="icon-redo" ng-click="redoChanges()" ng-class="{'disabled': !canRedo()}"></span>
+  </span>
+</div>

@@ -1,0 +1,212 @@
+$imagesPath: "../images" !default;
+.aplication-types--container {
+  flex-wrap: wrap;
+  img {
+    margin-right: 3%;
+    height: 40px;
+    margin-bottom: 35px;
+  }
+}
+
+.aplication-types--items {
+  background: $color-white;
+  border-radius: $border-radius--default;
+  border: 1px solid $color-sylver;
+  position: relative;
+  padding: 0 2%;
+  width: calc((100% - 20px) / 3 );
+  height: 140px;
+  margin-bottom: torem(20px);
+  margin-right: 10px;
+  transition: all 0.3s;
+  
+  .dp-ribbon span {
+    padding: 11px 0;
+  }
+
+  .tiendanube-exclusive {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    color: #B58FC1;
+    margin-top: 8px;
+  }
+
+  &:hover,
+  &.is--selected {
+    border: none;
+    box-shadow: 0 0 0 4px $color-grey-alpha-15;
+  }
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+  &:hover .notification--container {
+    visibility: visible;
+    opacity: 1;
+  }
+  .alt {
+    display: none;
+  }
+  .title {
+    color: $color-darkgrey;
+    font-weight: $font_weight-bolder;
+    margin-bottom: 5px;
+  }
+  .notification-icon--container {
+    &::before {
+      background: #B995C4;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-radius: $border-radius--default;
+      top: -2px;
+      right: -3px;
+    }
+    &::after {
+      content: '!';
+      color: $color-white;
+      display: inline-block;
+      position: absolute;
+      font-size: $font-size--tiny;
+      top: -3px;
+      right: 1.5px;
+    }
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+  }
+  .icon-notification {
+    font-size: $font-size--medium-alt;
+  }
+  .notification--container {
+    border-radius: $border-radius--default;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: baseline;
+    position: absolute;
+    padding-left: 25px;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: $transition-default;
+    span,
+    .title,
+    a {
+      color: $color-white;
+    }
+    span {
+      font-size: $font-size--small;
+      max-width: 80%;
+    }
+    a {
+      text-decoration: underline;
+      display: inline-block;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
+  .aplication-types-description--container {
+    min-height: 80px;
+  }
+}
+
+.aplication-types--active {
+  cursor: pointer;
+}
+
+.aplication-types--error {
+  .notification--container {
+    background: #e34f45 !important;
+  }
+}
+
+.aplication-types--warning {
+  .notification--container {
+    background: #B995C4;
+  }
+}
+
+.aplication-types--buy {
+  .notification--container {
+    background: #33ad73;
+  }
+}
+
+.aplication-types--demo  {
+  .notification--container {
+    background: #B995C4;
+  }
+  background-color: #F0E9F3;
+}
+
+.aplication-types--new-feature {
+  .notification--container {
+    background: #B995C4;
+  }
+}
+
+.aplication-types--new-feature {
+  position: relative;
+  div {
+    z-index: 1;
+  }
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -7px;
+    height: 121px;
+    width: 121px;
+    top: -5px;
+    background: url(#{$imagesPath}/coming-soon.svg) no-repeat center center;
+    z-index: 2;
+  }
+  &::after {
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 9px;
+    content: attr(data-text);
+    display: inline-block;
+    position: absolute;
+    top: 35px;
+    right: 5px;
+    transform: rotate(45deg);
+    z-index: 2;
+    font-weight: normal;
+  }
+  p {
+    padding-right: 25px;
+  }
+  &.es {
+    &::after {
+      top: 39px;
+      right: -13px;
+    }
+  }
+  &.en {
+    &::after {
+      top: 38px;
+      right: 8px;
+    }
+  }
+}
+
+.aplication-types--integration, .aplication-types--demo {
+  .notification--container {
+    background: $color-green !important;
+  }
+}
+
+.aplication-types--repeated {
+  cursor: default;
+
+  .notification--container {
+    background: $color-red;
+  }
+}

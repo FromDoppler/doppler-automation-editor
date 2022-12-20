@@ -1,0 +1,302 @@
+<div ng-hide="false" class="form--container dp-editor-panel-campaign-component">
+    <p class="title">{{'automation_editor.sidebar.form_title' | translate}}</p>
+    <form name="campaignForm">
+        <!-- email name -->
+        <div class="input--group">
+            <label class="label label--panel">*{{ 'automation_editor.sidebar.campaign_name' | translate }}</label>
+            <input type="text" class="input--text" ng-model="selectedComponent.name" ng-required="campaignForm.name.$dirty || selectedComponent.touched" name="name" id="name_property" ng-class="{'hasErrors': campaignForm.name.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'name')" ng-blur="emailNameOnBlur()" ng-disabled="!canEdit();"/>
+            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            <div class="error-messages--container" ng-show="showInputErrors.name">
+                <div class="error">{{'automation_editor.sidebar.campaign_name_error' | translate }}</div>
+            </div>
+        </div>
+        <!-- rss url -->
+        <div ng-if="automationType === AUTOMATION_TYPE.RSS_TO_EMAIL" class="input--group">
+            <label class="label label--panel">*{{ 'automation_editor.sidebar.rss_url' | translate }}</label>
+            <input type="url" class="input--text" ng-blur="setChanged()" ng-model="rss" ng-required="campaignForm.rss.$dirty || selectedComponent.touched" ng-model-options="{ allowInvalid: true }" name="rss" id="rss_property" ng-class="{'hasErrors': campaignForm.rss.$invalid}" maxlength="100" ng-disabled="rssLoading || !canEdit();"/>
+            <div class="loading--container-rss" ng-class="{'processing': rssLoading}">
+            	<span class="loading-icon loading-icon--small"></span>
+            </div>
+            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            <div ng-messages="campaignForm.rss.$error" class="error-messages--container" >
+                <div ng-message="url" class="error">{{ 'validation_messages.url' | translate }}</div>
+                <div ng-message="rss" id="errorRss" class="error">
+                {{ 'validation_messages.rss_invalid' | translate }}
+                {{ 'validation_messages.rss_invalid_check' | translate }}
+                <a href="{{'validation_messages.rss_invalid_link' | translate  }}" target="_blank">{{'validation_messages.rss_invalid_link' | translate  }}</a>
+                </div>
+            </div>
+        </div>
+        <!-- subject -->
+        <div class="input--group">
+            <label class="label label--panel">*{{ 'automation_editor.sidebar.campaign_subject' | translate }} <span data-static-tooltip="{{ 'automation_editor.sidebar.campaign_subject_tip' | translate }}" class="to-left all medium"><span class="icon-tip"></span></span></label>
+            <input type="text" class="input--text padding-r-buttons-place"
+              autocomplete="off"
+              ng-model="selectedComponent.subject"
+              ng-required="campaignForm.subject.$dirty || selectedComponent.touched"
+              name="subject" id="subject_property"
+              ng-focus="subjectFocus()"
+              ng-keyup="subjectUpdate()"
+              ng-change="subjectUpdate()"
+              ng-class="{'hasErrors': campaignForm.subject.$invalid}"
+              maxlength="100" ng-disabled="!canEdit();"/>
+            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            <div class="dp-button-group">
+              <dp-editor-panel-campaign-custom-fields></dp-editor-panel-campaign-custom-fields>
+              <div class="dp-bd-box">
+                <button type="button" class="dp-button button-medium dp-button-bd" aria-controls="dp-menu-emojis" id="emoji-button">
+                  <img src="/img/icons/emoji.svg">
+                </button>
+              </div>
+            </div>
+            <dp-editor-panel-campaign-subject ng-show="smartSubjectEnabled"></dp-editor-panel-campaign-subject>
+        </div>
+        <!-- preheader -->
+        <div class="input--group">
+            <label class="label label--panel">
+                {{ 'automation_editor.sidebar.campaign_pre_header' | translate }}
+                <span class="html-tooltip--container">
+                    <span class="html-tooltip to--left medium">
+                        {{ 'automation_editor.sidebar.campaign_pre_header_tip_part1' | translate }}
+                        <a class="link--default" target="_blank" href="{{ 'automation_editor.sidebar.campaign_pre_header_tip_link' | translate }}">{{ 'automation_editor.sidebar.campaign_pre_header_tip_part2' | translate }}</a>
+                    </span>
+                    <span class="icon-tip"></span>
+                </span>
+            </label>
+            <input type="text" class="input--text" ng-model="selectedComponent.preheader" name="preheader" id="preheader_property" ng-class="{'hasErrors': campaignForm.preheader.$invalid, 'input--counter': showPreheaderCounter}" maxlength="100" ng-keyup="updatePreheaderCounter($event)" ng-focus="preheaderCounter = 100 - selectedComponent.preheader.length; showPreheaderCounter = true;" ng-blur="showPreheaderCounter = false;" ng-disabled="!canEdit();"/>
+            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            <div class="counter" ng-show="showPreheaderCounter">{{preheaderCounter}}</div>
+        </div>
+        <!-- sender email -->
+        <div class="input--group">
+            <label class="label label--panel">*{{ 'automation_editor.sidebar.campaign_sender_email' | translate }}</label>
+            <input class="input--text"
+              dp-editor-dmarc-validation
+              dp-editor-private-domain-validation
+              ng-if="!domainKey"
+              ng-pattern="REGEX_EMAIL"
+              type="text"
+              ng-model="selectedComponent.fromEmail"
+              ng-required="(campaignForm.fromEmail.$dirty || selectedComponent.touched) && !domainKey"
+              name="fromEmail"
+              id="fromEmail_property_sender"
+              ng-class="campaignForm.fromEmail.$error.dmarc && !DMARCEmailSubscribers ? 'hasWarning' : (campaignForm.fromEmail.$invalid || selectedComponent.DMARCEmailActive==true) ? 'hasErrors': '' "
+              maxlength="100"
+              ng-keyup="inputKeyup($event, 'senderEmail')"
+              ng-blur="showInputErrors.senderEmail = false;"
+              ng-disabled="!canEdit();"/>
+              <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            <div class="error-messages--container">
+              <div class="dp-library margin-t-10">
+                <div ng-if="ShowDmarcWarning" class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+                  <span class="dp-message-icon"></span>
+                  <div class="dp-content-message">
+                    <span id="email-domain" class="text--small">
+                      {{'automation_editor.sidebar.campaign_dmarc_validation_part1' | translate }}{{ 'automation_editor.sidebar.campaign_dmarc_validation_part2' | translate }}
+                      <a href="{{'automation_editor.sidebar.campaign_dmarc_validation_linkUrl' | translate}}" target="_blank" class="dp-message-link dmarc-info ng-binding">
+                        {{'automation_editor.sidebar.campaign_dmarc_validation_linkText' | translate}}
+                      </a>.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div ng-messages="campaignForm.fromEmail.$error" ng-show="!showInputErrors.senderEmail" class="dp-library margin-t-10">
+                <div ng-message="dmarc" id="errorEmail" class="dp-wrap-message dp-wrap-cancel">
+                  <span class="dp-message-icon"></span>
+                  <div ng-if="DMARCEmailSubscribers" class="dp-content-message ng-binding ng-scope">
+                    <span id="email-domain-subscribers" class="text--small">
+                      {{'automation_editor.sidebar.campaign_dmarc_validation_subscribers_part1' | translate }}{{ 'automation_editor.sidebar.campaign_dmarc_validation_part2' | translate }}
+                      <a href="{{'automation_editor.sidebar.campaign_dmarc_validation_linkUrl' | translate}}" target="_blank" class="dmarc-info ng-binding dp-message-link">
+                        {{'automation_editor.sidebar.campaign_dmarc_validation_linkText' | translate}}
+                      </a>.
+                    </span>
+                    <div>
+                      <a id="accept-dmarc-subscribers" target="_blank" href="/ControlPanel/AdvancedPreferences/Dkim" class="text--tiny accept-dmarc margin-t-10 dp-message-link">
+                        {{'automation_editor.sidebar.campaign_dmarc_validation_subscribers_AcceptButton' | translate}}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
+                <div ng-message="privatedomain" class="error message-validation--container">
+                  <dp-editor-private-domain-validation-panel fullemail="campaignForm.fromEmail.$viewValue"></dp-editor-private-domain-validation-panel>
+                </div>
+              </div>
+              <div class="error" ng-show="showInputErrors.senderEmail">{{'automation_editor.sidebar.campaign_name_error' | translate }}</div>
+            </div>
+            <div class="domain-key--container" ng-if="domainKey">
+              <input class="input--text" id="fromEmail_property" type="text" name="fromEmailDkim"
+                ng-class="{'hasErrors': campaignForm.fromEmailDkim.$invalid}"
+                ng-model="selectedComponent.dkimEmail"
+                ng-pattern="REGEX_EMAIL_DKIM"
+                ng-change="updateFromEmailDkim(selectedComponent.dkimEmail)"
+                ng-required="(campaignForm.fromEmailDkim.$dirty || selectedComponent.touched) && domainKey"
+                ng-disabled="!canEdit();"/>
+              <span>&nbsp;@</span>
+              <dp-editor-dropdown class="dropdown dropdown--medium" id="dd-dkimList" name="selecteddkim" property="selecteddkim"
+                options="domainKeyList"
+                key-label="'DomainName'"
+                key-value="'DomainId'"
+                label="selectedComponent.DomainKeyLabel"
+                on-select-option="onDkimSelected(option.DomainId)"
+                value-selected="selectedComponent.idDomainKeySelected"
+                ng-disabled="!canEdit();">
+              </dp-editor-dropdown>
+              <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            </div>
+
+            <div ng-messages="campaignForm.fromEmailDkim.$error" class="error-messages--container" >
+                <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
+            </div>
+        </div>
+        <!-- sender name -->
+        <div class="input--group">
+            <label class="label label--panel">*{{ 'automation_editor.sidebar.campaign_sender_name' | translate }}</label>
+            <input type="text" class="input--text" ng-model="selectedComponent.fromName" ng-required="campaignForm.fromName.$dirty || selectedComponent.touched" name="fromName" id="fromName_property" maxlength="100" ng-class="{'hasErrors': campaignForm.fromName.$invalid}" ng-disabled="!canEdit();"/>
+            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+        </div>
+        <!-- reply email -->
+        <div class="input--group">
+            <label class="label label--panel">{{ 'automation_editor.sidebar.campaign_answer_email' | translate }}</label>
+            <input type="email" class="input--text" ng-pattern="REGEX_EMAIL" name="replyEmail" ng-model="selectedComponent.replyEmail"  id="replyEmail_property" ng-class="{'hasErrors': campaignForm.replyEmail.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'replyEmail')" ng-blur="showInputErrors.replyEmail = false;" ng-disabled="!canEdit();"/>
+            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            <div class="error-messages--container">
+                <div ng-messages="campaignForm.replyEmail.$error" ng-show="!showInputErrors.replyEmail">
+                    <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
+                </div>
+                <div class="error" ng-show="showInputErrors.replyEmail">{{'automation_editor.sidebar.campaign_name_error' | translate }}</div>
+            </div>
+        </div>
+
+        <!-- contact policy -->
+        <div class="input--group dp-library">
+          <p class="title">
+            {{ 'automation_editor.sidebar.contact_policy_title' | translate }}
+            <span class="html-tooltip--container margin-l-10">
+              <span class="html-tooltip to--center medium">
+                {{ 'automation_editor.sidebar.contact_policy_tooltip' | translate }}
+              </span>
+              <span class="icon-tip"></span>
+            </span>
+          </p>
+
+          <div class="dp-input--radio margin-r-18">
+            <label>
+              <input type="radio" name="ignoreContactPolicy" id="ignoreShippingLimitNo"
+                     ng-disabled="!canEdit() || !isIgnoreContactPolicySetupCompleted"
+                     ng-checked="!selectedComponent.hasToIgnoreShippingLimit"
+                     ng-click="selectedComponent.hasToIgnoreShippingLimit = false">
+              <span class="text--small">{{ 'automation_editor.sidebar.contact_policy_radio_no' | translate }}</span>
+            </label>
+          </div>
+
+          <div class="dp-input--radio">
+            <label>
+              <input type="radio" name="ignoreContactPolicy" id="ignoreShippingLimitYes"
+                     ng-disabled="!canEdit() || !isIgnoreContactPolicySetupCompleted"
+                     ng-checked="selectedComponent.hasToIgnoreShippingLimit"
+                     ng-click="selectedComponent.hasToIgnoreShippingLimit = true">
+              <span class="text--small">{{ 'automation_editor.sidebar.contact_policy_radio_yes' | translate }}</span>
+            </label>
+          </div>
+
+          <div class="padding-t-10" ng-show="!isIgnoreContactPolicySetupCompleted">
+            <span class="text-italic text--small">{{ 'automation_editor.sidebar.contact_policy_legend' | translate }}</span>
+            <a class="text-italic text--small link--default" href="{{ 'automation_editor.sidebar.contact_policy_help_link' | translate }}" target="_blank">{{ 'automation_editor.sidebar.contact_policy_help_text' | translate }}</a>
+          </div>
+        </div>
+
+        <!-- social share -->
+        <div ng-show="true" class="social--container">
+        	<p class="title">{{ 'automation_editor.sidebar.campaign_shares_title' | translate }}</p>
+        	<p class="text--small alt"><strong>{{ 'automation_editor.sidebar.campaign_shares_add' | translate }}</strong></p>
+        	<ul>
+        	  <li ng-repeat="share in selectedComponent.socialShares">
+    			  <a ng-click="canEdit() && (share.selected = share.selected ? false : true)">
+    			  <span class="icon-share-{{share.name}}" ng-class="{'active': share.selected}"></span></a>
+        	  </li>
+        	</ul>
+        </div>
+        <!-- email content -->
+        <div class="email-content--container">
+        	<p class="title">{{ 'automation_editor.sidebar.campaign_email_content_title' | translate }}</p>
+        	<div class="container">
+        			<div ng-click="toggleImportHtml(!selectedComponent.contentType || selectedComponent.contentType === CONTENT_TYPE.IMPORT);" ng-class="{'selected': selectedComponent.contentType === CONTENT_TYPE.IMPORT}" class="components--center relative">
+        				<img src="../../images/automation-editor-upload-html.svg" />
+        				<span class="text--small">{{ 'automation_editor.sidebar.campaign_import_file' | translate }}</span>
+                        <span class="icon-edit"></span>
+        			</div>
+        			<div ng-click="toggleTemplates(!selectedComponent.contentType || selectedComponent.contentType === CONTENT_TYPE.TEMPLATE);" ng-class="{'selected': selectedComponent.contentType === CONTENT_TYPE.TEMPLATE}" class="components--center relative">
+        				<img src="../../images/automation-editor-templates-editor.svg" />
+        				<span class="text--small">{{ 'automation_editor.sidebar.campaign_templates_editor' | translate }}</span>
+                        <span class="icon-edit"></span>
+        			</div>
+        			<div ng-click="toggleTinyEditor(true)" ng-class="{'selected': selectedComponent.contentType === CONTENT_TYPE.TINY_EDITOR, 'disabled': isDynamicContent()}" class="components--center relative" ng-disabled="!canEdit();">
+        				<img src="../../images/automation-editor-text-editor.svg" />
+        				<span class="text--small">{{ 'automation_editor.sidebar.campaign_text_html_editor' | translate }}</span>
+                        <span class="icon-edit"></span>
+        			</div>
+        	</div>
+        </div>
+    </form>
+    <div class="email-content--container"  ng-if="selectedComponent.thumbnailUrl !== '' && !isDynamicContent()">
+        <p class="title title-alt">{{ 'automation_editor.sidebar.campaign_send_test_title' | translate }}</p>
+        <p class="text--small text--warning" ng-show="!selectedComponent.completed"><i> {{ 'automation_editor.sidebar.campaign_send_test_warning_incomplete' | translate }}</i></p>
+        <form name="testEmailForm" class="relative" ng-class="{'disabled': !selectedComponent.completed}">
+            <!-- List send -->
+            <div class="dp-library">
+              <div class="group--container relative dp-input--radio">
+                <label>
+                  <input type="radio" name="testSend" id="sendSubscriberList"
+                    ng-disabled="!canEdit();"
+                    ng-checked="selectedComponent.emailOption === TEST_OPTION.LIST"
+                    ng-click="selectedComponent.emailOption = TEST_OPTION.LIST">
+                  <span>{{ 'automation_editor.sidebar.campaign_send_test_subscribers_title' | translate }}</span>
+                </label>
+              </div>
+            </div>
+            <p class="info text--tiny">{{ 'automation_editor.sidebar.campaign_send_test_subscribers_subtitle' | translate: { maxSubsInList: maxSubsInList} }}</p>
+            <div class="group--container test-email alt" ng-show="listToSend.length > 1">
+                <dp-custom-dropdown class="full" ng-disabled="selectedComponent.emailOption === TEST_OPTION.EMAIL || (!canEdit());" id="subscriberslistsToSend" name="list" property="name" options="listToSend" label="selectedList.label" on-select-option="onListSelected(option)" value-selected="selectedList.value"></dp-custom-dropdown>
+                <button class="button button--small button--primary" ng-disabled="selectedComponent.idList == 0 || selectedComponent.emailOption == 'email' || sendingTest || !canEdit()" ng-click="sendTestList()">{{ 'automation_editor.sidebar.campaign_send_test_send_button' | translate }}</button>
+                <span class="read-only--tooltip positive--alignment" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            </div>
+            <div class="error-messages--container" ng-if="errorMessageList !== ''"  click-outside="removeMessage();">
+                <div class="error"> {{errorMessageList}}</div>
+            </div>
+            <div ng-if="listTestOk" class="ok-messages--container" click-outside="removeMessage()">
+                <div> {{ 'automation_editor.sidebar.campaign_send_test_ok_message' | translate }}</div>
+            </div>
+            <div class="group--container alt" ng-show="listToSend.length === 1">
+                <button class="button button--small button--primary non-margin" ng-click="toggleCreateListTemplate(true)" ng-disabled="!canEdit();">{{ 'automation_editor.sidebar.campaign_send_test_create_list' | translate }}</button>
+            </div>
+            <!-- Email send -->
+            <div class="dp-library">
+              <div class="group--container relative dp-input--radio">
+                  <label>
+                    <input type="radio" name="testSend" id="sendEmail"
+                      ng-disabled="!canEdit();"
+                      ng-checked="selectedComponent.emailOption === TEST_OPTION.EMAIL"
+                      ng-click="selectedComponent.emailOption = TEST_OPTION.EMAIL">
+                    <span>{{ 'automation_editor.sidebar.campaign_send_test_email_title' | translate }}</span>
+                  </label>
+              </div>
+            </div>
+            <p class="info text--tiny">{{ 'automation_editor.sidebar.campaign_send_test_email_subtitle' | translate }}</p>
+            <div class="group--container alt">
+                <input type="text" class="input--text" ng-disabled="selectedComponent.emailOption === TEST_OPTION.LIST || !canEdit()" ng-class="{'hasErrors': testEmailForm.testEmail.$dirty && !isSubscriberEmail(selectedComponent.emailList) }" name="testEmail" ng-pattern="REGEX_SUBSCRIBER_EMAIL" ng-model="selectedComponent.emailList"/>
+                <button ng-disabled="!selectedComponent.emailList || selectedComponent.emailOption === TEST_OPTION.LIST || sendingTest || !canEdit()"  ng-click="sendTestToEmails()" class="button button--small button--primary">{{ 'automation_editor.sidebar.campaign_send_test_send_button' | translate }}</button>
+                <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+            </div>
+            <div ng-messages="testEmailForm.testEmail.$error" class="error-messages--container" >
+                <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
+            </div>
+            <div class="error-messages--container" ng-if="errorMessageEmail!==''" click-outside="removeMessage()">
+                <div class="error"> {{errorMessageEmail}}</div>
+            </div>
+            <div ng-if="emailTestOk" class="ok-messages--container" click-outside="removeMessage()">
+                 <div > {{ 'automation_editor.sidebar.campaign_send_test_ok_message' | translate }}</div>
+            </div>
+        </form>
+    </div>
+</div>

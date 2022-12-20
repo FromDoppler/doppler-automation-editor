@@ -1,0 +1,39 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper" id="siteTracking-modal" click-outside="close(false)">
+    <a class="icon-close modal--do-close " ng-click="close(false)" data-dismiss="modal"></a>
+    <div class="modal__content site-trackings-info--container">
+      <div class="title">{{ 'site_tracking.grid_headers.domain' | translate }}: <strong>{{ data.domain }}</strong></div>
+      <div class="block--separator">
+        <h1>{{ 'site_tracking.follows_code_title' | translate }}</h1>
+        <p class="description text--small">{{ 'site_tracking.follows_code_description' | translate }} <a href="{{ 'site_tracking.help_link' | translate }}" target="_blank">{{ 'site_tracking.help_text' | translate }}</a><span class="icon-tip"></span></p>
+      </div>
+      <div class="block--separator flex-grid">
+        <code class="text--small">
+          {{ 'site_tracking.follows_code_header_code' | translate: { domain: data.domainCode }  }}
+        </code>
+        <button class="button button--primary button--small copyToClipboard" data-clipboard-text="{{ 'site_tracking.follows_code_header_code' | translate: { domain: data.domainCode } }}">{{ 'actions.copy' | translate }}</button>
+      </div>
+      <hr class="separatorSection" />
+      <div class="block--separator">
+        <h1>{{ 'site_tracking.modal_push_config_title' | translate }}</h1>
+        <p class="description text--small">{{ 'site_tracking.modal_push_config_description' | translate }} <a href="{{ 'site_tracking.modal_push_help_link' | translate }}" target="_blank">{{ 'site_tracking.help_text' | translate }}</a><span class="icon-tip"></span></p>
+      </div>
+      <div class="block--separator">
+        <a class="button button--small button--primary" href="{{ data.pushSwUrl }}" id="push_download" download>{{ 'site_tracking.download_sw_push_button' | translate }}</a>
+      </div>
+       <hr class="separatorSection" />
+      <div class="block--separator dp-library">
+        <div class="dp-wrap-message dp-wrap-warning">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message">
+            <p>{{ 'site_tracking.before_verify' | translate }}</p>
+          </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal__action-btn">
+      <button class="button button--small button--alternative"  ng-click="close(false)" data-dismiss="modal">{{ 'actions.close' | translate }}</button>
+      <button class="button button--small button--primary" ng-click="close(true)" data-dismiss="modal">{{ 'site_tracking.verify_now' | translate }}</button>
+    </div>
+  </div>
+</div>

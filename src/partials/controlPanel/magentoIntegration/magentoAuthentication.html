@@ -1,0 +1,61 @@
+<form name="magento.form" ng-if="magento.sourceType === magento.mvcSourceType" ng-submit="magento.form.$valid && magento.connect()" novalidate>
+    <div>
+        <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
+            <span class="control-panel-section-title">{{ 'magento_integration.disconnected.title' | translate }} </span>
+            <span class="control-panel-section-subtitle">{{ 'magento_integration.disconnected.subtitle' | translate }}
+                <a href="{{ 'magento_integration.disconnected.help_link' | translate }}"
+                    target="_blank">{{ 'magento_integration.disconnected.help_text' | translate }}</a>
+            </span>
+            <hr class="full" style="width: calc(100% + 40px);" />
+            <section class="authentication-container" ng-if="!magento.connected">
+              <div class="authentication-elements">
+                <p class="select-list-text">{{ 'magento_integration.disconnected.store' | translate }}</p>
+                <p class="select-list-text">{{ 'magento_integration.disconnected.app_key' | translate }}</p>
+              </div>
+                <div class="authentication-elements">
+                  <input type="text"
+                         ng-required="true"
+                         ng-class="{'input-validation-error':magento.form.$submitted && !magento.disconnected && (magento.integrationData.store.$invalid || !magento.integrationData.store)}"
+                         ng-model="magento.integrationData.store"
+                         class="user-data-input"
+                         placeholder="{{ 'magento_integration.disconnected.store_placeholder' | translate }}"
+                         maxlength="100" />
+                  <input type="text"
+                         required
+                         ng-class="{'input-validation-error':magento.form.$submitted && !magento.disconnected && (magento.integrationData.appKey.$invalid || !magento.integrationData.appKey)}"
+                         ng-model="magento.integrationData.appKey"
+                         class="user-data-input"
+                         placeholder="{{ 'magento_integration.disconnected.app_key_placeholder' | translate }}"
+                         maxlength="250" />
+                </div>
+            </section>
+            <section class="authentication-container connected" ng-show="magento.connected">
+                <div class="authentication-elements">
+                    <p>{{ 'magento_integration.connected.store' | translate }} <strong>{{ magento.connectedStore }}</strong>
+                    </p>
+                </div>
+                <button type='button' class="button button--alternative"
+                    ng-click="magento.disconnectWarning()" ng-disabled="magento.importingAllLists">{{ 'magento_integration.connected.disconnect' | translate }}</button>
+            </section>
+            <div class="dp-library margin-t-20 margin-b-20" ng-show="magento.connectionError" >
+              <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+                <span class="dp-message-icon"></span>
+                <div class="dp-content-message dp-content-full">
+                  <span>{{ magento.errorMsg }}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!magento.connected">
+        <a class="button button--alternative" ng-disabled="magento.connecting"
+            href="/ControlPanel/ControlPanel?section=Integration"
+            id="back-button">{{ 'actions.cancel' | translate }}</a>
+        <button type="submit" id="save_info" ng-disabled="magento.connecting"
+            ng-class="{'button--spinner' : magento.connecting}" ng-click="magento.disconnected = false;"
+            class="button button--primary">
+            {{ 'actions.connect' | translate }}
+            <span class="icon-editor-saving" ng-show="magento.connecting"></span>
+        </button>
+    </div>
+</form>

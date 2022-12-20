@@ -1,0 +1,28 @@
+<div class="component">
+
+  <div class="dp-tooltip-top">
+    <span ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate">
+    </span>
+  </div>
+
+  <div class="uid-label-component">{{component.uid}}</div>
+  <img class="image-complete" src="/../images/automation-sms.svg" />
+  <img class="image-incomplete" src="/../images/automation-sms-grey.svg" />
+  <p class="container-name">
+    <span ng-show="!component.field" ng-bind-html="'automation_editor.canvas.sms_placeholder' | translate"></span>
+    <span ng-show="component.field">
+      {{ 'automation_editor.canvas.sms_part1'  | translate }}
+      <strong>{{ component.field.name }},</strong>
+      {{ 'automation_editor.canvas.sms_part2'  | translate }}
+      <span ng-if="!component.smsText" class="brackets">[[[...]]]</span>
+      <strong ng-if="component.smsText">{{ component.smsText }}</strong>
+    </span>
+  </p>
+  <p class="container-name name" ng-if="!showDeleteWarning">
+    <strong><ellipsis-with-tooltip text="component.name" css-class="multiline medium" multi-line="true"></ellipsis-with-tooltip></strong>
+  </p>
+  <div class="actions-element--container">
+    <dp-editor-delete-component on-delete-component="$parent.removeComponent(component)"></dp-editor-delete-component>
+  </div>
+</div>
+<dp-editor-new-step component="component" branch="branch"></dp-editor-new-step>

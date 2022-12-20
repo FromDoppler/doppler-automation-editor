@@ -1,0 +1,55 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper" id="modalCreateCustomDomain" click-outside="closeModal()">
+    <a class="icon-close modal--do-close" ng-click="closeModal()"></a>
+    <div class="modal__content create-custom-domain-modal">
+      <h1>{{'landing_pages_domains.create_domain.title' | translate}}</h1>
+      <p ng-bind-html="'landing_pages_domains.create_domain.description' | translate"></p>
+      <form name="createDomainForm" novalidate>
+        <!-- form -->
+        <div class="create-domain-form" ng-if="!processing">
+          <div class="input--container">
+            <input class="subdomain" type="text" name="subdomain" required
+              placeholder="{{'landing_pages_domains.create_domain.subdomain_placeholder' | translate}}"
+              ng-model="customDomain.subdomain"
+              ng-focus="hideWarningsAndErrors()"
+            />
+          </div>
+          <span class="dot-divider">&#46;</span>
+          <div class="input--container">
+            <input class="domain" type="text" name="domain" required
+              placeholder="{{'landing_pages_domains.create_domain.domain_placeholder' | translate}}"
+              ng-model="customDomain.domain"
+              ng-focus="hideWarningsAndErrors()"
+            />
+          </div>
+        </div>
+        <!-- loader -->
+        <div class="loading--container" ng-show="processing"
+          dp-partial="/angularjs/partials/shared/loading.html">
+        </div>
+        <!-- warning -->
+        <div class="message-warning bounceIn" ng-show="showWarning">
+          <span ng-bind-html="warningMessage"></span>
+        </div>
+        <!-- error -->
+        <div class="message-error bounceIn" ng-show="showError">
+          <span ng-bind-html="errorMessage"></span>
+        </div>
+        <!-- footer -->
+        <div class="modal__action-btn">
+          <button class="button button--alternative button--small"
+            data-dismiss="modal"
+            ng-click="closeModal()">
+            {{'actions.cancel' | translate}}
+          </button>
+          <button class="button button--primary button--small"
+            data-dismiss="modal"
+            ng-click="create()"
+            ng-disabled="processing">
+            {{'actions.add' | translate}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

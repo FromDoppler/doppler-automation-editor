@@ -1,0 +1,12 @@
+<div id="modal" class="modal modal--is-dialog">
+  <div class="modal__wrapper confirmation-upgrade-plan-popup" id="modalUpgradePlan">
+    <a class="icon-close modal--do-close " ng-click="close()"></a>
+    <div class="container">
+      <div class="icon">
+        <img src="../../../img/icons/newfeature-icon.svg" />
+      </div>
+      <div class="title">{{ 'confirmation-upgrade-plan-popup.title' | translate}}</div>
+      <div class="subtitle" ng-bind-html="data.subtitle | translate: {subscribersNumber: data.planSelected.EmailQty !== null ? data.planSelected.EmailQty : data.planSelected.SubscribersQty}"></div>
+    </div>
+  </div>
+</div>

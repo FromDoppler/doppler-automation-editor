@@ -1,0 +1,43 @@
+{
+  "mercado_libre_integration": {
+    "name": "Mercado Libre",
+    "disconnected": {
+      "title": "Connect Doppler with Mercado Libre",
+      "subtitle": "You will be able to syncronize your products with Doppler Templates, and send promotional Campaigns to your Contacts. Any doubt? Go to",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-doppler-with-mercadolibre/",
+      "connection_error": "Oops! We could not connect with Mercado Libre please try again later.",
+      "select_country_text": "Select the country of your Mercado Libre account:",
+      "countries": {
+        "ar": "Argentina",
+        "bo": "Bolivia",
+        "br": "Brasil",
+        "cl": "Chile",
+        "co": "Colombia",
+        "cr": "Costa Rica",
+        "do": "Dominicana",
+        "ec": "Ecuador",
+        "sv": "El Salvador",
+        "gt": "Guatemala",
+        "hn": "Honduras",
+        "mx": "México",
+        "ni": "Nicaragua",
+        "pa": "Panamá",
+        "py": "Paraguay",
+        "pe": "Perú",
+        "uy": "Uruguay",
+        "ve": "Venezuela"
+      }
+    },
+    "connected": {
+      "title": "Your Mercado Libre store is already connected with Doppler",
+      "subtitle": "From now on you can syncronize your products with Doppler Templates, and send promotional Campaigns to your Contacts.",
+      "store": "Connected Account:",
+      "disconnect": "Disconnect",
+      "disconnect_popup": {
+        "title": "Confirm you want to disconnect the integration",
+        "description": "If you do, you cannot import your products from Mercado Libre into Doppler Templates anymore."
+      }
+    }
+  }
+}

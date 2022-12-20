@@ -1,0 +1,16 @@
+<div>
+    <label class="label label--panel">* {{ 'form_labels.arg_dni' | translate }} 
+    <span ng-if="smsSettings.selectedPaymentMethod === smsSettings.PAYMENT_METHOD.CC">
+        {{ 'form_labels.arg_dni_clarification' | translate }}
+    </span>
+    </label>
+    <input dp-integer-input
+    type="text"
+    class="input--text"
+    ng-class="{ 'hasErrors' : billingInformationForm.dniArg.$invalid}"
+    ng-model="smsSettings.paymentData.billingInformation.dniArg"
+    name="dniArg"
+    maxlength="11"
+    ng-maxlength="11"
+    ng-required="billingInformationForm.dniArg.$dirty || billingInformationForm.$submitted"/>
+</div>

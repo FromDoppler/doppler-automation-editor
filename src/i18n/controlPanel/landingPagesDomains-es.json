@@ -1,0 +1,80 @@
+{
+  "landing_pages_domains": {
+    "breadcrumb": {
+      "control_panel": "Panel de Control",
+      "section": "Dominios de Landing Pages"
+    },
+    "configure_domain": {
+      "cname": "CNAME",
+      "cname_value": "Valor",
+      "description": "Ve a tu proveedor de dominio y configura el siguiente registro de DNS, junto con tu subdominio.<br/><br/>Después de ingresar el subdominio y el registro CNAME, regresa a esta página y haz clic en &#34Verificar&#34.<br/>¿Tienes dudas? Solo presiona ",
+      "help": {
+        "text": "HELP",
+        "url": "https://help.fromdoppler.com/es/como-configurar-dominios-de-landing-pages"
+      },
+      "hostname": "Host:",
+      "note": "La verificación puede demorar hasta 24 horas, dependiendo del proveedor. Mientras tanto, puedes seguir trabajando en tus Landing Pages.",
+      "record_type": "Tipo registro:",
+      "title": "Verificación de dominio"
+    },
+    "create_button": "Agregar dominio",
+    "create_domain": {
+      "title": "Crea tu dominio",
+      "description": "Si tu Sitio Web usa tu dominio raíz <i>(por ejemplo, www.misitio.com)</i>, tendrás que crear un subdominio que lo contenga <i>(por ejemplo, promo.mysite.com)</i>. No es posible mostrar tus Landing Pages en la misma URL que tu Sitio Web.<br/>Recuerda que sólo puedes incluir números, letras y guión medio.",
+      "domain_placeholder": "misitio.com",
+      "error": {
+        "default": "Ha ocurrido un error, por favor inténtalo de nuevo más tarde.",
+        "duplicate": "Este dominio ha sido agregado anteriormente.",
+        "invalid": "¡Ouch! El nombre de dominio no es válido.",
+        "required": "¡Ouch! Tienes que completar todos los campos.",
+        "used_by_other": "Este dominio está siendo utilizado por otro Usuario. Escríbenos a soporte@fromdoppler.com y te diremos cómo continuar."
+      },
+      "subdomain_placeholder": "promo"
+    },
+    "delete": {
+      "cancel": "CANCELAR",
+      "confirm": "ELIMINAR",
+      "error": {
+        "agreed": "ENTENDIDO",
+        "default": "¡Ouch! Se produjo un error al intentar eliminar el dominio.",
+        "form_associated": "¡Ouch! No puedes eliminar este dominio porque tiene Formularios asociados que están publicados."
+      },
+      "text": "Este dominio &quot;{{domain}}&quot; se eliminará permanentemente. ¿Estás seguro?"
+    },
+    "grid": {
+      "actions": {
+        "configure": "Configurar",
+        "delete": "Eliminar"
+      },
+      "headers": {
+        "actions": "Acciones",
+        "domain_name": "Dominio",
+        "domain_status": "Estado",
+        "validation_date": "Última verificación"
+      },
+      "status": {
+        "configuration_error": "<strong>¡Ouch! Verificado con error.</strong> Haz clic en <span class='icon-configure'></span> y sigue los pasos para solucionarlo.",
+        "pending": "Pendiente",
+        "unconfigured": "No configurado",
+        "verified": "<strong>Verificado.</strong> Ya puedes comenzar a utilizar tu dominio."
+      }
+    },
+    "no_domains": "No has agregado ningún dominio aún.",
+    "subhead": "Agrega los dominios de aquellos Formularios que quieres visualizar como Landing Pages.",
+    "title": "Dominios de Landing Pages",
+    "validation_states": {
+      "message-1": "Verificado con Error. ",
+      "message-2": "Verificado. ",
+      "message-3": "No configurado. ",
+      "message-4": "Pendiente. "
+    },
+    "verification_error": {
+      "button": "Entendido",
+      "description": "Para solucionarlo, toma en cuenta estas opciones:",
+      "first_suggest": "<strong>1)</strong> Chequea que tu CNAME direccione a <strong>{{formDopplerPagesDomain}}</strong> y revisa que no haya errores de ortografía o tipeo.",
+      "note": "Si has comprobado que no existen problemas con el CNAME y han pasado al menos 24 h para su actualización, escríbenos a <strong>soporte@fromdoppler.com</strong>.<br>Recuerda incluir una captura de pantalla del Panel de Control de CNAME de tu host para que podamos solucionarlo rápidamente.",
+      "second_suggest": "<strong>2)</strong> Es probable que el host se demore en actualizar el CNAME.<br>Si éste se encuentra configurado correctamente, espera al menos 2 horas para que comience a funcionar.",
+      "title": "Verificado con error"
+    }
+  }
+}

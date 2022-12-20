@@ -1,0 +1,114 @@
+<form name="bmwCrm.form" ng-submit="bmwCrm.form.$valid && bmwCrm.connect();" novalidate>
+  <div>
+    <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="bmwCrm.daysToDisconnection < 14 && bmwCrm.connected">
+      <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+      <div class="dp-library margin-t-20 margin-b-20">
+        <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message">
+            <span id="messageBar" class="text--small">
+              {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'bmwcrm_integration.name' | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+      <ul>
+        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
+        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
+        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+      </ul>
+      <br />
+      <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+      <hr class="full connection-issues-separator" />
+      <p>
+        {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
+        {{ bmwCrm.firstValidationErrorDate}}
+      </p>
+      <strong>
+        <span ng-if="bmwCrm.daysToDisconnection > 1">
+          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
+          {{ bmwCrm.daysToDisconnection }}
+          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+        </span>
+        <span ng-if="bmwCrm.daysToDisconnection <= 1">
+          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+        </span>
+      </strong>
+    </div>
+    <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
+      <div ng-show="!bmwCrm.connected">
+        <span class="control-panel-section-title">{{ 'bmwcrm_integration.disconnected.title' | translate }} </span>
+        <span class="control-panel-section-subtitle">
+          {{ 'bmwcrm_integration.disconnected.subtitle' | translate }}
+          <a href="{{ 'bmwcrm_integration.disconnected.help_link' | translate }}"
+             target="_blank">{{ 'bmwcrm_integration.disconnected.help_text' | translate }}</a>
+        </span>
+      </div>
+      <div ng-show="bmwCrm.connected">
+        <span class="control-panel-section-title">{{ 'bmwcrm_integration.connected.main_title' | translate }} </span>
+        <span class="control-panel-section-subtitle">
+          {{ 'bmwcrm_integration.connected.main_subtitle' | translate }}
+          <a href="{{ 'bmwcrm_integration.connected.main_help_link' | translate }}"
+             target="_blank">{{ 'bmwcrm_integration.connected.main_help_text' | translate }}</a>
+        </span>
+      </div>
+      <hr class="full" style="width: calc(100% + 40px);" />
+      <section class="authentication-container" ng-if="!bmwCrm.connected">
+        <div class="authentication-elements">
+          <p class="select-list-text">{{ 'bmwcrm_integration.disconnected.username' | translate }}</p>
+          <p class="select-list-text">{{ 'bmwcrm_integration.disconnected.password' | translate }}</p>
+          <p class="select-list-text">{{ 'bmwcrm_integration.disconnected.token' | translate }}</p>
+        </div>
+        <div class="authentication-elements">
+          <input type="text" ng-required="true"
+                 ng-class="{'input-validation-error':bmwCrm.form.$submitted && !bmwCrm.disconnected && (bmwCrm.integrationData.userName.$invalid || !bmwCrm.integrationData.userName)}"
+                 ng-model="bmwCrm.integrationData.userName" class="user-data-input"
+                 placeholder="{{ 'bmwcrm_integration.disconnected.username_placeholder' | translate }}"
+                 maxlength="100" />
+          <input type="text" required
+                 ng-class="{'input-validation-error':bmwCrm.form.$submitted && !bmwCrm.disconnected && (bmwCrm.integrationData.password.$invalid || !bmwCrm.integrationData.password)}"
+                 ng-model="bmwCrm.integrationData.password" class="user-data-input"
+                 placeholder="{{ 'bmwcrm_integration.disconnected.password_placeholder' | translate }}"
+                 maxlength="250" />
+          <input type="text" required
+                 ng-class="{'input-validation-error':bmwCrm.form.$submitted && !bmwCrm.disconnected && (bmwCrm.integrationData.token.$invalid || !bmwCrm.integrationData.token)}"
+                 ng-model="bmwCrm.integrationData.token" class="user-data-input"
+                 placeholder="{{ 'bmwcrm_integration.disconnected.token_placeholder' | translate }}"
+                 maxlength="250" />
+        </div>
+      </section>
+      <section class="authentication-container connected" ng-show="bmwCrm.connected">
+        <div class="authentication-elements">
+          <p>
+            {{ 'bmwcrm_integration.connected.account' | translate }} <strong>{{ bmwCrm.connectedAccount }}</strong>
+          </p>
+        </div>
+        <button type='button' class="button button--alternative"
+                ng-click="bmwCrm.disconnectWarning()" ng-disabled="bmwCrm.importingAllLists">
+          {{ 'bmwcrm_integration.connected.disconnect' | translate }}
+        </button>
+      </section>
+      <div class="dp-library margin-t-20 margin-b-20" ng-show="bmwCrm.connectionError">
+        <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message dp-content-full">
+            <span>{{ bmwCrm.errorMsg }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!bmwCrm.connected">
+    <a class="button button--alternative" ng-disabled="bmwCrm.connecting"
+       href="/ControlPanel/ControlPanel?section=Integration"
+       id="back-button">{{ 'actions.cancel' | translate }}</a>
+    <button type="submit" id="save_info" ng-disabled="bmwCrm.connecting"
+            ng-class="{'button--spinner' : bmwCrm.connecting}" ng-click="bmwCrm.disconnected = false;"
+            class="button button--primary">
+      {{ 'actions.connect' | translate }}
+      <span class="icon-editor-saving" ng-show="bmwCrm.connecting"></span>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,94 @@
+ {
+  "mercado_shops_integration": {
+    "name": "Mercado Shops",
+    "disconnected": {
+      "title": "Conecta Doppler con Mercado Shops",
+      "subtitle": "Así podrás sincronizar tus productos con las Plantillas de Doppler y enviar Campañas promocionales a tus Contactos. ¿Tienes dudas? Revisa el",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-doppler-con-mercado-shops",
+      "connection_error": "Ouch! No pudimos conectar con Mercado Shops vuelve a intentarlo luego.",
+      "select_country_text": "Selecciona el país de tu cuenta de Mercado Shops:",
+      "countries": {
+        "ar": "Argentina",
+        "bo": "Bolivia",
+        "br": "Brasil",
+        "cl": "Chile",
+        "co": "Colombia",
+        "cr": "Costa Rica",
+        "do": "Dominicana",
+        "ec": "Ecuador",
+        "sv": "El Salvador",
+        "gt": "Guatemala",
+        "hn": "Honduras",
+        "mx": "México",
+        "ni": "Nicaragua",
+        "pa": "Panamá",
+        "py": "Paraguay",
+        "pe": "Perú",
+        "uy": "Uruguay",
+        "ve": "Venezuela"
+      }
+    },
+    "connected": {
+      "title": "Tu tienda de Mercado Shops está conectada con Doppler",
+      "subtitle": "Ya puedes sincronizar tus productos con las Plantillas de Doppler y enviar Campañas promocionales a tus Contactos.",
+      "store": "Cuenta conectada:",
+      "disconnect": "Desconectar",
+      "list_title": "Selecciona la Lista a sincronizar con Mercado Shops",
+      "list_subtitle": "Toda la información de tus compradores se guardará en la Lista que elijas.",
+      "select_list": "Selecciona la Lista",
+      "select_list_warning": "Si eliges una Lista que ya tiene Contactos asociados, estos se removerán y solo se guardarán los que provengan de la integración.",
+      "select_list_placeholder": "Selecciona la Lista a sincronizar",
+      "next": "Siguiente",
+      "synchronize": "Sincronizar",
+      "grid_title": "Entidades de datos sincronizadas",
+      "list_name_grid": "Nombre de Lista",
+      "subscribers_count_grid": "Suscriptores",
+      "synchronizing_grid": "Sincronizando...",
+      "last_synchronization_grid": "Última Sincronización",
+      "entity_name_grid": "Nombre de Entidad",
+      "actions_grid": "Acciones",
+      "edit_tooltip": "Editar sincronización",
+      "lists": {
+        "buyers": "Compradores"
+      },
+      "delete_mode_grid": {
+        "message": "La sincronización se eliminará permanentemente. ¿Estás seguro?",
+        "delete": "Eliminar",
+        "cancel": "Cancelar",
+        "tooltip": "Eliminar sincronización"
+      },
+      "disconnect_popup": {
+        "title": "Confirma que quieres desconectar la integración",
+        "description": "Si lo haces, ya no podrás importar tus productos de Mercado Shops en las Plantillas de Doppler."
+      },
+      "actions_needed": {
+        "validation-needed": "No puedes seleccionar la Lista porque tienes que validar tu identidad en Mercado Shops. Presiona el siguiente link para terminar las validaciones requeridas. <a href='{{ link }}' target='_blank'>{{ link }}</a>",
+        "signature-needed": "No puedes seleccionar la Lista porque tienes que firmar los terminos y condiciones de Mercado Shops. Presiona el siguiente link para terminar las validaciones requeridas. <a href='{{ link }}' target='_blank'>{{ link }}</a>"
+      }
+    },
+    "mapping": {
+      "title": "Realiza el mapeo de campos",
+      "subtitle": "Vincula los campos de información de Mercado Shops con Campos de Doppler.",
+      "selected_data_entity": "Entidad de datos seleccionada",
+      "selected_subscriber_list": "Lista de Suscriptores seleccionada",
+      "data_entity_field": "Campo",
+      "select_field_placeholder": "Selecciona un campo...",
+      "skip_column_option": "Saltear Columna",
+      "empty_email_error_message": "Ouch! Debes seleccionar al menos un campo email.",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "fields": {
+        "buyer.contact.email": "Email",
+        "buyer.person.first_name": "Nombre",
+        "buyer.person.last_name": "Apellido",
+        "buyer.person.birthdate": "Fecha de Nacimiento",
+        "buyer.person.gender": "Sexo",
+        "buyer.contact.phone": "Teléfono",
+        "date_created": "Fecha de Última Compra",
+        "paid_amount": "Monto de Última Compra",
+        "currency_id": "Moneda de Última Compra"
+      }
+    }
+  }
+}
