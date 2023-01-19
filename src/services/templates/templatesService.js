@@ -6,13 +6,18 @@
     .service('templatesService', templatesService);
 
   templatesService.$inject = [
-    '$http'
+    '$http',
+    'EMAIL_EDITOR_TYPE',
+    'unlayerEditorHelper'
   ];
 
-  function templatesService($http) {
+  function templatesService($http, EMAIL_EDITOR_TYPE, unlayerEditorHelper) {
 
     var service = {
-      createTemplateFromPublic: createTemplateFromPublic,
+      getEditorTemplateUrl: getEditorTemplateUrl,
+      getEditorCampaignUrl: getEditorCampaignUrl,
+      getCampaignCreationFromTemplateUrl: getCampaignCreationFromTemplateUrl,
+      createTemplateFromPublicAndRedirect: createTemplateFromPublicAndRedirect,
       deleteTemplate: deleteTemplate,
       duplicateTemplate: duplicateTemplate,
       getCategoriesPublicTemplates: getCategoriesPublicTemplates,
@@ -73,14 +78,58 @@
       });
     }
 
-    // create new template from public. "id" is the template id.
-    function createTemplateFromPublic(id) {
-      return $http.post('/Templates/Main/CreateTemplateFromPublic', {
-        idTemplate: id
-      })
-        .then(function(response){
-          return response.data.id;
-        });
+    function getEditorTemplateUrl (id, editorType) {
+      switch (editorType) {
+        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerTemplateEditorUrl(id);
+        case EMAIL_EDITOR_TYPE.MSEDITOR:
+        default: return '/MSEditor/Editor?idTemplate=' + id;
+      }
+    }
+
+    function getEditorCampaignUrl (idCampaign, editorType) {
+      switch (editorType) {
+        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerCampaignEditorUrl(idCampaign);
+        case EMAIL_EDITOR_TYPE.MSEDITOR:
+        default: return '/MSEditor/Editor?idCampaign=' + idCampaign;
+      }
+    }
+
+    function getCampaignCreationFromTemplateUrl(id, editorType) {
+      switch (editorType) {
+        case EMAIL_EDITOR_TYPE.UNLAYER:
+          return '/Campaigns/BasicInfo?idTemplate=' + id + '&editorType=' + editorType;
+        case EMAIL_EDITOR_TYPE.MSEDITOR:
+        default: 
+          return '/Campaigns/BasicInfo?idTemplate=' + id;
+      }
+    }
+
+    function redirectToUnlayerEditorForTemplateCreation(baseTemplateId) {
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForTemplateCreation(baseTemplateId);
+    }
+
+    function createMSEditorTemplateFromPublicAndRedirect(baseTemplateId, onFail) {
+      return $http.post('/Templates/Main/CreateTemplateFromPublic', { idTemplate: baseTemplateId })
+        .then(function(response) { return response.data.id; })
+        .then(function(idNewTemplate) {
+          if (idNewTemplate) {
+            window.location.href = getEditorTemplateUrl(idNewTemplate, EMAIL_EDITOR_TYPE.MSEDITOR);
+          } else {
+            throw new Error("Unexpected idNewTemplate: " + idNewTemplate);
+          }})
+        .catch(onFail);
+    }
+
+    function createTemplateFromPublicAndRedirect(baseTemplateId, editorType, onFail) {
+      switch (editorType) {
+        case EMAIL_EDITOR_TYPE.UNLAYER: 
+          redirectToUnlayerEditorForTemplateCreation(baseTemplateId);
+          break;
+        case EMAIL_EDITOR_TYPE.MSEDITOR:
+        default:
+            createMSEditorTemplateFromPublicAndRedirect(baseTemplateId, onFail);
+            break;
+      }
     }
 
     // rename template. "name" is the new template name. "id" is the id for the template to rename.

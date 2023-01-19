@@ -43,7 +43,20 @@ dropdown {
   position: relative;
   &.is-visible {
     .dropdown-display {
-      box-shadow: 0 0 0 2px $color-snow;
+      box-shadow: 0 0 0 2px #e58900;
+
+      input {
+        border: 0;
+        height: 36px;
+      }
+
+      input:focus {
+        outline: none;
+        border: 0;
+        height: 36px;
+        box-shadow: none;
+      } 
+
     }
     .dropdown-list {
       display: block;
@@ -70,6 +83,14 @@ dropdown {
   text-align: left;
   height: 40px;
   line-height: 40px;
+  
+    .dropdown-arrow {
+      @include arrow(11px , 7px, "bottom", $color-lightgrey);
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 }
 
 .dropdown-label {
@@ -179,7 +200,7 @@ dropdown {
 }
 
 .dropdown-input,
-.dropdown-input:focus {
+.dropdown-input:focus, {
   border: none;
   outline: none;
 }

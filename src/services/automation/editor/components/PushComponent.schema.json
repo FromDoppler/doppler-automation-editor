@@ -6,5 +6,6 @@
   "pushMessageTitle": "",
   "pushMessageBody": "",
   "pushMessageOnClickLink": "",
-  "pushMessageImageUrl": ""
+  "pushMessageImageUrl": "",
+  "name": ""
 }

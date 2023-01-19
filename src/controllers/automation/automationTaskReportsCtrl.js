@@ -35,6 +35,8 @@
     $scope.dateTimeFormat = $scope.account.Lang === 'es' ? 'dd/MM/yyyy - h:mm:ss a' : 'MM/dd/yyyy - h:mm:ss a';
     $scope.showActionFilter = false;
     $scope.showSmsFilter = false;
+    $scope.showPushFilter = false;
+    $scope.selectedPushIds = [];
     $scope.actions = [];
     $scope.indexedActions = [];
     $scope.selectedActionIds = [];
@@ -239,6 +241,13 @@
       });
     }
 
+    var initAllPushSelected = function() {
+      angular.forEach($scope.itemsPush, function(el) {
+        el.selected = true;
+        $scope.selectedPushIds.push(el.idPush);
+      });
+    }
+
     function getTask() {
       summaryTaskService.getSummaryTask($scope.idScheduledTask)
         .then(function(response) {
@@ -289,8 +298,10 @@
           });
           $scope.getResults();
           $scope.getSmsResults();
-          $scope.getPushResults();
-
+          $scope.getPushResults()
+            .then(function() {
+              initAllPushSelected();
+            });
         }, function() {
           $scope.reportsLoading = false;
           $scope.pageLoading = false;
@@ -472,7 +483,10 @@
     };
 
     $scope.getPushResults = function() {
-      automationReportsService.getPushResults($scope.idScheduledTask)
+      if ($scope.itemsPush && !$scope.selectedPushIds.length) {
+        return clearPushData();
+      }
+      return automationReportsService.getPushResults($scope.idScheduledTask, $scope.selectedPushIds, $scope.selectedOption.id)
         .then(function(response) {
           var undeliveredP = ((response.undelivered * 100) / response.total);
           var deliveredP = ((response.delivered * 100) / response.total);
@@ -483,7 +497,11 @@
             'deliveredPerc': $filter('number')(deliveredP, 1),
             'total': response.total
           };
-          
+          if (response.pushNotificationList) {
+            $scope.itemsPush = response.pushNotificationList.map(function(item) {
+              return { idPush: item.IdPushNotification, name: item.Name, title: item.Title, body: item.Body, domain: item.Domain, selected: $scope.selectedPushIds.includes(item.IdPushNotification) };
+            });
+          }
           if (response.total) {
             $scope.donutInfoPush.data = [['delivered', response.delivered], ['notdelivered', response.undelivered], ['sent', response.total - response.delivered - response.undelivered]];
             $scope.donutGraphDataPush = $scope.getDonutChartConfig('#push', $scope.donutInfoPush.colors, $scope.donutInfoPush.data, $scope.donutInfoPush.names, $scope.donutTitle, true, true);
@@ -553,8 +571,23 @@
         }
       });
     };
-
     
+    $scope.onBlurFilter = function(e, isFilterOpen, toggleFilter) {
+      if (isFilterOpen) {
+        if (e.relatedTarget && e.relatedTarget.type.toLowerCase() === 'checkbox') {
+          e.target.focus();
+        } else if (!e.relatedTarget || e.relatedTarget.tagName.toLowerCase() !== 'button') {
+          toggleFilter();
+        }
+      }
+    };
+
+    $scope.togglePushFilter = function() {
+      $scope.showPushFilter = !$scope.showPushFilter;
+      $('#pushList').getNiceScroll().resize(); // eslint-disable-line
+      $('#pushList').scrollTop(0); // eslint-disable-line
+    };
+
     $scope.toggleSmsFilter = function() {
       $scope.showSmsFilter = !$scope.showSmsFilter;
       $('#smsList').getNiceScroll().resize(); // eslint-disable-line
@@ -577,6 +610,7 @@
       });
       $scope.getResults();
     };
+
     $scope.filterSms = function() {
       $scope.toggleSmsFilter();
       $scope.selectedSmsIds = [];
@@ -588,6 +622,28 @@
       $scope.getSmsResults();
     };
 
+    $scope.filterPush = function() {
+      $scope.togglePushFilter();
+      $scope.selectedPushIds = [];
+      angular.forEach($scope.itemsPush, function(value) {
+        if (value.selected) {
+          $scope.selectedPushIds.push(value.idPush);
+        }
+      });
+      $scope.getPushResults();
+    };
+
+    function clearPushData() {
+      $scope.pushData = {
+        'undelivered': 0,
+        'delivered': 0,
+        'undeliveredPerc': 0,
+        'deliveredPerc': 0,
+        'total': 0
+      };
+      var data = [['noinfo', 100]];
+      $scope.donutGraphDataPush = $scope.getDonutChartConfig('#push', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+    };
 
     $scope.clearActionFilters = function() {
       angular.forEach($scope.actions, function(value) {
@@ -609,9 +665,26 @@
       });
     };
 
+    $scope.clearPushFilters = function() {
+      angular.forEach($scope.itemsPush, function(value) {
+        if (_.includes($scope.selectedPushIds)) {
+          value.selected = true;
+        } else {
+          value.selected = false;
+        }
+      });
+    };
+
     $scope.round = function(value) {
       return Math.round(value);
     };
 
+    $scope.onClickTabReport = function(reportType){
+      if ($scope.reportsType !== reportType) {
+        $scope.reportsType = reportType;
+        $scope.changeOption();
+      }
+    };
+    
   }
 })();

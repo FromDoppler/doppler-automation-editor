@@ -10,6 +10,7 @@
     'CHANGE_TYPE',
     'changesManager',
     'COMPONENT_TYPE',
+    'AUTOMATION_TYPE',
     'componentsDataservice',
     'CONDITION_BRANCH',
     'selectedElementsService',
@@ -17,7 +18,7 @@
     '$translate',
   ];
 
-  function dpEditorNewStep(automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE, componentsDataservice,
+  function dpEditorNewStep(automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE, AUTOMATION_TYPE, componentsDataservice,
     CONDITION_BRANCH, selectedElementsService, goToService, $translate) {
     var directive = {
       restrict: 'E',
@@ -33,7 +34,11 @@
     return directive;
 
     function link(scope) {
+      var automationType = automation.getModel().automationType;
       scope.stepOptions = componentsDataservice.getComponents();
+      if (automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION) {
+        updateOptionsOnPushNotificationAutomationType();  
+      }
       scope.showStepOptions = false;
       scope.getReadOnlyLabel = automation.getReadOnlyLabel;
       scope.addNewStep = function(option) {
@@ -76,6 +81,20 @@
           default:
         }
         return toolTipMsg;
+      }
+
+      function updateOptionsOnPushNotificationAutomationType() {
+        var componentsAvailablesForPushNotification = [
+          COMPONENT_TYPE.DELAY,
+          COMPONENT_TYPE.PUSH_NOTIFICATION,
+          COMPONENT_TYPE.GOTO_STEP,
+          COMPONENT_TYPE.CONDITION
+        ];
+        for (var i = 0; i < scope.stepOptions.length; i++) {
+          scope.stepOptions[i].isEnable =
+            componentsAvailablesForPushNotification
+              .indexOf(scope.stepOptions[i].type) > -1;
+        }
       }
 
       function addConditionAndTransferChildren(rawData, index) {

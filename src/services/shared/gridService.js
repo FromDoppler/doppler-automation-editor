@@ -25,7 +25,6 @@
     * deleteRowUrl: url to remove an item
     */
     function initGrid(options) {
-      var headerData = mainMenuData;
       var Model = {};
 
       Model.displayed = [];
@@ -38,7 +37,7 @@
       Model.idListsOrSegmentFilter = options.idListsOrSegmentFilter || 0;
       Model.cantPerPage = 15;
       Model.allCampaignsLoaded = true;
-      Model.dateFormat = headerData.user.lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
+      Model.dateFormat = mainMenuData.user.lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
       Model.currentSort = '';
       Model.firstTimeLoad = true;
       Model.automationId = options.automationId || 0;

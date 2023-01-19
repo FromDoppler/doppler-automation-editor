@@ -1,55 +1,55 @@
 <div class="grayPanel-box grayPanel-box-relative automation-box--container">
-	<div class="reports-elements-container">
-		<h2 id="task_name_title" class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Title' | translate}}</h2>	
-		<p id="task_name_subtitle" class="task-section-subtitle">{{'ScheduledTask_Reports_Subtitle' | translate}}</p>
-	</div>
-	<hr />
-	<div class="reports-elements-container">
-		<ul class="header-totals">
-			<li><span class="header-totals-value">{{result.TotalSentCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_SentEmails' | translate}}</span></li>
-			<li><span class="header-totals-value">{{result.TotalOpenedMailCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_OpenEmails' | translate}}</span></li>
-			<li><span class="header-totals-value">{{result.TotalClickCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_TotalClicks' | translate}}</span></li>
-			<li class="header-totals-lastItem"><span class="header-totals-value">{{result.TotalUnsubscribersCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_Unsubscribe' | translate}}</span></li>
-		</ul>
-	</div>
-</div>
+			<div class="reports-elements-container">
+				<h2 id="task_name_title" class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Title' | translate}}</h2>	
+				<p id="task_name_subtitle" class="task-section-subtitle">{{'ScheduledTask_Reports_Subtitle' | translate}}</p>
+			</div>
+			<hr />
+			<div class="reports-elements-container">
+				<ul class="header-totals">
+					<li><span class="header-totals-value">{{result.TotalSentCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_SentEmails' | translate}}</span></li>
+					<li><span class="header-totals-value">{{result.TotalOpenedMailCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_OpenEmails' | translate}}</span></li>
+					<li><span class="header-totals-value">{{result.TotalClickCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_TotalClicks' | translate}}</span></li>
+					<li class="header-totals-lastItem"><span class="header-totals-value">{{result.TotalUnsubscribersCount}}</span><br /><br /><span class="header-totals-title">{{'ScheduledTask_Reports_Grid_Header_Unsubscribe' | translate}}</span></li>
+				</ul>
+			</div>
+		</div>
 
-<div class="grayPanel-box grayPanel-box-relative grayPanelBox-secondary">
-	<div class="loading-icon position--center" ng-show="reportsLoading"></div>			
-	<div ng-hide="reportsLoading">
-		<div class="reports-elements-container">
-			<h2 id="H1" class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Grid_Title' | translate}}</h2>
-			<p id="P1" class="task-section-subtitle">{{'ScheduledTask_Reports_Grid_Subtitle' | translate}}</p>
+		<div class="grayPanel-box grayPanel-box-relative grayPanelBox-secondary">
+			<div class="loading-icon position--center" ng-show="reportsLoading"></div>			
+			<div ng-hide="reportsLoading">
+				<div class="reports-elements-container">
+					<h2 id="H1" class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Grid_Title' | translate}}</h2>
+					<p id="P1" class="task-section-subtitle">{{'ScheduledTask_Reports_Grid_Subtitle' | translate}}</p>
+				</div>
+				<hr />
+				<div class="reports-elements-container">
+					<table class="table" > <!-- table -->
+						<thead>
+							<tr class="header">
+								<th>{{'ScheduledTask_Reports_Grid_Day' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_Sent' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_Delivered' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_Open' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_Clicks' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_Unsubscriber' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_Shared' | translate}}</th>
+								<th>{{'ScheduledTask_Reports_Grid_CTOR' | translate}}</th>
+							</tr>
+						</thead>
+						<tbody >
+							<tr ng-repeat="item in result.ItemsGroupedByDate" ng-class-even="'altRow'">
+								<td ng-if="selectedOption.id == 0 || selectedOption.id == 1">{{item.Date | date: dateFormat}}</td>
+								<td ng-if="selectedOption.id == 2 || selectedOption.id == 3">{{item.Date | date: 'MM/yyyy'}}</td>
+								<td class="table-column-fixed">{{item.SentCount}}</td>
+								<td class="table-column-fixed">{{item.DeliveryCount}}</td>
+								<td class="table-column-fixed">{{item.OpenedMailCount}}</td>
+								<td class="table-column-fixed">{{item.ClickCount}}</td>
+								<td class="table-column-fixed">{{item.UnsubscribersCount}}</td>
+								<td class="table-column-fixed">{{item.SocialUniqueClickCount}}</td>
+								<td class="table-column-fixed">{{item.ClickThroughOpenRate == 0 ? 0 : (item.ClickThroughOpenRate | number : 2)}}</td>
+							</tr>
+						</tbody>
+					</table><!-- table -->
+				</div>
+			</div>
 		</div>
-		<hr />
-		<div class="reports-elements-container">
-			<table class="table">
-				<thead>
-					<tr class="header">
-						<th>{{'ScheduledTask_Reports_Grid_Day' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_Sent' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_Delivered' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_Open' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_Clicks' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_Unsubscriber' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_Shared' | translate}}</th>
-						<th>{{'ScheduledTask_Reports_Grid_CTOR' | translate}}</th>
-					</tr>
-				</thead>
-				<tbody >
-					<tr ng-repeat="item in result.ItemsGroupedByDate" ng-class-even="'altRow'">
-						<td ng-if="selectedOption.id == 0 || selectedOption.id == 1">{{item.Date | date: dateFormat}}</td>
-						<td ng-if="selectedOption.id == 2 || selectedOption.id == 3">{{item.Date | date: 'MM/yyyy'}}</td>
-						<td class="table-column-fixed">{{item.SentCount}}</td>
-						<td class="table-column-fixed">{{item.DeliveryCount}}</td>
-						<td class="table-column-fixed">{{item.OpenedMailCount}}</td>
-						<td class="table-column-fixed">{{item.ClickCount}}</td>
-						<td class="table-column-fixed">{{item.UnsubscribersCount}}</td>
-						<td class="table-column-fixed">{{item.SocialUniqueClickCount}}</td>
-						<td class="table-column-fixed">{{item.ClickThroughOpenRate == 0 ? 0 : (item.ClickThroughOpenRate | number : 2)}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>

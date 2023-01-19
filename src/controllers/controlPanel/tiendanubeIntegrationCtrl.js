@@ -15,12 +15,13 @@
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
     'BASIC_FIELD',
-    'TIENDANUBE_FIELD_TYPE'
+    'TIENDANUBE_FIELD_TYPE',
+    'FIELD_TYPE'
   ];
 
   function tiendanubeIntegrationCtrl($scope, $translate, ModalService,
     tiendanubeService, $timeout, INTEGRATION_CODES, IMPORTING_STATE,
-    IMPORTING_STATE_STR, BASIC_FIELD, TIENDANUBE_FIELD_TYPE) {
+    IMPORTING_STATE_STR, BASIC_FIELD, TIENDANUBE_FIELD_TYPE, FIELD_TYPE) {
     var vm = this;
     vm.isLoading = true;
     vm.connectionError = false;
@@ -36,6 +37,7 @@
     vm.isLoadingTiendanubeFields = false;
     vm.showMapping = false;
     vm.isMapping = false;
+    vm.newField = null;
     vm.integrationData = {
       'clientName': 'Doppler',
       'clientDomain': null,
@@ -48,6 +50,7 @@
       vm.listPlaceholder = $translate.instant('tiendanube_integration.connected.select_list_placeholder');
       vm.getStatus(true);
       loadDopplerFields();
+      loadFieldTypes();
     });
 
     vm.getStatus = function(doPolling) {
@@ -64,6 +67,7 @@
               vm.allUserList === undefined ? vm.getUserList() : filterAvailableUserLists();
               vm.allTiendanubeEntitiesList === undefined ? vm.getTiendanubeEntitiesList() : filterAvailableEntities();
               vm.rfm = result.rfm;
+              vm.autoSyncDisabled = result.model.SyncDisabled;
             }
             if (!!vm.integratedLists && vm.integratedLists.length && isAnyImportingList(vm.integratedLists)
               && (doPolling !== undefined || doPolling)){
@@ -76,10 +80,12 @@
             vm.connectionError = true;
             vm.errorMsg = $translate.instant('tiendanube_integration.disconnected.connection_error');
           }
+          vm.newField = newFieldDefaults();
           vm.isLoading = false;
           vm.connected = !!result.model;
           vm.integrationData.clientDomain = result.urlBase;
           vm.integrationData.authRedirectUri = result.urlCallback;
+          vm.webAppUrl = result.webAppUrl;
         });
     };
 
@@ -220,7 +226,6 @@
     };
 
     vm.showMappingSection = function(fieldsMapped){
-      vm.availablesFields = vm.userFields;
       vm.isLoadingTiendanubeFields = true;
 
       var list = _.find(vm.allUserList, function(list){
@@ -253,14 +258,6 @@
         .catch(function() {
           showGeneralMappingError();
         });
-    };
-
-    vm.setAvailablesFields = function(){
-      vm.availablesFields = _.filter(vm.userFields, function(field){
-        return !_.find(vm.tiendanubeFields, function(selectedField){
-          return selectedField.idDopplerField === field.idField && selectedField.idDopplerField !== 0;
-        });
-      });
     };
 
     vm.mapFields = function() {
@@ -499,12 +496,18 @@
           if (listResult.length) {
             vm.userFields = listResult;
             vm.userFields.unshift({
+              idField: -1,
+              name: $translate.instant('tiendanube_integration.mapping.add_field_option'),
+              DataType: 0,
+              Value: null,
+              DopplerFieldTypeId: -1
+            });
+            vm.userFields.unshift({
               idField: 0,
               name: $translate.instant('tiendanube_integration.mapping.skip_column_option'),
               DataType: 0,
               Value: null
             });
-            vm.availablesFields = vm.userFields;
             vm.isLoading = false;
           }
         })
@@ -513,10 +516,88 @@
         });
     }
 
-    $scope.$on('ngRepeatFinished', function() {
-      vm.setAvailablesFields();
-    });
+    function loadFieldTypes() {
+      tiendanubeService.getFieldTypes()
+        .then(function (types) {
+          vm.fieldTypes = types;
+        })
+        .catch(function () {
+          showGeneralMappingError();
+        });
+    }
 
+    vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
+      return function (field) {
+        return (field.idField === 0 || field.idField === -1)
+          || (field.idField === dopplerFieldId)
+          || ((dopplerFieldTypeId != -1 ? field.type == dopplerFieldTypeId: true) && fieldNotUsed(field.idField));
+      };
+    }
+
+    function fieldNotUsed(idField) {
+      return !_.find(vm.tiendanubeFields, function (selectedField) {
+        return selectedField.idDopplerField === idField
+      });
+    }
+
+    vm.fieldChange = function (index, value) {
+      if (vm.newField.index != index && value == -1) {
+        vm.newField = newFieldDefaults();
+        vm.newField.index = index;
+
+        if (vm.tiendanubeFields[index].DopplerFieldTypeId != -1) {
+          vm.newField.dataType = getFieldDataType(index);
+        }
+        else {
+          vm.newField.typeDisabled = false;
+        }
+        
+        _.forEach(vm.tiendanubeFields, function (field, fIndex) {
+          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+        });
+      }
+      else if (vm.newField.index == index && value != -1) {
+        vm.newField = newFieldDefaults();
+      }
+    }
+
+    function getFieldDataType(index) {
+      var fieldTypeId = vm.tiendanubeFields[index].DopplerFieldTypeId;
+      var type = _.find(vm.fieldTypes, function (ftype) {
+        return ftype.id === fieldTypeId;
+      });
+      return type ? type.id : FIELD_TYPE.STRING;
+    }
+
+    vm.createField = function (index) {
+      if (vm.newField.name) {
+        tiendanubeService.createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+          .then(function (res) {
+            if (res.success) {
+              vm.userFields.push(res.field);
+              vm.tiendanubeFields[index].idDopplerField = res.field.idField;
+              vm.newField = newFieldDefaults();
+            }
+            else {
+              vm.newField.error = res.errorMessage;
+            }
+          })
+      }
+      else {
+        vm.newField.error = $translate.instant('tiendanube_integration.mapping.new_field.required_message');
+      }
+    }
+
+    function newFieldDefaults() {
+      return {
+        index: null,
+        name: '',
+        dataType: FIELD_TYPE.STRING,
+        isPrivate: "true",
+        error: null,
+        typeDisabled: true
+      };
+    }
   }
 })();
 

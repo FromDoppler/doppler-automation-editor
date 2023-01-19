@@ -1,78 +1,150 @@
-<section ng-if="!allTemplates && !isLoading && !templates.length" class="section--content background--white section--grid-empty flex-grid-v-center">
-	<div class="wrapper text--center components--center wrapper--default">
-		<img src="../../images/icon-templates.svg" class="icon" />
-		<h1>{{ 'templates_title' | translate }}</h1>
-		<p class="description">{{ 'templates_empty.description' | translate }} <br /><a class="link--default"  href="{{ 'templates_empty.description_link_url' | translate }}" target="_blank">{{ 'templates_empty.description_link_text' | translate }}</a></p>
-		<a class="button button--primary" ng-click="createTemplate()">{{ 'templates_create' | translate }}</a>
-	</div>
-</section>
-<section ng-if="!isLoading && templates.length" class="section--content background--white section--templates" id="templates-container">
-	<div class="wrapper wrapper--default">
-		<header ng-if="!isPublicTemplatesActive">
-			<div>
-				<h2>{{ 'templates_title' | translate }}</h2>
-				<p class="small">{{ privatesDescription }}</p>
-			</div>
-			<a ng-click="createTemplate()" class="button button--primary">{{ 'templates_create' | translate }}</a>
-		</header>
-		<div class="breadcrum" ng-if="isPublicTemplatesActive && !allTemplates">
-			<a ng-click="viewPrivateTemplates()">{{ 'templates_title' | translate }}</a> | <span> {{ 'templates_publics_breadcrum' | translate }}</span>
+<div class="dp-library">
+	<section ng-if="inTemplateChoosingMode() && !isLoading && !templates.length"
+		class="section--content background--white section--grid-empty flex-grid-v-center">
+		<div class="wrapper text--center components--center wrapper--default">
+			<img src="../../images/icon-templates.svg" class="icon" />
+			<h1>{{ 'templates_title' | translate }}</h1>
+			<p class="description">
+				{{ 'templates_empty.description' | translate }}
+				<br />
+				<a class="link--default" href="{{ 'templates_empty.description_link_url' | translate }}" target="_blank">{{ 'templates_empty.description_link_text' | translate }}</a>
+			</p>
+			<a class="button button--primary" ng-click="createTemplate()">{{ 'templates_create' | translate }}</a>
 		</div>
-		<header ng-if="isPublicTemplatesActive">
-			<div>
-				<h2>{{ allTemplates ? 'templates_title' : 'templates_public_title' | translate }}</h2>
-				<p class="small">{{ publicsDescription }}</p>
-			</div>
-			<dropdown class="dropdown dropdown--large" id="filter-categories" list="categories" ng-model="categorySelected.IdTemplateCategory" ng-change="filterPublicTemplates()" property="Name" id-value="IdTemplateCategory"></dropdown>
-		</header>
-		<div class="items" infinite-scroll="onScroll" infinite-scroll-element="editorTemplate" infinite-scroll-distance="200">
-			<div class="item" ng-repeat="template in templates">
-				<div class="img-container">
-					<img ng-src="{{ getNoCacheUrl(template.TemplatePreviewUrl) }}" poll="true" show-eye="true" dp-on-error-src="../../../img/asyncPreview/container_280x280.svg"/>
-          <div class="hover-actions">
-            <a class="icon-maximize" ng-click="openPreview(template)"></a>
-            <a ng-if="allTemplates" class="button button--light button--small-alt" ng-click="useTemplateAsIs(template)">{{ 'templates_card.use_as_is' | translate }}</a>
-            <a ng-if="(!isPublicTemplatesActive || allTemplates) && isCampaignsAvailable" class="button button-outline--white button--small-alt" ng-click="newCampaign(template)">{{allTemplates ? 'templates_card.select_and_edit' : 'templates_card.new_campaign' | translate }}</a>
-            <a ng-if="(!isPublicTemplatesActive || allTemplates) && !isCampaignsAvailable" class="button button-outline--white button--small-alt" ng-click="editTemplate(template.IdTemplate)">{{ 'templates_card.edit' | translate }}</a>
-            <a ng-if="isPublicTemplatesActive && !allTemplates" class="button button-outline--white button--small-alt" ng-click="selectTemplate(template.IdTemplate)">{{ 'templates_card.select' | translate }}</a>
-          </div>
+	</section>
+</div>
+
+<div class="dp-library">
+	<section ng-if="!isLoading && templates.length" class="section--content background--white section--templates"
+		id="templates-container">
+		<div class="wrapper wrapper--default">
+			<header class="hero-banner">
+				<div class="dp-container">
+					<div class="dp-rowflex">
+						<div class="col-sm-12">
+							<nav ng-if="inTemplateCreationMode()" class="dp-breadcrumb">
+								<ul>
+									<li><a ng-click="viewPrivateTemplates()">{{ 'templates_title' | translate }}</a></li>
+									<li><span>{{ 'templates_publics_breadcrum' | translate }}</span></li>
+								</ul>
+							</nav>
+							<h2 ng-if="inTemplateChoosingMode() || inAutomationMode()">{{ 'templates_title' | translate }}</h2>
+							<h2 ng-if="inTemplateCreationMode()">{{ 'templates_public_title' | translate }}</h2>
+						</div>
+						<div class="col-sm-7">
+							<p ng-if="inTemplateChoosingMode()" class="small">{{ privatesDescription }}</p>
+							<p ng-if="inAutomationMode() || inTemplateCreationMode()" class="small">{{ publicsDescription }}</p>
+						</div>
+						<div ng-if="inTemplateChoosingMode()" class="col-sm-5 text-align--right">
+							<a ng-click="createTemplate()" class="dp-button button-medium primary-green">{{ 'templates_create' | translate }}</a>
+						</div>
+						<div ng-if="inAutomationMode() || inTemplateCreationMode()" class="col-sm-5 align-end-dropdown">
+							<dropdown class="dropdown dropdown--large" id="filter-categories" list="categories"
+								ng-model="categorySelected.IdTemplateCategory" ng-change="filterPublicTemplates()"
+								property="Name" id-value="IdTemplateCategory"></dropdown>
+						</div>
+					</div>
 				</div>
-				<div class="container">
-					<hr />
-					<p class="template-name--container" data-static-tooltip="{{ template.Name }}">
-						<span class="template-name">{{ template.Name }}</span>
-					</p>
-					<div ng-if="!isPublicTemplatesActive">
-						<p class="small">
-							{{ formatDate(template.CreatedAt) | date : dateFormat }} <span ng-if="!selectButton">- {{ template.CampaignsCount }} {{'templates_total_campaigns' | translate }}</span>
+			</header>
+			<div class="items" infinite-scroll="onScroll" infinite-scroll-element="editorTemplate"
+				infinite-scroll-distance="200">
+				<div class="item" ng-repeat="template in templates">
+					<div ng-if="template.EditorType === EMAIL_EDITOR_TYPE.UNLAYER"
+						class="dp-ribbon dp-ribbon-top-left dp-ribbon-violet">
+						<span>Beta</span>
+					</div>
+					<div class="img-container">
+						<img ng-src="{{ getNoCacheUrl(template.TemplatePreviewUrl) }}" poll="true" show-eye="true"
+							dp-on-error-src="../../../img/asyncPreview/container_280x280.svg" />
+						<div class="hover-actions">
+							<a class="icon-maximize" ng-click="openPreview(template)"></a>
+							<!-- Take into account Automation before enable it for Unlayer -->
+							<a ng-if="template.EditorType !== EMAIL_EDITOR_TYPE.UNLAYER && inAutomationMode()"
+								class="button button--light button--small-alt" ng-click="useTemplateAsIs(template)">
+								{{ 'templates_card.use_as_is' | translate }}
+							</a>
+							<!-- Take into account Automation before enable it for Unlayer -->
+							<a ng-if="inAutomationMode() && isCampaignsAvailable"
+								class="button button-outline--white button--small-alt"
+								ng-click="newAutomationCampaign(template)">
+								{{ 'templates_card.select_and_edit' | translate }}
+							</a>
+							<a ng-if="inTemplateChoosingMode() && isCampaignsAvailable"
+								class="button button-outline--white button--small-alt"
+								href="{{ getCreateCampaignFromTemplateUrl(template.IdTemplate, template.EditorType) }}">
+								{{ 'templates_card.new_campaign' | translate }}
+							</a>
+							<a ng-if="inTemplateChoosingMode() && !isCampaignsAvailable"
+								class="button button-outline--white button--small-alt"
+								href="{{ getEditTemplateUrl(template.IdTemplate, template.EditorType) }}">
+								{{ 'templates_card.edit' | translate }}
+							</a>
+							<a ng-if="inTemplateCreationMode()"
+								class="button button-outline--white button--small-alt"
+								ng-click="selectTemplate(template.IdTemplate, template.EditorType)">
+								{{ 'templates_card.select' | translate }}
+							</a>
+						</div>
+					</div>
+					<div class="container">
+						<hr />
+						<p class="template-name--container" data-static-tooltip="{{ template.Name }}">
+							<span class="template-name">{{ template.Name }}</span>
 						</p>
-						<span class="bulls" ng-if="!disableMenu" ng-click="template.isMenuOpen=true;">&bull; &bull; &bull;</span>
-						<ul class="menu" id="{{template.IdTemplate}}" ng-if="template.isMenuOpen" click-outside="closeMenu(template)"  ng-class="{open: template.isMenuOpen}">
-							<li ng-click="editTemplate(template.IdTemplate)"><span class="container"><span class="icon-edit"></span></span> <span class="text">{{ 'templates_card.edit' | translate }}</span></li>
-							<li ng-click="renameTemplate(template)"><span class="container"><span class="icon-rename"></span></span><span class="text">{{ 'templates_card.rename' | translate }}</span></li>
-							<li ng-click="viewOnline(template.ViewOnlineUrl)">
-								<span class="titip-top titip-fade" ng-if="data.user.plan.planType === 'free'">
-									<span class="disabled">
+						<div ng-if="inTemplateChoosingMode()">
+							<p class="small">
+								{{ formatDate(template.CreatedAt) | date : dateFormat }}
+								<span ng-if="!selectButton">
+									- {{ template.CampaignsCount }} {{ 'templates_total_campaigns' | translate }}
+								</span>
+							</p>
+							<span class="bulls" ng-if="!disableMenu" ng-click="template.isMenuOpen=true;">&bull; &bull; &bull;</span>
+							<ul class="menu" id="{{template.IdTemplate}}" ng-if="template.isMenuOpen"
+								click-outside="closeMenu(template)" ng-class="{open: template.isMenuOpen}">
+								<li>
+									<a href="{{ getEditTemplateUrl(template.IdTemplate, template.EditorType) }}">
+										<span class="container"><span class="icon-edit"></span></span>
+										<span class="text">{{ 'templates_card.edit' | translate }}</span>
+									</a>
+								</li>
+								<li ng-click="renameTemplate(template)">
+									<span class="container"><span class="icon-rename"></span></span><span
+										class="text">{{ 'templates_card.rename' | translate }}</span>
+								</li>
+								<li ng-if="template.EditorType !== EMAIL_EDITOR_TYPE.UNLAYER"
+									ng-click="viewOnline(template.ViewOnlineUrl)">
+									<span class="titip-top titip-fade" ng-if="scope.user.plan.planType === 'free'">
+										<span class="disabled">
+											<span class="container"><span class="icon-view"></span></span>
+											<span class="text">{{ 'templates_card.view_online' | translate }}</span>
+										</span>
+										<span class="titip-content text-sm">
+											<span ng-bind-html="'templates_card.viewonline_tooltip.text' | translate"></span>
+											<a href="/ControlPanel/AccountPreferences/PreUpgrade?origin=my_templates">
+												{{ 'templates_card.viewonline_tooltip.link' | translate }}
+											</a>
+										</span>
+									</span>
+									<span ng-if="user.plan.planType !== 'free'">
 										<span class="container"><span class="icon-view"></span></span>
 										<span class="text">{{ 'templates_card.view_online' | translate }}</span>
 									</span>
-									<span class="titip-content text-sm">
-										<span ng-bind-html="'templates_card.viewonline_tooltip.text' | translate"></span>
-										<a href="/ControlPanel/AccountPreferences/PreUpgrade?origin=my_templates">{{ 'templates_card.viewonline_tooltip.link' | translate }}</a>
-									</span>
-								</span>
-								<span ng-if="data.user.plan.planType !== 'free'">
-									<span class="container"><span class="icon-view"></span></span>
-									<span class="text">{{ 'templates_card.view_online' | translate }}</span>
-								</span>
-							</li>
-							<li ng-click="duplicateTemplate(template)"><span class="container"><span class="icon-duplicate"></span></span><span class="text">{{ 'templates_card.duplicate' | translate }}</span></li>
-							<li ng-click="deleteTemplate(template)"><span class="container"><span class="icon-delete"></span></span><span class="text">{{ 'templates_card.delete' | translate }}</span></li>
-						</ul>
+								</li>
+								<li ng-if="template.EditorType !== EMAIL_EDITOR_TYPE.UNLAYER"
+									ng-click="duplicateTemplate(template)">
+									<span class="container"><span class="icon-duplicate"></span></span>
+									<span class="text">{{ 'templates_card.duplicate' | translate }}</span>
+								</li>
+								<li ng-click="deleteTemplate(template)">
+									<span class="container"><span class="icon-delete"></span></span>
+									<span class="text">{{ 'templates_card.delete' | translate }}</span>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+</div>
 <div ng-show="isLoading" class="loading--container components--center" dp-partial="angularjs/partials/shared/loading.html"></div>

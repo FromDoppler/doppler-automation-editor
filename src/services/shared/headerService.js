@@ -31,6 +31,7 @@
         deferred.resolve(mainMenuData);
         return deferred.promise;
       } else { //eslint-disable-line
+        // TODO: avoid this request (it is happening in Reports)
         return $q(function(resolve, reject) {
           var xhr = new XMLHttpRequest(); //eslint-disable-line no-undef
           xhr.open('GET', domain + 'Header/GetHeaderData', true);

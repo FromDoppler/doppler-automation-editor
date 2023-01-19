@@ -45,6 +45,7 @@
           vm.countries = result.countries;
           vm.isLoading = false;
           vm.connected = !!result.model;
+          vm.webAppUrl = result.webAppUrl;
         });
     };
 

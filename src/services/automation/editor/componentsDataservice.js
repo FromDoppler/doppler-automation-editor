@@ -60,8 +60,8 @@
         hasWarning: !settings.hasSmsCredits //does not hava a sms credit is a warnig to show
       }, {
         label: 'push_icon',
-        svg_path: '/../images/automation-push.svg', // eslint-disable-line
-        svg_hover_path: '/../images/automation-push-hover.svg', // eslint-disable-line
+        svg_path: '/../images/automation-push_notification.svg', // eslint-disable-line
+        svg_hover_path: '/../images/automation-push_notification-hover.svg', // eslint-disable-line
         type: COMPONENT_TYPE.PUSH_NOTIFICATION,
         isEnable: settings.isPushEnable && automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION
       }, {
@@ -69,7 +69,7 @@
         svg_path: '/../images/automation-goto.svg', // eslint-disable-line
         svg_hover_path: '/../images/automation-goto-hover.svg', // eslint-disable-line
         type: COMPONENT_TYPE.GOTO_STEP,
-        isEnable: settings.isGotoStepEnabled
+        isEnable: true
       }];
     }
   }

@@ -25,7 +25,7 @@
     return directive;
 
     function link(scope) {
-      scope.componentTypes = ['delay', 'campaign', 'action', 'condition', 'sms', 'push_notification', 'goto'];
+      scope.componentTypes = ['delay', 'campaign', 'action', 'condition', 'sms', 'push_notification', 'goto', 'initial_condition'];
       scope.isOpen = false;
       scope.warningsSteps = warningsStepsService.getAllWarningsSteps();
       scope.warningStepsCount = warningsStepsService.getWarningsStepsCount;
@@ -91,6 +91,10 @@
 
         return label;
       };
+
+      scope.hasBlockedList = function() {
+        return automation.hasBlockedList();
+      }
     }
   }
 })();

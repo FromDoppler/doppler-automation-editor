@@ -1,28 +1,28 @@
 {
   "magento_integration": {
-    "name": "Magento",
+    "name": "Adobe Commerce",
     "disconnected": {
-      "title": "Connect Doppler with your Magento store",
-      "subtitle": "Enter the following data from your Magento store to connect it with Doppler. Therefore, you can automatically synchronize your contacts and also add the products of your store into your Emails using the Template Editor. Do you have any doubts? Press ",
+      "title": "Connect Doppler with your Adobe Commerce store",
+      "subtitle": "Enter the following data from your Adobe Commerce store to connect it with Doppler. Therefore, you can automatically synchronize your contacts and also add the products of your store into your Emails using the Template Editor. Do you have any doubts? Press ",
       "help_text": "Help",
-      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-your-magento-account-with-doppler/",
+      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-your-adobe-commerce-account",
       "store": "URL of your store",
       "app_key": "Access Token",
-      "store_placeholder": "Put the URL of your Magento store",
-      "app_key_placeholder": "Enter your Magento Access Token",
-      "connection_error": "Oops! We could not connect with your Magento store please try again later."
+      "store_placeholder": "Put the URL of your Adobe Commerce store",
+      "app_key_placeholder": "Enter your Adobe Commerce Access Token",
+      "connection_error": "Oops! We could not connect with your Adobe Commerce store please try again later."
     },
     "connected": {
       "title": "Synchronize data entities with Subscriber Lists",
       "subtitle_list_count": "You currently have {{availableLists}} Lists. Be aware that you can sync Lists manually whenever you want.",
-      "subtitle": "Select the Magento entity and the Doppler List you wish to synchronize. Contacts belonging to that entity will be automatically imported into the List.",
+      "subtitle": "Select the Adobe Commerce entity and the Doppler List you wish to synchronize. Contacts belonging to that entity will be automatically imported into the List.",
       "store": "Connected Store Url:",
       "disconnect": "Disconnect",
       "synchronize": "Synchronize",
       "select_list": "Buyers List",
       "select_list_placeholder": "Select the List to synchronize",
       "select_entity_placeholder": "Select the Entity to synchronize",
-      "selected_list_title": "List created through Magento",
+      "selected_list_title": "List created through Adobe Commerce",
       "selected_list_subtitle": "At this moment you have 1 List. Keep in mind that you can manually synchronize it any time you want.",
       "grid_title": "Synchronized data entities",
       "list_name_grid": "List Name",
@@ -41,26 +41,34 @@
       },
       "disconnect_popup": {
         "title": "Are you sure you want to disconnect this integration?",
-        "description": "If you disconnect, your List will no longer receive new Subscribers from your Magento account and the Automations associated with the integration will be paused. Anyhow, you won't lose the contacts synced up to this moment."
+        "description": "If you disconnect, your List will no longer receive new Subscribers from your Adobe Commerce account and the Automations associated with the integration will be paused. Anyhow, you won't lose the contacts synced up to this moment."
       }
     },
     "mapping": {
       "title": "Map fields",
-      "subtitle": "Link the fields of your entity with those of the Subscriber List.",
-      "selected_data_entity": "Selected data entity",
-      "selected_subscriber_list": "Selected Subscriber List",
+      "subtitle": "Take benefit of the data from your contacts in other apps to expand your Doppler list. If you can’t find the same field among the options you can personalize it or omit it.",
+      "selected_data_entity": "Contact source",
+      "selected_subscriber_list": "Doppler destination",
       "data_entity_field": "Field",
       "select_field_placeholder": "Select field...",
       "skip_column_option": "Skip Column",
       "empty_email_error_message": "Ouch! There must be at least one Email field selected.",
       "back": "Back",
-      "next": "Next"
+      "next": "Next",
+      "add_field_option": "Create custom field",
+      "new_field": {
+        "public_opt": "Public",
+        "private_opt": "Private",
+        "button": "Create",
+        "required_message": "Ouch! This field is required"
+      }
+
     },
     "status": {
-      "title": "Your Magento store is already connected to Doppler",
-      "subtitle": "Your Contacts were integrated automatically from your store by the Doppler extension for Magento. You can also import your products into Email Templates and create Abandoned Cart and Product Retargeting Automations. Any doubts? Press ",
+      "title": "Your Adobe Commerce store is already connected to Doppler",
+      "subtitle": "Your Contacts were integrated automatically from your store by the Doppler extension for Adobe Commerce. You can also import your products into Email Templates and create Abandoned Cart and Product Retargeting Automations. Any doubts? Press ",
       "help_text": "Help",
-      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-your-magento-account-with-doppler/",
+      "help_link": "https://help.fromdoppler.com/en/how-to-integrate-your-adobe-commerce-account",
       "back": "Back"
     }
   }

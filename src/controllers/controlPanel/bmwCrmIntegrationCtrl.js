@@ -15,12 +15,13 @@
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
     'BASIC_FIELD',
-    'INTEGRATION_SOURCE_TYPE'
+    'INTEGRATION_SOURCE_TYPE',
+    'FIELD_TYPE'
   ];
 
   function bmwCrmIntegrationCtrl($scope, $translate, ModalService,
     bmwCrmService, $timeout, INTEGRATION_CODES, IMPORTING_STATE,
-    IMPORTING_STATE_STR, BASIC_FIELD) {
+    IMPORTING_STATE_STR, BASIC_FIELD, FIELD_TYPE) {
     var vm = this;
     vm.isLoading = true;
     vm.importingListDropdown = false;
@@ -43,11 +44,13 @@
     vm.bmwCrmFields = [];
     vm.showMapping = false;
     vm.isMapping = false;
+    vm.newField = null;
 
     $translate.onReady().then(function(){
       vm.synchronizeCampaings();
       vm.getStatus(true);
       loadDopplerFields();
+      loadFieldTypes();
     });
 
     vm.getStatus = function(doPolling){
@@ -63,6 +66,7 @@
               vm.lastSyncDate = result.model.LastSynchDate;
               vm.daysToDisconnection = result.model.DaysToDisconnection;
               vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
+              vm.autoSyncDisabled = result.model.SyncDisabled;
             }
             if (vm.integratedLists.length && isAnyImportingList(vm.integratedLists)
               && (doPolling !== undefined || doPolling)) {
@@ -79,7 +83,9 @@
             vm.connectionError = true;
             vm.errorMsg = $translate.instant('bmwcrm_integration.disconnected.connection_error');
           }
+          vm.newField = newFieldDefaults();
           vm.isLoading = false;
+          vm.webAppUrl = result.webAppUrl;
         });
     };
 
@@ -183,7 +189,6 @@
     };
 
     vm.showMappingSection = function(fieldsMapped) {
-      vm.availablesFields = vm.userFields;
       vm.isLoadingFields = true;
 
       var list = _.find(vm.allUserList, function(list) {
@@ -208,15 +213,6 @@
       vm.showMapping = true;
       vm.isLoadingFields = false;
       vm.isLoading = false;
-    };
-
-    vm.setAvailablesFields = function(){
-      vm.availablesFields = _.filter(vm.userFields, function(field){
-        return !_.find(vm.bmwCrmFields, function(selectedField){
-          return selectedField.idDopplerField === field.idField
-                && selectedField.idDopplerField !== 0;
-        });
-      });
     };
 
     vm.goBack = function(){
@@ -422,12 +418,18 @@
               return field.idField !== BASIC_FIELD.EMAIL;
             });
             vm.userFields.unshift({
+              idField: -1,
+              name: $translate.instant('bmwcrm_integration.mapping.add_field_option'),
+              DataType: 0,
+              Value: null,
+              DopplerFieldTypeId: -1
+            });
+            vm.userFields.unshift({
               idField: 0,
               name: $translate.instant('bmwcrm_integration.mapping.skip_column_option'),
               DataType: 0,
               Value: null
             });
-            vm.availablesFields = vm.userFields;
             vm.isLoading = false;
           }
         })
@@ -503,9 +505,80 @@
       });
     }
 
-    $scope.$on('ngRepeatFinished', function(){
-      vm.setAvailablesFields();
-    });
+    function loadFieldTypes() {
+      bmwCrmService.getFieldTypes()
+        .then(function (types) {
+          vm.fieldTypes = types;
+        })
+        .catch(function () {
+          showGeneralMappingError();
+        });
+    }
+
+    vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
+      return function (field) {
+        return (field.idField === 0 || field.idField === -1)
+          || (field.idField === dopplerFieldId)
+          || (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField));
+      };
+    }
+
+    function fieldNotUsed(idField) {
+      return !_.find(vm.bmwCrmFields, function (selectedField) {
+        return selectedField.idDopplerField === idField
+      });
+    }
+
+    vm.fieldChange = function (index, value) {
+      if (vm.newField.index != index && value == -1) {
+        vm.newField = newFieldDefaults();
+        vm.newField.index = index;
+        vm.newField.dataType = getFieldDataType(index);
+        _.forEach(vm.bmwCrmFields, function (field, fIndex) {
+          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+        });
+      }
+      else if (vm.newField.index == index && value != -1) {
+        vm.newField = newFieldDefaults();
+      }
+    }
+
+    function getFieldDataType(index) {
+      var fieldTypeId = vm.bmwCrmFields[index].DopplerFieldTypeId;
+      var type = _.find(vm.fieldTypes, function (ftype) {
+        return ftype.id === fieldTypeId;
+      });
+      return type ? type.id : FIELD_TYPE.STRING;
+    }
+
+    vm.createField = function (index) {
+      if (vm.newField.name) {
+        bmwCrmService.createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+          .then(function (res) {
+            if (res.success) {
+              vm.userFields.push(res.field);
+              vm.bmwCrmFields[index].idDopplerField = res.field.idField;
+              vm.newField = newFieldDefaults();
+            }
+            else {
+              vm.newField.error = res.errorMessage;
+            }
+          })
+      }
+      else {
+        vm.newField.error = $translate.instant('bmwcrm_integration.mapping.new_field.required_message');
+      }
+    }
+
+    function newFieldDefaults() {
+      return {
+        index: null,
+        name: '',
+        dataType: FIELD_TYPE.STRING,
+        isPrivate: "true",
+        error: null
+      };
+    }
   }
 })();
 

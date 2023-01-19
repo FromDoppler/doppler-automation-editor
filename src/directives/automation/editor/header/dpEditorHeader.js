@@ -20,9 +20,8 @@
     return directive;
 
     function controller($scope) {
-      console.log('automation', automation)
       $scope.rootComponent = automation.getModel();
-      console.log('$scope.rootComponent', $scope.rootComponent)
+
       $scope.skipTemplateSelection = function() {
         $rootScope.$broadcast('TEMPLATES.CLOSE_TEMPLATES_VIEW');
       };

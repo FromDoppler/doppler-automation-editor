@@ -6,8 +6,8 @@
   </div>
 
   <div class="uid-label-component">{{component.uid}}</div>
-  <img class="image-complete" src="/../images/automation-push.svg" />
-  <img class="image-incomplete" src="/../images/automation-push-grey.svg" />
+  <img class="image-complete" src="/../images/automation-push_notification.svg" />
+  <img class="image-incomplete" src="/../images/automation-push_notification-grey.svg" />
   <p class="container-name">
     <span ng-show="!component.pushMessageTitle && !component.pushMessageBody" ng-bind-html="'automation_editor.canvas.push_placeholder' | translate"></span>
     <span ng-show="component.pushMessageTitle || component.pushMessageBody">
@@ -21,4 +21,11 @@
       <strong ng-if="component.pushMessageBody">{{ component.pushMessageBody }}</strong>
     </span>
   </p>
+  <p class="container-name name">
+    <strong><ellipsis-with-tooltip text="component.name" css-class="multiline medium" multi-line="true"></ellipsis-with-tooltip></strong>
+  </p>
+  <div class="actions-element--container">
+    <dp-editor-delete-component on-delete-component="$parent.removeComponent(component)"></dp-editor-delete-component>
+  </div>
 </div>
+<dp-editor-new-step component="component" branch="branch"></dp-editor-new-step>

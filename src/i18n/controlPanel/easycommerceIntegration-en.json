@@ -52,9 +52,9 @@
     },
     "mapping": {
       "title": "Map fields",
-      "subtitle": "Link the fields of your entity with those of the Subscriber List.",
-      "selected_data_entity": "Selected data entity",
-      "selected_subscriber_list": "Selected Subscriber List",
+      "subtitle": "Take benefit of the data from your contacts in other apps to expand your Doppler list. If you can’t find the same field among the options you can personalize it or omit it.",
+      "selected_data_entity": "Contact source",
+      "selected_subscriber_list": "Doppler destination",
       "data_entity_field": "Field",
       "select_field_placeholder": "Select field...",
       "skip_column_option": "Skip Column",
@@ -84,6 +84,13 @@
         "group.name": "Group Name",
         "name": "Name",
         "phone_number": "Phone Number"
+      },
+      "add_field_option": "Create custom field",
+      "new_field": {
+        "public_opt": "Public",
+        "private_opt": "Private",
+        "button": "Create",
+        "required_message": "Ouch! This field is required"
       }
     },
     "status": {

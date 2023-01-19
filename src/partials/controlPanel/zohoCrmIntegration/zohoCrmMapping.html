@@ -13,22 +13,45 @@
     </p>
     <p class="integration-information-text">{{ 'zoho_crm_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ zohoCrm.selectedList.ListName }}</strong></p>
     <div class="mapping-container">
-      <div class="grayPanel-box flex-grid" ng-repeat="field in zohoCrm.zohoCrmFields" dp-on-finish-ng-repeat>
-        <div>
-          <p>{{ 'zoho_crm_integration.mapping.data_entity_field' | translate }}: <b>{{field.DisplayLabel.length > 20 ? field.DisplayLabel.substring(0,17) + '...' : field.DisplayLabel}}</b> ({{field.DataType}})</p>
+      <div ng-repeat="field in zohoCrm.zohoCrmFields" dp-on-finish-ng-repeat>
+        <div class="grayPanel-box flex-grid">
+          <div>
+            <p>{{ 'zoho_crm_integration.mapping.data_entity_field' | translate }}: <b>{{field.DisplayLabel.length > 20 ? field.DisplayLabel.substring(0,17) + '...' : field.DisplayLabel}}</b> ({{field.DataType}})</p>
+          </div>
+          <div>
+            <select id="dd-userFields{{$index}}"
+                    name="select-field{{$index}}"
+                    ng-model="field.idDopplerField"
+                    property="name"
+                    id-value="idField"
+                    ng-options="field.idField as field.name for field in zohoCrm.userFields | filter:zohoCrm.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+                    ng-click="zohoCrm.errorMessage=''"
+                    class="selector field-selector"
+                    ng-required="true"
+                    ng-change="zohoCrm.fieldChange($index, field.idDopplerField)">
+              <option value="" disabled="disabled">{{'zoho_crm_integration.mapping.select_field_placeholder' | translate}}</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <select id="dd-userFields{{$index}}"
-                  name="select-field{{$index}}"
-                  ng-model="field.idDopplerField"
-                  property="name"
-                  id-value="idField"
-                  ng-options="field.idField as field.name for field in zohoCrm.userFields | filter:zohoCrm.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
-                  ng-click="zohoCrm.errorMessage=''"
-                  class="field-selector"
-                  ng-required="true">
-            <option value="" disabled="disabled">{{'zoho_crm_integration.mapping.select_field_placeholder' | translate}}</option>
+        <div class="createCustomField-box" ng-show="$index == zohoCrm.newField.index">
+          <input type="text" class="name" id="Name" name="Name" value="" ng-model="zohoCrm.newField.name" maxlength="50" ng-click="zohoCrm.newField.error=''">
+          <select id="dd-fieldTypes{{$index}}"
+                  name="select-field-type{{$index}}"
+                  ng-model="zohoCrm.newField.dataType"
+                  ng-options="type.id as type.name for type in zohoCrm.fieldTypes"
+                  class="selector customFieldTypeDropDown"
+                  ng-required="true"
+                  ng-disabled="true">
           </select>
+          <div class="visibility-container">
+            <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="zohoCrm.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'zoho_crm_integration.mapping.new_field.public_opt' | translate}}</label>
+            <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="zohoCrm.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'zoho_crm_integration.mapping.new_field.private_opt' | translate}}</label>
+          </div>
+          <div class="validationTooltip-container" ng-show="zohoCrm.newField.error">
+            <span class="validationTooltip-image"></span>
+            <span class="validation-tooltip">{{ zohoCrm.newField.error }}</span>
+          </div>
+          <input type="submit" value="{{'zoho_crm_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="zohoCrm.createField($index)">
         </div>
       </div>
     </div>

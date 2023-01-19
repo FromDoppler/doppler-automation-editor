@@ -11,6 +11,7 @@
         });
 
         this.id = 0;
+        this.name = '';
         this.pushMessageTitle = '';
         this.pushMessageBody = '';
         this.pushMessageOnClickLink = '';
@@ -29,6 +30,9 @@
         BaseComponent.prototype.setData.call(this, data);
         if (data.hasOwnProperty('id')) {
           this.id = data.id;
+        }
+        if (data.hasOwnProperty('name')) {
+          this.name = data.name;
         }
         if (data.hasOwnProperty('pushMessageTitle')) {
           this.pushMessageTitle = data.pushMessageTitle;
@@ -50,12 +54,14 @@
         && this.pushMessageTitle !== undefined
         && this.pushMessageBody !== undefined
         && this.pushMessageOnClickLink !== undefined
-        && this.pushMessageImageUrl !== undefined;
+        && this.pushMessageImageUrl !== undefined
+        && this.name !== '';
       };
 
       PushComponent.prototype.getPropertiesToWatch = function() {
         var properties = BaseComponent.prototype.getPropertiesToWatch();
         return properties.concat([
+          'name',
           'pushMessageTitle',
           'pushMessageBody',
           'pushMessageOnClickLink',

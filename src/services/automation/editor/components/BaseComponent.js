@@ -16,7 +16,8 @@
         this.parentUid = null;
         this.completed = false;
         this.touched = false;
-
+        this.hasBlockedList = false;
+        
         // Override from data.
         if (params && params.data) {
           this.setData(params.data);

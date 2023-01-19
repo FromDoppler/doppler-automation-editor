@@ -1,0 +1,25 @@
+<div class="dp-library margin-b-20">
+  <div class="dp-wrap-message dp-wrap-cancel" ng-if="hasBlockedList()">
+    <span class="dp-message-icon"></span>
+    <div class="dp-content-message">
+      <p>{{ 'automation_editor.sidebar.list_or_segment_blocked' | translate }}</p>
+    </div>
+  </div>
+  <div class="selected-list alt" ng-if="selectedComponent.suscriptionLists.length > 0 || selectedComponent.allSubscribers">
+    <span class="text"><strong>{{ 'automation_editor.sidebar.list_selected' | translate }}</strong></span>
+    <div ng-repeat="item in selectedComponent.suscriptionLists" ng-if="selectedComponent.suscriptionLists.length > 0 && !selectedComponent.allSubscribers">
+      <span class="icon-check" ng-if ="item.ListStatus != 14" ></span>
+      <span class="dp-tooltip-container" ng-if ="item.ListStatus == 14">
+        <span class="tooltip-icon-clean"><i class="i-block"></i></span>
+        <div class="dp-tooltip-left-top dp-tooltip-top blocked-list-tooltip">
+          <span>{{ 'automation_editor.sidebar.list_blocked_tooltip' | translate }} <a class="color--green" href="../Lists/SubscribersList"> {{ 'automation_editor.sidebar.list_blocked_tooltip_more_information' | translate }}</a></span>
+        </div>
+      </span>
+      <span class="name">{{ item.ListName }}</span>
+    </div>
+    <div ng-if="!selectedComponent.suscriptionLists.length && selectedComponent.allSubscribers">
+      <span class="icon-check"></span>
+      <span class="name">{{ 'automation_editor.sidebar.list_all_my_contacts_selected' | translate }}</span>
+    </div>
+  </div>
+</div>

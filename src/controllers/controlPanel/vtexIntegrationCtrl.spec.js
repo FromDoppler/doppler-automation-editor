@@ -109,6 +109,27 @@ describe('vtex integration', function() {
       var deferred = $q.defer();
       deferred.resolve(result);
       return deferred.promise;
+    },
+    getFieldTypes: function () {
+      var result = {
+        success: true,
+        types: []
+      };
+      var deferred = $q.defer();
+      deferred.resolve(result);
+      return deferred.promise;
+    },
+    newFieldDefaults: function () {
+      var result = {
+        index: null,
+        name: '',
+        dataType: 2,
+        isPrivate: "true",
+        error: null
+      };
+      var deferred = $q.defer();
+      deferred.resolve(result);
+      return deferred.promise;
     }
   };
 
@@ -139,6 +160,21 @@ describe('vtex integration', function() {
     EMAIL: 'Email'
   }
 
+  var FIELD_TYPE = {
+    BOOLEAN: 0,
+    COUNTRY: 6,
+    DATE: 3,
+    EMAIL: 4,
+    GENDER: 5,
+    REAL: 1,
+    STRING: 2,
+    CONSENT: 7,
+    ORIGIN: 8,
+    SCORE: 9,
+    PHONE: 10,
+    PERMISSION: 11
+  }
+
   var $translate =  {
     instant: function (text){
       return text;
@@ -165,6 +201,7 @@ describe('vtex integration', function() {
       $provide.value('IMPORTING_STATE_STR', IMPORTING_STATE_STR);
       $provide.value('BASIC_FIELD', BASIC_FIELD);
       $provide.value('VTEX_FIELD_TYPE', VTEX_FIELD_TYPE);
+      $provide.value('FIELD_TYPE', FIELD_TYPE);
     });
   });
 
@@ -231,6 +268,10 @@ describe('vtex integration', function() {
 
     vtexServiceMock.getFields = function(){
       return vtexDataMock.getFields();
+    };
+
+    vtexServiceMock.getFieldTypes = function () {
+      return vtexDataMock.getFieldTypes();
     };
 
     // Act

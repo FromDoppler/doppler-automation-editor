@@ -1,5 +1,6 @@
 {
 	"General_Required_Field" : "¡Ouch! Este es un campo requerido.",
+
 	"ScheduledTask_AutomationMain_Grid_Pager" : "Mostrar mas resultados",
 	"CompleteInformation_Title" : "Completa la información faltante",
 	"CompleteInformation_Subtitle" : "Para continuar, necesitamos saber más sobre ti. Por favor completa la información faltante en el siguiente Formulario.",
@@ -21,7 +22,6 @@
 
 	"automation_grid_header" : {
 		"title" : "Campañas de Automation",
-		"title1" : "Campañas del Nuevo Automation",
 		"description" : "Aquí encontrarás todas tus Campañas de Automation ya sea que estén en borrador, pausadas o activas. ",
     	"quantity_part1" : "Actualmente tienes ",
     	"empty_part1" : "Actualmente no tienes ",
@@ -72,5 +72,11 @@
       "submit_buttton": "Confirmar",
       "warning_one_option": "Esta réplica no permite cambiar el tipo de automation."
     }
+  },
+  "automation_grid_body": {
+    "blocked_list": "Automation bloqueado",
+    "blocked_list_tooltip": "El Automation está bloqueado porque hay Contactos que afectan la calidad de tus envíos. Reinícialo luego de ",
+    "blocked_list_tooltip_link_text": "revisar tus Listas y Segmentos.",
+    "blocked_list_tooltip_link_url": "/Lists/SubscribersList"
   }
 }

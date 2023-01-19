@@ -13,15 +13,17 @@
     'automation',
     'changesManager',
     'ModalService',
+    'unlayerEditorHelper',
     'selectedElementsService',
     'settingsService',
     'templatesService',
     'AUTOMATION_TYPE',
-    'CONTENT_TYPE'
+    'CONTENT_TYPE',
+    'EMAIL_EDITOR_TYPE'
   ];
 
-  function dpTemplates($q, $location, $rootScope, $translate, automation, changesManager, ModalService,
-    selectedElementsService, settingsService, templatesService, AUTOMATION_TYPE, CONTENT_TYPE) {
+  function dpTemplates($q, $location, $rootScope, $translate, automation, changesManager, ModalService, unlayerEditorHelper,
+    selectedElementsService, settingsService, templatesService, AUTOMATION_TYPE, CONTENT_TYPE, EMAIL_EDITOR_TYPE) {
 
     var directive = {
       restrict: 'E',
@@ -40,14 +42,23 @@
 
     function controller($scope) {
       $scope.categoryFilter = $location.search().category ? $location.search().category.toLowerCase() : '';
-      $scope.data = mainMenuData;
-      $translate.use($scope.data.user.lang);
+      $scope.user = mainMenuData.user;
+      $translate.use(mainMenuData.user.lang);
       $scope.templates = [];
       $scope.isLoading = false;
+      // Take care about isPublicTemplatesActive and categoryFilter behavior: they are not
+      // updated in a synchronized way.
       $scope.isPublicTemplatesActive = $scope.allTemplates || !!$scope.categoryFilter;
-      $scope.dateFormat = $scope.data.user.lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
+      $scope.dateFormat = mainMenuData.user.lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
       $scope.selectedTemplateForCreate = false;
       $scope.isLoadingTemplates = false;
+      $scope.EMAIL_EDITOR_TYPE = EMAIL_EDITOR_TYPE;
+
+      $scope.inAutomationMode = function() { return $scope.allTemplates; };
+      $scope.inTemplatesSectionMode = function() { return !$scope.allTemplates; };
+      $scope.inTemplateCreationMode = function() { return $scope.inTemplatesSectionMode() && $scope.isPublicTemplatesActive; };
+      $scope.inTemplateChoosingMode = function() { return $scope.inTemplatesSectionMode() && !$scope.isPublicTemplatesActive; };
+
       settingsService.getSettings().then(function(response) {
         $scope.settings = response;
       });
@@ -57,6 +68,10 @@
       var urlRandomTimeParam = new Date().getTime();
       var isLoadingPreview = false;
       var defaultCategorySelected = 1;
+
+      var redirectToEditorCampaign = function (idCampaign, editorType) {
+        window.location.href = templatesService.getEditorCampaignUrl(idCampaign, editorType);
+      }
 
       if (!$scope.categoryFilter && $location.search().automationType){
         switch ($location.search().automationType) {
@@ -118,13 +133,7 @@
       }
 
       function isCampaignsAvailable() {
-        var isCampaignsAvailableByProfiles = false;
-        for (var i = 0; i < $scope.data.nav.length; i++) {
-          if ($scope.data.nav[i].idHTML === 'campaignMenu') {
-            return isCampaignsAvailableByProfiles = true;
-          }
-        }
-        return isCampaignsAvailableByProfiles;
+        return mainMenuData.isCampaignsAvailable;
       }
 
       function resetTemplates() {
@@ -311,12 +320,16 @@
         }
       };
 
-      $scope.editTemplate = function(id) {
-        window.location.href = '/MSEditor/Editor?idTemplate=' + id;
+      $scope.getEditTemplateUrl = function(id, editorType) {
+        return templatesService.getEditorTemplateUrl(id, editorType);
+      };
+
+      $scope.getCreateCampaignFromTemplateUrl = function(id, editorType) {
+        return templatesService.getCampaignCreationFromTemplateUrl(id, editorType);
       };
 
       $scope.viewOnline = function(url) {
-        if ($scope.data.user.plan.planType !== 'free'){
+        if (mainMenuData.user.plan.planType !== 'free'){
           window.open(url, '_blank');
         }
       };
@@ -327,13 +340,12 @@
         }
       };
 
-      $scope.selectTemplate = function(id) {
+      $scope.selectTemplate = function(id, editorType) {
         if (!$scope.selectedTemplateForCreate) {
           $scope.selectedTemplateForCreate = true;
-          templatesService.createTemplateFromPublic(id).then(function(idNewTemplate) {
-            if (idNewTemplate) {
-              window.location.href = '/MSEditor/Editor?idTemplate=' + idNewTemplate;
-            }
+          templatesService.createTemplateFromPublicAndRedirect(id, editorType, function(error) {
+            console.error("Error on createTemplateFromPublicAndRedirect", error);
+            $scope.selectedTemplateForCreate = false;
           });
         }
       };
@@ -362,28 +374,33 @@
         });
       };
 
-      $scope.newCampaign = function(template) {
-        if (!$scope.allTemplates) {
-          window.location.href = '/Campaigns/BasicInfo?idTemplate=' + template.IdTemplate;
-          return;
-        }
-
+      $scope.newAutomationCampaign = function(template) {
         var selectedComponent = selectedElementsService.getSelectedComponent();
-        automation.saveTemplateContent(selectedComponent.id, template.IdTemplate).then(function() {
-          setCampaignThumbnail(selectedComponent);
-          //we need to call to saveChanges to save the generated thumbnailUrl in the model
-          return automation.saveChanges().then(function(response) {
-            $rootScope.$broadcast('UPDATE_SAVING_STATE');
-            var newParams = {
-              'idScheduledTask': response.data.id,
-              'idCampaign': selectedComponent.id,
-              'redirectToTemplates': 'true'
-            };
-            $location.search(newParams);
-            $location.replace();
-            window.location.href = '/MSEditor/Editor?idCampaign=' + selectedComponent.id;
+
+        // This block is to allow history.back() to template selection
+        // TODO: fix related edge case https://makingsense.atlassian.net/browse/DE-942
+        var newParams = {
+          'idScheduledTask': automation.getModel().id,
+          'idCampaign': selectedComponent.id,
+          'redirectToTemplates': 'true'
+        };
+        $location.search(newParams);
+        $location.replace();
+
+        if (template.EditorType === EMAIL_EDITOR_TYPE.UNLAYER) {
+          setTimeout(function() {
+            window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(selectedComponent.id, template.IdTemplate);
+          }, 0);
+        } else {
+          automation.saveTemplateContent(selectedComponent.id, template.IdTemplate).then(function () {
+            setCampaignThumbnail(selectedComponent);
+            //we need to call to saveChanges to save the generated thumbnailUrl in the model
+            return automation.saveChanges().then(function (response) {
+              $rootScope.$broadcast('UPDATE_SAVING_STATE');
+              redirectToEditorCampaign(selectedComponent.id, EMAIL_EDITOR_TYPE.MSEDITOR);
+            });
           });
-        });
+        }
       };
 
       function setCampaignThumbnail(selectedComponent) {

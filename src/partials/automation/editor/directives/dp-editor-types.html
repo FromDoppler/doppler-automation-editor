@@ -42,6 +42,7 @@
               {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
               </span>
               <a ng-if="item.Status === 'buy'" href="/ControlPanel/AccountPreferences/UpgradeAccount?Plan=monthly">{{ 'automationTypes.info.buy' | translate }}</a>
+              <a ng-if="item.Status === 'buySms'" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
               <a ng-if="item.Status === 'error' || item.Status === 'warning'" href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings" class="text--uppercase">{{ item.Status === 'error' ? 'automationTypes.info.continue' : 'actions.start' | translate }}</a>
               <a ng-if="item.Status === 'demo'" ng-click="showPopup()">{{ 'automationTypes.info.activate' | translate }}</a>
               <a ng-if="!item.MakeAvailableToEdition && (item.Status === 'integration' || item.Status === 'repeated')" href="/ControlPanel/ControlPanel#AdvancedPreferences">{{ 'automationTypes.info.integration' | translate }}</a>

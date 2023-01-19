@@ -26,7 +26,9 @@
       manualSync: manualSync,
       getChangedState: getChangedState,
       getListData: getListData,
-      getEntities: getEntities
+      getEntities: getEntities,
+      getFieldTypes: getFieldTypes,
+      createField: createField
     };
 
     return service;
@@ -171,6 +173,27 @@
 
     function getEntities() {
       return $http.get('/Integration/Integration/GetMiTiendaEntities')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function getFieldTypes() {
+      return $http.get('/Integration/Integration/GetFieldTypes')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function createField(name, dataType, isPrivate) {
+      return $http.get('/Integration/Integration/CreateField',
+        {
+          params: {
+            name: encodeURIComponent(name),
+            dataType: dataType,
+            isPrivate: isPrivate
+          }
+        })
         .then(function (response) {
           return response.data;
         });

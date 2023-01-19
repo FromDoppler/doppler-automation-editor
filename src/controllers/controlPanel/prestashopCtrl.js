@@ -46,6 +46,7 @@
                 listName: response.ListName,
                 listStatus: response.subscriberListStatus
               }];
+              vm.autoSyncDisabled = response.SyncDisabled;
               if (response.subscriberListStatus === IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS) {
                 vm.disableSync = vm.importingList = true;
                 vm.checkListState();
@@ -53,6 +54,7 @@
             }
           }
           vm.isLoading = false;
+          vm.webAppUrl = response.webAppUrl;
         });
     }
 

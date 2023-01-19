@@ -27,7 +27,9 @@
       synchMagentoLists: synchMagentoLists,
       deleteList: deleteList,
       getAssociatedFieldMapping: getAssociatedFieldMapping,
-      updateRfmSettings: updateRfmSettings
+      updateRfmSettings: updateRfmSettings,
+      getFieldTypes: getFieldTypes,
+      createField: createField
     };
 
     return service;
@@ -186,6 +188,27 @@
         {
           idThirdPartyApp: idThirdPartyApp,
           rfm: rfm,
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function getFieldTypes() {
+      return $http.get('/Integration/Integration/GetFieldTypes')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function createField(name, dataType, isPrivate) {
+      return $http.get('/Integration/Integration/CreateField',
+        {
+          params: {
+            name: encodeURIComponent(name),
+            dataType: dataType,
+            isPrivate: isPrivate
+          }
         })
         .then(function (response) {
           return response.data;

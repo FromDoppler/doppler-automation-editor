@@ -26,7 +26,7 @@
     function link(scope) {
 
       scope.getFullReportLink = function(idModel, idAction) {
-        var url = '/AutomationMFE/ReportTask/Index?showAll=true&idScheduledTask=' + idModel;
+        var url = '/Automation/ReportTask/Index?showAll=true&idScheduledTask=' + idModel;
         if (idAction) {
           url += '&idAction=' + idAction;
         }

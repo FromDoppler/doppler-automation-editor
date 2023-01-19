@@ -1,0 +1,91 @@
+{
+  "jumpseller_integration": {
+    "name": "jumpseller",
+    "disconnected": {
+      "title": "Connect Doppler with your Jumpseller store",
+      "subtitle": "Integrate all information from your Jumpseller Customers into your Doppler Lists automatically. Do you have any doubts? Press",
+      "help_text": "Help",
+      "help_link": "https://help.fromdoppler.com/en/jumpseller-step-by-step-guide-to-integration/",
+      "login": "Login",
+      "token": "Token",
+      "login_placeholder": "Put the Login of your Jumpseller store",
+      "token_placeholder": "Enter your Jumpseller Token",
+      "connection_error": "Oops! We could not connect with your Jumpseller store please try again later."
+    },
+    "connected": {
+      "store": "Connected Store:",
+      "title": "Your Jumpseller store is already connected with Doppler",
+      "subtitle": "From now on you can syncronize your products with Doppler Templates, and send promotional Campaigns to your Contacts.",
+      "disconnect": "Disconnect",
+      "list_title": "Select the List to synchronize with Jumpseller",
+      "list_subtitle": "Information about your Jumpseller customers will be saved in the List you choose.",
+      "select_list": "Select the List",
+      "select_list_warning": "If the chosen List already has associated Contacts, they will be removed. Only Contacts that have come from the integration will be saved.",
+      "select_list_placeholder": "Select the List to synchronize",
+      "next": "Next",
+      "synchronize": "Synchronize",
+      "grid_title": "Synchronized data entities",
+      "list_name_grid": "List Name",
+      "subscribers_count_grid": "Subscribers",
+      "synchronizing_grid": "Synchronizing...",
+      "last_synchronization_grid": "Last Synchronization",
+      "entity_name_grid": "Data Entity Name",
+      "actions_grid": "Actions",
+      "edit_tooltip": "Edit synchronization",
+      "lists": {
+        "customers": "Customers"
+      },
+      "delete_mode_grid": {
+        "message": "The synchronization will be permanently deleted. Are you sure?",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "tooltip": "Delete synchronization"
+      },
+      "disconnect_popup": {
+        "title": "Are you sure you want to disconnect this integration?",
+        "description": "By confirming this disconnection, your List will no longer receive new Subscribers from your Jumpseller account. Anyhow, you won't lose the contacts synced up to this moment."
+      },
+      "actions_needed": {
+        "validation-needed": "No puedes seleccionar la Lista porque tienes que validar tu identidad en Jumpseller. Presiona el siguiente link para terminar las validaciones requeridas. <a href='{{ link }}' target='_blank'>{{ link }}</a>",
+        "signature-needed": "No puedes seleccionar la Lista porque tienes que firmar los terminos y condiciones de Jumpseller. Presiona el siguiente link para terminar las validaciones requeridas. <a href='{{ link }}' target='_blank'>{{ link }}</a>"
+      }
+    },
+    "mapping": {
+      "title": "Map fields",
+      "subtitle": "Take benefit of the data from your contacts in other apps to expand your Doppler list. If you can’t find the same field among the options you can personalize it or omit it.",
+      "selected_data_entity": "Contact source",
+      "selected_subscriber_list": "Doppler destination",
+      "data_entity_field": "Field",
+      "select_field_placeholder": "Select field...",
+      "skip_column_option": "Skip Column",
+      "empty_email_error_message": "Ouch! There must be at least one Email field selected.",
+      "back": "Back",
+      "next": "Next",
+      "fields": {
+        "email": "Email",
+        "phone": "Phone",
+        "status": "Status",
+        "accepts_marketing": "accepts_marketing",
+        "accepted_marketing_at": "accepted_marketing_at",
+        "cancelled_marketing_at": "cancelled_marketing_at",
+        "fullname": "Full Name",
+        "billing_addresses[0].name": "(Billing) Name",
+        "billing_addresses[0].surname": "(Billing) Surname",
+        "billing_addresses[0].address": "(Billing) Address",
+        "billing_addresses[0].city": "(Billing) City",
+        "billing_addresses[0].postal": "(Billing) Zipcode",
+        "billing_addresses[0].country": "(Billing) Country",
+        "billing_addresses[0].region": "(Billing) State",
+        "billing_addresses[0].taxid": "(Billing) Tax Identification",
+        "billing_addresses[0].municipality": "(Billing) Locality"
+      },
+      "add_field_option": "Create custom field",
+      "new_field": {
+        "public_opt": "Public",
+        "private_opt": "Private",
+        "button": "Create",
+        "required_message": "Ouch! This field is required"
+      }
+    }
+  }
+}

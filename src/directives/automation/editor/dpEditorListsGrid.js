@@ -48,7 +48,7 @@
       $scope.listSubtitle = $scope.listSubtitle || $translate.instant('automation_editor.lists_grid.description');
 
       $scope.gridModel = gridService.initGrid({
-        getDataUrl: '/AutomationMFE/Task/GetSubscribersLists',
+        getDataUrl: '/Automation/Task/GetSubscribersLists',
         isSelectElementGrid: true,
         idListsOrSegmentFilter: 2,
         selectedItemOptions: selectedItemOptions

@@ -41,7 +41,7 @@
       <span class="control-panel-section-subtitle">
         {{ 'easycommerce_integration.disconnected.subtitle' | translate }}
         <!--<a href="{{ 'easycommerce_integration.disconnected.help_link' | translate }}"
-        target="_blank">{{ 'easycommerce_integration.disconnected.help_text' | translate }}</a>-->
+    target="_blank">{{ 'easycommerce_integration.disconnected.help_text' | translate }}</a>-->
       </span>
       <hr class="full" style="width: calc(100% + 40px);" />
       <section class="authentication-container" ng-if="!easycommerce.connected">
@@ -77,6 +77,18 @@
           {{ 'easycommerce_integration.connected.disconnect' | translate }}
         </button>
       </section>
+      <div class="dp-library margin-t-20 margin-b-20" ng-show="easycommerce.autoSyncDisabled && easycommerce.connected  && easycommerce.integratedLists.length">
+        <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message dp-content-full">
+            <span class="text--small">
+              {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
+              <a target="_self" href="{{easycommerce.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+              {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="dp-library margin-t-20 margin-b-20" ng-show="easycommerce.connectionError">
         <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
           <span class="dp-message-icon"></span>
@@ -89,7 +101,7 @@
   </div>
   <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!easycommerce.connected">
     <a class="button button--alternative" ng-disabled="easycommerce.connecting"
-       href="/ControlPanel/ControlPanel?section=Integration"
+       href="{{easycommerce.webAppUrl}}/Integrations#native-integrations"
        id="back-button">{{ 'actions.cancel' | translate }}</a>
     <button type="submit" id="save_info" ng-disabled="easycommerce.connecting"
             ng-class="{'button--spinner' : easycommerce.connecting}" ng-click="easycommerce.disconnected = false;"

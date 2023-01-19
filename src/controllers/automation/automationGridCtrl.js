@@ -24,8 +24,8 @@
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
     $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;
     $scope.gridModel = gridService.initGrid({
-      getDataUrl: '/AutomationMFE/Automation/GetAutomationTasks',
-      deleteRowUrl: '/AutomationMFE/Task/DeleteTask'
+      getDataUrl: '/Automation/Automation/GetAutomationTasks',
+      deleteRowUrl: '/Automation/Task/DeleteTask'
     });
 
     $translate.onReady().then(function() {
@@ -80,7 +80,7 @@
       }).then(function (modal) {
         modal.close.then(function (closeModalResult) {
           if (closeModalResult.success) {
-            $window.location.href = '/AutomationMFE/EditorConfig?idScheduledTask=' + closeModalResult.idScheduledTask + '&automationType=' + closeModalResult.scheduledTaskType;
+            $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + closeModalResult.idScheduledTask + '&automationType=' + closeModalResult.scheduledTaskType;
           }
         });
       });

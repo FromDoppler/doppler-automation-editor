@@ -25,7 +25,12 @@
     function checkWarningStep(component) {
       var automation = $injector.get('automation');
       if (automation.isInitialConditionComponent(component)) {
-        return;
+        if (automation.hasBlockedList()) {
+          createWarningsSteps(COMPONENT_TYPE.INITIAL_CONDITION);
+        }
+        else {
+          removeWarningStep(component);
+        }
       }
 
       if (component.completed) {
@@ -55,6 +60,10 @@
           warningsSteps[componentType] = warningsSteps[componentType].concat(tmpArray);
         }
       });
+
+      if (componentType == COMPONENT_TYPE.INITIAL_CONDITION){
+        warningsSteps[componentType] = warningsSteps[componentType].concat(automation.getInitialConditionUid()); 
+      }
     }
 
     function removeWarningStep(component) {

@@ -83,7 +83,7 @@
 
   <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !mercadoLibre.connected}" ng-show="!mercadoLibre.connected">
     <a class="button button--alternative" ng-disabled="mercadoLibre.connecting"
-       href="/ControlPanel/ControlPanel?section=Integration"
+       href="{{mercadoLibre.webAppUrl}}/Integrations#native-integrations"
        id="back-button">{{ 'actions.cancel' | translate }}</a>
   </div>
 </form>

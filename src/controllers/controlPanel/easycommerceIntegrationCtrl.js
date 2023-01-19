@@ -15,12 +15,13 @@
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
     'BASIC_FIELD',
-    'INTEGRATION_SOURCE_TYPE'
+    'INTEGRATION_SOURCE_TYPE',
+    'FIELD_TYPE'
   ];
 
   function easycommerceIntegrationCtrl($scope, $translate, ModalService,
     easycommerceService, $timeout, INTEGRATION_CODES, IMPORTING_STATE,
-    IMPORTING_STATE_STR, BASIC_FIELD, INTEGRATION_SOURCE_TYPE) {
+    IMPORTING_STATE_STR, BASIC_FIELD, INTEGRATION_SOURCE_TYPE, FIELD_TYPE) {
     var vm = this;
     vm.isLoading = true;
     vm.connectionError = false;
@@ -37,6 +38,7 @@
     vm.isLoadingFields = false;
     vm.showMapping = false;
     vm.isMapping = false;
+    vm.newField = null;
     vm.sourceType = INTEGRATION_SOURCE_TYPE.MVC;
     vm.mvcSourceType = INTEGRATION_SOURCE_TYPE.MVC;
 
@@ -45,6 +47,7 @@
       vm.listPlaceholder = $translate.instant('easycommerce_integration.connected.select_list_placeholder');
       vm.getStatus(true);
       loadDopplerFields();
+      loadFieldTypes();
     });
 
     vm.getStatus = function(doPolling){
@@ -60,6 +63,7 @@
               vm.sourceType = result.model.SourceType;
               vm.daysToDisconnection = result.model.DaysToDisconnection;
               vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
+              vm.autoSyncDisabled = result.model.SyncDisabled;
             }
             if (vm.integratedLists.length && isAnyImportingList(vm.integratedLists)
               && (doPolling !== undefined || doPolling)){
@@ -71,13 +75,15 @@
               if (vm.integratedLists[0].IdList) {
                 vm.selectedListId = vm.integratedLists[0].IdList;
               }
-            }           
+            }
           } else {
             vm.connectionError = true;
             vm.errorMsg = $translate.instant('easycommerce_integration.disconnected.connection_error');
           }
+          vm.newField = newFieldDefaults();
           vm.isLoading = false;
           vm.connected = !!result.model;
+          vm.webAppUrl = result.webAppUrl;
         });
     };
 
@@ -227,7 +233,6 @@
     };
 
     vm.showMappingSection = function(fieldsMapped){
-      vm.availablesFields = vm.userFields;
       vm.isLoadingFields = true;
 
       var list = _.find(vm.allUserList, function(list){
@@ -253,14 +258,6 @@
       vm.showMapping = true;
       vm.isLoadingFields = false;
       vm.isLoading = false;
-    };
-
-    vm.setAvailablesFields = function(){
-      vm.availablesFields = _.filter(vm.userFields, function(field){
-        return !_.find(vm.easycommerceFields, function(selectedField){
-          return selectedField.idDopplerField === field.idField && selectedField.idDopplerField !== 0;
-        });
-      });
     };
 
     vm.mapFields = function(){
@@ -485,12 +482,18 @@
           if (listResult.length) {
             vm.userFields = listResult;
             vm.userFields.unshift({
+              idField: -1,
+              name: $translate.instant('easycommerce_integration.mapping.add_field_option'),
+              DataType: 0,
+              Value: null,
+              DopplerFieldTypeId: -1
+            });
+            vm.userFields.unshift({
               idField: 0,
               name: $translate.instant('easycommerce_integration.mapping.skip_column_option'),
               DataType: 0,
               Value: null
             });
-            vm.availablesFields = vm.userFields;
             vm.isLoading = false;
           }
         })
@@ -505,10 +508,80 @@
       });
     }
 
-    $scope.$on('ngRepeatFinished', function(){
-      vm.setAvailablesFields();
-    });
+    function loadFieldTypes() {
+      easycommerceService.getFieldTypes()
+        .then(function (types) {
+          vm.fieldTypes = types;
+        })
+        .catch(function () {
+          showGeneralMappingError();
+        });
+    }
 
+    vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
+      return function (field) {
+        return (field.idField === 0 || field.idField === -1)
+          || (field.idField === dopplerFieldId)
+          || (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField));
+      };
+    }
+
+    function fieldNotUsed(idField) {
+      return !_.find(vm.easycommerceFields, function (selectedField) {
+        return selectedField.idDopplerField === idField
+      });
+    }
+
+    vm.fieldChange = function (index, value) {
+      if (vm.newField.index != index && value == -1) {
+        vm.newField = newFieldDefaults();
+        vm.newField.index = index;
+        vm.newField.dataType = getFieldDataType(index);
+        _.forEach(vm.easycommerceFields, function (field, fIndex) {
+          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+        });
+      }
+      else if (vm.newField.index == index && value != -1) {
+        vm.newField = newFieldDefaults();
+      }
+    }
+
+    function getFieldDataType(index) {
+      var fieldTypeId = vm.easycommerceFields[index].DopplerFieldTypeId;
+      var type = _.find(vm.fieldTypes, function (ftype) {
+        return ftype.id === fieldTypeId;
+      });
+      return type ? type.id : FIELD_TYPE.STRING;
+    }
+
+    vm.createField = function (index) {
+      if (vm.newField.name) {
+        easycommerceService.createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+          .then(function (res) {
+            if (res.success) {
+              vm.userFields.push(res.field);
+              vm.easycommerceFields[index].idDopplerField = res.field.idField;
+              vm.newField = newFieldDefaults();
+            }
+            else {
+              vm.newField.error = res.errorMessage;
+            }
+          })
+      }
+      else {
+        vm.newField.error = $translate.instant('easycommerce_integration.mapping.new_field.required_message');
+      }
+    }
+
+    function newFieldDefaults() {
+      return {
+        index: null,
+        name: '',
+        dataType: FIELD_TYPE.STRING,
+        isPrivate: "true",
+        error: null
+      };
+    }
   }
 })();
 

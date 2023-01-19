@@ -1,5 +1,14 @@
 <p class="title">{{ 'automation_editor.sidebar.push_title' | translate }}</p>
 <form name="pushForm" class="form--container" id="form-panel-push" novalidate>
+    <!-- push name -->
+  <div class="input--group">
+    <label class="label label--panel">*{{ 'automation_editor.sidebar.Push_name' | translate }}</label>
+    <input type="text" class="input--text" ng-model="selectedComponent.name" ng-required="pushForm.name.$dirty || selectedComponent.touched" name="name" id="name_property" ng-class="{'hasErrors': pushForm.name.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'name')" ng-blur="emailNameOnBlur()"  ng-disabled="isReadOnly();" />
+    <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+    <div class="error-messages--container" ng-show="showInputErrors.name">
+      <div class="error">{{'automation_editor.sidebar.campaign_name_error' | translate }}</div>
+    </div>
+  </div>
   <div class="input--group">
     <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_title' | translate }}</label>
     <input type="text" class="input--text"

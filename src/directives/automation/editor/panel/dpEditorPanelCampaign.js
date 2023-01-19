@@ -18,11 +18,13 @@
     'settingsService',
     'TEST_OPTION',
     'utils',
-    'warningsStepsService'
+    'warningsStepsService',
+    'templatesService'
   ];
 
   function dpEditorPanelCampaign($rootScope, $translate, automation, AUTOMATION_TYPE, CAMPAIGN_TYPE, CHANGE_TYPE,
-    changesManager, conditionsDataservice, CONTENT_TYPE, settingsService, TEST_OPTION, utils, warningsStepsService) {
+    changesManager, conditionsDataservice, CONTENT_TYPE, settingsService, TEST_OPTION, utils, warningsStepsService,
+    templatesService) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-campaign.html',
@@ -174,13 +176,13 @@
             if (scope.selectedComponent.thumbnailUrl === '') {
               scope.toggleTemplateView(true, scope.selectedComponent.campaignType);
             } else {
-              window.location.href = '/MSEditor/Editor?idCampaign=' + scope.selectedComponent.id;
+              window.location.href = templatesService.getEditorCampaignUrl(scope.selectedComponent.id, scope.selectedComponent.editorType);
             }
           }, function() {
             automation.setIsProcessing(false);
           });
         } else if (value && scope.selectedComponent.thumbnailUrl !== '') {
-          window.location.href = '/MSEditor/Editor?idCampaign=' + scope.selectedComponent.id;
+          window.location.href = templatesService.getEditorCampaignUrl(scope.selectedComponent.id, scope.selectedComponent.editorType);
         } else if (!value) {
           scope.toggleTemplateView(true, scope.selectedComponent.campaignType);
         } else {

@@ -72,5 +72,11 @@
       "submit_buttton": "Confirm",
       "warning_one_option": "Automation type change is not allowed for this replica."
     }
+  },
+  "automation_grid_body": {
+    "blocked_list": "Automation blocked",
+    "blocked_list_tooltip": "The automation is blocked because there are contacts that affect the quality of your sendings. Restart it after",
+    "blocked_list_tooltip_link_text": "checking your lists and segments.",
+    "blocked_list_tooltip_link_url": "/Lists/SubscribersList"
   }
 }

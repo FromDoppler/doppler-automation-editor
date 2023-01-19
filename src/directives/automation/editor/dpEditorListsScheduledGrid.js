@@ -45,7 +45,7 @@
 
       $scope.showSelectAll = !selectedComponent.operation;
       $scope.gridModel = gridService.initGrid({
-        getDataUrl: '/AutomationMFE/Task/GetSubscribersLists',
+        getDataUrl: '/Automation/Task/GetSubscribersLists',
         isSelectElementGrid: true,
         selectedItemOptions: selectedItemOptions,
         // value 2 show only lists

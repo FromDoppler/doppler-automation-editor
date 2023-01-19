@@ -8,19 +8,52 @@
       </div>
     </div>
     <hr class="full" style="width: calc(100% + 40px);" />
-    <p class="integration-information-text">{{ 'miTienda_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ miTienda.selectedList.ListName }}</strong></p>
+    <p class="integration-information-text">
+      {{ 'miTienda_integration.mapping.selected_data_entity' | translate }}: <strong>{{ miTienda.selectedEntity.DisplayName }}</strong>
+    </p>
+    <p class="integration-information-text">
+      {{ 'miTienda_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ miTienda.selectedList.ListName }}</strong>
+    </p>
     <div class="mapping-container">
-      <div class="grayPanel-box flex-grid" ng-repeat="field in miTienda.miTiendaFields" dp-on-finish-ng-repeat>
-        <div>
-          <p>{{ 'miTienda_integration.mapping.data_entity_field' | translate }}: <b>{{ miTienda.getFiledName(field.Name) }}</b></p>
+      <div ng-repeat="field in miTienda.miTiendaFields" dp-on-finish-ng-repeat>
+        <div class="grayPanel-box flex-grid">
+          <div>
+            <p>{{ 'miTienda_integration.mapping.data_entity_field' | translate }}: <b>{{ miTienda.getFiledName(field.Name) }}</b></p>
+          </div>
+          <div>
+            <select id="dd-userFields{{$index}}"
+                    name="select-field{{$index}}"
+                    ng-model="field.idDopplerField"
+                    property="name"
+                    id-value="idField"
+                    ng-options="field.idField as field.name for field in miTienda.userFields  | filter:miTienda.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+                    ng-click="bmwCrm.errorMessage=''"
+                    class="selector field-selector"
+                    ng-required="true"
+                    ng-change="miTienda.fieldChange($index, field.idDopplerField)">
+              <option value="" disabled="disabled">{{'miTienda_integration.mapping.select_field_placeholder' | translate}}</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <dropdown class="dropdown dropdown--big"
-                    placeholder="{{'miTienda_integration.mapping.select_field_placeholder' | translate}}"
-                    id="dd-userFields{{$index}}" list="miTienda.availablesFields"
-                    name="miTienda.userFields" ng-model="field.idDopplerField" ng-required="true"
-                    property="name" id-value="idField" ng-change="miTienda.setAvailablesFields()"
-                    ng-disabled="miTienda.availablesFields && miTienda.availablesFields.length == 0" ng-click="miTienda.errorMessage=''"></dropdown>
+        <div class="createCustomField-box" ng-show="$index == miTienda.newField.index">
+          <input type="text" class="name" id="Name" name="Name" value="" ng-model="miTienda.newField.name" maxlength="50" ng-click="miTienda.newField.error=''">
+          <select id="dd-fieldTypes{{$index}}"
+                  name="select-field-type{{$index}}"
+                  ng-model="miTienda.newField.dataType"
+                  ng-options="type.id as type.name for type in miTienda.fieldTypes"
+                  class="selector customFieldTypeDropDown"
+                  ng-required="true"
+                  ng-disabled="true">
+          </select>
+          <div class="visibility-container">
+            <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="miTienda.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'miTienda_integration.mapping.new_field.public_opt' | translate}}</label>
+            <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="miTienda.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'miTienda_integration.mapping.new_field.private_opt' | translate}}</label>
+          </div>
+          <div class="validationTooltip-container" ng-show="miTienda.newField.error">
+            <span class="validationTooltip-image"></span>
+            <span class="validation-tooltip">{{ miTienda.newField.error }}</span>
+          </div>
+          <input type="submit" value="{{'miTienda_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="miTienda.createField($index)">
         </div>
       </div>
     </div>
@@ -33,7 +66,7 @@
       </div>
     </div>
   </div>
-  <div class="flex-grid-v-center--s-between">
+  <div class="nav-button-bar flex-grid-v-center--s-between">
     <button ng-click="miTienda.goBack()" class="button button--alternative">
       {{ 'miTienda_integration.mapping.back' | translate }}
     </button>

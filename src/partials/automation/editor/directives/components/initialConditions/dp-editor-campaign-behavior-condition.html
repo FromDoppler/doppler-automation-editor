@@ -1,4 +1,4 @@
-<div class="initial-step--container relative component" ng-class="{'is-error' : hasErrors() }">
+<div class="initial-step--container relative component" ng-class="{'is-error' : hasErrors() || hasBlockedList() }">
   <span class="icon-pointer"></span>
   <p ng-if="!component.sendType || ( component.suscriptionLists.length === 0 && !component.allSubscribers )">
     {{ 'automation_editor.components.initial_condition.behavior.scheduled_day' | translate }}
@@ -57,11 +57,10 @@
 	  </p>
 	</span>
 
-
-  <div class="tip-help--container initial-condition" ng-show="!component.completed || component.hasStartDateExpired">
-    <span class="icon-arrow-friendly"></span>
-    <span class="tip-help" ng-bind-html="'automation_editor.canvas.tip_initial_condition' | translate"></span>
-  </div>
+	<div class="tip-help--container initial-condition" ng-show="!component.completed || component.hasStartDateExpired || component.hasBlockedList">
+		<span class="icon-arrow-friendly"></span>
+		<span class="tip-help" ng-bind-html="getTipMessage()"></span>
+	</div>
 </div>
 
 <dp-editor-new-step component="component"></dp-editor-new-step>

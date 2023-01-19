@@ -3,7 +3,7 @@
     <img src="../../../images/automation-type-5.svg">
     <h2>{{ 'automation_grid_emtpy.title' | translate }}</h2>
     <p class="description">{{ 'automation_grid_emtpy.description' | translate }} <br /><br /><strong>{{ 'automation_grid_emtpy.description2' | translate }}</strong> <br /><a class="link--default"  href="{{ 'automation_grid_emtpy.link_url' | translate }}" target="_blank">{{ 'automation_grid_emtpy.link_text' | translate }}</a></p>
-    <a target="_self" href="/AutomationMFE/EditorConfig?idTaskType=0" class="button button--primary">{{ 'automation_grid_header.button' | translate }}</a>
+    <a target="_self" href="/Automation/EditorConfig?idTaskType=0" class="button button--primary">{{ 'automation_grid_header.button' | translate }}</a>
   </div>
 </section>
 <div ng-if="totalTasks">
@@ -32,10 +32,9 @@
           </p>
        </div>
        <div class="col-sm-5 text-align--right">
-        <a target="_self" href="/AutomationMFE/EditorConfig?idTaskType=0" class="dp-button button-medium primary-green">{{ 'automation_grid_header.button' | translate }}</a>
+        <a target="_self" href="/Automation/EditorConfig?idTaskType=0" class="dp-button button-medium primary-green">{{ 'automation_grid_header.button' | translate }}</a>
        </div>
       </div>
-       <span class="arrow"></span>
       </div>
       </header>
   </div>
@@ -66,7 +65,7 @@
             <td colspan="3" class="delete-confirmation" ng-cloak ng-show="row.cfDeleted">
               <span class="icon-warning"></span><span ng-bind-html="'grid_messages.custom_field_deleted' | translate "></span>
             </td>
-            <td colspan="2" ng-cloak class="delete-confirmation right" ng-show="row.cfDeleted"><a id="cancel-delete-{{$index}}" ng-cloak ng-click="row.cfDeleted=false" > {{ 'actions.cancel' | translate }} </a> | <a id="accept-delete-{{$index}}" ng-cloak href="/AutomationMFE/EditorConfig?idScheduledTask={{row.IdScheduledTask}}"> {{ 'actions.edit' | translate }}</a> </td>
+            <td colspan="2" ng-cloak class="delete-confirmation right" ng-show="row.cfDeleted"><a id="cancel-delete-{{$index}}" ng-cloak ng-click="row.cfDeleted=false" > {{ 'actions.cancel' | translate }} </a> | <a id="accept-delete-{{$index}}" ng-cloak href="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}"> {{ 'actions.edit' | translate }}</a> </td>
 
             <td class="status-column" ng-show="!row.deleting && !row.cfDeleted">
               <div data-static-tooltip="{{getStatusText(row)}}" class="inline-block">
@@ -74,8 +73,16 @@
               </div>
             </td>
             <td class="type-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'TYPE'}"><span class="task-type-label">{{row.Type}}</span></td>
-            <td class="name-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'NAME'}">
-              <ellipsis-with-tooltip text="row.Name" url="/AutomationMFE/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}"></ellipsis-with-tooltip>
+            <td class="name-column dp-library" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'NAME'}">
+              <div class="dp-icon-wrapper">
+                <span><ellipsis-with-tooltip text="row.Name" url="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}"></ellipsis-with-tooltip></span>
+                <div ng-if="row.IsAssociatedToBlockedList" class="tooltiptext dp-tooltip-container">
+                  <span class="dp-icon-blocked" aria-label="{{ 'automation_grid_body.blocked_list' | translate }}">{{ 'automation_grid_body.blocked_list' | translate }}</span>
+                  <div class="dp-tooltip-top blocked-list-tooltip">
+                    <span>{{ 'automation_grid_body.blocked_list_tooltip' | translate }} <a class="color--green" href="{{ 'automation_grid_body.blocked_list_tooltip_link_url' | translate }}">{{ 'automation_grid_body.blocked_list_tooltip_link_text' | translate }}</a></span>
+                  </div>
+                </div>
+              </div>
             </td>
             <td class="date-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}">{{row.CreationDate | date: gridModel.dateFormat}}</td>
 
@@ -88,7 +95,7 @@
                   <a class="icon-duplicate" ng-click="openReplicationPopup(row.IdScheduledTask, row.AutomationTaskType)" id="duplicate-{{row.IdScheduledTask}}" ng-class="{ 'disabled': !row.IsEnableToReplicate }"></a>
                 </span>
                 <span data-static-tooltip="{{ 'actions.edit' | translate }}">
-                  <a target="_self" class="icon-grid-edit" ng-href="/AutomationMFE/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}" id="edit-{{row.IdScheduledTask}}"></a>
+                  <a target="_self" class="icon-grid-edit" ng-href="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}" id="edit-{{row.IdScheduledTask}}"></a>
                 </span>
                 <span data-static-tooltip="{{ 'actions.delete' | translate }}" class="to-left">
                   <a id="delete-{{row.IdScheduledTask}}" ng-click="disableDeletedRows(); row.deleting=true" ><img src="../../../images/grid-delete.svg" /></a>

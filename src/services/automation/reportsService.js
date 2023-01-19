@@ -78,10 +78,12 @@
       });
     }
    
-    function getPushResults(id) {
+    function getPushResults(id, pushIds, reportType) {
       return $http.get('/Automation/ReportTask/GetPushNotificationResult', {
         params: {
-          idScheduledTask: id
+          idScheduledTask: id,
+          pushIds: pushIds,
+          reportType: reportType
         }
       }).then(function(response) {
         return response.data.data;

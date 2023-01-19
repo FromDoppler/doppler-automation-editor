@@ -14,12 +14,15 @@
     'settingsService',
     'actionsDataservice',
     'AUTOMATION_TYPE',
+    'templatesService',
     'selectedElementsService',
-    'changesManager'
+    'changesManager',
+    'CONTENT_TYPE'
   ];
 
   function dpEditorCampaign($rootScope, $timeout, ModalService, automation, conditionsDataservice, settingsService,
-    actionsDataservice, AUTOMATION_TYPE, selectedElementsService, changesManager) {
+    actionsDataservice, AUTOMATION_TYPE, templatesService, selectedElementsService, changesManager,
+    CONTENT_TYPE) {
     var directive = {
       restrict: 'E',
       scope: {
@@ -139,13 +142,13 @@
         selectedElementsService.setSelectedComponent(campaign);
         if (!automation.getIsProcessing()) {
           switch (campaign.contentType) {
-            case "tinyEditor":
+            case CONTENT_TYPE.TINY_EDITOR:
               callParentMethod(scope, "toogleTinyEditorView", true);
               break;
-            case "template":
-              window.location.href = '/MSEditor/Editor?idCampaign=' + campaign.id;
+            case CONTENT_TYPE.TEMPLATE:
+              window.location.href = templatesService.getEditorCampaignUrl(campaign.id, campaign.editorType);
               break;
-            case "import":
+            case CONTENT_TYPE.IMPORT:
               callParentMethod(scope, "toggleImportHtmlView", true);
               break;
             default:

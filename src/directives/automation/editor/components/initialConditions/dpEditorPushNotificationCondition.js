@@ -66,16 +66,6 @@
         }
       });
 
-      var parent = automation.getAllParentComponents();
-
-      if (parent && parent[1].children.length < 1) {
-        var pushNotificationComponent = {
-          campaignType: scope.component.automationType,
-          parentUid: scope.$parent.component.parentUid,
-          type: COMPONENT_TYPE.PUSH_NOTIFICATION
-        };
-        automation.addComponent(pushNotificationComponent, scope.$parent.component.parentUid);
-      }
       scope.isInitialConditionComplete = function() {
         if (scope.component.completed) {
           pushService.setInitialComponentCompleted(true);

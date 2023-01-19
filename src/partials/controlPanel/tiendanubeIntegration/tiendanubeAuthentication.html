@@ -62,6 +62,18 @@
           {{ 'tiendanube_integration.connected.disconnect' | translate }}
         </button>
       </section>
+      <div class="dp-library margin-t-20 margin-b-20" ng-show="tiendanube.autoSyncDisabled && tiendanube.connected && tiendanube.integratedLists.length">
+        <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message dp-content-full">
+            <span class="text--small">
+              {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
+              <a target="_self" href="{{tiendanube.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+              {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="dp-library margin-t-20 margin-b-20" ng-show="tiendanube.connectionError">
         <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
           <span class="dp-message-icon"></span>
@@ -78,7 +90,7 @@
   </div>
   <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !tiendanube.connected}" ng-show="!tiendanube.connected">
     <a class="button button--alternative" ng-disabled="tiendanube.connecting"
-       href="/ControlPanel/ControlPanel?section=Integration"
+       href="{{tiendanube.webAppUrl}}/Integrations#native-integrations"
        id="back-button">{{ 'actions.cancel' | translate }}</a>
     <button id="save_info" type="submit"
             ng-class="{'button--spinner' : tiendanube.connecting}" ng-click="tiendanube.disconnected = false;" 

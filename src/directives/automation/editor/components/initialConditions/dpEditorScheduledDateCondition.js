@@ -12,11 +12,12 @@
     'settingsService',
     'automation',
     'AUTOMATION_COMPLETED_STATE',
-    'dateValidation'
+    'dateValidation',
+    'warningsStepsService'
   ];
 
   function dpEditorScheduledDateCondition($translate, FREQUENCY_TYPE, MAX_ITEMS_TO_SHOW,
-    settingsService, automation, AUTOMATION_COMPLETED_STATE, dateValidation) {
+    settingsService, automation, AUTOMATION_COMPLETED_STATE, dateValidation, warningsStepsService) {
     var directive = {
       restrict: 'E',
       scope: {
@@ -46,6 +47,10 @@
       scope.hasErrors = function() {
         return scope.isFlowComplete() === AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS;
       };
+
+      scope.component.hasBlockedList = automation.hasBlockedList();
+      warningsStepsService.checkWarningStep(scope.component);
+      automation.checkCompleted();
 
       scope.getFrequencySummaryFor = function(frequencyType) {
         var innerHtml = '';
@@ -247,6 +252,18 @@
           timeZoneList.push(zone);
         });
         return timeZoneList;
+      }
+
+      scope.hasBlockedList = function(){
+        return automation.hasBlockedList();
+      }
+      
+      scope.getTipMessage = function(){
+        if (scope.hasBlockedList()) {
+          return $translate.instant('automation_editor.canvas.tip_initial_condition_blocked')
+        } else{
+          return $translate.instant('automation_editor.canvas.tip_initial_condition')
+        }
       }
     }
   }

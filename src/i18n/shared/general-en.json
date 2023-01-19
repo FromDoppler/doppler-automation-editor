@@ -225,6 +225,12 @@
         "days_to_disconnect_plural_1": "If the problem continues during the next",
         "days_to_disconnect_plural_2": "days, we'll have to disconnect it. We'll notify you if we do it.",
         "days_to_disconnect_singular": "If the problem continues, we’ll have to disconnect it tomorrow. We'll notify you if we do it."
+      },
+      "sync_disabled": {
+        "text1": "Auto sync is paused because your account has expired. ",
+        "text2": " and take the most of all the Doppler’s functions.",
+        "link": "/plan-selection/premium/by-contacts?origin=warning_integration",
+        "link_text": "Hire a plan"
       }
     }
   },

@@ -1,48 +1,77 @@
 <div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
-    ng-show="easycommerce.connected && easycommerce.showMapping">
-    <div>
-        <div class="authentication-container connected">
-            <div>
-                <span class="control-panel-section-title">{{ 'easycommerce_integration.mapping.title' | translate }}</span>
-                <span class="control-panel-section-subtitle">{{ 'easycommerce_integration.mapping.subtitle' | translate }}</span>
-            </div>
-        </div>
-        <hr class="full" style="width: calc(100% + 40px);" />
-        <p class="integration-information-text">{{ 'easycommerce_integration.mapping.selected_data_entity' | translate }}: <strong>{{ easycommerce.selectedEntity.description }}</strong>
-        </p>
-        <p class="integration-information-text">{{ 'easycommerce_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ easycommerce.selectedList.ListName }}</strong></p>
-        <div class="mapping-container">
-            <div class="grayPanel-box flex-grid" ng-repeat="field in easycommerce.easycommerceFields" dp-on-finish-ng-repeat>
-                <div>
-                  <p>{{ 'easycommerce_integration.mapping.data_entity_field' | translate }}: <b>{{ easycommerce.getFiledName(field.Name) }}</b></p>
-                </div>
-                <div>
-                    <dropdown class="dropdown dropdown--big"
-                        placeholder="{{'easycommerce_integration.mapping.select_field_placeholder' | translate}}"
-                        id="dd-userFields{{$index}}" list="easycommerce.availablesFields"
-                        name="easycommerce.userFields" ng-model="field.idDopplerField" ng-required="true"
-                        property="name" id-value="idField" ng-change="easycommerce.setAvailablesFields()"
-                        ng-disabled="easycommerce.availablesFields && easycommerce.availablesFields.length == 0" ng-click="easycommerce.errorMessage=''"></dropdown>
-                </div>
-            </div>
-        </div>
+     ng-show="easycommerce.connected && easycommerce.showMapping">
+  <div>
+    <div class="authentication-container connected">
+      <div>
+        <span class="control-panel-section-title">{{ 'easycommerce_integration.mapping.title' | translate }}</span>
+        <span class="control-panel-section-subtitle">{{ 'easycommerce_integration.mapping.subtitle' | translate }}</span>
+      </div>
     </div>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="!!easycommerce.errorMessage.length">
-      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
-        <span class="dp-message-icon"></span>
-        <div class="dp-content-message dp-content-full">
-          <span>{{ easycommerce.errorMessage }}</span>
+    <hr class="full" style="width: calc(100% + 40px);" />
+    <p class="integration-information-text">
+      {{ 'easycommerce_integration.mapping.selected_data_entity' | translate }}: <strong>{{ easycommerce.selectedEntity.description }}</strong>
+    </p>
+    <p class="integration-information-text">{{ 'easycommerce_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ easycommerce.selectedList.ListName }}</strong></p>
+    <div class="mapping-container">
+      <div ng-repeat="field in easycommerce.easycommerceFields" dp-on-finish-ng-repeat>
+        <div class="grayPanel-box flex-grid">
+          <div>
+            <p>{{ 'easycommerce_integration.mapping.data_entity_field' | translate }}: <b>{{ easycommerce.getFiledName(field.Name) }}</b></p>
+          </div>
+          <div>
+            <select id="dd-userFields{{$index}}"
+                    name="select-field{{$index}}"
+                    ng-model="field.idDopplerField"
+                    property="name"
+                    id-value="idField"
+                    ng-options="field.idField as field.name for field in easycommerce.userFields  | filter:easycommerce.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+                    ng-click="easycommerce.errorMessage=''"
+                    class="selector field-selector"
+                    ng-required="true"
+                    ng-change="easycommerce.fieldChange($index, field.idDopplerField)">
+              <option value="" disabled="disabled">{{'easycommerce_integration.mapping.select_field_placeholder' | translate}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="createCustomField-box" ng-show="$index == easycommerce.newField.index">
+          <input type="text" class="name" id="Name" name="Name" value="" ng-model="easycommerce.newField.name" maxlength="50" ng-click="easycommerce.newField.error=''">
+          <select id="dd-fieldTypes{{$index}}"
+                  name="select-field-type{{$index}}"
+                  ng-model="easycommerce.newField.dataType"
+                  ng-options="type.id as type.name for type in easycommerce.fieldTypes"
+                  class="selector customFieldTypeDropDown"
+                  ng-required="true"
+                  ng-disabled="true">
+          </select>
+          <div class="visibility-container">
+            <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="easycommerce.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'easycommerce_integration.mapping.new_field.public_opt' | translate}}</label>
+            <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="easycommerce.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'easycommerce_integration.mapping.new_field.private_opt' | translate}}</label>
+          </div>
+          <div class="validationTooltip-container" ng-show="easycommerce.newField.error">
+            <span class="validationTooltip-image"></span>
+            <span class="validation-tooltip">{{ easycommerce.newField.error }}</span>
+          </div>
+          <input type="submit" value="{{'easycommerce_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="easycommerce.createField($index)">
         </div>
       </div>
     </div>
-    <div class="flex-grid-v-center--s-between">
-        <button ng-click="easycommerce.goBack()" class="button button--alternative">
-                {{ 'easycommerce_integration.mapping.back' | translate }}
-        </button>
-        <button ng-class="{'button--spinner' : easycommerce.isMapping}" ng-click="easycommerce.mapFields()"
-                class="button button--primary">
-          {{ 'easycommerce_integration.connected.synchronize' | translate }}
-          <span class="icon-editor-saving hide"></span>
-        </button>
+  </div>
+  <div class="dp-library margin-t-20 margin-b-20" ng-show="!!easycommerce.errorMessage.length">
+    <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <span class="dp-message-icon"></span>
+      <div class="dp-content-message dp-content-full">
+        <span>{{ easycommerce.errorMessage }}</span>
+      </div>
     </div>
+  </div>
+  <div class="nav-button-bar flex-grid-v-center--s-between">
+    <button ng-click="easycommerce.goBack()" class="button button--alternative">
+      {{ 'easycommerce_integration.mapping.back' | translate }}
+    </button>
+    <button ng-class="{'button--spinner' : easycommerce.isMapping}" ng-click="easycommerce.mapFields()"
+            class="button button--primary">
+      {{ 'easycommerce_integration.connected.synchronize' | translate }}
+      <span class="icon-editor-saving hide"></span>
+    </button>
+  </div>
 </div>

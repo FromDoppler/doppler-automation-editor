@@ -85,6 +85,9 @@
         border-color: $color-red;
         &:hover {
           border-color: $color-red;
+          p {
+            color: $color-red;
+          }
         }
         .icon-pointer {
           color: $color-red;
@@ -799,7 +802,10 @@
       .initial-step--container {
         border-bottom:3px solid $color-primary;
         &.is-error {
-          border-color: $color-red;
+          border-bottom: 5px solid $color-red;
+          &:hover p {
+            color: $color-red;
+          }
         }
         cursor: pointer;
         &:hover p {

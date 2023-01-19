@@ -52,6 +52,7 @@
 		"add_step_title" : "Añade un paso a tu Flujo de Automation",
 		"tip_add_element" : "Comienza a definir los pasos <br />de tu Flujo de Automation",
 		"tip_initial_condition": "Configura el inicio del Flujo desde el menú lateral",
+    "tip_initial_condition_blocked": "Hay Contactos que afectan la calidad de tus envíos",
 		"wait_time_part1" : "Esperar",
 		"campaign_aspects" : "Define la información de tu envío",
 		"right_now": "Inmediatamente",
@@ -502,7 +503,7 @@
 		"footer_tip": "Selecciona las Listas o Segmentos y continúa con la edición de tu Automation",
 		"segments" : " (Segmento)",
 		"doppler_tip": "Aprovecha para segmentar tus Suscriptores por distintos criterios como edad o país de residencia.",
-    "all_contacts": "Enviar a todos mis contactos (Todas tus Listas serán seleccionadas)",
+    "all_contacts": "Enviar a todos mis contactos",
     "blocked_list": "Hay Suscriptores que afectan la calidad de tu Lista. Entérate más.",
     "blocked_list_link": "Entérate más.",
     "blocked_list_href":  "https://help.fromdoppler.com/es/listas-bloqueadas",
@@ -700,6 +701,9 @@
       "list_tip": "¿Tienes dudas sobre cómo crear tu Campaña de Automation por Suscripción a Lista?",
       "list_tip_part2": "Presiona",
       "list_selected": "Has seleccionado",
+      "list_blocked_tooltip": "La Lista fue bloqueada.",
+      "list_blocked_tooltip_more_information": "Revísala en tus listas y segmentos.",
+      "list_or_segment_blocked": "No puedes incluir Listas o Segmentos bloqueados.",
       "list_all_my_contacts_selected": "Todos mis contactos",
       "list_tip_link_text": "Help",
       "list_tip_link_url": "https://help.fromdoppler.com/es/como-crear-email-automation-ingreso-lista/",
@@ -749,7 +753,7 @@
       "Domains_select_button": "Seleccionar dominio",
       "Push_notification_campaign_tip": "¿Tienes dudas sobre cómo crear un Automation de notificaciones Push?",
       "Push_notification_campaign_tip_part2": "Revisa el",
-      "Push_notification_campaign_tip_link_url": "https://help.fromdoppler.com/es/automation-notificaciones-push",
+      "Push_notification_campaign_tip_link_url": "https://help.fromdoppler.com/es/como-activar-y-usar-envio-notificaciones-push",
       "Push_notification_campaign_tip_link_text": "HELP",
       "Push_notification_campaign_title": "Define el tipo de envío",
       "Push_notification_campaign_send_now_title": "Envío Inmediato",
@@ -759,6 +763,7 @@
       "Push_notification_campaign_field_date": "Fecha:",
       "Push_notification_campaign_date_picker_current_text": "Hoy",
       "Push_notification_campaign_field_hour": "Hora:",
+      "Push_name": "Nombre del Push",
       "goto_title": "¿Con qué paso lo quieres conectar?",
       "goto_title_tip": "Elige una opción del siguiente listado o selecciona un paso en el lienzo.",
       "goto_bottom_detail": "Algunos pasos están deshabilitados para evitar crear flujos infinitos.",
@@ -783,7 +788,7 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce",
           "option11": "easycommerce",
           "option14": "MiTienda"
@@ -814,10 +819,11 @@
           "option5": "Vtex",
           "option6": "Prestashop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce",
           "option11": "easycommerce",
-          "option14": "MiTienda"
+          "option14": "MiTienda",
+          "option15": "Jumpseller"
         },
         "drop_down_time_options": {
           "option0": "24 horas",
@@ -831,7 +837,6 @@
           "option30240": "3 Semanas"
         },
         "drop_down_ecommerce_errors": {
-          "error2": "¡Ouch! No has habilitado el periodo de prueba de Seguimiento en Sitio. <a href='/Automation/EditorConfig?idTaskType=0' class='text--underline' target='_self'>HABILÍTALO AHORA</a>.",
           "error3": "¡Ouch! No has habilitado la funcionalidad de Seguimiento en Sitio. <a href='/ControlPanel/CampaignsPreferences/SiteTrackingSettings' class='text--underline' target='_self'>HABILÍTALA AHORA</a>.",
           "error4": "¡Ouch! No has agregado y verificado el dominio del Sitio Web sobre el que quieres hacer el seguimiento. <a href='/ControlPanel/CampaignsPreferences/SiteTrackingSettings' class='text--underline' target='_self'>HAZLO AHORA</a>."
         }
@@ -853,7 +858,7 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce"
         },
         "drop_down_time_options": {
@@ -879,7 +884,7 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce"
         }
       },
@@ -890,8 +895,8 @@
       "push_message_on_click_link": "URL de destino (opcional)",
       "push_uploader_title" : "Imagen (opcional)",
       "push_uploader_retry_button" : "reintentar",
-      "push_uploader_drag_title" : "Arrastra Aquí o",
-      "push_uploader_button" : "Selecciona una Imagen"
+      "push_uploader_drag_title" : "Arrastra aquí o",
+      "push_uploader_button" : "Selecciona una imagen"
     },
     "steps": {
       "without_recorded": "SIN PASOS REGISTRADOS",
@@ -911,7 +916,8 @@
       "push_notification_not_defined": "Push sin definir",
       "push_notifications_not_defined": "Push sin definir",
       "goto_not_defined": "Ir al Paso sin definir",
-      "gotos_not_defined": "Ir a los Pasos sin definir"
+      "gotos_not_defined": "Ir a los Pasos sin definir",
+      "initial_condition_not_defined": "Condición inicial bloqueada"
     },
 	"saved": "Guardado",
 	"saving": "Guardando",
@@ -999,7 +1005,12 @@
       "title11": "Notificaciones Push",
       "description11": "Envía alertas con ofertas o información relevante a los visitantes de tu Sitio Web o Tienda Online.",
       "start11_message": "Tienes al menos un dominio verificado. CREAR AUTOMATION",
+      "title12": "Envío de SMS masivos",
+      "description12": "Usa mensajes SMS automatizados para potenciar tu estrategia de omnicanalidad.",
+      "start12_message": "Llega a tus contactos con mensajes directos en sus teléfonos.",
       "buy": "COMPRAR",
+      "buySms_message": "Primero estima el costo según el país y carga fondos para estas campañas.",
+      "buySms": "ESTIMAR COSTO",
       "error_message": "¡Ouch! No hay dominios verificados.",
       "continue": "CONTINUAR",
       "warning_message": "¡Psst! Necesitas habilitar la funcionalidad y verificar los dominios agregados.",

@@ -286,7 +286,7 @@
             <div class="group--container alt">
                 <input type="text" class="input--text" ng-disabled="selectedComponent.emailOption === TEST_OPTION.LIST || !canEdit()" ng-class="{'hasErrors': testEmailForm.testEmail.$dirty && !isSubscriberEmail(selectedComponent.emailList) }" name="testEmail" ng-pattern="REGEX_SUBSCRIBER_EMAIL" ng-model="selectedComponent.emailList"/>
                 <button ng-disabled="!selectedComponent.emailList || selectedComponent.emailOption === TEST_OPTION.LIST || sendingTest || !canEdit()"  ng-click="sendTestToEmails()" class="button button--small button--primary">{{ 'automation_editor.sidebar.campaign_send_test_send_button' | translate }}</button>
-                <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
+                <span class="read-only--tooltip positive--alignment" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
             </div>
             <div ng-messages="testEmailForm.testEmail.$error" class="error-messages--container" >
                 <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>

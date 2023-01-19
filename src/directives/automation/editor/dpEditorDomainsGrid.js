@@ -45,7 +45,7 @@
       var automationModel = automation.getModel();
 
       $scope.gridModel = gridService.initGrid({
-        getDataUrl: '/AutomationMFE/Task/GetPushValidDomains',
+        getDataUrl: '/Automation/Task/GetPushValidDomains',
         isSelectElementGrid: true,
         selectedItemOptions: selectedItemOptions,
         automationId: selectedComponent.operation ? automationModel.id : 0

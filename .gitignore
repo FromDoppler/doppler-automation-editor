@@ -1,7 +1,18 @@
-logs/*
-!.gitkeep
+# dependencies
 node_modules/
-dist/
-tmp
+
+# production
+/app
+/dist
+
+# misc
+!.gitkeep
+npm-debug.log*
+package-lock.json*
+
+# OS files (OSX, Windows)
 .DS_Store
+Thumbs.db
+
+#InteliJ
 .idea

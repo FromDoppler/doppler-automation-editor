@@ -22,25 +22,47 @@
           </div>
         </div>
         <div class="mapping-container">
-            <div class="grayPanel-box flex-grid" ng-repeat="field in bmwCrm.bmwCrmFields" dp-on-finish-ng-repeat>
-                <div>
-                  <p>{{ 'bmwcrm_integration.mapping.data_entity_field' | translate }}: <b>{{ bmwCrm.getFiledName(field.Name) }}</b></p>
-                </div>
-                <div>
-                    <dropdown class="dropdown dropdown--big"
-                        placeholder="{{'bmwcrm_integration.mapping.select_field_placeholder' | translate}}"
-                        id="dd-userFields{{$index}}"
-                        list="bmwCrm.availablesFields"
-                        name="bmwCrm.userFields"
+          <div ng-repeat="field in bmwCrm.bmwCrmFields" dp-on-finish-ng-repeat>
+            <div class="grayPanel-box flex-grid">
+              <div>
+                <p>{{ 'bmwcrm_integration.mapping.data_entity_field' | translate }}: <b>{{ bmwCrm.getFiledName(field.Name) }}</b></p>
+              </div>
+              <div>
+                <select id="dd-userFields{{$index}}"
+                        name="select-field{{$index}}"
                         ng-model="field.idDopplerField"
-                        ng-required="true"
                         property="name"
                         id-value="idField"
-                        ng-change="bmwCrm.setAvailablesFields()"
-                        ng-disabled="bmwCrm.availablesFields && bmwCrm.availablesFields.length == 0"
-                        ng-click="bmwCrm.errorMessage=''"></dropdown>
-                </div>
+                        ng-options="field.idField as field.name for field in bmwCrm.userFields  | filter:bmwCrm.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+                        ng-click="bmwCrm.errorMessage=''"
+                        class="selector field-selector"
+                        ng-required="true"
+                        ng-change="bmwCrm.fieldChange($index, field.idDopplerField)">
+                  <option value="" disabled="disabled">{{'bmwcrm_integration.mapping.select_field_placeholder' | translate}}</option>
+                </select>
+              </div>
             </div>
+            <div class="createCustomField-box" ng-show="$index == bmwCrm.newField.index">
+              <input type="text" class="name" id="Name" name="Name" value="" ng-model="bmwCrm.newField.name" maxlength="50" ng-click="bmwCrm.newField.error=''">
+              <select id="dd-fieldTypes{{$index}}"
+                      name="select-field-type{{$index}}"
+                      ng-model="bmwCrm.newField.dataType"
+                      ng-options="type.id as type.name for type in bmwCrm.fieldTypes"
+                      class="selector customFieldTypeDropDown"
+                      ng-required="true"
+                      ng-disabled="true">
+              </select>
+              <div class="visibility-container">
+                <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="bmwCrm.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'bmwcrm_integration.mapping.new_field.public_opt' | translate}}</label>
+                <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="bmwCrm.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'bmwcrm_integration.mapping.new_field.private_opt' | translate}}</label>
+              </div>
+              <div class="validationTooltip-container" ng-show="bmwCrm.newField.error">
+                <span class="validationTooltip-image"></span>
+                <span class="validation-tooltip">{{ bmwCrm.newField.error }}</span>
+              </div>
+              <input type="submit" value="{{'bmwcrm_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="bmwCrm.createField($index)">
+            </div>
+          </div>
         </div>
     </div>
     <div class="dp-library margin-t-20 margin-b-20" ng-show="!!bmwCrm.errorMessage.length">
@@ -51,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="flex-grid-v-center--s-between">
+    <div class="nav-button-bar flex-grid-v-center--s-between">
         <button ng-click="bmwCrm.goBack()" class="button button--alternative">
                 {{ 'bmwcrm_integration.mapping.back' | translate }}
         </button>

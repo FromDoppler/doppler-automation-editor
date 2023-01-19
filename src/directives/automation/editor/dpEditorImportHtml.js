@@ -192,7 +192,7 @@
 
       $scope.dropzoneConfig = {
         'options': {
-          'url': '/AutomationMFE/Content/SubmitFile?idCampaign=' + selectedEmail.id.toString() + '&validateDynamicContent=' + $scope.isDynamicAutomation,
+          'url': '/Automation/Content/SubmitFile?idCampaign=' + selectedEmail.id.toString() + '&validateDynamicContent=' + $scope.isDynamicAutomation,
           'maxFiles': 1,
           'addReomveLinks': true,
           'paramName': 'fileName',

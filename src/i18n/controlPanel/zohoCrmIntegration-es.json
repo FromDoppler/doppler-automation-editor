@@ -58,15 +58,22 @@
     },
     "mapping": {
       "title": "Mapeo de Campos",
-      "subtitle": "Selecciona los Campos que deseas importar a tu Lista.",
-      "selected_data_entity": "Módulo seleccionado",
-      "selected_subscriber_list": "Lista seleccionada",
+      "subtitle": "Importa datos de tus contactos en otras apps hacia tu lista de Doppler. Crea un nuevo campo personalizado si no lo encuentras entre las opciones, o también lo puedes omitir.",
+      "selected_data_entity": "Origen de contactos",
+      "selected_subscriber_list": "Destino en Doppler",
       "data_entity_field": "Campo",
       "select_field_placeholder": "Selecciona un campo...",
       "skip_column_option": "Saltear Columna",
+      "add_field_option": "Crear campo personalizado",
       "empty_email_error_message": "Ouch! Debes seleccionar al menos un campo email.",
       "back": "Atrás",
-      "next": "Continuar"
+      "next": "Continuar",
+      "new_field": {
+        "public_opt": "Público",
+        "private_opt": "Privado",
+        "button": "Crear",
+        "required_message": "Ouch! Este campo es requerido"
+      }
     }
   }
 }

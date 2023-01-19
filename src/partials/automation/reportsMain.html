@@ -1,16 +1,30 @@
-<div class="section-separation"> <!-- breadcrum -->
-			<div class="path-info breadCrumb">
-				<a id="link-to-list" href="/Automation/Automation/AutomationApp/" target="_self">{{ 'automationTypes.automation_breadcrumb.all_automations' | translate }}</a> <span class="path-info-separator"> > </span>
-				<span>{{taskName}}</span>
-			</div>
-		</div><!-- breadcrum -->
+<div class="dp-library">
+  <header class="hero-banner">
+    <div class="dp-container">
+      <div class="dp-rowflex">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <nav class="dp-breadcrumb">
+            <ul>
+              <li>
+                <a id="link-to-list" href="/Automation/Automation/AutomationApp/" target="_self">{{ 'automationTypes.automation_breadcrumb.all_automations' | translate }}</a>
+              </li>
+              <li>
+                <span>{{taskName}}</span>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  </div>
 
 		<div class="automation-summary-section" id="reports-header"> <!-- header -->
 				<h2 id="task_name_title" class="sectionBox-title">{{taskName}}</h2>
       <ul class="menu-horizontal">
-        <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==0}" ng-click="reportsType=0;getResults();">{{ 'ScheduledTask_Reports_Campaigns_title' | translate }}</li>
-        <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==1}" ng-click="reportsType=1;getSmsResults();">{{ 'ScheduledTask_Reports_Sms_title' | translate }}</li>
-        <li ng-show="reportsType==2" class="item-menu" ng-class="{'active':reportsType==2}" ng-click="reportsType=2;getPushResults();">{{ 'ScheduledTask_Reports_Push_title' | translate }}</li>
+        <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==0}" ng-click="onClickTabReport(0)">{{ 'ScheduledTask_Reports_Campaigns_title' | translate }}</li>
+        <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==1}" ng-click="onClickTabReport(1)">{{ 'ScheduledTask_Reports_Sms_title' | translate }}</li>
+        <li ng-show="reportsType==2" class="item-menu" ng-class="{'active':reportsType==2}" ng-click="onClickTabReport(2)">{{ 'ScheduledTask_Reports_Push_title' | translate }}</li>
       </ul>
 				<div class="automation-summary-section__container">
 
@@ -41,7 +55,7 @@
       <div class="report-options">
         <dropdown id="dd-when-sent-filter" class="dropdown report-filter" list="options" ng-model="selectedOption.id" ng-change="changeOption(selectedOption.id);" property="name" id-value="id"></dropdown>
 
-        <div class="action-filter" ng-show="reportsType==0">
+        <div class="action-filter" ng-show="reportsType==0" tabindex="0" ng-blur="onBlurFilter($event, showActionFilter, toggleActionFilter);">
           <!-- action filter -->
           <a id="dd-actions" class="fake-dropdown report-filter" ng-click="toggleActionFilter();clearActionFilters();">{{'ScheduledTask_Reports_Filter_Action' | translate}} <span class="dropdown-arrow"></span></a>
           <div class="fake-dropdown--container" ng-show="showActionFilter">
@@ -63,7 +77,7 @@
           </div>
         </div><!-- action filter -->
 
-        <div class="action-filter" ng-show="reportsType==1">
+        <div class="action-filter" ng-show="reportsType==1"  tabindex="0" ng-blur="onBlurFilter($event, showSmsFilter, toggleSmsFilter);">
           <!-- sms filter -->
           <a id="sms-actions" class="fake-dropdown report-filter" ng-click="toggleSmsFilter();">{{'ScheduledTask_Reports_Filter_Action' | translate}} <span class="dropdown-arrow"></span></a>
           <div class="fake-dropdown--container" ng-show="showSmsFilter">
@@ -83,6 +97,31 @@
             </div>
           </div>
         </div><!-- sms filter -->
+
+        <div class="action-filter" ng-show="reportsType==2" tabindex="0" ng-blur="onBlurFilter($event, showPushFilter, togglePushFilter);">
+          <!-- push filter -->
+          <a id="push-actions" class="fake-dropdown report-filter" ng-click="togglePushFilter();">{{'ScheduledTask_Reports_Filter_Action_Push' | translate}} <span class="dropdown-arrow"></span></a>
+          <div class="fake-dropdown--container" ng-show="showPushFilter">
+            <hr />
+            <div class="fake-dropdown-elements" id="pushList" ng-nicescroll=ng-nicescroll nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}">
+              <div ng-repeat="item in itemsPush">
+                <div class="action--container">
+                  <img src="/../images/automation-push_notification.svg" dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg" class="html-preview-img sms-image" alt="campaign preview" />
+                  <checkbox ng-model="item.selected"></checkbox>
+                  <span>
+                    <p>{{item.domain}}</p>
+                    <p>{{item.title}}</p>
+                    <p>{{item.body}}</p>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="button--container">
+              <a ng-click="togglePushFilter();clearPushFilters();">{{'ScheduledTask_Reports_CancelFilter' | translate}}</a> <button class="green-small" ng-click="filterPush();">{{'ScheduledTask_Reports_Filter' | translate}}</button>
+            </div>
+          </div>
+        </div><!-- push filter -->
 
       </div>
 
@@ -128,7 +167,7 @@
 				</div>
 		</div><!-- header -->
 
-		<div class="automation-report-container dp-library" ng-show="reportsType == 0 && false">
+		<div class="automation-report-container dp-library" ng-show="reportsType == 0">
 			<div class="automation-report-card">
 				<h3 class="sectionBox-title-secondary"><span class="dpicon iconapp-infographic-file"></span>{{'ScheduledTask_Export_Automation_Campaign_Title' | translate}}</h3>
 				<p class="automation-report-description">{{'ScheduledTask_Export_Automation_Campaign_Description' | translate}}</p>

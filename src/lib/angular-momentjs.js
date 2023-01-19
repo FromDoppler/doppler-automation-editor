@@ -146,4 +146,4 @@
             return _asyncLoading ? deferred.promise : _moment;
         } ];
     });
-})(this, this.angular, void 0);
+})(window, window.angular, void 0);

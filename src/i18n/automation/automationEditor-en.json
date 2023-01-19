@@ -52,6 +52,7 @@
 		"add_step_title" : "Add a step to your Automation Flow",
 		"tip_add_element" : "Start defining the steps in your<br />Automation Flow",
 		"tip_initial_condition": "Set the Flow starting point up from the side menu",
+    "tip_initial_condition_blocked": "There are contacts that affect the quality of your sendings",
 		"wait_time_part1" : "Wait",
 		"campaign_aspects" : "Define your shipment information",
 		"right_now": "Inmediately",
@@ -502,7 +503,7 @@
 		"footer_tip": "Select a List and continue editing your Email Automation Campaign",
 		"segments" : " (Segment)",
 		"doppler_tip": "Create a Segment based on different criterias like your Subscriber's age or location.",
-    "all_contacts": "Send to all my contacts (All your Lists will be selected)",
+    "all_contacts": "Send to all my contacts",
     "blocked_list": "There’re Subscribers that affect the quality of your List. Learn more.",
     "blocked_list_link": "Learn more.",
     "blocked_list_href": "https://help.fromdoppler.com/en/blocked-lists",
@@ -701,6 +702,9 @@
       "list_tip": "Do you have any doubt about how to create a Signup-based Automation Campaign?",
       "list_tip_part2": "Press",
       "list_selected": "You've selected",
+      "list_blocked_tooltip": "The List was blocked.",
+      "list_blocked_tooltip_more_information": "Check it at lists and segments.",
+      "list_or_segment_blocked": "You can't include locked Lists or Segments.",
       "list_all_my_contacts_selected": "All my contacts",
       "list_tip_link_text": "Help",
       "list_tip_link_url": "https://help.fromdoppler.com/en/como-crear-email-automation-ingreso-lista/",
@@ -750,7 +754,7 @@
       "Domains_select_button": "Select domain",
       "Push_notification_campaign_tip": "Any doubt about how to create a Push notification Automation?",
       "Push_notification_campaign_tip_part2": "Take a look at the",
-      "Push_notification_campaign_tip_link_url": "https://help.fromdoppler.com/en/push-notifications-automation",
+      "Push_notification_campaign_tip_link_url": "https://help.fromdoppler.com/en/how-to-active-and-use-send-push-notification",
       "Push_notification_campaign_tip_link_text": "HELP",
       "Push_notification_campaign_title": "Define the sending type",
       "Push_notification_campaign_send_now_title": "Immediate Send Out",
@@ -760,6 +764,7 @@
       "Push_notification_campaign_field_date": "Date:",
       "Push_notification_campaign_date_picker_current_text": "Today",
       "Push_notification_campaign_field_hour": "Hour:",
+      "Push_name": "Push Name",
       "goto_title": "What step do you want to connect it with?",
       "goto_title_tip": "Choose an option from the list below or select a step on the canvas.",
       "goto_bottom_detail": "Some steps are disabled to avoid creating infinite flows.",
@@ -784,7 +789,7 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce",
           "option11": "easycommerce",
           "option14": "MiTienda"
@@ -815,10 +820,11 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce",
           "option11": "easycommerce",
-          "option14": "MiTienda"
+          "option14": "MiTienda",
+          "option15": "Jumpseller"
         },
         "drop_down_time_options": {
           "option0": "24 hours",
@@ -832,7 +838,6 @@
           "option30240": "3 Weeks"
         },
         "drop_down_ecommerce_errors": {
-          "error2": "Ouch! You haven't enabled the On-Site Tracking free trial. <a href='/Automation/EditorConfig?idTaskType=0'  class='text--underline' target='_self'>ENABLE IT NOW</a>.",
           "error3": "Ouch! You haven't enable the On-Site Tracking feature. <a href='/ControlPanel/CampaignsPreferences/SiteTrackingSettings' class='text--underline' target='_self'>ENABLE IT NOW</a>.",
           "error4": "Ouch! You haven't added and verified the domain of the Website you want to track down. <a href='/ControlPanel/CampaignsPreferences/SiteTrackingSettings' class='text--underline' target='_self'>DO IT NOW</a>."
         }
@@ -854,7 +859,7 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce"
         },
         "drop_down_time_options": {
@@ -880,7 +885,7 @@
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce"
         }
       },
@@ -891,8 +896,8 @@
       "push_message_on_click_link": "Destination URL (optional)",
       "push_uploader_title" : "Image (optional)",
       "push_uploader_retry_button" : "retry",
-      "push_uploader_drag_title" : "Drag Here o",
-      "push_uploader_button" : "Select Image"
+      "push_uploader_drag_title" : "Drag here or",
+      "push_uploader_button" : "Select an image"
     },
     "steps": {
       "without_recorded": "NO REGISTERED STEPS",
@@ -912,7 +917,8 @@
       "push_notification_not_defined": "Undefined Push",
       "push_notifications_not_defined": "Undefined Push",
       "goto_not_defined": "Undefined Go to Step",
-      "gotos_not_defined": "Undefined Go to Steps"
+      "gotos_not_defined": "Undefined Go to Steps",
+      "initial_condition_not_defined": "Intial condition blocked"
     },
 	"saved": "Saved",
 	"saving": "Saving",
@@ -1000,7 +1006,12 @@
       "title11": "Push Notifications",
       "description11": "Send alerts with special offers or relevant information to your Website or E-commerce visitors.",
       "start11_message": "You have at least one verified domain. CREATE YOUR AUTOMATION",
+      "title12": "Mass SMS sending",
+      "description12": "Use automated SMS messages to enhance your omnichannel strategy.",
+      "start12_message": "Reach your contacts with direct messages on their phones.",
       "buy": "BUY NOW",
+      "buySms": "ESTIMATE COST",
+      "buySms_message": "First estimate the cost by country and charge funds for these campaigns.",
       "error_message": "Ouch! There are no verified domains.",
       "continue": "CONTINUE",
       "warning_message": "Pst! You need to enable the functionality and verify the added domains.",

@@ -15,12 +15,13 @@
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
     'BASIC_FIELD',
-    'VTEX_FIELD_TYPE'
+    'VTEX_FIELD_TYPE',
+    'FIELD_TYPE'
   ];
 
   function vtexIntegrationCtrl($scope, $translate, ModalService,
     vtexService, $timeout, INTEGRATION_CODES, IMPORTING_STATE,
-    IMPORTING_STATE_STR, BASIC_FIELD, VTEX_FIELD_TYPE) {
+    IMPORTING_STATE_STR, BASIC_FIELD, VTEX_FIELD_TYPE, FIELD_TYPE) {
     var vm = this;
     vm.isLoading = true;
     vm.connectionError = false;
@@ -36,12 +37,14 @@
     vm.isLoadingVtexFields = false;
     vm.showMapping = false;
     vm.isMapping = false;
+    vm.newField = null;
 
     $translate.onReady().then(function() {
       vm.entityPlaceholder = $translate.instant('vtex_integration.connected.select_entity_placeholder');
       vm.listPlaceholder = $translate.instant('vtex_integration.connected.select_list_placeholder');
       vm.getStatus(true);
       loadDopplerFields();
+      loadFieldTypes();
     });
 
     vm.getStatus = function(doPolling){
@@ -57,6 +60,7 @@
               vm.daysToDisconnection = result.model.DaysToDisconnection;
               vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
               vm.rfm = result.rfm;
+              vm.autoSyncDisabled = result.model.SyncDisabled;
             }
             if (vm.integratedLists.length && isAnyImportingList(vm.integratedLists)
               && (doPolling !== undefined || doPolling)){
@@ -69,8 +73,10 @@
             vm.connectionError = true;
             vm.errorMsg = $translate.instant('vtex_integration.disconnected.connection_error');
           }
+          vm.newField = newFieldDefaults();
           vm.isLoading = false;
           vm.connected = !!result.model;
+          vm.webAppUrl = result.webAppUrl;
         });
     };
 
@@ -208,7 +214,6 @@
     };
 
     vm.showMappingSection = function(fieldsMapped){
-      vm.availablesFields = vm.userFields;
       vm.isLoadingVtexFields = true;
 
       var list = _.find(vm.allUserList, function(list){
@@ -241,14 +246,6 @@
         .catch(function() {
           showGeneralMappingError();
         });
-    };
-
-    vm.setAvailablesFields = function(){
-      vm.availablesFields = _.filter(vm.userFields, function(field){
-        return !_.find(vm.vtexFields, function(selectedField){
-          return selectedField.idDopplerField === field.idField && selectedField.idDopplerField !== 0;
-        });
-      });
     };
 
     vm.mapFields = function(){
@@ -355,7 +352,7 @@
 
     function insertEmailAtTheBeginningIfExists() {
       var vtexFieldsExtracted = _.partition(vm.vtexFields, function(field) {
-        return field.Type === VTEX_FIELD_TYPE.EMAIL;
+        return field.DopplerFieldTypeId === FieldType.EMAIL;
       });
 
       var vtexEmailFields = vtexFieldsExtracted[0];
@@ -460,11 +457,22 @@
       });
     }
 
+    vm.getFiledName = function (name) {
+      return name.length > 30 ? name.substring(0, 27) + '...' : name
+    }
+
     function loadDopplerFields() {
       vtexService.getFields()
         .then(function(listResult){
           if (listResult.length) {
             vm.userFields = listResult;
+            vm.userFields.unshift({
+              idField: -1,
+              name: $translate.instant('vtex_integration.mapping.add_field_option'),
+              DataType: 0,
+              Value: null,
+              DopplerFieldTypeId: -1
+            });
             vm.userFields.unshift({
               idField: 0,
               name: $translate.instant('vtex_integration.mapping.skip_column_option'),
@@ -480,10 +488,80 @@
         });
     }
 
-    $scope.$on('ngRepeatFinished', function() {
-      vm.setAvailablesFields();
-    });
+    function loadFieldTypes() {
+      vtexService.getFieldTypes()
+        .then(function (types) {
+          vm.fieldTypes = types;
+        })
+        .catch(function () {
+          showGeneralMappingError();
+        });
+    }
 
+    vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
+      return function (field) {
+        return (field.idField === 0 || field.idField === -1)
+          || (field.idField === dopplerFieldId)
+          || (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField));
+      };
+    }
+
+    function fieldNotUsed(idField) {
+      return !_.find(vm.vtexFields, function (selectedField) {
+        return selectedField.idDopplerField === idField
+      });
+    }
+
+    vm.fieldChange = function (index, value) {
+      if (vm.newField.index != index && value == -1) {
+        vm.newField = newFieldDefaults();
+        vm.newField.index = index;
+        vm.newField.dataType = getFieldDataType(index);
+        _.forEach(vm.vtexFields, function (field, fIndex) {
+          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+        });
+      }
+      else if (vm.newField.index == index && value != -1) {
+        vm.newField = newFieldDefaults();
+      }
+    }
+
+    function getFieldDataType(index) {
+      var fieldTypeId = vm.vtexFields[index].DopplerFieldTypeId;
+      var type = _.find(vm.fieldTypes, function (ftype) {
+        return ftype.id === fieldTypeId;
+      });
+      return type ? type.id : FIELD_TYPE.STRING;
+    }
+
+    vm.createField = function (index) {
+      if (vm.newField.name) {
+        vtexService.createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+          .then(function (res) {
+            if (res.success) {
+              vm.userFields.push(res.field);
+              vm.vtexFields[index].idDopplerField = res.field.idField;
+              vm.newField = newFieldDefaults();
+            }
+            else {
+              vm.newField.error = res.errorMessage;
+            }
+          })
+      }
+      else {
+        vm.newField.error = $translate.instant('vtex_integration.mapping.new_field.required_message');
+      }
+    }
+
+    function newFieldDefaults() {
+      return {
+        index: null,
+        name: '',
+        dataType: FIELD_TYPE.STRING,
+        isPrivate: "true",
+        error: null
+      };
+    }
   }
 })();
 

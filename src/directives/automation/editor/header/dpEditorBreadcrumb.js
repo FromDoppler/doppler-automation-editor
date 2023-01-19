@@ -30,7 +30,6 @@
       var onBlurPromise;
       scope.exitOptions = optionsListDataservice.getExitOptions();
       scope.isOpen = false;
-      console.log('scope', scope)
       if (scope.rootComponent.name === '') {
         element.find('input')[0].focus();
       }

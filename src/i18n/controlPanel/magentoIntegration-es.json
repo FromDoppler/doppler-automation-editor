@@ -1,28 +1,28 @@
 {
   "magento_integration": {
-    "name": "Magento",
+    "name": "Adobe Commerce",
     "disconnected": {
-      "title": "Conecta Doppler con tu tienda Magento",
-      "subtitle": "Ingresa los siguientes datos de tu tienda Magento para conectarla con Doppler. De esta forma, podrás sincronizar automáticamente tus contactos y también agregar los productos de tu tienda a tus Emails utilizando el Editor de Plantillas. ¿Tienes dudas? Presiona ",
+      "title": "Conecta Doppler con tu tienda Adobe Commerce",
+      "subtitle": "Ingresa los siguientes datos de tu tienda Adobe Commerce para conectarla con Doppler. De esta forma, podrás sincronizar automáticamente tus contactos y también agregar los productos de tu tienda a tus Emails utilizando el Editor de Plantillas. ¿Tienes dudas? Presiona ",
       "help_text": "Help",
-      "help_link": "https://help.fromdoppler.com/es/como-integrar-tu-ecommerce-de-magento-con-tu-cuenta-de-doppler/",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-tu-tienda-de-adobe-commerce",
       "store": "Url de la tienda",
       "app_key": "Access Token",
-      "store_placeholder": "Ingresa la URL de tu tienda de Magento",
-      "app_key_placeholder": "Ingresa el Access Token de tu tienda Magento",
-      "connection_error": "Ouch! No pudimos conectar con tu tienda Magento vuelve a intentarlo luego."
+      "store_placeholder": "Ingresa la URL de tu tienda de Adobe Commerce",
+      "app_key_placeholder": "Ingresa el Access Token de tu tienda Adobe Commerce",
+      "connection_error": "Ouch! No pudimos conectar con tu tienda Adobe Commerce vuelve a intentarlo luego."
     },
     "connected": {
       "title": "Sincroniza entidades de datos con Listas de Suscriptores",
       "subtitle_list_count": "En este momento tienes {{availableLists}} Listas. Recuerda que puedes sincronizarlas manualmente cuando lo desees.",
-      "subtitle": "Selecciona la entidad de datos de Magento y la Lista de Doppler que deseas sincronizar. Los contactos que pertenecen a esa entidad serán importados automáticamente en la Lista.",
+      "subtitle": "Selecciona la entidad de datos de Adobe Commerce y la Lista de Doppler que deseas sincronizar. Los contactos que pertenecen a esa entidad serán importados automáticamente en la Lista.",
       "store": "Url de la tienda conectada:",
       "disconnect": "Desconectar",
       "synchronize": "Sincronizar",
       "select_list": "Lista de Compradores",
       "select_entity_placeholder": "Selecciona la Entidad a sincronizar",
       "select_list_placeholder": "Selecciona la Lista a sincronizar",
-      "selected_list_title": "Lista creada a partir de Magento",
+      "selected_list_title": "Lista creada a partir de Adobe Commerce",
       "selected_list_subtitle": "Actualmente tienes una Lista. Ten en cuenta que puedes sincronizar manualmente en cualquier momento.",
       "grid_title": "Entidades de datos sincronizadas",
       "list_name_grid": "Nombre de Lista",
@@ -41,26 +41,33 @@
       },
       "disconnect_popup": {
         "title": "¿Estás seguro que deseas desconectar la integración?",
-        "description": "Si desconectas, tu Lista dejará de actualizarse con Suscriptores obtenidos desde Magento y los Automations asociados a la integración se pausarán. De todos modos, no perderás los contactos sincronizados hasta el momento."
+        "description": "Si desconectas, tu Lista dejará de actualizarse con Suscriptores obtenidos desde Adobe Commerce y los Automations asociados a la integración se pausarán. De todos modos, no perderás los contactos sincronizados hasta el momento."
       }
     },
     "mapping": {
       "title": "Realiza el mapeo de campos",
-      "subtitle": "Vincula los campos de tu entidad con los de la Lista de Suscriptores.",
-      "selected_data_entity": "Entidad de datos seleccionada",
-      "selected_subscriber_list": "Lista de Suscriptores seleccionada",
+      "subtitle": "Importa datos de tus contactos en otras apps hacia tu lista de Doppler. Crea un nuevo campo personalizado si no lo encuentras entre las opciones, o también lo puedes omitir.",
+      "selected_data_entity": "Origen de contactos",
+      "selected_subscriber_list": "Destino en Doppler",
       "data_entity_field": "Campo",
       "select_field_placeholder": "Selecciona un campo...",
       "skip_column_option": "Saltear Columna",
       "empty_email_error_message": "Ouch! Debes seleccionar al menos un campo email.",
       "back": "Atrás",
-      "next": "Siguiente"
+      "next": "Siguiente",
+      "add_field_option": "Crear campo personalizado",
+      "new_field": {
+        "public_opt": "Público",
+        "private_opt": "Privado",
+        "button": "Crear",
+        "required_message": "Ouch! Este campo es requerido"
+      }
     },
     "status": {
-      "title": "Tu tienda Magento ya se encuentra conectada con Doppler",
-      "subtitle": "Ya se están enviando automáticamente los Contactos de tu tienda desde la extensión Doppler para Magento. Además puedes importar los productos de tu tienda en Plantillas de Email y crear Automations de Carrito Abandonado y Producto Visitado. ¿Tienes dudas? Presiona ",
+      "title": "Tu tienda Adobe Commerce ya se encuentra conectada con Doppler",
+      "subtitle": "Ya se están enviando automáticamente los Contactos de tu tienda desde la extensión Doppler para Adobe Commerce. Además puedes importar los productos de tu tienda en Plantillas de Email y crear Automations de Carrito Abandonado y Producto Visitado. ¿Tienes dudas? Presiona ",
       "help_text": "Help",
-      "help_link": "https://help.fromdoppler.com/es/como-integrar-tu-ecommerce-de-magento-con-tu-cuenta-de-doppler/",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-tu-tienda-de-adobe-commerce",
       "back": "Atrás"
     }
   }

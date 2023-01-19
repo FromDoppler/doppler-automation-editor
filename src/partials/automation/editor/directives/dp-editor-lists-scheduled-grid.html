@@ -15,7 +15,6 @@
 				<p>{{ listSubtitle }} <span ng-if="showSelectAll" data-static-tooltip="{{ 'automation_editor.lists_scheduled_grid.doppler_tip' | translate }}" class="all medium"><span class="icon-tip"></span></span></p>
 			  </div>
 			</div>
-		  <span class="arrow"></span>
 		  </div>
 		</header>
 	  </div>
@@ -55,7 +54,7 @@
 				<tbody>
 					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdSubscribersList}}" ng-click="selectRow(row)">
 						<td class="status-column relative">
-							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdSubscribersList}}" name="selectList" ng-checked="row.IsChecked" ng-disabled="row.ListStatus == blockedStatus"/>
+							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdSubscribersList}}" name="selectList" ng-checked="row.IsChecked" ng-disabled="row.ListStatus == blockedStatus && !row.IsChecked"/>
 							<label></label>
 						</td>
 						<td class="type-column"><span ng-if="row.DtoLabel"><span class="list-label {{ row.DtoLabel.Colour }}">{{ row.DtoLabel.LabelName }}</span></span></td>

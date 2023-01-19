@@ -15,12 +15,13 @@
     'BASIC_FIELD',
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
-    '$timeout'
+    '$timeout',
+    'FIELD_TYPE'
   ];
 
   function miTiendaIntegrationCtrl($scope, $translate, ModalService,
     miTiendaService, INTEGRATION_CODES, INTEGRATION_SOURCE_TYPE, BASIC_FIELD, IMPORTING_STATE,
-    IMPORTING_STATE_STR, $timeout) {
+    IMPORTING_STATE_STR, $timeout, FIELD_TYPE) {
     var vm = this;
     vm.isLoading = true;
     vm.connectionError = false;
@@ -34,10 +35,12 @@
     vm.allEntitiesList = [];
     vm.entitiesList = [];
     vm.importingListDropdown = false;
+    vm.newField = null;
 
     $translate.onReady().then(function () {
       vm.getStatus();
       loadDopplerFields();
+      loadFieldTypes();
     });
 
     vm.getStatus = function () {
@@ -54,13 +57,16 @@
               vm.integratedLists = result.integratedLists;
               vm.allEntitiesList.length === 0 ? vm.getEntitiesList() : filterAvailableEntities();
               vm.disableSync = vm.integratedLists.length === 0;
+              vm.autoSyncDisabled = result.model.SyncDisabled;
             }
           } else {
             vm.connectionError = true;
             vm.errorMsg = $translate.instant('miTienda_integration.disconnected.connection_error');
           }
+          vm.newField = newFieldDefaults();
           vm.isLoading = false;
           vm.connected = !!result.model;
+          vm.webAppUrl = result.webAppUrl;
         });
     };
 
@@ -150,7 +156,6 @@
     };
 
     vm.showMappingSection = function (fieldsMapped) {
-      vm.availablesFields = vm.userFields;
       vm.isLoadingFields = true;
 
       var list = _.find(vm.allUserList, function (list) {
@@ -311,15 +316,6 @@
         });
     };
 
-    vm.setAvailablesFields = function () {
-      vm.availablesFields = _.filter(vm.userFields, function (field) {
-        return !_.find(vm.miTiendaFields, function (selectedField) {
-          return selectedField.idDopplerField === field.idField
-            && selectedField.idDopplerField !== 0;
-        });
-      });
-    };
-
     vm.onEntitySelected = function () {
       if (vm.selectedEntityId) {
         var listName = $translate.instant('miTienda_integration.connected.lists.' + vm.selectedEntityId);
@@ -336,12 +332,18 @@
           if (listResult.length) {
             vm.userFields = listResult;
             vm.userFields.unshift({
+              idField: -1,
+              name: $translate.instant('miTienda_integration.mapping.add_field_option'),
+              DataType: 0,
+              Value: null,
+              DopplerFieldTypeId: -1
+            });
+            vm.userFields.unshift({
               idField: 0,
               name: $translate.instant('miTienda_integration.mapping.skip_column_option'),
               DataType: 0,
               Value: null
             });
-            vm.availablesFields = vm.userFields;
             vm.isLoading = false;
           }
         })
@@ -464,14 +466,85 @@
     }
 
     function resetMapping() {
-      _.map(vm.bmwCrmFields, function (field) {
+      _.map(vm.miTiendaFields, function (field) {
         field.idDopplerField = null;
       });
     }
 
-    $scope.$on('ngRepeatFinished', function () {
-      vm.setAvailablesFields();
-    });
+    function loadFieldTypes() {
+      miTiendaService.getFieldTypes()
+        .then(function (types) {
+          vm.fieldTypes = types;
+        })
+        .catch(function () {
+          showGeneralMappingError();
+        });
+    }
+
+    vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
+      return function (field) {
+        return (field.idField === 0 || field.idField === -1)
+          || (field.idField === dopplerFieldId)
+          || (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField));
+      };
+    }
+
+    function fieldNotUsed(idField) {
+      return !_.find(vm.miTiendaFields, function (selectedField) {
+        return selectedField.idDopplerField === idField
+      });
+    }
+
+    vm.fieldChange = function (index, value) {
+      if (vm.newField.index != index && value == -1) {
+        vm.newField = newFieldDefaults();
+        vm.newField.index = index;
+        vm.newField.dataType = getFieldDataType(index);
+        _.forEach(vm.miTiendaFields, function (field, fIndex) {
+          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+        });
+      }
+      else if (vm.newField.index == index && value != -1) {
+        vm.newField = newFieldDefaults();
+      }
+    }
+
+    function getFieldDataType(index) {
+      var fieldTypeId = vm.miTiendaFields[index].DopplerFieldTypeId;
+      var type = _.find(vm.fieldTypes, function (ftype) {
+        return ftype.id === fieldTypeId;
+      });
+      return type ? type.id : FIELD_TYPE.STRING;
+    }
+
+    vm.createField = function (index) {
+      if (vm.newField.name) {
+        miTiendaService.createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+          .then(function (res) {
+            if (res.success) {
+              vm.userFields.push(res.field);
+              vm.miTiendaFields[index].idDopplerField = res.field.idField;
+              vm.newField = newFieldDefaults();
+            }
+            else {
+              vm.newField.error = res.errorMessage;
+            }
+          })
+      }
+      else {
+        vm.newField.error = $translate.instant('miTienda_integration.mapping.new_field.required_message');
+      }
+    }
+
+    function newFieldDefaults() {
+      return {
+        index: null,
+        name: '',
+        dataType: FIELD_TYPE.STRING,
+        isPrivate: "true",
+        error: null
+      };
+    }
   }
 })();
 

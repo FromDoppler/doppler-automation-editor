@@ -2,14 +2,15 @@
 module.exports = function(config) {
   config.set({
 
-    basePath: './app',
+    basePath: './src',
 
     files: [
       'lib/angular/angular.js',
       'lib/angular-route/angular-route.js',
       '../node_modules/angular-mocks/angular-mocks.js',
-      'core/**/*.js',
-      'view*/**/*.js'
+      'controllers/**/*.js',
+      'controllers/**/*.js',
+      'services/**/*.js'
     ],
 
     autoWatch: true,

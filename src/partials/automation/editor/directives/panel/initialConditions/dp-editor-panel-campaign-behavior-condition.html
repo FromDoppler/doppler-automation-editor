@@ -9,17 +9,7 @@
 <div class="list-selection--panel">
   <p class="title">{{ 'automation_editor.sidebar.scheduled_date_select_list_title' | translate }}</p>
   <!-- list and segments selector -->
-  <div class="selected-list alt disable--toggler" ng-if="selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers">
-    <span class="text"><strong>{{ 'automation_editor.sidebar.list_selected' | translate }}</strong></span>
-    <div ng-repeat="item in selectedComponent.suscriptionLists" ng-if="selectedComponent.suscriptionLists.length > 0 && !selectedComponent.allSubscribers">
-      <span class="icon-check"></span>
-      <span class="name">{{ item.ListName }}</span>
-    </div>
-    <div ng-if="!selectedComponent.suscriptionLists.length && selectedComponent.allSubscribers">
-      <span class="icon-check"></span>
-      <span class="name">{{ 'automation_editor.sidebar.list_all_my_contacts_selected' | translate }}</span>
-    </div>
-  </div>
+  <dp-editor-panel-subscribers-lists></dp-editor-panel-subscribers-lists>
   <button ng-click="showListSelectionMultiple()" class="button button--small button--primary" ng-disabled="isReadOnly();">{{selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers ? 'automation_editor.sidebar.list_replace_button' : 'automation_editor.sidebar.scheduled_date_select_list_button' | translate }}</button>
 </div>
 <div ng-show="selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers">

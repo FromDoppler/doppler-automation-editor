@@ -36,7 +36,7 @@ angular.module('dopplerApp', ['pascalprecht.translate', 'ngSanitize', 'intercept
 .config(['$httpProvider', '$translateProvider', '$locationProvider', function ($httpProvider, $translateProvider, $locationProvider) {
   setIENoCaching($httpProvider);
   $httpProvider.interceptors.push('httpInterceptor');
-  $locationProvider.html5Mode({
+  $locationProvider.html5Mode({ 
     enabled: true,
     requireBase: false,
     rewriteLinks: false

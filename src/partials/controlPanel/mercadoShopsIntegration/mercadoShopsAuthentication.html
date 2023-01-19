@@ -79,11 +79,23 @@
         {{ 'mercado_shops_integration.connected.disconnect' | translate }}
       </button>
     </section>
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="mercadoShops.autoSyncDisabled && mercadoShops.integratedLists.length">
+      <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span class="text--small">
+            {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
+            <a target="_self" href="{{mercadoShops.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+            {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !mercadoShops.connected}" ng-show="!mercadoShops.connected">
     <a class="button button--alternative" ng-disabled="mercadoShops.connecting"
-       href="/ControlPanel/ControlPanel?section=Integration"
+       href="{{mercadoShops.webAppUrl}}/Integrations#native-integrations"
        id="back-button">{{ 'actions.cancel' | translate }}</a>
   </div>
 </form>

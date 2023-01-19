@@ -3,10 +3,10 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorCampaignBehaviorCondition', ['SEND_TYPE', '$translate', 'automation', 'AUTOMATION_STATE', '$interval', 'dateValidation', 'settingsService', dpEditorCampaignBehaviorCondition]);
+    .directive('dpEditorCampaignBehaviorCondition', ['SEND_TYPE', '$translate', 'automation', 'AUTOMATION_STATE', 'AUTOMATION_TYPE', 'COMPONENT_TYPE', '$interval', 'dateValidation', 'settingsService', 'warningsStepsService', dpEditorCampaignBehaviorCondition]);
 
   function dpEditorCampaignBehaviorCondition(SEND_TYPE, $translate, automation,
-    AUTOMATION_STATE, $interval, dateValidation, settingsService ) {
+    AUTOMATION_STATE, AUTOMATION_TYPE, COMPONENT_TYPE, $interval, dateValidation, settingsService, warningsStepsService ) {
     var directive = {
       restrict: 'E',
       scope: {
@@ -40,6 +40,20 @@
         }, 900000);
       }
 
+      if (automation.getModel().automationType === AUTOMATION_TYPE.SMS) {
+        var parent = automation.getAllParentComponents();
+        if (parent && parent[1].children.length < 1) {
+          var smsComponent = {  
+            parentUid: scope.$parent.component.parentUid,
+            type: COMPONENT_TYPE.SMS
+          };
+          automation.addComponent(smsComponent, scope.$parent.component.parentUid);
+        }
+      }
+
+      scope.component.hasBlockedList = automation.hasBlockedList();
+      warningsStepsService.checkWarningStep(scope.component);
+      automation.checkCompleted();
 
       scope.$watch('component.frequency.date', function(){
         if (scope.component.frequency) {
@@ -57,6 +71,18 @@
           }
         }
       });
+
+      scope.hasBlockedList = function(){
+        return automation.hasBlockedList();
+      }
+
+      scope.getTipMessage = function(){
+        if (scope.hasBlockedList()) {
+          return $translate.instant('automation_editor.canvas.tip_initial_condition_blocked')
+        } else{
+          return $translate.instant('automation_editor.canvas.tip_initial_condition')
+        }
+      }
     }
   }
 })();

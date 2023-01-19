@@ -26,7 +26,9 @@
       integrateZohoCrmList: integrateZohoCrmList,
       synchZohoCrmLists: synchZohoCrmLists,
       deleteList: deleteList,
-      getAssociatedFieldMapping: getAssociatedFieldMapping
+      getAssociatedFieldMapping: getAssociatedFieldMapping,
+      getFieldTypes: getFieldTypes,
+      createField: createField
     };
 
     return service;
@@ -177,6 +179,27 @@
           idList: idList
         })
         .then(function(response) {
+            return response.data;
+         });
+    }
+
+    function getFieldTypes(){
+      return $http.get('/Integration/Integration/GetFieldTypes')
+        .then(function(response){
+          return response.data;
+        });
+    }
+
+    function createField(name, dataType, isPrivate){
+      return $http.get('/Integration/Integration/CreateField',
+        {
+          params: {
+            name: encodeURIComponent(name),
+            dataType: dataType,
+            isPrivate: isPrivate
+          }
+        })
+        .then(function(response){
           return response.data;
         });
     }

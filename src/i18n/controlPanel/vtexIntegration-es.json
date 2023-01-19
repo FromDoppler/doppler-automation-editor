@@ -5,7 +5,7 @@
       "title": "Conecta Doppler con tu tienda VTEX",
       "subtitle": "Ingresa los siguientes datos de tu tienda VTEX para conectarla con Doppler. De esta forma, podrás sincronizar automáticamente tus contactos y también agregar los productos de tu tienda a tus Emails utilizando el Editor de Plantillas. ¿Tienes dudas? Presiona ",
       "help_text": "Help",
-      "help_link": "https://help.fromdoppler.com/es/como-integrar-doppler-y-vtex/",
+      "help_link": "https://help.fromdoppler.com/es/como-integrar-tu-tienda-vtex",
       "store": "Nombre de la tienda",
       "app_key": "App Key",
       "token": "Token",
@@ -45,15 +45,22 @@
     },
     "mapping": {
       "title": "Realiza el mapeo de campos",
-      "subtitle": "Vincula los campos de tu entidad con los de la Lista de Suscriptores.",
-      "selected_data_entity": "Entidad de datos seleccionada",
-      "selected_subscriber_list": "Lista de Suscriptores seleccionada",
+      "subtitle": "Importa datos de tus contactos en otras apps hacia tu lista de Doppler. Crea un nuevo campo personalizado si no lo encuentras entre las opciones, o también lo puedes omitir.",
+      "selected_data_entity": "Origen de contactos",
+      "selected_subscriber_list": "Destino en Doppler",
       "data_entity_field": "Campo de entidad",
       "select_field_placeholder": "Selecciona un campo...",
       "skip_column_option": "Saltear Columna",
       "empty_email_error_message": "Ouch! Debes seleccionar al menos un campo email.",
       "back": "Atrás",
-      "next": "Siguiente"
+      "next": "Siguiente",
+      "add_field_option": "Crear campo personalizado",
+      "new_field": {
+        "public_opt": "Público",
+        "private_opt": "Privado",
+        "button": "Crear",
+        "required_message": "Ouch! Este campo es requerido"
+      }
     }
   }
 }

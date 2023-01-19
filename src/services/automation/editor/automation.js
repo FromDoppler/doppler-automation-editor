@@ -3,46 +3,38 @@
 
   angular
     .module('dopplerApp.automation.editor')
-   // .service('automation', automation);
     .factory('automation', automation);
 
   automation.$inject = [
     '$q',
-    'automationDataservice',
-    'componentInterpreter',
-    'CONDITION_TYPE',
-    'AUTOMATION_TYPE',
-    'COMPONENT_TYPE',
-
-    'warningsStepsService',
-    'goToService',
-
     '$rootScope',
     '$timeout',
     '$translate',
     '$window',
     'AUTOMATION_COMPLETED_STATE',
     'AUTOMATION_STATE',
-    
+    'AUTOMATION_TYPE',
+    'automationDataservice',
+    'componentInterpreter',
     'conditionsDataservice',
+    'COMPONENT_TYPE',
+    'CONDITION_TYPE',
     'emailLinksDataservice',
     'FIELD_TYPE',
     'FREQUENCY_TYPE',
     'selectedElementsService',
     'userFieldsDataservice',
+    'warningsStepsService',
     'settingsService',
     'DOMAIN_STATUS',
     'ModalService',
+    'goToService',
   ];
 
-  function automation($q, automationDataservice, componentInterpreter,
-    CONDITION_TYPE, AUTOMATION_TYPE, COMPONENT_TYPE,
-    warningsStepsService, goToService,
-    $rootScope, $timeout, $translate, $window, AUTOMATION_COMPLETED_STATE, AUTOMATION_STATE,
-    conditionsDataservice, 
+  function automation($q, $rootScope, $timeout, $translate, $window, AUTOMATION_COMPLETED_STATE, AUTOMATION_STATE,
+    AUTOMATION_TYPE, automationDataservice, componentInterpreter, conditionsDataservice, COMPONENT_TYPE, CONDITION_TYPE,
     emailLinksDataservice, FIELD_TYPE, FREQUENCY_TYPE, selectedElementsService, userFieldsDataservice,
-     settingsService, DOMAIN_STATUS, ModalService, 
-    ) {
+    warningsStepsService, settingsService, DOMAIN_STATUS, ModalService, goToService) {
     var promise;
     var model;
     var automationNamePromise;
@@ -64,7 +56,6 @@
     var selectedTaskThirdPartySelected;
     var thirdPartyAppsConnected;
     var siteTracking = false;
-    var siteTrackingLicensed = false;
 
     var service = {
       addComponent: addComponent,
@@ -132,6 +123,8 @@
       getProductStoresList: getProductStoresList,
       domainHaveErrors: domainHaveErrors,
       applyDropDownChange: applyDropDownChange,
+      hasBlockedList: hasBlockedList,
+      getInitialConditionUid: getInitialConditionUid
     };
 
     return service;
@@ -140,42 +133,10 @@
       // hack to hide main scroll just for automation
       // TODO fix it #goto issues
       document.querySelector('html').style.overflow = 'hidden';
-
-      // return $q(function(resolve, reject) {
-      //   if (idScheduledTask) {
-      //     automationDataservice.getAutomation(idScheduledTask).then(
-      //       function(response){
-      //         selectedTaskThirdPartySelected = response.data.initialCondition ?
-      //       response.data.initialCondition.idThirdPartyApp : null;
-      //       setData(response.data);
-      //       isModelLoaded = true;
-      //       checkCompleted();
-      //       }
-      //     )
-      //   }
-      //   else {
-      //     var data = {
-      //       data: {
-      //         type: COMPONENT_TYPE.AUTOMATION,
-      //         automationType: getAutomationType(parseInt(idTaskType)),
-      //         id: 0
-      //       }
-      //     };
-
-      //   }
-
-      //     if (okToGreet(name)) {
-      //       resolve('Hello, ' + name + '!');
-      //     } else {
-      //       reject('Greeting ' + name + ' is not allowed.');
-      //     }
-      // });
-
       var defer = $q.defer();
 
       if (!promise) {
         if (idScheduledTask) {
-        
           promise = automationDataservice.getAutomation(idScheduledTask);
         } else {
           var data = {
@@ -190,7 +151,6 @@
         }
 
         promise.then(function(response) {
-          //console.log('response', JSON.stringify(response))
           selectedTaskThirdPartySelected = response.data.initialCondition ?
             response.data.initialCondition.idThirdPartyApp : null;
           setData(response.data);
@@ -237,6 +197,9 @@
           break;
       case 11:
         automationType = AUTOMATION_TYPE.PUSH_NOTIFICATION;
+        break;
+      case 12:
+        automationType = AUTOMATION_TYPE.SMS;
         break;
       default:
         automationType = AUTOMATION_TYPE.NONE;
@@ -298,6 +261,7 @@
       case AUTOMATION_TYPE.RSS_TO_EMAIL:
         condition = CONDITION_TYPE.RSS_TO_EMAIL;
         break;
+      case AUTOMATION_TYPE.SMS:
       case AUTOMATION_TYPE.CAMPAIGN_BEHAVIOR:
         condition = CONDITION_TYPE.CAMPAIGN_BEHAVIOR;
         break;
@@ -334,7 +298,6 @@
       angular.forEach(data.children, function(child, index) {
         addComponent(child, index);
       });
-      console.log('model', model)
     }
 
     function saveChanges() {
@@ -801,7 +764,6 @@
       settingsService.getSettings().then(function(response) {
         domains = response.domains;
         siteTracking = response.siteTrackingActive;
-        siteTrackingLicensed = response.siteTrackingLicensed;
         $rootScope.thirdPartyAppsConnected = response.thirdPartyAppsListConnected;
         thirdPartyAppsConnected = response.thirdPartyAppsListConnected;
 
@@ -1011,9 +973,7 @@
       var domainVerified = productsStoreOptions.filter(function(val) {
         return val.DomainVerified === true && val.IdThirdPartyApp === selectedOption;
       }).length ? true : false;
-      if (!siteTrackingLicensed) {
-        domainError = 2;
-      } else if (!siteTracking) {
+      if (!siteTracking) {
         domainError = 3;
       } else if (!domainVerified) {
         domainError = 4;
@@ -1031,6 +991,17 @@
 
     function applyDropDownChange() {
       model.children[0].hasUnsavedChanges = true;
+    }
+
+    function hasBlockedList(){
+      return model.initialCondition.suscriptionLists.some(
+      function(e){
+        return e.ListStatus == 14;
+      })
+    } 
+    
+    function getInitialConditionUid() {
+      return model.initialCondition.uid;
     }
   }
 })();

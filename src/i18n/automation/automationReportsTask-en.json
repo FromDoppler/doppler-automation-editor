@@ -22,6 +22,7 @@
   "ScheduledTask_Reports_Grid_Shared": "Shared",
   "ScheduledTask_Reports_Grid_CTOR": "CTOR",
   "ScheduledTask_Reports_Filter_Action": "Filter by Campaign",
+  "ScheduledTask_Reports_Filter_Action_Push": "Filter by Push",
   "ScheduledTask_Reports_CancelFilter": "Cancel",
   "ScheduledTask_Reports_Filter": "Filter",
   "ScheduledTask_Reports_GraphicReport": "Graphics",

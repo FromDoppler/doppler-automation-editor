@@ -24,7 +24,9 @@
       getAssociatedFieldMapping: getAssociatedFieldMapping,
       manualSync: manualSync,
       getChangedState: getChangedState,
-      getListData: getListData
+      getListData: getListData,
+      getFieldTypes: getFieldTypes,
+      createField: createField
     };
 
     return service;
@@ -154,6 +156,27 @@
       return $http.post('/Integration/Integration/GetSubscribersListInfo',
         {
           idList: idList
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function getFieldTypes() {
+      return $http.get('/Integration/Integration/GetFieldTypes')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function createField(name, dataType, isPrivate) {
+      return $http.get('/Integration/Integration/CreateField',
+        {
+          params: {
+            name: encodeURIComponent(name),
+            dataType: dataType,
+            isPrivate: isPrivate
+          }
         })
         .then(function (response) {
           return response.data;

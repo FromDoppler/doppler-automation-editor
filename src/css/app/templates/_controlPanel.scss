@@ -1,6 +1,6 @@
 $iconsPath: "/assets/app/icons" !default;
 .panel-box-app--ctrlpanel {
-  margin: 20px auto 30px;
+  margin: 0px auto 30px;
   .description {
     max-width: 70%;
     margin-top: 10px;
@@ -268,13 +268,15 @@ $iconsPath: "/assets/app/icons" !default;
     .mapping-container {
       margin-top: 40px;
     }
+
     .integration-information-text {
       margin-top: 10px;
     }
+
     .grayPanel-box {
       width: 100%;
       padding: 10px;
-      margin-bottom: 20px;
+      margin-top: 20px;
 
       &.flex-grid {
         .dropdown {
@@ -287,28 +289,99 @@ $iconsPath: "/assets/app/icons" !default;
         }
       }
     }
-    .field-selector {
+
+    .selector {
       width: 100%;
       border: 1px solid #ccc;
       color: #666;
       border-radius: 3px;
       font-size: 13px;
-      padding: 0 40px 0 10px;
+      padding: 0 10px 0 10px;
       text-align: left;
       height: 40px;
       line-height: 40px;
     }
+
     .field-selector:invalid {
       color: #999;
       font-style: italic;
     }
+
     .field-selector option[value=""] {
       color: #999;
       font-style: italic;
     }
+
+    .field-selector option[value="number:0"] {
+      color: #000 !important;
+      font-weight: bold !important;
+    }
+
+    .field-selector option[value="number:-1"] {
+      color: #000 !important;
+      font-weight: bold !important;
+    }
+
     .field-selector option:not([value=""]) {
       color: #666;
       font-style: normal;
+    }
+
+    .createCustomField-box {
+      background-color: #DEE8F0;
+      border-top: solid 1px #FFF;
+      border-radius: 0 0 4px 4px;
+      box-shadow: 0 1px 0 0 #999999;
+      display: inline-block;
+      padding: 10px 15px;
+      width: 870px;
+    }
+
+    .createCustomField-box .name {
+      border: solid 1px #D3D3D3;
+      border-radius: 3px;
+      float: left;
+      height: 40px;
+      margin-right: 10px;
+      padding: 0px 10px;
+      width: 242px;
+    }
+
+    .createCustomField-box .customFieldTypeDropDown {
+      float: left;
+      margin-right: 20px;
+      width: 100px !important;
+      height: 40px;
+    }
+
+    .createCustomField-box .visibility-container {
+      color: #666;
+      float: left;
+      line-height: 40px;
+      margin-right: 10px;
+      width: 310px;
+    }
+
+    .createCustomField-box .visibility-container label {
+      display: inline-block;
+      padding-left: 5px;
+      width: 105px;
+    }
+
+    .createCustomField-box .submit {
+      float: right;
+    }
+
+    .validationTooltip-container {
+      margin-top: 45px
+    }
+
+    .validationTooltip-image {
+      display: inline;
+    }
+
+    .validation-tooltip {
+      display: inline-block;
     }
   }
 

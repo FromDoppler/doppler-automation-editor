@@ -21,6 +21,7 @@
         this.socialShares = [];
         this.thumbnailUrl = '';
         this.contentType = '';
+        this.editorType = null;
         this.innerHTML = '';
         this.DMARCAcceptedDomain = '';
         this.hasUnsavedChanges = true;
@@ -82,6 +83,9 @@
         }
         if (data.hasOwnProperty('contentType')) {
           this.contentType = data.contentType;
+        }
+        if (data.hasOwnProperty('editorType')) {
+          this.editorType = data.editorType;
         }
         if (data.hasOwnProperty('innerHTML')) {
           this.innerHTML = data.innerHTML;

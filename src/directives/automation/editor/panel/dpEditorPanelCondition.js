@@ -52,6 +52,7 @@
 
     function link(scope) {
       var watchesCollection = [];
+      var automationType = automation.getModel().automationType;
       scope.CONDITION_OPERATOR = CONDITION_OPERATOR;
       scope.CONDITIONAL_EVENT = CONDITIONAL_EVENT;
       scope.CONDITIONAL_TYPE = CONDITIONAL_TYPE;
@@ -64,6 +65,10 @@
       scope.conditionPlaceholder = $translate.instant('automation_editor.components.condition.conditionals.placeholder');
       scope.comparisonOperators = optionsListDataservice.getComparisonOperators();
       scope.conditionalOptions = optionsListDataservice.getConditionalOptions();
+
+      if (automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION) {
+        scope.conditionalOptions = updateOptionsOnPushNotificationAutomationType();
+      }
       scope.campaignBehaviorEvents = optionsListDataservice.getCampaignBehaviorEvents();
       scope.genderFieldOptions = optionsListDataservice.getGenderFieldOptions();
       scope.listMembershipEvents = optionsListDataservice.getListMembershipEvents();
@@ -156,6 +161,14 @@
         }
       });
 
+      function updateOptionsOnPushNotificationAutomationType() {
+        return [
+          {
+              label: $translate.instant('automation_editor.components.condition.conditionals.site_behavior.label'),
+              value: "site_behavior"
+          }
+        ];
+      }
       function loadEmailsAndLinks() {
         if (!changesManager.getUnsavedChanges()) {
           scope.emailComponentsToBind = automation.getEmailComponentsToBind(scope.selectedComponent);

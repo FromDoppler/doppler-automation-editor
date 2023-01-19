@@ -1,0 +1,117 @@
+<form name="jumpseller.form" ng-submit="jumpseller.form.$valid && jumpseller.connect()" novalidate>
+  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="jumpseller.daysToDisconnection < 14 && jumpseller.connected">
+    <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div class="dp-library margin-t-20 margin-b-20">
+      <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <span id="messageBar" class="text--small">
+            {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'jumpseller_integration.name' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+    <ul>
+      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
+      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
+      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+    </ul>
+    <br />
+    <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+    <hr class="full connection-issues-separator" />
+    <p>
+      {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
+      {{ jumpseller.firstValidationErrorDate}}
+    </p>
+    <strong>
+      <span ng-if="jumpseller.daysToDisconnection > 1">
+        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
+        {{ jumpseller.daysToDisconnection }}
+        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+      </span>
+      <span ng-if="jumpseller.daysToDisconnection <= 1">
+        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+      </span>
+    </strong>
+  </div>
+  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="!jumpseller.connected">
+    <span class="control-panel-section-title">{{ 'jumpseller_integration.disconnected.title' | translate }} </span>
+    <span class="control-panel-section-subtitle">
+      {{ 'jumpseller_integration.disconnected.subtitle' | translate }}
+      <a href="{{ 'jumpseller_integration.disconnected.help_link' | translate }}"
+        target="_blank">{{ 'jumpseller_integration.disconnected.help_text' | translate }}</a>
+    </span>
+    <hr class="full" style="width: calc(100% + 40px);" />
+    <section class="authentication-container" ng-if="!jumpseller.connected">
+      <div class="authentication-elements">
+        <p class="select-list-text">{{ 'jumpseller_integration.disconnected.login' | translate }}</p>
+        <p class="select-list-text">{{ 'jumpseller_integration.disconnected.token' | translate }}</p>
+      </div>
+      <div class="authentication-elements">
+        <input type="text"
+               ng-required="true"
+               ng-class="{'input-validation-error':jumpseller.form.$submitted && !jumpseller.disconnected && (jumpseller.integrationData.login.$invalid || !jumpseller.integrationData.login)}"
+               ng-model="jumpseller.integrationData.login"
+               class="user-data-input"
+               placeholder="{{ 'jumpseller_integration.disconnected.login_placeholder' | translate }}"
+               maxlength="100" />
+        <input type="text"
+               required
+               ng-class="{'input-validation-error':jumpseller.form.$submitted && !jumpseller.disconnected && (jumpseller.integrationData.token.$invalid || !jumpseller.integrationData.token)}"
+               ng-model="jumpseller.integrationData.token"
+               class="user-data-input"
+               placeholder="{{ 'jumpseller_integration.disconnected.token_placeholder' | translate }}"
+               maxlength="250" />
+      </div>
+    </section>
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="jumpseller.connectionError">
+      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span>{{ jumpseller.errorMsg }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="jumpseller.connected">
+    <span class="control-panel-section-title">{{ 'jumpseller_integration.connected.title' | translate }} </span>
+    <span class="control-panel-section-subtitle">
+      {{ 'jumpseller_integration.connected.subtitle' | translate }}
+    </span>
+    <section class="authentication-container connected">
+      <div class="authentication-elements">
+        <p>
+          {{ 'jumpseller_integration.connected.store' | translate }} <strong>{{ jumpseller.connectedAccount }}</strong>
+        </p>
+      </div>
+      <button type='button' class="button button--alternative"
+              ng-click="jumpseller.disconnectWarning()" ng-disabled="jumpseller.importingAllLists">
+        {{ 'jumpseller_integration.connected.disconnect' | translate }}
+      </button>
+    </section>
+    <div class="dp-library margin-t-20 margin-b-20" ng-show="jumpseller.autoSyncDisabled && jumpseller.integratedLists.length">
+      <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span class="text--small">
+            {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
+            <a target="_self" href="{{jumpseller.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+            {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!jumpseller.connected">
+    <a class="button button--alternative" ng-disabled="jumpseller.connecting"
+       href="{{jumpseller.webAppUrl}}/Integrations#native-integrations"
+       id="back-button">{{ 'actions.cancel' | translate }}</a>
+    <button type="submit" id="save_info" ng-disabled="jumpseller.connecting"
+            ng-class="{'button--spinner' : jumpseller.connecting}" ng-click="jumpseller.disconnected = false;"
+            class="button button--primary">
+      {{ 'actions.connect' | translate }}
+      <span class="icon-editor-saving" ng-show="jumpseller.connecting"></span>
+    </button>
+  </div>
+</form>

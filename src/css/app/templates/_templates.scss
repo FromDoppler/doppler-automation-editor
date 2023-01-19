@@ -19,11 +19,11 @@
 }
 
 .section--templates {
-  padding-top: toem(60px);
+  // padding-top: toem(60px);
   padding-bottom: toem(90px);
   header {
     align-items: flex-end;
-    border-bottom: 1px solid #E0E0E0;
+    // border-bottom: 1px solid #E0E0E0;
     display: flex;
     justify-content: space-between;
     padding-bottom: toem(20px);
@@ -73,6 +73,9 @@
     overflow: hidden;
     position: relative;
     text-align: center;
+    height: 257px;
+    width: 100%;
+    
     &:hover {
       .hover-actions {
         opacity: 1;
@@ -111,9 +114,8 @@
     .button--light {
       margin-bottom: 15px;
     }
-    .button {
-      width: 160px;
-      max-width: 160px;
+    a.button-outline--white:hover {
+        color: $color-white;
     }
   }
   .icon-maximize {
@@ -195,6 +197,13 @@
         [class^=icon-] {
           color: $color-base;
         }
+      }
+      a {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        color: unset;
       }
     }
   }

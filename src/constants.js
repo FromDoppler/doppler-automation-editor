@@ -52,6 +52,7 @@ var AutomationType = {
   PENDING_ORDER: 'pending_order',
   CONFIRMATION_ORDER: 'confirmation_order',
   PUSH_NOTIFICATION: 'push_notification',
+  SMS: 'sms',
 };
 
 var AutomationTypeIds = {
@@ -343,7 +344,8 @@ var IntegrationCodes = {
   EASYCOMMERCE: 11,
   BMWCRM: 12,
   MERCADOLIBRE: 13,
-  MITIENDA:14
+  MITIENDA: 14,
+  JUMPSELLER: 15
 }
 
 var VtexFieldType = {
@@ -442,6 +444,11 @@ var PushConfigurationStatus = {
   FIREBASE_WORKER_NOT_FOUND: 2
 };
 
+var EMAIL_EDITOR_TYPE = {
+  MSEDITOR: 4,
+  UNLAYER: 5
+};
+
 angular.module('dopplerApp')
   .constant("Enums", Enums)
   .constant("REGEX", Regex)
@@ -459,6 +466,7 @@ angular.module('dopplerApp')
   .constant("IMPORTING_STATE", ImportingState)
   .constant("IMPORTING_STATE_STR", ImportingStateStr)
   .constant("BASIC_FIELD", BasicField)
+  .constant("FIELD_TYPE", FieldType)
   .constant("INTEGRATION_ERROR_CODES", IntegrationErrorCodes)
   .constant("INTEGRATION_SOURCE_TYPE", IntegrationSourceType)
   .constant("PAYMENT_METHOD", PaymentMethod)
@@ -466,7 +474,8 @@ angular.module('dopplerApp')
   .constant("COUNTRIES_WITH_TRANSFER", CountriesWithTransfer)
   .constant("MX_TYPE_OF_PAYMENT", MxTypeOfPayment)
   .constant("BILLING_SYSTEM", BiilingSystem)
-  .constant('PUSH_CONFIGURATION_STATUS', PushConfigurationStatus);
+  .constant('PUSH_CONFIGURATION_STATUS', PushConfigurationStatus)
+  .constant('EMAIL_EDITOR_TYPE', EMAIL_EDITOR_TYPE);
 
 angular.module('dopplerApp.automation.editor')
   .constant('AUTOMATION_STATE',AutomationState)

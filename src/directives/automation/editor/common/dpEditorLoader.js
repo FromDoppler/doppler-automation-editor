@@ -10,7 +10,6 @@
   ];
 
   function dpEditorLoader($rootScope) {
-    console.log('entro')
     var directive = {
       restrict: 'E',
       link: link,

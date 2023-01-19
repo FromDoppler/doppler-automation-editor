@@ -391,6 +391,7 @@
           }
           .test-email {
             flex-wrap: wrap;
+            height: 45px;
           }
           .verification-time--container .form-container .container {
             flex-wrap: wrap;
@@ -414,7 +415,7 @@
                position: relative;
              }
              &.positive--alignment {
-                bottom: 14px;
+                bottom: 3px;
              }
             }
           }
@@ -545,6 +546,32 @@
     }
     .button {
       display: block;
+    }
+
+    .dp-library {
+      .dp-list-blocked-error-msg{
+        font-size: $font-size--small;
+        color: $color-red;
+      }
+      .selected-list {
+        margin-bottom: 10px;
+        .dp-tooltip-container {
+          span {
+            padding: 0 4px;
+          }
+          .dp-tooltip-left-top {
+            transform: translate(-5%,-100%);
+            &:before{
+              left: 3%;
+              right: 95%;
+            }
+            &:after{
+              left: 3%;
+              right: 95%;
+            }
+          }
+        }
+      }
     }
 
     .selected-list {
