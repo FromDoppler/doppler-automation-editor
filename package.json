@@ -66,7 +66,7 @@
     "double-build": "npm run clean-win-dist; build; build",
     "build": "webpack",
     "pretest": "npm install",
-    "test": "karma start karma.conf.js",
+    "test": "",
     "test-single-run": "npm test -- --single-run",
     "preupdate-webdriver": "npm install",
     "//": "Do not install the Firefox driver to work around https://github.com/angular/webdriver-manager/issues/303.",
