@@ -8,7 +8,6 @@ node_modules/
 # misc
 !.gitkeep
 npm-debug.log*
-package-lock.json*
 
 # OS files (OSX, Windows)
 .DS_Store
