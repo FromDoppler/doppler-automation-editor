@@ -58,12 +58,10 @@
 							dp-on-error-src="../../../img/asyncPreview/container_280x280.svg" />
 						<div class="hover-actions">
 							<a class="icon-maximize" ng-click="openPreview(template)"></a>
-							<!-- Take into account Automation before enable it for Unlayer -->
-							<a ng-if="template.EditorType !== EMAIL_EDITOR_TYPE.UNLAYER && inAutomationMode()"
+							<a ng-if="inAutomationMode()"
 								class="button button--light button--small-alt" ng-click="useTemplateAsIs(template)">
 								{{ 'templates_card.use_as_is' | translate }}
 							</a>
-							<!-- Take into account Automation before enable it for Unlayer -->
 							<a ng-if="inAutomationMode() && isCampaignsAvailable"
 								class="button button-outline--white button--small-alt"
 								ng-click="newAutomationCampaign(template)">

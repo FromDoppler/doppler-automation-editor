@@ -3,8 +3,8 @@ $gulp: true !default;
 @if $gulp == true {
 	@font-face {
 		font-family: "icon-font";
-		src: url('#{$fontPath}icon-font.eot?1673901628737');
-		src: url('#{$fontPath}icon-font.eot?1673901628737#iefix') format('eot'), url('#{$fontPath}icon-font.woff2?1673901628737') format('woff2'), url('#{$fontPath}icon-font.woff?1673901628737') format('woff'), url('#{$fontPath}icon-font.ttf?1673901628737') format('truetype'), url('#{$fontPath}icon-font.svg?1673901628737#icon-font') format('svg');
+		src: url('#{$fontPath}icon-font.eot?1675107700426');
+		src: url('#{$fontPath}icon-font.eot?1675107700426#iefix') format('eot'), url('#{$fontPath}icon-font.woff2?1675107700426') format('woff2'), url('#{$fontPath}icon-font.woff?1675107700426') format('woff'), url('#{$fontPath}icon-font.ttf?1675107700426') format('truetype'), url('#{$fontPath}icon-font.svg?1675107700426#icon-font') format('svg');
 	}
 	
 	.icon:before {

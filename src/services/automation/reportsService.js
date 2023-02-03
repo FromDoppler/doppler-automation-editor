@@ -51,7 +51,7 @@
         params: {
           idScheduledTask: id,
           reportType: reportType,
-          smsIdList: smsIdList
+          smsIds: smsIdList
         }
       }).then(function(response) {
         return response.data.data;

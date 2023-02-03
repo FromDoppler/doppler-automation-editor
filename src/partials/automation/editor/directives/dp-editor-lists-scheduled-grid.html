@@ -54,7 +54,7 @@
 				<tbody>
 					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdSubscribersList}}" ng-click="selectRow(row)">
 						<td class="status-column relative">
-							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdSubscribersList}}" name="selectList" ng-checked="row.IsChecked" ng-disabled="row.ListStatus == blockedStatus && !row.IsChecked"/>
+							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdSubscribersList}}" name="selectList" ng-checked="row.IsChecked" ng-disabled="IsDisabledRowStatus(row)"/>
 							<label></label>
 						</td>
 						<td class="type-column"><span ng-if="row.DtoLabel"><span class="list-label {{ row.DtoLabel.Colour }}">{{ row.DtoLabel.LabelName }}</span></span></td>

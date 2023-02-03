@@ -513,8 +513,10 @@
     };
 
     $scope.getSmsResults = function() {
-      var smsIdsList = null;
-      automationReportsService.getSmsResults($scope.idScheduledTask, $scope.selectedOption.id, smsIdsList)
+      if ($scope.itemsSms && $scope.selectedSmsIds && !$scope.selectedSmsIds.length) {
+        return clearSmsData();
+      }
+      automationReportsService.getSmsResults($scope.idScheduledTask, $scope.selectedOption.id, $scope.selectedSmsIds)
         .then(function(response) {
           var undeliveredP = ((response.undelivered * 100) / response.total);
           var deliveredP = ((response.delivered * 100) / response.total);
@@ -530,7 +532,7 @@
           };
           if (response.smsList) {
             $scope.itemsSms = response.smsList.map(function(item) {
-              return { 'idSms': item.IdSms, 'name': item.Name, 'selected': true };
+              return { 'idSms': item.IdSms, 'name': item.Name, 'selected': $scope.selectedSmsIds == null || $scope.selectedSmsIds.length == 0 ? true : $scope.selectedSmsIds.includes(item.IdSms) };
             });
           }
           $scope.itemsSmsByCountry = response.smsByCountry;
@@ -643,6 +645,19 @@
       };
       var data = [['noinfo', 100]];
       $scope.donutGraphDataPush = $scope.getDonutChartConfig('#push', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+    };
+
+    function clearSmsData() {
+      $scope.smsData = {
+        'undelivered': 0,
+        'delivered': 0,
+        'undeliveredPerc': 0,
+        'deliveredPerc': 0,
+        'total': 0
+      };
+      var data = [['noinfo', 100]];
+      $scope.itemsSmsByCountry = [];
+      $scope.donutGraphDataSms = $scope.getDonutChartConfig('#sms', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
     };
 
     $scope.clearActionFilters = function() {

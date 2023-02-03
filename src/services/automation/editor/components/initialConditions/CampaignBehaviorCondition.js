@@ -40,7 +40,8 @@
       CampaignBehaviorCondition.prototype.getPropertiesToWatch = function() {
         var properties = ScheduledDateCondition.prototype.getPropertiesToWatch();
         return properties.concat([
-          'sendType'
+          'sendType',
+          'suscriptionLists'
         ]);
       };
 

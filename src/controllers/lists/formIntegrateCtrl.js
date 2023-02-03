@@ -33,7 +33,6 @@
         $translate.instant('forms_integrate.headers.integration_embed.description'),
         //TODO: the follow actions are not defined yet so are hidden:
         //$translate.instant('forms_integrate.headers.integration_wordpress.description'),
-        $translate.instant('forms_integrate.headers.integration_facebook.description')
       ];
       loadData();
     });

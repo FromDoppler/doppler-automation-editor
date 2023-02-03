@@ -13,7 +13,6 @@
     'automation',
     'changesManager',
     'ModalService',
-    'unlayerEditorHelper',
     'selectedElementsService',
     'settingsService',
     'templatesService',
@@ -22,7 +21,7 @@
     'EMAIL_EDITOR_TYPE'
   ];
 
-  function dpTemplates($q, $location, $rootScope, $translate, automation, changesManager, ModalService, unlayerEditorHelper,
+  function dpTemplates($q, $location, $rootScope, $translate, automation, changesManager, ModalService,
     selectedElementsService, settingsService, templatesService, AUTOMATION_TYPE, CONTENT_TYPE, EMAIL_EDITOR_TYPE) {
 
     var directive = {
@@ -368,39 +367,65 @@
       $scope.useTemplateAsIs = function(template) {
         var selectedComponent = selectedElementsService.getSelectedComponent();
 
-        automation.saveTemplateContent(selectedComponent.id, template.IdTemplate).then(function() {
-          setCampaignThumbnail(selectedComponent);
-          $rootScope.$broadcast('TEMPLATES.CLOSE_TEMPLATES_VIEW');
+        setLocationWithIdCampaign(false, function() {
+          if (!templatesService.tryToRedirectToSetCampaignFromTemplateIfUnlayerAndContinue(
+            template.IdTemplate,
+            template.EditorType,
+            selectedComponent.id))
+          {
+            automation.saveTemplateContent(selectedComponent.id, template.IdTemplate).then(function() {
+              setCampaignThumbnail(selectedComponent);
+              $rootScope.$broadcast('TEMPLATES.CLOSE_TEMPLATES_VIEW');
+            });
+          }
         });
       };
+
+      var setLocationWithIdCampaign = function(redirectToTemplates, callback) {
+        var selectedComponent = selectedElementsService.getSelectedComponent();
+        var newParams = {
+          'idScheduledTask': automation.getModel().id,
+          'idCampaign': selectedComponent.id,
+        };
+
+        if (redirectToTemplates) {
+          newParams.redirectToTemplates = 'true';
+        }
+
+        $location.search(newParams);
+        $location.replace();
+
+        // setTimeout to update $location before executing the code
+        setTimeout(callback, 0);
+      }
 
       $scope.newAutomationCampaign = function(template) {
         var selectedComponent = selectedElementsService.getSelectedComponent();
 
         // This block is to allow history.back() to template selection
-        // TODO: fix related edge case https://makingsense.atlassian.net/browse/DE-942
-        var newParams = {
-          'idScheduledTask': automation.getModel().id,
-          'idCampaign': selectedComponent.id,
-          'redirectToTemplates': 'true'
-        };
-        $location.search(newParams);
-        $location.replace();
-
-        if (template.EditorType === EMAIL_EDITOR_TYPE.UNLAYER) {
-          setTimeout(function() {
-            window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(selectedComponent.id, template.IdTemplate);
-          }, 0);
-        } else {
-          automation.saveTemplateContent(selectedComponent.id, template.IdTemplate).then(function () {
-            setCampaignThumbnail(selectedComponent);
-            //we need to call to saveChanges to save the generated thumbnailUrl in the model
-            return automation.saveChanges().then(function (response) {
-              $rootScope.$broadcast('UPDATE_SAVING_STATE');
-              redirectToEditorCampaign(selectedComponent.id, EMAIL_EDITOR_TYPE.MSEDITOR);
+        // redirectToTemplates is not set because the campaign already has a thumbnail set.
+        // See https://makingsense.atlassian.net/browse/DE-942
+        setLocationWithIdCampaign(false, function() {
+          if (!templatesService.tryToRedirectToSetCampaignFromTemplateIfUnlayerAndEdit(
+            template.IdTemplate,
+            template.EditorType,
+            selectedComponent.id))
+          {
+            // This block is to allow history.back() to template selection
+            // it works with MSEditor but not with Unlayer.
+            // See https://makingsense.atlassian.net/browse/DE-942
+            setLocationWithIdCampaign(true, function() {
+              automation.saveTemplateContent(selectedComponent.id, template.IdTemplate).then(function () {
+                setCampaignThumbnail(selectedComponent);
+                //we need to call to saveChanges to save the generated thumbnailUrl in the model
+                return automation.saveChanges().then(function (response) {
+                  $rootScope.$broadcast('UPDATE_SAVING_STATE');
+                  redirectToEditorCampaign(selectedComponent.id, template.EditorType);
+                });
+              });
             });
-          });
-        }
+          }
+        });
       };
 
       function setCampaignThumbnail(selectedComponent) {

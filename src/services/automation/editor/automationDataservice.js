@@ -35,7 +35,7 @@
       stopAutomationCampaign: stopAutomationCampaign,
       saveTinyEditorContent: saveTinyEditorContent,
       validateAndAutoCompleteRSS: validateAndAutoCompleteRSS,
-      getDynamicContent: getDynamicContent
+      hasDynamicContent: hasDynamicContent
     };
 
     return service;
@@ -200,10 +200,10 @@
         });
     }
 
-    function getDynamicContent(model, idCampaign) {
-      return $http.get('/Automation/Automation/GetDynamicContent', {
+    function hasDynamicContent(idScheduledTask, idCampaign) {
+      return $http.get('/Automation/Automation/HasDynamicContent', {
         params: {
-          model: model,
+          idScheduledTask: idScheduledTask,
           idCampaign: idCampaign
         }
       });

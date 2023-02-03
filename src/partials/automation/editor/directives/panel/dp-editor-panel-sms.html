@@ -9,7 +9,8 @@
            name="name"
            ng-class="{'hasErrors': smsForm.name.$invalid && smsForm.name.$dirty }"
            ng-blur="activateBlur();"
-           maxlength="50" />
+           maxlength="50"
+           ng-disabled="isReadOnly()" />
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
     <div ng-messages="smsForm.name.$error" class="error-messages--container">
       <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>

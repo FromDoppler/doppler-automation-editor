@@ -7,17 +7,20 @@
 
   templatesService.$inject = [
     '$http',
+    '$location',
     'EMAIL_EDITOR_TYPE',
     'unlayerEditorHelper'
   ];
 
-  function templatesService($http, EMAIL_EDITOR_TYPE, unlayerEditorHelper) {
+  function templatesService($http, $location, EMAIL_EDITOR_TYPE, unlayerEditorHelper) {
 
     var service = {
       getEditorTemplateUrl: getEditorTemplateUrl,
       getEditorCampaignUrl: getEditorCampaignUrl,
       getCampaignCreationFromTemplateUrl: getCampaignCreationFromTemplateUrl,
       createTemplateFromPublicAndRedirect: createTemplateFromPublicAndRedirect,
+      tryToRedirectToSetCampaignFromTemplateIfUnlayerAndEdit: tryToRedirectToSetCampaignFromTemplateIfUnlayerAndEdit,
+      tryToRedirectToSetCampaignFromTemplateIfUnlayerAndContinue: tryToRedirectToSetCampaignFromTemplateIfUnlayerAndContinue,
       deleteTemplate: deleteTemplate,
       duplicateTemplate: duplicateTemplate,
       getCategoriesPublicTemplates: getCategoriesPublicTemplates,
@@ -30,6 +33,25 @@
 
     return service;
 
+    function ensureExitParameterWithCurrentUrl(parameters) {
+      parameters = parameters || {};
+      // I am not using destructuring because I think it is not
+      // compatible with current build tools versions
+      if (!parameters.exit) {
+        parameters.exit = $location.absUrl();
+      }
+      return parameters;
+    }
+
+    function ensureContinueParameterWithCurrentUrl(parameters) {
+      parameters = parameters || {};
+      // I am not using destructuring because I think it is not
+      // compatible with current build tools versions
+      if (!parameters.continue) {
+        parameters.continue = $location.absUrl();
+      }
+      return parameters;
+    }
 
     // get all templates for this user
     function getPrivateTemplates(page, cantPerPage) {
@@ -78,17 +100,17 @@
       });
     }
 
-    function getEditorTemplateUrl (id, editorType) {
+    function getEditorTemplateUrl (id, editorType, parameters) {
       switch (editorType) {
-        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerTemplateEditorUrl(id);
+        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerTemplateEditorUrl(id, ensureExitParameterWithCurrentUrl(parameters));
         case EMAIL_EDITOR_TYPE.MSEDITOR:
         default: return '/MSEditor/Editor?idTemplate=' + id;
       }
     }
 
-    function getEditorCampaignUrl (idCampaign, editorType) {
+    function getEditorCampaignUrl (idCampaign, editorType, parameters) {
       switch (editorType) {
-        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerCampaignEditorUrl(idCampaign);
+        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerCampaignEditorUrl(idCampaign, ensureExitParameterWithCurrentUrl(parameters));
         case EMAIL_EDITOR_TYPE.MSEDITOR:
         default: return '/MSEditor/Editor?idCampaign=' + idCampaign;
       }
@@ -99,13 +121,13 @@
         case EMAIL_EDITOR_TYPE.UNLAYER:
           return '/Campaigns/BasicInfo?idTemplate=' + id + '&editorType=' + editorType;
         case EMAIL_EDITOR_TYPE.MSEDITOR:
-        default: 
+        default:
           return '/Campaigns/BasicInfo?idTemplate=' + id;
       }
     }
 
-    function redirectToUnlayerEditorForTemplateCreation(baseTemplateId) {
-      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForTemplateCreation(baseTemplateId);
+    function redirectToUnlayerEditorForTemplateCreation(baseTemplateId, parameters) {
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForTemplateCreation(baseTemplateId, ensureExitParameterWithCurrentUrl(parameters));
     }
 
     function createMSEditorTemplateFromPublicAndRedirect(baseTemplateId, onFail) {
@@ -120,16 +142,60 @@
         .catch(onFail);
     }
 
-    function createTemplateFromPublicAndRedirect(baseTemplateId, editorType, onFail) {
+    function createTemplateFromPublicAndRedirect(baseTemplateId, editorType, parameters, onFail) {
       switch (editorType) {
-        case EMAIL_EDITOR_TYPE.UNLAYER: 
-          redirectToUnlayerEditorForTemplateCreation(baseTemplateId);
+        case EMAIL_EDITOR_TYPE.UNLAYER:
+          redirectToUnlayerEditorForTemplateCreation(baseTemplateId, ensureExitParameterWithCurrentUrl(parameters));
           break;
         case EMAIL_EDITOR_TYPE.MSEDITOR:
         default:
             createMSEditorTemplateFromPublicAndRedirect(baseTemplateId, onFail);
             break;
       }
+    }
+
+    /**
+     *
+     * If the template is Unlayer, it redirects to the URL for setting campaign content from
+     * template and returns true.
+     *
+     * If the template is not, it does nothing and returns false.
+     *
+     * @param {number} baseTemplateId
+     * @param {number} editorType
+     * @param {number} idCampaign
+     * @param {Object|null|undefined} parameters
+     * @returns {boolean} true when editorType is Unlayer. Otherwise, false indicating that no operation has been done.
+     */
+    function tryToRedirectToSetCampaignFromTemplateIfUnlayerAndEdit(baseTemplateId, editorType, idCampaign, parameters) {
+      if (editorType !== EMAIL_EDITOR_TYPE.UNLAYER) {
+        return false;
+      }
+
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(idCampaign, baseTemplateId, ensureExitParameterWithCurrentUrl(parameters));
+      return true;
+    }
+
+    /**
+     *
+     * If the template is Unlayer, it redirects to the URL for setting campaign content from
+     * template and returns true.
+     *
+     * If the template is not, it does nothing and returns false.
+     *
+     * @param {number} baseTemplateId
+     * @param {number} editorType
+     * @param {number} idCampaign
+     * @param {Object|null|undefined} parameters
+     * @returns {boolean} true when editorType is Unlayer. Otherwise, false indicating that no operation has been done.
+     */
+    function tryToRedirectToSetCampaignFromTemplateIfUnlayerAndContinue(baseTemplateId, editorType, idCampaign, parameters) {
+      if (editorType !== EMAIL_EDITOR_TYPE.UNLAYER) {
+        return false;
+      }
+
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(idCampaign, baseTemplateId, ensureContinueParameterWithCurrentUrl(parameters));
+      return true;
     }
 
     // rename template. "name" is the new template name. "id" is the id for the template to rename.
