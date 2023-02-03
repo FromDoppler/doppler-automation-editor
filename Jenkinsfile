@@ -36,67 +36,67 @@ pipeline {
                 sh 'docker build --target build .'
             }
         }
-        // stage('Publish in our CDN') {
-        //     environment {
-        //         PKG_NAME = "doppler-automation-editor-mfe"
-        //     }
-        //     stages {
-        //         stage('Publish pre-release packages from pull request') {
-        //             when {
-        //                 changeRequest target: 'main'
-        //             }
-        //             steps {
-        //                 sh '''
-        //                   sh build-n-publish.sh \
-        //                     --package=${PKG_NAME} \
-        //                     --commit=${GIT_COMMIT} \
-        //                     --name=pr-${CHANGE_ID}
-        //                   '''
-        //             }
-        //         }
-        //         stage('Publish pre-release packages from main') {
-        //             when {
-        //                 branch 'main'
-        //             }
-        //             steps {
-        //                 sh '''
-        //                   sh build-n-publish.sh \
-        //                     --package=${PKG_NAME} \
-        //                     --commit=${GIT_COMMIT} \
-        //                     --name=main
-        //                   '''
-        //             }
-        //         }
-        //         stage('Publish pre-release packages from INT') {
-        //             when {
-        //                 branch 'INT'
-        //             }
-        //             steps {
-        //                 sh '''
-        //                   sh build-n-publish.sh \
-        //                     --package=${PKG_NAME} \
-        //                     --commit=${GIT_COMMIT} \
-        //                     --name=INT
-        //                   '''
-        //             }
-        //         }
-        //         stage('Publish final version images') {
-        //             when {
-        //                 expression {
-        //                     return isVersionTag(readCurrentTag())
-        //                 }
-        //             }
-        //             steps {
-        //                 sh '''
-        //                   sh build-n-publish.sh \
-        //                     --package=${PKG_NAME} \
-        //                     --commit=${GIT_COMMIT} \
-        //                     --version=${TAG_NAME}
-        //                   '''
-        //             }
-        //         }
-        //     }
-        //}
+        stage('Publish in our CDN') {
+            environment {
+                PKG_NAME = "doppler-automation-editor-mfe"
+            }
+            stages {
+                stage('Publish pre-release packages from pull request') {
+                    when {
+                        changeRequest target: 'main'
+                    }
+                    steps {
+                        sh '''
+                          sh build-n-publish.sh \
+                            --package=${PKG_NAME} \
+                            --commit=${GIT_COMMIT} \
+                            --name=pr-${CHANGE_ID}
+                          '''
+                    }
+                }
+                stage('Publish pre-release packages from main') {
+                    when {
+                        branch 'main'
+                    }
+                    steps {
+                        sh '''
+                          sh build-n-publish.sh \
+                            --package=${PKG_NAME} \
+                            --commit=${GIT_COMMIT} \
+                            --name=main
+                          '''
+                    }
+                }
+                stage('Publish pre-release packages from INT') {
+                    when {
+                        branch 'INT'
+                    }
+                    steps {
+                        sh '''
+                          sh build-n-publish.sh \
+                            --package=${PKG_NAME} \
+                            --commit=${GIT_COMMIT} \
+                            --name=INT
+                          '''
+                    }
+                }
+                stage('Publish final version images') {
+                    when {
+                        expression {
+                            return isVersionTag(readCurrentTag())
+                        }
+                    }
+                    steps {
+                        sh '''
+                          sh build-n-publish.sh \
+                            --package=${PKG_NAME} \
+                            --commit=${GIT_COMMIT} \
+                            --version=${TAG_NAME}
+                          '''
+                    }
+                }
+            }
+        }
     }
 }
 

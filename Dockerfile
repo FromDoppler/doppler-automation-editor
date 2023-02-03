@@ -22,7 +22,7 @@ ENV CI=true
 ARG public_url="."
 ENV PUBLIC_URL="${public_url}"
 RUN npm run build
-RUN npm run build
+RUN npm run build2
 
 # Using specific digest (f7f7607...) to avoid unwanted changes in the non-oficial image
 FROM ttionya/openssh-client@sha256:f7f7607d56f09a7c42e246e9c256ff51cf2f0802e3b2d88da6537bea516fe142 as final
