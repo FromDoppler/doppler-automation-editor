@@ -28,7 +28,7 @@ module.exports = {
     directives: path.resolve(__dirname, './dist/static/js/directives.js'),
     styles: path.resolve(__dirname, './dist/static/css/styles.css'),
   },
-    mode: "production", 
+    mode: "development", 
     output: {
       path: path.resolve(__dirname, "./dist"),
       filename: 'static/js/[name].[contenthash:8].js',

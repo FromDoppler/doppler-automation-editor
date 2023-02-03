@@ -39,7 +39,7 @@ module.exports = {
         path.resolve(__dirname, './src/css/doppler-common/common.scss'),
       ]
     },
-    mode: "production",
+    mode: "development",
     output: {
       path: path.resolve(__dirname, "./dist"),
       filename: 'static/js/[name].js',
