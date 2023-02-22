@@ -77,7 +77,6 @@ module.exports = {
         publicPath: "https://cdn.fromdoppler.com/doppler-automation-editor-mfe/",
         generate: (seed, files, entrypoints) => {
           const manifestFiles = files.reduce((manifest, file) => {
-            console.log(file)
             manifest[file.name] = file.path;
             return manifest;
           }, seed);

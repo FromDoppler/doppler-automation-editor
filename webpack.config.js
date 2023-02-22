@@ -61,6 +61,13 @@ module.exports = {
           loader: "html-loader",   
         },
         {
+          test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+          type: 'asset',   // <-- Assets module - asset
+          generator: {  //If emitting file, the file path is
+            filename: 'static/fonts/[hash][ext][query]'
+          }
+        },
+        {
           test: /\.scss$/,
           use: [
             MiniCssExtractPlugin.loader, 
