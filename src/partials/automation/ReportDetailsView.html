@@ -18,7 +18,8 @@
 			<div class="loading-icon position--center" ng-show="reportsLoading"></div>			
 			<div ng-hide="reportsLoading">
 				<div class="reports-elements-container">
-					<h2 id="H1" class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Grid_Title' | translate}}</h2>
+					<h2 id="H1" class="sectionBox-title-secondary" ng-if = "selectedOption.id == 0 || selectedOption.id == 1" >{{'ScheduledTask_Reports_Grid_Title' | translate}}</h2>
+					<h2 id="H1" class="sectionBox-title-secondary" ng-if = "selectedOption.id == 2 || selectedOption.id == 3" >{{'ScheduledTask_Reports_Grid_Title_Monthly' | translate}}</h2>
 					<p id="P1" class="task-section-subtitle">{{'ScheduledTask_Reports_Grid_Subtitle' | translate}}</p>
 				</div>
 				<hr />
@@ -42,8 +43,8 @@
 								<td ng-if="selectedOption.id == 2 || selectedOption.id == 3">{{item.Date | date: 'MM/yyyy'}}</td>
 								<td class="table-column-fixed">{{item.SentCount}}</td>
 								<td class="table-column-fixed">{{item.DeliveryCount}}</td>
-								<td class="table-column-fixed">{{item.OpenedMailCount}}</td>
-								<td class="table-column-fixed">{{item.ClickCount}}</td>
+								<td class="table-column-fixed">{{item.DistinctOpenedMailCount}}</td>
+								<td class="table-column-fixed">{{item.UniqueClickCount}}</td>
 								<td class="table-column-fixed">{{item.UnsubscribersCount}}</td>
 								<td class="table-column-fixed">{{item.SocialUniqueClickCount}}</td>
 								<td class="table-column-fixed">{{item.ClickThroughOpenRate == 0 ? 0 : (item.ClickThroughOpenRate | number : 2)}}</td>

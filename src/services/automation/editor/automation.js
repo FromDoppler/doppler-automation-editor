@@ -541,7 +541,7 @@
 
     function hasDynamicElement(idCampaign) {
       var defer = $q.defer();
-      automationDataservice.getDynamicContent(model, idCampaign).then(function(result) {
+      automationDataservice.hasDynamicContent(model.id, idCampaign).then(function(result) {
         defer.resolve((JSON.parse(result.data)));
       });
       return defer.promise;
@@ -659,7 +659,7 @@
       saveChanges().then(function() {
         var errCode = {
           fieldUpdateFails: 35,
-          automationSubscribersListsBlocked: 190
+          automationSubscribersListsBlocked: 192
         }
         startAutomationCampaign().then(function(response) {
           if (!response.data.success && response.data.ErrorCode) {

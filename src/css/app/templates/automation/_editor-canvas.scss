@@ -462,7 +462,7 @@
             margin: 0;
             text-align: center;
             position: absolute;
-            bottom: 1px;
+            bottom: 0;
             left: 0;
             width: $size-full;
           }
@@ -482,6 +482,8 @@
       visibility: visible;
       opacity: 1;
       transition: all .3s ease-out;
+      max-height: 182px;
+      overflow: hidden;
     }
 
     .delete--warning {
@@ -839,7 +841,7 @@
         align-items: center;
       }
     }
-    
+
     &.incomplete:not(.focus) .dp-editor-component-renderer > .component--container .component.goto-possible-connection,
     &:not(.incomplete):not(.focus) .dp-editor-component-renderer > .component--container .component.goto-possible-connection,
     &.incomplete:not(.focus) .dp-editor-component-renderer > .component--container .component.goto-connected,

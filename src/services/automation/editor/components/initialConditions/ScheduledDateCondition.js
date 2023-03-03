@@ -45,7 +45,8 @@
 
       ScheduledDateCondition.prototype.getPropertiesToWatch = function() {
         return [
-          'frequency'
+          'frequency',
+          'suscriptionLists'
         ];
       };
 

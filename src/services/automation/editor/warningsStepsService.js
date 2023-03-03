@@ -29,14 +29,17 @@
           createWarningsSteps(COMPONENT_TYPE.INITIAL_CONDITION);
         }
         else {
-          removeWarningStep(component);
+          removeWarningStep({
+            type: COMPONENT_TYPE.INITIAL_CONDITION, 
+            uid: component.uid
+          });
         }
-      }
-
-      if (component.completed) {
-        removeWarningStep(component);
       } else {
-        createWarningsSteps(component.type);
+        if (component.completed) {
+          removeWarningStep(component);
+        } else {
+          createWarningsSteps(component.type);
+        }
       }
     }
 

@@ -71,7 +71,8 @@
 
 				<div>
 					<label class="label" for="PhoneNumber">*{{ 'CompleteInformation_PhoneNumber' | translate }}</label>
-					<input name="PhoneNumber" type="text" class="input--text" ng-model="model.PhoneNumber" data-required ng-maxlength="25" ng-pattern="PhoneNumberPattern" ng-class="{ 'hasErrors': submitted && CompleteInformation.PhoneNumber.$invalid }"/>
+					<br>
+					<input id="phone_sms" ng-change="changePhoneNumber(CompleteInformation)" name="PhoneNumber" type="text" class="input--text" ng-model="model.PhoneNumber" data-required ng-maxlength="25" ng-class="{ 'hasErrors': submitted && CompleteInformation.PhoneNumber.$error && CompleteInformation.PhoneNumber.$dirty }"/>
 					<div ng-messages="CompleteInformation.PhoneNumber.$error" ng-if='submitted' class="error-messages--container">
 						<div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
 						<div ng-message="maxlength" class="error">{{ 'General_MaxLength_Field' | translate }}</div>

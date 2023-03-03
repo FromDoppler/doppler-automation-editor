@@ -29,6 +29,7 @@
     function controller($scope) {
       var selectedComponent = selectedElementsService.getSelectedComponent();
       $scope.blockedStatus = BLOCKED_STATUS.VALUE;
+      $scope.checkedRows = [];
       var oldComponentData = JSON.parse(JSON.stringify({
         allSubscribers: selectedComponent.allSubscribers,
         suscriptionLists: selectedComponent.suscriptionLists
@@ -57,7 +58,10 @@
       $scope.gridModel.getLabels(true);
       $scope.gridModel.currentSort = 'LAST_SENT_DATE';
       $scope.gridModel.getListData();
-
+      
+      $scope.gridModel.selectedItems.forEach(function (e) {
+        $scope.checkedRows.push(e.IdSubscribersList);
+      })
 
       $scope.selectRow = function(item) {
         if (!document.getElementById('checkbox-' + item.IdSubscribersList).disabled) {
@@ -121,6 +125,10 @@
       $scope.backToEditor = function() {
         $scope.toggleListSelection(LIST_SELECTION_STATE.NONE);
       };
+
+      $scope.IsDisabledRowStatus = function(row) {
+        return row.ListStatus == $scope.blockedStatus && !row.IsChecked && !$scope.checkedRows.includes(row.IdSubscribersList);
+      }; 
     }
   }
 })();

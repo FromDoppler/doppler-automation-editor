@@ -23,6 +23,9 @@
     $scope.PhoneNumberPattern = Constants.PhoneNumberPattern;
     $scope.close = close;
 
+    var iti = null;
+    var smsForm = null;
+
     $translate.onReady().then(function() {
       summaryTaskService.getContactInformation().then(function(response) {
         if (response.data.success) {
@@ -38,6 +41,7 @@
             'IdIndustry': undefined
           });
         }
+        initializePhoneInput();
       });
     });
 
@@ -64,5 +68,72 @@
         });
       }
     };
+
+    function initializePhoneInput() {
+      var inputRef = null;
+      var interval;
+
+      function applyIntlInput() {
+        smsForm = document.getElementsByName('CompleteInformation');
+        inputRef = document.getElementById('phone_sms');
+        if (inputRef !== null) {
+          iti = window.intlTelInput(inputRef, {
+            nationalMode: true,
+            separateDialCode: false,
+            autoPlaceholder: 'aggressive',
+            preferredCountries: ['ar', 'mx', 'co', 'es', 'ec', 'cl', 'pe', 'us'],
+            initialCountry: 'ar',
+            customContainer: 'dropdown--full'
+          });
+          window.clearInterval(interval);
+          $scope.changePhoneNumber(smsForm);
+          inputRef.addEventListener('countrychange', function() {
+            $scope.changePhoneNumber(smsForm);
+          });
+        }
+      }
+
+      interval = window.setInterval(applyIntlInput, 50);
+    }
+
+    $scope.changePhoneNumber = function changePhoneNumber(smsForm) {
+      if (smsForm.PhoneNumber) {
+        if (iti.getNumber()) {
+          var isValid = iti.isValidNumber();
+          if (isValid) {
+            $scope.model.PhoneNumber = iti.getNumber(1);
+            smsForm.PhoneNumber.$error = false;
+            return;
+          }
+          evaluateIntlError(iti.getValidationError(), smsForm);
+        } else {
+          smsForm.PhoneNumber.$error = {
+            'required': true
+          };
+        }
+      }
+    }
+
+    function evaluateIntlError(errorCode, smsForm) {
+      switch (errorCode) {
+      case 0:
+        smsForm.PhoneNumber.$error = {
+          'pattern': true,
+          'required': false
+        };
+        break;
+      case 3:
+        smsForm.PhoneNumber.$error = {
+          'maxlength': true,
+          'required': false
+        };
+        break;
+      default:
+        smsForm.PhoneNumber.$error = {
+          'pattern': true,
+          'required': false
+        };
+      }
+    }
   }
 })();
