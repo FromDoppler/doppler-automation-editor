@@ -46,6 +46,20 @@ module.exports = {
           ]
         },
         {
+          test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+          type: 'asset',   // <-- Assets module - asset
+          generator: {  //If emitting file, the file path is
+            filename: 'static/fonts/[hash][ext][query]'
+          }
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset',
+          generator: {
+            filename: 'static/images/[hash][ext][query]'
+          }
+        },
+        {
           test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader, 

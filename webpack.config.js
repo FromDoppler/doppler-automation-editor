@@ -68,6 +68,13 @@ module.exports = {
           }
         },
         {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset',
+          generator: {
+            filename: 'static/images/[hash][ext][query]'
+          }
+        },
+        {
           test: /\.scss$/,
           use: [
             MiniCssExtractPlugin.loader, 
