@@ -38,8 +38,12 @@ dp-editor-header,
   z-index: 6;
 }
 
-dp-editor-header {
-  z-index: 6;
+dp-editor-types {
+  .dp-editor-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
 }
 
 .dp-editor-footer {
