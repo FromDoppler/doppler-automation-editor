@@ -9,13 +9,13 @@
     'automation',
     'taskService',
     'ModalService',
-    'selectedElementsService',
     '$rootScope',
-    'AUTOMATION_TYPE_IDS'
+    'AUTOMATION_TYPE_IDS',
+    '$window'
   ];
 
-  function dpEditorTypes(automation, taskService, ModalService, selectedElementsService,
-    $rootScope, AUTOMATION_TYPE_IDS) {
+  function dpEditorTypes(automation, taskService, ModalService,
+    $rootScope, AUTOMATION_TYPE_IDS, $window) {
     var directive = {
       restrict: 'E',
       link: link,
@@ -25,6 +25,7 @@
     return directive;
 
     function link(scope) {
+      automation.load(0);
       scope.types = [];
       scope.isLoading = true;
       scope.integrationsListLength = 0;
@@ -67,11 +68,15 @@
 
       scope.buildAutomation = function() {
         automation.buildAutomation(scope.selectedType);
-        automation.saveChanges().then(function(){
-          scope.toggleTypesView(false);
-          selectedElementsService.setSelectedComponent(scope.rootComponent.initialCondition);
+        automation.saveChanges().then(function(response){
+          $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + response.data.id + '&automationType=' +  automation.getAutomationType(parseInt(scope.selectedType));
         });
       };
+
+      scope.returnGrid = function() {
+        $window.history.back();
+      };
+
       scope.integrationsList = function(automationType) {
         var result = [];
         switch (automationType) {

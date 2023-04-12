@@ -21,6 +21,7 @@
     $scope.rows = 10;
     $scope.tasksQuantity = '';
     $scope.totalTasks = 0;
+    $scope.createNewAutomationView =  $window.location.href.indexOf("/selectAutomation") > 0;
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
     $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;
     $scope.gridModel = gridService.initGrid({
@@ -41,6 +42,11 @@
         $scope.gridLoading = false;
         $scope.replicateAutomationEnabled = response.data.ReplicateAutomationEnabled;
       });
+    }
+
+    $scope.createNewAutomation = function(value) {
+      $window.history.pushState({ createNewAutomationView: value }, '', window.location.href.concat('selectAutomation'));
+      $scope.createNewAutomationView =  value;
     }
 
     $scope.disableDeletedRows = function() {
@@ -109,6 +115,10 @@
       }
     }
 
+    window.addEventListener("popstate", function () {
+      $scope.createNewAutomationView = $window.location.href.indexOf("/selectAutomation") > 0;
+      $scope.$apply();
+    });
   }
 
 })();

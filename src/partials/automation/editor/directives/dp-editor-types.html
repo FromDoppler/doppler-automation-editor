@@ -58,7 +58,7 @@
   </section>
   <div class="dp-editor-footer">
     <div class="item">
-      <a class="button button--small button-outline--primary" href="/Automation/Automation/AutomationApp/">{{ 'actions.cancel' | translate }}</a>
+      <button class="button button--small button-outline--primary" ng-click="returnGrid()">{{ 'actions.cancel' | translate }}</button>
       <!-- hide until implement initial conditions -->
         <div class="right" ng-if="false">
           <button class="button button--small button--primary" ng-click="buildAutomation()" ng-disabled="!selectedType">{{ 'automation_editor.buttons.build_campaign' | translate }}</button>
