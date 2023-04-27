@@ -5,8 +5,15 @@
         <p>{{ 'automationTypes.automation_task_header.description' | translate }}</p>
     </header>
     <div class="aplication-types--container flex-grid-v-center" ng-show="!isLoading">
-      <div target="_self" class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} {{lang}}" ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}" ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" data-text="{{ 'automationTypes.info.new_feature' | translate }}" ng-if="item.Status !== 'hidden'">
-        <img ng-src="../../../images/automation-type-{{ item.Type }}.svg" />
+      <div target="_self" 
+        class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} template-types--{{item.Type}}"
+        ng-class="{'aplication-types--new-feature1' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}"
+        ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" 
+        ng-if="item.Status !== 'hidden'">
+        <div class="aplication-types--new-feature  {{lang}}"
+        data-text="{{ 'automationTypes.info.new_feature' | translate }}" 
+        ng-if="item.IsNewFeature && item.Status !== 'repeated'"></div>
+        <!-- <img ng-src="../../../images/automation-type-{{ item.Type }}.svg" /> -->
         <div class="aplication-types-description--container">
           <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
           <p class="text--small">{{ 'automationTypes.info.description' + item.Type | translate }}</p>
@@ -59,9 +66,5 @@
   <div class="dp-editor-footer">
     <div class="item">
       <button class="button button--small button-outline--primary" ng-click="returnGrid()">{{ 'actions.cancel' | translate }}</button>
-      <!-- hide until implement initial conditions -->
-        <div class="right" ng-if="false">
-          <button class="button button--small button--primary" ng-click="buildAutomation()" ng-disabled="!selectedType">{{ 'automation_editor.buttons.build_campaign' | translate }}</button>
-        </div>
     </div>
 </div>

@@ -17,6 +17,7 @@
       changeStatus: changeStatus,
       deleteTask: deleteTask,
       getAutomationTypeList: getAutomationTypeList,
+      getAutomationTemplateList: getAutomationTemplateList,
       createReplica: createReplica,
     };
 
@@ -47,6 +48,19 @@
           idTask: idTask
         }
       });
+    }
+
+    function getAutomationTemplateList() {
+      return $http
+        .get('/Automation/Task/GetAutomationTemplatesList')
+        .then(function(response){
+          const blankTemplate = {
+            "IdAutomationTemplate": 0,
+            "Type": "0",
+            "Status": "active"
+          }
+          return [blankTemplate].concat(response.data.automationTemplateList);
+        });
     }
 
     function getAutomationTypeList(replicationTypeSource) {

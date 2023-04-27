@@ -84,7 +84,7 @@ module.exports = {
               options: {
                 webpackImporter: false,
                 implementation: require("sass"),
-                additionalData: "$flagsImagePath:'../app/icons/';$iconsPath:'../app/icons';$fontPath:'../../fonts/';$gulp:'false';",
+                additionalData: "$flagsImagePath:'../app/icons/';$imgPath:'../images/';$iconsPath:'../app/icons';$fontPath:'../../fonts/';$gulp:'false';",
                 sassOptions: {
                   importer: globImporter(),
                   includePaths: [ path.resolve(__dirname, './node_modules')]

@@ -41,7 +41,6 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
                                     || automationData.data.automationType === AUTOMATION_TYPE.PENDING_ORDER
                                     || automationData.data.automationType === AUTOMATION_TYPE.CONFIRMATION_ORDER;
         $scope.showTinyEditor = false;
-        //$scope.showAutomationTypes = automationData.data.automationType === AUTOMATION_TYPE.NONE;
         $scope.isProcessing = automation.getIsProcessing;
         $scope.isAutomationActive = automation.getIsAutomationActive;
 

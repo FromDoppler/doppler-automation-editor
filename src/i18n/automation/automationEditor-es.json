@@ -976,6 +976,21 @@
       "header_domain_column": "Dominios"
     }
   },
+
+  "automationTemplates": {
+    "info": {
+      "title0": "Crear flujo desde cero",
+      "description0": "Define tu mismo las condiciones y acciones que dispararán tus campañas creando un flujo personalizado.",
+      "title1": "Revalidacion de suscriptores",
+      "description1": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
+      "title2": "Descuento cumpleaños",
+      "description2": "Los cumpleaños son una oportunidad perfecta para construir una mejor relación con tu cliente.",
+      "title4": "Nuevo Contacto",
+      "description4": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
+      "title3": "Carrito abandonado",
+      "description3": "Úsalo para crear una secuencia de emails y animar a las personas que estuvieron cerca de completar una compra."
+    }
+  },
   "automationTypes": {
     "info": {
       "title3": "Fechas Programadas",

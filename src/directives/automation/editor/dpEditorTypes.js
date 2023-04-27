@@ -26,16 +26,7 @@
 
     function link(scope) {
       automation.load(0);
-      scope.types = [];
-      scope.isLoading = true;
       scope.integrationsListLength = 0;
-      scope.lang = mainMenuData.user.lang;
-
-      taskService.getAutomationTypeList()
-        .then(function(data) {
-          scope.types = data;
-          scope.isLoading = false;
-        });
 
       scope.showPopup = function() {
         ModalService.showModal({
@@ -71,10 +62,6 @@
         automation.saveChanges().then(function(response){
           $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + response.data.id + '&automationType=' +  automation.getAutomationType(parseInt(scope.selectedType));
         });
-      };
-
-      scope.returnGrid = function() {
-        $window.history.back();
       };
 
       scope.integrationsList = function(automationType) {

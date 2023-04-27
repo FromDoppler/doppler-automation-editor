@@ -6,6 +6,14 @@ $imagesPath: "../images" !default;
     height: 40px;
     margin-bottom: 35px;
   }
+  @for $i from 0 through 12 {
+    .template-types--#{$i} {
+      &::before {
+        background: url(#{$imagesPath}/automation-type-#{$i}.svg) no-repeat center center;
+        background-size: 50%;
+      } 
+    }
+  }
 }
 
 .aplication-types--items {
@@ -152,6 +160,10 @@ $imagesPath: "../images" !default;
   }
 }
 
+.is--blank-template {
+  border: 1px dashed #33AD73;
+}
+
 .aplication-types--new-feature {
   position: relative;
   div {
@@ -161,10 +173,10 @@ $imagesPath: "../images" !default;
     content: '';
     display: block;
     position: absolute;
-    right: -7px;
+    right: -407px;
     height: 121px;
     width: 121px;
-    top: -5px;
+    top: -74px;
     background: url(#{$imagesPath}/coming-soon.svg) no-repeat center center;
     z-index: 2;
   }
@@ -175,8 +187,6 @@ $imagesPath: "../images" !default;
     content: attr(data-text);
     display: inline-block;
     position: absolute;
-    top: 35px;
-    right: 5px;
     transform: rotate(45deg);
     z-index: 2;
     font-weight: normal;
@@ -186,14 +196,14 @@ $imagesPath: "../images" !default;
   }
   &.es {
     &::after {
-      top: 39px;
-      right: -13px;
+      top: -30px;
+      right: -410px;
     }
   }
   &.en {
     &::after {
-      top: 38px;
-      right: 8px;
+      top: -35px;
+      right: -390px;
     }
   }
 }
@@ -209,5 +219,23 @@ $imagesPath: "../images" !default;
 
   .notification--container {
     background: $color-red;
+  }
+}
+
+dp-editor-types,
+dp-editor-template {
+  .aplication-types--items {
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 121px;
+      width: 121px;
+      top: -10px;
+      left: -20px;
+    }
+    .aplication-types-description--container{
+      margin: 10px 0 0 20%;
+    }
   }
 }

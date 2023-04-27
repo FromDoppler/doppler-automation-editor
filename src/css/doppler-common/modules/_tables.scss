@@ -1,3 +1,5 @@
+$imgPath: '/assets/images' !default;
+
 .grid--default {
   margin-top: 35px;
   width: $size-full;
@@ -450,6 +452,21 @@
   .icon-check {
     color: $color-green;
     font-size: 16px;
+  }
+}
+
+dp-editor-template {
+  .hero-banner{
+    background-color: #FFFBEF;
+    p{
+      padding: 5px 0;
+    }
+    .dp-automation-shape{
+      background-position: center;
+      background-size: 40%;
+      background-repeat: no-repeat;
+      background-image: url(#{$imgPath}/automation-shapes.svg);
+    }
   }
 }
 
