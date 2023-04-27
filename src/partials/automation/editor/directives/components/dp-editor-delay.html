@@ -12,7 +12,7 @@
 		<span class="time">(XX)</span> {{'automation_editor.canvas.time_placeholder' | translate}}
 	</p>
   <p ng-show="component.time > 0"> {{'automation_editor.canvas.wait_time_part1' | translate}}
-  	<span class="time"><span class="selected">{{component.time}} {{getTimeUnitLabel()}}</span>
+  	<span class="time"><span class="selected">{{component.time}} {{getTimeUnitLabel()}}</span></span>
   </p>
 	<p ng-show="component.time === 0 || component.time === '0'"> {{ 'automation_editor.canvas.right_now' | translate }}  </p>
   <div class="actions-element--container">
