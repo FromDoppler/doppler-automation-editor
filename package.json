@@ -29,6 +29,7 @@
     "cpx": "^1.5.0",
     "css-loader": "^6.7.1",
     "dropzone": "3.11.0",
+    "eslint": "^8.39.0",
     "file-loader": "^6.2.0",
     "html-loader": "^4.2.0",
     "http-server": "^0.11.1",
@@ -41,7 +42,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "node-sass-glob-importer": "^3.0.2",
     "normalize.css": "^8.0.1",
-    "prettier": "^2.3.2",
+    "prettier": "2.8.8",
     "protractor": "^5.4.1",
     "replace-hash-in-file-webpack-plugin": "^1.0.8",
     "sass": "1.56.1",
@@ -60,6 +61,9 @@
     "copy-libs": "cpx \"node_modules/{angular,angular-*,intl-tel-input/build/js,dropzone/downloads}/**/*\" app/lib -C",
     "prestart1": "npm install1",
     "start": "http-server --cors -a localhost -p 8000 -c-1 ./dist",
+    "verify-format": "npm run prettier-check",
+    "prettier-check": "prettier --check **/*.{html,css,scss,less,js,ts,md,yml,yaml,json}",
+    "prettier-fix": "prettier --write **/*.{html,css,scss,less,js,ts,md,yml,yaml,json}",
     "clean-dist": "rm -rf dist/*",
     "clean-win-dist": "del dist/*",
     "double-build": "npm run clean-win-dist; build; build",
@@ -74,5 +78,11 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor e2e-tests/protractor.conf.js",
     "update-index-async": "node --eval \"var fs=require('fs'),indexFile='app/index-async.html',loaderFile='app/lib/angular-loader/angular-loader.min.js',loaderText=fs.readFileSync(loaderFile,'utf-8').split(/sourceMappingURL=angular-loader.min.js.map/).join('sourceMappingURL=lib/angular-loader/angular-loader.min.js.map'),indexText=fs.readFileSync(indexFile,'utf-8').split(/\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/).join('//@@NG_LOADER_START@@\\n'+loaderText+'    //@@NG_LOADER_END@@');fs.writeFileSync(indexFile,indexText);\""
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true
   }
 }
