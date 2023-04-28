@@ -138,14 +138,15 @@
     </div>
 
     <div class="input--group">
-      <label class="label label--panel">{{'automation_editor.components.initial_condition.site_behavior.panel.times_label' | translate}}</p></label>
+      <label class="label label--panel">{{'automation_editor.components.initial_condition.site_behavior.panel.times_label' | translate}}</label>
       <dp-editor-dropdown
-      options="timesBackAutomation"
-      label="'automation_editor.components.initial_condition.site_behavior.panel.times_value' + selectedComponent.timesBackAutomation | translate"
-      value-selected="selectedComponent.timesBackAutomation"
-      on-select-option="onTimesBackChange(option)"
-      class="dropdown dropdown--full"
-      ng-disabled="isReadOnly()"></dp-editor-dropdown>
+        options="timesBackAutomation"
+        label="'automation_editor.components.initial_condition.site_behavior.panel.times_value' + selectedComponent.timesBackAutomation | translate"
+        value-selected="selectedComponent.timesBackAutomation"
+        on-select-option="onTimesBackChange(option)"
+        class="dropdown dropdown--full"
+        ng-disabled="isReadOnly()">
+      </dp-editor-dropdown>
       <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
     </div>
   </form>

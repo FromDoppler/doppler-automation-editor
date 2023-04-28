@@ -27,7 +27,7 @@
   <span class="icon-warning"></span>
   {{ 'forms_integrate.headers.integration_facebook.body.tab_deleted_text_1' | translate }} "<span class="text-emphasis">{{facebookCtrl.facebookData.facebookTabName}}</span>" {{ 'forms_integrate.headers.integration_facebook.body.tab_deleted_text_2' | translate }} <span class="text-emphasis">{{facebookCtrl.facebookData.facebookFanPageSelected.label}}</span>
 </p>
-<p class="text--small" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && facebookCtrl.disabledFanPages"">
+<p class="text--small" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && facebookCtrl.disabledFanPages">
   <span class="icon-warning"></span>
    {{ 'forms_integrate.error.disabledFanPages' | translate }}
    <b><a ng-click="facebookCtrl.integrateAccount()" class="text--uppercase text-error"> {{ 'forms_integrate.error.retry' | translate }}</a></b>

@@ -1,7 +1,7 @@
 <div class="subscribers-scoring">
   <div class="panel-box-app panel-box-app--ctrlpanel">
     <h3>{{ 'subscribers_scoring.title' | translate }}</h3>
-    <p class="description text--small">{{ 'subscribers_scoring.description' | translate }} <a target="_blank" href="{{ 'subscribers_scoring.help_link' | translate }}"">{{ 'subscribers_scoring.help' | translate }}</a>.</p>
+    <p class="description text--small">{{ 'subscribers_scoring.description' | translate }} <a target="_blank" href="{{ 'subscribers_scoring.help_link' | translate }}">{{ 'subscribers_scoring.help' | translate }}</a>.</p>
 
     <div ng-repeat="score in scores track by $index" class="inputContainer scoring-box">
       <p><b>{{ 'subscribers_scoring.stars_description.first_part_bold' | translate}} {{scores.length - $index}} {{$last ? 'subscribers_scoring.stars_description.stars_singular' : 'subscribers_scoring.stars_description.stars_plural' | translate}}</b> {{ 'subscribers_scoring.stars_description.second_part' | translate}} <dp-score-stars  total-stars="totalStars" full-stars="score.Score"></dp-score-stars></p>
