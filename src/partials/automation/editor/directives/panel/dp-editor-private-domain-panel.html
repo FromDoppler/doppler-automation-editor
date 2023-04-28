@@ -1,76 +1,179 @@
 <div ng-show="!maxDomainsReached">
   <!-- main message for validation -->
-  <span class="text--small"><strong>{{'automation_editor.sidebar.campaign_domain_error_part1' | translate}}</strong>
-  {{'automation_editor.sidebar.campaign_domain_error_part2' | translate}} <br /> <br /> {{'automation_editor.sidebar.campaign_domain_error_part3' | translate}}</span>
-  <strong><a target="_blank" href=" {{'automation_editor.sidebar.campaign_domain_error_help_link' | translate}}">  {{'help_link_text' | translate}} </a></strong>.
+  <span class="text--small"
+    ><strong
+      >{{'automation_editor.sidebar.campaign_domain_error_part1' |
+      translate}}</strong
+    >
+    {{'automation_editor.sidebar.campaign_domain_error_part2' | translate}}
+    <br />
+    <br />
+    {{'automation_editor.sidebar.campaign_domain_error_part3' |
+    translate}}</span
+  >
+  <strong
+    ><a
+      target="_blank"
+      href=" {{'automation_editor.sidebar.campaign_domain_error_help_link' | translate}}"
+    >
+      {{'help_link_text' | translate}}
+    </a></strong
+  >.
 
   <!-- validation panel -->
   <div class="validation--container">
     <form name="privateDomainForm">
       <div class="input--group">
-        <label class="label label--panel"> {{ 'automation_editor.sidebar.campaign_domain_send_email_title' | translate }} </label>
+        <label class="label label--panel">
+          {{ 'automation_editor.sidebar.campaign_domain_send_email_title' |
+          translate }}
+        </label>
 
         <div>
-          <input type="text" class="input--text domain" ng-model="email" ng-model-options="{ updateOn: 'blur' }"
-          ng-required="privateDomainForm.email.$dirty" name="email" id="email_optin" ng-disabled="processing"
-        ng-class="{'hasErrors': privateDomainForm.email.$invalid}" ng-pattern="$parent.REGEX_EMAIL_DKIM" maxlength="100"/>
+          <input
+            type="text"
+            class="input--text domain"
+            ng-model="email"
+            ng-model-options="{ updateOn: 'blur' }"
+            ng-required="privateDomainForm.email.$dirty"
+            name="email"
+            id="email_optin"
+            ng-disabled="processing"
+            ng-class="{'hasErrors': privateDomainForm.email.$invalid}"
+            ng-pattern="$parent.REGEX_EMAIL_DKIM"
+            maxlength="100"
+          />
           <span class="domain">@{{validatedDomain}}</span>
         </div>
         <!-- ok sent msg -->
-        <div ng-if="emailSent && showConfirmation" class="ok-messages--container">
-            <div> {{ 'automation_editor.sidebar.campaign_domain_send_success' | translate }} </div>
-      </div>
+        <div
+          ng-if="emailSent && showConfirmation"
+          class="ok-messages--container"
+        >
+          <div>
+            {{ 'automation_editor.sidebar.campaign_domain_send_success' |
+            translate }}
+          </div>
+        </div>
 
-      <!-- email not sent error msg -->
-      <div ng-if="emailNotSent" class="error-messages--container">
-          <div class="error"> {{ 'automation_editor.sidebar.campaign_domain_send_error' | translate }} </div>
+        <!-- email not sent error msg -->
+        <div ng-if="emailNotSent" class="error-messages--container">
+          <div class="error">
+            {{ 'automation_editor.sidebar.campaign_domain_send_error' |
+            translate }}
+          </div>
         </div>
 
         <!-- error msg -->
-        <div ng-messages="privateDomainForm.email.$error" class="error-messages--container" >
-            <div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
+        <div
+          ng-messages="privateDomainForm.email.$error"
+          class="error-messages--container"
+        >
+          <div ng-message="pattern" class="error">
+            {{ 'validation_messages.email' | translate }}
+          </div>
         </div>
 
         <!-- send email btn -->
-        <button class="button button--alternative button--small" ng-class="{'button--spinner': !emailSent && processing }" ng-click="getCodeByEmail()"
-          ng-disabled = "processing || privateDomainForm.email.$invalid || privateDomainForm.email.$pristine">
-          {{ 'automation_editor.sidebar.campaign_domain_send_email_btn' | translate }}  <span ng-show="!emailSent && processing" class="icon-editor-saving ng-hide"></span>
+        <button
+          class="button button--alternative button--small"
+          ng-class="{'button--spinner': !emailSent && processing }"
+          ng-click="getCodeByEmail()"
+          ng-disabled="processing || privateDomainForm.email.$invalid || privateDomainForm.email.$pristine"
+        >
+          {{ 'automation_editor.sidebar.campaign_domain_send_email_btn' |
+          translate }}
+          <span
+            ng-show="!emailSent && processing"
+            class="icon-editor-saving ng-hide"
+          ></span>
         </button>
-
       </div>
 
-
       <div class="input--group">
-
-        <label class="label label--panel"> {{ 'automation_editor.sidebar.campaign_domain_send_code_title' | translate }} </label>
-        <input type="text" class="input--text" ng-model="code" ng-model-options="{ updateOn: 'blur' }"
-        ng-required="privateDomainForm.code.$dirty" name="code" id="code_optin"
-        ng-class="{'hasErrors': privateDomainForm.code.$invalid}" maxlength="100" ng-disabled="processing" />
+        <label class="label label--panel">
+          {{ 'automation_editor.sidebar.campaign_domain_send_code_title' |
+          translate }}
+        </label>
+        <input
+          type="text"
+          class="input--text"
+          ng-model="code"
+          ng-model-options="{ updateOn: 'blur' }"
+          ng-required="privateDomainForm.code.$dirty"
+          name="code"
+          id="code_optin"
+          ng-class="{'hasErrors': privateDomainForm.code.$invalid}"
+          maxlength="100"
+          ng-disabled="processing"
+        />
 
         <!-- validate code btn -->
-        <button class="button button--alternative button--small" ng-class="{'button--spinner': emailSent && processing }" ng-click="validateCode()"
-        ng-disabled="processing || privateDomainForm.code.$pristine || privateDomainForm.code.$invalid"> {{ 'automation_editor.sidebar.campaign_domain_send_code_btn' | translate }} <span ng-show="emailSent && processing"
-        class="icon-editor-saving ng-hide"></span> </button>
+        <button
+          class="button button--alternative button--small"
+          ng-class="{'button--spinner': emailSent && processing }"
+          ng-click="validateCode()"
+          ng-disabled="processing || privateDomainForm.code.$pristine || privateDomainForm.code.$invalid"
+        >
+          {{ 'automation_editor.sidebar.campaign_domain_send_code_btn' |
+          translate }}
+          <span
+            ng-show="emailSent && processing"
+            class="icon-editor-saving ng-hide"
+          ></span>
+        </button>
 
         <!-- error message -->
-        <div class="error-messages--container" ng-show="!success && codeValidated" >
-          <div class="error">  {{ 'automation_editor.sidebar.campaign_domain_code_validation_failed' | translate }} </div>
+        <div
+          class="error-messages--container"
+          ng-show="!success && codeValidated"
+        >
+          <div class="error">
+            {{
+            'automation_editor.sidebar.campaign_domain_code_validation_failed' |
+            translate }}
+          </div>
         </div>
 
         <!-- success message -->
         <div ng-show="success && codeValidated" class="ok-messages--container">
-            <div> {{ 'automation_editor.sidebar.campaign_domain_code_validation_ok' | translate }} </div>
+          <div>
+            {{ 'automation_editor.sidebar.campaign_domain_code_validation_ok' |
+            translate }}
+          </div>
         </div>
-
       </div>
     </form>
   </div>
 </div>
 
 <div ng-show="maxDomainsReached">
-  <strong> {{ 'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part1' | translate }} </strong> <br/> <br/>
-  {{ 'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part2' | translate }}
-  <strong><a target="_self" href="/ControlPanel/AdvancedPreferences/Dkim"> {{ 'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part3' | translate }} </a></strong>
-   {{ 'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part4' | translate }}
-  <strong><a target="_blank" href="{{ 'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part5' | translate }}" > {{ 'help_link_text' | translate }}.</a></strong>
+  <strong>
+    {{
+    'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part1'
+    | translate }}
+  </strong>
+  <br />
+  <br />
+  {{
+  'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part2' |
+  translate }}
+  <strong
+    ><a target="_self" href="/ControlPanel/AdvancedPreferences/Dkim">
+      {{
+      'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part3'
+      | translate }}
+    </a></strong
+  >
+  {{
+  'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part4' |
+  translate }}
+  <strong
+    ><a
+      target="_blank"
+      href="{{ 'automation_editor.sidebar.campaign_domain_code_validation_max_domain_part5' | translate }}"
+    >
+      {{ 'help_link_text' | translate }}.</a
+    ></strong
+  >
 </div>

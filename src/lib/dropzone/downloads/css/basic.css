@@ -9,8 +9,8 @@
 }
 .dropzone {
   position: relative;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
   padding: 1em;
 }
 .dropzone.dz-clickable {
@@ -29,15 +29,15 @@
   filter: none;
 }
 .dropzone.dz-drag-hover {
-  border-color: rgba(0,0,0,0.15);
-  background: rgba(0,0,0,0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.04);
 }
 .dropzone.dz-started .dz-message {
   display: none;
 }
 .dropzone .dz-preview,
 .dropzone-previews .dz-preview {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
   position: relative;
   display: inline-block;
   margin: 17px;
@@ -142,7 +142,7 @@
   position: absolute;
   top: -5px;
   left: -20px;
-  background: rgba(245,245,245,0.8);
+  background: rgba(245, 245, 245, 0.8);
   padding: 8px 10px;
   color: #800;
   min-width: 140px;

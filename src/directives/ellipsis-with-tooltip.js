@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,7 +8,6 @@
   ellipsisWithTooltip.$inject = ['$timeout'];
 
   function ellipsisWithTooltip($timeout) {
-
     var directive = {
       restrict: 'E',
       link: link,
@@ -16,9 +15,9 @@
         text: '=',
         url: '@',
         cssClass: '@',
-        multiLine: '@'
+        multiLine: '@',
       },
-      templateUrl: 'angularjs/partials/shared/ellipsis-with-tooltip.html'
+      templateUrl: 'angularjs/partials/shared/ellipsis-with-tooltip.html',
     };
 
     return directive;
@@ -26,10 +25,14 @@
     function link(scope, element) {
       scope.cssClass = scope.cssClass || '';
 
-      function activateEllipsis(){
-        $timeout(function() {
-          var textElement = angular.element(element[0].querySelector('.text'))[0];
-          var tooltipElement = angular.element(element[0].querySelector('.titip-top'))[0];
+      function activateEllipsis() {
+        $timeout(function () {
+          var textElement = angular.element(
+            element[0].querySelector('.text')
+          )[0];
+          var tooltipElement = angular.element(
+            element[0].querySelector('.titip-top')
+          )[0];
           if (isEllipsisActive(textElement)) {
             tooltipElement.classList.remove('tooltip-hide');
             if (scope.multiLine) {
@@ -42,17 +45,17 @@
 
       activateEllipsis();
 
-      if (scope.multiLine){
-        scope.$watch('text', function(){
+      if (scope.multiLine) {
+        scope.$watch('text', function () {
           activateEllipsis();
         });
       }
 
       function isEllipsisActive(e) {
-        return scope.multiLine ? (e.offsetHeight < e.scrollHeight) : (e.offsetWidth < e.scrollWidth);
+        return scope.multiLine
+          ? e.offsetHeight < e.scrollHeight
+          : e.offsetWidth < e.scrollWidth;
       }
-
     }
   }
-
 })();

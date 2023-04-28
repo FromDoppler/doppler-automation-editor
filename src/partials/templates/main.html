@@ -1,48 +1,124 @@
-<section class="section--default background--white section--templates" id="templates-container">
-	<div class="wrapper wrapper--old">
-		<header ng-if="!isPublicTemplatesActive">
-			<div>
-				<h2>{{ 'templates_title' | translate }}</h2>
-				<p class="small">{{ 'templates_description' | translate }}</p>
-			</div>
-			<a ng-click="createTemplate()" class="button button--primary">{{ 'templates_create' | translate }}</a>
-		</header>
-		<div class="breadcrum" ng-if="isPublicTemplatesActive">
-			<a ng-click="viewPrivateTemplates()">{{ 'templates_title' | translate }}</a> | <span> {{ 'templates_publics_breadcrum' | translate }}</span>
-		</div>
-		<header ng-if="isPublicTemplatesActive">
-			<div>
-				<h2>{{ 'templates_public_title' | translate }}</h2>
-				<p class="small">{{ 'templates_public_description' | translate }}</p>
-			</div>
-			<dropdown class="dropdown" id="filter-categories" list="categories" ng-model="categorySelected.IdTemplateCategory" ng-change="filterPublicTemplates()" property="Name" id-value="IdTemplateCategory"></dropdown>
-		</header>
-		<div class="items" infinite-scroll="onScroll" infinite-scroll-distance="200">
-			<div class="item" ng-repeat="template in templates">
-				<div class="img-container">
-					<img ng-src="{{ getNoCacheUrl(template.TemplatePreviewUrl) }}" poll="true" show-eye="true" dp-on-error-src="../../../img/asyncPreview/container_280x280.svg"/>
-					<div class="hover-actions">
-						<a class="icon-maximize" ng-click="openPreview(template)"></a>
-						<a ng-if="!isPublicTemplatesActive" class="button button-outline--white" ng-click="newCampaign(template.IdTemplate)">{{ 'templates_card.new_campaign' | translate }}</a>
-						<a ng-if="isPublicTemplatesActive" class="button button-outline--white" ng-click="selectTemplate(template.IdTemplate)">{{ 'templates_card.select' | translate }}</a>
-					</div>
-				</div>
-				<div class="container" ng-if="!isPublicTemplatesActive">
-					<hr />
-					<p class="template-name--container" data-static-tooltip="{{ template.Name }}">
-						<span class="template-name">{{ template.Name }}</span>
-					</p>
-					<p class="small">{{ formatDate(template.CreatedAt) | date : dateFormat }} - {{ template.CampaignsCount }} {{'templates_total_campaigns' | translate }}</p>
-					<span class="bulls"   ng-click="template.isMenuOpen=true;">&bull; &bull; &bull;</span>
-					<ul class="menu" id="{{template.IdTemplate}}" ng-if="template.isMenuOpen" click-outside="closeMenu(template)"  ng-class="{open: template.isMenuOpen}">
-						<li ng-click="editTemplate(template.IdTemplate)"><span class="container"><span class="icon-edit"></span></span> <span class="text">{{ 'templates_card.edit' | translate }}</span></li>
-						<li ng-click="renameTemplate(template)"><span class="container"><span class="icon-rename"></span></span><span class="text">{{ 'templates_card.rename' | translate }}</span></li>
-						<li ng-click="viewOnline(template.ViewOnlineUrl)" ng-if="data.user.plan.planType !== 'free'"><span class="container"><span class="icon-view"></span></span><span class="text">{{ 'templates_card.view_online' | translate }}</span></li>
-						<li ng-click="duplicateTemplate(template)"><span class="container"><span class="icon-duplicate"></span></span><span class="text">{{ 'templates_card.duplicate' | translate }}</span></li>
-						<li ng-click="deleteTemplate(template)"><span class="container"><span class="icon-delete"></span></span><span class="text">{{ 'templates_card.delete' | translate }}</span></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+<section
+  class="section--default background--white section--templates"
+  id="templates-container"
+>
+  <div class="wrapper wrapper--old">
+    <header ng-if="!isPublicTemplatesActive">
+      <div>
+        <h2>{{ 'templates_title' | translate }}</h2>
+        <p class="small">{{ 'templates_description' | translate }}</p>
+      </div>
+      <a ng-click="createTemplate()" class="button button--primary"
+        >{{ 'templates_create' | translate }}</a
+      >
+    </header>
+    <div class="breadcrum" ng-if="isPublicTemplatesActive">
+      <a ng-click="viewPrivateTemplates()"
+        >{{ 'templates_title' | translate }}</a
+      >
+      | <span> {{ 'templates_publics_breadcrum' | translate }}</span>
+    </div>
+    <header ng-if="isPublicTemplatesActive">
+      <div>
+        <h2>{{ 'templates_public_title' | translate }}</h2>
+        <p class="small">{{ 'templates_public_description' | translate }}</p>
+      </div>
+      <dropdown
+        class="dropdown"
+        id="filter-categories"
+        list="categories"
+        ng-model="categorySelected.IdTemplateCategory"
+        ng-change="filterPublicTemplates()"
+        property="Name"
+        id-value="IdTemplateCategory"
+      ></dropdown>
+    </header>
+    <div
+      class="items"
+      infinite-scroll="onScroll"
+      infinite-scroll-distance="200"
+    >
+      <div class="item" ng-repeat="template in templates">
+        <div class="img-container">
+          <img
+            ng-src="{{ getNoCacheUrl(template.TemplatePreviewUrl) }}"
+            poll="true"
+            show-eye="true"
+            dp-on-error-src="../../../img/asyncPreview/container_280x280.svg"
+          />
+          <div class="hover-actions">
+            <a class="icon-maximize" ng-click="openPreview(template)"></a>
+            <a
+              ng-if="!isPublicTemplatesActive"
+              class="button button-outline--white"
+              ng-click="newCampaign(template.IdTemplate)"
+              >{{ 'templates_card.new_campaign' | translate }}</a
+            >
+            <a
+              ng-if="isPublicTemplatesActive"
+              class="button button-outline--white"
+              ng-click="selectTemplate(template.IdTemplate)"
+              >{{ 'templates_card.select' | translate }}</a
+            >
+          </div>
+        </div>
+        <div class="container" ng-if="!isPublicTemplatesActive">
+          <hr />
+          <p
+            class="template-name--container"
+            data-static-tooltip="{{ template.Name }}"
+          >
+            <span class="template-name">{{ template.Name }}</span>
+          </p>
+          <p class="small">
+            {{ formatDate(template.CreatedAt) | date : dateFormat }} - {{
+            template.CampaignsCount }} {{'templates_total_campaigns' | translate
+            }}
+          </p>
+          <span class="bulls" ng-click="template.isMenuOpen=true;"
+            >&bull; &bull; &bull;</span
+          >
+          <ul
+            class="menu"
+            id="{{template.IdTemplate}}"
+            ng-if="template.isMenuOpen"
+            click-outside="closeMenu(template)"
+            ng-class="{open: template.isMenuOpen}"
+          >
+            <li ng-click="editTemplate(template.IdTemplate)">
+              <span class="container"><span class="icon-edit"></span></span>
+              <span class="text">{{ 'templates_card.edit' | translate }}</span>
+            </li>
+            <li ng-click="renameTemplate(template)">
+              <span class="container"><span class="icon-rename"></span></span
+              ><span class="text"
+                >{{ 'templates_card.rename' | translate }}</span
+              >
+            </li>
+            <li
+              ng-click="viewOnline(template.ViewOnlineUrl)"
+              ng-if="data.user.plan.planType !== 'free'"
+            >
+              <span class="container"><span class="icon-view"></span></span
+              ><span class="text"
+                >{{ 'templates_card.view_online' | translate }}</span
+              >
+            </li>
+            <li ng-click="duplicateTemplate(template)">
+              <span class="container"><span class="icon-duplicate"></span></span
+              ><span class="text"
+                >{{ 'templates_card.duplicate' | translate }}</span
+              >
+            </li>
+            <li ng-click="deleteTemplate(template)">
+              <span class="container"><span class="icon-delete"></span></span
+              ><span class="text"
+                >{{ 'templates_card.delete' | translate }}</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

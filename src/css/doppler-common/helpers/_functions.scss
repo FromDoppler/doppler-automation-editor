@@ -3,8 +3,10 @@
 /// @param {Number} context [$font-size--base] The base font size
 /// @return {Em} value
 @function toem($target, $context: $font-size--base) {
-   @if $target == 0 { @return 0 }
-   @return $target / $context + 0em;
+  @if $target == 0 {
+    @return 0;
+  }
+  @return $target / $context + 0em;
 }
 
 /// Convert to REMs function
@@ -12,10 +14,11 @@
 /// @param {Number} context [$font-size--base] - The base font size
 /// @return {Rem} value
 @function torem($target, $context: $font-size--base) {
-   @if $target == 0 { @return 0 }
-   @return $target / $context + 0rem;
+  @if $target == 0 {
+    @return 0;
+  }
+  @return $target / $context + 0rem;
 }
-
 
 /// Create a single media condition out of a map of queries
 /// @param {String} queries - The queries

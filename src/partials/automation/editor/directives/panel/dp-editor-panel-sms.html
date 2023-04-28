@@ -2,117 +2,221 @@
 <p class="title">{{ 'automation_editor.sidebar.sms_title' | translate }}</p>
 <form name="smsForm" class="form--container" ng-if="isLoaded" novalidate>
   <div class="input--group">
-    <label class="label label--panel">*{{ 'automation_editor.sidebar.phone_name' | translate }}</label>
-    <input type="text" class="input--text"
-           ng-model="selectedComponent.name"
-           ng-required="smsForm.name.$dirty"
-           name="name"
-           ng-class="{'hasErrors': smsForm.name.$invalid && smsForm.name.$dirty }"
-           ng-blur="activateBlur();"
-           maxlength="50"
-           ng-disabled="isReadOnly()" />
-    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+    <label class="label label--panel"
+      >*{{ 'automation_editor.sidebar.phone_name' | translate }}</label
+    >
+    <input
+      type="text"
+      class="input--text"
+      ng-model="selectedComponent.name"
+      ng-required="smsForm.name.$dirty"
+      name="name"
+      ng-class="{'hasErrors': smsForm.name.$invalid && smsForm.name.$dirty }"
+      ng-blur="activateBlur();"
+      maxlength="50"
+      ng-disabled="isReadOnly()"
+    />
+    <span class="read-only--tooltip" ng-show="isReadOnly();"
+      >{{ getReadOnlyLabel(); }}</span
+    >
     <div ng-messages="smsForm.name.$error" class="error-messages--container">
-      <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+      <div ng-message="required" class="error">
+        {{ 'validation_messages.required' | translate }}
+      </div>
     </div>
   </div>
-<div class="input--group">
-    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+  <div class="input--group">
+    <span class="read-only--tooltip" ng-show="isReadOnly();"
+      >{{ getReadOnlyLabel(); }}</span
+    >
     <div class="error-messages--container" ng-if="phoneNames.length === 0">
       <div class="error">
-      {{ 'automation_editor.sidebar.non_customs_phone_error' | translate }}
-      <a href="/Lists/MasterCustomFields/">{{ 'automation_editor.sidebar.non_customs_error_link' | translate }}</a>
+        {{ 'automation_editor.sidebar.non_customs_phone_error' | translate }}
+        <a href="/Lists/MasterCustomFields/"
+          >{{ 'automation_editor.sidebar.non_customs_error_link' | translate
+          }}</a
+        >
       </div>
     </div>
   </div>
-<div class="input--group">
-  <label class="label label--panel">*{{ 'automation_editor.sidebar.phone_type' | translate }}</label>
-  <dp-editor-dropdown class="full" name="defineActions"
-    options="phoneOptions"
-    ng-class="{'placeholder': selectedComponent.field, 'hasError': test()}"
-    label="selectedComponent.field ? selectedComponent.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
-    on-select-option="onPhoneTypeSelected(option, selectedComponent.field)"
-    key-value="'id'"
-    key-label="'name'"
-    value-selected="selectedComponent.field.id"
-    ng-disabled="isReadOnly();">
-  </dp-editor-dropdown>
-  <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
-  <div class="error-messages--container" ng-if="phoneOptions.length === 0">
-    <div class="error">
-    {{ 'automation_editor.sidebar.non_customs_phone_error' | translate }}
-    <a href="/Lists/MasterCustomFields/">{{ 'automation_editor.sidebar.non_customs_error_link' | translate }}</a>
-    </div>
-  </div>
-</div>
-<div class="input--group">
-  <label class="label label--panel">*{{ 'automation_editor.sidebar.sms_text' | translate }}</label>
-  <span class="span--sms">{{ 'automation_editor.sidebar.sms_text_desc' | translate }}</span>
-    <div ng-if="hasColombiaCodeSmsActive" class="dp-sms-colombia-warning dp-library">
-    <div class="dp-wrap-message dp-wrap-warning">
-      <span class="dp-message-icon"></span>
-      <div class="dp-content-message">
-        <p>
-          {{ 'automation_editor.sidebar.sms_colombian_warning_msg' | translate }}
-          <a ng-href="{{ 'automation_editor.sidebar.sms_colombian_warning_link'| translate }}" class="dp-message-link"  target="_blank">{{ 'automation_editor.sidebar.sms_colombian_warning_link_label' | translate }}</a>
-        </p>
+  <div class="input--group">
+    <label class="label label--panel"
+      >*{{ 'automation_editor.sidebar.phone_type' | translate }}</label
+    >
+    <dp-editor-dropdown
+      class="full"
+      name="defineActions"
+      options="phoneOptions"
+      ng-class="{'placeholder': selectedComponent.field, 'hasError': test()}"
+      label="selectedComponent.field ? selectedComponent.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
+      on-select-option="onPhoneTypeSelected(option, selectedComponent.field)"
+      key-value="'id'"
+      key-label="'name'"
+      value-selected="selectedComponent.field.id"
+      ng-disabled="isReadOnly();"
+    >
+    </dp-editor-dropdown>
+    <span class="read-only--tooltip" ng-show="isReadOnly();"
+      >{{ getReadOnlyLabel(); }}</span
+    >
+    <div class="error-messages--container" ng-if="phoneOptions.length === 0">
+      <div class="error">
+        {{ 'automation_editor.sidebar.non_customs_phone_error' | translate }}
+        <a href="/Lists/MasterCustomFields/"
+          >{{ 'automation_editor.sidebar.non_customs_error_link' | translate
+          }}</a
+        >
       </div>
     </div>
   </div>
-  <textarea type="text" class="textarea textarea-sms input--text width-full margin-t-10"
-    ng-model="selectedComponent.smsText"
-    ng-required="smsForm.smsText.$dirty || selectedComponent.touched"
-    name="smsText"
-    maxlength="160"
-    ng-disabled="isReadOnly();"
-    ng-change="charactersCountChange(selectedComponent.smsText);"
-    ng-trim="false"
-    ng-pattern="REGEX_SMS" >
-  </textarea>
-  <div class="flex-display flex-justify-between">
-    <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCount }}/160.</span>
-    <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.count_parts' | translate }} {{ smsPartsCount }}.</span>
+  <div class="input--group">
+    <label class="label label--panel"
+      >*{{ 'automation_editor.sidebar.sms_text' | translate }}</label
+    >
+    <span class="span--sms"
+      >{{ 'automation_editor.sidebar.sms_text_desc' | translate }}</span
+    >
+    <div
+      ng-if="hasColombiaCodeSmsActive"
+      class="dp-sms-colombia-warning dp-library"
+    >
+      <div class="dp-wrap-message dp-wrap-warning">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <p>
+            {{ 'automation_editor.sidebar.sms_colombian_warning_msg' | translate
+            }}
+            <a
+              ng-href="{{ 'automation_editor.sidebar.sms_colombian_warning_link'| translate }}"
+              class="dp-message-link"
+              target="_blank"
+              >{{ 'automation_editor.sidebar.sms_colombian_warning_link_label' |
+              translate }}</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <textarea
+      type="text"
+      class="textarea textarea-sms input--text width-full margin-t-10"
+      ng-model="selectedComponent.smsText"
+      ng-required="smsForm.smsText.$dirty || selectedComponent.touched"
+      name="smsText"
+      maxlength="160"
+      ng-disabled="isReadOnly();"
+      ng-change="charactersCountChange(selectedComponent.smsText);"
+      ng-trim="false"
+      ng-pattern="REGEX_SMS"
+    >
+    </textarea>
+    <div class="flex-display flex-justify-between">
+      <span class="text--lightgrey text--tiny"
+        >{{ 'automation_editor.sidebar.characters' | translate }} {{
+        charactersCount }}/160.</span
+      >
+      <span class="text--lightgrey text--tiny"
+        >{{ 'automation_editor.sidebar.count_parts' | translate }} {{
+        smsPartsCount }}.</span
+      >
+    </div>
+
+    <span class="read-only--tooltip" ng-show="isReadOnly();"
+      >{{ getReadOnlyLabel(); }}</span
+    >
+    <div ng-messages="smsForm.smsText.$error" class="error-messages--container">
+      <div ng-message="pattern" class="error">
+        {{ 'validation_messages.sms_pattern' | translate }}
+      </div>
+      <div ng-message="required" class="error">
+        {{ 'validation_messages.required' | translate }}
+      </div>
+    </div>
   </div>
-  
-  
-  <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
-  <div ng-messages="smsForm.smsText.$error" class="error-messages--container" >
-    <div ng-message="pattern" class="error">{{ 'validation_messages.sms_pattern' | translate }}</div>
-    <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+  <div class="input--group">
+    <label class="label label--panel"
+      >{{ 'automation_editor.sidebar.sms_text_test' | translate }}</label
+    >
+    <span class="span--sms"
+      >{{ 'automation_editor.sidebar.sms_text_test_desc' | translate }}</span
+    >
+    <div class="display-flex">
+      <input
+        id="phone_sms"
+        type="tel"
+        class="input-sms input--text"
+        ng-model="selectedComponent.smsPhoneNumberTest"
+        ng-required="smsForm.smsPhoneNumberTest.$dirty || selectedComponent.touched"
+        name="smsPhoneNumberTest"
+        ng-class="{'hasErrors': smsForm.smsPhoneNumberTest.$error && smsForm.smsPhoneNumberTest.$dirty || isSmsPhoneNumberTestInvalidByChangeCountry}"
+        maxlength="160"
+        ng-disabled="isReadOnly();"
+        ng-change="changePhoneNumber(smsForm)"
+      />
+      <button
+        class="button-test-sms button button--small button--primary"
+        ng-class="{'button--spinner' : sendingSmsTest}"
+        ng-disabled="smsForm.smsPhoneNumberTest.$error"
+        ng-click="sendSmsTest(smsForm)"
+      >
+        {{ 'automation_editor.sidebar.campaign_send_test_send_button' |
+        translate }}
+        <span class="icon-editor-saving hide"></span>
+      </button>
+    </div>
+    <span class="read-only--tooltip" ng-show="isReadOnly();"
+      >{{ getReadOnlyLabel(); }}</span
+    >
+    <div
+      ng-messages="smsForm.smsPhoneNumberTest.$error"
+      class="error-messages--container"
+    >
+      <div ng-message="genericPhone" class="error">
+        {{ 'validation_messages.phone_generic_error' | translate }}
+      </div>
+      <div ng-message="funds" class="error">
+        {{ 'validation_messages.phone_funds_insuficient' | translate }}&nbsp;<a
+          class="text-underline"
+          href="/ControlPanel/AccountPreferences/GetSmsConfiguration"
+          >{{ 'actions.buy_now' | translate }}</a
+        >
+      </div>
+      <div ng-message="countryNotActive" class="error">
+        {{ 'validation_messages.phone_country_not_active' | translate:{
+        'countryName' : countryUsed} }}&nbsp;<a
+          class="text-underline"
+          href="/ControlPanel/AccountPreferences/GetSmsConfiguration"
+          >{{ 'actions.activate_now' | translate }}</a
+        >
+      </div>
+      <div ng-message="isSmsPhoneNumberTestValid" class="error">
+        {{ 'validation_messages.phone_pattern' | translate }}
+      </div>
+      <div ng-message="isSmsPhoneNumberTestInvalidTooShort" class="error">
+        {{ 'validation_messages.phone_pattern_too_short' | translate }}
+      </div>
+      <div ng-message="isSmsPhoneNumberTestInvalidTooLong" class="error">
+        {{ 'validation_messages.phone_pattern_too_long' | translate }}
+      </div>
+      <div ng-message="required" class="error">
+        {{ 'validation_messages.required' | translate }}
+      </div>
+      <div ng-show="isSmsPhoneNumberTestInvalidByChangeCountry" class="error">
+        {{ 'validation_messages.phone_pattern' | translate }}
+      </div>
+    </div>
   </div>
-</div>
-<div class="input--group">
-  <label class="label label--panel">{{ 'automation_editor.sidebar.sms_text_test' | translate }}</label>
-  <span class="span--sms">{{ 'automation_editor.sidebar.sms_text_test_desc' | translate }}</span>
-  <div class="display-flex">
-    <input id="phone_sms" type="tel" class="input-sms input--text"
-           ng-model="selectedComponent.smsPhoneNumberTest"
-           ng-required="smsForm.smsPhoneNumberTest.$dirty || selectedComponent.touched"
-           name="smsPhoneNumberTest"
-           ng-class="{'hasErrors': smsForm.smsPhoneNumberTest.$error && smsForm.smsPhoneNumberTest.$dirty || isSmsPhoneNumberTestInvalidByChangeCountry}"
-           maxlength="160"
-           ng-disabled="isReadOnly();"
-           ng-change="changePhoneNumber(smsForm)" />
-    <button class="button-test-sms button button--small button--primary" ng-class="{'button--spinner' : sendingSmsTest}" ng-disabled="smsForm.smsPhoneNumberTest.$error" ng-click="sendSmsTest(smsForm)">
-      {{ 'automation_editor.sidebar.campaign_send_test_send_button' | translate }}
-      <span class="icon-editor-saving hide"></span>
-    </button>
-  </div>
-  <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
-  <div ng-messages="smsForm.smsPhoneNumberTest.$error" class="error-messages--container">
-    <div ng-message="genericPhone" class="error">{{ 'validation_messages.phone_generic_error' | translate }}</div>
-    <div ng-message="funds" class="error">{{ 'validation_messages.phone_funds_insuficient' | translate }}&nbsp;<a class="text-underline" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'actions.buy_now' | translate }}</a></div>
-    <div ng-message="countryNotActive" class="error">{{ 'validation_messages.phone_country_not_active' | translate:{ 'countryName' : countryUsed} }}&nbsp;<a class="text-underline" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'actions.activate_now' | translate }}</a></div>
-    <div ng-message="isSmsPhoneNumberTestValid" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
-    <div ng-message="isSmsPhoneNumberTestInvalidTooShort" class="error">{{ 'validation_messages.phone_pattern_too_short' | translate }}</div>
-    <div ng-message="isSmsPhoneNumberTestInvalidTooLong" class="error">{{ 'validation_messages.phone_pattern_too_long' | translate }}</div>
-    <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
-    <div ng-show="isSmsPhoneNumberTestInvalidByChangeCountry" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
-  </div>
-</div>
 </form>
 <div>
-	<span class="icon-globo"></span>
-	<p class="help-tip"><strong>{{ 'automation_editor.sidebar.sms_help_tip' | translate }}</strong> <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span>
-    <a ng-href="{{ 'automation_editor.sidebar.sms_help_tip_link' | translate }}" class="link--default" target="_blank">{{ 'help_link_text' | translate }}</a>.</p>
+  <span class="icon-globo"></span>
+  <p class="help-tip">
+    <strong>{{ 'automation_editor.sidebar.sms_help_tip' | translate }}</strong>
+    <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span>
+    <a
+      ng-href="{{ 'automation_editor.sidebar.sms_help_tip_link' | translate }}"
+      class="link--default"
+      target="_blank"
+      >{{ 'help_link_text' | translate }}</a
+    >.
+  </p>
 </div>

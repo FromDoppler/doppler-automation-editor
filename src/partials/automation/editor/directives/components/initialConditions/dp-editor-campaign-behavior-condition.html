@@ -1,66 +1,118 @@
-<div class="initial-step--container relative component" ng-class="{'is-error' : hasErrors() || hasBlockedList() }">
+<div
+  class="initial-step--container relative component"
+  ng-class="{'is-error' : hasErrors() || hasBlockedList() }"
+>
   <span class="icon-pointer"></span>
-  <p ng-if="!component.sendType || ( component.suscriptionLists.length === 0 && !component.allSubscribers )">
-    {{ 'automation_editor.components.initial_condition.behavior.scheduled_day' | translate }}
+  <p
+    ng-if="!component.sendType || ( component.suscriptionLists.length === 0 && !component.allSubscribers )"
+  >
+    {{ 'automation_editor.components.initial_condition.behavior.scheduled_day' |
+    translate }}
     <span class="brackets">[[[...]]]</span>
-    {{ 'automation_editor.components.initial_condition.behavior.lists_sg' | translate }}
-     <span class="brackets">[[[...]]]</span>
+    {{ 'automation_editor.components.initial_condition.behavior.lists_sg' |
+    translate }}
+    <span class="brackets">[[[...]]]</span>
   </p>
-  <span ng-if="component.suscriptionLists.length >= 1 || component.allSubscribers">
-	  <p ng-if="component.sendType === SEND_TYPE.INMEDIATE">
-	    {{ 'automation_editor.components.initial_condition.behavior.inmediately_send' | translate }}
-	    <strong> {{ 'automation_editor.components.initial_condition.behavior.inmediately_frequency' | translate }}</strong>
+  <span
+    ng-if="component.suscriptionLists.length >= 1 || component.allSubscribers"
+  >
+    <p ng-if="component.sendType === SEND_TYPE.INMEDIATE">
+      {{
+      'automation_editor.components.initial_condition.behavior.inmediately_send'
+      | translate }}
+      <strong>
+        {{
+        'automation_editor.components.initial_condition.behavior.inmediately_frequency'
+        | translate }}</strong
+      >
 
-	    <span ng-if="component.suscriptionLists.length === 1">
-	    	{{ 'automation_editor.components.initial_condition.behavior.lists_sg' | translate }}
-	    </span>
-	    <span ng-if="component.suscriptionLists.length > 1">
-	    	{{ 'automation_editor.components.initial_condition.behavior.lists_pl' | translate }}
-	    </span>
-	    	<strong ng-repeat="list in component.suscriptionLists"><!--
-	      --><span ng-if="$index <= 3"><span ng-show="$last && !$first">{{'automation_editor.components.initial_condition.scheduled_date.canvas.and' | translate}}&nbsp;</span>
-	      {{ list.ListName}}<!--
-	      --><span ng-if="!$last && $index < (component.suscriptionLists.length - 2)">, </span>
-	      </span>
-	    	</strong>
-	    	<strong ng-if="component.suscriptionLists.length > 3">...</strong>
-	    	<strong ng-if="component.allSubscribers">
-	    		{{ 'automation_editor.components.initial_condition.behavior.all_subscribers' | translate }}
-	    	</strong>
-	  </p>
-
-	  <p ng-if="component.sendType === SEND_TYPE.SCHEDULED">
-	  	{{ 'automation_editor.components.initial_condition.behavior.scheduled_day' | translate }}
-	  	{{ 'automation_editor.components.initial_condition.behavior.scheduled_day_part2' | translate }}
-	  	<strong ng-if="component.frequency && component.frequency.date">{{ date }}</strong>
-
-	    {{component.frequency.time.hour === 1 ? 'automation_editor.components.initial_condition.behavior.hours_sg' : 'automation_editor.components.initial_condition.behavior.hours_pl' | translate}}
-	    <strong>{{component.frequency.time.hour > 9 ? component.frequency.time.hour : '0' + component.frequency.time.hour}}:{{component.frequency.time.minute > 9 ? component.frequency.time.minute : '0' + component.frequency.time.minute}}
-      {{ timeZone }}
+      <span ng-if="component.suscriptionLists.length === 1">
+        {{ 'automation_editor.components.initial_condition.behavior.lists_sg' |
+        translate }}
+      </span>
+      <span ng-if="component.suscriptionLists.length > 1">
+        {{ 'automation_editor.components.initial_condition.behavior.lists_pl' |
+        translate }}
+      </span>
+      <strong ng-repeat="list in component.suscriptionLists"
+        ><!--
+	      --><span ng-if="$index <= 3"
+          ><span ng-show="$last && !$first"
+            >{{'automation_editor.components.initial_condition.scheduled_date.canvas.and'
+            | translate}}&nbsp;</span
+          >
+          {{ list.ListName}}<!--
+	      --><span
+            ng-if="!$last && $index < (component.suscriptionLists.length - 2)"
+            >,
+          </span>
+        </span>
       </strong>
-	  	 <span ng-if="component.suscriptionLists.length > 1">
-	    	{{ 'automation_editor.components.initial_condition.behavior.lists_pl' | translate }}
-	    	</span>
-	    	<span ng-if="component.suscriptionLists.length == 1">
-	    	{{ 'automation_editor.components.initial_condition.behavior.lists_sg' | translate }}
-	    	</span>
-	    	<strong  ng-repeat="list in component.suscriptionLists"><!--
-	      --><span ng-if="$index <= 3"><span ng-show="$last && !$first">{{'automation_editor.components.initial_condition.scheduled_date.canvas.and' | translate}}&nbsp;</span>
-	      {{ list.ListName}}<!--
-	      --><span ng-if="!$last && $index < (component.suscriptionLists.length - 2)">, </span>
-	      </span>
-	    	</strong>
-	    	<strong ng-if="component.suscriptionLists.length > 3">...</strong>
-	    	<strong ng-if="component.allSubscribers">
-	    		{{ 'automation_editor.components.initial_condition.behavior.all_subscribers' | translate }}
-	    	</strong>
-	  </p>
-	</span>
+      <strong ng-if="component.suscriptionLists.length > 3">...</strong>
+      <strong ng-if="component.allSubscribers">
+        {{
+        'automation_editor.components.initial_condition.behavior.all_subscribers'
+        | translate }}
+      </strong>
+    </p>
 
-	<div class="tip-help--container initial-condition" ng-show="!component.completed || component.hasStartDateExpired || component.hasBlockedList">
-		<span class="icon-arrow-friendly"></span>
-		<span class="tip-help" ng-bind-html="getTipMessage()"></span>
-	</div>
+    <p ng-if="component.sendType === SEND_TYPE.SCHEDULED">
+      {{ 'automation_editor.components.initial_condition.behavior.scheduled_day'
+      | translate }} {{
+      'automation_editor.components.initial_condition.behavior.scheduled_day_part2'
+      | translate }}
+      <strong ng-if="component.frequency && component.frequency.date"
+        >{{ date }}</strong
+      >
+
+      {{component.frequency.time.hour === 1 ?
+      'automation_editor.components.initial_condition.behavior.hours_sg' :
+      'automation_editor.components.initial_condition.behavior.hours_pl' |
+      translate}}
+      <strong
+        >{{component.frequency.time.hour > 9 ? component.frequency.time.hour :
+        '0' + component.frequency.time.hour}}:{{component.frequency.time.minute
+        > 9 ? component.frequency.time.minute : '0' +
+        component.frequency.time.minute}} {{ timeZone }}
+      </strong>
+      <span ng-if="component.suscriptionLists.length > 1">
+        {{ 'automation_editor.components.initial_condition.behavior.lists_pl' |
+        translate }}
+      </span>
+      <span ng-if="component.suscriptionLists.length == 1">
+        {{ 'automation_editor.components.initial_condition.behavior.lists_sg' |
+        translate }}
+      </span>
+      <strong ng-repeat="list in component.suscriptionLists"
+        ><!--
+	      --><span ng-if="$index <= 3"
+          ><span ng-show="$last && !$first"
+            >{{'automation_editor.components.initial_condition.scheduled_date.canvas.and'
+            | translate}}&nbsp;</span
+          >
+          {{ list.ListName}}<!--
+	      --><span
+            ng-if="!$last && $index < (component.suscriptionLists.length - 2)"
+            >,
+          </span>
+        </span>
+      </strong>
+      <strong ng-if="component.suscriptionLists.length > 3">...</strong>
+      <strong ng-if="component.allSubscribers">
+        {{
+        'automation_editor.components.initial_condition.behavior.all_subscribers'
+        | translate }}
+      </strong>
+    </p>
+  </span>
+
+  <div
+    class="tip-help--container initial-condition"
+    ng-show="!component.completed || component.hasStartDateExpired || component.hasBlockedList"
+  >
+    <span class="icon-arrow-friendly"></span>
+    <span class="tip-help" ng-bind-html="getTipMessage()"></span>
+  </div>
 </div>
 
 <dp-editor-new-step component="component"></dp-editor-new-step>

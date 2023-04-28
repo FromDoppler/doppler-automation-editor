@@ -1,13 +1,29 @@
 ﻿<div id="modal" class="modal modal--is-dialog">
   <div class="modal__wrapper" click-outside="close(false)">
-    <a class="icon-close modal--do-close " ng-click="close(false)" data-dismiss="modal"></a>
+    <a
+      class="icon-close modal--do-close"
+      ng-click="close(false)"
+      data-dismiss="modal"
+    ></a>
     <div class="modal__content">
       <h1>{{data.title}}</h1>
       <p>{{data.description}}</p>
     </div>
     <div class="modal__action-btn">
-       <button class="button button--alternative button--small" ng-click="close(false)" data-dismiss="modal">{{data.buttonCancelLabel}}</button>
-       <button class="button {{data.buttonPrimaryClass}}"  ng-click="close(true)" data-dismiss="modal">{{data.buttonPrimaryLabel}}</button>
+      <button
+        class="button button--alternative button--small"
+        ng-click="close(false)"
+        data-dismiss="modal"
+      >
+        {{data.buttonCancelLabel}}
+      </button>
+      <button
+        class="button {{data.buttonPrimaryClass}}"
+        ng-click="close(true)"
+        data-dismiss="modal"
+      >
+        {{data.buttonPrimaryLabel}}
+      </button>
     </div>
   </div>
 </div>

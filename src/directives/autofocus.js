@@ -8,28 +8,25 @@
  *
  * License: MIT
  */
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('autofocus', autofocus);
+  angular.module('dopplerApp').directive('autofocus', autofocus);
 
   autofocus.$inject = ['$timeout'];
 
   function autofocus($timeout) {
     var directive = {
       restrict: 'A',
-      link: link
+      link: link,
     };
 
     return directive;
 
     function link(scope, element) {
-      $timeout(function() {
+      $timeout(function () {
         element[0].focus();
       });
     }
   }
-
 })();

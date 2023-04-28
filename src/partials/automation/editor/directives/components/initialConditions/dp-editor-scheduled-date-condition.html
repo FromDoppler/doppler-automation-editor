@@ -1,17 +1,36 @@
-<div class="initial-step--container relative component" ng-class="{'is-error' : hasErrors() || hasBlockedList() }">
+<div
+  class="initial-step--container relative component"
+  ng-class="{'is-error' : hasErrors() || hasBlockedList() }"
+>
   <span class="icon-pointer"></span>
   <p ng-if="!component.frequency">
-    {{ 'automation_editor.components.initial_condition.scheduled_date.default_part1' | translate }}
+    {{
+    'automation_editor.components.initial_condition.scheduled_date.default_part1'
+    | translate }}
     <span class="brackets">&#91;&#91;&#91;&hellip;&#93;&#93;&#93;</span>
-    {{ 'automation_editor.components.initial_condition.scheduled_date.default_part2' | translate }}
+    {{
+    'automation_editor.components.initial_condition.scheduled_date.default_part2'
+    | translate }}
   </p>
-  <p ng-if="component.frequency && component.frequency.type === FREQUENCY_TYPE.DAY_WEEK" ng-bind-html="getFrequencySummaryFor(FREQUENCY_TYPE.DAY_WEEK)"></p>
-  <p ng-if="component.frequency && component.frequency.type === FREQUENCY_TYPE.DAY_MONTH" ng-bind-html="getFrequencySummaryFor(FREQUENCY_TYPE.DAY_MONTH)"></p>
-  <p ng-if="component.frequency && component.frequency.type === FREQUENCY_TYPE.DAY_YEAR" ng-bind-html="getFrequencySummaryFor(FREQUENCY_TYPE.DAY_YEAR)"></p>
-  <div class="tip-help--container initial-condition" ng-show="!component.completed || component.hasStartDateExpired || component.hasBlockedList">
-		<span class="icon-arrow-friendly"></span>
-		<span class="tip-help" ng-bind-html="getTipMessage()"></span>
-	</div>
+  <p
+    ng-if="component.frequency && component.frequency.type === FREQUENCY_TYPE.DAY_WEEK"
+    ng-bind-html="getFrequencySummaryFor(FREQUENCY_TYPE.DAY_WEEK)"
+  ></p>
+  <p
+    ng-if="component.frequency && component.frequency.type === FREQUENCY_TYPE.DAY_MONTH"
+    ng-bind-html="getFrequencySummaryFor(FREQUENCY_TYPE.DAY_MONTH)"
+  ></p>
+  <p
+    ng-if="component.frequency && component.frequency.type === FREQUENCY_TYPE.DAY_YEAR"
+    ng-bind-html="getFrequencySummaryFor(FREQUENCY_TYPE.DAY_YEAR)"
+  ></p>
+  <div
+    class="tip-help--container initial-condition"
+    ng-show="!component.completed || component.hasStartDateExpired || component.hasBlockedList"
+  >
+    <span class="icon-arrow-friendly"></span>
+    <span class="tip-help" ng-bind-html="getTipMessage()"></span>
+  </div>
 </div>
 
 <dp-editor-new-step component="component"></dp-editor-new-step>

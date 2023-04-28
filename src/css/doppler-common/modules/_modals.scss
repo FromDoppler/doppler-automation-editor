@@ -1,7 +1,7 @@
 /*TODO Refactor*/
 .modal {
   box-sizing: border-box; /*TO DO Remove when app has new styles*/
-  background-color: rgba(34,34,34,.95);
+  background-color: rgba(34, 34, 34, 0.95);
   width: $size-full;
   height: $size-full;
   position: fixed;
@@ -27,7 +27,6 @@
     opacity: 1;
   }
 
-
   &.modal--is-dialog {
     &.modal-one-link--container {
       .modal__content {
@@ -40,10 +39,10 @@
       max-width: 560px;
       padding: 20px;
       &.modal--medium {
-        max-width:780px;
+        max-width: 780px;
       }
     }
-    &.modal-two-options-input--container{
+    &.modal-two-options-input--container {
       .form--container {
         background-color: $color-old-ghostwhite;
         padding: 20px;
@@ -60,13 +59,13 @@
       label.label--one-input {
         color: $color-darkgrey;
         margin: 20px 0 15px 0;
-      }    
+      }
     }
     .modal__content {
       padding: 0 10px;
 
       h1 {
-        margin: 0 0 15px 0 ;
+        margin: 0 0 15px 0;
         font-size: 20px;
         text-align: left;
       }
@@ -92,7 +91,7 @@
     .modal__action-btn {
       margin-top: 20px;
       padding-top: 20px;
-      border-top: 1px solid #E5E5E5;
+      border-top: 1px solid #e5e5e5;
       text-align: right;
 
       .button + .button {
@@ -136,7 +135,7 @@
     font-size: $font-size--medium-alt;
     position: absolute;
     top: 10px;
-    transition:$transition-default;
+    transition: $transition-default;
     right: 15px;
     &:hover {
       color: #444;
@@ -166,18 +165,16 @@
   *,
   *:before,
   *:after {
-      box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   .label--one-input {
     margin-bottom: 5px;
     display: inline-block;
     color: $color-base;
-    font-weight:bold;
+    font-weight: bold;
   }
-
 }
-
 
 .modal--big-form {
   .container {
@@ -279,10 +276,10 @@ html.open-popup {
     position: absolute;
     border-radius: 50%;
     border: 5px solid;
-    border-color: rgba(255,255,255,.3);
+    border-color: rgba(255, 255, 255, 0.3);
     border-top-color: #fff;
-    -webkit-animation: dp-preloader-spin .7s infinite linear;
-    animation: dp-preloader-spin .7s infinite linear;
+    -webkit-animation: dp-preloader-spin 0.7s infinite linear;
+    animation: dp-preloader-spin 0.7s infinite linear;
     left: 1em;
   }
 }

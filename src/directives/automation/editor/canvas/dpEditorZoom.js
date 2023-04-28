@@ -1,24 +1,19 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation.editor')
     .directive('dpEditorZoom', dpEditorZoom);
 
-  dpEditorZoom.$inject = [
-    '$compile',
-    '$document',
-    'automation',
-    'ZOOM_ACTION'
-  ];
+  dpEditorZoom.$inject = ['$compile', '$document', 'automation', 'ZOOM_ACTION'];
 
   function dpEditorZoom($compile, $document, automation, ZOOM_ACTION) {
     var directive = {
       restrict: 'A',
       scope: {
-        scalable: '@'
+        scalable: '@',
       },
-      link: link
+      link: link,
     };
 
     return directive;
@@ -30,14 +25,17 @@
       scope.maxScale = 1;
       scope.minScale = 0.5;
       var stepperScale = 0.1;
-      var scalableContainer = angular.element(element[0].getElementsByClassName(scope.scalable));
+      var scalableContainer = angular.element(
+        element[0].getElementsByClassName(scope.scalable)
+      );
       // scaling control
       var zoomControl = angular.element(
         '<div class="zoom-control">' +
           '<div ng-click="scale(ZOOM_ACTION.IN)" class="icon-zoom-in" ng-class="{disabled: canvasScale === maxScale}"></div>' +
           '<div ng-click="scale(ZOOM_ACTION.RESET)" class="icon-zoom-fit-to-scale" ng-class="{disabled: canvasScale === maxScale}"></div>' +
           '<div ng-click="scale(ZOOM_ACTION.OUT)" class="icon-zoom-out" ng-class="{disabled: canvasScale === minScale}"></div>' +
-        '</div>');
+          '</div>'
+      );
       // dragging settings
       var lastClientX;
       var lastClientY;
@@ -49,31 +47,41 @@
       element.bind('mousedown', handleMousedown);
 
       // scaling method
-      scope.scale = function(zoomAction) {
+      scope.scale = function (zoomAction) {
         switch (zoomAction) {
-        case ZOOM_ACTION.IN:
-          if (scope.canvasScale === scope.maxScale) {
-            return;
-          }
-          scope.canvasScale = parseFloat(Math.min(scope.canvasScale + stepperScale, scope.maxScale).toFixed(1));
-          break;
+          case ZOOM_ACTION.IN:
+            if (scope.canvasScale === scope.maxScale) {
+              return;
+            }
+            scope.canvasScale = parseFloat(
+              Math.min(
+                scope.canvasScale + stepperScale,
+                scope.maxScale
+              ).toFixed(1)
+            );
+            break;
 
-        case ZOOM_ACTION.RESET:
-          if (scope.canvasScale === scope.maxScale) {
-            return;
-          }
-          scope.canvasScale = 1;
-          break;
+          case ZOOM_ACTION.RESET:
+            if (scope.canvasScale === scope.maxScale) {
+              return;
+            }
+            scope.canvasScale = 1;
+            break;
 
-        case ZOOM_ACTION.OUT:
-          if (scope.canvasScale === scope.minScale) {
-            return;
-          }
-          scope.canvasScale = parseFloat(Math.max(scope.canvasScale - stepperScale, scope.minScale).toFixed(1));
-          break;
+          case ZOOM_ACTION.OUT:
+            if (scope.canvasScale === scope.minScale) {
+              return;
+            }
+            scope.canvasScale = parseFloat(
+              Math.max(
+                scope.canvasScale - stepperScale,
+                scope.minScale
+              ).toFixed(1)
+            );
+            break;
 
-        default:
-          scope.canvasScale = 1;
+          default:
+            scope.canvasScale = 1;
         }
 
         scalableContainer.css('transform', 'scale(' + scope.canvasScale + ')');
@@ -102,8 +110,8 @@
       }
 
       function handleMousemove(event) {
-        element[0].scrollLeft -= (-lastClientX + (lastClientX = event.clientX));
-        element[0].scrollTop -= (-lastClientY + (lastClientY = event.clientY));
+        element[0].scrollLeft -= -lastClientX + (lastClientX = event.clientX);
+        element[0].scrollTop -= -lastClientY + (lastClientY = event.clientY);
       }
 
       function handleMouseup() {
@@ -115,7 +123,7 @@
       }
 
       // destroy mouse listeners
-      scope.$on('$destroy', function() {
+      scope.$on('$destroy', function () {
         element.unbind('mousedown', handleMousedown);
         element.unbind('mousemove', handleMousemove);
         $document.unbind('mouseup', handleMouseup);

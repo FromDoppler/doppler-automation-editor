@@ -1,67 +1,149 @@
 <section class="section--default background--white">
   <div class="wrapper wrapper--default">
     <header class="grid-title-section">
-        <h2>{{ 'automationTypes.automation_task_header.title' | translate }}</h2>
-        <p>{{ 'automationTypes.automation_task_header.description' | translate }}</p>
+      <h2>{{ 'automationTypes.automation_task_header.title' | translate }}</h2>
+      <p>
+        {{ 'automationTypes.automation_task_header.description' | translate }}
+      </p>
     </header>
-    <div class="aplication-types--container flex-grid-v-center" ng-show="!isLoading">
-      <div target="_self" class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} {{lang}}" ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}" ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" data-text="{{ 'automationTypes.info.new_feature' | translate }}" ng-if="item.Status !== 'hidden'">
+    <div
+      class="aplication-types--container flex-grid-v-center"
+      ng-show="!isLoading"
+    >
+      <div
+        target="_self"
+        class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} {{lang}}"
+        ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}"
+        ng-repeat="item in types"
+        ng-click="selectAutomationType(item.Type, item.Status)"
+        data-text="{{ 'automationTypes.info.new_feature' | translate }}"
+        ng-if="item.Status !== 'hidden'"
+      >
         <img ng-src="../../../images/automation-type-{{ item.Type }}.svg" />
         <div class="aplication-types-description--container">
-          <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
-          <p class="text--small">{{ 'automationTypes.info.description' + item.Type | translate }}</p>
-          <p ng-if="item.Type == 9 || item.Type == 10" class="tiendanube-exclusive" ng-bind-html="'automationTypes.info.tiendanube_content' | translate"></p>
+          <p class="title">
+            {{ 'automationTypes.info.title' + item.Type | translate }}
+          </p>
+          <p class="text--small">
+            {{ 'automationTypes.info.description' + item.Type | translate }}
+          </p>
+          <p
+            ng-if="item.Type == 9 || item.Type == 10"
+            class="tiendanube-exclusive"
+            ng-bind-html="'automationTypes.info.tiendanube_content' | translate"
+          ></p>
         </div>
-        <div ng-if="item.Status !== 'active' || item.IsNewFeature" class="notification--container flex-grid">
-          <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
+        <div
+          ng-if="item.Status !== 'active' || item.IsNewFeature"
+          class="notification--container flex-grid"
+        >
+          <p class="title">
+            {{ 'automationTypes.info.title' + item.Type | translate }}
+          </p>
           <span ng-if="item.Status === 'active' && item.IsNewFeature ">
-            {{ 'automationTypes.info.start'+ item.Type +'_message' | translate }}
-            <span ng-if="item.Type == 7 || item.Type == 8 || item.Type == 9 || item.Type == 10">
+            {{ 'automationTypes.info.start'+ item.Type +'_message' | translate
+            }}
+            <span
+              ng-if="item.Type == 7 || item.Type == 8 || item.Type == 9 || item.Type == 10"
+            >
               <span ng-repeat="thirdPartyApp in integrationsList(item.Type)">
                 <span ng-if="integrationsListLength == 1">
-                  {{ 'automationTypes.info.integration_names_dynamic.message_part2' | translate:{ 'ecommerceName' : thirdPartyApp.Name} }}
-                </span><!--
-                --><span ng-show="integrationsListLength > 1 && $index <= (integrationsListLength - 2)">
-                  {{ 'automationTypes.info.integration_names_dynamic.message_part2' | translate:{ 'ecommerceName' : thirdPartyApp.Name} }}
-                </span><!--
-                --><span ng-show="integrationsListLength > 1 && $index < (integrationsListLength - 2)">
-                  {{ 'automationTypes.info.integration_names_dynamic.message_part2_separator2' | translate }}
-                </span><!--
-                --><span ng-show="integrationsListLength > 1 && $index == (integrationsListLength - 1)">
-                  {{ 'automationTypes.info.integration_names_dynamic.message_part2_separator1' | translate }}
-                  {{ 'automationTypes.info.integration_names_dynamic.message_part2' | translate:{ 'ecommerceName' : thirdPartyApp.Name} }}
-                </span>
-              </span>{{ 'automationTypes.info.integration_names_dynamic.message_part3' | translate }}
-              </span>
+                  {{
+                  'automationTypes.info.integration_names_dynamic.message_part2'
+                  | translate:{ 'ecommerceName' : thirdPartyApp.Name} }} </span
+                ><!--
+                --><span
+                  ng-show="integrationsListLength > 1 && $index <= (integrationsListLength - 2)"
+                >
+                  {{
+                  'automationTypes.info.integration_names_dynamic.message_part2'
+                  | translate:{ 'ecommerceName' : thirdPartyApp.Name} }} </span
+                ><!--
+                --><span
+                  ng-show="integrationsListLength > 1 && $index < (integrationsListLength - 2)"
+                >
+                  {{
+                  'automationTypes.info.integration_names_dynamic.message_part2_separator2'
+                  | translate }} </span
+                ><!--
+                --><span
+                  ng-show="integrationsListLength > 1 && $index == (integrationsListLength - 1)"
+                >
+                  {{
+                  'automationTypes.info.integration_names_dynamic.message_part2_separator1'
+                  | translate }} {{
+                  'automationTypes.info.integration_names_dynamic.message_part2'
+                  | translate:{ 'ecommerceName' : thirdPartyApp.Name} }}
+                </span> </span
+              >{{ 'automationTypes.info.integration_names_dynamic.message_part3'
+              | translate }}
             </span>
-            <span ng-if="item.Status !== 'active'" class="{{ item.Status }}">
-              <span ng-if="item.MakeAvailableToEdition">
-                {{ 'automationTypes.info.repeated_message_for_unique_available_integration' | translate }}
-              </span>
-              <span ng-if="!item.MakeAvailableToEdition">
-              {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
-              </span>
-              <a ng-if="item.Status === 'buy'" href="/ControlPanel/AccountPreferences/UpgradeAccount?Plan=monthly">{{ 'automationTypes.info.buy' | translate }}</a>
-              <a ng-if="item.Status === 'buySms'" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
-              <a ng-if="item.Status === 'error' || item.Status === 'warning'" href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings" class="text--uppercase">{{ item.Status === 'error' ? 'automationTypes.info.continue' : 'actions.start' | translate }}</a>
-              <a ng-if="item.Status === 'demo'" ng-click="showPopup()">{{ 'automationTypes.info.activate' | translate }}</a>
-              <a ng-if="!item.MakeAvailableToEdition && (item.Status === 'integration' || item.Status === 'repeated')" href="/ControlPanel/ControlPanel#AdvancedPreferences">{{ 'automationTypes.info.integration' | translate }}</a>
-              <a ng-if="item.MakeAvailableToEdition" href="/Automation/EditorConfig?idScheduledTask={{ item.ScheduledTaskId }}&automationType={{ item.AutomationTypeDescription }}">{{ 'automationTypes.info.edit_automation' | translate }}</a>
+          </span>
+          <span ng-if="item.Status !== 'active'" class="{{ item.Status }}">
+            <span ng-if="item.MakeAvailableToEdition">
+              {{
+              'automationTypes.info.repeated_message_for_unique_available_integration'
+              | translate }}
             </span>
-          </div>
+            <span ng-if="!item.MakeAvailableToEdition">
+              {{ 'automationTypes.info.' + item.Status + '_message' | translate
+              }}
+            </span>
+            <a
+              ng-if="item.Status === 'buy'"
+              href="/ControlPanel/AccountPreferences/UpgradeAccount?Plan=monthly"
+              >{{ 'automationTypes.info.buy' | translate }}</a
+            >
+            <a
+              ng-if="item.Status === 'buySms'"
+              href="/ControlPanel/AccountPreferences/GetSmsConfiguration"
+              >{{ 'automationTypes.info.buySms' | translate }}</a
+            >
+            <a
+              ng-if="item.Status === 'error' || item.Status === 'warning'"
+              href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings"
+              class="text--uppercase"
+              >{{ item.Status === 'error' ? 'automationTypes.info.continue' :
+              'actions.start' | translate }}</a
+            >
+            <a ng-if="item.Status === 'demo'" ng-click="showPopup()"
+              >{{ 'automationTypes.info.activate' | translate }}</a
+            >
+            <a
+              ng-if="!item.MakeAvailableToEdition && (item.Status === 'integration' || item.Status === 'repeated')"
+              href="/ControlPanel/ControlPanel#AdvancedPreferences"
+              >{{ 'automationTypes.info.integration' | translate }}</a
+            >
+            <a
+              ng-if="item.MakeAvailableToEdition"
+              href="/Automation/EditorConfig?idScheduledTask={{ item.ScheduledTaskId }}&automationType={{ item.AutomationTypeDescription }}"
+              >{{ 'automationTypes.info.edit_automation' | translate }}</a
+            >
+          </span>
         </div>
       </div>
-      <div class="loading--container components--center" ng-show="isLoading">
-        <span class="loading-icon"></span>
-      </div>
     </div>
-  </section>
-  <div class="dp-editor-footer">
-    <div class="item">
-      <a class="button button--small button-outline--primary" href="/Automation/Automation/AutomationApp/">{{ 'actions.cancel' | translate }}</a>
-      <!-- hide until implement initial conditions -->
-                <div class="right" ng-if="false">
-                  <button class="button button--small button--primary" ng-click="buildAutomation()" ng-disabled="!selectedType">{{ 'automation_editor.buttons.build_campaign' | translate }}</button>
-                </div>
-</div>
+    <div class="loading--container components--center" ng-show="isLoading">
+      <span class="loading-icon"></span>
+    </div>
+  </div>
+</section>
+<div class="dp-editor-footer">
+  <div class="item">
+    <a
+      class="button button--small button-outline--primary"
+      href="/Automation/Automation/AutomationApp/"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <!-- hide until implement initial conditions -->
+    <div class="right" ng-if="false">
+      <button
+        class="button button--small button--primary"
+        ng-click="buildAutomation()"
+        ng-disabled="!selectedType"
+      >
+        {{ 'automation_editor.buttons.build_campaign' | translate }}
+      </button>
+    </div>
+  </div>
 </div>

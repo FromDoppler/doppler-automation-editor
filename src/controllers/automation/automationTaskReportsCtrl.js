@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -18,21 +18,42 @@
     '$sce',
     '$filter',
     'ModalService',
-    'utils'
+    'utils',
   ];
 
-  function automationTaskReportsCtrl($scope, $rootScope, $location, taskService, summaryTaskService,
-    automationReportsService, $translate, accountInformation, _, $sce, $filter, ModalService, utils) {
+  function automationTaskReportsCtrl(
+    $scope,
+    $rootScope,
+    $location,
+    taskService,
+    summaryTaskService,
+    automationReportsService,
+    $translate,
+    accountInformation,
+    _,
+    $sce,
+    $filter,
+    ModalService,
+    utils
+  ) {
     $scope.email = mainMenuData.user.email;
     $scope.pageLoading = true;
-    $scope.idScheduledTask = $location.search().idScheduledTask === undefined ? 0 :
-      parseInt($location.search().idScheduledTask);
-    $scope.idAction = $location.search().idAction ? parseInt($location.search().idAction) : 0;
+    $scope.idScheduledTask =
+      $location.search().idScheduledTask === undefined
+        ? 0
+        : parseInt($location.search().idScheduledTask);
+    $scope.idAction = $location.search().idAction
+      ? parseInt($location.search().idAction)
+      : 0;
     var showAll = !!$location.search().showAll;
     $scope.account = accountInformation;
     $translate.use($scope.account.Lang);
-    $scope.dateFormat = $scope.account.Lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
-    $scope.dateTimeFormat = $scope.account.Lang === 'es' ? 'dd/MM/yyyy - h:mm:ss a' : 'MM/dd/yyyy - h:mm:ss a';
+    $scope.dateFormat =
+      $scope.account.Lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
+    $scope.dateTimeFormat =
+      $scope.account.Lang === 'es'
+        ? 'dd/MM/yyyy - h:mm:ss a'
+        : 'MM/dd/yyyy - h:mm:ss a';
     $scope.showActionFilter = false;
     $scope.showSmsFilter = false;
     $scope.showPushFilter = false;
@@ -60,90 +81,134 @@
     $scope.donutGraphData = {};
     $scope.loaded = false;
     $scope.engagementList = [];
-    $scope.reportsType = ($location.search().eventType === 'push_notification') ? 2 : 0;
+    $scope.reportsType =
+      $location.search().eventType === 'push_notification' ? 2 : 0;
 
     $scope.donutData = [];
-    $scope.datax = { 'id': 'x' };
+    $scope.datax = { id: 'x' };
 
-    $translate.onReady().then(function() {
+    $translate.onReady().then(function () {
       $scope.options = [
         { id: 0, name: $translate.instant('ScheduledTask_Reports_LastWeek') },
         { id: 1, name: $translate.instant('ScheduledTask_Reports_LastMonth') },
         { id: 2, name: $translate.instant('ScheduledTask_Reports_LastYear') },
-        { id: 3, name: $translate.instant('ScheduledTask_Reports_All') }
+        { id: 3, name: $translate.instant('ScheduledTask_Reports_All') },
       ];
 
       if (!showAll) {
-        $scope.selectedOption = { id: 0, name: $translate.instant('ScheduledTask_Reports_LastWeek') };
+        $scope.selectedOption = {
+          id: 0,
+          name: $translate.instant('ScheduledTask_Reports_LastWeek'),
+        };
       } else {
-        $scope.selectedOption = { id: 3, name: $translate.instant('ScheduledTask_Reports_All') };
+        $scope.selectedOption = {
+          id: 3,
+          name: $translate.instant('ScheduledTask_Reports_All'),
+        };
       }
 
       $scope.selectedView = 'dashboard';
       $scope.open = $translate.instant('ScheduledTask_Reports_Open');
-      $scope.delivered = $translate.instant('ScheduledTask_Reports_Reached_Subscriptors');
-      $scope.notdelivered = $translate.instant('ScheduledTask_Reports_Not_Reached_Subscriptors');
+      $scope.delivered = $translate.instant(
+        'ScheduledTask_Reports_Reached_Subscriptors'
+      );
+      $scope.notdelivered = $translate.instant(
+        'ScheduledTask_Reports_Not_Reached_Subscriptors'
+      );
       $scope.sent = $translate.instant('ScheduledTask_Reports_Total_Sms');
       $scope.notOpen = $translate.instant('ScheduledTask_Reports_NotOpen');
       $scope.bounced = $translate.instant('ScheduledTask_Reports_Bounced');
-      $scope.openTooltip = $translate.instant('ScheduledTask_Reports_OpenGraph_tooltip');
-      $scope.clickTooltip = $translate.instant('ScheduledTask_Reports_Grid_Clicks');
+      $scope.openTooltip = $translate.instant(
+        'ScheduledTask_Reports_OpenGraph_tooltip'
+      );
+      $scope.clickTooltip = $translate.instant(
+        'ScheduledTask_Reports_Grid_Clicks'
+      );
       $scope.donutTitle = $translate.instant('ScheduledTask_Reports_OpenRate');
       $scope.noDataTitle = $translate.instant('ScheduledTask_Reports_NoOpens');
-      $scope.donutInfo.names = { 'opens': $scope.open, 'notopen': $scope.notOpen, 'bounced': $scope.bounced };
-      $scope.donutInfoSms.names = { 'delivered': $scope.delivered, 'notdelivered': $scope.notdelivered, 'sent': $scope.sent };
-      $scope.donutInfo.colors = { 'opens': '#009F4E', 'notopen': '#666666', 'bounced': '#F82C1F' };
-      $scope.donutInfoSms.colors = { 'delivered': '#009F4E', 'notdelivered': '#F82C1F', 'sent': '#666' };
+      $scope.donutInfo.names = {
+        opens: $scope.open,
+        notopen: $scope.notOpen,
+        bounced: $scope.bounced,
+      };
+      $scope.donutInfoSms.names = {
+        delivered: $scope.delivered,
+        notdelivered: $scope.notdelivered,
+        sent: $scope.sent,
+      };
+      $scope.donutInfo.colors = {
+        opens: '#009F4E',
+        notopen: '#666666',
+        bounced: '#F82C1F',
+      };
+      $scope.donutInfoSms.colors = {
+        delivered: '#009F4E',
+        notdelivered: '#F82C1F',
+        sent: '#666',
+      };
       getTask();
     });
 
-    $scope.getDonutChartConfig = function(id, colors, data, names, title, showlabel, showTooltip) {
+    $scope.getDonutChartConfig = function (
+      id,
+      colors,
+      data,
+      names,
+      title,
+      showlabel,
+      showTooltip
+    ) {
       var config = {
         bindto: id,
         data: {
           columns: data,
           type: 'donut',
           colors: colors,
-          names: names
+          names: names,
         },
         donut: {
           title: title,
           label: {
             show: showlabel,
-            format: function(value, ratio) {
-              return (ratio * 100 % 1 === 0) ?
-                $filter('number')(ratio * 100) + '%' :
-                $filter('number')(ratio * 100, 1) + '%';
-            }
-          }
+            format: function (value, ratio) {
+              return (ratio * 100) % 1 === 0
+                ? $filter('number')(ratio * 100) + '%'
+                : $filter('number')(ratio * 100, 1) + '%';
+            },
+          },
         },
         legend: {
-          show: false
+          show: false,
         },
         size: {
           height: 248,
-          width: 248
+          width: 248,
         },
         tooltip: {
           show: showTooltip,
           format: {
-            value: function(value, ratio) {
-              return (ratio * 100 % 1 === 0) ?
-                $filter('number')(ratio * 100) + '%' :
-                $filter('number')(ratio * 100, 1) + '%';
-            }
-          }
-        }
+            value: function (value, ratio) {
+              return (ratio * 100) % 1 === 0
+                ? $filter('number')(ratio * 100) + '%'
+                : $filter('number')(ratio * 100, 1) + '%';
+            },
+          },
+        },
       };
       return config;
     };
 
-
-    $scope.getLineChartConfig = function(id, timeaxis, campaignDataArray, campaignNames, maxY, tooltipText) {
-
+    $scope.getLineChartConfig = function (
+      id,
+      timeaxis,
+      campaignDataArray,
+      campaignNames,
+      maxY,
+      tooltipText
+    ) {
       var columnData = [];
       columnData.push(timeaxis);
-      angular.forEach(campaignDataArray, function(value) {
+      angular.forEach(campaignDataArray, function (value) {
         columnData.push(value);
       });
       // get max value multiple of 4
@@ -159,56 +224,58 @@
           type: 'area-spline',
           x: 'x',
           columns: columnData,
-          names: campaignNames
+          names: campaignNames,
         },
         size: {
           height: 240,
-          width: 870
+          width: 870,
         },
         grid: {
           y: {
-            show: true
-          }
+            show: true,
+          },
         },
         tooltip: {
           // Default true
           grouped: false,
           format: {
-            name: function() {
+            name: function () {
               return tooltipText;
             },
-            value: function(value) {
-              return (value % 1 === 0) ? $filter('number')(value) : $filter('number')(value, 1);
-            }
-          }
+            value: function (value) {
+              return value % 1 === 0
+                ? $filter('number')(value)
+                : $filter('number')(value, 1);
+            },
+          },
         },
         axis: {
           y: {
             tick: {
               count: 5,
-              format: function(d) {
-                return (d);
-              }
+              format: function (d) {
+                return d;
+              },
             },
             min: 0,
             padding: { top: 0, bottom: 0 },
-            max: maxY
+            max: maxY,
           },
           x: {
             type: 'category',
             tick: {
-              categories: timeaxis
-            }
-          }
+              categories: timeaxis,
+            },
+          },
         },
         legend: {
-          show: false
-        }
+          show: false,
+        },
       };
       return chartJson;
     };
 
-    $scope.changeOption = function() {
+    $scope.changeOption = function () {
       if ($scope.reportsType === 2) {
         $scope.getPushResults();
       } else if ($scope.reportsType === 1) {
@@ -224,47 +291,58 @@
         controller: 'modalExportAutomationReportsCtrl',
         inputs: {
           data: {
-            title: $translate.instant('ScheduledTask_Reports_Sms_reports_export_title'),
+            title: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_title'
+            ),
             buttonCancelLabel: $translate.instant('actions.cancel'),
-            buttonPrimaryLabel: $translate.instant('ScheduledTask_Reports_Sms_reports_export_button'),
+            buttonPrimaryLabel: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_button'
+            ),
             buttonPrimaryClass: 'button--primary button--small',
             fieldValue: $scope.email,
             required: true,
             regex: utils.REGEX_EMAIL,
-            label: $translate.instant('ScheduledTask_Reports_Sms_reports_export_label'),
+            label: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_label'
+            ),
             selectedActionIds: $scope.selectedActionIds,
             optionTimePeriod: $scope.selectedOption.id,
             scheduledTaskId: $scope.idScheduledTask,
-            typeReport: typeReport
-          }
-        }
+            typeReport: typeReport,
+          },
+        },
       });
-    }
+    };
 
-    var initAllPushSelected = function() {
-      angular.forEach($scope.itemsPush, function(el) {
+    var initAllPushSelected = function () {
+      angular.forEach($scope.itemsPush, function (el) {
         el.selected = true;
         $scope.selectedPushIds.push(el.idPush);
       });
-    }
+    };
 
     function getTask() {
-      summaryTaskService.getSummaryTask($scope.idScheduledTask)
-        .then(function(response) {
+      summaryTaskService.getSummaryTask($scope.idScheduledTask).then(
+        function (response) {
           var data = response.data;
           $scope.taskName = data.model.TaskName;
           $scope.frecuencyType = data.model.FrequencyType;
           $scope.fieldsListSeleted = data.model.NameFieldsList;
           var charactersInLine = '';
           var charactersInLineBody = '';
-          angular.forEach($scope.fieldsListSeleted, function(item, index) {
+          angular.forEach($scope.fieldsListSeleted, function (item, index) {
             $scope.fieldsText = $scope.fieldsText + '“' + item + '” ';
-            $scope.fieldsTextTooltip = $scope.fieldsTextTooltip + '“' + item + '” ';
-            $scope.fieldsTextTooltipBody = $scope.fieldsTextTooltipBody + '“' + item + '” ';
+            $scope.fieldsTextTooltip =
+              $scope.fieldsTextTooltip + '“' + item + '” ';
+            $scope.fieldsTextTooltipBody =
+              $scope.fieldsTextTooltipBody + '“' + item + '” ';
             charactersInLine = charactersInLine + '“' + item + '” ';
             charactersInLineBody = charactersInLineBody + '“' + item + '” ';
             if (index === $scope.fieldsListSeleted.length - 1) {
-              $scope.fieldsText = $scope.fieldsText.substring(0, $scope.fieldsText.length - 1);
+              $scope.fieldsText = $scope.fieldsText.substring(
+                0,
+                $scope.fieldsText.length - 1
+              );
             }
             if (charactersInLine.length > 70) {
               charactersInLine = '';
@@ -272,53 +350,68 @@
             }
             if (charactersInLineBody.length > 130) {
               charactersInLineBody = '';
-              $scope.fieldsTextTooltipBody = $scope.fieldsTextTooltipBody + '<br/>';
+              $scope.fieldsTextTooltipBody =
+                $scope.fieldsTextTooltipBody + '<br/>';
             }
-
           });
           $scope.dayPerWeek = [];
-          angular.forEach(data.model.DayPerWeek, function(value) {
-            $scope.dayPerWeek.push($translate.instant('ScheduledTask_Summary_Day_' + value));
+          angular.forEach(data.model.DayPerWeek, function (value) {
+            $scope.dayPerWeek.push(
+              $translate.instant('ScheduledTask_Summary_Day_' + value)
+            );
           });
           $scope.dayPerMonth = data.model.DayPerMonth;
-          angular.forEach(data.model.DelaysList, function(item) {
+          angular.forEach(data.model.DelaysList, function (item) {
             var itemToAdd = {
-              name: item.CampaignName, urlPreview: item.PreviewUrl,
-              idAutomationAction: item.IdAction, selected: 'true'
-
+              name: item.CampaignName,
+              urlPreview: item.PreviewUrl,
+              idAutomationAction: item.IdAction,
+              selected: 'true',
             };
-            var column = {id: item.IdAction.toString(), 'type': 'spline', name: item.CampaignName };
+            var column = {
+              id: item.IdAction.toString(),
+              type: 'spline',
+              name: item.CampaignName,
+            };
             $scope.datacolumns.push(column);
             $scope.actions.push(itemToAdd);
             //done this to access faster to action
             $scope.indexedActions[itemToAdd.idAutomationAction] = itemToAdd;
-            if ($scope.idAction === 0 || $scope.idAction === itemToAdd.idAutomationAction) {
+            if (
+              $scope.idAction === 0 ||
+              $scope.idAction === itemToAdd.idAutomationAction
+            ) {
               $scope.selectedActionIds.push(itemToAdd.idAutomationAction);
             }
           });
           $scope.getResults();
           $scope.getSmsResults();
-          $scope.getPushResults()
-            .then(function() {
-              initAllPushSelected();
-            });
-        }, function() {
+          $scope.getPushResults().then(function () {
+            initAllPushSelected();
+          });
+        },
+        function () {
           $scope.reportsLoading = false;
           $scope.pageLoading = false;
-        });
+        }
+      );
     }
 
-    $scope.getHtml = function(html) {
+    $scope.getHtml = function (html) {
       return $sce.trustAsHtml(html);
     };
 
     function setEngagementResult(data) {
       $scope.engagementList = [];
       if (data !== undefined && data.Items !== undefined) {
-        angular.forEach(data.Items, function(item) {
+        angular.forEach(data.Items, function (item) {
           $scope.engagementList.push({
-            points: item.Ranking, email: item.Email,
-            name: (item.FirstName !== null ? item.FirstName : '-') + ' ' + (item.LastName !== null ? item.LastName : '-')
+            points: item.Ranking,
+            email: item.Email,
+            name:
+              (item.FirstName !== null ? item.FirstName : '-') +
+              ' ' +
+              (item.LastName !== null ? item.LastName : '-'),
           });
         });
       }
@@ -330,7 +423,15 @@
       var pattern = /Date\(([^)]+)\)/;
       $scope.result = model;
       data = [['noinfo', 100]];
-      $scope.donutGraphDataSms = $scope.getDonutChartConfig('#sms', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+      $scope.donutGraphDataSms = $scope.getDonutChartConfig(
+        '#sms',
+        { noinfo: '#dcdcdc' },
+        data,
+        { noinfo: 'NO info' },
+        $scope.noDataTitle,
+        false,
+        false
+      );
 
       if ($scope.selectedOption.id === 0 || $scope.selectedOption.id === 1) {
         dateFilterFormat = 'dd';
@@ -338,27 +439,52 @@
         dateFilterFormat = 'dd MMMM';
       }
       if ($scope.result !== undefined) {
-        angular.forEach($scope.result.ItemsGroupedByDate, function(item) {
+        angular.forEach($scope.result.ItemsGroupedByDate, function (item) {
           item.Date = new Date(parseFloat(pattern.exec(item.Date)[1]));
         });
-        $scope.result.LastClickedEmailDate = new Date(parseFloat(pattern.exec($scope.result.LastClickedEmailDate)[1]));
-        $scope.result.LastOpenedEmailDate = new Date(parseFloat(pattern.exec($scope.result.LastOpenedEmailDate)[1]));
+        $scope.result.LastClickedEmailDate = new Date(
+          parseFloat(pattern.exec($scope.result.LastClickedEmailDate)[1])
+        );
+        $scope.result.LastOpenedEmailDate = new Date(
+          parseFloat(pattern.exec($scope.result.LastOpenedEmailDate)[1])
+        );
 
         //donut data
-        var bouncedPercent = ($scope.result.TotalHardBouncedMailCount + $scope.result.TotalSoftBouncedMailCount) /
-          $scope.result.TotalSentCount * 100;
-        var notopenPercent = ($scope.result.TotalUnopenedMailCount / $scope.result.TotalSentCount * 100);
-        var openPercent = $scope.result.TotalDistinctOpenedMailCount / $scope.result.TotalSentCount * 100;
-        var clickPercent = ($scope.result.TotalUniqueClickCount * 100) / $scope.result.TotalClickCount;
+        var bouncedPercent =
+          (($scope.result.TotalHardBouncedMailCount +
+            $scope.result.TotalSoftBouncedMailCount) /
+            $scope.result.TotalSentCount) *
+          100;
+        var notopenPercent =
+          ($scope.result.TotalUnopenedMailCount /
+            $scope.result.TotalSentCount) *
+          100;
+        var openPercent =
+          ($scope.result.TotalDistinctOpenedMailCount /
+            $scope.result.TotalSentCount) *
+          100;
+        var clickPercent =
+          ($scope.result.TotalUniqueClickCount * 100) /
+          $scope.result.TotalClickCount;
         $scope.donutData = {
-          'notopen': $filter('number')(notopenPercent, 1),
-          'open': $filter('number')(openPercent, 1),
-          'bounced': $filter('number')(bouncedPercent, 1),
-          'CTOR': $filter('number')($scope.result.TotalClickThroughOpenRate, 1),
-          'uniqueClickPercent': clickPercent % 1 === 0 ? $filter('number')(clickPercent) : $filter('number')(clickPercent, 2)
-
+          notopen: $filter('number')(notopenPercent, 1),
+          open: $filter('number')(openPercent, 1),
+          bounced: $filter('number')(bouncedPercent, 1),
+          CTOR: $filter('number')($scope.result.TotalClickThroughOpenRate, 1),
+          uniqueClickPercent:
+            clickPercent % 1 === 0
+              ? $filter('number')(clickPercent)
+              : $filter('number')(clickPercent, 2),
         };
-        $scope.donutInfo.data = [['opens', $scope.result.TotalDistinctOpenedMailCount], ['notopen', $scope.result.TotalUnopenedMailCount], ['bounced', $scope.result.TotalHardBouncedMailCount + $scope.result.TotalSoftBouncedMailCount]];
+        $scope.donutInfo.data = [
+          ['opens', $scope.result.TotalDistinctOpenedMailCount],
+          ['notopen', $scope.result.TotalUnopenedMailCount],
+          [
+            'bounced',
+            $scope.result.TotalHardBouncedMailCount +
+              $scope.result.TotalSoftBouncedMailCount,
+          ],
+        ];
 
         //line chart opens and clicks
         $scope.timeArray = [];
@@ -371,11 +497,11 @@
         var tempMax = 0;
 
         //get campaign names of selected actions on filter
-        angular.forEach($scope.selectedActionIds, function(item) {
+        angular.forEach($scope.selectedActionIds, function (item) {
           $scope.campaignNames[item] = $scope.indexedActions[item].name;
         });
 
-        angular.forEach($scope.result.ActionItems, function(item, key) {
+        angular.forEach($scope.result.ActionItems, function (item, key) {
           var id = item.IdAutomationAction;
           var openData = [];
           var clickData = [];
@@ -384,9 +510,14 @@
           if (key === 0) {
             $scope.timeArray.push('x');
           }
-          angular.forEach(item.Items, function(actionItem) {
+          angular.forEach(item.Items, function (actionItem) {
             if (key === 0) {
-              $scope.timeArray.push($filter('date')(new Date(parseFloat(pattern.exec(actionItem.Date)[1])), dateFilterFormat));
+              $scope.timeArray.push(
+                $filter('date')(
+                  new Date(parseFloat(pattern.exec(actionItem.Date)[1])),
+                  dateFilterFormat
+                )
+              );
             }
             openData.push(actionItem.OpenedMailCount);
             clickData.push(actionItem.ClickCount);
@@ -400,27 +531,70 @@
           openDataValues.shift();
           clickDataValues.shift();
           tempMax = _.max(openDataValues);
-          $scope.maxOpenData = tempMax > $scope.maxOpenData ? tempMax : $scope.maxOpenData;
+          $scope.maxOpenData =
+            tempMax > $scope.maxOpenData ? tempMax : $scope.maxOpenData;
           tempMax = _.max(clickDataValues);
-          $scope.maxClickData = tempMax > $scope.maxClickData ? tempMax : $scope.maxClickData;
+          $scope.maxClickData =
+            tempMax > $scope.maxClickData ? tempMax : $scope.maxClickData;
         });
 
-
-        $scope.openGraphData = $scope.getLineChartConfig('#chart', $scope.timeArray, $scope.campaignDataOpensArray, $scope.campaignNames, $scope.maxOpenData, $scope.openTooltip);
-        $scope.clickGraphData = $scope.getLineChartConfig('#clicksChart', $scope.timeArray, $scope.campaignDataClicksArray, $scope.campaignNames, $scope.maxClickData, $scope.clickTooltip);
+        $scope.openGraphData = $scope.getLineChartConfig(
+          '#chart',
+          $scope.timeArray,
+          $scope.campaignDataOpensArray,
+          $scope.campaignNames,
+          $scope.maxOpenData,
+          $scope.openTooltip
+        );
+        $scope.clickGraphData = $scope.getLineChartConfig(
+          '#clicksChart',
+          $scope.timeArray,
+          $scope.campaignDataClicksArray,
+          $scope.campaignNames,
+          $scope.maxClickData,
+          $scope.clickTooltip
+        );
         if ($scope.result.TotalSentCount !== 0) {
-          $scope.donutGraphData = $scope.getDonutChartConfig('#opens', $scope.donutInfo.colors, $scope.donutInfo.data, $scope.donutInfo.names, $scope.donutTitle, true, true);
+          $scope.donutGraphData = $scope.getDonutChartConfig(
+            '#opens',
+            $scope.donutInfo.colors,
+            $scope.donutInfo.data,
+            $scope.donutInfo.names,
+            $scope.donutTitle,
+            true,
+            true
+          );
         } else {
           data = [['noinfo', 100]];
-          $scope.donutGraphData = $scope.getDonutChartConfig('#opens', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+          $scope.donutGraphData = $scope.getDonutChartConfig(
+            '#opens',
+            { noinfo: '#dcdcdc' },
+            data,
+            { noinfo: 'NO info' },
+            $scope.noDataTitle,
+            false,
+            false
+          );
         }
         //set funnel array data
         $scope.funnelArray = [];
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_Grid_Sent'), value: $scope.result.TotalSentCount });
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_Grid_Delivered'), value: $scope.result.TotalDeliveryCount });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_Grid_Sent'),
+          value: $scope.result.TotalSentCount,
+        });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_Grid_Delivered'),
+          value: $scope.result.TotalDeliveryCount,
+        });
 
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_FunnelOpen'), value: $scope.result.TotalDistinctOpenedMailCount });
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_Grid_Clicks'), value: $scope.result.TotalUniqueClickPerCampaignCount });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_FunnelOpen'),
+          value: $scope.result.TotalDistinctOpenedMailCount,
+        });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_Grid_Clicks'),
+          value: $scope.result.TotalUniqueClickPerCampaignCount,
+        });
         $scope.totalFunnel = $scope.result.TotalSentCount;
         if ($scope.totalFunnel === 0) {
           $scope.totalFunnel = 1;
@@ -434,129 +608,271 @@
         $scope.maxOpenData = 4;
         $scope.maxClickData = 4;
         $scope.funnelArray = [];
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_Grid_Sent'), value: 0 });
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_Grid_Delivered'), value: 0 });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_Grid_Sent'),
+          value: 0,
+        });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_Grid_Delivered'),
+          value: 0,
+        });
 
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_FunnelOpen'), value: 0 });
-        $scope.funnelArray.push({ 'catname': $translate.instant('ScheduledTask_Reports_Grid_Clicks'), value: 0 });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_FunnelOpen'),
+          value: 0,
+        });
+        $scope.funnelArray.push({
+          catname: $translate.instant('ScheduledTask_Reports_Grid_Clicks'),
+          value: 0,
+        });
         $scope.totalFunnel = 1;
 
-        $scope.openGraphData = $scope.getLineChartConfig('#chart', $scope.timeArray, $scope.campaignDataOpensArray, $scope.campaignNames, $scope.maxOpenData, $scope.openTooltip);
-        $scope.clickGraphData = $scope.getLineChartConfig('#clicksChart', $scope.timeArray, $scope.campaignDataClicksArray, $scope.campaignNames, $scope.maxClickData, $scope.clickTooltip);
+        $scope.openGraphData = $scope.getLineChartConfig(
+          '#chart',
+          $scope.timeArray,
+          $scope.campaignDataOpensArray,
+          $scope.campaignNames,
+          $scope.maxOpenData,
+          $scope.openTooltip
+        );
+        $scope.clickGraphData = $scope.getLineChartConfig(
+          '#clicksChart',
+          $scope.timeArray,
+          $scope.campaignDataClicksArray,
+          $scope.campaignNames,
+          $scope.maxClickData,
+          $scope.clickTooltip
+        );
         data = [['noinfo', 100]];
-        $scope.donutGraphData = $scope.getDonutChartConfig('#opens', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+        $scope.donutGraphData = $scope.getDonutChartConfig(
+          '#opens',
+          { noinfo: '#dcdcdc' },
+          data,
+          { noinfo: 'NO info' },
+          $scope.noDataTitle,
+          false,
+          false
+        );
       }
       $scope.loaded = true;
     }
 
-    $scope.getResults = function() {
+    $scope.getResults = function () {
       $scope.reportsLoading = true;
       if ($scope.selectedOption.id === 0 || $scope.selectedOption.id === 1) {
-        automationReportsService.getResults($scope.idScheduledTask, $scope.selectedOption.id, $scope.selectedActionIds, 'daily')
-          .then(function(response) {
-            var data = response.data;
-            setResult(data.model);
-            $scope.reportsLoading = false;
-            $scope.pageLoading = false;
-          },
-          function() {
-            $scope.reportsLoading = false;
-            $scope.pageLoading = false;
-          });
+        automationReportsService
+          .getResults(
+            $scope.idScheduledTask,
+            $scope.selectedOption.id,
+            $scope.selectedActionIds,
+            'daily'
+          )
+          .then(
+            function (response) {
+              var data = response.data;
+              setResult(data.model);
+              $scope.reportsLoading = false;
+              $scope.pageLoading = false;
+            },
+            function () {
+              $scope.reportsLoading = false;
+              $scope.pageLoading = false;
+            }
+          );
       } else {
-        automationReportsService.getResults($scope.idScheduledTask, $scope.selectedOption.id, $scope.selectedActionIds, 'monthly')
-          .then(function(response) {
-            var data = response.data;
-            setResult(data.model);
-            $scope.reportsLoading = false;
-            $scope.pageLoading = false;
-          }, function() {
-            $scope.reportsLoading = false;
-            $scope.pageLoading = false;
-          });
+        automationReportsService
+          .getResults(
+            $scope.idScheduledTask,
+            $scope.selectedOption.id,
+            $scope.selectedActionIds,
+            'monthly'
+          )
+          .then(
+            function (response) {
+              var data = response.data;
+              setResult(data.model);
+              $scope.reportsLoading = false;
+              $scope.pageLoading = false;
+            },
+            function () {
+              $scope.reportsLoading = false;
+              $scope.pageLoading = false;
+            }
+          );
       }
-      automationReportsService.getResults($scope.idScheduledTask, $scope.selectedOption.id,
-        $scope.selectedActionIds, 'engagement').then(function(response) {
-        var data = response.data;
-        setEngagementResult(data.model);
-      });
+      automationReportsService
+        .getResults(
+          $scope.idScheduledTask,
+          $scope.selectedOption.id,
+          $scope.selectedActionIds,
+          'engagement'
+        )
+        .then(function (response) {
+          var data = response.data;
+          setEngagementResult(data.model);
+        });
     };
 
-    $scope.getPushResults = function() {
+    $scope.getPushResults = function () {
       if ($scope.itemsPush && !$scope.selectedPushIds.length) {
         return clearPushData();
       }
-      return automationReportsService.getPushResults($scope.idScheduledTask, $scope.selectedPushIds, $scope.selectedOption.id)
-        .then(function(response) {
-          var undeliveredP = ((response.undelivered * 100) / response.total);
-          var deliveredP = ((response.delivered * 100) / response.total);
+      return automationReportsService
+        .getPushResults(
+          $scope.idScheduledTask,
+          $scope.selectedPushIds,
+          $scope.selectedOption.id
+        )
+        .then(function (response) {
+          var undeliveredP = (response.undelivered * 100) / response.total;
+          var deliveredP = (response.delivered * 100) / response.total;
           $scope.pushData = {
-            'undelivered': response.undelivered,
-            'delivered': response.delivered,
-            'undeliveredPerc': $filter('number')(undeliveredP, 1),
-            'deliveredPerc': $filter('number')(deliveredP, 1),
-            'total': response.total
+            undelivered: response.undelivered,
+            delivered: response.delivered,
+            undeliveredPerc: $filter('number')(undeliveredP, 1),
+            deliveredPerc: $filter('number')(deliveredP, 1),
+            total: response.total,
           };
           if (response.pushNotificationList) {
-            $scope.itemsPush = response.pushNotificationList.map(function(item) {
-              return { idPush: item.IdPushNotification, name: item.Name, title: item.Title, body: item.Body, domain: item.Domain, selected: $scope.selectedPushIds.includes(item.IdPushNotification) };
+            $scope.itemsPush = response.pushNotificationList.map(function (
+              item
+            ) {
+              return {
+                idPush: item.IdPushNotification,
+                name: item.Name,
+                title: item.Title,
+                body: item.Body,
+                domain: item.Domain,
+                selected: $scope.selectedPushIds.includes(
+                  item.IdPushNotification
+                ),
+              };
             });
           }
           if (response.total) {
-            $scope.donutInfoPush.data = [['delivered', response.delivered], ['notdelivered', response.undelivered], ['sent', response.total - response.delivered - response.undelivered]];
-            $scope.donutGraphDataPush = $scope.getDonutChartConfig('#push', $scope.donutInfoPush.colors, $scope.donutInfoPush.data, $scope.donutInfoPush.names, $scope.donutTitle, true, true);
+            $scope.donutInfoPush.data = [
+              ['delivered', response.delivered],
+              ['notdelivered', response.undelivered],
+              [
+                'sent',
+                response.total - response.delivered - response.undelivered,
+              ],
+            ];
+            $scope.donutGraphDataPush = $scope.getDonutChartConfig(
+              '#push',
+              $scope.donutInfoPush.colors,
+              $scope.donutInfoPush.data,
+              $scope.donutInfoPush.names,
+              $scope.donutTitle,
+              true,
+              true
+            );
           } else {
             var data = [['noinfo', 100]];
-            $scope.donutGraphDataPush = $scope.getDonutChartConfig('#push', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+            $scope.donutGraphDataPush = $scope.getDonutChartConfig(
+              '#push',
+              { noinfo: '#dcdcdc' },
+              data,
+              { noinfo: 'NO info' },
+              $scope.noDataTitle,
+              false,
+              false
+            );
           }
         });
     };
 
-    $scope.getSmsResults = function() {
-      if ($scope.itemsSms && $scope.selectedSmsIds && !$scope.selectedSmsIds.length) {
+    $scope.getSmsResults = function () {
+      if (
+        $scope.itemsSms &&
+        $scope.selectedSmsIds &&
+        !$scope.selectedSmsIds.length
+      ) {
         return clearSmsData();
       }
-      automationReportsService.getSmsResults($scope.idScheduledTask, $scope.selectedOption.id, $scope.selectedSmsIds)
-        .then(function(response) {
-          var undeliveredP = ((response.undelivered * 100) / response.total);
-          var deliveredP = ((response.delivered * 100) / response.total);
+      automationReportsService
+        .getSmsResults(
+          $scope.idScheduledTask,
+          $scope.selectedOption.id,
+          $scope.selectedSmsIds
+        )
+        .then(function (response) {
+          var undeliveredP = (response.undelivered * 100) / response.total;
+          var deliveredP = (response.delivered * 100) / response.total;
           $scope.smsData = {
-            'undelivered': response.undelivered,
-            'delivered': response.delivered,
-            'undeliveredPerc': $filter('number')(undeliveredP, 1),
-            'deliveredPerc': $filter('number')(deliveredP, 1),
-            'total': response.total,
-            'hasSms': response.hasSms,
-            'smsList': response.smsList,
-            'smsByCountry': response.smsByCountry
+            undelivered: response.undelivered,
+            delivered: response.delivered,
+            undeliveredPerc: $filter('number')(undeliveredP, 1),
+            deliveredPerc: $filter('number')(deliveredP, 1),
+            total: response.total,
+            hasSms: response.hasSms,
+            smsList: response.smsList,
+            smsByCountry: response.smsByCountry,
           };
           if (response.smsList) {
-            $scope.itemsSms = response.smsList.map(function(item) {
-              return { 'idSms': item.IdSms, 'name': item.Name, 'selected': $scope.selectedSmsIds == null || $scope.selectedSmsIds.length == 0 ? true : $scope.selectedSmsIds.includes(item.IdSms) };
+            $scope.itemsSms = response.smsList.map(function (item) {
+              return {
+                idSms: item.IdSms,
+                name: item.Name,
+                selected:
+                  $scope.selectedSmsIds == null ||
+                  $scope.selectedSmsIds.length == 0
+                    ? true
+                    : $scope.selectedSmsIds.includes(item.IdSms),
+              };
             });
           }
           $scope.itemsSmsByCountry = response.smsByCountry;
-          
+
           if (response.total) {
-            $scope.donutInfoSms.data = [['delivered', response.delivered], ['notdelivered', response.undelivered], ['sent', response.total - response.delivered - response.undelivered]];
-            $scope.donutGraphDataSms = $scope.getDonutChartConfig('#sms', $scope.donutInfoSms.colors, $scope.donutInfoSms.data, $scope.donutInfoSms.names, $scope.donutTitle, true, true);
+            $scope.donutInfoSms.data = [
+              ['delivered', response.delivered],
+              ['notdelivered', response.undelivered],
+              [
+                'sent',
+                response.total - response.delivered - response.undelivered,
+              ],
+            ];
+            $scope.donutGraphDataSms = $scope.getDonutChartConfig(
+              '#sms',
+              $scope.donutInfoSms.colors,
+              $scope.donutInfoSms.data,
+              $scope.donutInfoSms.names,
+              $scope.donutTitle,
+              true,
+              true
+            );
           } else {
             var data = [['noinfo', 100]];
-            $scope.donutGraphDataSms = $scope.getDonutChartConfig('#sms', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
+            $scope.donutGraphDataSms = $scope.getDonutChartConfig(
+              '#sms',
+              { noinfo: '#dcdcdc' },
+              data,
+              { noinfo: 'NO info' },
+              $scope.noDataTitle,
+              false,
+              false
+            );
           }
         });
     };
 
-    $scope.createReportandRedirect = function() {
+    $scope.createReportandRedirect = function () {
       ModalService.showModal({
         templateUrl: 'angularjs/partials/shared/modalTwoOptionsWithInput.html',
         controller: 'modalExportSmsReportsCtrl',
         inputs: {
           data: {
-            title: $translate.instant('ScheduledTask_Reports_Sms_reports_export_title'),
-            description: $translate.instant('ScheduledTask_Reports_Sms_reports_export_subtitle'),
+            title: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_title'
+            ),
+            description: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_subtitle'
+            ),
             buttonCancelLabel: $translate.instant('actions.cancel'),
-            buttonPrimaryLabel: $translate.instant('ScheduledTask_Reports_Sms_reports_export_button'),
+            buttonPrimaryLabel: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_button'
+            ),
             buttonPrimaryClass: 'button--primary button--small',
             required: true,
             regex: utils.REGEX_EMAIL,
@@ -565,47 +881,55 @@
             option1Value: 'Office2003_XLS',
             option2Value: 'Office2007_XLSX',
             option: 'Office2007_XLSX',
-            label: $translate.instant('ScheduledTask_Reports_Sms_reports_export_label'),
+            label: $translate.instant(
+              'ScheduledTask_Reports_Sms_reports_export_label'
+            ),
             scheduledTaskId: $scope.idScheduledTask,
             reportType: $scope.selectedOption.id,
-            fieldValue: $scope.email
-          }
-        }
+            fieldValue: $scope.email,
+          },
+        },
       });
     };
-    
-    $scope.onBlurFilter = function(e, isFilterOpen, toggleFilter) {
+
+    $scope.onBlurFilter = function (e, isFilterOpen, toggleFilter) {
       if (isFilterOpen) {
-        if (e.relatedTarget && e.relatedTarget.type.toLowerCase() === 'checkbox') {
+        if (
+          e.relatedTarget &&
+          e.relatedTarget.type.toLowerCase() === 'checkbox'
+        ) {
           e.target.focus();
-        } else if (!e.relatedTarget || e.relatedTarget.tagName.toLowerCase() !== 'button') {
+        } else if (
+          !e.relatedTarget ||
+          e.relatedTarget.tagName.toLowerCase() !== 'button'
+        ) {
           toggleFilter();
         }
       }
     };
 
-    $scope.togglePushFilter = function() {
+    $scope.togglePushFilter = function () {
       $scope.showPushFilter = !$scope.showPushFilter;
       $('#pushList').getNiceScroll().resize(); // eslint-disable-line
       $('#pushList').scrollTop(0); // eslint-disable-line
     };
 
-    $scope.toggleSmsFilter = function() {
+    $scope.toggleSmsFilter = function () {
       $scope.showSmsFilter = !$scope.showSmsFilter;
       $('#smsList').getNiceScroll().resize(); // eslint-disable-line
       $('#smsList').scrollTop(0); // eslint-disable-line
     };
 
-    $scope.toggleActionFilter = function() {
+    $scope.toggleActionFilter = function () {
       $scope.showActionFilter = !$scope.showActionFilter;
       $('#actionList').getNiceScroll().resize(); // eslint-disable-line
       $('#actionList').scrollTop(0); // eslint-disable-line
     };
 
-    $scope.filterActions = function() {
+    $scope.filterActions = function () {
       $scope.toggleActionFilter();
       $scope.selectedActionIds = [];
-      angular.forEach($scope.actions, function(value) {
+      angular.forEach($scope.actions, function (value) {
         if (value.selected) {
           $scope.selectedActionIds.push(value.idAutomationAction);
         }
@@ -613,10 +937,10 @@
       $scope.getResults();
     };
 
-    $scope.filterSms = function() {
+    $scope.filterSms = function () {
       $scope.toggleSmsFilter();
       $scope.selectedSmsIds = [];
-      angular.forEach($scope.itemsSms, function(value) {
+      angular.forEach($scope.itemsSms, function (value) {
         if (value.selected) {
           $scope.selectedSmsIds.push(value.idSms);
         }
@@ -624,10 +948,10 @@
       $scope.getSmsResults();
     };
 
-    $scope.filterPush = function() {
+    $scope.filterPush = function () {
       $scope.togglePushFilter();
       $scope.selectedPushIds = [];
-      angular.forEach($scope.itemsPush, function(value) {
+      angular.forEach($scope.itemsPush, function (value) {
         if (value.selected) {
           $scope.selectedPushIds.push(value.idPush);
         }
@@ -637,31 +961,47 @@
 
     function clearPushData() {
       $scope.pushData = {
-        'undelivered': 0,
-        'delivered': 0,
-        'undeliveredPerc': 0,
-        'deliveredPerc': 0,
-        'total': 0
+        undelivered: 0,
+        delivered: 0,
+        undeliveredPerc: 0,
+        deliveredPerc: 0,
+        total: 0,
       };
       var data = [['noinfo', 100]];
-      $scope.donutGraphDataPush = $scope.getDonutChartConfig('#push', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
-    };
+      $scope.donutGraphDataPush = $scope.getDonutChartConfig(
+        '#push',
+        { noinfo: '#dcdcdc' },
+        data,
+        { noinfo: 'NO info' },
+        $scope.noDataTitle,
+        false,
+        false
+      );
+    }
 
     function clearSmsData() {
       $scope.smsData = {
-        'undelivered': 0,
-        'delivered': 0,
-        'undeliveredPerc': 0,
-        'deliveredPerc': 0,
-        'total': 0
+        undelivered: 0,
+        delivered: 0,
+        undeliveredPerc: 0,
+        deliveredPerc: 0,
+        total: 0,
       };
       var data = [['noinfo', 100]];
       $scope.itemsSmsByCountry = [];
-      $scope.donutGraphDataSms = $scope.getDonutChartConfig('#sms', { 'noinfo': '#dcdcdc' }, data, { 'noinfo': 'NO info' }, $scope.noDataTitle, false, false);
-    };
+      $scope.donutGraphDataSms = $scope.getDonutChartConfig(
+        '#sms',
+        { noinfo: '#dcdcdc' },
+        data,
+        { noinfo: 'NO info' },
+        $scope.noDataTitle,
+        false,
+        false
+      );
+    }
 
-    $scope.clearActionFilters = function() {
-      angular.forEach($scope.actions, function(value) {
+    $scope.clearActionFilters = function () {
+      angular.forEach($scope.actions, function (value) {
         if (_.includes($scope.selectedActionIds, value.idAutomationAction)) {
           value.selected = true;
         } else {
@@ -670,8 +1010,8 @@
       });
     };
 
-    $scope.clearSmsFilters = function() {
-      angular.forEach($scope.itemsSms, function(value) {
+    $scope.clearSmsFilters = function () {
+      angular.forEach($scope.itemsSms, function (value) {
         if (_.includes($scope.selectedSmsIds)) {
           value.selected = true;
         } else {
@@ -680,8 +1020,8 @@
       });
     };
 
-    $scope.clearPushFilters = function() {
-      angular.forEach($scope.itemsPush, function(value) {
+    $scope.clearPushFilters = function () {
+      angular.forEach($scope.itemsPush, function (value) {
         if (_.includes($scope.selectedPushIds)) {
           value.selected = true;
         } else {
@@ -690,16 +1030,15 @@
       });
     };
 
-    $scope.round = function(value) {
+    $scope.round = function (value) {
       return Math.round(value);
     };
 
-    $scope.onClickTabReport = function(reportType){
+    $scope.onClickTabReport = function (reportType) {
       if ($scope.reportsType !== reportType) {
         $scope.reportsType = reportType;
         $scope.changeOption();
       }
     };
-    
   }
 })();

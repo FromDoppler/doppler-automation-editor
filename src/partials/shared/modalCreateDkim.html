@@ -1,34 +1,79 @@
 <div id="modal" class="modal modal--is-dialog">
   <div class="modal__wrapper" id="modalCreateDkim" click-outside="close(false)">
-    <a class="icon-close modal--do-close"  ng-click="close(false)"></a>
+    <a class="icon-close modal--do-close" ng-click="close(false)"></a>
     <div class="modal__content">
       <h1>{{ data.title }}</h1>
       <p>{{ data.description }}</p>
     </div>
     <form class="modal--form" name="createDomainForm" novalidate>
       <div ng-show="!addingDomain" class="container">
-        <label class="label" for="DomainName">{{ 'control_panel.dkim.add_domain.domain' | translate }}</label>
+        <label class="label" for="DomainName"
+          >{{ 'control_panel.dkim.add_domain.domain' | translate }}</label
+        >
         <div class="form-controls--container">
           <div class="input--container">
-            <input name="DomainName" dp-private-domain-validator maxlength="253" ng-model="DomainName" type="text" ng-change="resetValidations()" required ng-pattern="data.domainRegex" />
-            <div ng-messages="createDomainForm.DomainName.$error" ng-if='createDomainForm.$submitted' class="error-messages--container" >
-              <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
-              <div ng-message="isDomainBelongsToOther" class="error">
-                <span ng-bind-html="'control_panel.dkim.add_domain.domain_belongs_to_other' | translate"></span>
+            <input
+              name="DomainName"
+              dp-private-domain-validator
+              maxlength="253"
+              ng-model="DomainName"
+              type="text"
+              ng-change="resetValidations()"
+              required
+              ng-pattern="data.domainRegex"
+            />
+            <div
+              ng-messages="createDomainForm.DomainName.$error"
+              ng-if="createDomainForm.$submitted"
+              class="error-messages--container"
+            >
+              <div ng-message="required" class="error">
+                {{ 'validation_messages.required' | translate }}
               </div>
-              <div ng-message="pattern" class="error">{{ 'validation_messages.domain' | translate }}</div>
-              <div ng-message="duplicated" class="error">{{ 'control_panel.dkim.add_domain.duplicated' | translate }}</div>
+              <div ng-message="isDomainBelongsToOther" class="error">
+                <span
+                  ng-bind-html="'control_panel.dkim.add_domain.domain_belongs_to_other' | translate"
+                ></span>
+              </div>
+              <div ng-message="pattern" class="error">
+                {{ 'validation_messages.domain' | translate }}
+              </div>
+              <div ng-message="duplicated" class="error">
+                {{ 'control_panel.dkim.add_domain.duplicated' | translate }}
+              </div>
             </div>
           </div>
-          <input class="save-button submit main_buttons_green_small" ng-if="!addedDomainSuccess" type="submit" ng-click="addDomain()" value="{{ 'actions.add' | translate}}" />
+          <input
+            class="save-button submit main_buttons_green_small"
+            ng-if="!addedDomainSuccess"
+            type="submit"
+            ng-click="addDomain()"
+            value="{{ 'actions.add' | translate}}"
+          />
         </div>
-          <div class="ok_message message-validation validation-warning" ng-show="duplicatedOtherUser" dp-dynamic-html="duplicatedOtherUserMessage"></div>
-          <div class="nav-button-bar" ng-show="duplicatedOtherUser">
-            <a ng-click="close({'success': false})" class="cancel-button submit main_buttons_gray_small">{{ 'button_cancel' | translate }} </a>
-            <a class="save-button submit main_buttons_green_small" ng-click="createDkim()" >{{ 'button_accept' | translate }} </a>
-          </div>
+        <div
+          class="ok_message message-validation validation-warning"
+          ng-show="duplicatedOtherUser"
+          dp-dynamic-html="duplicatedOtherUserMessage"
+        ></div>
+        <div class="nav-button-bar" ng-show="duplicatedOtherUser">
+          <a
+            ng-click="close({'success': false})"
+            class="cancel-button submit main_buttons_gray_small"
+            >{{ 'button_cancel' | translate }}
+          </a>
+          <a
+            class="save-button submit main_buttons_green_small"
+            ng-click="createDkim()"
+            >{{ 'button_accept' | translate }}
+          </a>
+        </div>
       </div>
-      <div ng-show="addingDomain" class="loading--container" dp-partial="/angularjs/partials/shared/loading.html"></div>
+      <div
+        ng-show="addingDomain"
+        class="loading--container"
+        dp-partial="/angularjs/partials/shared/loading.html"
+      ></div>
     </form>
   </div>
 </div>

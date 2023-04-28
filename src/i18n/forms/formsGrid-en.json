@@ -1,8 +1,8 @@
 {
-  "forms_grid" : {
+  "forms_grid": {
     "header": {
       "button": "Create Form",
-      "headline" : "Forms",
+      "headline": "Forms",
       "subhead_a": "Here you'll find all your Subscription Forms including the ones that are in draft, published or with unpublished changes. You currently have ",
       "subhead_b": "Keep in mind that you can create up to {{maxForms}}.",
       "subhead_form": "Form.",

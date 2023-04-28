@@ -1,11 +1,30 @@
-<div class="dropdown--container" ng-click="toggleVisibility();" ng-class="{ 'is-visible': expanded, 'is-disabled': disabled }">
+<div
+  class="dropdown--container"
+  ng-click="toggleVisibility();"
+  ng-class="{ 'is-visible': expanded, 'is-disabled': disabled }"
+>
   <div class="dropdown-display" ng-class="{ clicked: expanded }">
-    <span ng-show="!allowSearch || !expanded" class="dropdown-label">{{label}}</span>
+    <span ng-show="!allowSearch || !expanded" class="dropdown-label"
+      >{{label}}</span
+    >
     <span class="dropdown-arrow" ng-if="!arrowSelection"></span>
   </div>
   <ul class="dropdown-list" ng-show="expanded && filteredOptions.length">
-    <li class="dropdown-list-item" ng-repeat="(index, option) in filteredOptions" id="item{{index}}" ng-disabled="option.disabled" ng-class="{'is-selected': isSelected(option), 'non-selected': option.isBlocked}" ng-style="option.style" ng-click="onSelectOption({option: option})">
-      <span class="dropdown-list-item--text" >{{option.label}} <span class='blocked' ng-if="option.isBlocked">{{ 'automation_editor.sidebar.list_blocked' | translate }}</span></span>
+    <li
+      class="dropdown-list-item"
+      ng-repeat="(index, option) in filteredOptions"
+      id="item{{index}}"
+      ng-disabled="option.disabled"
+      ng-class="{'is-selected': isSelected(option), 'non-selected': option.isBlocked}"
+      ng-style="option.style"
+      ng-click="onSelectOption({option: option})"
+    >
+      <span class="dropdown-list-item--text"
+        >{{option.label}}
+        <span class="blocked" ng-if="option.isBlocked"
+          >{{ 'automation_editor.sidebar.list_blocked' | translate }}</span
+        ></span
+      >
     </li>
   </ul>
 </div>

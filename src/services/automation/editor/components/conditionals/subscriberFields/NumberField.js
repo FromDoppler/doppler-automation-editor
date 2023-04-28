@@ -1,10 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('NumberField', ['BaseField', function(BaseField) {
-
+  angular.module('dopplerApp.automation.editor').factory('NumberField', [
+    'BaseField',
+    function (BaseField) {
       function NumberField(data) {
         // Inherited constructor.
         BaseField.call(this, data);
@@ -18,7 +17,7 @@
 
       // Prototype inherence from BaseField.
       NumberField.prototype = Object.create(BaseField.prototype);
-      NumberField.prototype.setData = function(data) {
+      NumberField.prototype.setData = function (data) {
         BaseField.prototype.setData.call(this, data);
         if (data.hasOwnProperty('criteria')) {
           this.criteria = data.criteria;
@@ -31,10 +30,11 @@
         }
       };
 
-      NumberField.prototype.checkCompleted = function() {
+      NumberField.prototype.checkCompleted = function () {
         return !!(!this.deleted && this.criteria.length && this.value);
       };
 
       return NumberField;
-    }]);
+    },
+  ]);
 })();

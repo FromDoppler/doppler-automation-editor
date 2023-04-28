@@ -1,19 +1,29 @@
 <div>
-    <label class="label label--panel">* {{ 'form_labels.arg_dni' | translate }} 
-        <span ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.CC">
-        {{ 'form_labels.arg_dni_clarification' | translate }}
-        </span>
-    </label>
-    <input dp-integer-input
-        type="text"
-        class="input--text"
-        ng-class="{ 'hasErrors' : billingInformationForm.dniArg.$invalid}"
-        ng-model="billingInformation.billingInformationData.dniArg"
-        name="dniArg"
-        maxlength="11"
-        ng-maxlength="11"
-        ng-required="billingInformationForm.dniArg.$dirty || billingInformationForm.$submitted"/>
-    <div ng-messages="billingInformationForm.dniArg.$error" class="error-messages--container" >
-        <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+  <label class="label label--panel"
+    >* {{ 'form_labels.arg_dni' | translate }}
+    <span
+      ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.CC"
+    >
+      {{ 'form_labels.arg_dni_clarification' | translate }}
+    </span>
+  </label>
+  <input
+    dp-integer-input
+    type="text"
+    class="input--text"
+    ng-class="{ 'hasErrors' : billingInformationForm.dniArg.$invalid}"
+    ng-model="billingInformation.billingInformationData.dniArg"
+    name="dniArg"
+    maxlength="11"
+    ng-maxlength="11"
+    ng-required="billingInformationForm.dniArg.$dirty || billingInformationForm.$submitted"
+  />
+  <div
+    ng-messages="billingInformationForm.dniArg.$error"
+    class="error-messages--container"
+  >
+    <div ng-message="required" class="error">
+      {{ 'validation_messages.required' | translate }}
     </div>
+  </div>
 </div>

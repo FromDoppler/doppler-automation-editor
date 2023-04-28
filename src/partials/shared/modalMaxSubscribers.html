@@ -1,62 +1,178 @@
-<div id="modal" class="modal modal--is-dialog modal--visible modal--full-height" >
-	<div class="modal__wrapper modal--medium" id="modalMaxSubscribers" click-outside="close(isSendEmail)">
-		<a class="icon-close modal--do-close " ng-click="close(isSendEmail)"></a>
-		<div ng-show="!isSendEmail">
-			<div class="modal__content">
-				<h1>{{ 'modal_maxsubscribers.title' | translate }}</h1>
-				<p>{{ 'modal_maxsubscribers.subtitle' | translate }}</p>
-			</div>
-			<form class="modal--big-form" name="validationForm" novalidate>
-				<input type="hidden" id="urlReferrer" ng-model="data.UrlReferrer" />
-			<div ng-if="data.QuestionsList == undefined" style="min-height:726px;"></div> <!-- to prevent popup resize until data is flushed -->
-				<div class="container">
-					<div ng-repeat="item in data.QuestionsList" ng-class="{'full no-padding':item.Answer.AnswerType != 1}">
-						<input type="hidden" ng-model="item.Question" />
-						<label class="label" for="ReplyTo">{{item.Question}}</label>
-						<input class="input--text" ng-class="{ 'hasErrors':submitted && validationForm['question' + $index].$invalid }" type="text" ng-if="item.Answer.AnswerType == 1" ng-model="item.Answer.Value" name="{{item.name}}" data-required="true"/>
-						<input class="input--text" type="text" id="url-field" ng-if="item.Answer.AnswerType == 6" ng-model="item.Answer.Value" name="{{item.name}}" data-required="true" ng-class="{ 'hasErrors':submitted && validationForm['question' + $index].$invalid }" />
-						<div class="checkbox--container"  ng-if="item.Answer.AnswerType == 2 || item.Answer.AnswerType == 3">
-							<div class="checkbox-item" ng-repeat="checkboxItem in item.Answer.AnswerOptions">
-								<input ng-if="!$last || item.Answer.AnswerType == 2" type="checkbox" ng-model="item.Answer.List[$index]" name="{{item.name}}" value="{{checkboxItem}}"  ng-required="!someSelected(item.Answer.List)"/>
-								<input ng-if="$last && item.Answer.AnswerType == 3" type="checkbox" ng-model="item.Answer.List[$index]" name="{{item.name}}" value="{{checkboxItem}}" ng-required="!someSelected(item.Answer.List)" ng-click="toggleTextarea()" />
+<div
+  id="modal"
+  class="modal modal--is-dialog modal--visible modal--full-height"
+>
+  <div
+    class="modal__wrapper modal--medium"
+    id="modalMaxSubscribers"
+    click-outside="close(isSendEmail)"
+  >
+    <a class="icon-close modal--do-close" ng-click="close(isSendEmail)"></a>
+    <div ng-show="!isSendEmail">
+      <div class="modal__content">
+        <h1>{{ 'modal_maxsubscribers.title' | translate }}</h1>
+        <p>{{ 'modal_maxsubscribers.subtitle' | translate }}</p>
+      </div>
+      <form class="modal--big-form" name="validationForm" novalidate>
+        <input type="hidden" id="urlReferrer" ng-model="data.UrlReferrer" />
+        <div
+          ng-if="data.QuestionsList == undefined"
+          style="min-height: 726px"
+        ></div>
+        <!-- to prevent popup resize until data is flushed -->
+        <div class="container">
+          <div
+            ng-repeat="item in data.QuestionsList"
+            ng-class="{'full no-padding':item.Answer.AnswerType != 1}"
+          >
+            <input type="hidden" ng-model="item.Question" />
+            <label class="label" for="ReplyTo">{{item.Question}}</label>
+            <input
+              class="input--text"
+              ng-class="{ 'hasErrors':submitted && validationForm['question' + $index].$invalid }"
+              type="text"
+              ng-if="item.Answer.AnswerType == 1"
+              ng-model="item.Answer.Value"
+              name="{{item.name}}"
+              data-required="true"
+            />
+            <input
+              class="input--text"
+              type="text"
+              id="url-field"
+              ng-if="item.Answer.AnswerType == 6"
+              ng-model="item.Answer.Value"
+              name="{{item.name}}"
+              data-required="true"
+              ng-class="{ 'hasErrors':submitted && validationForm['question' + $index].$invalid }"
+            />
+            <div
+              class="checkbox--container"
+              ng-if="item.Answer.AnswerType == 2 || item.Answer.AnswerType == 3"
+            >
+              <div
+                class="checkbox-item"
+                ng-repeat="checkboxItem in item.Answer.AnswerOptions"
+              >
+                <input
+                  ng-if="!$last || item.Answer.AnswerType == 2"
+                  type="checkbox"
+                  ng-model="item.Answer.List[$index]"
+                  name="{{item.name}}"
+                  value="{{checkboxItem}}"
+                  ng-required="!someSelected(item.Answer.List)"
+                />
+                <input
+                  ng-if="$last && item.Answer.AnswerType == 3"
+                  type="checkbox"
+                  ng-model="item.Answer.List[$index]"
+                  name="{{item.name}}"
+                  value="{{checkboxItem}}"
+                  ng-required="!someSelected(item.Answer.List)"
+                  ng-click="toggleTextarea()"
+                />
 
-								<label class="label">{{checkboxItem}}</label>
-
-							</div>
-							<textarea ng-if="item.Answer.AnswerType == 3" ng-show="isShowTextarea" id="textArea-others" maxlength='140' class="textarea" ng-model="item.Answer.Text" ></textarea>
-						</div>
-						<dropdown class="dropdown dropdown--full" id="{{$index}}" ng-if="item.Answer.AnswerType == 4" list="item.Answer.AnswerOptions" name="{{item.name}}" ng-model="item.Answer.Value" property="text" id-value="text" ng-required="true" ng-class="{ 'hasErrors':submitted && validationForm['question' + $index].$invalid }"></dropdown>
-						<div class="radios--container" ng-if="item.Answer.AnswerType == 5">
-							<div class="radios-item" ng-repeat="radioItem in item.Answer.AnswerOptions">
-								<input type="radio" name="sendsCampaignsBefore" ng-model="item.Answer.Value" value="{{radioItem}}"  />
-								<label class="label">{{radioItem}}</label>
-							</div>
-						</div>
-						<div ng-messages="validationForm['question' + $index].$error" ng-if='submitted && (item.Answer.AnswerType == 2 || item.Answer.AnswerType == 3)' class="error-messages--container" >
-							<span class="error" ng-message="required">{{ 'validation_messages.required_checkbox' | translate }}</span>
-						</div>
-						<div ng-messages="validationForm['question' + $index].$error" ng-if='submitted && (item.Answer.AnswerType != 2 && item.Answer.AnswerType != 3)' class="error-messages--container" >
-							<span class="error" ng-message="required">{{ 'validation_messages.required' | translate }}</span>
-							<span class="error" ng-message="maxlength">{{ 'validation_messages.maxlength' | translate }}</span>
-						</div>
-					</div>
-					<div class="modal--footer-text">
-						<p><i>{{ 'modal_maxsubscribers.form_help' | translate }} <a class="link--default" target="_BLANK" href="{{data.UrlHelp}}">{{ 'modal_maxsubscribers.form_help_link_text' | translate }}</a></i></p>
-						<p><i>{{ 'modal_maxsubscribers.info_text' | translate }}</i></p>
-					</div>
-				</div>
-				<div class="modal__action-btn">
-					<button class="button button--alternative button--small" ng-disabled="buttonsDisabled" ng-click="close(false)" data-dismiss="modal">{{ 'button_cancel' | translate}}</button>
-					<button class="button button--primary button--small" ng-disabled="buttonsDisabled" ng-click="buttonsDisabled=true;submitted=true;sendEmail()">{{ 'CompleteInformation_SaveButton' | translate }}</button>
-				</div>
-			</form>
-		</div>
-		<div ng-show="isSendEmail" class="modal--post">
-	      <div class="modal__content">
-	        <p>{{ 'modal_maxsubscribers.request_processed' | translate }}</p>
-	        <button class="button button--primary button--small" ng-click="close(true)"> {{ 'button_accept' | translate }} </button>
-	      </div>
-	    </div>
-	</div>
-
+                <label class="label">{{checkboxItem}}</label>
+              </div>
+              <textarea
+                ng-if="item.Answer.AnswerType == 3"
+                ng-show="isShowTextarea"
+                id="textArea-others"
+                maxlength="140"
+                class="textarea"
+                ng-model="item.Answer.Text"
+              ></textarea>
+            </div>
+            <dropdown
+              class="dropdown dropdown--full"
+              id="{{$index}}"
+              ng-if="item.Answer.AnswerType == 4"
+              list="item.Answer.AnswerOptions"
+              name="{{item.name}}"
+              ng-model="item.Answer.Value"
+              property="text"
+              id-value="text"
+              ng-required="true"
+              ng-class="{ 'hasErrors':submitted && validationForm['question' + $index].$invalid }"
+            ></dropdown>
+            <div class="radios--container" ng-if="item.Answer.AnswerType == 5">
+              <div
+                class="radios-item"
+                ng-repeat="radioItem in item.Answer.AnswerOptions"
+              >
+                <input
+                  type="radio"
+                  name="sendsCampaignsBefore"
+                  ng-model="item.Answer.Value"
+                  value="{{radioItem}}"
+                />
+                <label class="label">{{radioItem}}</label>
+              </div>
+            </div>
+            <div
+              ng-messages="validationForm['question' + $index].$error"
+              ng-if="submitted && (item.Answer.AnswerType == 2 || item.Answer.AnswerType == 3)"
+              class="error-messages--container"
+            >
+              <span class="error" ng-message="required"
+                >{{ 'validation_messages.required_checkbox' | translate }}</span
+              >
+            </div>
+            <div
+              ng-messages="validationForm['question' + $index].$error"
+              ng-if="submitted && (item.Answer.AnswerType != 2 && item.Answer.AnswerType != 3)"
+              class="error-messages--container"
+            >
+              <span class="error" ng-message="required"
+                >{{ 'validation_messages.required' | translate }}</span
+              >
+              <span class="error" ng-message="maxlength"
+                >{{ 'validation_messages.maxlength' | translate }}</span
+              >
+            </div>
+          </div>
+          <div class="modal--footer-text">
+            <p>
+              <i
+                >{{ 'modal_maxsubscribers.form_help' | translate }}
+                <a class="link--default" target="_BLANK" href="{{data.UrlHelp}}"
+                  >{{ 'modal_maxsubscribers.form_help_link_text' | translate
+                  }}</a
+                ></i
+              >
+            </p>
+            <p><i>{{ 'modal_maxsubscribers.info_text' | translate }}</i></p>
+          </div>
+        </div>
+        <div class="modal__action-btn">
+          <button
+            class="button button--alternative button--small"
+            ng-disabled="buttonsDisabled"
+            ng-click="close(false)"
+            data-dismiss="modal"
+          >
+            {{ 'button_cancel' | translate}}
+          </button>
+          <button
+            class="button button--primary button--small"
+            ng-disabled="buttonsDisabled"
+            ng-click="buttonsDisabled=true;submitted=true;sendEmail()"
+          >
+            {{ 'CompleteInformation_SaveButton' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+    <div ng-show="isSendEmail" class="modal--post">
+      <div class="modal__content">
+        <p>{{ 'modal_maxsubscribers.request_processed' | translate }}</p>
+        <button
+          class="button button--primary button--small"
+          ng-click="close(true)"
+        >
+          {{ 'button_accept' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -3,42 +3,68 @@
     <div class="modal-content--large replicate-automation-modal">
       <span class="close" ng-click="close({ success: false })"></span>
 
-      <div class="margin-b-20" ng-show="automationTypesList && automationTypesList.length === 1">
+      <div
+        class="margin-b-20"
+        ng-show="automationTypesList && automationTypesList.length === 1"
+      >
         <div class="dp-wrap-message dp-wrap-info">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
-            <span class="text--small">{{ 'automation_replicate.modal.warning_one_option' | translate}}</span>
+            <span class="text--small"
+              >{{ 'automation_replicate.modal.warning_one_option' |
+              translate}}</span
+            >
           </div>
         </div>
       </div>
 
-      <h2 class="modal-title">{{ 'automation_replicate.modal.title' | translate}}</h2>
+      <h2 class="modal-title">
+        {{ 'automation_replicate.modal.title' | translate}}
+      </h2>
       <p>{{ 'automation_replicate.modal.description' | translate}}</p>
 
       <form action="#" class="form-request">
         <fieldset>
-          <legend>{{ 'automation_replicate.modal.dropdown_title' | translate}}</legend>
+          <legend>
+            {{ 'automation_replicate.modal.dropdown_title' | translate}}
+          </legend>
           <ul class="field-group">
             <li class="field-item">
-              <label for="plan">{{ 'automation_replicate.modal.dropdown_title' | translate}}</label>
-              <dp-editor-dropdown class="dropdown dropdown--medium dp-dropdown-replicate-automation" id="automationTypeSelector"
+              <label for="plan"
+                >{{ 'automation_replicate.modal.dropdown_title' |
+                translate}}</label
+              >
+              <dp-editor-dropdown
+                class="dropdown dropdown--medium dp-dropdown-replicate-automation"
+                id="automationTypeSelector"
                 options="automationTypesList"
                 key-label="'Name'"
                 key-value="'Id'"
                 label="lastAutomationTypeSelected.Name"
                 on-select-option="onAutomationTypeSelect(option)"
                 value-selected="lastAutomationTypeSelected.Id"
-                ng-disabled="automationTypesList && automationTypesList.length === 1">
+                ng-disabled="automationTypesList && automationTypesList.length === 1"
+              >
               </dp-editor-dropdown>
             </li>
           </ul>
         </fieldset>
 
         <div class="container-buttons">
-          <button type="button" name="cancel" class="dp-button button-medium primary-grey" ng-click="close({ success: false })">
+          <button
+            type="button"
+            name="cancel"
+            class="dp-button button-medium primary-grey"
+            ng-click="close({ success: false })"
+          >
             {{ 'automation_replicate.modal.cancel_button' | translate}}
           </button>
-          <button type="button" name="submit" class="dp-button button-medium primary-green" ng-click="createReplica()">
+          <button
+            type="button"
+            name="submit"
+            class="dp-button button-medium primary-green"
+            ng-click="createReplica()"
+          >
             {{ 'automation_replicate.modal.submit_buttton' | translate}}
           </button>
         </div>

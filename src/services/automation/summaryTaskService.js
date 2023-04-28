@@ -1,27 +1,26 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation')
     .factory('summaryTaskService', summaryTaskService);
 
-  summaryTaskService.$inject = [
-    '$http'
-  ];
+  summaryTaskService.$inject = ['$http'];
 
   function summaryTaskService($http) {
-
     var service = {
       getSummaryTask: getSummaryTask,
       getContactInformation: getContactInformation,
       getStatesByCountry: getStatesByCountry,
-      saveContactInfo: saveContactInfo
+      saveContactInfo: saveContactInfo,
     };
 
     return service;
 
     function getSummaryTask(id) {
-      return $http.get('/Automation/SummaryTask/GetSummaryTask', { params: { idTask: id } });
+      return $http.get('/Automation/SummaryTask/GetSummaryTask', {
+        params: { idTask: id },
+      });
     }
 
     function getContactInformation() {
@@ -29,12 +28,15 @@
     }
 
     function getStatesByCountry(idCountry) {
-      return $http.get('/ControlPanel/AccountPreferences/GetStatesByCountry', { params: { idCountry: idCountry } });
+      return $http.get('/ControlPanel/AccountPreferences/GetStatesByCountry', {
+        params: { idCountry: idCountry },
+      });
     }
 
     function saveContactInfo(model) {
-      return $http.post('/CompleteContactInformation/SaveContactInfo', { model: model });
+      return $http.post('/CompleteContactInformation/SaveContactInfo', {
+        model: model,
+      });
     }
   }
-
 })();

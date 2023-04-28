@@ -3,13 +3,18 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorPanelCampaignCustomFields', ['$document', '$timeout', dpEditorPanelCampaignCustomFields]);
+    .directive('dpEditorPanelCampaignCustomFields', [
+      '$document',
+      '$timeout',
+      dpEditorPanelCampaignCustomFields,
+    ]);
 
   function dpEditorPanelCampaignCustomFields($document, $timeout) {
     var directive = {
-      templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-campaign-custom-fields.html',
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-campaign-custom-fields.html',
       restrict: 'AE',
-      link: link
+      link: link,
     };
 
     return directive;
@@ -47,26 +52,34 @@
 
       function closeOnOutsideClick() {
         // If we don't use $timeout the same "click" event that fired this method will trigger the $document.one('click') binding we're doing next.
-        $timeout(function () {
-          // We just want it to fire once so we don't populate our DOM with event listeners.
-          $document.one('click', function (event) {
-            var cfButton = document.getElementById(CF_BUTTON_ID);
-            var cfItemsContainer = document.getElementById(CF_ITEMS_CONTAINER_ID);
+        $timeout(
+          function () {
+            // We just want it to fire once so we don't populate our DOM with event listeners.
+            $document.one('click', function (event) {
+              var cfButton = document.getElementById(CF_BUTTON_ID);
+              var cfItemsContainer = document.getElementById(
+                CF_ITEMS_CONTAINER_ID
+              );
 
-            // If next click is on the button, or custom fields items container, or something inside them, then don't do anything and leave the default behavior.
-            if (cfButton === event.target ||
-              cfButton.contains(event.target) ||
-              cfItemsContainer === event.target ||
-              cfItemsContainer.contains(event.target)
-            ) {
-              return;
-            }
+              // If next click is on the button, or custom fields items container, or something inside them, then don't do anything and leave the default behavior.
+              if (
+                cfButton === event.target ||
+                cfButton.contains(event.target) ||
+                cfItemsContainer === event.target ||
+                cfItemsContainer.contains(event.target)
+              ) {
+                return;
+              }
 
-            //temporal fix to solve dp library issue
-            document.getElementById(CF_ITEMS_CONTAINER_ID).style.display = 'none';
-            scope.showContainerCFItems = false;
-          });
-        }, 0, false);
+              //temporal fix to solve dp library issue
+              document.getElementById(CF_ITEMS_CONTAINER_ID).style.display =
+                'none';
+              scope.showContainerCFItems = false;
+            });
+          },
+          0,
+          false
+        );
       }
 
       scope.clickCFItem = function (customFieldName) {
@@ -74,15 +87,15 @@
         //temporal fix to solve dp library issue
         document.getElementById(CF_ITEMS_CONTAINER_ID).style.display = 'none';
         scope.showContainerCFItems = false;
-      }
+      };
 
       scope.clickCFButton = function () {
         scope.showContainerCFItems = !scope.showContainerCFItems;
         //temporal fix to solve dp library issue
-        document.getElementById(CF_ITEMS_CONTAINER_ID).style.display = scope.showContainerCFItems?'block':'none';
+        document.getElementById(CF_ITEMS_CONTAINER_ID).style.display =
+          scope.showContainerCFItems ? 'block' : 'none';
         closeOnOutsideClick();
-      }
-
+      };
     }
   }
 })();

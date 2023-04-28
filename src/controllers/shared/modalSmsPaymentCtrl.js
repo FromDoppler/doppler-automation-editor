@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,19 +10,24 @@
     '$rootScope',
     'close',
     'data',
-    'smsSettingsService'
+    'smsSettingsService',
   ];
 
-  function ModalSmsPaymentCtrl($scope, $rootScope, close, data, smsSettingsService) {
+  function ModalSmsPaymentCtrl(
+    $scope,
+    $rootScope,
+    close,
+    data,
+    smsSettingsService
+  ) {
     $scope.smsSettingsService = smsSettingsService;
 
-    $scope.close = function(result) {
+    $scope.close = function (result) {
       close(result);
     };
 
-    $rootScope.$on('closeSmsPaymentModal', function() {
+    $rootScope.$on('closeSmsPaymentModal', function () {
       $scope.close(false);
     });
   }
-
 })();

@@ -1,6 +1,6 @@
 {
-	"automation_editor": {
-		"date_format": "MM/dd/yyyy",
+  "automation_editor": {
+    "date_format": "MM/dd/yyyy",
     "breadcrumb": {
       "placeholder": "Automation without name",
       "scheduled_date": "Scheduled Date: ",
@@ -22,7 +22,7 @@
       "confirmation_order": "Successful Payment: ",
       "push_notification": "Push Notifications: "
     },
-		"buttons": {
+    "buttons": {
       "exit": "Exit and edit later",
       "back_to_editor": "Back to the Automation Flow",
       "confirm": "Confirm",
@@ -35,412 +35,412 @@
       "restart_campaign": "Restart Automation",
       "build_campaign": "Build Automation",
       "reactivate_campaign": "Reactivate Automation"
-  	},
-	"canvas": {
-    "action_placeholder": "Define the Action",
-    "action_list_placeholder": "Associate Subscriber to the List ",
-    "action_resend_email_palceholder": "Resend Email",
-    "action_remove_suscriber_placeholder": "Remove Subscriber from the List",
-    "action_change_field_placeholder": "Edit Field",
-    "action_change_field_with_value": "with value",
-		"delay_icon" : "Wait",
-		"campaign_icon" : "Email",
-		"campaign_placeholder": "Email Name?",
-		"condition_icon" : "Condition",
-    "condition_placeholder": "Define your Condition criteria ",
-		"action_icon" : "Action",
-		"add_step_title" : "Add a step to your Automation Flow",
-		"tip_add_element" : "Start defining the steps in your<br />Automation Flow",
-		"tip_initial_condition": "Set the Flow starting point up from the side menu",
-    "tip_initial_condition_blocked": "There are contacts that affect the quality of your sendings",
-		"wait_time_part1" : "Wait",
-		"campaign_aspects" : "Define your shipment information",
-		"right_now": "Inmediately",
-		"time_placeholder": "time",
-    "sms_icon": "Sms",
-    "sms_placeholder": "Define your Sms",
-    "sms_part1": "Send to phone",
-    "sms_part2": "the text message",
-    "sms_new_step_not_credit": "You don't have enough funds to send SMS.<br><a target='_self' href='/ControlPanel/AccountPreferences/GetSmsConfiguration?'>Click here</a> to recharge and start your Automation.",
-    "abandoned_cart_aspects": "Define the shipment information",
-    "push_icon": "Push",
-    "push_placeholder": "Define the Push notification content",
-    "push_title_preview": "Title: ",
-    "push_body_preview": " Message: ",
-    "goto_step_placeholder": "Select the step you want to connect with",
-    "goto_step_connection_label": "Connection",
-    "goto_icon": "Connect",
-    "goto_tooltip_invalid_connection_to_goto": "Choose another type of step. <br /> You cannot link two “Connect”.",
-    "goto_tooltip_infinite_flow_generation": "Choose another step. <br /> If you connect it with this, you will create an infinite flow."
-	},
-	"components": {
-    "initial_condition": {
-      "scheduled_date": {
-        "canvas": {
-          "and": " and",
-          "day_month": {
-            "intro": "The shipment will be sent the day ",
-            "of_the_month": " of the month,"
-          },
-          "day_week": {
-            "intro_single": "The shipment will be sent the day ",
-            "intro_plural": "The shipment will be sent the days "
-          },
-          "day_year": {
-            "after": " after",
-            "before": " before",
-            "criteria_are_met": " the following criteria are met ",
-            "day": "day",
-            "days": "days",
-            "intro": "The shipment will be sent ",
-            "intro_single": "The shipment will be sent when the following criteria is met ",
-            "intro_plural": "The shipment will be sent when the following criteria are met",
-            "of_the_day": " the day of "
-          },
-          "hour": "at ",
-          "hours": "at "
-        },
-        "custom_birthday": "Birthday",
-        "default_part1": "Start sending the day",
-        "default_part2": "at HH:MM.",
-        "day_moment_after": "After",
-        "day_moment_before": "Before",
-        "day_moment_now": "The exact day"
-      },
-      "days_of_the_week": {
-        "sunday": "Sunday",
-        "monday": "Monday",
-        "tuesday": "Tuesday",
-        "wednesday": "Wednesday",
-        "thursday": "Thursday",
-        "friday": "Friday",
-        "saturday": "Saturday"
-      },
-      "site_behavior": {
-        "canvas": {
-          "intro": "A Subscriber has visited ",
-          "at_least": " at least",
-          "more_times": "times",
-          "separator": "the URL ",
-          "more_urls": " ...",
-          "visited": " has visited ",
-          "no_visited": " hasn't visit ",
-          "operator_and": " and",
-          "operator_or": " or",
-          "a_subscriber": "A Subscriber"
-        },
-        "panel": {
-          "title": "Define the page URL (s) on which you want to track your visitors behavior",
-          "title2": "Indicate how often the same Subscriber can re-enter the Automation Flow",
-          "description": "This is important if you want to prevent a Subscriber from receiving the same Email each time he visits your website.",
-          "times_label": "Enter a Subscriber to the Automation Flow",
-          "times_value0": "Once",
-          "times_value1": "Once every 3 months",
-          "times_value2": "Once every 6 months",
-          "url": "*URL",
-          "url_tooltip": "Add a * at the end of your website URL: fromdoppler.com/* to track all of its pages.",
-          "url_tip": "Pst! Want to track all of your site pages? Look at this tip",
-          "validation_messages": {
-            "domain_non_registered": "Ouch! The entered domain hasn't been registered.",
-            "domain_non_registered_link": "ADD IT NOW",
-            "domain_non_verified": "Ouch! The entered domain hasn't been verified.",
-            "domain_non_verified_link": "DO IT NOW.",
-            "duplicated_domain": "Ouch! The domain has been previously added.",
-            "url_has_parameters": "Ouch! The entered URL has parameters that can't be processed by the system. Try removing characters after the ?"
-          },
-          "placeholder": "URL",
-          "visited_page": "Visited the page",
-          "visited_count": "time / times",
-          "verification_time_title": "Define when you want we verify whether the Condition has been met",
-          "verification_time_description": "After that period, Doppler will analyze again if the Condition has been met. Do you have doubts? Press ",
-          "verification_time": "Verification time",
-          "verification_time_placeholder": "Example: 24"
-        },
-        "tip_normal": "Press",
-        "tip_strong": "Do you have any doubts about how to create a On-Site Tracking Automation?",
-        "tip_url": "https://help.fromdoppler.com/en/create-onsite-tracking-automation/"
-      },
-      "subscription_list": "A Subscriber has joined the List ",
-      "behavior": {
-        "scheduled_day": "Make the shipment ",
-        "scheduled_day_part2": "the ",
-        "hours_pl": " at ",
-        "hours_sg": " at ",
-        "lists_pl": " to the Lists ",
-        "lists_sg": " to the List ",
-        "inmediately_send": "Make the shipment ",
-        "inmediately_frequency": "immediately",
-        "all_subscribers": " to all my Subscribers."
-      },
-      "months_of_the_week": {
-        "january": "January",
-        "february": "February",
-        "march": "March",
-        "april": "April",
-        "may": "May",
-        "june": "June",
-        "july": "July",
-        "august": "August",
-        "september": "September",
-        "october": "October",
-        "november": "November",
-        "december": "December"
-      },
-      "today": "Today",
-      "abandoned_cart": {
-        "main_description": "The Subscriber abandoned the cart <strong>{{time}}</strong> ago"
-      },
-      "visited_products": {
-        "main_description": "The Subscriber visited the product page <strong>{{time}}</strong> ago"
-      },
-      "pending_order": {
-        "main_description": "The Subscriber completed an Order <strong>{{time}}</strong> ago and has a Pending Payment."
-      },
-      "confirmation_order": {
-        "main_description": "A payment has been registered successfully"
-      },
-      "push_notification": {
-        "scheduled_day": "Make a ",
-        "scheduled_day_frequency": "Scheduled Send Out",
-        "scheduled_day_part2": "on ",
-        "hours_pl": " at ",
-        "hours_sg": " at ",
-        "domains_pl": " to domains ",
-        "domains_sg": " to domain ",
-        "inmediately_send": "Make a ",
-        "inmediately_frequency": "Immediate Send Out",
-        "and": " and",
-        "tip_initial_condition": "Set the Automation starting point up from the side menu"
-      },
-      "panel": {
-        "validation_messages": {
-          "trial_expired_error": "The selected date is after the expiration of the account. In order to start the Automation you must first hire a Plan.",
-          "trial_upgrade": "UPGRADE NOW"
-        }
-      }
     },
-    "action": {
-      "options": {
-        "placeholder": "Select an Action",
-        "associate_subscriber_to_list": "Associate Subscriber to a List",
-        "resend_email": "Resend Email changing Subject Line",
-        "remove_subscriber_from_list": "Remove Subscriber from the List",
-        "change_subscriber_field": "Modify Subscriber information"
-      },
-      "list_grid": {
-        "title": "Select the List you want to associate the Subscriber",
-        "subtitle": "Associate a Subscriber to a specific List based on criteria you have previously defined such as having opened a Campaign or clicked on a link, for example."
-      },
-      "remove_grid": {
-        "title": "Select the List you want to remove the Subscriber from",
-        "subtitle": "When the Condition you've defined is met, the Subscriber will be removed from the List or Lists you select below but will remain active on your account."
-      }
+    "canvas": {
+      "action_placeholder": "Define the Action",
+      "action_list_placeholder": "Associate Subscriber to the List ",
+      "action_resend_email_palceholder": "Resend Email",
+      "action_remove_suscriber_placeholder": "Remove Subscriber from the List",
+      "action_change_field_placeholder": "Edit Field",
+      "action_change_field_with_value": "with value",
+      "delay_icon": "Wait",
+      "campaign_icon": "Email",
+      "campaign_placeholder": "Email Name?",
+      "condition_icon": "Condition",
+      "condition_placeholder": "Define your Condition criteria ",
+      "action_icon": "Action",
+      "add_step_title": "Add a step to your Automation Flow",
+      "tip_add_element": "Start defining the steps in your<br />Automation Flow",
+      "tip_initial_condition": "Set the Flow starting point up from the side menu",
+      "tip_initial_condition_blocked": "There are contacts that affect the quality of your sendings",
+      "wait_time_part1": "Wait",
+      "campaign_aspects": "Define your shipment information",
+      "right_now": "Inmediately",
+      "time_placeholder": "time",
+      "sms_icon": "Sms",
+      "sms_placeholder": "Define your Sms",
+      "sms_part1": "Send to phone",
+      "sms_part2": "the text message",
+      "sms_new_step_not_credit": "You don't have enough funds to send SMS.<br><a target='_self' href='/ControlPanel/AccountPreferences/GetSmsConfiguration?'>Click here</a> to recharge and start your Automation.",
+      "abandoned_cart_aspects": "Define the shipment information",
+      "push_icon": "Push",
+      "push_placeholder": "Define the Push notification content",
+      "push_title_preview": "Title: ",
+      "push_body_preview": " Message: ",
+      "goto_step_placeholder": "Select the step you want to connect with",
+      "goto_step_connection_label": "Connection",
+      "goto_icon": "Connect",
+      "goto_tooltip_invalid_connection_to_goto": "Choose another type of step. <br /> You cannot link two “Connect”.",
+      "goto_tooltip_infinite_flow_generation": "Choose another step. <br /> If you connect it with this, you will create an infinite flow."
     },
-    "campaign": {
-      "delete_warning": {
-        "title": "Ouch! This Email can't be eliminated since it's associated with other elements."
-      }
-    },
-    "condition": {
-      "canvas_description": {
-        "check_for": "Verify during ",
-        "if_subscriber": " if",
-        "of_time": " time",
-        "operator_and": " and",
-        "operator_or": " or",
-        "plural_days": " days ",
-        "plural_hours": " hours ",
-        "plural_minutes": " minutes ",
-        "plural_weeks": " weeks ",
-        "singular_days": " day ",
-        "singular_hours": " hour ",
-        "singular_minutes": " minute ",
-        "singular_weeks": " week ",
-        "verification_time": " time",
-        "verification_after": " After "
-      },
-      "conditionals": {
-        "campaign_behavior": {
-          "canvas_description": {
-            "any_link_clicked": "has clicked on some link",
-            "email_not_open": "has not opened the Email",
-            "intro_lower": " the Subscriber",
-            "intro_upper": "The Subscriber",
-            "link_clicked": "has clicked on the link",
-            "link_not_clicked": "has not clicked on the link",
-            "nexus_of": "in the Email ",
-            "no_link_clicked": "has not clicked on any link",
-            "open_email": "has opened the Email",
-            "any_dynamic_link_clicked": "has clicked on some dynamic link",
-            "no_dynamic_link_clicked": "has not clicked on any dynamic link"
-          },
-          "events": {
-            "any_link_clicked": "Has clicked on some link",
-            "email_not_open": "Has not opened the Email",
-            "link_clicked": "Has clicked on a specific link",
-            "link_not_clicked": "Has not clicked on a specific link",
-            "no_link_clicked": "Has not clicked on any link",
-            "open_email": "Has opened the Email",
-            "any_dynamic_link_clicked": "Has clicked on some dynamic link",
-            "no_dynamic_link_clicked": "Has not clicked on any dynamic link"
-          },
-          "label": "Subscriber behavior in a Campaign",
-          "label_email": "Select the Email",
-          "label_event": "Select the trigger",
-          "label_link": "Select the link"
-        },
-        "error": {
-          "deleted_field": "Ouch! Selected Field doesn't exist.",
-          "duplicate_conditional": "Ouch! This criterion already exists.",
-          "deleted_link": "Ouch! This link has been removed.",
-          "no_email": "Ouch! You must create at least one Email.",
-          "no_link": "Ouch! This Email has no links.",
-          "number_pattern": "Ouch! The number you entered is invalid."
-        },
-        "list_membership": {
-          "canvas_description": {
-            "belongs": "is a member of the List",
-            "intro_lower": " the Subscriber",
-            "intro_upper": "The Subscriber",
-            "not_belongs": "is not a member of the List"
-          },
-          "events": {
-            "belongs": "Member",
-            "not_belongs": "No member"
-          },
-          "label": "Subscriber's membership of a List",
-          "label_list": "You've selected",
-          "list_selection": {
-            "title": "Select a List to determine the Subscriber's membership",
-            "subtitle": "Identify the List on the basis of which you want to determine the membership of the Subscribers."
-          }
-        },
-        "placeholder": "Select a Condition type",
-        "subscriber_information": {
-          "boolean": {
-            "no": "No",
-            "yes": "Yes"
-          },
-          "canvas_description": {
-            "criteria": {
-              "contains": " contains ",
-              "ends_with": " finishes with ",
-              "equals_to": " is equals to ",
-              "greater_than": " is greater than ",
-              "greater_than_or_equals_to": " is greater than or equals to ",
-              "less_than": " is less than ",
-              "less_than_or_equals_to": " is less than or equals to ",
-              "not_contains": " does not contains ",
-              "not_ends_with": " does not finishes with ",
-              "not_equals_to": " is different to ",
-              "not_starts_with": " does not start with ",
-              "starts_with": " starts with "
+    "components": {
+      "initial_condition": {
+        "scheduled_date": {
+          "canvas": {
+            "and": " and",
+            "day_month": {
+              "intro": "The shipment will be sent the day ",
+              "of_the_month": " of the month,"
             },
-            "female": "female",
-            "intro_lower": " the Field",
-            "intro_upper": "The Field",
-            "intro_is": " is ",
-            "intro_possessive": " his ",
-            "intro_subject": " of the Subscriber",
-            "male": "male",
-            "n_a": "N/A",
-            "negative": "No",
-            "positive": "Yes"
-          },
-          "criteria": {
-            "contains": "Contains",
-            "ends_with": "Finishes with",
-            "equals_to": "Equals to",
-            "not_contains": "Does not contains",
-            "not_ends_with": "Does not finishes with",
-            "not_equals_to": "Different to",
-            "not_starts_with": "Does not start with",
-            "label": "Select Criteria",
-            "operators": {
-              "label": "Select Operator",
-              "less_than": "Less than",
-              "less_than_or_equals_to": "Less than or equal to",
-              "greater_than": "Greater than",
-              "greater_than_or_equals_to": "Greater than or equal to",
-              "equals_to": "Equals"
+            "day_week": {
+              "intro_single": "The shipment will be sent the day ",
+              "intro_plural": "The shipment will be sent the days "
             },
-            "starts_with": "Starts with"
+            "day_year": {
+              "after": " after",
+              "before": " before",
+              "criteria_are_met": " the following criteria are met ",
+              "day": "day",
+              "days": "days",
+              "intro": "The shipment will be sent ",
+              "intro_single": "The shipment will be sent when the following criteria is met ",
+              "intro_plural": "The shipment will be sent when the following criteria are met",
+              "of_the_day": " the day of "
+            },
+            "hour": "at ",
+            "hours": "at "
           },
-          "fields": {
-            "FIRST_NAME": "First name",
-            "LAST_NAME": "Last name",
-            "EMAIL": "Email",
-            "GENDER": "Gender",
-            "BIRTHDAY": "Birthday",
-            "COUNTRY": "Country",
-            "CONSENT": "Consent",
-            "ORIGIN": "Origin",
-            "SCORE": "Score"
-          },
-          "gender": {
-            "female": "Female",
-            "label": "Select Gender",
-            "male": "Male",
-            "n_a": "N/A"
-          },
-          "label": "Subscriber's information",
-          "label_country": "Select Country",
-          "label_score": "Select Score",
-          "label_origin": "Select Origin",
-          "label_field": "Select Field"
+          "custom_birthday": "Birthday",
+          "default_part1": "Start sending the day",
+          "default_part2": "at HH:MM.",
+          "day_moment_after": "After",
+          "day_moment_before": "Before",
+          "day_moment_now": "The exact day"
+        },
+        "days_of_the_week": {
+          "sunday": "Sunday",
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday"
         },
         "site_behavior": {
-          "label": "On-Site Tracking",
-          "the_subscriber": " the Subscriber",
-          "no_visited": " hasn't visited ",
-          "visited": " has visited ",
-          "separator": "the URL ",
-          "more_times": "times",
-          "at_least": " at least"
+          "canvas": {
+            "intro": "A Subscriber has visited ",
+            "at_least": " at least",
+            "more_times": "times",
+            "separator": "the URL ",
+            "more_urls": " ...",
+            "visited": " has visited ",
+            "no_visited": " hasn't visit ",
+            "operator_and": " and",
+            "operator_or": " or",
+            "a_subscriber": "A Subscriber"
+          },
+          "panel": {
+            "title": "Define the page URL (s) on which you want to track your visitors behavior",
+            "title2": "Indicate how often the same Subscriber can re-enter the Automation Flow",
+            "description": "This is important if you want to prevent a Subscriber from receiving the same Email each time he visits your website.",
+            "times_label": "Enter a Subscriber to the Automation Flow",
+            "times_value0": "Once",
+            "times_value1": "Once every 3 months",
+            "times_value2": "Once every 6 months",
+            "url": "*URL",
+            "url_tooltip": "Add a * at the end of your website URL: fromdoppler.com/* to track all of its pages.",
+            "url_tip": "Pst! Want to track all of your site pages? Look at this tip",
+            "validation_messages": {
+              "domain_non_registered": "Ouch! The entered domain hasn't been registered.",
+              "domain_non_registered_link": "ADD IT NOW",
+              "domain_non_verified": "Ouch! The entered domain hasn't been verified.",
+              "domain_non_verified_link": "DO IT NOW.",
+              "duplicated_domain": "Ouch! The domain has been previously added.",
+              "url_has_parameters": "Ouch! The entered URL has parameters that can't be processed by the system. Try removing characters after the ?"
+            },
+            "placeholder": "URL",
+            "visited_page": "Visited the page",
+            "visited_count": "time / times",
+            "verification_time_title": "Define when you want we verify whether the Condition has been met",
+            "verification_time_description": "After that period, Doppler will analyze again if the Condition has been met. Do you have doubts? Press ",
+            "verification_time": "Verification time",
+            "verification_time_placeholder": "Example: 24"
+          },
+          "tip_normal": "Press",
+          "tip_strong": "Do you have any doubts about how to create a On-Site Tracking Automation?",
+          "tip_url": "https://help.fromdoppler.com/en/create-onsite-tracking-automation/"
         },
-        "abandoned_cart_information": {
-          "label": "Cart Information",
-          "the_cart": " the Cart",
-          "no_visited": " hasn't visited ",
-          "visited": " has visited ",
-          "separator": "the URL ",
-          "more_times": "times",
-          "at_least": " at least",
-          "fields": {
-            "date": "Date",
-            "amount_of_products": "Amount of products",
-            "status": "Status",
-            "total": "Total"
+        "subscription_list": "A Subscriber has joined the List ",
+        "behavior": {
+          "scheduled_day": "Make the shipment ",
+          "scheduled_day_part2": "the ",
+          "hours_pl": " at ",
+          "hours_sg": " at ",
+          "lists_pl": " to the Lists ",
+          "lists_sg": " to the List ",
+          "inmediately_send": "Make the shipment ",
+          "inmediately_frequency": "immediately",
+          "all_subscribers": " to all my Subscribers."
+        },
+        "months_of_the_week": {
+          "january": "January",
+          "february": "February",
+          "march": "March",
+          "april": "April",
+          "may": "May",
+          "june": "June",
+          "july": "July",
+          "august": "August",
+          "september": "September",
+          "october": "October",
+          "november": "November",
+          "december": "December"
+        },
+        "today": "Today",
+        "abandoned_cart": {
+          "main_description": "The Subscriber abandoned the cart <strong>{{time}}</strong> ago"
+        },
+        "visited_products": {
+          "main_description": "The Subscriber visited the product page <strong>{{time}}</strong> ago"
+        },
+        "pending_order": {
+          "main_description": "The Subscriber completed an Order <strong>{{time}}</strong> ago and has a Pending Payment."
+        },
+        "confirmation_order": {
+          "main_description": "A payment has been registered successfully"
+        },
+        "push_notification": {
+          "scheduled_day": "Make a ",
+          "scheduled_day_frequency": "Scheduled Send Out",
+          "scheduled_day_part2": "on ",
+          "hours_pl": " at ",
+          "hours_sg": " at ",
+          "domains_pl": " to domains ",
+          "domains_sg": " to domain ",
+          "inmediately_send": "Make a ",
+          "inmediately_frequency": "Immediate Send Out",
+          "and": " and",
+          "tip_initial_condition": "Set the Automation starting point up from the side menu"
+        },
+        "panel": {
+          "validation_messages": {
+            "trial_expired_error": "The selected date is after the expiration of the account. In order to start the Automation you must first hire a Plan.",
+            "trial_upgrade": "UPGRADE NOW"
           }
         }
       },
-      "delete_warning": {
-        "title": "Ouch! You can't delete this Condition. ",
-        "body": "Before you have to delete all the elements that are inside one of the branches."
+      "action": {
+        "options": {
+          "placeholder": "Select an Action",
+          "associate_subscriber_to_list": "Associate Subscriber to a List",
+          "resend_email": "Resend Email changing Subject Line",
+          "remove_subscriber_from_list": "Remove Subscriber from the List",
+          "change_subscriber_field": "Modify Subscriber information"
+        },
+        "list_grid": {
+          "title": "Select the List you want to associate the Subscriber",
+          "subtitle": "Associate a Subscriber to a specific List based on criteria you have previously defined such as having opened a Campaign or clicked on a link, for example."
+        },
+        "remove_grid": {
+          "title": "Select the List you want to remove the Subscriber from",
+          "subtitle": "When the Condition you've defined is met, the Subscriber will be removed from the List or Lists you select below but will remain active on your account."
+        }
       },
-      "negative_branch": "NO",
-      "positive_branch": "YES",
-      "verification_time": {
-        "error_days": "Ouch! You must enter a number between 1 and 7.",
-        "error_hours": "Ouch! You must enter a number between 1 and 168.",
-        "error_minutes": "Ouch! You must enter a number between 5 and 60.",
-        "error_weeks": "Ouch! You must enter a number between 1 and 12.",
-        "label": "Verification time",
-        "subtitle": "When the time has expired, users who didn't met the Condition will be send to the NO branch.",
-        "title": "Define when you want we verify whether the Condition has been met"
+      "campaign": {
+        "delete_warning": {
+          "title": "Ouch! This Email can't be eliminated since it's associated with other elements."
+        }
+      },
+      "condition": {
+        "canvas_description": {
+          "check_for": "Verify during ",
+          "if_subscriber": " if",
+          "of_time": " time",
+          "operator_and": " and",
+          "operator_or": " or",
+          "plural_days": " days ",
+          "plural_hours": " hours ",
+          "plural_minutes": " minutes ",
+          "plural_weeks": " weeks ",
+          "singular_days": " day ",
+          "singular_hours": " hour ",
+          "singular_minutes": " minute ",
+          "singular_weeks": " week ",
+          "verification_time": " time",
+          "verification_after": " After "
+        },
+        "conditionals": {
+          "campaign_behavior": {
+            "canvas_description": {
+              "any_link_clicked": "has clicked on some link",
+              "email_not_open": "has not opened the Email",
+              "intro_lower": " the Subscriber",
+              "intro_upper": "The Subscriber",
+              "link_clicked": "has clicked on the link",
+              "link_not_clicked": "has not clicked on the link",
+              "nexus_of": "in the Email ",
+              "no_link_clicked": "has not clicked on any link",
+              "open_email": "has opened the Email",
+              "any_dynamic_link_clicked": "has clicked on some dynamic link",
+              "no_dynamic_link_clicked": "has not clicked on any dynamic link"
+            },
+            "events": {
+              "any_link_clicked": "Has clicked on some link",
+              "email_not_open": "Has not opened the Email",
+              "link_clicked": "Has clicked on a specific link",
+              "link_not_clicked": "Has not clicked on a specific link",
+              "no_link_clicked": "Has not clicked on any link",
+              "open_email": "Has opened the Email",
+              "any_dynamic_link_clicked": "Has clicked on some dynamic link",
+              "no_dynamic_link_clicked": "Has not clicked on any dynamic link"
+            },
+            "label": "Subscriber behavior in a Campaign",
+            "label_email": "Select the Email",
+            "label_event": "Select the trigger",
+            "label_link": "Select the link"
+          },
+          "error": {
+            "deleted_field": "Ouch! Selected Field doesn't exist.",
+            "duplicate_conditional": "Ouch! This criterion already exists.",
+            "deleted_link": "Ouch! This link has been removed.",
+            "no_email": "Ouch! You must create at least one Email.",
+            "no_link": "Ouch! This Email has no links.",
+            "number_pattern": "Ouch! The number you entered is invalid."
+          },
+          "list_membership": {
+            "canvas_description": {
+              "belongs": "is a member of the List",
+              "intro_lower": " the Subscriber",
+              "intro_upper": "The Subscriber",
+              "not_belongs": "is not a member of the List"
+            },
+            "events": {
+              "belongs": "Member",
+              "not_belongs": "No member"
+            },
+            "label": "Subscriber's membership of a List",
+            "label_list": "You've selected",
+            "list_selection": {
+              "title": "Select a List to determine the Subscriber's membership",
+              "subtitle": "Identify the List on the basis of which you want to determine the membership of the Subscribers."
+            }
+          },
+          "placeholder": "Select a Condition type",
+          "subscriber_information": {
+            "boolean": {
+              "no": "No",
+              "yes": "Yes"
+            },
+            "canvas_description": {
+              "criteria": {
+                "contains": " contains ",
+                "ends_with": " finishes with ",
+                "equals_to": " is equals to ",
+                "greater_than": " is greater than ",
+                "greater_than_or_equals_to": " is greater than or equals to ",
+                "less_than": " is less than ",
+                "less_than_or_equals_to": " is less than or equals to ",
+                "not_contains": " does not contains ",
+                "not_ends_with": " does not finishes with ",
+                "not_equals_to": " is different to ",
+                "not_starts_with": " does not start with ",
+                "starts_with": " starts with "
+              },
+              "female": "female",
+              "intro_lower": " the Field",
+              "intro_upper": "The Field",
+              "intro_is": " is ",
+              "intro_possessive": " his ",
+              "intro_subject": " of the Subscriber",
+              "male": "male",
+              "n_a": "N/A",
+              "negative": "No",
+              "positive": "Yes"
+            },
+            "criteria": {
+              "contains": "Contains",
+              "ends_with": "Finishes with",
+              "equals_to": "Equals to",
+              "not_contains": "Does not contains",
+              "not_ends_with": "Does not finishes with",
+              "not_equals_to": "Different to",
+              "not_starts_with": "Does not start with",
+              "label": "Select Criteria",
+              "operators": {
+                "label": "Select Operator",
+                "less_than": "Less than",
+                "less_than_or_equals_to": "Less than or equal to",
+                "greater_than": "Greater than",
+                "greater_than_or_equals_to": "Greater than or equal to",
+                "equals_to": "Equals"
+              },
+              "starts_with": "Starts with"
+            },
+            "fields": {
+              "FIRST_NAME": "First name",
+              "LAST_NAME": "Last name",
+              "EMAIL": "Email",
+              "GENDER": "Gender",
+              "BIRTHDAY": "Birthday",
+              "COUNTRY": "Country",
+              "CONSENT": "Consent",
+              "ORIGIN": "Origin",
+              "SCORE": "Score"
+            },
+            "gender": {
+              "female": "Female",
+              "label": "Select Gender",
+              "male": "Male",
+              "n_a": "N/A"
+            },
+            "label": "Subscriber's information",
+            "label_country": "Select Country",
+            "label_score": "Select Score",
+            "label_origin": "Select Origin",
+            "label_field": "Select Field"
+          },
+          "site_behavior": {
+            "label": "On-Site Tracking",
+            "the_subscriber": " the Subscriber",
+            "no_visited": " hasn't visited ",
+            "visited": " has visited ",
+            "separator": "the URL ",
+            "more_times": "times",
+            "at_least": " at least"
+          },
+          "abandoned_cart_information": {
+            "label": "Cart Information",
+            "the_cart": " the Cart",
+            "no_visited": " hasn't visited ",
+            "visited": " has visited ",
+            "separator": "the URL ",
+            "more_times": "times",
+            "at_least": " at least",
+            "fields": {
+              "date": "Date",
+              "amount_of_products": "Amount of products",
+              "status": "Status",
+              "total": "Total"
+            }
+          }
+        },
+        "delete_warning": {
+          "title": "Ouch! You can't delete this Condition. ",
+          "body": "Before you have to delete all the elements that are inside one of the branches."
+        },
+        "negative_branch": "NO",
+        "positive_branch": "YES",
+        "verification_time": {
+          "error_days": "Ouch! You must enter a number between 1 and 7.",
+          "error_hours": "Ouch! You must enter a number between 1 and 168.",
+          "error_minutes": "Ouch! You must enter a number between 5 and 60.",
+          "error_weeks": "Ouch! You must enter a number between 1 and 12.",
+          "label": "Verification time",
+          "subtitle": "When the time has expired, users who didn't met the Condition will be send to the NO branch.",
+          "title": "Define when you want we verify whether the Condition has been met"
+        }
       }
-    }
-	},
-	"create_list" : {
-		"title" : "Create a List to send your tests",
-		"description" : "You'll be sending your Campaign tests to the following contacts. Please assign a name to the List so you can identify it easily. Don't forget to add your Susbcribers' Name and Lastname to test your Custom Fields.",
-		"list_name" : "Subscribers List name:",
-		"add_suscriber": "Add new Subscriber",
-		"footer_tip" : "Generate a List that contains %1 Subscribers or less to send a test.",
-		"button_create": "Create test List",
-		"duplicate_email": "You already entered this email",
-		"duplicate_listname": "¡Oh No! You already used this name in another List."
-	},
+    },
+    "create_list": {
+      "title": "Create a List to send your tests",
+      "description": "You'll be sending your Campaign tests to the following contacts. Please assign a name to the List so you can identify it easily. Don't forget to add your Susbcribers' Name and Lastname to test your Custom Fields.",
+      "list_name": "Subscribers List name:",
+      "add_suscriber": "Add new Subscriber",
+      "footer_tip": "Generate a List that contains %1 Subscribers or less to send a test.",
+      "button_create": "Create test List",
+      "duplicate_email": "You already entered this email",
+      "duplicate_listname": "¡Oh No! You already used this name in another List."
+    },
     "footer": {
       "tip_stop": "To edit the Automation, you must first stop it.",
       "tip_state_0": "Pst! Every step must be completed",
@@ -453,11 +453,11 @@
       "tip_state_error": "Ouch! It seems that something is not right with the conditions at the begining of the flow.",
       "tip_not_sms_credit": "Don't forget <a href='/ControlPanel/AccountPreferences/GetSmsConfiguration' target='_self'><strong>to top up</strong></a> funds for your SMS shipments before starting your Automation!"
     },
-	"header": {
-		"tip_templates": "Want to choose your Template later?",
-		"undo": "Undo",
-		"redo": "Redo"
-	},
+    "header": {
+      "tip_templates": "Want to choose your Template later?",
+      "undo": "Undo",
+      "redo": "Redo"
+    },
     "import_file": {
       "title": "Import Campaign content",
       "description": "It's time to import your .html or zip. You can either search for it or just drag and drop it into the place shown below. Any doubts? We can help you out! Just press ",
@@ -478,56 +478,56 @@
       "abandoned_cart_tip_link_url": "https://help.fromdoppler.com/en/create-abandoned-cart-automation",
       "visited_products_tip_link_url": "https://help.fromdoppler.com/en/create-product-retargeting-automation"
     },
-	"blocked_list": {
-		"tooltip_tag": "BLOCKED LIST",
-		"link_text": "Learn more.",
-		"help_link": "https://help.fromdoppler.com/en/blocked-lists",
-		"tooltip_text": "There’re Subscribers that affect the quality of your List."
-	},
-	"lists_grid" : {
-		"title" : "Select the List you want to associate with your Campaign",
-		"description" : "Every Subscriber that joins to the selected List will receive your Email Automation Campaign. This feature was tailor made for Welcome Emails. Any doubts? We're here for you, just press ",
-		"link_url": "https://help.fromdoppler.com/en/como-crear-email-automation-ingreso-lista",
-		"tip_help": "Select a List and continue editing your Email Automation Campaign"
-	},
-  "lists_grid_empty": {
-    "title": "It seems that you haven't created Lists yet",
-    "description": "Do it now and then go back to continue editing your Automation.",
-    "action": "Exit and create a List"
-  },
-	"lists_scheduled_grid" : {
-		"title" : "Select the List or Segment you want to associate your Campaign",
-		"description": "Identify who you want to send your Email Automation Campaign to. You can select Subscriber's Lists or generate a Segment by choosing different Filtering Criterias.",
-		"list_filter" : "Lists",
-		"segments_filter" : "Segments",
-		"footer_tip": "Select a List and continue editing your Email Automation Campaign",
-		"segments" : " (Segment)",
-		"doppler_tip": "Create a Segment based on different criterias like your Subscriber's age or location.",
-    "all_contacts": "Send to all my contacts",
-    "blocked_list": "There’re Subscribers that affect the quality of your List. Learn more.",
-    "blocked_list_link": "Learn more.",
-    "blocked_list_href": "https://help.fromdoppler.com/en/blocked-lists",
-    "blocked_list_text": "BLOCKED LIST",
-    "blocked_segment": "There’re Subscribers that affect the quality of your Segment.",
-    "blocked_segment_href": "https://help.fromdoppler.com/en/blocked-lists#blocked-segments",
-    "blocked_segment_text": "BLOCKED SEGMENT"    
-	},
-	"tiny_editor": {
-		"title": "Text & HTML Editor",
-		"subtitle": "Use this Editor to compose your Campaign content. Select the Custom Fields you want to include from the list on you right and they will be automatically added to your Email content.",
-		"dopplerTip": "Give a human touch to your texts by adding as many Custom Fields as you want. Any doubts? We can help you out! Just press ",
-		"dopplerTipLink": "https://help.fromdoppler.com/en/como-agregar-un-campo-personalizado/",
-		"custom_fields_title": "Custom Fields",
-		"return_button": "Back to the Automation Flow",
-		"confirm_button": "Confirm"
-	},
-	"lists_grid_headers" : {
-		"label" : "Tag",
-		"list_name" : "List Name",
-		"list_segments_name": "List Name or Segment",
-		"last_send" : "Last Mailing Date",
-		"subscribers": "Subscribers"
-		},
+    "blocked_list": {
+      "tooltip_tag": "BLOCKED LIST",
+      "link_text": "Learn more.",
+      "help_link": "https://help.fromdoppler.com/en/blocked-lists",
+      "tooltip_text": "There’re Subscribers that affect the quality of your List."
+    },
+    "lists_grid": {
+      "title": "Select the List you want to associate with your Campaign",
+      "description": "Every Subscriber that joins to the selected List will receive your Email Automation Campaign. This feature was tailor made for Welcome Emails. Any doubts? We're here for you, just press ",
+      "link_url": "https://help.fromdoppler.com/en/como-crear-email-automation-ingreso-lista",
+      "tip_help": "Select a List and continue editing your Email Automation Campaign"
+    },
+    "lists_grid_empty": {
+      "title": "It seems that you haven't created Lists yet",
+      "description": "Do it now and then go back to continue editing your Automation.",
+      "action": "Exit and create a List"
+    },
+    "lists_scheduled_grid": {
+      "title": "Select the List or Segment you want to associate your Campaign",
+      "description": "Identify who you want to send your Email Automation Campaign to. You can select Subscriber's Lists or generate a Segment by choosing different Filtering Criterias.",
+      "list_filter": "Lists",
+      "segments_filter": "Segments",
+      "footer_tip": "Select a List and continue editing your Email Automation Campaign",
+      "segments": " (Segment)",
+      "doppler_tip": "Create a Segment based on different criterias like your Subscriber's age or location.",
+      "all_contacts": "Send to all my contacts",
+      "blocked_list": "There’re Subscribers that affect the quality of your List. Learn more.",
+      "blocked_list_link": "Learn more.",
+      "blocked_list_href": "https://help.fromdoppler.com/en/blocked-lists",
+      "blocked_list_text": "BLOCKED LIST",
+      "blocked_segment": "There’re Subscribers that affect the quality of your Segment.",
+      "blocked_segment_href": "https://help.fromdoppler.com/en/blocked-lists#blocked-segments",
+      "blocked_segment_text": "BLOCKED SEGMENT"
+    },
+    "tiny_editor": {
+      "title": "Text & HTML Editor",
+      "subtitle": "Use this Editor to compose your Campaign content. Select the Custom Fields you want to include from the list on you right and they will be automatically added to your Email content.",
+      "dopplerTip": "Give a human touch to your texts by adding as many Custom Fields as you want. Any doubts? We can help you out! Just press ",
+      "dopplerTipLink": "https://help.fromdoppler.com/en/como-agregar-un-campo-personalizado/",
+      "custom_fields_title": "Custom Fields",
+      "return_button": "Back to the Automation Flow",
+      "confirm_button": "Confirm"
+    },
+    "lists_grid_headers": {
+      "label": "Tag",
+      "list_name": "List Name",
+      "list_segments_name": "List Name or Segment",
+      "last_send": "Last Mailing Date",
+      "subscribers": "Subscribers"
+    },
     "templates": {
       "privates_description": "Select a Template for the Email of your Automation.",
       "publics_description": "Select one of our Templates to create the Email for your Automation and customize it as you wish.",
@@ -894,10 +894,10 @@
       "push_message_body": "Message",
       "push_message_body_desc": "Tip. You can use emojis 😃🤩🥳. Emojis count as more than one character over the message maximum allowed.",
       "push_message_on_click_link": "Destination URL (optional)",
-      "push_uploader_title" : "Image (optional)",
-      "push_uploader_retry_button" : "retry",
-      "push_uploader_drag_title" : "Drag here or",
-      "push_uploader_button" : "Select an image"
+      "push_uploader_title": "Image (optional)",
+      "push_uploader_retry_button": "retry",
+      "push_uploader_drag_title": "Drag here or",
+      "push_uploader_button": "Select an image"
     },
     "steps": {
       "without_recorded": "NO REGISTERED STEPS",
@@ -920,46 +920,46 @@
       "gotos_not_defined": "Undefined Go to Steps",
       "initial_condition_not_defined": "Intial condition blocked"
     },
-	"saved": "Saved",
-	"saving": "Saving",
-  "reports": {
-    "title": "Automation Metrics Summary",
-    "full_report": "See full Report >>",
-    "delivered_mails": "Total Successful Deliveries",
-    "open_rate": "Open Rate",
-    "click_rate": "Click Through Open Rate",
-    "last_activity": "Date of the last registered activity",
-    "paused_date": "Paused on",
-    "stopped_date": "Stopped on",
-    "paused_title": "PAUSED AUTOMATION",
-    "stopped_title": "STOPPED AUTOMATION",
-    "paused_description": "Pst! From the edit view you can only modify the content of the Emails in your flow and the values for the Wait times. Once you've made the necessary adjustments, restart your Automation.",
-    "stopped_description_one": "Pst! When reactivating your Automation, <strong>it will start from the top</strong>, as if it were the first time you activate it.",
-    "stopped_description_two": "You can download a Report on your Campaign performance from the Download Center."
-  },
-  "pause_modal": {
-    "title": "Pause Automation",
-    "description_one": "While your Campaign is paused, <strong>new Subscribers can't enter to the flow</strong>",
-    "description_two": "When you restart your Automation, it will resume for those Subscribers who were in the flow, no matter how much time has passed.",
-    "description_three": "You only can modify elements as <strong>Emails and Wait times.</strong>",
-    "description_four": "Are you sure you want to pause it?",
-    "stop": "YES, PAUSE AUTOMATION",
-    "cancel": "NO, MAYBE LATER"
-  },
-  "stop_modal": {
-    "title": "Stop Automation",
-    "description_one": "The Subscribers will NOT continue their path through the flow.",
-    "description_two": "You can download a Report on your Campaign performance.",
-    "description_three": "<strong>IMPORTANT:</strong> If you reactivate the Campaign, it will start from the top, as if it were the first time you activate it.",
-    "description_four": "Are you sure you want to stop it?",
-    "stop": "YES, STOP AUTOMATION",
-    "cancel": "NO, MAYBE LATER"
-  },
-  "pause_confirmation_modal": {
-    "title": "Once you've made the necessary adjustments, restart your Automation",
-    "description": "From the edit view you can only modify the content of the Emails in your flow and the values for the Wait times.",
-    "ok": "ok"
-  },
+    "saved": "Saved",
+    "saving": "Saving",
+    "reports": {
+      "title": "Automation Metrics Summary",
+      "full_report": "See full Report >>",
+      "delivered_mails": "Total Successful Deliveries",
+      "open_rate": "Open Rate",
+      "click_rate": "Click Through Open Rate",
+      "last_activity": "Date of the last registered activity",
+      "paused_date": "Paused on",
+      "stopped_date": "Stopped on",
+      "paused_title": "PAUSED AUTOMATION",
+      "stopped_title": "STOPPED AUTOMATION",
+      "paused_description": "Pst! From the edit view you can only modify the content of the Emails in your flow and the values for the Wait times. Once you've made the necessary adjustments, restart your Automation.",
+      "stopped_description_one": "Pst! When reactivating your Automation, <strong>it will start from the top</strong>, as if it were the first time you activate it.",
+      "stopped_description_two": "You can download a Report on your Campaign performance from the Download Center."
+    },
+    "pause_modal": {
+      "title": "Pause Automation",
+      "description_one": "While your Campaign is paused, <strong>new Subscribers can't enter to the flow</strong>",
+      "description_two": "When you restart your Automation, it will resume for those Subscribers who were in the flow, no matter how much time has passed.",
+      "description_three": "You only can modify elements as <strong>Emails and Wait times.</strong>",
+      "description_four": "Are you sure you want to pause it?",
+      "stop": "YES, PAUSE AUTOMATION",
+      "cancel": "NO, MAYBE LATER"
+    },
+    "stop_modal": {
+      "title": "Stop Automation",
+      "description_one": "The Subscribers will NOT continue their path through the flow.",
+      "description_two": "You can download a Report on your Campaign performance.",
+      "description_three": "<strong>IMPORTANT:</strong> If you reactivate the Campaign, it will start from the top, as if it were the first time you activate it.",
+      "description_four": "Are you sure you want to stop it?",
+      "stop": "YES, STOP AUTOMATION",
+      "cancel": "NO, MAYBE LATER"
+    },
+    "pause_confirmation_modal": {
+      "title": "Once you've made the necessary adjustments, restart your Automation",
+      "description": "From the edit view you can only modify the content of the Emails in your flow and the values for the Wait times.",
+      "ok": "ok"
+    },
     "no_dynamic_element_modal": {
       "title": "WARNING",
       "description_abandoned_cart": "You are about to start this Automation without showing elements of your users' Abandoned Cart in any Email.",
@@ -976,7 +976,7 @@
       "scheduled_subtitle": "The listed domains are your active domains.",
       "header_domain_column": "Domains"
     }
-	},
+  },
   "automationTypes": {
     "info": {
       "title3": "Scheduled Date",

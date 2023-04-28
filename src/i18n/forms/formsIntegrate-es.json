@@ -1,5 +1,5 @@
 {
-  "forms_integrate" : {
+  "forms_integrate": {
     "error": {
       "install": "No hemos podido instalar tu Tab.",
       "install_tab": "El mínimo requerido por Facebook para instalar Tabs es de 2.000 fans.",
@@ -37,7 +37,7 @@
         "description": "Link",
         "title": "Comparte la URL pública de tu Formulario",
         "text": "Usa esta opción si no tienes un sitio web pero quieres que tu Formulario aparezca visible de modo público.",
-        "button_text_1" : "Copiar URL"
+        "button_text_1": "Copiar URL"
       },
       "integration_landing": {
         "title": "Muestra tu Formulario como Landing Page",
@@ -62,7 +62,7 @@
         "error": {
           "duplicate": "¡Ouch! Ya has utilizado esta URL en otro Formulario",
           "pattern": "¡Ouch! No puedes incluir espacios ni caracteres especiales.",
-          "required" : "¡Ouch! Este es un campo requerido."
+          "required": "¡Ouch! Este es un campo requerido."
         }
       },
       "integration_wordpress": {

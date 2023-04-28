@@ -1,154 +1,313 @@
-<form name="zohoCrm.form" ng-submit="zohoCrm.connect('StartZohoAuthorization', zohoCrm);" novalidate>
+<form
+  name="zohoCrm.form"
+  ng-submit="zohoCrm.connect('StartZohoAuthorization', zohoCrm);"
+  novalidate
+>
   <div>
-    <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="zohoCrm.daysToDisconnection < 14 && zohoCrm.connected">
-      <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+      ng-show="zohoCrm.daysToDisconnection < 14 && zohoCrm.connected"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'control_panel.integrations.connection_issues.title' | translate
+        }}</span
+      >
       <div class="dp-library margin-t-20 margin-b-20">
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
             <span id="messageBar" class="text--small">
-              {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'zoho_crm_integration.name' | translate }}
+              {{ 'control_panel.integrations.connection_issues.subtitle' |
+              translate }} {{'zoho_crm_integration.name' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+      <strong class="connection-issues-list-title">
+        {{ 'control_panel.integrations.connection_issues.list_title' | translate
+        }}
+      </strong>
       <ul>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_1' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_2' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_3' |
+          translate }}
+        </li>
       </ul>
       <br />
-      <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+      <span
+        >{{ 'control_panel.integrations.connection_issues.text_list_4' |
+        translate }}</span
+      >
       <hr class="full connection-issues-separator" />
       <p>
-        {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-        {{ zohoCrm.firstValidationErrorDate}}
+        {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+        translate }} {{ zohoCrm.firstValidationErrorDate}}
       </p>
       <strong>
         <span ng-if="zohoCrm.daysToDisconnection > 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-          {{ zohoCrm.daysToDisconnection }}
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+          | translate }} {{ zohoCrm.daysToDisconnection }} {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+          | translate }}
         </span>
         <span ng-if="zohoCrm.daysToDisconnection <= 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+          | translate }}
         </span>
       </strong>
     </div>
-    <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
-      <span class="control-panel-section-title">{{ 'zoho_crm_integration.disconnected.title' | translate }} </span>
+    <div
+      id="main-panel"
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'zoho_crm_integration.disconnected.title' | translate }}
+      </span>
       <span class="control-panel-section-subtitle" ng-show="!zohoCrm.connected">
         {{ 'zoho_crm_integration.disconnected.subtitle' | translate }}
-        <a href="{{ 'zoho_crm_integration.disconnected.help_link' | translate }}"
-           target="_blank" ng-trim="false">{{ 'zoho_crm_integration.disconnected.help_text' | translate }}</a>
+        <a
+          href="{{ 'zoho_crm_integration.disconnected.help_link' | translate }}"
+          target="_blank"
+          ng-trim="false"
+          >{{ 'zoho_crm_integration.disconnected.help_text' | translate }}</a
+        >
       </span>
       <span class="control-panel-section-subtitle" ng-show="zohoCrm.connected">
         {{ 'zoho_crm_integration.connected.subtitle' | translate }}
       </span>
-      <hr class="full" style="width: calc(100% + 40px);" ng-show="zohoCrm.connected" />
-      <span class="control-panel-section-subtitle auth-cont-step1" ng-class="{'display-flex-force': !zohoCrm.connected}" ng-show="!zohoCrm.connected">
+      <hr
+        class="full"
+        style="width: calc(100% + 40px)"
+        ng-show="zohoCrm.connected"
+      />
+      <span
+        class="control-panel-section-subtitle auth-cont-step1"
+        ng-class="{'display-flex-force': !zohoCrm.connected}"
+        ng-show="!zohoCrm.connected"
+      >
         {{ 'zoho_crm_integration.disconnected.step1' | translate }}
-        <a href="{{ 'zoho_crm_integration.disconnected.step1_link' | translate }}" target='_blank'>{{ 'zoho_crm_integration.disconnected.step1_console' | translate }}</a>
+        <a
+          href="{{ 'zoho_crm_integration.disconnected.step1_link' | translate }}"
+          target="_blank"
+          >{{ 'zoho_crm_integration.disconnected.step1_console' | translate
+          }}</a
+        >
         {{ 'zoho_crm_integration.disconnected.step1_2' | translate }}
       </span>
 
-      <section class="authentication-container auth-cont-step1" ng-class="{'display-flex-force': !zohoCrm.connected}" ng-show="!zohoCrm.connected">
+      <section
+        class="authentication-container auth-cont-step1"
+        ng-class="{'display-flex-force': !zohoCrm.connected}"
+        ng-show="!zohoCrm.connected"
+      >
         <div class="authentication-elements">
-          <p class="select-list-text">{{ 'zoho_crm_integration.disconnected.client_name' | translate }}</p>
-          <p class="select-list-text">{{ 'zoho_crm_integration.disconnected.client_domain' | translate }}</p>
-          <p class="select-list-text">{{ 'zoho_crm_integration.disconnected.auth_redi_uri' | translate }}</p>
-          <p class="select-list-text">{{ 'zoho_crm_integration.disconnected.client_type' | translate }}</p>
+          <p class="select-list-text">
+            {{ 'zoho_crm_integration.disconnected.client_name' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'zoho_crm_integration.disconnected.client_domain' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'zoho_crm_integration.disconnected.auth_redi_uri' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'zoho_crm_integration.disconnected.client_type' | translate }}
+          </p>
         </div>
         <div class="authentication-elements zoho-inputs">
-          <input id="clientName" type="text" ng-required="false"
-                 ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientName.$invalid || !zohoCrm.integrationData.clientName)}"
-                 ng-model="zohoCrm.integrationData.clientName" class="user-data-input pointer-none"
-                 maxlength="100" />
-          <a class="button button--alternative" ng-click="zohoCrm.copyToClipboard('clientName')">{{ 'actions.copy' | translate }}</a>
-          <input id="clientDomain" type="text" ng-required="false"
-                 ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientDomain.$invalid || !zohoCrm.integrationData.clientDomain)}"
-                 ng-model="zohoCrm.integrationData.clientDomain" class="user-data-input pointer-none"
-                 maxlength="250" />
-          <a class="button button--alternative" ng-click="zohoCrm.copyToClipboard('clientDomain')">{{ 'actions.copy' | translate }}</a>
-          <input id="authRedirectUri" type="text" ng-required="false"
-                 ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.authRedirectUri.$invalid || !zohoCrm.integrationData.authRedirectUri)}"
-                 ng-model="zohoCrm.integrationData.authRedirectUri" class="user-data-input pointer-none"
-                 maxlength="250" />
-          <a class="button button--alternative" ng-click="zohoCrm.copyToClipboard('authRedirectUri')">{{ 'actions.copy' | translate }}</a>
-          <input id="clientType" type="text" ng-required="false"
-                 ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientType.$invalid || !zohoCrm.integrationData.clientType)}"
-                 ng-model="zohoCrm.integrationData.clientType" class="user-data-input pointer-none"
-                 maxlength="250" />
-          <a class="button button--alternative" ng-click="zohoCrm.copyToClipboard('clientType')">{{ 'actions.copy' | translate }}</a>
+          <input
+            id="clientName"
+            type="text"
+            ng-required="false"
+            ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientName.$invalid || !zohoCrm.integrationData.clientName)}"
+            ng-model="zohoCrm.integrationData.clientName"
+            class="user-data-input pointer-none"
+            maxlength="100"
+          />
+          <a
+            class="button button--alternative"
+            ng-click="zohoCrm.copyToClipboard('clientName')"
+            >{{ 'actions.copy' | translate }}</a
+          >
+          <input
+            id="clientDomain"
+            type="text"
+            ng-required="false"
+            ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientDomain.$invalid || !zohoCrm.integrationData.clientDomain)}"
+            ng-model="zohoCrm.integrationData.clientDomain"
+            class="user-data-input pointer-none"
+            maxlength="250"
+          />
+          <a
+            class="button button--alternative"
+            ng-click="zohoCrm.copyToClipboard('clientDomain')"
+            >{{ 'actions.copy' | translate }}</a
+          >
+          <input
+            id="authRedirectUri"
+            type="text"
+            ng-required="false"
+            ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.authRedirectUri.$invalid || !zohoCrm.integrationData.authRedirectUri)}"
+            ng-model="zohoCrm.integrationData.authRedirectUri"
+            class="user-data-input pointer-none"
+            maxlength="250"
+          />
+          <a
+            class="button button--alternative"
+            ng-click="zohoCrm.copyToClipboard('authRedirectUri')"
+            >{{ 'actions.copy' | translate }}</a
+          >
+          <input
+            id="clientType"
+            type="text"
+            ng-required="false"
+            ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientType.$invalid || !zohoCrm.integrationData.clientType)}"
+            ng-model="zohoCrm.integrationData.clientType"
+            class="user-data-input pointer-none"
+            maxlength="250"
+          />
+          <a
+            class="button button--alternative"
+            ng-click="zohoCrm.copyToClipboard('clientType')"
+            >{{ 'actions.copy' | translate }}</a
+          >
         </div>
       </section>
-      <span class="control-panel-section-subtitle auth-cont-step1" ng-class="{'display-flex-force': !zohoCrm.connected}" ng-show="!zohoCrm.connected">{{ 'zoho_crm_integration.disconnected.step2' | translate }} </span>
-      <section class="authentication-container auth-cont-step1" ng-class="{'display-flex-force': !zohoCrm.connected}" ng-show="!zohoCrm.connected">
+      <span
+        class="control-panel-section-subtitle auth-cont-step1"
+        ng-class="{'display-flex-force': !zohoCrm.connected}"
+        ng-show="!zohoCrm.connected"
+        >{{ 'zoho_crm_integration.disconnected.step2' | translate }}
+      </span>
+      <section
+        class="authentication-container auth-cont-step1"
+        ng-class="{'display-flex-force': !zohoCrm.connected}"
+        ng-show="!zohoCrm.connected"
+      >
         <div class="authentication-elements">
-          <p class="select-list-text">{{ 'zoho_crm_integration.disconnected.client_id' | translate }}</p>
-          <p class="select-list-text">{{ 'zoho_crm_integration.disconnected.client_secret' | translate }}</p>
+          <p class="select-list-text">
+            {{ 'zoho_crm_integration.disconnected.client_id' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'zoho_crm_integration.disconnected.client_secret' | translate }}
+          </p>
         </div>
         <div class="authentication-elements">
-          <input type="text" required
-                 ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientId.$invalid || !zohoCrm.integrationData.clientId)}"
-                 ng-model="zohoCrm.integrationData.clientId" class="user-data-input"
-                 placeholder="{{ 'zoho_crm_integration.disconnected.client_id_placeholder' | translate }}"
-                 maxlength="100" />
-          <input type="text" required
-                 ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientSecret.$invalid || !zohoCrm.integrationData.clientSecret)}"
-                 ng-model="zohoCrm.integrationData.clientSecret" class="user-data-input"
-                 placeholder="{{ 'zoho_crm_integration.disconnected.client_secret_placeholder' | translate }}"
-                 maxlength="250" />
+          <input
+            type="text"
+            required
+            ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientId.$invalid || !zohoCrm.integrationData.clientId)}"
+            ng-model="zohoCrm.integrationData.clientId"
+            class="user-data-input"
+            placeholder="{{ 'zoho_crm_integration.disconnected.client_id_placeholder' | translate }}"
+            maxlength="100"
+          />
+          <input
+            type="text"
+            required
+            ng-class="{'input-validation-error':zohoCrm.form.$submitted && !zohoCrm.disconnected && (zohoCrm.integrationData.clientSecret.$invalid || !zohoCrm.integrationData.clientSecret)}"
+            ng-model="zohoCrm.integrationData.clientSecret"
+            class="user-data-input"
+            placeholder="{{ 'zoho_crm_integration.disconnected.client_secret_placeholder' | translate }}"
+            maxlength="250"
+          />
         </div>
       </section>
-      <section id="authConnected" class="authentication-container connected" ng-show="zohoCrm.connected">
+      <section
+        id="authConnected"
+        class="authentication-container connected"
+        ng-show="zohoCrm.connected"
+      >
         <div class="authentication-elements">
           <p id="lastSynchDate" ng-show="!!zohoCrm.lastSynchDate">
-            {{ 'zoho_crm_integration.connected.last_synchronization_grid' | translate }} <strong>{{ zohoCrm.lastSynchDate }}</strong>
+            {{ 'zoho_crm_integration.connected.last_synchronization_grid' |
+            translate }} <strong>{{ zohoCrm.lastSynchDate }}</strong>
           </p>
           <p ng-show="zohoCrm.connected && !zohoCrm.lastSynchDate">
             {{ 'zoho_crm_integration.connected.status' | translate }}
           </p>
         </div>
-        <button type='button' class="button button--alternative"
-                ng-click="zohoCrm.disconnectWarning()" ng-disabled="zohoCrm.importingAllLists">
+        <button
+          type="button"
+          class="button button--alternative"
+          ng-click="zohoCrm.disconnectWarning()"
+          ng-disabled="zohoCrm.importingAllLists"
+        >
           {{ 'zoho_crm_integration.connected.disconnect' | translate }}
         </button>
       </section>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="zohoCrm.autoSyncDisabled && zohoCrm.connected && zohoCrm.integratedLists.length">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="zohoCrm.autoSyncDisabled && zohoCrm.connected && zohoCrm.integratedLists.length"
+      >
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span class="text--small">
               {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-              <a target="_self" href="{{zohoCrm.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+              <a
+                target="_self"
+                href="{{zohoCrm.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+                >{{ 'control_panel.integrations.sync_disabled.link_text' |
+                translate }}</a
+              >
               {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="zohoCrm.connectionError">
-        <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="zohoCrm.connectionError"
+      >
+        <div
+          id="messageBar"
+          class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+        >
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span>{{ zohoCrm.errorMsg }}</span>
           </div>
         </div>
       </div>
-      <div id="connection-error-zoho" class="message-validation validation-error ng-hide">
+      <div
+        id="connection-error-zoho"
+        class="message-validation validation-error ng-hide"
+      >
         <span id="connection-error-zoho-span"></span>
         <a href="mailto:soporte@fromdoppler.com">soporte@fromdoppler.com</a>
       </div>
     </div>
   </div>
-  <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !zohoCrm.connected}" ng-show="!zohoCrm.connected">
-    <a class="button button--alternative" ng-disabled="zohoCrm.connecting"
-       href="{{zohoCrm.webAppUrl}}/Integrations#native-integrations"
-       id="back-button">{{ 'actions.cancel' | translate }}</a>
-    <button id="save_info" type="submit"
-            ng-class="{'button--spinner' : zohoCrm.connecting}" ng-click="zohoCrm.disconnected = false;" 
-            class="button button--primary">
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth"
+    ng-class="{'display-flex-force': !zohoCrm.connected}"
+    ng-show="!zohoCrm.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="zohoCrm.connecting"
+      href="{{zohoCrm.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <button
+      id="save_info"
+      type="submit"
+      ng-class="{'button--spinner' : zohoCrm.connecting}"
+      ng-click="zohoCrm.disconnected = false;"
+      class="button button--primary"
+    >
       {{ 'actions.connect' | translate }}
       <span class="icon-editor-saving" ng-show="zohoCrm.connecting"></span>
     </button>

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -11,25 +11,38 @@
     'data',
     '$translate',
     'automationReportsService',
-    'ModalService'
+    'ModalService',
   ];
 
-  function modalExportSmsReportsCtrl($scope, close, data, $translate, automationReportsService, ModalService) {
+  function modalExportSmsReportsCtrl(
+    $scope,
+    close,
+    data,
+    $translate,
+    automationReportsService,
+    ModalService
+  ) {
     $scope.data = data;
     $scope.data.maxlength = $scope.data.maxlength || 70;
     $scope.data.required = $scope.data.required || false;
-    $scope.data.patternErrorMessage = $translate.instant('validation_messages.email');
+    $scope.data.patternErrorMessage = $translate.instant(
+      'validation_messages.email'
+    );
 
-
-    $scope.close = function() {
+    $scope.close = function () {
       close();
     };
 
-    $scope.saveAndClose = function() {
+    $scope.saveAndClose = function () {
       if ($scope.validationForm.$valid) {
-        automationReportsService.exportSmsReport($scope.data.scheduledTaskId, $scope.data.reportType,
-          $scope.validationForm.fieldValue.$viewValue, $scope.validationForm.option.$viewValue)
-          .then(function(response) {
+        automationReportsService
+          .exportSmsReport(
+            $scope.data.scheduledTaskId,
+            $scope.data.reportType,
+            $scope.validationForm.fieldValue.$viewValue,
+            $scope.validationForm.option.$viewValue
+          )
+          .then(function (response) {
             if (response) {
               close();
               ModalService.showModal({
@@ -38,15 +51,21 @@
                 inputs: {
                   data: {
                     title: $translate.instant('ExportReports.title'),
-                    description: $translate.instant('ExportReports.description'),
-                    description2: $translate.instant('ExportReports.description2'),
-                    buttonLabel: $translate.instant('ExportReports.buttonLabel'),
+                    description: $translate.instant(
+                      'ExportReports.description'
+                    ),
+                    description2: $translate.instant(
+                      'ExportReports.description2'
+                    ),
+                    buttonLabel: $translate.instant(
+                      'ExportReports.buttonLabel'
+                    ),
                     buttonContainerClass: 'align-left',
                     buttonClass: 'button--primary',
-                    actionLink: '/DownloadCenter/DownloadCenter'
-                  }
-                }
-              });              
+                    actionLink: '/DownloadCenter/DownloadCenter',
+                  },
+                },
+              });
             }
           });
       }

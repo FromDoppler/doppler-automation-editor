@@ -1,15 +1,15 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation.editor')
-    .factory('BaseFrequency', function() {
+    .factory('BaseFrequency', function () {
       function BaseFrequency(data) {
-      // Defaults.
+        // Defaults.
         this.type = data.type;
         this.time = {
           hour: 12,
-          minute: 0
+          minute: 0,
         };
         this.timezone = null;
 
@@ -18,7 +18,7 @@
         }
       }
 
-      BaseFrequency.prototype.setData = function(data) {
+      BaseFrequency.prototype.setData = function (data) {
         if (data.hasOwnProperty('time')) {
           this.time = data.time;
         }

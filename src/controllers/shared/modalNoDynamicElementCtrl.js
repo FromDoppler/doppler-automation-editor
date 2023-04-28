@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,19 +10,24 @@
     '$rootScope',
     'close',
     'data',
-    'AUTOMATION_TYPE'
+    'AUTOMATION_TYPE',
   ];
 
-  function ModalNoDynamicElementCtrl($scope, $rootScope, close, data, AUTOMATION_TYPE) {
+  function ModalNoDynamicElementCtrl(
+    $scope,
+    $rootScope,
+    close,
+    data,
+    AUTOMATION_TYPE
+  ) {
     $scope.data = data;
 
-    $scope.startCampaign = function() {
+    $scope.startCampaign = function () {
       $rootScope.startCampaign();
     };
 
-    $scope.close = function(result) {
+    $scope.close = function (result) {
       close(result);
     };
   }
-
 })();

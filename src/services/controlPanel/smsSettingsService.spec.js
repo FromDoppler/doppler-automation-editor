@@ -1,6 +1,6 @@
 'use strict';
 
-describe('SmsSettingsService', function() {
+describe('SmsSettingsService', function () {
   beforeEach(module('dopplerApp'));
 
   var smsSettingsService;
@@ -9,23 +9,27 @@ describe('SmsSettingsService', function() {
     smsSettingsService = _smsSettingsService_;
   }));
 
-  it('should map form data correctly into model for CREDIT CARD payment', function() {
+  it('should map form data correctly into model for CREDIT CARD payment', function () {
     // Arrange
     var mockedData = {
       billingInformation: {
-      ccNumber: '4226457083932337',
-      ccExpMonth: 12,
-      ccExpYear: 2020,
-      holderFullName: 'Elizabeth Carter',
-      idCCType: 1,
-      ccVerification: '456'
+        ccNumber: '4226457083932337',
+        ccExpMonth: 12,
+        ccExpYear: 2020,
+        holderFullName: 'Elizabeth Carter',
+        idCCType: 1,
+        ccVerification: '456',
       },
       fee: 100,
-      paymentMethod: 1 //CREDIT CARD
-    }
+      paymentMethod: 1, //CREDIT CARD
+    };
 
     // Act
-    var model = smsSettingsService.mapBillingInformationModel(mockedData.billingInformation, mockedData.fee, mockedData.paymentMethod);
+    var model = smsSettingsService.mapBillingInformationModel(
+      mockedData.billingInformation,
+      mockedData.fee,
+      mockedData.paymentMethod
+    );
 
     // Assert
     expect(model.IdPaymentMethod).toBe(1);
@@ -38,7 +42,7 @@ describe('SmsSettingsService', function() {
     expect(model.CCVerification).toBe('456');
   });
 
-  it('should map form data correctly into model for TRANSFER payment for MX', function() {
+  it('should map form data correctly into model for TRANSFER payment for MX', function () {
     // Arrange
     var mockedData = {
       billingInformation: {
@@ -49,14 +53,18 @@ describe('SmsSettingsService', function() {
         paymentType: 'PPD',
         paymentWay: 'TRANSFER',
         bankName: 'Bank',
-        lastNumbers: '4444'
+        lastNumbers: '4444',
       },
       fee: 100,
-      paymentMethod: 3 //TRANSFER
-    }
+      paymentMethod: 3, //TRANSFER
+    };
 
     // Act
-    var model = smsSettingsService.mapBillingInformationModel(mockedData.billingInformation, mockedData.fee, mockedData.paymentMethod);
+    var model = smsSettingsService.mapBillingInformationModel(
+      mockedData.billingInformation,
+      mockedData.fee,
+      mockedData.paymentMethod
+    );
 
     // Assert
     expect(model.IdPaymentMethod).toBe(3);
@@ -71,7 +79,7 @@ describe('SmsSettingsService', function() {
     expect(model.BankAccount).toBe('4444');
   });
 
-  it('should map form data correctly into model for TRANSFER payment for ARG', function() {
+  it('should map form data correctly into model for TRANSFER payment for ARG', function () {
     // Arrange
     var mockedData = {
       billingInformation: {
@@ -80,11 +88,15 @@ describe('SmsSettingsService', function() {
         cuit: '24374492728',
       },
       fee: 100,
-      paymentMethod: 3 //TRANSFER
-    }
+      paymentMethod: 3, //TRANSFER
+    };
 
     // Act
-    var model = smsSettingsService.mapBillingInformationModel(mockedData.billingInformation, mockedData.fee, mockedData.paymentMethod);
+    var model = smsSettingsService.mapBillingInformationModel(
+      mockedData.billingInformation,
+      mockedData.fee,
+      mockedData.paymentMethod
+    );
 
     // Assert
     expect(model.IdPaymentMethod).toBe(3);

@@ -1,9 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('BaseField', ['$translate', 'BASIC_FIELDS', 'userFieldsDataservice', function($translate, BASIC_FIELDS, userFieldsDataservice) {
+  angular.module('dopplerApp.automation.editor').factory('BaseField', [
+    '$translate',
+    'BASIC_FIELDS',
+    'userFieldsDataservice',
+    function ($translate, BASIC_FIELDS, userFieldsDataservice) {
       function BaseField(data) {
         //defaults
         this.type = data.type;
@@ -13,7 +15,7 @@
         this.deleted = false;
       }
 
-      BaseField.prototype.setData = function(data) {
+      BaseField.prototype.setData = function (data) {
         if (data.hasOwnProperty('id')) {
           this.id = data.id;
           this.deleted = !userFieldsDataservice.findField(this.id);
@@ -28,12 +30,16 @@
         var fieldLabel = fieldName;
 
         if (_.includes(BASIC_FIELDS, fieldName)) {
-          fieldLabel = $translate.instant('automation_editor.components.condition.conditionals.subscriber_information.fields.' + fieldName);
+          fieldLabel = $translate.instant(
+            'automation_editor.components.condition.conditionals.subscriber_information.fields.' +
+              fieldName
+          );
         }
 
         return fieldLabel;
       }
 
       return BaseField;
-    }]);
+    },
+  ]);
 })();

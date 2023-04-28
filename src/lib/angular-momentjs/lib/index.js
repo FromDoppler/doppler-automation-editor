@@ -9,5 +9,5 @@ angular.module('gdi2290.moment-service', []);
 angular.module('gdi2290.moment', [
   'gdi2290.moment-service',
   'gdi2290.amDateFormat',
-  'gdi2290.amTimeAgo'
+  'gdi2290.amTimeAgo',
 ]);

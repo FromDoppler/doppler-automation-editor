@@ -1,104 +1,179 @@
-<form name="presta.form" ng-submit="presta.form.$valid && presta.connect();" novalidate>
+<form
+  name="presta.form"
+  ng-submit="presta.form.$valid && presta.connect();"
+  novalidate
+>
   <!-- Connection issues warning -->
-  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="presta.daysToDisconnection < 14">
-    <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+  <div
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="presta.daysToDisconnection < 14"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'control_panel.integrations.connection_issues.title' | translate
+      }}</span
+    >
     <div class="dp-library margin-t-20 margin-b-20">
       <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message">
           <span id="messageBar" class="text--small">
-            {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'prestashop.name' | translate }}
+            {{ 'control_panel.integrations.connection_issues.subtitle' |
+            translate }} {{'prestashop.name' | translate }}
           </span>
         </div>
       </div>
     </div>
-    <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+    <strong class="connection-issues-list-title">
+      {{ 'control_panel.integrations.connection_issues.list_title' | translate
+      }}
+    </strong>
     <ul>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_1' |
+        translate }}
+      </li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_2' |
+        translate }}
+      </li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_3' |
+        translate }}
+      </li>
     </ul>
     <br />
-    <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+    <span
+      >{{ 'control_panel.integrations.connection_issues.text_list_4' | translate
+      }}</span
+    >
     <hr class="full connection-issues-separator" />
     <p>
-      {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-      {{ presta.firstValidationErrorDate}}
+      {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+      translate }} {{ presta.firstValidationErrorDate}}
     </p>
     <strong>
       <span ng-if="presta.daysToDisconnection > 1">
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-        {{ presta.daysToDisconnection }}
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+        {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+        | translate }} {{ presta.daysToDisconnection }} {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+        | translate }}
       </span>
       <span ng-if="presta.daysToDisconnection <= 1">
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+        {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+        | translate }}
       </span>
     </strong>
   </div>
 
   <!--prestashop data  box -->
-  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
-
+  <div
+    id="main-panel"
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  >
     <!-- title and subtitle -->
-    <span class="control-panel-section-title">{{ 'prestashop.disconnected.title' | translate }} </span>
+    <span class="control-panel-section-title"
+      >{{ 'prestashop.disconnected.title' | translate }}
+    </span>
     <span class="control-panel-section-subtitle">
       {{ 'prestashop.disconnected.subtitle' | translate }}
-      <a href="{{ 'prestashop.disconnected.help_link' | translate }}" target="_blank">{{ 'prestashop.disconnected.help_text' | translate }}</a>
+      <a
+        href="{{ 'prestashop.disconnected.help_link' | translate }}"
+        target="_blank"
+        >{{ 'prestashop.disconnected.help_text' | translate }}</a
+      >
     </span>
     <div class="dp-library margin-t-20 margin-b-20" ng-show="!presta.connected">
       <div class="col-md-12 m-b-12 dp-wrap-message dp-wrap-warning">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full">
-          <span id="messageBar" class="text--small">{{ 'prestashop.disconnected.subtitle2' | translate }}</span>
-          <a class="dp-message-link" href="{{ 'prestashop.disconnected.help_link2' | translate }}" target="_blank">{{ 'prestashop.disconnected.help_text2' | translate }}</a>
+          <span id="messageBar" class="text--small"
+            >{{ 'prestashop.disconnected.subtitle2' | translate }}</span
+          >
+          <a
+            class="dp-message-link"
+            href="{{ 'prestashop.disconnected.help_link2' | translate }}"
+            target="_blank"
+            >{{ 'prestashop.disconnected.help_text2' | translate }}</a
+          >
         </div>
       </div>
     </div>
-    <hr class="full" style="width: calc(100% + 40px);" />
+    <hr class="full" style="width: calc(100% + 40px)" />
 
     <!-- integration authentication status not connected -->
     <section class="authentication-container" ng-show="!presta.connected">
-
       <div class="authentication-elements">
-        <p class="select-list-text">{{ 'prestashop.disconnected.store' | translate }}</p>
-        <p class="select-list-text">{{ 'prestashop.disconnected.app_key' | translate }}</p>
+        <p class="select-list-text">
+          {{ 'prestashop.disconnected.store' | translate }}
+        </p>
+        <p class="select-list-text">
+          {{ 'prestashop.disconnected.app_key' | translate }}
+        </p>
       </div>
 
       <div class="authentication-elements">
-        <input type="text"
-               ng-required="true"
-               ng-class="{'input-validation-error':presta.form.$submitted && !presta.disconnected && (presta.integrationData.url.$invalid || !presta.integrationData.url)}"
-               ng-model="presta.integrationData.url"
-               class="user-data-input"
-               placeholder="{{ 'prestashop.disconnected.store_placeholder' | translate }}"
-               maxlength="100" />
-        <input type="text"
-               required
-               ng-class="{'input-validation-error':presta.form.$submitted && !presta.disconnected && (presta.integrationData.appKey.$invalid || !presta.integrationData.appKey)}"
-               ng-model="presta.integrationData.appKey"
-               class="user-data-input"
-               placeholder="{{ 'prestashop.disconnected.app_key_placeholder' | translate }}"
-               maxlength="250" />
+        <input
+          type="text"
+          ng-required="true"
+          ng-class="{'input-validation-error':presta.form.$submitted && !presta.disconnected && (presta.integrationData.url.$invalid || !presta.integrationData.url)}"
+          ng-model="presta.integrationData.url"
+          class="user-data-input"
+          placeholder="{{ 'prestashop.disconnected.store_placeholder' | translate }}"
+          maxlength="100"
+        />
+        <input
+          type="text"
+          required
+          ng-class="{'input-validation-error':presta.form.$submitted && !presta.disconnected && (presta.integrationData.appKey.$invalid || !presta.integrationData.appKey)}"
+          ng-model="presta.integrationData.appKey"
+          class="user-data-input"
+          placeholder="{{ 'prestashop.disconnected.app_key_placeholder' | translate }}"
+          maxlength="250"
+        />
       </div>
-
     </section>
 
     <!-- integration status connected -->
-    <section class="authentication-container connected" ng-show="presta.connected">
+    <section
+      class="authentication-container connected"
+      ng-show="presta.connected"
+    >
       <div class="authentication-elements">
-        <p>{{ 'prestashop.connected.urlStore' | translate }} <strong>{{ presta.connectedUrlStore }}</strong></p>
-        <p>{{ 'prestashop.connected.date' | translate }}: <strong>{{ presta.syncDate }}</strong></p>
+        <p>
+          {{ 'prestashop.connected.urlStore' | translate }}
+          <strong>{{ presta.connectedUrlStore }}</strong>
+        </p>
+        <p>
+          {{ 'prestashop.connected.date' | translate }}:
+          <strong>{{ presta.syncDate }}</strong>
+        </p>
       </div>
-      <button type='button' class="button button--alternative" ng-disabled="presta.importingList" ng-click="presta.disconnectWarning()">{{ 'prestashop.connected.disconnect' | translate }}</button>
+      <button
+        type="button"
+        class="button button--alternative"
+        ng-disabled="presta.importingList"
+        ng-click="presta.disconnectWarning()"
+      >
+        {{ 'prestashop.connected.disconnect' | translate }}
+      </button>
     </section>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="presta.autoSyncDisabled && presta.connected && presta.integratedLists.length">
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="presta.autoSyncDisabled && presta.connected && presta.integratedLists.length"
+    >
       <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full">
           <span class="text--small">
             {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-            <a target="_self" href="{{presta.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+            <a
+              target="_self"
+              href="{{presta.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+              >{{ 'control_panel.integrations.sync_disabled.link_text' |
+              translate }}</a
+            >
             {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
           </span>
         </div>
@@ -107,7 +182,10 @@
 
     <!-- connect error -->
     <div class="dp-library margin-t-20 margin-b-20" ng-show="presta.errorMsg">
-      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <div
+        id="messageBar"
+        class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+      >
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full">
           <span>{{ presta.errorMsg }}</span>
@@ -117,53 +195,101 @@
   </div>
 
   <!-- integration select list -->
-  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="!presta.connected">
+  <div
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="!presta.connected"
+  >
     <div>
       <div>
-        <span class="control-panel-section-title">{{ 'prestashop.disconnected.list_select_title' | translate }}</span>
-        <span class="control-panel-section-subtitle">{{ 'prestashop.disconnected.list_select_subtitle' | translate }}</span>
+        <span class="control-panel-section-title"
+          >{{ 'prestashop.disconnected.list_select_title' | translate }}</span
+        >
+        <span class="control-panel-section-subtitle"
+          >{{ 'prestashop.disconnected.list_select_subtitle' | translate
+          }}</span
+        >
       </div>
-      <hr class="full" style="width: calc(100% + 40px);" />
+      <hr class="full" style="width: calc(100% + 40px)" />
     </div>
 
     <div class="flex-grid-v-center">
-      <p class="select-list-text">{{ 'prestashop.disconnected.list_select_label' | translate }}</p>
-      <dropdown class="dropdown dropdown--big"
-                id="dd-lists"
-                list="presta.lists"
-                name="presta.integrationData.listId"
-                ng-model="presta.integrationData.listId"
-                ng-required="true"
-                property="ListName"
-                placeholder="{{ 'prestashop.disconnected.list_placeholder' | translate }}"
-                id-value="IdList"></dropdown>
+      <p class="select-list-text">
+        {{ 'prestashop.disconnected.list_select_label' | translate }}
+      </p>
+      <dropdown
+        class="dropdown dropdown--big"
+        id="dd-lists"
+        list="presta.lists"
+        name="presta.integrationData.listId"
+        ng-model="presta.integrationData.listId"
+        ng-required="true"
+        property="ListName"
+        placeholder="{{ 'prestashop.disconnected.list_placeholder' | translate }}"
+        id-value="IdList"
+      ></dropdown>
     </div>
   </div>
 
-  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="presta.connected">
+  <div
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="presta.connected"
+  >
     <div>
       <div class="authentication-container connected">
         <div>
-          <span class="control-panel-section-title">{{ 'prestashop.connected.selected_list_title' | translate }}</span>
-          <span class="control-panel-section-subtitle">{{ 'prestashop.connected.selected_list_subtitle' | translate }}</span>
+          <span class="control-panel-section-title"
+            >{{ 'prestashop.connected.selected_list_title' | translate }}</span
+          >
+          <span class="control-panel-section-subtitle"
+            >{{ 'prestashop.connected.selected_list_subtitle' | translate
+            }}</span
+          >
         </div>
         <div class="button--frame">
-          <button type="button" ng-click="presta.synchronize();" ng-class="{'spin': presta.importingList && !presta.disableSync}" ng-disabled="presta.disableSync" class="button reload-icon"></button>
+          <button
+            type="button"
+            ng-click="presta.synchronize();"
+            ng-class="{'spin': presta.importingList && !presta.disableSync}"
+            ng-disabled="presta.disableSync"
+            class="button reload-icon"
+          ></button>
         </div>
       </div>
-      <hr class="full" style="width: calc(100% + 40px);" />
-      <p class="select-list-text">{{ 'prestashop.connected.selected_list_label' | translate }} </p>
+      <hr class="full" style="width: calc(100% + 40px)" />
+      <p class="select-list-text">
+        {{ 'prestashop.connected.selected_list_label' | translate }}
+      </p>
       <table class="grid">
         <thead>
-        <th class="list-name">{{ 'prestashop.connected.list_name_grid' | translate }}</th>
-        <th>{{ 'prestashop.connected.subscribers_count_grid' | translate }}</th>
+          <th class="list-name">
+            {{ 'prestashop.connected.list_name_grid' | translate }}
+          </th>
+          <th>
+            {{ 'prestashop.connected.subscribers_count_grid' | translate }}
+          </th>
         </thead>
         <tbody>
-          <tr ng-repeat="list in presta.integratedLists" ng-class="{'exportingList': list.listStatus === presta.IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS}">
-            <td class="integratedLists-name"><ellipsis-with-tooltip class="stand-alone" text="list.listName"></ellipsis-with-tooltip></td>
-            <td ng-show="list.listStatus !== presta.IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS"> {{ list.subscribersCount }} </td>
-            <td ng-show="list.listStatus === presta.IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS" colspan="1">
-              <span class="icon-clock"></span>&nbsp;{{ 'prestashop.connected.synchronizing_grid' | translate }}
+          <tr
+            ng-repeat="list in presta.integratedLists"
+            ng-class="{'exportingList': list.listStatus === presta.IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS}"
+          >
+            <td class="integratedLists-name">
+              <ellipsis-with-tooltip
+                class="stand-alone"
+                text="list.listName"
+              ></ellipsis-with-tooltip>
+            </td>
+            <td
+              ng-show="list.listStatus !== presta.IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS"
+            >
+              {{ list.subscribersCount }}
+            </td>
+            <td
+              ng-show="list.listStatus === presta.IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS"
+              colspan="1"
+            >
+              <span class="icon-clock"></span>&nbsp;{{
+              'prestashop.connected.synchronizing_grid' | translate }}
             </td>
           </tr>
         </tbody>
@@ -171,12 +297,27 @@
     </div>
   </div>
 
-  <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!presta.connected">
-    <a class="button button--alternative" ng-disabled="presta.connecting" href="{{presta.webAppUrl}}/Integrations#native-integrations" id="back-button">{{ 'actions.cancel' | translate }}</a>
-    <button type="submit" id="save_info" ng-disabled="presta.connecting" ng-class="{'button--spinner' : presta.connecting}" ng-click="presta.disconnected = false;" class="button button--primary">
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between"
+    ng-show="!presta.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="presta.connecting"
+      href="{{presta.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <button
+      type="submit"
+      id="save_info"
+      ng-disabled="presta.connecting"
+      ng-class="{'button--spinner' : presta.connecting}"
+      ng-click="presta.disconnected = false;"
+      class="button button--primary"
+    >
       {{ 'actions.connect' | translate }}
       <span class="icon-editor-saving" ng-show="presta.connecting"></span>
     </button>
   </div>
-
 </form>

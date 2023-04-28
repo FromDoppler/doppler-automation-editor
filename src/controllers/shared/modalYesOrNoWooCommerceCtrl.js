@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,20 +9,25 @@
     '$scope',
     'close',
     'data',
-    'wooCommerceService'
+    'wooCommerceService',
   ];
 
-  function modalYesOrNoWooCommerceCtrl($scope, close, data, wooCommerceService) {
+  function modalYesOrNoWooCommerceCtrl(
+    $scope,
+    close,
+    data,
+    wooCommerceService
+  ) {
     $scope.data = data;
 
-    $scope.close = function(result) {
+    $scope.close = function (result) {
       close(result);
     };
 
-    $scope.disconnect = function(){
+    $scope.disconnect = function () {
       $scope.disconnecting = true;
-      wooCommerceService.disconnect().then(function(response){
-        if (response.success){
+      wooCommerceService.disconnect().then(function (response) {
+        if (response.success) {
           $scope.disconnecting = false;
           close(true);
         } else {
@@ -31,7 +36,5 @@
         }
       });
     };
-
   }
-
 })();

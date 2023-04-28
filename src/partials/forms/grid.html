@@ -1,152 +1,384 @@
-<section class="section--content background--white section--grid-empty flex-grid-v-center" ng-if="form.totalForms === 0 && !form.gridModel.firstTimeLoad">
+<section
+  class="section--content background--white section--grid-empty flex-grid-v-center"
+  ng-if="form.totalForms === 0 && !form.gridModel.firstTimeLoad"
+>
   <div class="wrapper text--center components--center wrapper--default">
-    <img src="../../../images/form-icon.svg">
+    <img src="../../../images/form-icon.svg" />
     <h2>{{'forms_grid.no_forms.headline' | translate}}</h2>
     <p class="description">
       <span ng-bind-html="'forms_grid.no_forms.subhead' | translate"></span>
-      <br/><br/>
+      <br /><br />
       <strong>{{'forms_grid.no_forms.lead_a' | translate }}</strong>
-      <br/>
-      <a class="link--default" href="{{'forms_grid.no_forms.lead_b' | translate}}" target="_blank">
+      <br />
+      <a
+        class="link--default"
+        href="{{'forms_grid.no_forms.lead_b' | translate}}"
+        target="_blank"
+      >
         {{'forms_grid.no_forms.lead_c' | translate}}
       </a>
     </p>
-    <button ng-disabled="form.totalForms >= form.maxForms" ng-click="form.showFormTypesScreen()" id="createNewForm" class="button button--primary">
+    <button
+      ng-disabled="form.totalForms >= form.maxForms"
+      ng-click="form.showFormTypesScreen()"
+      id="createNewForm"
+      class="button button--primary"
+    >
       {{'forms_grid.header.button' | translate}}
     </button>
   </div>
 </section>
-<section ng-if="form.totalForms !== 0 && !form.gridModel.firstTimeLoad" class="dp-library">
-<header class="hero-banner">
-  <div class="dp-container">
-    <div class="dp-rowflex">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <h2>{{ 'forms_grid.header.headline' | translate }}</h2>
-      </div>
-      <div class="col-sm-7">
-        <p>
-          <span>{{'forms_grid.header.subhead_a' | translate}}
-            <strong>
-              {{form.totalForms}}
-              {{form.totalForms !== 1 ? 'forms_grid.header.subhead_forms' : 'forms_grid.header.subhead_form' | translate }}
-            </strong>
-            {{'forms_grid.header.subhead_b' | translate : {maxForms : form.maxForms} }}
-          </span>
-        </p>
-      </div>
-      <div class="col-sm-5 text-align--right">
-        <button ng-disabled="form.totalForms >= form.maxForms" ng-click="form.showFormTypesScreen()" id="createNewForm" class="dp-button button-medium primary-green">
-          {{'forms_grid.header.button' | translate}}
-        </button>
+<section
+  ng-if="form.totalForms !== 0 && !form.gridModel.firstTimeLoad"
+  class="dp-library"
+>
+  <header class="hero-banner">
+    <div class="dp-container">
+      <div class="dp-rowflex">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h2>{{ 'forms_grid.header.headline' | translate }}</h2>
+        </div>
+        <div class="col-sm-7">
+          <p>
+            <span
+              >{{'forms_grid.header.subhead_a' | translate}}
+              <strong>
+                {{form.totalForms}} {{form.totalForms !== 1 ?
+                'forms_grid.header.subhead_forms' :
+                'forms_grid.header.subhead_form' | translate }}
+              </strong>
+              {{'forms_grid.header.subhead_b' | translate : {maxForms :
+              form.maxForms} }}
+            </span>
+          </p>
+        </div>
+        <div class="col-sm-5 text-align--right">
+          <button
+            ng-disabled="form.totalForms >= form.maxForms"
+            ng-click="form.showFormTypesScreen()"
+            id="createNewForm"
+            class="dp-button button-medium primary-green"
+          >
+            {{'forms_grid.header.button' | translate}}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
   <div class="grid--container ng-hide" ng-show="!form.gridModel.firstTimeLoad">
     <div class="wrapper">
       <div class="flex-grid">
         <div class="search-container">
-          <input class="input--text input--search" ng-model="form.gridModel.searchText" type="text" placeholder="{{ 'grid.search' | translate }}" ng-change="form.gridModel.search(form.gridModel.searchText)"/>
+          <input
+            class="input--text input--search"
+            ng-model="form.gridModel.searchText"
+            type="text"
+            placeholder="{{ 'grid.search' | translate }}"
+            ng-change="form.gridModel.search(form.gridModel.searchText)"
+          />
           <span class="icon-search" ng-show="!form.gridModel.searchText"></span>
-          <span class="icon-close" ng-show="form.gridModel.searchText" ng-click="form.gridModel.cleanSearch()"></span>
+          <span
+            class="icon-close"
+            ng-show="form.gridModel.searchText"
+            ng-click="form.gridModel.cleanSearch()"
+          ></span>
         </div>
-        <dp-editor-dropdown class="ng-hide dropdown--big" name="filterSearch"
+        <dp-editor-dropdown
+          class="ng-hide dropdown--big"
+          name="filterSearch"
           options="form.filterOptions"
           label="'forms_grid.filters.no_filter' | translate"
           on-select-option="onActionSelected(option)"
-          value-selected="form.selected">
+          value-selected="form.selected"
+        >
         </dp-editor-dropdown>
       </div>
 
-      <table class="grid--default" infinite-scroll="form.gridModel.onScroll" infinite-scroll-distance="200" ng-show="form.gridModel.displayed.length > 0">
+      <table
+        class="grid--default"
+        infinite-scroll="form.gridModel.onScroll"
+        infinite-scroll-distance="200"
+        ng-show="form.gridModel.displayed.length > 0"
+      >
         <thead>
           <tr>
-            <th id="StatusId" ng-class="{'active' : form.gridModel.currentSort == 'STATUS'}"><a ng-click="form.gridModel.sort('STATUS')">{{ 'grid.headers.status' | translate }} <span ng-class="form.gridModel.setArrowClass('STATUS')"></span></a></th>
-            <th id="Type" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'TYPE'" ng-class="{'active' : form.gridModel.currentSort == 'TYPE'}"><a ng-click="form.gridModel.sort('TYPE')"> {{ 'grid.headers.type' | translate }} <span ng-class="form.gridModel.setArrowClass('TYPE')"></span></a></th>
-            <th id="Name" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'NAME'" ng-class="{'active' : form.gridModel.currentSort == 'NAME'}"><a ng-click="form.gridModel.sort('NAME')">{{ 'grid.headers.name' | translate }} <span ng-class="form.gridModel.setArrowClass('NAME')"></span></a></th>
-            <th id="AssociatedList" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'DESTINY_LIST'" ng-class="{'active' : form.gridModel.currentSort == 'DESTINY_LIST'}"><a ng-click="form.gridModel.sort('DESTINY_LIST')">{{ 'forms_grid.headers.destiny_list' | translate }} <span ng-class="form.gridModel.setArrowClass('DESTINY_LIST')"></span></a></th>
-            <th id="CreationDate" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'CREATION_DATE'" ng-class="{'active' : form.gridModel.currentSort == 'CREATION_DATE'}"><a ng-click="form.gridModel.sort('CREATION_DATE')">{{ 'grid.headers.creation_date' | translate }} <span ng-class="form.gridModel.setArrowClass('CREATION_DATE')"></span></a></th>
-            <th id="ConvertionRate"><a> {{ 'forms_grid.headers.convertion_rate' | translate}} <span ng-class="ng-hide"></span></a></th>
-            <th id="Actions"><span>{{ 'grid.headers.actions' | translate }} <a> <span ng-class="ng-hide"></span> </a></span></th>
+            <th
+              id="StatusId"
+              ng-class="{'active' : form.gridModel.currentSort == 'STATUS'}"
+            >
+              <a ng-click="form.gridModel.sort('STATUS')"
+                >{{ 'grid.headers.status' | translate }}
+                <span ng-class="form.gridModel.setArrowClass('STATUS')"></span
+              ></a>
+            </th>
+            <th
+              id="Type"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'TYPE'"
+              ng-class="{'active' : form.gridModel.currentSort == 'TYPE'}"
+            >
+              <a ng-click="form.gridModel.sort('TYPE')">
+                {{ 'grid.headers.type' | translate }}
+                <span ng-class="form.gridModel.setArrowClass('TYPE')"></span
+              ></a>
+            </th>
+            <th
+              id="Name"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'NAME'"
+              ng-class="{'active' : form.gridModel.currentSort == 'NAME'}"
+            >
+              <a ng-click="form.gridModel.sort('NAME')"
+                >{{ 'grid.headers.name' | translate }}
+                <span ng-class="form.gridModel.setArrowClass('NAME')"></span
+              ></a>
+            </th>
+            <th
+              id="AssociatedList"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'DESTINY_LIST'"
+              ng-class="{'active' : form.gridModel.currentSort == 'DESTINY_LIST'}"
+            >
+              <a ng-click="form.gridModel.sort('DESTINY_LIST')"
+                >{{ 'forms_grid.headers.destiny_list' | translate }}
+                <span
+                  ng-class="form.gridModel.setArrowClass('DESTINY_LIST')"
+                ></span
+              ></a>
+            </th>
+            <th
+              id="CreationDate"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'CREATION_DATE'"
+              ng-class="{'active' : form.gridModel.currentSort == 'CREATION_DATE'}"
+            >
+              <a ng-click="form.gridModel.sort('CREATION_DATE')"
+                >{{ 'grid.headers.creation_date' | translate }}
+                <span
+                  ng-class="form.gridModel.setArrowClass('CREATION_DATE')"
+                ></span
+              ></a>
+            </th>
+            <th id="ConvertionRate">
+              <a>
+                {{ 'forms_grid.headers.convertion_rate' | translate}}
+                <span ng-class="ng-hide"></span
+              ></a>
+            </th>
+            <th id="Actions">
+              <span
+                >{{ 'grid.headers.actions' | translate }}
+                <a> <span ng-class="ng-hide"></span> </a
+              ></span>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="row in form.gridModel.displayed" id="tr-{{row.Id}}" delete-message="{{delete-id==row.IdScheduledTask}}">
+          <tr
+            ng-repeat="row in form.gridModel.displayed"
+            id="tr-{{row.Id}}"
+            delete-message="{{delete-id==row.IdScheduledTask}}"
+          >
             <!-- row deleting confirmation message -->
-            <td colspan="4" class="delete-confirmation" ng-cloak ng-show="row.deleting">
+            <td
+              colspan="4"
+              class="delete-confirmation"
+              ng-cloak
+              ng-show="row.deleting"
+            >
               <span class="icon-warning"></span>
-              <span ng-bind-html="'forms_grid.delete_message' | translate:{ 'formName' : row.Name } "></span>
+              <span
+                ng-bind-html="'forms_grid.delete_message' | translate:{ 'formName' : row.Name } "
+              ></span>
             </td>
-            <td colspan="4" ng-cloak class="delete-confirmation right" ng-show="row.deleting"><a id="cancel-delete-{{$index}}" ng-cloak ng-click="row.deleting=false"> {{ 'actions.cancel' | translate }} </a> | <a id="accept-delete-{{$index}}" ng-cloak ng-click="form.deleteRowConfirmed(row)">{{ 'actions.delete' | translate }}</a> </td>
+            <td
+              colspan="4"
+              ng-cloak
+              class="delete-confirmation right"
+              ng-show="row.deleting"
+            >
+              <a
+                id="cancel-delete-{{$index}}"
+                ng-cloak
+                ng-click="row.deleting=false"
+              >
+                {{ 'actions.cancel' | translate }}
+              </a>
+              |
+              <a
+                id="accept-delete-{{$index}}"
+                ng-cloak
+                ng-click="form.deleteRowConfirmed(row)"
+                >{{ 'actions.delete' | translate }}</a
+              >
+            </td>
             <!-- status column -->
             <td class="status-column" ng-show="!row.deleting">
               <div class="switch">
-                <span ng-if="row.Status== form.FORM_STATE.DRAFT" data-static-tooltip="{{ 'status.draft' | translate }}">
+                <span
+                  ng-if="row.Status== form.FORM_STATE.DRAFT"
+                  data-static-tooltip="{{ 'status.draft' | translate }}"
+                >
                   <span class="icon-grid-draft"></span>
                 </span>
-                <span ng-if="row.Status== form.FORM_STATE.PUBLISHED" data-static-tooltip="{{ 'status.send' | translate }}">
+                <span
+                  ng-if="row.Status== form.FORM_STATE.PUBLISHED"
+                  data-static-tooltip="{{ 'status.send' | translate }}"
+                >
                   <span class="icon-check"></span>
                 </span>
-                <span ng-if="row.Status== form.FORM_STATE.PUBLISHED_WITH_CHANGES" data-static-tooltip="{{ 'status.publish_with_changes' | translate }}">
+                <span
+                  ng-if="row.Status== form.FORM_STATE.PUBLISHED_WITH_CHANGES"
+                  data-static-tooltip="{{ 'status.publish_with_changes' | translate }}"
+                >
                   <span class="icon-published-with-changes">
-                    <img src="../../../images/grid-published-with-changes.svg" />
+                    <img
+                      src="../../../images/grid-published-with-changes.svg"
+                    />
                   </span>
                 </span>
               </div>
             </td>
             <!-- form type -->
-            <td class="type-column-alt" ng-show="!row.deleting" ng-class="{'active' : form.gridModel.currentSort == 'TYPE'}">
-              <span class="task-type-label">{{'forms_grid.type.option' + row.Type | translate}}</span>
+            <td
+              class="type-column-alt"
+              ng-show="!row.deleting"
+              ng-class="{'active' : form.gridModel.currentSort == 'TYPE'}"
+            >
+              <span class="task-type-label"
+                >{{'forms_grid.type.option' + row.Type | translate}}</span
+              >
             </td>
             <!-- form name -->
-            <td id="name-{{row.Id}}" class="name-column-alt" ng-show="!row.deleting" ng-class="{'active' : form.gridModel.currentSort == 'NAME'}">
-              <ellipsis-with-tooltip ng-if="row.IsOld" text="row.Name" url="/Lists/Form/EditExistingForm?idForm={{row.Id}}"></ellipsis-with-tooltip>
-              <ellipsis-with-tooltip ng-if="!row.IsOld" text="row.Name" url="/MSFormsEditor/Editor?idForm={{row.Id}}"></ellipsis-with-tooltip>
+            <td
+              id="name-{{row.Id}}"
+              class="name-column-alt"
+              ng-show="!row.deleting"
+              ng-class="{'active' : form.gridModel.currentSort == 'NAME'}"
+            >
+              <ellipsis-with-tooltip
+                ng-if="row.IsOld"
+                text="row.Name"
+                url="/Lists/Form/EditExistingForm?idForm={{row.Id}}"
+              ></ellipsis-with-tooltip>
+              <ellipsis-with-tooltip
+                ng-if="!row.IsOld"
+                text="row.Name"
+                url="/MSFormsEditor/Editor?idForm={{row.Id}}"
+              ></ellipsis-with-tooltip>
             </td>
             <!-- form selected List -->
-            <td id="formAssociatedList-{{row.Id}}" class="name-column-alt" ng-show="!row.deleting" ng-class="{'active' : form.gridModel.currentSort == 'DESTINY_LIST'}">
+            <td
+              id="formAssociatedList-{{row.Id}}"
+              class="name-column-alt"
+              ng-show="!row.deleting"
+              ng-class="{'active' : form.gridModel.currentSort == 'DESTINY_LIST'}"
+            >
               {{row.SubscribersListsName}}
             </td>
             <!-- form creation date -->
-            <td id="formCrDate-{{row.Id}}" class="date-column" ng-show="!row.deleting" ng-class="{'active' : form.gridModel.currentSort == 'CREATION_DATE'}">
+            <td
+              id="formCrDate-{{row.Id}}"
+              class="date-column"
+              ng-show="!row.deleting"
+              ng-class="{'active' : form.gridModel.currentSort == 'CREATION_DATE'}"
+            >
               {{row.CreationDate | date: form.gridModel.dateFormat}}
             </td>
             <!-- convertion rate -->
-            <td id="convertionRate-{{row.Id}}" class="date-column" ng-show="!row.deleting">
-              <span data-static-tooltip="{{ 'grid.convertion_rate_tooltip' | translate }}" class="to-left all to-bottom medium">
+            <td
+              id="convertionRate-{{row.Id}}"
+              class="date-column"
+              ng-show="!row.deleting"
+            >
+              <span
+                data-static-tooltip="{{ 'grid.convertion_rate_tooltip' | translate }}"
+                class="to-left all to-bottom medium"
+              >
                 {{row.ConvertionRate}}
               </span>
             </td>
             <!-- action columns -->
             <td ng-show="!row.deleting" class="actions-column-alt">
               <div class="icons--container">
-                <span ng-class="{'is--disabled': row.Status== form.FORM_STATE.DRAFT }" data-static-tooltip="{{ 'actions.publish' | translate}}">
-                  <a target="_self" ng-if="!row.IsOld" ng-href="/Lists/Form/Integrate?idForm={{row.Id}}" class="icon-embed"></a>
-                  <a ng-if="row.IsOld" data-ajax="true" class="icon-embed" data-ajax-method="GET" data-ajax-mode="replace" data-ajax-success="openDistributeFormFancy()" data-ajax-update="#DistributeFormFancyContent"
-                     ng-href="/Lists/Form/Distribute?idForm={{row.Id}}" id="forms_embedcode-{{row.Id}}"></a>
+                <span
+                  ng-class="{'is--disabled': row.Status== form.FORM_STATE.DRAFT }"
+                  data-static-tooltip="{{ 'actions.publish' | translate}}"
+                >
+                  <a
+                    target="_self"
+                    ng-if="!row.IsOld"
+                    ng-href="/Lists/Form/Integrate?idForm={{row.Id}}"
+                    class="icon-embed"
+                  ></a>
+                  <a
+                    ng-if="row.IsOld"
+                    data-ajax="true"
+                    class="icon-embed"
+                    data-ajax-method="GET"
+                    data-ajax-mode="replace"
+                    data-ajax-success="openDistributeFormFancy()"
+                    data-ajax-update="#DistributeFormFancyContent"
+                    ng-href="/Lists/Form/Distribute?idForm={{row.Id}}"
+                    id="forms_embedcode-{{row.Id}}"
+                  ></a>
                 </span>
-                <span class="ng-hide" ng-class="{'is--disabled': row.IsOld }" data-static-tooltip="{{ 'actions.duplicate' | translate }}">
-                  <a target="_self" ng-click="duplicateRow" class="icon-duplicate" id="duplicate-{{row.Id}}"></a>
+                <span
+                  class="ng-hide"
+                  ng-class="{'is--disabled': row.IsOld }"
+                  data-static-tooltip="{{ 'actions.duplicate' | translate }}"
+                >
+                  <a
+                    target="_self"
+                    ng-click="duplicateRow"
+                    class="icon-duplicate"
+                    id="duplicate-{{row.Id}}"
+                  ></a>
                 </span>
                 <span data-static-tooltip="{{ 'actions.edit' | translate }}">
-                  <a target="_self" ng-if="row.IsOld" class="icon-grid-edit" ng-href="/Lists/Form/EditExistingForm?idForm={{row.Id}}" id="editOld-{{row.Id}}"></a>
-                  <a target="_self" ng-if="!row.IsOld" class="icon-grid-edit" ng-href="/MSFormsEditor/Editor?idForm={{row.Id}}" id="edit-{{row.Id}}"></a>
-
+                  <a
+                    target="_self"
+                    ng-if="row.IsOld"
+                    class="icon-grid-edit"
+                    ng-href="/Lists/Form/EditExistingForm?idForm={{row.Id}}"
+                    id="editOld-{{row.Id}}"
+                  ></a>
+                  <a
+                    target="_self"
+                    ng-if="!row.IsOld"
+                    class="icon-grid-edit"
+                    ng-href="/MSFormsEditor/Editor?idForm={{row.Id}}"
+                    id="edit-{{row.Id}}"
+                  ></a>
                 </span>
-                <span data-static-tooltip="{{ 'actions.delete' | translate }}" class="to-left">
-                  <a id="delete-{{row.Id}}" ng-click="form.disableDeletedRows(); row.deleting=true;"><img src="../../../images/grid-delete.svg" /></a>
+                <span
+                  data-static-tooltip="{{ 'actions.delete' | translate }}"
+                  class="to-left"
+                >
+                  <a
+                    id="delete-{{row.Id}}"
+                    ng-click="form.disableDeletedRows(); row.deleting=true;"
+                    ><img src="../../../images/grid-delete.svg"
+                  /></a>
                 </span>
               </div>
             </td>
-
           </tr>
         </tbody>
       </table>
-      <div class="no-search-results ng-hide" ng-show="form.gridModel.displayed.length == 0 && !form.gridModel.firstTimeLoad"> {{ 'empty_search' | translate }} </div>
+      <div
+        class="no-search-results ng-hide"
+        ng-show="form.gridModel.displayed.length == 0 && !form.gridModel.firstTimeLoad"
+      >
+        {{ 'empty_search' | translate }}
+      </div>
     </div>
   </div>
 </section>
 
-<div class="loading--container components--center loading--container--editor-grid" ng-show="form.gridModel.firstTimeLoad">
+<div
+  class="loading--container components--center loading--container--editor-grid"
+  ng-show="form.gridModel.firstTimeLoad"
+>
   <span class="loading-icon"></span>
 </div>

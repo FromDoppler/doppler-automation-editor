@@ -1,10 +1,18 @@
 <div class="form-integration-header">
-  <p class="title">{{ 'forms_integrate.headers.integration_iframe.title' | translate }}</p>
-  <span>{{ 'forms_integrate.headers.integration_iframe.text' | translate }}</span>
+  <p class="title">
+    {{ 'forms_integrate.headers.integration_iframe.title' | translate }}
+  </p>
+  <span
+    >{{ 'forms_integrate.headers.integration_iframe.text' | translate }}</span
+  >
 </div>
 <div class="form-integration-box monospace-font">
-  <span>
-      {{form.iframeText}}
-  </span>
+  <span> {{form.iframeText}} </span>
 </div>
-<button class="button button--small button-outline--primary copyToClipboard form-integration-copy-iframe" id="copyLink" data-clipboard-text="{{ form.iframeText }}">{{ 'forms_integrate.headers.integration_embed.button_text' | translate }}</button>
+<button
+  class="button button--small button-outline--primary copyToClipboard form-integration-copy-iframe"
+  id="copyLink"
+  data-clipboard-text="{{ form.iframeText }}"
+>
+  {{ 'forms_integrate.headers.integration_embed.button_text' | translate }}
+</button>

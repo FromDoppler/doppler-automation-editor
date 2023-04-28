@@ -1,24 +1,35 @@
-
 <div class="dp-automation-subject-panel dp-library">
   <div class="field-item field-item--100 dp-wrapper-bd">
     <button type="button" class="dp-show-tips" ng-click="toogleAdvice()">
       <span class="dp-show-text">
-        {{ showAdvice ? 'automation_editor.sidebar.subject_hide_advice' : 'automation_editor.sidebar.subject_show_advice' | translate }}
+        {{ showAdvice ? 'automation_editor.sidebar.subject_hide_advice' :
+        'automation_editor.sidebar.subject_show_advice' | translate }}
       </span>
-      <span class="ms-icon icon-close dp-text-bold-before" ng-class="{'rotation': !showAdvice}"></span>
+      <span
+        class="ms-icon icon-close dp-text-bold-before"
+        ng-class="{'rotation': !showAdvice}"
+      ></span>
     </button>
   </div>
   <div ng-if="showAdvice" class="field-item field-item--100 dp-advice">
-    <div class="dp-suggestion-bd-wrapper" id="dp_campaign_subject_advice_wrapper">
+    <div
+      class="dp-suggestion-bd-wrapper"
+      id="dp_campaign_subject_advice_wrapper"
+    >
       <div class="dp-container">
-
         <div class="padding-b-10">
-          <span class="dp-new">{{ 'automation_editor.sidebar.subject_beta_feature' | translate }}</span>
+          <span class="dp-new"
+            >{{ 'automation_editor.sidebar.subject_beta_feature' | translate
+            }}</span
+          >
         </div>
 
-        <div class="dp-smart-subject-effective-wrapper padding-t-15 padding-b-20">
+        <div
+          class="dp-smart-subject-effective-wrapper padding-t-15 padding-b-20"
+        >
           <span class="subject-more-effective-title">
-            {{ 'automation_editor.sidebar.subject_effective_tittle' | translate }}
+            {{ 'automation_editor.sidebar.subject_effective_tittle' | translate
+            }}
             <strong id="dp_score_result" ng-style="getScoreSubjectStyle()">
               {{ getScoreSubjectLabel() }}
             </strong>
@@ -32,52 +43,95 @@
             <li></li>
           </ul>
 
-          <span class="dp-effective-ia-explain">{{ 'automation_editor.sidebar.subject_effective_ia_explain' | translate }}</span>
-          <section class="dp-subject-ia-section" ng-class="{'hide': showSmartSubjectApiError}">
-            <p class="dp-text-bold">{{ 'automation_editor.sidebar.subject_keyWords' | translate }}</p>
+          <span class="dp-effective-ia-explain"
+            >{{ 'automation_editor.sidebar.subject_effective_ia_explain' |
+            translate }}</span
+          >
+          <section
+            class="dp-subject-ia-section"
+            ng-class="{'hide': showSmartSubjectApiError}"
+          >
+            <p class="dp-text-bold">
+              {{ 'automation_editor.sidebar.subject_keyWords' | translate }}
+            </p>
             <div class="dp-effective-ia-content">
               <span ng-bind-html="keywords"></span>
               <div class="dp-tooltip-container">
-	              <span class="ms-icon icon-info-icon"></span>
-	              <div class="dp-tooltip-top">
-                  <span>{{ 'automation_editor.sidebar.subject_effective_tooltip' | translate }}</span>
-	              </div>
+                <span class="ms-icon icon-info-icon"></span>
+                <div class="dp-tooltip-top">
+                  <span
+                    >{{ 'automation_editor.sidebar.subject_effective_tooltip' |
+                    translate }}</span
+                  >
+                </div>
               </div>
             </div>
           </section>
-          <section class="dp-subject-ia-section" ng-class="{'hide': !showSmartSubjectApiError}">
+          <section
+            class="dp-subject-ia-section"
+            ng-class="{'hide': !showSmartSubjectApiError}"
+          >
             <div class="dp-wrap-message dp-wrap-cancel">
               <span class="dp-message-icon"></span>
               <div class="dp-content-message">
-                <p>{{ 'automation_editor.sidebar.subject_effective_ia_error' | translate }}</p>
+                <p>
+                  {{ 'automation_editor.sidebar.subject_effective_ia_error' |
+                  translate }}
+                </p>
               </div>
             </div>
           </section>
 
-          <p class="text-bold padding-t-20">{{ 'automation_editor.sidebar.subject_industry_title' | translate }}</p>
-          <div class="dp-industry-selector dp-subject-border" id="dp_subject_industry_description" ng-show="!showIndustrySelector">
-            <p id="user_industry_description" ng-bind-html="getDropDownLabel()"></p>
-            <a ng-click="clickToChangeIndustry()" ng-if="canEdit()" ng-bind-html="(userIndustry.Description ? 'automation_editor.sidebar.subject_industry_change' : 'automation_editor.sidebar.subject_industry_select') | translate"></a>
+          <p class="text-bold padding-t-20">
+            {{ 'automation_editor.sidebar.subject_industry_title' | translate }}
+          </p>
+          <div
+            class="dp-industry-selector dp-subject-border"
+            id="dp_subject_industry_description"
+            ng-show="!showIndustrySelector"
+          >
+            <p
+              id="user_industry_description"
+              ng-bind-html="getDropDownLabel()"
+            ></p>
+            <a
+              ng-click="clickToChangeIndustry()"
+              ng-if="canEdit()"
+              ng-bind-html="(userIndustry.Description ? 'automation_editor.sidebar.subject_industry_change' : 'automation_editor.sidebar.subject_industry_select') | translate"
+            ></a>
           </div>
 
-          <div class="dp-industry-selector dp-subject-border field-item" id="dp_subject_industry_selector" ng-show="showIndustrySelector">
+          <div
+            class="dp-industry-selector dp-subject-border field-item"
+            id="dp_subject_industry_selector"
+            ng-show="showIndustrySelector"
+          >
             <ul class="field-group">
-              <li class="field-item ">
-                <dp-editor-dropdown class="dropdown dropdown--medium" id="industrySelector" name="industrySelector" property="industrySelector"
+              <li class="field-item">
+                <dp-editor-dropdown
+                  class="dropdown dropdown--medium"
+                  id="industrySelector"
+                  name="industrySelector"
+                  property="industrySelector"
                   options="industriesList"
                   key-label="'Description'"
                   key-value="'IdIndustry'"
                   label="getDropDownLabel()"
                   on-select-option="onIndustrySelected(option)"
                   value-selected="lastIndustrySelected.IdIndustry"
-                  ng-disabled="!canEdit()">
+                  ng-disabled="!canEdit()"
+                >
                 </dp-editor-dropdown>
               </li>
               <li class="field-item">
-                <button id="btn_set_subject_industry" class="dp-button button-medium primary-green"
+                <button
+                  id="btn_set_subject_industry"
+                  class="dp-button button-medium primary-green"
                   ng-class="{'button--centered-loading': isSavingIndustry}"
                   ng-disabled="!canEdit()"
-                  ng-click="confirmIndustryChange()">{{buttonConfirmText}}
+                  ng-click="confirmIndustryChange()"
+                >
+                  {{buttonConfirmText}}
                 </button>
               </li>
             </ul>
@@ -86,14 +140,22 @@
           <div class="dp-temporal-message" ng-show="showIndustrySaveMessage">
             <div class="dp-wrap-message" ng-class="industrySaveMessageClass">
               <span class="dp-message-icon"></span>
-              <div class="dp-content-message dp-content-full" ng-bind-html="industrySaveMessageText"></div>
+              <div
+                class="dp-content-message dp-content-full"
+                ng-bind-html="industrySaveMessageText"
+              ></div>
             </div>
           </div>
 
-          <div class="bg-suggestion padding-t-10" ng-show="showIndustrySaveSuggestionMessage">
+          <div
+            class="bg-suggestion padding-t-10"
+            ng-show="showIndustrySaveSuggestionMessage"
+          >
             <ul class="dp-tips-list">
               <li class="advice-warning">
-                <span ng-bind-html="'automation_editor.sidebar.subject_industry_save_suggestion' | translate"></span>
+                <span
+                  ng-bind-html="'automation_editor.sidebar.subject_industry_save_suggestion' | translate"
+                ></span>
               </li>
             </ul>
           </div>
@@ -101,47 +163,88 @@
         <div class="dp-rowflex">
           <div class="col-lg-12 col-md-12 dp-ghostwhite padding-b-10">
             <nav class="tabs-wrapper">
-              <ul class=" tabs-nav">
+              <ul class="tabs-nav">
                 <li class="tab--item">
-                  <a href="#" class="tab--link active">{{ 'automation_editor.sidebar.subject_suggestion_title' | translate }}</a>
+                  <a href="#" class="tab--link active"
+                    >{{ 'automation_editor.sidebar.subject_suggestion_title' |
+                    translate }}</a
+                  >
                 </li>
               </ul>
               <div class="tabs-bg"></div>
             </nav>
             <section class="tab--container col-sm-12">
-              <article class="tab--content active padding-t-10" id="dp_suggestion_tab_content">
+              <article
+                class="tab--content active padding-t-10"
+                id="dp_suggestion_tab_content"
+              >
                 <div class="bg-suggestion">
                   <ul class="dp-tips-list">
-                    <li id="subject_suggestion_item_short" ng-class="statusTips.character">
+                    <li
+                      id="subject_suggestion_item_short"
+                      ng-class="statusTips.character"
+                    >
                       <span>
-                        <strong>{{ 'automation_editor.sidebar.subject_suggestion_short_title' | translate }}</strong>
+                        <strong
+                          >{{
+                          'automation_editor.sidebar.subject_suggestion_short_title'
+                          | translate }}</strong
+                        >
                       </span>
                       <p id="subject_suggestion_item_short_description">
-                        {{ 'automation_editor.sidebar.subject_suggestion_short_description' | translate }}
+                        {{
+                        'automation_editor.sidebar.subject_suggestion_short_description'
+                        | translate }}
                       </p>
                     </li>
-                    <li id="subject_suggestion_item_emojis" ng-class="statusTips.emoji">
+                    <li
+                      id="subject_suggestion_item_emojis"
+                      ng-class="statusTips.emoji"
+                    >
                       <span>
-                        <strong>{{ 'automation_editor.sidebar.subject_suggestion_emojis_title' | translate }}</strong>
+                        <strong
+                          >{{
+                          'automation_editor.sidebar.subject_suggestion_emojis_title'
+                          | translate }}</strong
+                        >
                       </span>
                       <p id="subject_suggestion_item_emojis_description">
-                        {{ 'automation_editor.sidebar.subject_suggestion_emojis_description' | translate }}
+                        {{
+                        'automation_editor.sidebar.subject_suggestion_emojis_description'
+                        | translate }}
                       </p>
                     </li>
-                    <li id="subject_suggestion_item_custom" ng-class="statusTips.custom_field">
+                    <li
+                      id="subject_suggestion_item_custom"
+                      ng-class="statusTips.custom_field"
+                    >
                       <span>
-                        <strong>{{ 'automation_editor.sidebar.subject_suggestion_custom_title' | translate }}</strong>
+                        <strong
+                          >{{
+                          'automation_editor.sidebar.subject_suggestion_custom_title'
+                          | translate }}</strong
+                        >
                       </span>
-                      <p id="subject_suggestion_item_custom_description"
-                         ng-bind-html="'automation_editor.sidebar.subject_suggestion_custom_description' | translate ">
-                      </p>
+                      <p
+                        id="subject_suggestion_item_custom_description"
+                        ng-bind-html="'automation_editor.sidebar.subject_suggestion_custom_description' | translate "
+                      ></p>
                     </li>
-                    <li id="subject_suggestion_item_special_char" ng-class="statusTips.special_char">
+                    <li
+                      id="subject_suggestion_item_special_char"
+                      ng-class="statusTips.special_char"
+                    >
                       <span>
-                        <strong>{{ 'automation_editor.sidebar.subject_suggestion_special_char_title' | translate }}</strong>
+                        <strong
+                          >{{
+                          'automation_editor.sidebar.subject_suggestion_special_char_title'
+                          | translate }}</strong
+                        >
                       </span>
                       <p id="subject_suggestion_item_special_char_description">
-                        {{ 'automation_editor.sidebar.subject_suggestion_special_char_description' | translate }}
+                        {{
+                        'automation_editor.sidebar.subject_suggestion_special_char_description'
+                        | translate }}
                       </p>
                     </li>
                   </ul>

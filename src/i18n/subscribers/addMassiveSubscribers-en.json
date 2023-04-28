@@ -1,42 +1,42 @@
 {
-  "addMassiveSubscribers" : {
+  "addMassiveSubscribers": {
     "header": {
-    "back_subscribers_text": "Master Subscribers",
-    "screen_description": "Associate to new List",
-    "title" : "Create a new List",
-    "description_1": "We'll associate the",
-    "description_1_singular": "We'll associate the ",
-    "quantity_subscribers_selected_text": " Subscribers",
-    "quantity_subscribers_selected_text_singular": "Subscriber",
-    "description_2": " who meet the selected criteria ",
-    "description_2_singular": " who meet the selected criteria ",
-    "status": "Status",
-    "scoring": "Scoring",
-    "origin": "Origin",
-    "description_3": " to the List you'll create. Do you want to modify the filtering criteria? ",
-    "back_subscribers_text_2": "Go back to the previous step",
-    "quantity_subsbribers_not_associated_text": "Subscribers",
-    "quantity_subsbribers_not_associated_text_singular": "1 Subscriber",
-    "description_4": "can't be associated to the List because they are",
-    "description_4_singular": "can't be associated to the List because it's",
-    "description_5": "To active them, ",
-    "description_5_singular": "To active it, ",
-    "activation_link": "UPGRADE YOUR PLAN"
+      "back_subscribers_text": "Master Subscribers",
+      "screen_description": "Associate to new List",
+      "title": "Create a new List",
+      "description_1": "We'll associate the",
+      "description_1_singular": "We'll associate the ",
+      "quantity_subscribers_selected_text": " Subscribers",
+      "quantity_subscribers_selected_text_singular": "Subscriber",
+      "description_2": " who meet the selected criteria ",
+      "description_2_singular": " who meet the selected criteria ",
+      "status": "Status",
+      "scoring": "Scoring",
+      "origin": "Origin",
+      "description_3": " to the List you'll create. Do you want to modify the filtering criteria? ",
+      "back_subscribers_text_2": "Go back to the previous step",
+      "quantity_subsbribers_not_associated_text": "Subscribers",
+      "quantity_subsbribers_not_associated_text_singular": "1 Subscriber",
+      "description_4": "can't be associated to the List because they are",
+      "description_4_singular": "can't be associated to the List because it's",
+      "description_5": "To active them, ",
+      "description_5_singular": "To active it, ",
+      "activation_link": "UPGRADE YOUR PLAN"
     },
     "title_box": "New List name",
     "duplicated_list_name_error": "Ouch! You've already used this name for another List.",
     "character_limit_error": "Ouch! You've reached the maximum number of characters.",
     "status_descriptions": {
-      "status_0" : "All status",
-      "status_1" : "Active",
-      "status_2" : "Active not Associate to a List",
-      "status_3" : "Removed by Hard-Bounced",
-      "status_4" : "Removed by Soft-Bounced",
-      "status_5" : "Removed by Subscriber",
-      "status_6" : "Removed by Never-Opened",
-      "status_7" : "Pending",
-      "status_8" : "Removed by Client",
-      "status_9" : "On Hold waiting for Upgrade"
+      "status_0": "All status",
+      "status_1": "Active",
+      "status_2": "Active not Associate to a List",
+      "status_3": "Removed by Hard-Bounced",
+      "status_4": "Removed by Soft-Bounced",
+      "status_5": "Removed by Subscriber",
+      "status_6": "Removed by Never-Opened",
+      "status_7": "Pending",
+      "status_8": "Removed by Client",
+      "status_9": "On Hold waiting for Upgrade"
     },
     "scoring_descriptions": {
       "all_scorings": "All Scoring",
@@ -53,14 +53,14 @@
       "origin_6": "RestAPI",
       "origin_8": "Tiendanube",
       "origin_7": "TokkoBroker",
-      "origin_9" : "DataHub"
+      "origin_9": "DataHub"
     },
     "subscribers_not_associated_status": {
       "waiting_upgrade_plan": "On Hold Waiting for Upgrade"
     },
-    "footer" : {
-      "button_cancel" : "Cancel",
-      "button_create" : "Create and Associate"
+    "footer": {
+      "button_cancel": "Cancel",
+      "button_create": "Create and Associate"
     }
   }
 }

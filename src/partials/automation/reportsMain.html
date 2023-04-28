@@ -6,7 +6,13 @@
           <nav class="dp-breadcrumb">
             <ul>
               <li>
-                <a id="link-to-list" href="/Automation/Automation/AutomationApp/" target="_self">{{ 'automationTypes.automation_breadcrumb.all_automations' | translate }}</a>
+                <a
+                  id="link-to-list"
+                  href="/Automation/Automation/AutomationApp/"
+                  target="_self"
+                  >{{ 'automationTypes.automation_breadcrumb.all_automations' |
+                  translate }}</a
+                >
               </li>
               <li>
                 <span>{{taskName}}</span>
@@ -17,174 +23,431 @@
       </div>
     </div>
   </header>
-  </div>
+</div>
 
-		<div class="automation-summary-section" id="reports-header"> <!-- header -->
-				<h2 id="task_name_title" class="sectionBox-title">{{taskName}}</h2>
-      <ul class="menu-horizontal">
-        <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==0}" ng-click="onClickTabReport(0)">{{ 'ScheduledTask_Reports_Campaigns_title' | translate }}</li>
-        <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==1}" ng-click="onClickTabReport(1)">{{ 'ScheduledTask_Reports_Sms_title' | translate }}</li>
-        <li ng-show="reportsType==2" class="item-menu" ng-class="{'active':reportsType==2}" ng-click="onClickTabReport(2)">{{ 'ScheduledTask_Reports_Push_title' | translate }}</li>
-      </ul>
-				<div class="automation-summary-section__container">
+<div class="automation-summary-section" id="reports-header">
+  <!-- header -->
+  <h2 id="task_name_title" class="sectionBox-title">{{taskName}}</h2>
+  <ul class="menu-horizontal">
+    <li
+      ng-show="reportsType!=2"
+      class="item-menu"
+      ng-class="{'active':reportsType==0}"
+      ng-click="onClickTabReport(0)"
+    >
+      {{ 'ScheduledTask_Reports_Campaigns_title' | translate }}
+    </li>
+    <li
+      ng-show="reportsType!=2"
+      class="item-menu"
+      ng-class="{'active':reportsType==1}"
+      ng-click="onClickTabReport(1)"
+    >
+      {{ 'ScheduledTask_Reports_Sms_title' | translate }}
+    </li>
+    <li
+      ng-show="reportsType==2"
+      class="item-menu"
+      ng-class="{'active':reportsType==2}"
+      ng-click="onClickTabReport(2)"
+    >
+      {{ 'ScheduledTask_Reports_Push_title' | translate }}
+    </li>
+  </ul>
+  <div class="automation-summary-section__container">
+    <div class="task-section-subtitle">
+      <div
+        class="text-element-container"
+        ng-class="{'sms-text-element-container':reportsType==1}"
+      >
+        <p class="summary-phrase">
+          {{'ScheduledTask_Summary_Subtitle_FrequencyType1_Part0' | translate}}
+        </p>
+        <div class="fields-list" ng-if="frecuencyType == 1">
+          <span class="titip-top titip-fade">
+            <span class="fields-list-inside">{{fieldsText}}.</span>
+            <span class="titip-content text-sm"
+              ><span ng-bind-html="getHtml(fieldsTextTooltip)"></span>
+            </span>
+          </span>
+        </div>
 
-
-			<div class="task-section-subtitle">
-				<div class="text-element-container" ng-class="{'sms-text-element-container':reportsType==1}">
-					<p class="summary-phrase">{{'ScheduledTask_Summary_Subtitle_FrequencyType1_Part0' | translate}}</p>
-					<div class="fields-list" ng-if="frecuencyType == 1">
-						<span class="titip-top titip-fade">
-							<span class="fields-list-inside">{{fieldsText}}.</span>
-							<span class="titip-content text-sm"><span ng-bind-html="getHtml(fieldsTextTooltip)"></span>
-							</span>
-						</span>
-					</div>
-
-					<div class="fields-list" ng-if="frecuencyType == 2">
-						<span>{{'ScheduledTask_Summary_Subtitle_FrequencyType2_Part1' | translate }}
-							<strong><span ng-repeat=" day in dayPerWeek"> <span ng-show="$last && !$first">{{'ScheduledTask_Summary_Day_And' | translate }} </span> {{day}}<span ng-if="!$last && $index < (dayPerWeek.length - 2)">, </span>  </span></strong>
-						</span>
-					</div>
-					<div class="fields-list" ng-if="frecuencyType == 3">
-						<span>{{'ScheduledTask_Summary_Subtitle_FrequencyType3_Part1' | translate:{dayPerMonth:dayPerMonth} }}</span>
-					</div>
-				</div>
-            </div>
-
-
-      <div class="report-options">
-        <dropdown id="dd-when-sent-filter" class="dropdown report-filter" list="options" ng-model="selectedOption.id" ng-change="changeOption(selectedOption.id);" property="name" id-value="id"></dropdown>
-
-        <div class="action-filter" ng-show="reportsType==0" tabindex="0" ng-blur="onBlurFilter($event, showActionFilter, toggleActionFilter);">
-          <!-- action filter -->
-          <a id="dd-actions" class="fake-dropdown report-filter" ng-click="toggleActionFilter();clearActionFilters();">{{'ScheduledTask_Reports_Filter_Action' | translate}} <span class="dropdown-arrow"></span></a>
-          <div class="fake-dropdown--container" ng-show="showActionFilter">
-            <hr />
-            <div class="fake-dropdown-elements" id="actionList" ng-nicescroll=ng-nicescroll nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}">
-              <div ng-repeat="item in actions">
-                <div class="action--container">
-                  <a ng-if="item.urlPreview == ''" class="thumb-preview-nonexistent"></a>
-                  <img ng-if="item.urlPreview != ''" ng-src="{{item.urlPreview}}" dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg" class="html-preview-img" alt="campaign preview" />
-                  <checkbox ng-model="item.selected"></checkbox>
-                  <span class="action-name">{{item.name}}</span>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div class="button--container">
-              <a ng-click="toggleActionFilter();clearActionFilters();">{{'ScheduledTask_Reports_CancelFilter' | translate}}</a> <button class="green-small" ng-click="filterActions();">{{'ScheduledTask_Reports_Filter' | translate}}</button>
-            </div>
-          </div>
-        </div><!-- action filter -->
-
-        <div class="action-filter" ng-show="reportsType==1"  tabindex="0" ng-blur="onBlurFilter($event, showSmsFilter, toggleSmsFilter);">
-          <!-- sms filter -->
-          <a id="sms-actions" class="fake-dropdown report-filter" ng-click="toggleSmsFilter();">{{'ScheduledTask_Reports_Filter_Action' | translate}} <span class="dropdown-arrow"></span></a>
-          <div class="fake-dropdown--container" ng-show="showSmsFilter">
-            <hr />
-            <div class="fake-dropdown-elements" id="smsList" ng-nicescroll=ng-nicescroll nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}">
-              <div ng-repeat="item in itemsSms">
-                <div class="action--container">
-                  <img src="/../images/automation-sms.svg" dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg" class="html-preview-img sms-image" alt="campaign preview" />
-                  <checkbox ng-model="item.selected"></checkbox>
-                  <span class="action-name">{{item.name}}</span>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div class="button--container">
-              <a ng-click="toggleSmsFilter();clearSmsFilters();">{{'ScheduledTask_Reports_CancelFilter' | translate}}</a> <button class="green-small" ng-click="filterSms();">{{'ScheduledTask_Reports_Filter' | translate}}</button>
-            </div>
-          </div>
-        </div><!-- sms filter -->
-
-        <div class="action-filter" ng-show="reportsType==2" tabindex="0" ng-blur="onBlurFilter($event, showPushFilter, togglePushFilter);">
-          <!-- push filter -->
-          <a id="push-actions" class="fake-dropdown report-filter" ng-click="togglePushFilter();">{{'ScheduledTask_Reports_Filter_Action_Push' | translate}} <span class="dropdown-arrow"></span></a>
-          <div class="fake-dropdown--container" ng-show="showPushFilter">
-            <hr />
-            <div class="fake-dropdown-elements" id="pushList" ng-nicescroll=ng-nicescroll nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}">
-              <div ng-repeat="item in itemsPush">
-                <div class="action--container">
-                  <img src="/../images/automation-push_notification.svg" dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg" class="html-preview-img sms-image" alt="campaign preview" />
-                  <checkbox ng-model="item.selected"></checkbox>
-                  <span>
-                    <p>{{item.domain}}</p>
-                    <p>{{item.title}}</p>
-                    <p>{{item.body}}</p>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div class="button--container">
-              <a ng-click="togglePushFilter();clearPushFilters();">{{'ScheduledTask_Reports_CancelFilter' | translate}}</a> <button class="green-small" ng-click="filterPush();">{{'ScheduledTask_Reports_Filter' | translate}}</button>
-            </div>
-          </div>
-        </div><!-- push filter -->
-
+        <div class="fields-list" ng-if="frecuencyType == 2">
+          <span
+            >{{'ScheduledTask_Summary_Subtitle_FrequencyType2_Part1' | translate
+            }}
+            <strong
+              ><span ng-repeat=" day in dayPerWeek">
+                <span ng-show="$last && !$first"
+                  >{{'ScheduledTask_Summary_Day_And' | translate }}
+                </span>
+                {{day}}<span ng-if="!$last && $index < (dayPerWeek.length - 2)"
+                  >,
+                </span>
+              </span></strong
+            >
+          </span>
+        </div>
+        <div class="fields-list" ng-if="frecuencyType == 3">
+          <span
+            >{{'ScheduledTask_Summary_Subtitle_FrequencyType3_Part1' |
+            translate:{dayPerMonth:dayPerMonth} }}</span
+          >
+        </div>
       </div>
+    </div>
 
+    <div class="report-options">
+      <dropdown
+        id="dd-when-sent-filter"
+        class="dropdown report-filter"
+        list="options"
+        ng-model="selectedOption.id"
+        ng-change="changeOption(selectedOption.id);"
+        property="name"
+        id-value="id"
+      ></dropdown>
 
-					<a class="svg-icon dash" ng-show="reportsType==0" ng-class="{'active':selectedView=='dashboard'}" ng-click="selectedView = 'dashboard'" > <!-- icon dashboard -->
-						<span class="titip-top titip-fade" data-title="{{'ScheduledTask_Reports_GraphicReport' | translate}}">
-						<?xml version="1.0" encoding="utf-8"?>
-						<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-						<g>
-							<g>
-								<rect fill-rule="evenodd" clip-rule="evenodd" width="7" height="4"/>
-								<rect y="6" fill-rule="evenodd" clip-rule="evenodd" width="16" height="4"/>
-							</g>
-							<rect x="9" fill-rule="evenodd" clip-rule="evenodd" width="7" height="4"/>
-							<rect y="12" fill-rule="evenodd" clip-rule="evenodd" width="7" height="4"/>
-							<rect x="9" y="12" fill-rule="evenodd" clip-rule="evenodd" width="7" height="4"/>
-						</g>
-						</svg>
-						</span>
-					</a><!-- icon dashboard -->
+      <div
+        class="action-filter"
+        ng-show="reportsType==0"
+        tabindex="0"
+        ng-blur="onBlurFilter($event, showActionFilter, toggleActionFilter);"
+      >
+        <!-- action filter -->
+        <a
+          id="dd-actions"
+          class="fake-dropdown report-filter"
+          ng-click="toggleActionFilter();clearActionFilters();"
+          >{{'ScheduledTask_Reports_Filter_Action' | translate}}
+          <span class="dropdown-arrow"></span
+        ></a>
+        <div class="fake-dropdown--container" ng-show="showActionFilter">
+          <hr />
+          <div
+            class="fake-dropdown-elements"
+            id="actionList"
+            ng-nicescroll="ng-nicescroll"
+            nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}"
+          >
+            <div ng-repeat="item in actions">
+              <div class="action--container">
+                <a
+                  ng-if="item.urlPreview == ''"
+                  class="thumb-preview-nonexistent"
+                ></a>
+                <img
+                  ng-if="item.urlPreview != ''"
+                  ng-src="{{item.urlPreview}}"
+                  dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg"
+                  class="html-preview-img"
+                  alt="campaign preview"
+                />
+                <checkbox ng-model="item.selected"></checkbox>
+                <span class="action-name">{{item.name}}</span>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="button--container">
+            <a ng-click="toggleActionFilter();clearActionFilters();"
+              >{{'ScheduledTask_Reports_CancelFilter' | translate}}</a
+            >
+            <button class="green-small" ng-click="filterActions();">
+              {{'ScheduledTask_Reports_Filter' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- action filter -->
 
+      <div
+        class="action-filter"
+        ng-show="reportsType==1"
+        tabindex="0"
+        ng-blur="onBlurFilter($event, showSmsFilter, toggleSmsFilter);"
+      >
+        <!-- sms filter -->
+        <a
+          id="sms-actions"
+          class="fake-dropdown report-filter"
+          ng-click="toggleSmsFilter();"
+          >{{'ScheduledTask_Reports_Filter_Action' | translate}}
+          <span class="dropdown-arrow"></span
+        ></a>
+        <div class="fake-dropdown--container" ng-show="showSmsFilter">
+          <hr />
+          <div
+            class="fake-dropdown-elements"
+            id="smsList"
+            ng-nicescroll="ng-nicescroll"
+            nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}"
+          >
+            <div ng-repeat="item in itemsSms">
+              <div class="action--container">
+                <img
+                  src="/../images/automation-sms.svg"
+                  dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg"
+                  class="html-preview-img sms-image"
+                  alt="campaign preview"
+                />
+                <checkbox ng-model="item.selected"></checkbox>
+                <span class="action-name">{{item.name}}</span>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="button--container">
+            <a ng-click="toggleSmsFilter();clearSmsFilters();"
+              >{{'ScheduledTask_Reports_CancelFilter' | translate}}</a
+            >
+            <button class="green-small" ng-click="filterSms();">
+              {{'ScheduledTask_Reports_Filter' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- sms filter -->
 
-					<span class="icon-divider" ng-show="reportsType==0"></span>
+      <div
+        class="action-filter"
+        ng-show="reportsType==2"
+        tabindex="0"
+        ng-blur="onBlurFilter($event, showPushFilter, togglePushFilter);"
+      >
+        <!-- push filter -->
+        <a
+          id="push-actions"
+          class="fake-dropdown report-filter"
+          ng-click="togglePushFilter();"
+          >{{'ScheduledTask_Reports_Filter_Action_Push' | translate}}
+          <span class="dropdown-arrow"></span
+        ></a>
+        <div class="fake-dropdown--container" ng-show="showPushFilter">
+          <hr />
+          <div
+            class="fake-dropdown-elements"
+            id="pushList"
+            ng-nicescroll="ng-nicescroll"
+            nice-option="{iframeautoresize: true,autohidemode: false, background: '#DCDCDC', cursorcolor: '#7F7F7F', cursorborder: 0, railalign: 'center', zindex: 99999}"
+          >
+            <div ng-repeat="item in itemsPush">
+              <div class="action--container">
+                <img
+                  src="/../images/automation-push_notification.svg"
+                  dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg"
+                  class="html-preview-img sms-image"
+                  alt="campaign preview"
+                />
+                <checkbox ng-model="item.selected"></checkbox>
+                <span>
+                  <p>{{item.domain}}</p>
+                  <p>{{item.title}}</p>
+                  <p>{{item.body}}</p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="button--container">
+            <a ng-click="togglePushFilter();clearPushFilters();"
+              >{{'ScheduledTask_Reports_CancelFilter' | translate}}</a
+            >
+            <button class="green-small" ng-click="filterPush();">
+              {{'ScheduledTask_Reports_Filter' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- push filter -->
+    </div>
 
-					<a class="svg-icon details" ng-show="reportsType==0" ng-class="{'active':selectedView=='details'}" ng-click="selectedView = 'details'"><!-- icon details -->
-						<span class="titip-top titip-fade" data-title="{{'ScheduledTask_Reports_DetailReport' | translate}}">
-						<?xml version="1.0" encoding="utf-8"?>
-						<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-						<svg version="1.1" id="Svg1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-						<g>
-							<rect y="5" fill-rule="evenodd" clip-rule="evenodd" width="16" height="2"/>
-							<rect y="9" fill-rule="evenodd" clip-rule="evenodd" width="16" height="2"/>
-							<rect y="13" fill-rule="evenodd" clip-rule="evenodd" width="16" height="2"/>
-							<rect y="1" fill-rule="evenodd" clip-rule="evenodd" width="16" height="2"/>
-						</g>
-						</svg>
-						</span>
-					</a><!-- icon details -->
+    <a
+      class="svg-icon dash"
+      ng-show="reportsType==0"
+      ng-class="{'active':selectedView=='dashboard'}"
+      ng-click="selectedView = 'dashboard'"
+    >
+      <!-- icon dashboard -->
+      <span
+        class="titip-top titip-fade"
+        data-title="{{'ScheduledTask_Reports_GraphicReport' | translate}}"
+      >
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="16px"
+          height="16px"
+          viewBox="0 0 16 16"
+          enable-background="new 0 0 16 16"
+          xml:space="preserve"
+        >
+          <g>
+            <g>
+              <rect
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                width="7"
+                height="4"
+              />
+              <rect
+                y="6"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                width="16"
+                height="4"
+              />
+            </g>
+            <rect
+              x="9"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="7"
+              height="4"
+            />
+            <rect
+              y="12"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="7"
+              height="4"
+            />
+            <rect
+              x="9"
+              y="12"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="7"
+              height="4"
+            />
+          </g>
+        </svg>
+      </span> </a
+    ><!-- icon dashboard -->
 
-				</div>
-		</div><!-- header -->
+    <span class="icon-divider" ng-show="reportsType==0"></span>
 
-		<div class="automation-report-container dp-library" ng-show="reportsType == 0">
-			<div class="automation-report-card">
-				<h3 class="sectionBox-title-secondary"><span class="dpicon iconapp-infographic-file"></span>{{'ScheduledTask_Export_Automation_Campaign_Title' | translate}}</h3>
-				<p class="automation-report-description">{{'ScheduledTask_Export_Automation_Campaign_Description' | translate}}</p>
-				<button type="button" class="dp-button button-big primary-green" ng-click="getCsvReport('campaign')"><span class="dpicon iconapp-downloading"></span> {{'ScheduledTask_Export_Automation_Download' | translate}}</button>
-			</div>
-			<div class="automation-report-card">
-				<h3 class="sectionBox-title-secondary"><span class="dpicon iconapp-employee-search"></span> {{'ScheduledTask_Export_Automation_Subscriber_Title' | translate}}</h3>
-				<p class="automation-report-description">{{'ScheduledTask_Export_Automation_Subscriber_Description' | translate}}</p>
-				<button type="button" class="dp-button button-big primary-green" ng-click="getCsvReport('contact')"><span class="dpicon iconapp-downloading"></span> {{'ScheduledTask_Export_Automation_Download' | translate}}</button>
-			</div>
-		</div>
+    <a
+      class="svg-icon details"
+      ng-show="reportsType==0"
+      ng-class="{'active':selectedView=='details'}"
+      ng-click="selectedView = 'details'"
+      ><!-- icon details -->
+      <span
+        class="titip-top titip-fade"
+        data-title="{{'ScheduledTask_Reports_DetailReport' | translate}}"
+      >
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <svg
+          version="1.1"
+          id="Svg1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="16px"
+          height="16px"
+          viewBox="0 0 16 16"
+          enable-background="new 0 0 16 16"
+          xml:space="preserve"
+        >
+          <g>
+            <rect
+              y="5"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="16"
+              height="2"
+            />
+            <rect
+              y="9"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="16"
+              height="2"
+            />
+            <rect
+              y="13"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="16"
+              height="2"
+            />
+            <rect
+              y="1"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              width="16"
+              height="2"
+            />
+          </g>
+        </svg>
+      </span> </a
+    ><!-- icon details -->
+  </div>
+</div>
+<!-- header -->
 
-		<div ng-include="'angularjs/partials/automation/ReportDetailsView.html'" ng-show="selectedView == 'details' && reportsType==0"></div>
+<div class="automation-report-container dp-library" ng-show="reportsType == 0">
+  <div class="automation-report-card">
+    <h3 class="sectionBox-title-secondary">
+      <span class="dpicon iconapp-infographic-file"></span
+      >{{'ScheduledTask_Export_Automation_Campaign_Title' | translate}}
+    </h3>
+    <p class="automation-report-description">
+      {{'ScheduledTask_Export_Automation_Campaign_Description' | translate}}
+    </p>
+    <button
+      type="button"
+      class="dp-button button-big primary-green"
+      ng-click="getCsvReport('campaign')"
+    >
+      <span class="dpicon iconapp-downloading"></span>
+      {{'ScheduledTask_Export_Automation_Download' | translate}}
+    </button>
+  </div>
+  <div class="automation-report-card">
+    <h3 class="sectionBox-title-secondary">
+      <span class="dpicon iconapp-employee-search"></span>
+      {{'ScheduledTask_Export_Automation_Subscriber_Title' | translate}}
+    </h3>
+    <p class="automation-report-description">
+      {{'ScheduledTask_Export_Automation_Subscriber_Description' | translate}}
+    </p>
+    <button
+      type="button"
+      class="dp-button button-big primary-green"
+      ng-click="getCsvReport('contact')"
+    >
+      <span class="dpicon iconapp-downloading"></span>
+      {{'ScheduledTask_Export_Automation_Download' | translate}}
+    </button>
+  </div>
+</div>
 
-    <div ng-include="'angularjs/partials/automation/ReportSmsDetailsView.html'" ng-show="reportsType==1"></div>
-    
-    <div ng-include="'angularjs/partials/automation/ReportPushDetailsView.html'" ng-show="reportsType==2"></div>
+<div
+  ng-include="'angularjs/partials/automation/ReportDetailsView.html'"
+  ng-show="selectedView == 'details' && reportsType==0"
+></div>
 
-		<div ng-include="'angularjs/partials/automation/ReportGraphicsView.html'" ng-show="selectedView == 'dashboard' && reportsType==0"></div>
+<div
+  ng-include="'angularjs/partials/automation/ReportSmsDetailsView.html'"
+  ng-show="reportsType==1"
+></div>
 
+<div
+  ng-include="'angularjs/partials/automation/ReportPushDetailsView.html'"
+  ng-show="reportsType==2"
+></div>
+
+<div
+  ng-include="'angularjs/partials/automation/ReportGraphicsView.html'"
+  ng-show="selectedView == 'dashboard' && reportsType==0"
+></div>

@@ -1,46 +1,132 @@
 <div class="subscribers-scoring">
   <div class="panel-box-app panel-box-app--ctrlpanel">
     <h3>{{ 'subscribers_scoring.title' | translate }}</h3>
-    <p class="description text--small">{{ 'subscribers_scoring.description' | translate }} <a target="_blank" href="{{ 'subscribers_scoring.help_link' | translate }}">{{ 'subscribers_scoring.help' | translate }}</a>.</p>
+    <p class="description text--small">
+      {{ 'subscribers_scoring.description' | translate }}
+      <a
+        target="_blank"
+        href="{{ 'subscribers_scoring.help_link' | translate }}"
+        >{{ 'subscribers_scoring.help' | translate }}</a
+      >.
+    </p>
 
-    <div ng-repeat="score in scores track by $index" class="inputContainer scoring-box">
-      <p><b>{{ 'subscribers_scoring.stars_description.first_part_bold' | translate}} {{scores.length - $index}} {{$last ? 'subscribers_scoring.stars_description.stars_singular' : 'subscribers_scoring.stars_description.stars_plural' | translate}}</b> {{ 'subscribers_scoring.stars_description.second_part' | translate}} <dp-score-stars  total-stars="totalStars" full-stars="score.Score"></dp-score-stars></p>
+    <div
+      ng-repeat="score in scores track by $index"
+      class="inputContainer scoring-box"
+    >
+      <p>
+        <b
+          >{{ 'subscribers_scoring.stars_description.first_part_bold' |
+          translate}} {{scores.length - $index}} {{$last ?
+          'subscribers_scoring.stars_description.stars_singular' :
+          'subscribers_scoring.stars_description.stars_plural' | translate}}</b
+        >
+        {{ 'subscribers_scoring.stars_description.second_part' | translate}}
+        <dp-score-stars
+          total-stars="totalStars"
+          full-stars="score.Score"
+        ></dp-score-stars>
+      </p>
       <div class="selectContainer">
         <div class="subscribersScoringSelect">
-          <dp-editor-dropdown ng-click="validError()" ng-disabled="$last" arrow-selection="true" options="!$last ? scoringValues : 0" label="score.OpenAmount.toString()" value-selected="score.OpenAmount" on-select-option="onValueSelected($index, option.value, 'OpenAmount', $last)" on-select-prev-option="onValueSelected($index, score.OpenAmount + 1, 'OpenAmount', $last)" on-select-next-option="onValueSelected($index, score.OpenAmount - 1, 'OpenAmount', $last)"> </dp-editor-dropdown>
+          <dp-editor-dropdown
+            ng-click="validError()"
+            ng-disabled="$last"
+            arrow-selection="true"
+            options="!$last ? scoringValues : 0"
+            label="score.OpenAmount.toString()"
+            value-selected="score.OpenAmount"
+            on-select-option="onValueSelected($index, option.value, 'OpenAmount', $last)"
+            on-select-prev-option="onValueSelected($index, score.OpenAmount + 1, 'OpenAmount', $last)"
+            on-select-next-option="onValueSelected($index, score.OpenAmount - 1, 'OpenAmount', $last)"
+          >
+          </dp-editor-dropdown>
         </div>
-        <div class="subscribersScoringSelect-description"><span><b>{{ 'subscribers_scoring.openings' | translate }}</b></span></div>
+        <div class="subscribersScoringSelect-description">
+          <span><b>{{ 'subscribers_scoring.openings' | translate }}</b></span>
+        </div>
       </div>
       <div class="selectContainer">
         <div class="subscribersScoringSelect">
-          <dp-editor-dropdown ng-click="validError()" ng-disabled="$last" arrow-selection="true" options="!$last ? scoringValues : 0" label="score.ClickAmount.toString()" value-selected="score.ClickAmount" on-select-option="onValueSelected($index, option.value, 'ClickAmount', $last)" on-select-prev-option="onValueSelected($index, score.ClickAmount + 1, 'ClickAmount', $last)" on-select-next-option="onValueSelected($index, score.ClickAmount - 1, 'ClickAmount', $last)"> </dp-editor-dropdown>
+          <dp-editor-dropdown
+            ng-click="validError()"
+            ng-disabled="$last"
+            arrow-selection="true"
+            options="!$last ? scoringValues : 0"
+            label="score.ClickAmount.toString()"
+            value-selected="score.ClickAmount"
+            on-select-option="onValueSelected($index, option.value, 'ClickAmount', $last)"
+            on-select-prev-option="onValueSelected($index, score.ClickAmount + 1, 'ClickAmount', $last)"
+            on-select-next-option="onValueSelected($index, score.ClickAmount - 1, 'ClickAmount', $last)"
+          >
+          </dp-editor-dropdown>
         </div>
-        <div class="subscribersScoringSelect-description"><span><b>{{ 'subscribers_scoring.clicks' | translate }}</b></span></div>
+        <div class="subscribersScoringSelect-description">
+          <span><b>{{ 'subscribers_scoring.clicks' | translate }}</b></span>
+        </div>
       </div>
-      <p class="errorMessage" ng-if="score.error = (scores[$index].OpenAmount >= scores[$index - 1].OpenAmount || scores[$index].ClickAmount >= scores[$index - 1].ClickAmount)">{{'subscribers_scoring.two_stars.error_message' | translate }}</p>
-      <p class="errorMessage" ng-if="score.error ? false : score.error = score.ClickAmount > score.OpenAmount">{{'subscribers_scoring.clicks_exceed_open_error' | translate }}</p>
+      <p
+        class="errorMessage"
+        ng-if="score.error = (scores[$index].OpenAmount >= scores[$index - 1].OpenAmount || scores[$index].ClickAmount >= scores[$index - 1].ClickAmount)"
+      >
+        {{'subscribers_scoring.two_stars.error_message' | translate }}
+      </p>
+      <p
+        class="errorMessage"
+        ng-if="score.error ? false : score.error = score.ClickAmount > score.OpenAmount"
+      >
+        {{'subscribers_scoring.clicks_exceed_open_error' | translate }}
+      </p>
       <div class="selectContainer">
-        <span class="scoring-description" ng-if="score.Score == 2">{{ 'subscribers_scoring.two_stars.description' | translate }}</span>
-        <span class="scoring-description" ng-if="score.Score == 1">{{ 'subscribers_scoring.one_star.description' | translate }}</span>
+        <span class="scoring-description" ng-if="score.Score == 2"
+          >{{ 'subscribers_scoring.two_stars.description' | translate }}</span
+        >
+        <span class="scoring-description" ng-if="score.Score == 1"
+          >{{ 'subscribers_scoring.one_star.description' | translate }}</span
+        >
       </div>
     </div>
 
     <div class="inputContainer scoring-box">
       <p><b>{{ 'subscribers_scoring.period_title' | translate }}</b></p>
       <div class="selectContainer">
-        <div class="subscribersScoringSelect-description twoDescriptions"><span><b>{{ 'subscribers_scoring.last' | translate }}</b></span></div>
-        <div class="subscribersScoringSelect select--twoDescriptions">
-          <dp-editor-dropdown arrow-selection="true" options="periodValues" label="periodSelectedValue.toString()" value-selected="periodSelectedValue" on-select-option="onPeriodSelected(option.value)" on-select-prev-option="onPeriodSelected(periodSelectedValue + 1)" on-select-next-option="onPeriodSelected(periodSelectedValue -1)"> </dp-editor-dropdown>
+        <div class="subscribersScoringSelect-description twoDescriptions">
+          <span><b>{{ 'subscribers_scoring.last' | translate }}</b></span>
         </div>
-        <div class="subscribersScoringSelect-description"><span><b>{{ 'subscribers_scoring.months' | translate }}</b></span></div>
+        <div class="subscribersScoringSelect select--twoDescriptions">
+          <dp-editor-dropdown
+            arrow-selection="true"
+            options="periodValues"
+            label="periodSelectedValue.toString()"
+            value-selected="periodSelectedValue"
+            on-select-option="onPeriodSelected(option.value)"
+            on-select-prev-option="onPeriodSelected(periodSelectedValue + 1)"
+            on-select-next-option="onPeriodSelected(periodSelectedValue -1)"
+          >
+          </dp-editor-dropdown>
+        </div>
+        <div class="subscribersScoringSelect-description">
+          <span><b>{{ 'subscribers_scoring.months' | translate }}</b></span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="nav-button-bar">
-    <input ng-click="goBack()" class="main_buttons_gray_big customWidthButton" type="button" value="{{ 'subscribers_scoring.button_back' | translate }}">
+    <input
+      ng-click="goBack()"
+      class="main_buttons_gray_big customWidthButton"
+      type="button"
+      value="{{ 'subscribers_scoring.button_back' | translate }}"
+    />
     <div class="floatRight">
-        <input ng-click="saveScoringPreferences()" class="main_buttons_green_big customWidthButton" type="button" ng-disabled="disableButton" value="{{ 'subscribers_scoring.button_save' | translate }}">
+      <input
+        ng-click="saveScoringPreferences()"
+        class="main_buttons_green_big customWidthButton"
+        type="button"
+        ng-disabled="disableButton"
+        value="{{ 'subscribers_scoring.button_save' | translate }}"
+      />
     </div>
   </div>
 </div>

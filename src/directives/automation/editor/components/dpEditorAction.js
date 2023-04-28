@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,18 +9,24 @@
     'ACTION_TYPE',
     'actionsDataservice',
     'FIELD_TYPE',
-    '$translate'
+    '$translate',
   ];
 
-  function dpEditorAction(ACTION_TYPE, actionsDataservice, FIELD_TYPE, $translate) {
+  function dpEditorAction(
+    ACTION_TYPE,
+    actionsDataservice,
+    FIELD_TYPE,
+    $translate
+  ) {
     var directive = {
       restrict: 'E',
       scope: {
         branch: '=',
-        component: '='
+        component: '=',
       },
-      templateUrl: 'angularjs/partials/automation/editor/directives/components/dp-editor-action.html',
-      link: link
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/components/dp-editor-action.html',
+      link: link,
     };
 
     function link(scope) {
@@ -33,38 +39,53 @@
         return date ? moment(date).format(scope.format.toUpperCase()) : ' ';
       };
 
-      scope.$on('CAMPAIGN.NAME_CHANGE', function(event, params){
+      scope.$on('CAMPAIGN.NAME_CHANGE', function (event, params) {
         if (scope.component.operation.email.uidEmail === params.uidEmail) {
           scope.component.operation.email.label = params.name;
         }
       });
-      scope.deleteAction = function() {
+      scope.deleteAction = function () {
         actionsDataservice.deleteEmailReference(scope.component.uid);
         scope.$parent.removeComponent(scope.component);
       };
-      scope.$watch('component.operation.email.uidEmail', function(newEmailUid){
-        actionsDataservice.setEmailReference(scope.component.uid, newEmailUid);
-      });
-      scope.getRemoveSubscriberSummary = function() {
+      scope.$watch(
+        'component.operation.email.uidEmail',
+        function (newEmailUid) {
+          actionsDataservice.setEmailReference(
+            scope.component.uid,
+            newEmailUid
+          );
+        }
+      );
+      scope.getRemoveSubscriberSummary = function () {
         var content = '';
-        var selectedLists = scope.component.operation && scope.component.operation.suscriptionLists;
-        if (scope.component.operation.type === ACTION_TYPE.REMOVE_SUBSCRIBER_FROM_LIST) {
-          for (var i = 0; ( i < selectedLists.length && i < 3 ); i++) {
+        var selectedLists =
+          scope.component.operation &&
+          scope.component.operation.suscriptionLists;
+        if (
+          scope.component.operation.type ===
+          ACTION_TYPE.REMOVE_SUBSCRIBER_FROM_LIST
+        ) {
+          for (var i = 0; i < selectedLists.length && i < 3; i++) {
             if (i > 0) {
               content += ', ';
             }
             content += '<strong>' + selectedLists[i].ListName + '</strong>';
           }
-          if ( selectedLists.length > 3 ) {
+          if (selectedLists.length > 3) {
             content += '...';
           }
         }
         return content;
       };
-      scope.showBrackets = function() {
-        return scope.component.operation && !scope.component.operation.suscriptionList
-        && !scope.component.operation.email && !scope.component.operation.suscriptionLists
-        && scope.component.operation.type !== ACTION_TYPE.CHANGE_SUBSCRIBER_FIELD;
+      scope.showBrackets = function () {
+        return (
+          scope.component.operation &&
+          !scope.component.operation.suscriptionList &&
+          !scope.component.operation.email &&
+          !scope.component.operation.suscriptionLists &&
+          scope.component.operation.type !== ACTION_TYPE.CHANGE_SUBSCRIBER_FIELD
+        );
       };
     }
 

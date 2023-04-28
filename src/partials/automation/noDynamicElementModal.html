@@ -2,11 +2,27 @@
   <div class="modal__wrapper" click-outside="close(false)">
     <a class="icon-close modal--do-close" data-dismiss="modal"></a>
     <div class="modal__content">
-      <h1>{{ 'automation_editor.no_dynamic_element_modal.title' | translate }}</h1>
-      <p ng-bind-html="'automation_editor.no_dynamic_element_modal.description_' + data.automationType | translate"></p>
+      <h1>
+        {{ 'automation_editor.no_dynamic_element_modal.title' | translate }}
+      </h1>
+      <p
+        ng-bind-html="'automation_editor.no_dynamic_element_modal.description_' + data.automationType | translate"
+      ></p>
     </div>
     <div class="modal__action-btn">
-      <button class="button button--alternative button--small" data-dismiss="modal">{{ 'automation_editor.no_dynamic_element_modal.cancel' | translate }}</button>
-      <button class="button button--primary button--small" ng-click="startCampaign()" data-dismiss="modal">{{ 'automation_editor.no_dynamic_element_modal.start' | translate }}</button>
+      <button
+        class="button button--alternative button--small"
+        data-dismiss="modal"
+      >
+        {{ 'automation_editor.no_dynamic_element_modal.cancel' | translate }}
+      </button>
+      <button
+        class="button button--primary button--small"
+        ng-click="startCampaign()"
+        data-dismiss="modal"
+      >
+        {{ 'automation_editor.no_dynamic_element_modal.start' | translate }}
+      </button>
     </div>
   </div>
+</div>

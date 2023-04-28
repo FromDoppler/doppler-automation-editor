@@ -1,7 +1,6 @@
 //jshint strict: false
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
-
     basePath: './src',
 
     files: [
@@ -10,7 +9,7 @@ module.exports = function(config) {
       '../node_modules/angular-mocks/angular-mocks.js',
       'controllers/**/*.js',
       'controllers/**/*.js',
-      'services/**/*.js'
+      'services/**/*.js',
     ],
 
     autoWatch: true,
@@ -22,8 +21,7 @@ module.exports = function(config) {
     plugins: [
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-jasmine'
-    ]
-
+      'karma-jasmine',
+    ],
   });
 };

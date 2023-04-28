@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Utils', function() {
+describe('Utils', function () {
   beforeEach(module('dopplerApp.automation.editor'));
 
   var utils;
@@ -11,132 +11,132 @@ describe('Utils', function() {
 
   // Tests for CUIT
 
-  it('should validate valid type 20 cuit', function() {
+  it('should validate valid type 20 cuit', function () {
     // Assert
     expect(utils.validateCuit('20348514149')).toBe(true);
   });
 
-  it('should validate valid type 23 cuit', function() {
+  it('should validate valid type 23 cuit', function () {
     // Assert
     expect(utils.validateCuit('23361491939')).toBe(true);
   });
 
-  it('should validate valid type 24 cuit', function() {
+  it('should validate valid type 24 cuit', function () {
     // Assert
     expect(utils.validateCuit('24374492728')).toBe(true);
   });
 
-  it('should validate valid type 27 cuit', function() {
+  it('should validate valid type 27 cuit', function () {
     // Assert
     expect(utils.validateCuit('27348514143')).toBe(true);
   });
 
-  it('should validate valid type 30 cuit', function() {
+  it('should validate valid type 30 cuit', function () {
     // Assert
-    expect(utils.validateCuit('30478569544')).toBe(true);;
+    expect(utils.validateCuit('30478569544')).toBe(true);
   });
 
-  it('should validate valid type 33 cuit', function() {
+  it('should validate valid type 33 cuit', function () {
     // Assert
     expect(utils.validateCuit('33123123129')).toBe(true);
   });
 
-  it('should validate valid type 34 cuit', function() {
+  it('should validate valid type 34 cuit', function () {
     // Assert
     expect(utils.validateCuit('34500045339')).toBe(true);
   });
 
-  it('should validate invalid cuit number', function() {
+  it('should validate invalid cuit number', function () {
     // Assert
     expect(utils.validateCuit('12345678912')).toBe(false);
   });
 
-  it('should validate invalid cuit with less than 11 digits', function() {
+  it('should validate invalid cuit with less than 11 digits', function () {
     // Assert
     expect(utils.validateCuit('1')).toBe(false);
     expect(utils.validateCuit('3450004533')).toBe(false);
   });
 
-  it('should validate invalid cuit with more than 11 digits', function() {
+  it('should validate invalid cuit with more than 11 digits', function () {
     // Assert
     expect(utils.validateCuit('345000453355')).toBe(false);
     expect(utils.validateCuit('34500045335555555')).toBe(false);
   });
 
-  it('should validate invalid type 20 cuit', function() {
+  it('should validate invalid type 20 cuit', function () {
     // Assert
     expect(utils.validateCuit('20348514142')).toBe(false);
   });
 
-  it('should validate invalid type 23 cuit', function() {
+  it('should validate invalid type 23 cuit', function () {
     // Assert
     expect(utils.validateCuit('23361491933')).toBe(false);
   });
 
-  it('should validate invalid type 24 cuit', function() {
+  it('should validate invalid type 24 cuit', function () {
     // Assert
     expect(utils.validateCuit('24374492724')).toBe(false);
   });
 
-  it('should validate invalid type 27 cuit', function() {
+  it('should validate invalid type 27 cuit', function () {
     // Assert
     expect(utils.validateCuit('27348514141')).toBe(false);
   });
 
-  it('should validate invalid type 30 cuit', function() {
+  it('should validate invalid type 30 cuit', function () {
     // Assert
     expect(utils.validateCuit('30478569549')).toBe(false);
   });
 
-  it('should validate invalid type 33 cuit', function() {
+  it('should validate invalid type 33 cuit', function () {
     // Assert
     expect(utils.validateCuit('33123123121')).toBe(false);
   });
 
-  it('should validate invalid type 34 cuit', function() {
+  it('should validate invalid type 34 cuit', function () {
     // Assert
     expect(utils.validateCuit('34500045333')).toBe(false);
   });
 
   // tests for NIT
 
-  it('should not allow nit less than 10 characters', function() {
+  it('should not allow nit less than 10 characters', function () {
     // Assert
     expect(utils.validateNit('345000')).toBe(false);
   });
 
-  it('should validate invalid nit empty', function() {
+  it('should validate invalid nit empty', function () {
     // Assert
     expect(utils.validateNit('')).toBe(false);
   });
 
-  it('should validate nit for 10 characters for companies', function() {
+  it('should validate nit for 10 characters for companies', function () {
     // Assert
     expect(utils.validateNit('8903127496')).toBe(true);
     expect(utils.validateNit('8001972684')).toBe(true);
     expect(utils.validateNit('9014586527')).toBe(true);
   });
 
-  it('should validate nit less than 10 characters, for a person not a company', function() {
+  it('should validate nit less than 10 characters, for a person not a company', function () {
     // Assert
     expect(utils.validateNit('60136269')).toBe(true);
     expect(utils.validateNit('945090625')).toBe(true);
     expect(utils.validateNit('1586664')).toBe(true);
   });
 
-  it('should validate invalid nit for 10 characters', function() {
+  it('should validate invalid nit for 10 characters', function () {
     // Assert
     expect(utils.validateNit('8903127492')).toBe(false);
   });
 
-  it('should allow nit with more than 10 characters', function() {
+  it('should allow nit with more than 10 characters', function () {
     // Assert
     expect(utils.validateNit('8903127496255155')).toBe(false);
   });
 
   // Tests for RFC
 
-  it('should validate valid RFC', function() {
+  it('should validate valid RFC', function () {
     // Assert
     expect(utils.validateRfc('GADL230310IN1')).toBe('GADL230310IN1');
     expect(utils.validateRfc('XAXX010101000')).toBe('XAXX010101000');
@@ -152,7 +152,7 @@ describe('Utils', function() {
     expect(utils.validateRfc('EME100521PK8')).toBe('EME100521PK8');
   });
 
-  it('should validate valid RFC with spaces', function() {
+  it('should validate valid RFC with spaces', function () {
     // Assert
     expect(utils.validateRfc('GADL 230310 IN1')).toBe('GADL230310IN1');
     expect(utils.validateRfc('XAXX 010101 000')).toBe('XAXX010101000');
@@ -168,7 +168,7 @@ describe('Utils', function() {
     expect(utils.validateRfc('EME 100521 PK8')).toBe('EME100521PK8');
   });
 
-  it('should validate valid RFC with dash', function() {
+  it('should validate valid RFC with dash', function () {
     // Assert
     expect(utils.validateRfc('GADL-230310-IN1')).toBe('GADL230310IN1');
     expect(utils.validateRfc('XAXX-010101-000')).toBe('XAXX010101000');
@@ -183,7 +183,7 @@ describe('Utils', function() {
     expect(utils.validateRfc('EME-100521-PK8')).toBe('EME100521PK8');
   });
 
-  it('should fail for invalid RFC verification digit', function() {
+  it('should fail for invalid RFC verification digit', function () {
     // Assert
     expect(utils.validateRfc('LOMP8206281HO')).toBe(false);
     expect(utils.validateRfc('MELM8305281HO')).toBe(false);
@@ -197,7 +197,7 @@ describe('Utils', function() {
     expect(utils.validateRfc('EZE100521PK9')).toBe(false);
   });
 
-  it('should fail for invalid RFC length', function() {
+  it('should fail for invalid RFC length', function () {
     // Assert
     expect(utils.validateRfc('LOMP82281HO')).toBe(false);
     expect(utils.validateRfc('MELM5281HO')).toBe(false);
@@ -210,11 +210,11 @@ describe('Utils', function() {
     expect(utils.validateRfc('EZE100521PK96G')).toBe(false);
   });
 
-  it('should return true for empty RFC length to avoid problems with forms validations', function() {
+  it('should return true for empty RFC length to avoid problems with forms validations', function () {
     expect(utils.validateRfc('')).toBe(true);
   });
 
-  it('it should return RFC without spaces and dashes', function() {
+  it('it should return RFC without spaces and dashes', function () {
     expect(utils.formatValidRfc('GADL-230310-IN1')).toBe('GADL230310IN1');
     expect(utils.formatValidRfc('GPO 920120 440')).toBe('GPO920120440');
     expect(utils.formatValidRfc('TLE 130415 5W0')).toBe('TLE1304155W0');

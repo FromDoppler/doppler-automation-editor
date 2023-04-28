@@ -1,65 +1,135 @@
-<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
-     ng-if="magento.connected && magento.showMapping && magento.sourceType == magento.mvcSourceType">
+<div
+  id="mapping-panel"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  ng-if="magento.connected && magento.showMapping && magento.sourceType == magento.mvcSourceType"
+>
   <div>
     <div class="authentication-container connected">
       <div>
-        <span class="control-panel-section-title">{{ 'magento_integration.mapping.title' | translate }}</span>
-        <span class="control-panel-section-subtitle">{{ 'magento_integration.mapping.subtitle' | translate }}</span>
+        <span class="control-panel-section-title"
+          >{{ 'magento_integration.mapping.title' | translate }}</span
+        >
+        <span class="control-panel-section-subtitle"
+          >{{ 'magento_integration.mapping.subtitle' | translate }}</span
+        >
       </div>
     </div>
-    <hr class="full" style="width: calc(100% + 40px);" />
+    <hr class="full" style="width: calc(100% + 40px)" />
     <p class="integration-information-text">
-      {{ 'magento_integration.mapping.selected_data_entity' | translate }}: <strong>{{ magento.selectedEntity.DisplayName }}</strong>
+      {{ 'magento_integration.mapping.selected_data_entity' | translate }}:
+      <strong>{{ magento.selectedEntity.DisplayName }}</strong>
     </p>
     <p class="integration-information-text">
-      {{ 'magento_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ magento.selectedList.ListName }}</strong>
+      {{ 'magento_integration.mapping.selected_subscriber_list' | translate }}:
+      <strong>{{ magento.selectedList.ListName }}</strong>
     </p>
     <div class="mapping-container">
       <div ng-repeat="field in magento.magentoFields" dp-on-finish-ng-repeat>
         <div class="grayPanel-box flex-grid">
           <div>
-            <p>{{ 'magento_integration.mapping.data_entity_field' | translate }}: <b>{{ magento.getFiledName(field.DisplayName) }}</b></p>
+            <p>
+              {{ 'magento_integration.mapping.data_entity_field' | translate }}:
+              <b>{{ magento.getFiledName(field.DisplayName) }}</b>
+            </p>
           </div>
           <div>
-            <select id="dd-userFields{{$index}}"
-                    name="select-field{{$index}}"
-                    ng-model="field.idDopplerField"
-                    property="name"
-                    id-value="idField"
-                    ng-options="field.idField as field.name for field in magento.userFields  | filter:magento.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
-                    ng-click="magento.errorMessage=''"
-                    class="selector field-selector"
-                    ng-required="true"
-                    ng-change="magento.fieldChange($index, field.idDopplerField)">
-              <option value="" disabled="disabled">{{'magento_integration.mapping.select_field_placeholder' | translate}}</option>
+            <select
+              id="dd-userFields{{$index}}"
+              name="select-field{{$index}}"
+              ng-model="field.idDopplerField"
+              property="name"
+              id-value="idField"
+              ng-options="field.idField as field.name for field in magento.userFields  | filter:magento.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+              ng-click="magento.errorMessage=''"
+              class="selector field-selector"
+              ng-required="true"
+              ng-change="magento.fieldChange($index, field.idDopplerField)"
+            >
+              <option value="" disabled="disabled">
+                {{'magento_integration.mapping.select_field_placeholder' |
+                translate}}
+              </option>
             </select>
           </div>
         </div>
-        <div class="createCustomField-box" ng-show="$index == magento.newField.index">
-          <input type="text" class="name" id="Name" name="Name" value="" ng-model="magento.newField.name" maxlength="50" ng-click="magento.newField.error=''">
-          <select id="dd-fieldTypes{{$index}}"
-                  name="select-field-type{{$index}}"
-                  ng-model="magento.newField.dataType"
-                  ng-options="type.id as type.name for type in magento.fieldTypes"
-                  class="selector customFieldTypeDropDown"
-                  ng-required="true"
-                  ng-disabled="true">
-          </select>
+        <div
+          class="createCustomField-box"
+          ng-show="$index == magento.newField.index"
+        >
+          <input
+            type="text"
+            class="name"
+            id="Name"
+            name="Name"
+            value=""
+            ng-model="magento.newField.name"
+            maxlength="50"
+            ng-click="magento.newField.error=''"
+          />
+          <select
+            id="dd-fieldTypes{{$index}}"
+            name="select-field-type{{$index}}"
+            ng-model="magento.newField.dataType"
+            ng-options="type.id as type.name for type in magento.fieldTypes"
+            class="selector customFieldTypeDropDown"
+            ng-required="true"
+            ng-disabled="true"
+          ></select>
           <div class="visibility-container">
-            <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="magento.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'magento_integration.mapping.new_field.public_opt' | translate}}</label>
-            <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="magento.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'magento_integration.mapping.new_field.private_opt' | translate}}</label>
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-public{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="magento.newField.isPrivate"
+                value="false"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-public{{$index}}"
+              >{{'magento_integration.mapping.new_field.public_opt' |
+              translate}}</label
+            >
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-private{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="magento.newField.isPrivate"
+                value="true"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-private{{$index}}"
+              >{{'magento_integration.mapping.new_field.private_opt' |
+              translate}}</label
+            >
           </div>
-          <div class="validationTooltip-container" ng-show="magento.newField.error">
+          <div
+            class="validationTooltip-container"
+            ng-show="magento.newField.error"
+          >
             <span class="validationTooltip-image"></span>
             <span class="validation-tooltip">{{ magento.newField.error }}</span>
           </div>
-          <input type="submit" value="{{'magento_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="magento.createField($index)">
+          <input
+            type="submit"
+            value="{{'magento_integration.mapping.new_field.button' | translate}}"
+            class="main_buttons_green_small submit"
+            ng-click="magento.createField($index)"
+          />
         </div>
       </div>
     </div>
   </div>
-  <div class="dp-library margin-t-20 margin-b-20" ng-show="!!magento.errorMessage.length">
-    <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+  <div
+    class="dp-library margin-t-20 margin-b-20"
+    ng-show="!!magento.errorMessage.length"
+  >
+    <div
+      id="messageBar"
+      class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+    >
       <span class="dp-message-icon"></span>
       <div class="dp-content-message dp-content-full">
         <span>{{ magento.errorMessage }}</span>
@@ -70,8 +140,11 @@
     <button ng-click="magento.goBack()" class="button button--alternative">
       {{ 'magento_integration.mapping.back' | translate }}
     </button>
-    <button ng-class="{'button--spinner' : magento.isMapping}" ng-click="magento.mapFields()"
-            class="button button--primary">
+    <button
+      ng-class="{'button--spinner' : magento.isMapping}"
+      ng-click="magento.mapFields()"
+      class="button button--primary"
+    >
       {{ 'magento_integration.connected.synchronize' | translate }}
       <span class="icon-editor-saving hide"></span>
     </button>

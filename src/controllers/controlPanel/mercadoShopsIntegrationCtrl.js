@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -15,12 +15,21 @@
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
     '$timeout',
-    'FIELD_TYPE'
+    'FIELD_TYPE',
   ];
 
-  function mercadoShopsIntegrationCtrl($scope, $translate, ModalService,
-    mercadoShopsService, INTEGRATION_CODES, BASIC_FIELD, IMPORTING_STATE,
-    IMPORTING_STATE_STR, $timeout, FIELD_TYPE) {
+  function mercadoShopsIntegrationCtrl(
+    $scope,
+    $translate,
+    ModalService,
+    mercadoShopsService,
+    INTEGRATION_CODES,
+    BASIC_FIELD,
+    IMPORTING_STATE,
+    IMPORTING_STATE_STR,
+    $timeout,
+    FIELD_TYPE
+  ) {
     var vm = this;
     vm.isLoading = true;
     vm.connectionError = false;
@@ -31,50 +40,51 @@
     vm.integratedLists = [];
     vm.countries = [];
     vm.newField = null;
-    
-    $translate.onReady().then(function() {
+
+    $translate.onReady().then(function () {
       vm.getStatus(true);
       loadDopplerFields();
       loadFieldTypes();
     });
 
-    vm.getStatus = function(doPolling) {
-      return mercadoShopsService.getIntegrationStatus()
-        .then(function(result){
-          if (result.success) {
-            if (!!result.model) { // eslint-disable-line
-              vm.idThirdPartyApp = result.idThirdPartyApp;
-              vm.connectedAccount = result.model.AccountName;
-              vm.daysToDisconnection = result.model.DaysToDisconnection;
-              vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
-              vm.allUserList === vm.getUserList();
-              vm.integratedLists = result.integratedLists;
-              vm.disableSync = result.integratedLists.length === 0;
-              vm.actionNeeded = result.actionNeeded;
-              vm.autoSyncDisabled = result.model.SyncDisabled;
-            }
-          } else {
-            vm.connectionError = true;
-            vm.errorMsg = $translate.instant('mercado_shops_integration.disconnected.connection_error');
+    vm.getStatus = function (doPolling) {
+      return mercadoShopsService.getIntegrationStatus().then(function (result) {
+        if (result.success) {
+          if (!!result.model) {
+            // eslint-disable-line
+            vm.idThirdPartyApp = result.idThirdPartyApp;
+            vm.connectedAccount = result.model.AccountName;
+            vm.daysToDisconnection = result.model.DaysToDisconnection;
+            vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
+            vm.allUserList === vm.getUserList();
+            vm.integratedLists = result.integratedLists;
+            vm.disableSync = result.integratedLists.length === 0;
+            vm.actionNeeded = result.actionNeeded;
+            vm.autoSyncDisabled = result.model.SyncDisabled;
           }
-          vm.newField = newFieldDefaults();
-          vm.countries = result.countries;
-          vm.isLoading = false;
-          vm.connected = !!result.model;
-          vm.webAppUrl = result.webAppUrl;
-        });
+        } else {
+          vm.connectionError = true;
+          vm.errorMsg = $translate.instant(
+            'mercado_shops_integration.disconnected.connection_error'
+          );
+        }
+        vm.newField = newFieldDefaults();
+        vm.countries = result.countries;
+        vm.isLoading = false;
+        vm.connected = !!result.model;
+        vm.webAppUrl = result.webAppUrl;
+      });
     };
 
     vm.getUserList = function () {
       vm.isLoading = true;
-      mercadoShopsService.getUserLists()
-        .then(function (listResult) {
-          if (listResult.success) {
-            vm.allUserList = listResult.lists;
-            vm.setDefultList();
-          }
-          vm.isLoading = false;
-        });
+      mercadoShopsService.getUserLists().then(function (listResult) {
+        if (listResult.success) {
+          vm.allUserList = listResult.lists;
+          vm.setDefultList();
+        }
+        vm.isLoading = false;
+      });
     };
 
     vm.setDefultList = function () {
@@ -85,11 +95,18 @@
         vm.selectedListId = defaultList[0].IdList;
       }
     };
-    
+
     vm.connect = function (country) {
       var windowName = 'popUp';
       var windowSize = 'width=600,height=500,scrollbars=yes';
-      var OpenWindow = window.open('StartMercadoLibreAuthorization?idThirdPartyApp=' + vm.idThirdPartyApp + '&location=' + country, windowName, windowSize);
+      var OpenWindow = window.open(
+        'StartMercadoLibreAuthorization?idThirdPartyApp=' +
+          vm.idThirdPartyApp +
+          '&location=' +
+          country,
+        windowName,
+        windowSize
+      );
       OpenWindow.focus();
       var timer = window.setInterval(function () {
         if (OpenWindow.closed) {
@@ -99,20 +116,25 @@
       }, 500);
     };
 
-    vm.disconnectWarning = function(){
+    vm.disconnectWarning = function () {
       ModalService.showModal({
         templateUrl: 'angularjs/partials/shared/modalYesOrNoVtex.html',
         controller: 'modalYesOrNoMercadoShopsCtrl',
-        inputs: { data:
-          {
-            title: $translate.instant('mercado_shops_integration.connected.disconnect_popup.title'),
-            description: $translate.instant('mercado_shops_integration.connected.disconnect_popup.description'),
+        inputs: {
+          data: {
+            title: $translate.instant(
+              'mercado_shops_integration.connected.disconnect_popup.title'
+            ),
+            description: $translate.instant(
+              'mercado_shops_integration.connected.disconnect_popup.description'
+            ),
             buttonCancelLabel: $translate.instant('actions.cancel'),
             buttonPrimaryLabel: $translate.instant('actions.disconnect'),
-            buttonPrimaryClass: 'button--primary button--small'
-          } }
-      }).then(function(modal) {
-        modal.close.then(function(result) {
+            buttonPrimaryClass: 'button--primary button--small',
+          },
+        },
+      }).then(function (modal) {
+        modal.close.then(function (result) {
           if (result) {
             vm.connectionError = false;
             vm.showMapping = false;
@@ -134,10 +156,9 @@
           list.SubscribersListStatus = IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
           return list;
         });
-        mercadoShopsService.manualSync()
-          .then(function () {
-            vm.checkListState();
-          });
+        mercadoShopsService.manualSync().then(function () {
+          vm.checkListState();
+        });
         $timeout(function () {
           vm.disableSync = vm.importingAllLists;
         }, 2500);
@@ -153,7 +174,8 @@
 
       vm.selectedList = list;
 
-      mercadoShopsService.getMercadoShopsFields()
+      mercadoShopsService
+        .getMercadoShopsFields()
         .then(function (listResult) {
           if (listResult.success) {
             vm.mercadoShopsFields = listResult.fields;
@@ -177,7 +199,8 @@
 
     vm.deleteList = function (idList) {
       vm.isLoading = true;
-      mercadoShopsService.deleteList(idList)
+      mercadoShopsService
+        .deleteList(idList)
         .then(function (listResult) {
           if (listResult.success) {
             vm.getStatus();
@@ -211,7 +234,8 @@
       vm.selectedListId = idList;
       vm.isLoading = true;
       vm.errorMessage = '';
-      mercadoShopsService.getAssociatedFieldMapping(idList)
+      mercadoShopsService
+        .getAssociatedFieldMapping(idList)
         .then(function (result) {
           if (result.success && result.fields.length > 0) {
             vm.showMappingSection(result.fields);
@@ -237,7 +261,8 @@
     };
 
     vm.synchronizeList = function (idList) {
-      mercadoShopsService.synchLists(idList)
+      mercadoShopsService
+        .synchLists(idList)
         .then(function (listResult) {
           if (listResult.success) {
             vm.showMapping = false;
@@ -254,57 +279,77 @@
     vm.checkListState = function () {
       vm.stateArray = [];
       // only check lists in process
-      var allInProcess = _.filter(vm.integratedLists, function (integratedList) {
-        return integratedList.SubscribersListStatus === IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
-      });
+      var allInProcess = _.filter(
+        vm.integratedLists,
+        function (integratedList) {
+          return (
+            integratedList.SubscribersListStatus ===
+            IMPORTING_STATE.IMPORTING_SUBSCRIBERS
+          );
+        }
+      );
       vm.stateArray = _.map(allInProcess, function (list) {
-        return { 'IdSubscribersList': list.IdList, 'CurrentStatus': IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS };
+        return {
+          IdSubscribersList: list.IdList,
+          CurrentStatus: IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS,
+        };
       });
 
       if (allInProcess.length) {
         vm.disableSync = true;
         vm.importingAllLists = true;
 
-        if (!vm.timer) { //eslint-disable-line
+        if (!vm.timer) {
+          //eslint-disable-line
           (function tick() {
-            mercadoShopsService.getChangedState(vm.stateArray, vm.idThirdPartyApp).then(function (response) {
-              if (response.arePending) {
-                vm.timer = $timeout(tick, 1000);
-              } else {
-                vm.importingAllLists = false;
-                vm.disableSync = false;
-                vm.timer = undefined;
-                vm.disableSync = false;
-              }
-              if (response.changedSates.length) {
-                for (var i = 0; i < response.changedSates.length; i++) {
-                  var currentList = response.changedSates[i];
-                  updateListData(currentList.IdSubscribersList, response.syncDate);
+            mercadoShopsService
+              .getChangedState(vm.stateArray, vm.idThirdPartyApp)
+              .then(function (response) {
+                if (response.arePending) {
+                  vm.timer = $timeout(tick, 1000);
+                } else {
+                  vm.importingAllLists = false;
+                  vm.disableSync = false;
+                  vm.timer = undefined;
+                  vm.disableSync = false;
                 }
-              }
-            });
+                if (response.changedSates.length) {
+                  for (var i = 0; i < response.changedSates.length; i++) {
+                    var currentList = response.changedSates[i];
+                    updateListData(
+                      currentList.IdSubscribersList,
+                      response.syncDate
+                    );
+                  }
+                }
+              });
           })();
         }
       }
     };
 
     function loadDopplerFields() {
-      mercadoShopsService.getUserFields()
+      mercadoShopsService
+        .getUserFields()
         .then(function (listResult) {
           if (listResult.length) {
             vm.userFields = listResult;
             vm.userFields.unshift({
               idField: -1,
-              name: $translate.instant('mercado_shops_integration.mapping.add_field_option'),
+              name: $translate.instant(
+                'mercado_shops_integration.mapping.add_field_option'
+              ),
               DataType: 0,
               Value: null,
-              DopplerFieldTypeId: -1
+              DopplerFieldTypeId: -1,
             });
             vm.userFields.unshift({
               idField: 0,
-              name: $translate.instant('mercado_shops_integration.mapping.skip_column_option'),
+              name: $translate.instant(
+                'mercado_shops_integration.mapping.skip_column_option'
+              ),
               DataType: 0,
-              Value: null
+              Value: null,
             });
             vm.isLoading = false;
           }
@@ -316,26 +361,35 @@
 
     function loadFieldsMapped(fieldsMapped) {
       _.map(fieldsMapped, function (fieldMapped) {
-        var fieldAlreadyMapped = _.find(vm.mercadoShopsFields, function (field) {
-          return field.Name === fieldMapped.ThirdPartyColumnName;
-        });
+        var fieldAlreadyMapped = _.find(
+          vm.mercadoShopsFields,
+          function (field) {
+            return field.Name === fieldMapped.ThirdPartyColumnName;
+          }
+        );
         fieldAlreadyMapped.idDopplerField = fieldMapped.IdField;
       });
     }
 
     function loadFieldsPreMapped() {
-      var fieldAlreadyMapped = _.filter(vm.mercadoShopsFields, function (field) {
-        return field.IdDopplerField;
-      });
+      var fieldAlreadyMapped = _.filter(
+        vm.mercadoShopsFields,
+        function (field) {
+          return field.IdDopplerField;
+        }
+      );
       _.map(fieldAlreadyMapped, function (fieldMapped) {
         fieldMapped.idDopplerField = fieldMapped.IdDopplerField;
       });
     }
 
     function insertEmailAtTheBeginningIfExists() {
-      var mercadoShopsFieldsExtracted = _.partition(vm.mercadoShopsFields, function (field) {
-        return field.Name === 'email';
-      });
+      var mercadoShopsFieldsExtracted = _.partition(
+        vm.mercadoShopsFields,
+        function (field) {
+          return field.Name === 'email';
+        }
+      );
 
       var emailFields = mercadoShopsFieldsExtracted[0];
 
@@ -347,27 +401,41 @@
 
     function showGeneralMappingError(errorMessage) {
       vm.isLoading = false;
-      vm.errorMessage = !!errorMessage ? errorMessage : $translate.instant('validation_messages.connection_error'); // eslint-disable-line no-extra-boolean-cast
+      vm.errorMessage = !!errorMessage
+        ? errorMessage
+        : $translate.instant('validation_messages.connection_error'); // eslint-disable-line no-extra-boolean-cast
       $timeout(function () {
         vm.errorMessage = '';
       }, 8000);
     }
 
     function validateEmptyEmail() {
-      var emailFieldSelected = _.find(vm.mercadoShopsFields, function (mercadoShopsField) {
-        return mercadoShopsField.idDopplerField === BASIC_FIELD.EMAIL;
-      });
+      var emailFieldSelected = _.find(
+        vm.mercadoShopsFields,
+        function (mercadoShopsField) {
+          return mercadoShopsField.idDopplerField === BASIC_FIELD.EMAIL;
+        }
+      );
 
-      emailFieldSelected ? vm.errorMessage = '' : showGeneralMappingError($translate.instant('mercado_shops_integration.mapping.empty_email_error_message'));
+      emailFieldSelected
+        ? (vm.errorMessage = '')
+        : showGeneralMappingError(
+            $translate.instant(
+              'mercado_shops_integration.mapping.empty_email_error_message'
+            )
+          );
       return !!emailFieldSelected;
-    };
+    }
 
     function integrateAndSynchronize() {
       var entity = {
-        DisplayName: $translate.instant('mercado_shops_integration.connected.lists.buyers'),
-        Name: 'buyers'
-      }
-      mercadoShopsService.integrateList(vm.selectedList, entity)
+        DisplayName: $translate.instant(
+          'mercado_shops_integration.connected.lists.buyers'
+        ),
+        Name: 'buyers',
+      };
+      mercadoShopsService
+        .integrateList(vm.selectedList, entity)
         .then(function (listResult) {
           if (listResult.success) {
             vm.selectedListId = listResult.idList;
@@ -381,19 +449,25 @@
     }
 
     function mapFieldsAndSynchronize() {
-      mercadoShopsService.associateFieldMapping(vm.selectedListId,
-        _.filter(vm.mercadoShopsFields, function (entity) {
-          return entity.idDopplerField && entity.idDopplerField !== 0;
-        })
-      )
+      mercadoShopsService
+        .associateFieldMapping(
+          vm.selectedListId,
+          _.filter(vm.mercadoShopsFields, function (entity) {
+            return entity.idDopplerField && entity.idDopplerField !== 0;
+          })
+        )
         .then(function (listResult) {
           if (listResult.success) {
             vm.synchronizeList(vm.selectedListId);
             vm.getStatus().then(function () {
-              var currentList = _.find(vm.integratedLists, function (integratedList) {
-                return integratedList.IdList === vm.selectedListId;
-              });
-              currentList.SubscribersListStatus === IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
+              var currentList = _.find(
+                vm.integratedLists,
+                function (integratedList) {
+                  return integratedList.IdList === vm.selectedListId;
+                }
+              );
+              currentList.SubscribersListStatus ===
+                IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
               vm.checkListState();
               vm.selectedEntityId = null;
               vm.selectedListId = null;
@@ -405,7 +479,7 @@
           vm.isMapping = false;
           vm.getStatus();
         });
-    };
+    }
 
     function updateListData(idList, syncDate) {
       mercadoShopsService.getListData(idList).then(function (responseListData) {
@@ -423,7 +497,8 @@
     }
 
     function loadFieldTypes() {
-      mercadoShopsService.getFieldTypes()
+      mercadoShopsService
+        .getFieldTypes()
         .then(function (types) {
           vm.fieldTypes = types;
         })
@@ -434,15 +509,18 @@
 
     vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
       return function (field) {
-        return (field.idField === 0 || field.idField === -1)
-          || (field.idField === dopplerFieldId)
-          || (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField));
+        return (
+          field.idField === 0 ||
+          field.idField === -1 ||
+          field.idField === dopplerFieldId ||
+          (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField))
+        );
       };
-    }
+    };
 
     function fieldNotUsed(idField) {
       return !_.find(vm.mercadoShopsFields, function (selectedField) {
-        return selectedField.idDopplerField === idField
+        return selectedField.idDopplerField === idField;
       });
     }
 
@@ -452,13 +530,15 @@
         vm.newField.index = index;
         vm.newField.dataType = getFieldDataType(index);
         _.forEach(vm.mercadoShopsFields, function (field, fIndex) {
-          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+          field.idDopplerField =
+            field.idDopplerField == -1 && fIndex != index
+              ? null
+              : field.idDopplerField;
         });
-      }
-      else if (vm.newField.index == index && value != -1) {
+      } else if (vm.newField.index == index && value != -1) {
         vm.newField = newFieldDefaults();
       }
-    }
+    };
 
     function getFieldDataType(index) {
       var fieldTypeId = vm.mercadoShopsFields[index].DopplerFieldTypeId;
@@ -470,32 +550,36 @@
 
     vm.createField = function (index) {
       if (vm.newField.name) {
-        mercadoShopsService .createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+        mercadoShopsService
+          .createField(
+            vm.newField.name,
+            vm.newField.dataType,
+            vm.newField.isPrivate
+          )
           .then(function (res) {
             if (res.success) {
               vm.userFields.push(res.field);
               vm.mercadoShopsFields[index].idDopplerField = res.field.idField;
               vm.newField = newFieldDefaults();
-            }
-            else {
+            } else {
               vm.newField.error = res.errorMessage;
             }
-          })
+          });
+      } else {
+        vm.newField.error = $translate.instant(
+          'mercado_shops_integration.mapping.new_field.required_message'
+        );
       }
-      else {
-        vm.newField.error = $translate.instant('mercado_shops_integration.mapping.new_field.required_message');
-      }
-    }
+    };
 
     function newFieldDefaults() {
       return {
         index: null,
         name: '',
         dataType: FIELD_TYPE.STRING,
-        isPrivate: "true",
-        error: null
+        isPrivate: 'true',
+        error: null,
       };
     }
   }
 })();
-

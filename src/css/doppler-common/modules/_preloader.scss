@@ -1,13 +1,13 @@
-.preloader{
+.preloader {
   align-items: center;
   background: #222;
   display: flex;
   flex-direction: column;
   height: $size-full;
   justify-content: center;
-  opacity:1;
+  opacity: 1;
   position: absolute;
-  top:0;
+  top: 0;
   transition: $transition-default;
   visibility: visible;
   width: $size-full;
@@ -16,7 +16,7 @@
     position: relative;
   }
   &.hide {
-    opacity:0;
+    opacity: 0;
     visibility: hidden;
   }
   .icon-loader {

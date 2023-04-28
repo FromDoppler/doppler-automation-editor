@@ -1,56 +1,97 @@
 <div ng-if="magento.connected && magento.sourceType !== magento.mvcSourceType">
   <div>
-    <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="magento.daysToDisconnection < 14">
-      <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+      ng-show="magento.daysToDisconnection < 14"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'control_panel.integrations.connection_issues.title' | translate
+        }}</span
+      >
       <div class="dp-library margin-t-20 margin-b-20">
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
             <span id="messageBar" class="text--small">
-              {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'magento_integration.name' | translate }}
+              {{ 'control_panel.integrations.connection_issues.subtitle' |
+              translate }} {{'magento_integration.name' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+      <strong class="connection-issues-list-title">
+        {{ 'control_panel.integrations.connection_issues.list_title' | translate
+        }}
+      </strong>
       <ul>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_1' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_2' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_3' |
+          translate }}
+        </li>
       </ul>
       <br />
-      <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+      <span
+        >{{ 'control_panel.integrations.connection_issues.text_list_4' |
+        translate }}</span
+      >
       <hr class="full connection-issues-separator" />
       <p>
-        {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-        {{ magento.firstValidationErrorDate}}
+        {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+        translate }} {{ magento.firstValidationErrorDate}}
       </p>
       <strong>
         <span ng-if="magento.daysToDisconnection > 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-          {{ magento.daysToDisconnection }}
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+          | translate }} {{ magento.daysToDisconnection }} {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+          | translate }}
         </span>
         <span ng-if="magento.daysToDisconnection <= 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+          | translate }}
         </span>
       </strong>
     </div>
-    <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
-      <span class="control-panel-section-title">{{ 'magento_integration.status.title' | translate }} </span>
+    <div
+      id="main-panel"
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'magento_integration.status.title' | translate }}
+      </span>
       <span class="control-panel-section-subtitle">
         {{ 'magento_integration.status.subtitle' | translate }}
-        <a href="{{ 'magento_integration.status.help_link' | translate }}"
-           target="_blank">{{ 'magento_integration.status.help_text' | translate }}</a>
+        <a
+          href="{{ 'magento_integration.status.help_link' | translate }}"
+          target="_blank"
+          >{{ 'magento_integration.status.help_text' | translate }}</a
+        >
       </span>
     </div>
   </div>
   <div class="nav-button-bar flex-grid-v-center--s-between">
-    <a class="button button--alternative" ng-disabled="magento.connecting"
-       href="/ControlPanel/ControlPanel?section=Integration"
-       id="back-button">{{ 'magento_integration.status.back' | translate }}</a>
-    <button type='button' class="button button--alternative"
-            ng-click="magento.disconnectWarning()">
+    <a
+      class="button button--alternative"
+      ng-disabled="magento.connecting"
+      href="/ControlPanel/ControlPanel?section=Integration"
+      id="back-button"
+      >{{ 'magento_integration.status.back' | translate }}</a
+    >
+    <button
+      type="button"
+      class="button button--alternative"
+      ng-click="magento.disconnectWarning()"
+    >
       {{ 'magento_integration.connected.disconnect' | translate }}
     </button>
   </div>

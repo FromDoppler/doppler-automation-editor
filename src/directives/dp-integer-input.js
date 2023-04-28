@@ -1,15 +1,13 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('dpIntegerInput', dpIntegerInput);
+  angular.module('dopplerApp').directive('dpIntegerInput', dpIntegerInput);
 
   function dpIntegerInput() {
     var directive = {
       restrict: 'A',
       require: 'ngModel',
-      link: link
+      link: link,
     };
 
     return directive;

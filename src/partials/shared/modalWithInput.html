@@ -1,33 +1,67 @@
 <div id="modal" class="modal modal--is-dialog">
   <div class="modal__wrapper">
-    <a class="icon-close modal--do-close"  ng-click="close(false)"></a>
+    <a class="icon-close modal--do-close" ng-click="close(false)"></a>
     <div class="modal__content">
       <h1>{{ data.title }}</h1>
       <p>{{ data.description }}</p>
-        <ul class="modal-list--disc" ng-if="data.descriptionLi1">
-          <li> {{ data.descriptionLi1 }}</li>
-          <li> {{ data.descriptionLi2 }}</li>
-        </ul>
+      <ul class="modal-list--disc" ng-if="data.descriptionLi1">
+        <li>{{ data.descriptionLi1 }}</li>
+        <li>{{ data.descriptionLi2 }}</li>
+      </ul>
     </div>
     <form name="validationForm" novalidate>
-      <label class="text--small label--one-input" ng-if="data.label">{{ data.label }}</label>
-    	<input type="text" name="fieldValue" class="input--text" ng-readonly="processingSave" ng-class="{ 'hasErrors': submitted && validationForm.fieldValue.$invalid }" ng-required="data.required" placeholder="{{data.placeholder}}" ng-maxlength="data.maxlength"  ng-model="data.fieldValue" ng-pattern="data.regex" />
-		<div ng-messages="validationForm.fieldValue.$error" ng-if='submitted' class="error-messages--container" >
-			<span class="error" ng-message="required">{{ 'validation_messages.required' | translate }}</span>
-			<span class="error" ng-message="maxlength">{{ 'validation_messages.maxlength' | translate }}</span>
-      <span class="error" ng-message="pattern">{{ data.patternErrorMessage }}</span>
-		</div>
+      <label class="text--small label--one-input" ng-if="data.label"
+        >{{ data.label }}</label
+      >
+      <input
+        type="text"
+        name="fieldValue"
+        class="input--text"
+        ng-readonly="processingSave"
+        ng-class="{ 'hasErrors': submitted && validationForm.fieldValue.$invalid }"
+        ng-required="data.required"
+        placeholder="{{data.placeholder}}"
+        ng-maxlength="data.maxlength"
+        ng-model="data.fieldValue"
+        ng-pattern="data.regex"
+      />
+      <div
+        ng-messages="validationForm.fieldValue.$error"
+        ng-if="submitted"
+        class="error-messages--container"
+      >
+        <span class="error" ng-message="required"
+          >{{ 'validation_messages.required' | translate }}</span
+        >
+        <span class="error" ng-message="maxlength"
+          >{{ 'validation_messages.maxlength' | translate }}</span
+        >
+        <span class="error" ng-message="pattern"
+          >{{ data.patternErrorMessage }}</span
+        >
+      </div>
     </form>
     <div class="modal__action-btn">
-       <button class="button button--alternative button--small" ng-click="close(false)" data-dismiss="modal">{{ data.buttonCancelLabel }}</button>
-       <button class="button {{ data.buttonPrimaryClass }}"
-       ng-click="submitted=true;close(true);"
-       ng-disabled="validationForm.$invalid && submitted || processingSave"
-       ng-class="{'button--spinner': processingSave }"
-       data-dismiss="modal">
-       {{ data.buttonPrimaryLabel }}
-       <span ng-show="processingSave" class="icon-editor-saving ng-hide"></span>
-       </button>
+      <button
+        class="button button--alternative button--small"
+        ng-click="close(false)"
+        data-dismiss="modal"
+      >
+        {{ data.buttonCancelLabel }}
+      </button>
+      <button
+        class="button {{ data.buttonPrimaryClass }}"
+        ng-click="submitted=true;close(true);"
+        ng-disabled="validationForm.$invalid && submitted || processingSave"
+        ng-class="{'button--spinner': processingSave }"
+        data-dismiss="modal"
+      >
+        {{ data.buttonPrimaryLabel }}
+        <span
+          ng-show="processingSave"
+          class="icon-editor-saving ng-hide"
+        ></span>
+      </button>
     </div>
   </div>
 </div>

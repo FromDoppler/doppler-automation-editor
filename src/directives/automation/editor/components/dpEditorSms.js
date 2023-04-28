@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,32 +8,44 @@
   dpEditorSms.$inject = [
     'userFieldsDataservice',
     'automation',
-    'warningsStepsService'
+    'warningsStepsService',
   ];
 
-  function dpEditorSms(userFieldsDataservice, automation, warningsStepsService) {
+  function dpEditorSms(
+    userFieldsDataservice,
+    automation,
+    warningsStepsService
+  ) {
     var directive = {
       restrict: 'E',
       scope: {
         branch: '=',
-        component: '='
+        component: '=',
       },
-      templateUrl: 'angularjs/partials/automation/editor/directives/components/dp-editor-sms.html',
-      link: link
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/components/dp-editor-sms.html',
+      link: link,
     };
 
     return directive;
 
     function link(scope) {
-      userFieldsDataservice.getPhoneCustoms()
-        .then(function(data){
-          if (data.length && userFieldsDataservice.isFieldDeleted(scope.component.field, data)) {
-            scope.component.setData({ field: null, smsText: '', id: 0, name: '' });
-            scope.component.checkCompleted();
-            automation.checkCompleted();
-            warningsStepsService.checkWarningStep(scope.component);
-          }
-        });
+      userFieldsDataservice.getPhoneCustoms().then(function (data) {
+        if (
+          data.length &&
+          userFieldsDataservice.isFieldDeleted(scope.component.field, data)
+        ) {
+          scope.component.setData({
+            field: null,
+            smsText: '',
+            id: 0,
+            name: '',
+          });
+          scope.component.checkCompleted();
+          automation.checkCompleted();
+          warningsStepsService.checkWarningStep(scope.component);
+        }
+      });
     }
   }
 })();

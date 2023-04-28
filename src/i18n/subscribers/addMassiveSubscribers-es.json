@@ -1,42 +1,42 @@
 {
-  "addMassiveSubscribers" : {
+  "addMassiveSubscribers": {
     "header": {
-    "back_subscribers_text": "Listado Maestro de Suscriptores",
-    "screen_description": "Asociar a Lista nueva",
-    "title" : "Crea una nueva Lista",
-    "description_1": "Asociaremos los",
-    "description_1_singular": "Asociaremos al",
-    "quantity_subscribers_selected_text": " Suscriptores",
-    "quantity_subscribers_selected_text_singular": "Suscriptor",
-    "description_2": " que cumplen con los criterios seleccionados ",
-    "description_2_singular": " que cumple con los criterios seleccionados ",
-    "status": "Estado",
-    "scoring": "Calificación",
-    "origin": "Origen",
-    "description_3": " a la Lista que vas a crear. ¿Deseas modificar los criterios de filtrado? ",
-    "back_subscribers_text_2": "Regresa al paso anterior",
-    "quantity_subsbribers_not_associated_text": "Suscriptores",
-    "quantity_subsbribers_not_associated_text_singular": "1 Suscriptor",
-    "description_4": "no pueden ser asociados a la Lista porque se encuentran en ",
-    "description_4_singular": "no puede ser asociado a la Lista porque se encuentra en",
-    "description_5": "Para activarlos, ",
-    "description_5_singular": "Para activarlo, ",
-    "activation_link": "AMPLÍA TU PLAN"
+      "back_subscribers_text": "Listado Maestro de Suscriptores",
+      "screen_description": "Asociar a Lista nueva",
+      "title": "Crea una nueva Lista",
+      "description_1": "Asociaremos los",
+      "description_1_singular": "Asociaremos al",
+      "quantity_subscribers_selected_text": " Suscriptores",
+      "quantity_subscribers_selected_text_singular": "Suscriptor",
+      "description_2": " que cumplen con los criterios seleccionados ",
+      "description_2_singular": " que cumple con los criterios seleccionados ",
+      "status": "Estado",
+      "scoring": "Calificación",
+      "origin": "Origen",
+      "description_3": " a la Lista que vas a crear. ¿Deseas modificar los criterios de filtrado? ",
+      "back_subscribers_text_2": "Regresa al paso anterior",
+      "quantity_subsbribers_not_associated_text": "Suscriptores",
+      "quantity_subsbribers_not_associated_text_singular": "1 Suscriptor",
+      "description_4": "no pueden ser asociados a la Lista porque se encuentran en ",
+      "description_4_singular": "no puede ser asociado a la Lista porque se encuentra en",
+      "description_5": "Para activarlos, ",
+      "description_5_singular": "Para activarlo, ",
+      "activation_link": "AMPLÍA TU PLAN"
     },
     "title_box": "Nombre de la nueva Lista",
     "duplicated_list_name_error": "¡Ouch! Ya has utilizado este nombre para otra Lista.",
     "character_limit_error": "¡Ouch! Has alcanzado la cantidad máxima de caracteres.",
     "status_descriptions": {
-      "status_0" : "Todos los estados",
-      "status_1" : "Activo",
-      "status_2" : "Activo No Asociado a Lista",
-      "status_3" : "Removido por Rebote Hard",
-      "status_4" : "Removido por Rebote Soft",
-      "status_5" : "Removido por el Suscriptor",
-      "status_6" : "Removido por No Aperturas",
-      "status_7" : "Pendiente",
-      "status_8" : "Removido por el Cliente",
-      "status_9" : "En Espera de Ampliación de Plan"
+      "status_0": "Todos los estados",
+      "status_1": "Activo",
+      "status_2": "Activo No Asociado a Lista",
+      "status_3": "Removido por Rebote Hard",
+      "status_4": "Removido por Rebote Soft",
+      "status_5": "Removido por el Suscriptor",
+      "status_6": "Removido por No Aperturas",
+      "status_7": "Pendiente",
+      "status_8": "Removido por el Cliente",
+      "status_9": "En Espera de Ampliación de Plan"
     },
     "scoring_descriptions": {
       "all_scorings": "Todas las Calificaciones",
@@ -53,14 +53,14 @@
       "origin_6": "RestAPI",
       "origin_7": "TokkoBroker",
       "origin_8": "Tiendanube",
-      "origin_9" : "DataHub"
+      "origin_9": "DataHub"
     },
     "subscribers_not_associated_status": {
       "waiting_upgrade_plan": "Espera de Ampliación de Plan"
     },
-    "footer" : {
-      "button_cancel" : "Cancelar",
-      "button_create" : "Crear y asociar"
+    "footer": {
+      "button_cancel": "Cancelar",
+      "button_create": "Crear y asociar"
     }
   }
 }

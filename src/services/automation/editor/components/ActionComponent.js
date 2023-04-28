@@ -1,14 +1,15 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('ActionComponent', ['$injector', 'BaseComponent', 'COMPONENT_TYPE', function($injector, BaseComponent, COMPONENT_TYPE) {
-
+  angular.module('dopplerApp.automation.editor').factory('ActionComponent', [
+    '$injector',
+    'BaseComponent',
+    'COMPONENT_TYPE',
+    function ($injector, BaseComponent, COMPONENT_TYPE) {
       function ActionComponent(data) {
         // Inherited constructor.
         BaseComponent.call(this, {
-          type: COMPONENT_TYPE.ACTION
+          type: COMPONENT_TYPE.ACTION,
         });
         this.actionType = '';
         this.operation = null;
@@ -20,10 +21,12 @@
 
       // Prototype inherence from BaseComponent.
       ActionComponent.prototype = Object.create(BaseComponent.prototype);
-      ActionComponent.prototype.markup = '<dp-editor-action class="component--container action" component="component" branch="branch"></dp-editor-action>';
-      ActionComponent.prototype.panelTemplate = '<div dp-editor-panel-action class="dp-editor-panel-action"></div>';
+      ActionComponent.prototype.markup =
+        '<dp-editor-action class="component--container action" component="component" branch="branch"></dp-editor-action>';
+      ActionComponent.prototype.panelTemplate =
+        '<div dp-editor-panel-action class="dp-editor-panel-action"></div>';
 
-      ActionComponent.prototype.setData = function(data) {
+      ActionComponent.prototype.setData = function (data) {
         var automation = $injector.get('automation');
 
         BaseComponent.prototype.setData.call(this, data);
@@ -32,7 +35,7 @@
           this.actionType = data.actionType;
           this.operation = automation.createOperation({
             type: data.actionType,
-            suscriptionList: data.suscriptionList
+            suscriptionList: data.suscriptionList,
           });
         }
         if (data.hasOwnProperty('operation') && data.operation) {
@@ -44,7 +47,7 @@
         }
       };
 
-      ActionComponent.prototype.checkCompleted = function() {
+      ActionComponent.prototype.checkCompleted = function () {
         var isCompleted = !!this.operation;
 
         if (isCompleted) {
@@ -53,12 +56,11 @@
         this.completed = isCompleted;
       };
 
-      ActionComponent.prototype.getPropertiesToWatch = function() {
-        return [
-          'operation'
-        ];
+      ActionComponent.prototype.getPropertiesToWatch = function () {
+        return ['operation'];
       };
 
       return ActionComponent;
-    }]);
+    },
+  ]);
 })();

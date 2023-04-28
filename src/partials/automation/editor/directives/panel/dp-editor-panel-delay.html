@@ -1,23 +1,42 @@
-<p class="title">{{ 'automation_editor.sidebar.time_before_campaign' | translate }}</p>
-<label class="label label--panel">*{{ 'automation_editor.sidebar.delay_time' | translate }}</label>
+<p class="title">
+  {{ 'automation_editor.sidebar.time_before_campaign' | translate }}
+</p>
+<label class="label label--panel"
+  >*{{ 'automation_editor.sidebar.delay_time' | translate }}</label
+>
 <form name="delayForm" class="delay--form relative">
   <div class="flex-grid-v-center--s-between">
-    <input class="number input--text input-size--medium" name="time" type="text" pattern="\d*" maxlength="3"
+    <input
+      class="number input--text input-size--medium"
+      name="time"
+      type="text"
+      pattern="\d*"
+      maxlength="3"
       ng-class="{ 'hasErrors': delayForm.time.$invalid}"
       ng-model="selectedComponent.time"
       ng-required="delayForm.time.$dirty || selectedComponent.touched"
       placeholder="{{ 'automation_editor.sidebar.delay_input_placeholder' | translate }}"
-      ng-disabled="!canEdit();">
-    <dp-editor-dropdown class="dropdown dropdown--medium" id="dd-timeUnit" name="timeUnit" property="name"
+      ng-disabled="!canEdit();"
+    />
+    <dp-editor-dropdown
+      class="dropdown dropdown--medium"
+      id="dd-timeUnit"
+      name="timeUnit"
+      property="name"
       options="timeUnitOptions"
       label="'automation_editor.sidebar.time_unit.' + selectedComponent.timeUnit | translate"
       on-select-option="onTimeUnitSelected(option.value)"
       value-selected="selectedComponent.timeUnit"
-      ng-disabled="!canEdit();">
+      ng-disabled="!canEdit();"
+    >
     </dp-editor-dropdown>
-    <span class="read-only--tooltip" ng-show="!canEdit();">{{ getReadOnlyLabel(); }}</span>
+    <span class="read-only--tooltip" ng-show="!canEdit();"
+      >{{ getReadOnlyLabel(); }}</span
+    >
   </div>
-	<div ng-messages="delayForm.time.$error" class="error-messages--container">
-		<div ng-message="pattern" class="error">{{ 'validation_messages.number_pattern_3digits' | translate }}</div>
-	</div>
+  <div ng-messages="delayForm.time.$error" class="error-messages--container">
+    <div ng-message="pattern" class="error">
+      {{ 'validation_messages.number_pattern_3digits' | translate }}
+    </div>
+  </div>
 </form>

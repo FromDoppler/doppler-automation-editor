@@ -1,18 +1,31 @@
-<div ng-mouseenter="onMouseEnterOverComponent()" ng-mouseleave="onMouseLeaveOverComponent()" ng-click="onClickComponent($event)" class="component" ng-class="{'delete-warning': showDeleteWarning}">
-
+<div
+  ng-mouseenter="onMouseEnterOverComponent()"
+  ng-mouseleave="onMouseLeaveOverComponent()"
+  ng-click="onClickComponent($event)"
+  class="component"
+  ng-class="{'delete-warning': showDeleteWarning}"
+>
   <div class="dp-tooltip-top">
-    <span ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate">
+    <span
+      ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate"
+    >
     </span>
   </div>
 
   <div class="condition--details box">
     <div class="uid-label-component">{{component.uid}}</div>
     <img class="image-complete" src="/../images/automation-condition.svg" />
-    <img class="image-incomplete" src="/../images/automation-condition-grey.svg" />
+    <img
+      class="image-incomplete"
+      src="/../images/automation-condition-grey.svg"
+    />
     <p ng-bind-html="getConditionSummary()"></p>
   </div>
   <div class="delete--warning condition">
-    <strong>{{'automation_editor.components.condition.delete_warning.title' | translate}}</strong>
+    <strong
+      >{{'automation_editor.components.condition.delete_warning.title' |
+      translate}}</strong
+    >
     {{'automation_editor.components.condition.delete_warning.body' | translate}}
   </div>
   <div class="actions-element--container">
@@ -20,39 +33,70 @@
       click-validation="true"
       on-delete-component="removeAndTransferChildren()"
       on-click-icon="canBeRemoved()"
-      ng-mouseleave="showDeleteWarning = false;">
+      ng-mouseleave="showDeleteWarning = false;"
+    >
     </dp-editor-delete-component>
   </div>
 </div>
 <div class="conditions--container" id="conditions-{{component.uid}}">
   <div class="item yes">
-    <div class="delay--container text--small" ng-if="isVerificationTimeNeeded() && hasNegativeConditionalEvents()" ng-bind-html="getDelaySummary()"></div>
+    <div
+      class="delay--container text--small"
+      ng-if="isVerificationTimeNeeded() && hasNegativeConditionalEvents()"
+      ng-bind-html="getDelaySummary()"
+    ></div>
     <div class="item--container">
       <div class="item--center">
-        <span class="condition--text condition--text-yes relative"><b>{{'automation_editor.components.condition.positive_branch' | translate}}</b></span>
-        <dp-editor-new-step component="component" branch="CONDITION_BRANCH.POSITIVE" parent-uid="component.uid"></dp-editor-new-step>
-        <dp-editor-component-renderer ng-repeat="sibling in component[CONDITION_BRANCH.POSITIVE]"
+        <span class="condition--text condition--text-yes relative"
+          ><b
+            >{{'automation_editor.components.condition.positive_branch' |
+            translate}}</b
+          ></span
+        >
+        <dp-editor-new-step
+          component="component"
+          branch="CONDITION_BRANCH.POSITIVE"
+          parent-uid="component.uid"
+        ></dp-editor-new-step>
+        <dp-editor-component-renderer
+          ng-repeat="sibling in component[CONDITION_BRANCH.POSITIVE]"
           ng-class="{'focus': selectedComponent && selectedComponentUid === sibling.uid, 'incomplete': !sibling.completed, 'touched': sibling.touched}"
           branch="CONDITION_BRANCH.POSITIVE"
           component="sibling"
           parent-uid="sibling.parentUid"
-          ng-click="$event.stopPropagation();">
+          ng-click="$event.stopPropagation();"
+        >
         </dp-editor-component-renderer>
       </div>
     </div>
   </div>
   <div class="item no">
-    <div class="delay--container text--small" ng-if="isVerificationTimeNeeded() && !hasNegativeConditionalEvents()" ng-bind-html="getDelaySummary()"></div>
+    <div
+      class="delay--container text--small"
+      ng-if="isVerificationTimeNeeded() && !hasNegativeConditionalEvents()"
+      ng-bind-html="getDelaySummary()"
+    ></div>
     <div class="item--container-no">
       <div class="item--center">
-        <span class="condition--text condition--text-no relative"><b>{{'automation_editor.components.condition.negative_branch' | translate}}</b></span>
-        <dp-editor-new-step component="component" branch="CONDITION_BRANCH.NEGATIVE" parent-uid="component.uid"></dp-editor-new-step>
-        <dp-editor-component-renderer ng-repeat="sibling in component[CONDITION_BRANCH.NEGATIVE]"
+        <span class="condition--text condition--text-no relative"
+          ><b
+            >{{'automation_editor.components.condition.negative_branch' |
+            translate}}</b
+          ></span
+        >
+        <dp-editor-new-step
+          component="component"
+          branch="CONDITION_BRANCH.NEGATIVE"
+          parent-uid="component.uid"
+        ></dp-editor-new-step>
+        <dp-editor-component-renderer
+          ng-repeat="sibling in component[CONDITION_BRANCH.NEGATIVE]"
           ng-class="{'focus': selectedComponent && selectedComponentUid === sibling.uid, 'incomplete': !sibling.completed, 'touched': sibling.touched}"
           branch="CONDITION_BRANCH.NEGATIVE"
           component="sibling"
           parent-uid="sibling.parentUid"
-          ng-click="$event.stopPropagation();">
+          ng-click="$event.stopPropagation();"
+        >
         </dp-editor-component-renderer>
       </div>
     </div>

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -12,7 +12,7 @@
       findLink: findLink,
       getLinksByEmail: getLinksByEmail,
       updateEmailComponentLinks: updateEmailComponentLinks,
-      updateLinksId: updateLinksId
+      updateLinksId: updateLinksId,
     };
 
     return service;
@@ -24,7 +24,7 @@
     }
 
     function findLink(emailUid, idLink) {
-      return _.find(linksByEmail[emailUid], function(link) {
+      return _.find(linksByEmail[emailUid], function (link) {
         return link.idLink === idLink;
       });
     }
@@ -38,8 +38,8 @@
     }
 
     function updateLinksId(emailUid, linksData) {
-      _.each(linksData, function(linkData) {
-        var link = _.find(linksByEmail[emailUid], function(item) {
+      _.each(linksData, function (linkData) {
+        var link = _.find(linksByEmail[emailUid], function (item) {
           return item.idLink === linkData.oldIdLink;
         });
         link.idLink = linkData.idLink;

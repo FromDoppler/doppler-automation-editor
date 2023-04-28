@@ -1,62 +1,136 @@
-<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
-     ng-show="mercadoShops.connected && mercadoShops.showMapping">
+<div
+  id="mapping-panel"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  ng-show="mercadoShops.connected && mercadoShops.showMapping"
+>
   <div>
     <div class="authentication-container connected">
       <div>
-        <span class="control-panel-section-title">{{ 'mercado_shops_integration.mapping.title' | translate }}</span>
-        <span class="control-panel-section-subtitle">{{ 'mercado_shops_integration.mapping.subtitle' | translate }}</span>
+        <span class="control-panel-section-title"
+          >{{ 'mercado_shops_integration.mapping.title' | translate }}</span
+        >
+        <span class="control-panel-section-subtitle"
+          >{{ 'mercado_shops_integration.mapping.subtitle' | translate }}</span
+        >
       </div>
     </div>
-    <hr class="full" style="width: calc(100% + 40px);" />
+    <hr class="full" style="width: calc(100% + 40px)" />
     <p class="integration-information-text">
-      {{ 'mercado_shops_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ mercadoShops.selectedList.ListName }}</strong>
+      {{ 'mercado_shops_integration.mapping.selected_subscriber_list' |
+      translate }}: <strong>{{ mercadoShops.selectedList.ListName }}</strong>
     </p>
     <div class="mapping-container">
-      <div ng-repeat="field in mercadoShops.mercadoShopsFields" dp-on-finish-ng-repeat>
+      <div
+        ng-repeat="field in mercadoShops.mercadoShopsFields"
+        dp-on-finish-ng-repeat
+      >
         <div class="grayPanel-box flex-grid">
           <div>
-            <p>{{ 'mercado_shops_integration.mapping.data_entity_field' | translate }}: <b>{{ mercadoShops.getFiledName(field.Name) }}</b></p>
+            <p>
+              {{ 'mercado_shops_integration.mapping.data_entity_field' |
+              translate }}: <b>{{ mercadoShops.getFiledName(field.Name) }}</b>
+            </p>
           </div>
           <div>
-            <select id="dd-userFields{{$index}}"
-                    name="select-field{{$index}}"
-                    ng-model="field.idDopplerField"
-                    property="name"
-                    id-value="idField"
-                    ng-options="field.idField as field.name for field in mercadoShops.userFields  | filter:mercadoShops.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
-                    ng-click="mercadoShops.errorMessage=''"
-                    class="selector field-selector"
-                    ng-required="true"
-                    ng-change="mercadoShops.fieldChange($index, field.idDopplerField)">
-              <option value="" disabled="disabled">{{'mercado_shops_integration.mapping.select_field_placeholder' | translate}}</option>
+            <select
+              id="dd-userFields{{$index}}"
+              name="select-field{{$index}}"
+              ng-model="field.idDopplerField"
+              property="name"
+              id-value="idField"
+              ng-options="field.idField as field.name for field in mercadoShops.userFields  | filter:mercadoShops.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+              ng-click="mercadoShops.errorMessage=''"
+              class="selector field-selector"
+              ng-required="true"
+              ng-change="mercadoShops.fieldChange($index, field.idDopplerField)"
+            >
+              <option value="" disabled="disabled">
+                {{'mercado_shops_integration.mapping.select_field_placeholder' |
+                translate}}
+              </option>
             </select>
           </div>
         </div>
-        <div class="createCustomField-box" ng-show="$index == mercadoShops.newField.index">
-          <input type="text" class="name" id="Name" name="Name" value="" ng-model="mercadoShops.newField.name" maxlength="50" ng-click="mercadoShops.newField.error=''">
-          <select id="dd-fieldTypes{{$index}}"
-                  name="select-field-type{{$index}}"
-                  ng-model="mercadoShops.newField.dataType"
-                  ng-options="type.id as type.name for type in mercadoShops.fieldTypes"
-                  class="selector customFieldTypeDropDown"
-                  ng-required="true"
-                  ng-disabled="true">
-          </select>
+        <div
+          class="createCustomField-box"
+          ng-show="$index == mercadoShops.newField.index"
+        >
+          <input
+            type="text"
+            class="name"
+            id="Name"
+            name="Name"
+            value=""
+            ng-model="mercadoShops.newField.name"
+            maxlength="50"
+            ng-click="mercadoShops.newField.error=''"
+          />
+          <select
+            id="dd-fieldTypes{{$index}}"
+            name="select-field-type{{$index}}"
+            ng-model="mercadoShops.newField.dataType"
+            ng-options="type.id as type.name for type in mercadoShops.fieldTypes"
+            class="selector customFieldTypeDropDown"
+            ng-required="true"
+            ng-disabled="true"
+          ></select>
           <div class="visibility-container">
-            <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="mercadoShops.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'mercado_shops_integration.mapping.new_field.public_opt' | translate}}</label>
-            <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="mercadoShops.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'mercado_shops_integration.mapping.new_field.private_opt' | translate}}</label>
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-public{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="mercadoShops.newField.isPrivate"
+                value="false"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-public{{$index}}"
+              >{{'mercado_shops_integration.mapping.new_field.public_opt' |
+              translate}}</label
+            >
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-private{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="mercadoShops.newField.isPrivate"
+                value="true"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-private{{$index}}"
+              >{{'mercado_shops_integration.mapping.new_field.private_opt' |
+              translate}}</label
+            >
           </div>
-          <div class="validationTooltip-container" ng-show="mercadoShops.newField.error">
+          <div
+            class="validationTooltip-container"
+            ng-show="mercadoShops.newField.error"
+          >
             <span class="validationTooltip-image"></span>
-            <span class="validation-tooltip">{{ mercadoShops.newField.error }}</span>
+            <span class="validation-tooltip"
+              >{{ mercadoShops.newField.error }}</span
+            >
           </div>
-          <input type="submit" value="{{'mercado_shops_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="mercadoShops.createField($index)">
+          <input
+            type="submit"
+            value="{{'mercado_shops_integration.mapping.new_field.button' | translate}}"
+            class="main_buttons_green_small submit"
+            ng-click="mercadoShops.createField($index)"
+          />
         </div>
       </div>
     </div>
   </div>
-  <div class="dp-library margin-t-20 margin-b-20" ng-show="!!mercadoShops.errorMessage.length">
-    <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+  <div
+    class="dp-library margin-t-20 margin-b-20"
+    ng-show="!!mercadoShops.errorMessage.length"
+  >
+    <div
+      id="messageBar"
+      class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+    >
       <span class="dp-message-icon"></span>
       <div class="dp-content-message">
         <span>{{ mercadoShops.errorMessage }}</span>
@@ -67,8 +141,11 @@
     <button ng-click="mercadoShops.goBack()" class="button button--alternative">
       {{ 'mercado_shops_integration.mapping.back' | translate }}
     </button>
-    <button ng-class="{'button--spinner' : mercadoShops.isMapping}" ng-click="mercadoShops.mapFields()"
-            class="button button--primary">
+    <button
+      ng-class="{'button--spinner' : mercadoShops.isMapping}"
+      ng-click="mercadoShops.mapFields()"
+      class="button button--primary"
+    >
       {{ 'mercado_shops_integration.connected.synchronize' | translate }}
       <span class="icon-editor-saving hide"></span>
     </button>

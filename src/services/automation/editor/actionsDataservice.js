@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -11,7 +11,7 @@
     var service = {
       setEmailReference: setEmailReference,
       isEmailReferenced: isEmailReferenced,
-      deleteEmailReference: deleteEmailReference
+      deleteEmailReference: deleteEmailReference,
     };
 
     return service;
@@ -21,7 +21,7 @@
     }
 
     function isEmailReferenced(emailUid) {
-      return !!_.find(actionComponents, function(uid) {
+      return !!_.find(actionComponents, function (uid) {
         return uid === emailUid;
       });
     }
@@ -29,6 +29,5 @@
     function deleteEmailReference(actionUid) {
       delete actionComponents[actionUid];
     }
-
   }
 })();

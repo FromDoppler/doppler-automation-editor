@@ -1,28 +1,23 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('scrollOnTop', scrollOnTop);
+  angular.module('dopplerApp').directive('scrollOnTop', scrollOnTop);
 
   function scrollOnTop() {
-
     var directive = {
       restrict: 'A',
       link: link,
       scope: {
-        scrollCallback: '&'
-      }
+        scrollCallback: '&',
+      },
     };
 
     return directive;
 
     function link(scope, element) {
-      element.on('scroll', function() {
+      element.on('scroll', function () {
         scope.scrollCallback()(element[0].scrollTop === 0);
       });
     }
-
   }
-
 })();

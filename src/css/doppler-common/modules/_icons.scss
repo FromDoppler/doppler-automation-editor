@@ -1,22 +1,22 @@
-[class^=icon-] {
-  font-family:"icon-font";
-  display:inline-block;
-  vertical-align:middle;
-  line-height:1;
-  font-weight:normal;
-  font-style:normal;
-  speak:none;
-  text-decoration:inherit;
-  text-transform:none;
-  text-rendering:optimizeLegibility;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+[class^='icon-'] {
+  font-family: 'icon-font';
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* close icon button */
 .cross-circle {
-  width:16px;
-  height:16px;
+  width: 16px;
+  height: 16px;
   background: $color-base;
   border: 0;
   @include border-radius(50%);
@@ -29,8 +29,8 @@
     background-color: $color-white;
     width: 10px;
     height: 2px;
-    background-color: #FFF;
-    content: "";
+    background-color: #fff;
+    content: '';
     left: 50%;
     top: 50%;
     margin-left: -5px;
@@ -47,7 +47,7 @@
     width: 10px;
     height: 2px;
     background-color: $color-white;
-    content: "";
+    content: '';
     position: absolute;
     @include transform(rotate(45deg));
   }
@@ -78,7 +78,7 @@
     width: 8px;
     height: 2px;
     background-color: $color-white;
-    content: "";
+    content: '';
     position: absolute;
     @include transform(rotate(0deg));
   }
@@ -87,9 +87,9 @@
 .tooltiptext {
   padding-left: 5px;
   height: 18px;
-  color: #E34F45;
+  color: #e34f45;
   font-weight: bold;
-  background: #FFC3BF;
+  background: #ffc3bf;
   font-size: 9px;
   border-radius: 2px;
   position: relative;
@@ -115,7 +115,8 @@
   margin-right: 10px;
 }
 
-.blocked-list-tooltip, .blocked-segment-tooltip {
+.blocked-list-tooltip,
+.blocked-segment-tooltip {
   top: -5px !important;
 }
 
@@ -130,15 +131,15 @@
 }
 
 dp-editor-lists-grid {
-  .radio-custom.first-selected[disabled="disabled"] + label {
+  .radio-custom.first-selected[disabled='disabled'] + label {
     background-color: $color-white;
   }
 
-  .radio-custom[disabled="disabled"][checked="checked"] + label {
+  .radio-custom[disabled='disabled'][checked='checked'] + label {
     background-color: $color-green-light;
   }
 
-  .radio-custom[disabled="disabled"] + label {
+  .radio-custom[disabled='disabled'] + label {
     background-color: $color-sylver;
   }
 
@@ -152,7 +153,7 @@ dp-editor-lists-grid {
   box-sizing: border-box;
   position: relative;
   display: block;
-  transform: scale(var(--ggs,1));
+  transform: scale(var(--ggs, 1));
   width: 12px;
   height: 12px;
   border: 2px solid;
@@ -163,19 +164,19 @@ dp-editor-lists-grid {
   left: 50%;
 }
 
-  .i-block::before {
-    content: "";
-    display: inline-block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 10px;
-    height: 2px;
-    background: $color-white;
-    border-radius: 5px;
-    transform: rotate(-45deg);
-    top: 3px;
-    left: -1px
-  }
+.i-block::before {
+  content: '';
+  display: inline-block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: $color-white;
+  border-radius: 5px;
+  transform: rotate(-45deg);
+  top: 3px;
+  left: -1px;
+}
 
 .tooltip-icon {
   margin-left: 3px;
@@ -186,7 +187,7 @@ dp-editor-lists-grid {
   justify-content: center;
   position: relative;
   display: inline-block;
-  border-radius:0px 3px 3px 0px;
+  border-radius: 0px 3px 3px 0px;
 }
 
 .tooltip-icon-clean {
@@ -202,5 +203,4 @@ dp-editor-lists-grid {
   top: 4px;
 }
 
-  /* Blocked Icon */
-
+/* Blocked Icon */

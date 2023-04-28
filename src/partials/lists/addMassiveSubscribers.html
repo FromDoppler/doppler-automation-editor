@@ -1,58 +1,137 @@
 <div class="massiveSubscribersNewList">
   <div id="content-wrapper" class="ng-hide" ng-show="!addSubscribers.isLoading">
     <div class="dp-library">
-        <header class="titleSectionHeader-content hero-banner">
-            <div class="dp-container">
-                <div class="dp-rowflex">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                            <nav class="dp-breadcrumb">
-                                <ul>
-                                <li>
-                                    <a ng-href="/Lists/MasterSubscriber">{{ 'addMassiveSubscribers.header.back_subscribers_text' | translate }}</a>
-                                </li>
-                                <li><span> {{ 'addMassiveSubscribers.header.screen_description' | translate }}</span></li>
-                                </ul>
-                            </nav>
-                            <h2 class="areaTitle">{{ 'addMassiveSubscribers.header.title' | translate }}</h2>
-                            <p class="addNewSubscriberList-content">
-                                <span>
-                                    {{ 'addMassiveSubscribers.header.description_1' + oneSubscriber | translate }} <strong>{{subscribersCount !== 1 ? subscribersCount : ''}} {{ 'addMassiveSubscribers.header.quantity_subscribers_selected_text' + oneSubscriber | translate }}</strong>
-                                    {{ 'addMassiveSubscribers.header.description_2' + oneSubscriber | translate }} <i>({{ 'addMassiveSubscribers.header.status' | translate }}: <strong>
-                                    {{ 'addMassiveSubscribers.status_descriptions.status_' + status | translate }} </strong> | {{ 'addMassiveSubscribers.header.scoring' | translate }}:
-                                    <strong ng-if="score === 0"> {{ 'addMassiveSubscribers.scoring_descriptions.all_scorings' | translate }}</strong>
-                                    <strong ng-if="score === 1">{{score}} {{ 'addMassiveSubscribers.scoring_descriptions.star_sg' | translate }}</strong>
-                                    <strong ng-if="score > 1">{{score}} {{ 'addMassiveSubscribers.scoring_descriptions.star_pl' | translate }}</strong>
-                                    | {{ 'addMassiveSubscribers.header.origin' | translate }}: <strong>
-                                    {{ 'addMassiveSubscribers.origin_descriptions.origin_' + origin | translate }}</strong>)</i> {{ 'addMassiveSubscribers.header.description_3' | translate }}
-                                    <a href="/Lists/MasterSubscriber">{{ 'addMassiveSubscribers.header.back_subscribers_text_2' | translate }}.</a>
-                                </span>
-                                <span ng-if="subscribersStandBy !== 0" class="text--yellow">
-                                    <br /><br />
-                                    <strong>{{subscribersStandBy !==1 ? subscribersStandBy : ''}} {{ 'addMassiveSubscribers.header.quantity_subsbribers_not_associated_text' + oneSubscriberStandBy | translate }}</strong>
-                                    {{ 'addMassiveSubscribers.header.description_4' + oneSubscriberStandBy | translate }}
-                                    <strong> {{ 'addMassiveSubscribers.subscribers_not_associated_status.waiting_upgrade_plan' | translate }}</strong>.
-                                    {{ 'addMassiveSubscribers.header.description_5' + oneSubscriberStandBy | translate }}
-                                    <a ng-click="openPopup()" class="activationLink">{{ 'addMassiveSubscribers.header.activation_link' | translate }}</a>.
-                                </span>
-                            </p>
-                    </div>
-                </div>
+      <header class="titleSectionHeader-content hero-banner">
+        <div class="dp-container">
+          <div class="dp-rowflex">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <nav class="dp-breadcrumb">
+                <ul>
+                  <li>
+                    <a ng-href="/Lists/MasterSubscriber"
+                      >{{ 'addMassiveSubscribers.header.back_subscribers_text' |
+                      translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <span>
+                      {{ 'addMassiveSubscribers.header.screen_description' |
+                      translate }}</span
+                    >
+                  </li>
+                </ul>
+              </nav>
+              <h2 class="areaTitle">
+                {{ 'addMassiveSubscribers.header.title' | translate }}
+              </h2>
+              <p class="addNewSubscriberList-content">
+                <span>
+                  {{ 'addMassiveSubscribers.header.description_1' +
+                  oneSubscriber | translate }}
+                  <strong
+                    >{{subscribersCount !== 1 ? subscribersCount : ''}} {{
+                    'addMassiveSubscribers.header.quantity_subscribers_selected_text'
+                    + oneSubscriber | translate }}</strong
+                  >
+                  {{ 'addMassiveSubscribers.header.description_2' +
+                  oneSubscriber | translate }}
+                  <i
+                    >({{ 'addMassiveSubscribers.header.status' | translate }}:
+                    <strong>
+                      {{ 'addMassiveSubscribers.status_descriptions.status_' +
+                      status | translate }}
+                    </strong>
+                    | {{ 'addMassiveSubscribers.header.scoring' | translate }}:
+                    <strong ng-if="score === 0">
+                      {{
+                      'addMassiveSubscribers.scoring_descriptions.all_scorings'
+                      | translate }}</strong
+                    >
+                    <strong ng-if="score === 1"
+                      >{{score}} {{
+                      'addMassiveSubscribers.scoring_descriptions.star_sg' |
+                      translate }}</strong
+                    >
+                    <strong ng-if="score > 1"
+                      >{{score}} {{
+                      'addMassiveSubscribers.scoring_descriptions.star_pl' |
+                      translate }}</strong
+                    >
+                    | {{ 'addMassiveSubscribers.header.origin' | translate }}:
+                    <strong>
+                      {{ 'addMassiveSubscribers.origin_descriptions.origin_' +
+                      origin | translate }}</strong
+                    >)</i
+                  >
+                  {{ 'addMassiveSubscribers.header.description_3' | translate }}
+                  <a href="/Lists/MasterSubscriber"
+                    >{{ 'addMassiveSubscribers.header.back_subscribers_text_2' |
+                    translate }}.</a
+                  >
+                </span>
+                <span ng-if="subscribersStandBy !== 0" class="text--yellow">
+                  <br /><br />
+                  <strong
+                    >{{subscribersStandBy !==1 ? subscribersStandBy : ''}} {{
+                    'addMassiveSubscribers.header.quantity_subsbribers_not_associated_text'
+                    + oneSubscriberStandBy | translate }}</strong
+                  >
+                  {{ 'addMassiveSubscribers.header.description_4' +
+                  oneSubscriberStandBy | translate }}
+                  <strong>
+                    {{
+                    'addMassiveSubscribers.subscribers_not_associated_status.waiting_upgrade_plan'
+                    | translate }}</strong
+                  >. {{ 'addMassiveSubscribers.header.description_5' +
+                  oneSubscriberStandBy | translate }}
+                  <a ng-click="openPopup()" class="activationLink"
+                    >{{ 'addMassiveSubscribers.header.activation_link' |
+                    translate }}</a
+                  >.
+                </span>
+              </p>
             </div>
-        </header>
+          </div>
+        </div>
+      </header>
     </div>
-      <div class="grayPanel-box newSubscriber--box">
-          <div class="grayPanelPadding-box">
-            <h1 class="title--box areaTitle">{{ 'addMassiveSubscribers.title_box' | translate }}</h1>
-            <input ng-focus="deleteErrorMessage()" ng-class="{'input--error' : duplicatedListNameMessage || characterLimitMessage}" ng-model="listName" class="input--list" type="text" ng-disabled="!canCreate"/>
-            <p class="error--message" ng-if="duplicatedListNameMessage">{{ 'addMassiveSubscribers.duplicated_list_name_error' | translate }}</p>
-            <p class="error--message" ng-if="characterLimitMessage">{{ 'addMassiveSubscribers.character_limit_error' | translate }}</p>
-          </div>
+    <div class="grayPanel-box newSubscriber--box">
+      <div class="grayPanelPadding-box">
+        <h1 class="title--box areaTitle">
+          {{ 'addMassiveSubscribers.title_box' | translate }}
+        </h1>
+        <input
+          ng-focus="deleteErrorMessage()"
+          ng-class="{'input--error' : duplicatedListNameMessage || characterLimitMessage}"
+          ng-model="listName"
+          class="input--list"
+          type="text"
+          ng-disabled="!canCreate"
+        />
+        <p class="error--message" ng-if="duplicatedListNameMessage">
+          {{ 'addMassiveSubscribers.duplicated_list_name_error' | translate }}
+        </p>
+        <p class="error--message" ng-if="characterLimitMessage">
+          {{ 'addMassiveSubscribers.character_limit_error' | translate }}
+        </p>
       </div>
-      <div class="nav-button-bar">
-          <input ng-click="goBack()" class="main_buttons_gray_big" type="button" value="{{ 'addMassiveSubscribers.footer.button_cancel' | translate }}">
-          <div class="floatRight">
-              <input ng-click="createNewList()" class="main_buttons_green_big " type="button" value="{{ 'addMassiveSubscribers.footer.button_create' | translate }}" ng-disabled="!canCreate || !listName">
-          </div>
+    </div>
+    <div class="nav-button-bar">
+      <input
+        ng-click="goBack()"
+        class="main_buttons_gray_big"
+        type="button"
+        value="{{ 'addMassiveSubscribers.footer.button_cancel' | translate }}"
+      />
+      <div class="floatRight">
+        <input
+          ng-click="createNewList()"
+          class="main_buttons_green_big"
+          type="button"
+          value="{{ 'addMassiveSubscribers.footer.button_create' | translate }}"
+          ng-disabled="!canCreate || !listName"
+        />
       </div>
+    </div>
   </div>
 </div>

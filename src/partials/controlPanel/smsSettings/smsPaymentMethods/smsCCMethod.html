@@ -1,15 +1,22 @@
 <div class="margin-t-20">
-  <label class="label label--panel">* {{ 'sms_settings.buy_screen.credit_card.firstname_lastname' | translate }}</label>
+  <label class="label label--panel"
+    >* {{ 'sms_settings.buy_screen.credit_card.firstname_lastname' | translate
+    }}</label
+  >
   <input
     type="text"
     name="holderFullName"
     class="input--text"
     ng-model="smsSettings.paymentData.billingInformation.holderFullName"
     ng-required="billingInformationForm.holderFullName.$dirty || billingInformationForm.$submitted"
-    ng-class="{ 'hasErrors' : billingInformationForm.holderFullName.$invalid }"/>
-  <div class="grid-display payment-two-columns gap-30 padding-t-10  row-gap-10">
+    ng-class="{ 'hasErrors' : billingInformationForm.holderFullName.$invalid }"
+  />
+  <div class="grid-display payment-two-columns gap-30 padding-t-10 row-gap-10">
     <div>
-      <label class="label label--panel">* {{ 'sms_settings.buy_screen.credit_card.credit_card_type' | translate }}</label>
+      <label class="label label--panel"
+        >* {{ 'sms_settings.buy_screen.credit_card.credit_card_type' | translate
+        }}</label
+      >
       <dropdown
         class="dropdown"
         placeholder="{{smsSettings.selectOptionPlaceholder}}"
@@ -21,10 +28,14 @@
         id-value="idCCType"
         ng-required="billingInformationForm.idCCType.$dirty || billingInformationForm.$submitted"
         ng-class="{ 'hasErrors' : billingInformationForm.idCCType.$invalid }"
-        ng-change="smsSettings.updateRegExCC()"></dropdown>
+        ng-change="smsSettings.updateRegExCC()"
+      ></dropdown>
     </div>
     <div>
-      <label class="label label--panel">* {{ 'sms_settings.buy_screen.credit_card.card_number' | translate }}</label>
+      <label class="label label--panel"
+        >* {{ 'sms_settings.buy_screen.credit_card.card_number' | translate
+        }}</label
+      >
       <input
         type="text"
         dp-integer-input
@@ -33,11 +44,15 @@
         class="input--text"
         ng-pattern="smsSettings.regexCC"
         ng-class="{ 'hasErrors' : billingInformationForm.ccNumber.$invalid }"
-        ng-required="billingInformationForm.ccNumber.$dirty || billingInformationForm.$submitted"/>
+        ng-required="billingInformationForm.ccNumber.$dirty || billingInformationForm.$submitted"
+      />
     </div>
     <div class="grid-display payment-two-columns gap-30">
       <div>
-        <label class="label label--panel">* {{ 'sms_settings.buy_screen.credit_card.expiration_date' | translate }}</label>
+        <label class="label label--panel"
+          >* {{ 'sms_settings.buy_screen.credit_card.expiration_date' |
+          translate }}</label
+        >
         <dropdown
           class="dropdown"
           placeholder="{{smsSettings.ccExpMonthPlaceholder}}"
@@ -48,7 +63,8 @@
           property="name"
           id-value="id"
           ng-required="billingInformationForm.ccExpMonth.$dirty || billingInformationForm.$submitted"
-          ng-class="{ 'hasErrors' : billingInformationForm.ccExpMonth.$invalid }"></dropdown>
+          ng-class="{ 'hasErrors' : billingInformationForm.ccExpMonth.$invalid }"
+        ></dropdown>
       </div>
       <div>
         <dropdown
@@ -61,12 +77,17 @@
           property="name"
           id-value="id"
           ng-required="billingInformationForm.ccExpYear.$dirty || billingInformationForm.$submitted"
-          ng-class="{ 'hasErrors' : billingInformationForm.ccExpYear.$invalid }"></dropdown>
+          ng-class="{ 'hasErrors' : billingInformationForm.ccExpYear.$invalid }"
+        ></dropdown>
       </div>
     </div>
     <div>
-      <label class="label label--panel">* {{ 'sms_settings.buy_screen.credit_card.verification_code' | translate }}</label>
-      <input dp-integer-input
+      <label class="label label--panel"
+        >* {{ 'sms_settings.buy_screen.credit_card.verification_code' |
+        translate }}</label
+      >
+      <input
+        dp-integer-input
         type="text"
         class="input--text"
         ng-class="{ 'hasErrors' : billingInformationForm.ccVerificationCode.$invalid}"
@@ -76,14 +97,16 @@
         ng-maxlength="{{ smsSettings.cvvLength }}"
         ng-minlenght="{{ smsSettings.cvvLength }}"
         maxlength="{{ smsSettings.cvvLength }}"
-        minlength="{{ smsSettings.cvvLength }}"/>
+        minlength="{{ smsSettings.cvvLength }}"
+      />
     </div>
-    <div ng-include="'angularjs/partials/controlPanel/smsSettings/smsPaymentMethods/dni.html'"
+    <div
+      ng-include="'angularjs/partials/controlPanel/smsSettings/smsPaymentMethods/dni.html'"
       ng-if="smsSettings.showDNI(
         smsSettings.paymentData.billingInformation.idCountry,
         smsSettings.selectedPaymentMethod,
         smsSettings.paymentData.billingInformation.idConsumerType
-        )">
-    </div>
+        )"
+    ></div>
   </div>
 </div>

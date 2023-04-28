@@ -1,23 +1,23 @@
 'use strict';
 
-angular.module('gdi2290.moment-service')
-.provider('$moment', function() {
+angular.module('gdi2290.moment-service').provider('$moment', function () {
   var _asyncLoading = false;
-  var _scriptUrl = '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js';
+  var _scriptUrl =
+    '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js';
   var _localeConfig = {};
   var _locale;
 
-  this.asyncLoading = function(config) {
+  this.asyncLoading = function (config) {
     _asyncLoading = config || _asyncLoading;
     return this;
   };
 
-  this.scriptUrl = function(url) {
+  this.scriptUrl = function (url) {
     _scriptUrl = url || _scriptUrl;
     return this;
   };
 
-  this.locale = function(locale, config) {
+  this.locale = function (locale, config) {
     _locale = locale || _locale;
     _localeConfig = config || _localeConfig;
     return this;
@@ -27,12 +27,14 @@ angular.module('gdi2290.moment-service')
   // and call our onScriptLoad callback when it
   // has been loaded
   function createScript(callback) {
-    if (!document) { return; }
+    if (!document) {
+      return;
+    }
     var scriptTag = document.createElement('script');
     scriptTag.type = 'text/javascript';
     scriptTag.async = true;
     scriptTag.src = _scriptUrl;
-    scriptTag.onreadystatechange = function() {
+    scriptTag.onreadystatechange = function () {
       if (this.readyState === 'complete') {
         callback();
       }
@@ -42,14 +44,18 @@ angular.module('gdi2290.moment-service')
     s.appendChild(scriptTag);
   }
 
-  this.$get = ['$timeout', '$q', '$window', function($timeout, $q, $window) {
+  this.$get = [
+    '$timeout',
+    '$q',
+    '$window',
+    function ($timeout, $q, $window) {
       var deferred = $q.defer();
       var _moment = $window.moment;
 
       if (_asyncLoading) {
         // Load client in the browser
-        var onScriptLoad = function(callback) {
-          $timeout(function() {
+        var onScriptLoad = function (callback) {
+          $timeout(function () {
             if (_locale) {
               if ($window.moment.lang) {
                 $window.moment.lang(_locale, _localeConfig);
@@ -71,6 +77,7 @@ angular.module('gdi2290.moment-service')
         }
       }
 
-      return (_asyncLoading) ? deferred.promise: _moment;
-  }];
+      return _asyncLoading ? deferred.promise : _moment;
+    },
+  ];
 });

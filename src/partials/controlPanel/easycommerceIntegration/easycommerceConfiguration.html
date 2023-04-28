@@ -1,109 +1,239 @@
-<div id="connectedCont" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-if="easycommerce.connected && !easycommerce.showMapping">
-    <div>
-        <div class="authentication-container connected">
-            <div>
-                <span class="control-panel-section-title">{{ 'easycommerce_integration.connected.title' | translate }}</span>
-                <span class="control-panel-section-subtitle" ng-show="!easycommerce.isLoading">
-                  {{ 'easycommerce_integration.connected.subtitle_list_count' | translate:{ 'availableLists' : easycommerce.integratedLists.length} }}
-                </span>
-            </div>
-            <div class="button--frame">
-                <button type="button" ng-click="easycommerce.synchronizeAllLists();"
-                    ng-class="{'spin': easycommerce.importingList && !easycommerce.disableSync}" ng-disabled="easycommerce.disableSync"
-                    class="button reload-icon"></button>
-            </div>
-        </div>
-        <div ng-if="easycommerce.easycommerceEntitiesList.length > 0">
-          <div class="dp-library">
-            <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope margin-b-20">
-              <span class="dp-message-icon"></span>
-              <div class="dp-content-message">
-                <span id="messageBar" class="text--small">
-                  {{ 'miTienda_integration.connected.select_list_warning' | translate }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <hr class="full" style="width: calc(100% + 40px);" />
-          <div style="min-height:74px" class="loading--container components--center" dp-partial="angularjs/partials/shared/loading.html" ng-if="easycommerce.importingListDropdown && !easycommerce.isLoading"></div>
-          <div class="entity-selector-container flex-grid" ng-if="!easycommerce.importingListDropdown">
-            <dropdown class="dropdown dropdown--big"
-                      placeholder="{{easycommerce.entityPlaceholder}}" id="dd-entities"
-                      list="easycommerce.easycommerceEntitiesList" name="easycommerce.selectedEntityId" ng-model="easycommerce.selectedEntityId"
-                      ng-required="true" property="description" id-value="id" ng-disabled="!!easycommerce.easycommerceEntitiesList && easycommerce.easycommerceEntitiesList.length === 0 || easycommerce.isLoadingFields"
-                      ng-click="easycommerce.onEntitySelected();"></dropdown>
-            <dropdown class="dropdown dropdown--big"
-                      placeholder="{{easycommerce.listPlaceholder}}" id="dd-lists"
-                      list="easycommerce.userList" name="easycommerce.selectedListId" ng-model="easycommerce.selectedListId" ng-required="true"
-                      property="ListName" id-value="IdList" ng-disabled="!!easycommerce.userList && easycommerce.userList.length === 0 || easycommerce.isLoadingFields"></dropdown>
-            <div>
-              <button type="submit" ng-click="easycommerce.showMappingSection();" class="button button--primary"
-                      ng-disabled="!easycommerce.selectedEntityId || !easycommerce.selectedListId" ng-class="{'button--spinner' : easycommerce.isLoadingFields}">
-                {{ 'easycommerce_integration.mapping.next' | translate }}
-                <span class="icon-editor-saving hide"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div ng-if="easycommerce.integratedLists.length">
-            <p class="select-list-text">{{ 'easycommerce_integration.connected.grid_title' | translate }}:</p>
-            <span class="control-panel-section-subtitle">  </span>
-            <table class="grid">
-                <thead>
-                    <th>{{ 'easycommerce_integration.connected.entity_name_grid' | translate }}</th>
-                    <th>{{ 'easycommerce_integration.connected.list_name_grid' | translate }}</th>
-                    <th>{{ 'easycommerce_integration.connected.last_synchronization_grid' | translate }}</th>
-                    <th>{{ 'easycommerce_integration.connected.subscribers_count_grid' | translate }}</th>
-                    <th>{{ 'easycommerce_integration.connected.actions_grid' | translate }}</th>
-                </thead>
-                <tbody>
-                    <tr ng-show="!easycommerce.importingList && integratedList.SubscribersListStatus !== 5" ng-repeat="integratedList in easycommerce.integratedLists">
-                        <td ng-show="easycommerce.integrationToDelete != $index">{{ integratedList.ThirdPartyName }}</td>
-                        <td class="list-name" ng-show="easycommerce.integrationToDelete != $index"><ellipsis-with-tooltip text="integratedList.Name" class="stand-alone"></ellipsis-with-tooltip></td>
-                        <td ng-show="easycommerce.integrationToDelete != $index">{{ integratedList.LastUpdateFormatted ? integratedList.LastUpdateFormatted : '-'  }}</td>
-                        <td ng-show="easycommerce.integrationToDelete != $index">{{ integratedList.SubscribersCount }}</td>
-                        <td ng-show="easycommerce.integrationToDelete != $index" class="actions">
-                            <span data-static-tooltip="{{ 'easycommerce_integration.connected.edit_tooltip' | translate }}">
-                                <a target="_self" class="icon-grid-edit" ng-click="easycommerce.editMap(integratedList.IdList, integratedList.ThirdPartyId)"></a>
-                            </span>
-                            <span data-static-tooltip="{{ 'easycommerce_integration.connected.delete_mode_grid.tooltip' | translate }}" class="to-left">
-                                <a ng-click="!easycommerce.isLoadingVtexFields ? easycommerce.integrationToDelete = $index : false"><img src="../../../images/grid-delete.svg"></a>
-                            </span>
-                        </td>
-                        <td ng-show="easycommerce.integrationToDelete == $index" class="delete-confirmation-text" colspan="3">
-                            <span class="deleteConfirmationIcon"></span>
-                            <span>{{ 'easycommerce_integration.connected.delete_mode_grid.message' | translate }}</span>
-                        </td>
-                        <td ng-show="easycommerce.integrationToDelete == $index" class="delete-confirmation-actions" colspan="2">
-                            <span>
-                                <a ng-click="!easycommerce.isLoadingFields ? easycommerce.integrationToDelete = null : false">
-                                    {{ 'easycommerce_integration.connected.delete_mode_grid.cancel' | translate }}
-                                </a>
-                                |
-                                <a class="delete-text" ng-click="!easycommerce.isLoadingFields ? easycommerce.deleteList(integratedList.IdList) : false">
-                                    {{ 'easycommerce_integration.connected.delete_mode_grid.delete' | translate }}
-                                </a>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr ng-show="easycommerce.importingList || integratedList.SubscribersListStatus === 5" class="exportingList" ng-repeat="integratedList in easycommerce.integratedLists">
-                        <td>{{ integratedList.ThirdPartyName }}</td>
-                        <td class="list-name sync">{{ integratedList.Name }}</td>
-                        <td colspan="3" class="status">
-                            <span class="icon-clock"></span>
-                            <span>&nbsp;{{ 'easycommerce_integration.connected.synchronizing_grid' | translate }}</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="dp-library margin-t-20 margin-b-20" ng-show="!!easycommerce.errorMessage.length">
-          <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
-            <span class="dp-message-icon"></span>
-            <div class="dp-content-message dp-content-full">
-              <span>{{ easycommerce.errorMessage }}</span>
-            </div>
-          </div>
-        </div>
+<div
+  id="connectedCont"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  ng-if="easycommerce.connected && !easycommerce.showMapping"
+>
+  <div>
+    <div class="authentication-container connected">
+      <div>
+        <span class="control-panel-section-title"
+          >{{ 'easycommerce_integration.connected.title' | translate }}</span
+        >
+        <span
+          class="control-panel-section-subtitle"
+          ng-show="!easycommerce.isLoading"
+        >
+          {{ 'easycommerce_integration.connected.subtitle_list_count' |
+          translate:{ 'availableLists' : easycommerce.integratedLists.length} }}
+        </span>
+      </div>
+      <div class="button--frame">
+        <button
+          type="button"
+          ng-click="easycommerce.synchronizeAllLists();"
+          ng-class="{'spin': easycommerce.importingList && !easycommerce.disableSync}"
+          ng-disabled="easycommerce.disableSync"
+          class="button reload-icon"
+        ></button>
+      </div>
     </div>
+    <div ng-if="easycommerce.easycommerceEntitiesList.length > 0">
+      <div class="dp-library">
+        <div
+          class="dp-wrap-message dp-wrap-warning ng-binding ng-scope margin-b-20"
+        >
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message">
+            <span id="messageBar" class="text--small">
+              {{ 'miTienda_integration.connected.select_list_warning' |
+              translate }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <hr class="full" style="width: calc(100% + 40px)" />
+      <div
+        style="min-height: 74px"
+        class="loading--container components--center"
+        dp-partial="angularjs/partials/shared/loading.html"
+        ng-if="easycommerce.importingListDropdown && !easycommerce.isLoading"
+      ></div>
+      <div
+        class="entity-selector-container flex-grid"
+        ng-if="!easycommerce.importingListDropdown"
+      >
+        <dropdown
+          class="dropdown dropdown--big"
+          placeholder="{{easycommerce.entityPlaceholder}}"
+          id="dd-entities"
+          list="easycommerce.easycommerceEntitiesList"
+          name="easycommerce.selectedEntityId"
+          ng-model="easycommerce.selectedEntityId"
+          ng-required="true"
+          property="description"
+          id-value="id"
+          ng-disabled="!!easycommerce.easycommerceEntitiesList && easycommerce.easycommerceEntitiesList.length === 0 || easycommerce.isLoadingFields"
+          ng-click="easycommerce.onEntitySelected();"
+        ></dropdown>
+        <dropdown
+          class="dropdown dropdown--big"
+          placeholder="{{easycommerce.listPlaceholder}}"
+          id="dd-lists"
+          list="easycommerce.userList"
+          name="easycommerce.selectedListId"
+          ng-model="easycommerce.selectedListId"
+          ng-required="true"
+          property="ListName"
+          id-value="IdList"
+          ng-disabled="!!easycommerce.userList && easycommerce.userList.length === 0 || easycommerce.isLoadingFields"
+        ></dropdown>
+        <div>
+          <button
+            type="submit"
+            ng-click="easycommerce.showMappingSection();"
+            class="button button--primary"
+            ng-disabled="!easycommerce.selectedEntityId || !easycommerce.selectedListId"
+            ng-class="{'button--spinner' : easycommerce.isLoadingFields}"
+          >
+            {{ 'easycommerce_integration.mapping.next' | translate }}
+            <span class="icon-editor-saving hide"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div ng-if="easycommerce.integratedLists.length">
+      <p class="select-list-text">
+        {{ 'easycommerce_integration.connected.grid_title' | translate }}:
+      </p>
+      <span class="control-panel-section-subtitle"> </span>
+      <table class="grid">
+        <thead>
+          <th>
+            {{ 'easycommerce_integration.connected.entity_name_grid' | translate
+            }}
+          </th>
+          <th>
+            {{ 'easycommerce_integration.connected.list_name_grid' | translate
+            }}
+          </th>
+          <th>
+            {{ 'easycommerce_integration.connected.last_synchronization_grid' |
+            translate }}
+          </th>
+          <th>
+            {{ 'easycommerce_integration.connected.subscribers_count_grid' |
+            translate }}
+          </th>
+          <th>
+            {{ 'easycommerce_integration.connected.actions_grid' | translate }}
+          </th>
+        </thead>
+        <tbody>
+          <tr
+            ng-show="!easycommerce.importingList && integratedList.SubscribersListStatus !== 5"
+            ng-repeat="integratedList in easycommerce.integratedLists"
+          >
+            <td ng-show="easycommerce.integrationToDelete != $index">
+              {{ integratedList.ThirdPartyName }}
+            </td>
+            <td
+              class="list-name"
+              ng-show="easycommerce.integrationToDelete != $index"
+            >
+              <ellipsis-with-tooltip
+                text="integratedList.Name"
+                class="stand-alone"
+              ></ellipsis-with-tooltip>
+            </td>
+            <td ng-show="easycommerce.integrationToDelete != $index">
+              {{ integratedList.LastUpdateFormatted ?
+              integratedList.LastUpdateFormatted : '-' }}
+            </td>
+            <td ng-show="easycommerce.integrationToDelete != $index">
+              {{ integratedList.SubscribersCount }}
+            </td>
+            <td
+              ng-show="easycommerce.integrationToDelete != $index"
+              class="actions"
+            >
+              <span
+                data-static-tooltip="{{ 'easycommerce_integration.connected.edit_tooltip' | translate }}"
+              >
+                <a
+                  target="_self"
+                  class="icon-grid-edit"
+                  ng-click="easycommerce.editMap(integratedList.IdList, integratedList.ThirdPartyId)"
+                ></a>
+              </span>
+              <span
+                data-static-tooltip="{{ 'easycommerce_integration.connected.delete_mode_grid.tooltip' | translate }}"
+                class="to-left"
+              >
+                <a
+                  ng-click="!easycommerce.isLoadingVtexFields ? easycommerce.integrationToDelete = $index : false"
+                  ><img src="../../../images/grid-delete.svg"
+                /></a>
+              </span>
+            </td>
+            <td
+              ng-show="easycommerce.integrationToDelete == $index"
+              class="delete-confirmation-text"
+              colspan="3"
+            >
+              <span class="deleteConfirmationIcon"></span>
+              <span
+                >{{
+                'easycommerce_integration.connected.delete_mode_grid.message' |
+                translate }}</span
+              >
+            </td>
+            <td
+              ng-show="easycommerce.integrationToDelete == $index"
+              class="delete-confirmation-actions"
+              colspan="2"
+            >
+              <span>
+                <a
+                  ng-click="!easycommerce.isLoadingFields ? easycommerce.integrationToDelete = null : false"
+                >
+                  {{
+                  'easycommerce_integration.connected.delete_mode_grid.cancel' |
+                  translate }}
+                </a>
+                |
+                <a
+                  class="delete-text"
+                  ng-click="!easycommerce.isLoadingFields ? easycommerce.deleteList(integratedList.IdList) : false"
+                >
+                  {{
+                  'easycommerce_integration.connected.delete_mode_grid.delete' |
+                  translate }}
+                </a>
+              </span>
+            </td>
+          </tr>
+          <tr
+            ng-show="easycommerce.importingList || integratedList.SubscribersListStatus === 5"
+            class="exportingList"
+            ng-repeat="integratedList in easycommerce.integratedLists"
+          >
+            <td>{{ integratedList.ThirdPartyName }}</td>
+            <td class="list-name sync">{{ integratedList.Name }}</td>
+            <td colspan="3" class="status">
+              <span class="icon-clock"></span>
+              <span
+                >&nbsp;{{
+                'easycommerce_integration.connected.synchronizing_grid' |
+                translate }}</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="!!easycommerce.errorMessage.length"
+    >
+      <div
+        id="messageBar"
+        class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+      >
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full">
+          <span>{{ easycommerce.errorMessage }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

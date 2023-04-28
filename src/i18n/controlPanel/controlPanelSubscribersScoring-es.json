@@ -1,29 +1,29 @@
 {
-  "subscribers_scoring" : {
+  "subscribers_scoring": {
     "title": "Administrador de Calificación de Suscriptores",
     "description": "Personaliza los parámetros que quieres utilizar para calificar a cada Suscriptor. Si no lo haces, las calificaciones estarán basadas en los valores que sugerimos para un buen análisis de desempeño. La calificación de los Suscriptores se realizará pasadas las 24 horas de que hayas definido los valores correspondientes a cada categoría. ¿Necesitas ayuda? Presiona ",
-    "help" : "HELP",
-    "help_link" : "https://help.fromdoppler.com/es/como-funciona-la-calificacion-de-suscriptores",
+    "help": "HELP",
+    "help_link": "https://help.fromdoppler.com/es/como-funciona-la-calificacion-de-suscriptores",
     "openings": "Aperturas",
     "clicks": "Clics",
     "last": "Últimos",
     "months": "meses",
     "clicks_exceed_open_error": "¡Ouch! Los clics deben ser menores o iguales que las aperturas.",
     "stars_description": {
-      "first_part_bold" : "Calificar a un Suscriptor como",
+      "first_part_bold": "Calificar a un Suscriptor como",
       "stars_singular": "estrella",
       "stars_plural": "estrellas",
       "second_part": "cuando este haya registrado al menos"
     },
-    "two_stars" : {
+    "two_stars": {
       "description": "Estos valores dependen de los ingresados en los parámetros de calificación de 3 estrellas.",
       "error_message": "¡Ouch! Los valores deben ser menores a los ingresados en la calificación superior."
     },
-    "one_star" : {
-      "description" : "Estos valores no pueden ser modificados, sirven simplemente a modo de referencia y dependen de los ingresados en los parámetros de calificación de 2 estrellas."
+    "one_star": {
+      "description": "Estos valores no pueden ser modificados, sirven simplemente a modo de referencia y dependen de los ingresados en los parámetros de calificación de 2 estrellas."
     },
     "period_title": "Calificar en base a la actividad del Suscriptor durante los",
-    "button_back" : "Atrás",
-    "button_save" : "Guardar"
+    "button_back": "Atrás",
+    "button_save": "Guardar"
   }
 }

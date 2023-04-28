@@ -1,22 +1,19 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('checkbox', checkbox);
+  angular.module('dopplerApp').directive('checkbox', checkbox);
 
   function checkbox() {
-
     var directive = {
       scope: {
         someSelected: '=',
         internalNgChecked: '=ngChecked',
-        internalNgDisabled: '=ngDisabled'
+        internalNgDisabled: '=ngDisabled',
       },
       require: 'ngModel',
       restrict: 'E',
       templateUrl: 'angularjs/partials/shared/checkbox.html',
-      link: link
+      link: link,
     };
 
     return directive;
@@ -39,20 +36,27 @@
       }
 
       // Update element when model changes
-      scope.$watch(function() {
-        if (modelCtrl.$modelValue === trueValue || modelCtrl.$modelValue === true) {
-          modelCtrl.$setViewValue(trueValue);
-        } else {
-          modelCtrl.$setViewValue(falseValue);
-        }
-        return modelCtrl.$modelValue;
-      }, function() {
-        scope.checked = modelCtrl.$modelValue === trueValue;
-      }, true);
+      scope.$watch(
+        function () {
+          if (
+            modelCtrl.$modelValue === trueValue ||
+            modelCtrl.$modelValue === true
+          ) {
+            modelCtrl.$setViewValue(trueValue);
+          } else {
+            modelCtrl.$setViewValue(falseValue);
+          }
+          return modelCtrl.$modelValue;
+        },
+        function () {
+          scope.checked = modelCtrl.$modelValue === trueValue;
+        },
+        true
+      );
 
       //On click swap value and trigger onChange function
-      elem.bind('click', function() {
-        scope.$apply(function() {
+      elem.bind('click', function () {
+        scope.$apply(function () {
           if (scope.internalNgChecked === undefined) {
             if (modelCtrl.$modelValue === falseValue) {
               modelCtrl.$setViewValue(trueValue);
@@ -69,7 +73,5 @@
         });
       });
     }
-
   }
-
 })();

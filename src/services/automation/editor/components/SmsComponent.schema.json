@@ -3,7 +3,7 @@
   "phoneType": "",
   "parentUid": 0,
   "completed": false,
-  "touched" : false,
+  "touched": false,
   "smsText": 0,
-  "name":  ""
+  "name": ""
 }

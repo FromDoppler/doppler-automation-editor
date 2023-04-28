@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -13,15 +13,24 @@
     'CHANGE_TYPE',
     'changesManager',
     '$q',
-    'optionsListDataservice'
+    'optionsListDataservice',
   ];
 
-  function dpEditorBreadcrumb($rootScope, $window, automation, AUTOMATION_STATE,
-    CHANGE_TYPE, changesManager, $q, optionsListDataservice) {
+  function dpEditorBreadcrumb(
+    $rootScope,
+    $window,
+    automation,
+    AUTOMATION_STATE,
+    CHANGE_TYPE,
+    changesManager,
+    $q,
+    optionsListDataservice
+  ) {
     var directive = {
       restrict: 'AE',
-      templateUrl: 'angularjs/partials/automation/editor/directives/header/dp-editor-breadcrumb.html',
-      link: link
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/header/dp-editor-breadcrumb.html',
+      link: link,
     };
 
     return directive;
@@ -34,10 +43,13 @@
         element.find('input')[0].focus();
       }
 
-      angular.forEach(element.find('a'), function(anchor) {
-        angular.element(anchor).bind('contextmenu', function() {
-          if (changesManager.getUnsavedChanges() && scope.rootComponent.state !== AUTOMATION_STATE.ACTIVE) {
-            automation.saveChanges().then(function() {
+      angular.forEach(element.find('a'), function (anchor) {
+        angular.element(anchor).bind('contextmenu', function () {
+          if (
+            changesManager.getUnsavedChanges() &&
+            scope.rootComponent.state !== AUTOMATION_STATE.ACTIVE
+          ) {
+            automation.saveChanges().then(function () {
               $rootScope.$broadcast('UPDATE_SAVING_STATE');
             });
           }
@@ -45,7 +57,7 @@
       });
 
       function setDefaultNameIfEmpty() {
-        return automation.getAutomationName().then(function(response) {
+        return automation.getAutomationName().then(function (response) {
           scope.rootComponent.name = response;
         });
       }
@@ -57,15 +69,15 @@
           parentUid: scope.rootComponent.uid,
           key: 'name',
           oldValue: angular.copy(oldValue),
-          newValue: angular.copy(newValue)
+          newValue: angular.copy(newValue),
         });
       }
 
-      scope.onFocusBreadcrum = function() {
+      scope.onFocusBreadcrum = function () {
         scope.breadcrumOldValue = scope.rootComponent.name;
       };
 
-      scope.onBlurBreadcrum = function(newValue, reset) {
+      scope.onBlurBreadcrum = function (newValue, reset) {
         if (!onBlurPromise || reset) {
           onBlurPromise = $q.defer();
         } else {
@@ -73,11 +85,14 @@
         }
 
         if (!newValue.length) {
-          setDefaultNameIfEmpty().then(function() {
-            addBreadcrumChange(scope.rootComponent.name, scope.breadcrumOldValue);
+          setDefaultNameIfEmpty().then(function () {
+            addBreadcrumChange(
+              scope.rootComponent.name,
+              scope.breadcrumOldValue
+            );
             onBlurPromise.resolve();
           });
-        } else if (newValue !== scope.breadcrumOldValue){
+        } else if (newValue !== scope.breadcrumOldValue) {
           addBreadcrumChange(newValue, scope.breadcrumOldValue);
           onBlurPromise.resolve();
         }
@@ -87,18 +102,17 @@
         return onBlurPromise.promise;
       };
 
-      scope.$on('AUTOMATION_NAME_FOCUS', function() {
+      scope.$on('AUTOMATION_NAME_FOCUS', function () {
         element.find('input')[0].focus();
       });
 
-      scope.closeDropdown = function() {
+      scope.closeDropdown = function () {
         scope.isOpen = false;
       };
 
-      scope.toogleExitOptions = function() {
+      scope.toogleExitOptions = function () {
         scope.isOpen = !scope.isOpen;
       };
-
     }
   }
 })();

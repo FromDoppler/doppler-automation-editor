@@ -1,9 +1,17 @@
-<div ng-show="controlPanelLoaded" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
+<div
+  ng-show="controlPanelLoaded"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+>
   <span class="control-panel-section-title"> {{ title }} </span>
-  <span class="control-panel-section-subtitle"> {{ subtitle }}
+  <span class="control-panel-section-subtitle">
+    {{ subtitle }}
     <a ng-if="link" target="_blank" href="{{link}}">{{linkText}}</a>.
   </span>
-  <hr class="full" style="width: calc(100% + 40px);" />
+  <hr class="full" style="width: calc(100% + 40px)" />
   <dp-dkim-section ng-if="type === 'DKIM'"></dp-dkim-section>
 </div>
-<div ng-show="!controlPanelLoaded" class="loading--container components--center" dp-partial="/angularjs/partials/shared/loading.html"></div>
+<div
+  ng-show="!controlPanelLoaded"
+  class="loading--container components--center"
+  dp-partial="/angularjs/partials/shared/loading.html"
+></div>

@@ -23,14 +23,14 @@
 */
 
 exports['angular-momentjs'] = {
-  setUp: function(done) {
+  setUp: function (done) {
     // setup here
     done();
   },
-  'no args': function(test) {
+  'no args': function (test) {
     test.expect(1);
     // tests here
     test.equal(1, 1, 'should be 1.');
     test.done();
-  }
+  },
 };

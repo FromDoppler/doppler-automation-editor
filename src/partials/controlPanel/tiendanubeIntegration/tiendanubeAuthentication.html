@@ -1,100 +1,188 @@
-<form name="tiendanube.form" ng-submit="tiendanube.connect('StartTiendaNubeAuthorization',tiendanube);" novalidate>
+<form
+  name="tiendanube.form"
+  ng-submit="tiendanube.connect('StartTiendaNubeAuthorization',tiendanube);"
+  novalidate
+>
   <div>
-    <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="tiendanube.daysToDisconnection < 14 && tiendanube.connected">
-      <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+      ng-show="tiendanube.daysToDisconnection < 14 && tiendanube.connected"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'control_panel.integrations.connection_issues.title' | translate
+        }}</span
+      >
       <div class="dp-library margin-t-20 margin-b-20">
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
             <span id="messageBar" class="text--small">
-              {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'tiendanube_integration.name' | translate }}
+              {{ 'control_panel.integrations.connection_issues.subtitle' |
+              translate }} {{'tiendanube_integration.name' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+      <strong class="connection-issues-list-title">
+        {{ 'control_panel.integrations.connection_issues.list_title' | translate
+        }}
+      </strong>
       <ul>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_1' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_2' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_3' |
+          translate }}
+        </li>
       </ul>
       <br />
-      <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+      <span
+        >{{ 'control_panel.integrations.connection_issues.text_list_4' |
+        translate }}</span
+      >
       <hr class="full connection-issues-separator" />
       <p>
-        {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-        {{ tiendanube.firstValidationErrorDate}}
+        {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+        translate }} {{ tiendanube.firstValidationErrorDate}}
       </p>
       <strong>
         <span ng-if="tiendanube.daysToDisconnection > 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-          {{ tiendanube.daysToDisconnection }}
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+          | translate }} {{ tiendanube.daysToDisconnection }} {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+          | translate }}
         </span>
         <span ng-if="tiendanube.daysToDisconnection <= 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+          | translate }}
         </span>
       </strong>
     </div>
-    <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
-      <span class="control-panel-section-title">{{ 'tiendanube_integration.disconnected.title' | translate }} </span>
-      <span class="control-panel-section-subtitle" ng-show="!tiendanube.connected">
-        {{ 'tiendanube_integration.disconnected.subtitle' | translate }}
-        <a href="{{ 'tiendanube_integration.disconnected.help_link' | translate }}"
-           target="_blank" ng-trim="false">{{ 'tiendanube_integration.disconnected.help_text' | translate }}</a>
+    <div
+      id="main-panel"
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'tiendanube_integration.disconnected.title' | translate }}
       </span>
-      <span class="control-panel-section-subtitle" ng-show="tiendanube.connected">
+      <span
+        class="control-panel-section-subtitle"
+        ng-show="!tiendanube.connected"
+      >
+        {{ 'tiendanube_integration.disconnected.subtitle' | translate }}
+        <a
+          href="{{ 'tiendanube_integration.disconnected.help_link' | translate }}"
+          target="_blank"
+          ng-trim="false"
+          >{{ 'tiendanube_integration.disconnected.help_text' | translate }}</a
+        >
+      </span>
+      <span
+        class="control-panel-section-subtitle"
+        ng-show="tiendanube.connected"
+      >
         {{ 'tiendanube_integration.connected.subtitle' | translate }}
       </span>
-      <hr class="full" style="width: calc(100% + 40px);" ng-show="tiendanube.connected" />
-      <section id="authConnected" class="authentication-container connected" ng-show="tiendanube.connected">
+      <hr
+        class="full"
+        style="width: calc(100% + 40px)"
+        ng-show="tiendanube.connected"
+      />
+      <section
+        id="authConnected"
+        class="authentication-container connected"
+        ng-show="tiendanube.connected"
+      >
         <div class="authentication-elements">
           <p id="lastSynchDate" ng-show="!!tiendanube.lastSynchDate">
-            {{ 'tiendanube_integration.connected.last_synchronization_grid' | translate }} <strong>{{ tiendanube.lastSynchDate }}</strong>
+            {{ 'tiendanube_integration.connected.last_synchronization_grid' |
+            translate }} <strong>{{ tiendanube.lastSynchDate }}</strong>
           </p>
-          <p ng-show="tiendanube.connected && !tiendanube.lastSynchDate">
+          <p ng-show="tiendanube.connected && !tiendanube.lastSynchDate"></p>
           <p>
-            {{ 'tiendanube_integration.connected.store' | translate }} <strong>{{ tiendanube.connectedStore }}</strong>
+            {{ 'tiendanube_integration.connected.store' | translate }}
+            <strong>{{ tiendanube.connectedStore }}</strong>
           </p>
         </div>
-        <button type='button' class="button button--alternative"
-                ng-click="tiendanube.disconnectWarning()" ng-disabled="tiendanube.importingAllLists">
+        <button
+          type="button"
+          class="button button--alternative"
+          ng-click="tiendanube.disconnectWarning()"
+          ng-disabled="tiendanube.importingAllLists"
+        >
           {{ 'tiendanube_integration.connected.disconnect' | translate }}
         </button>
       </section>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="tiendanube.autoSyncDisabled && tiendanube.connected && tiendanube.integratedLists.length">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="tiendanube.autoSyncDisabled && tiendanube.connected && tiendanube.integratedLists.length"
+      >
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span class="text--small">
               {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-              <a target="_self" href="{{tiendanube.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+              <a
+                target="_self"
+                href="{{tiendanube.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+                >{{ 'control_panel.integrations.sync_disabled.link_text' |
+                translate }}</a
+              >
               {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="tiendanube.connectionError">
-        <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="tiendanube.connectionError"
+      >
+        <div
+          id="messageBar"
+          class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+        >
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span>{{ tiendanube.errorMsg }}</span>
           </div>
         </div>
       </div>
-      <div id="connection-error-zoho" class="message-validation validation-error ng-hide">
+      <div
+        id="connection-error-zoho"
+        class="message-validation validation-error ng-hide"
+      >
         <span id="connection-error-zoho-span"></span>
         <a href="mailto:soporte@fromdoppler.com">soporte@fromdoppler.com</a>
       </div>
     </div>
   </div>
-  <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !tiendanube.connected}" ng-show="!tiendanube.connected">
-    <a class="button button--alternative" ng-disabled="tiendanube.connecting"
-       href="{{tiendanube.webAppUrl}}/Integrations#native-integrations"
-       id="back-button">{{ 'actions.cancel' | translate }}</a>
-    <button id="save_info" type="submit"
-            ng-class="{'button--spinner' : tiendanube.connecting}" ng-click="tiendanube.disconnected = false;" 
-            class="button button--primary">
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth"
+    ng-class="{'display-flex-force': !tiendanube.connected}"
+    ng-show="!tiendanube.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="tiendanube.connecting"
+      href="{{tiendanube.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <button
+      id="save_info"
+      type="submit"
+      ng-class="{'button--spinner' : tiendanube.connecting}"
+      ng-click="tiendanube.disconnected = false;"
+      class="button button--primary"
+    >
       {{ 'actions.connect' | translate }}
       <span class="icon-editor-saving" ng-show="tiendanube.connecting"></span>
     </button>

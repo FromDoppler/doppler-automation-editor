@@ -1,8 +1,17 @@
 ﻿<div class="add-step--container">
-	<span class="icon-doppler-logo"></span>
-  <p class="tip-help" ng-if="rootComponent.state !== AUTOMATION_STATE.ACTIVE">{{ 'automation_editor.sidebar.add_step_tip' | translate }}</p>
-  <div class="tip-stop-container" ng-if="rootComponent.state === AUTOMATION_STATE.ACTIVE">
-    <p class="tip-help">{{ 'automation_editor.footer.tip_stop' | translate }}</p>
-    <button class="button  button--primary" ng-click="stopCampaign()">{{ 'automation_editor.buttons.stop_campaign' | translate }}</button>
+  <span class="icon-doppler-logo"></span>
+  <p class="tip-help" ng-if="rootComponent.state !== AUTOMATION_STATE.ACTIVE">
+    {{ 'automation_editor.sidebar.add_step_tip' | translate }}
+  </p>
+  <div
+    class="tip-stop-container"
+    ng-if="rootComponent.state === AUTOMATION_STATE.ACTIVE"
+  >
+    <p class="tip-help">
+      {{ 'automation_editor.footer.tip_stop' | translate }}
+    </p>
+    <button class="button button--primary" ng-click="stopCampaign()">
+      {{ 'automation_editor.buttons.stop_campaign' | translate }}
+    </button>
   </div>
 </div>

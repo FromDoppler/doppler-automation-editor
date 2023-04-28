@@ -4,91 +4,172 @@
   && !facebookCtrl.error"
   class="button button--small button--alternative"
   ng-class="{'button--spinner':facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT && facebookCtrl.processing}"
-  ng-click="facebookCtrl.integrateAccount()">
-  {{ 'forms_integrate.headers.integration_facebook.body.button_integrate' | translate }}
-  <span ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT && facebookCtrl.processing"
-        class="icon-editor-saving ng-hide"></span>
+  ng-click="facebookCtrl.integrateAccount()"
+>
+  {{ 'forms_integrate.headers.integration_facebook.body.button_integrate' |
+  translate }}
+  <span
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT && facebookCtrl.processing"
+    class="icon-editor-saving ng-hide"
+  ></span>
 </button>
 
 <!-- With Account but not tab configured -->
-<p class="text--small text-emphasis" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && !facebookCtrl.disabledFanPages">
+<p
+  class="text--small text-emphasis"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && !facebookCtrl.disabledFanPages"
+>
   <span class="icon-grid-edit"></span>
-  {{ 'forms_integrate.headers.integration_facebook.body.subtitle_1' | translate }}
+  {{ 'forms_integrate.headers.integration_facebook.body.subtitle_1' | translate
+  }}
 </p>
-<p class="text--small text-emphasis" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && !facebookCtrl.facebookData.fanPages.length">
+<p
+  class="text--small text-emphasis"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && !facebookCtrl.facebookData.fanPages.length"
+>
   <span class="icon-warning"></span>
   {{ 'forms_integrate.error.no_fanPage' | translate }}
 </p>
-<p class="text--small text-emphasis" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS">
+<p
+  class="text--small text-emphasis"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS"
+>
   <span class="icon-grid-edit"></span>
-  {{ 'forms_integrate.headers.integration_facebook.body.subtitle_2' | translate }}
+  {{ 'forms_integrate.headers.integration_facebook.body.subtitle_2' | translate
+  }}
 </p>
-<p class="text--small" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETED">
+<p
+  class="text--small"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETED"
+>
   <span class="icon-warning"></span>
-  {{ 'forms_integrate.headers.integration_facebook.body.tab_deleted_text_1' | translate }} "<span class="text-emphasis">{{facebookCtrl.facebookData.facebookTabName}}</span>" {{ 'forms_integrate.headers.integration_facebook.body.tab_deleted_text_2' | translate }} <span class="text-emphasis">{{facebookCtrl.facebookData.facebookFanPageSelected.label}}</span>
+  {{ 'forms_integrate.headers.integration_facebook.body.tab_deleted_text_1' |
+  translate }} "<span class="text-emphasis"
+    >{{facebookCtrl.facebookData.facebookTabName}}</span
+  >" {{ 'forms_integrate.headers.integration_facebook.body.tab_deleted_text_2' |
+  translate }}
+  <span class="text-emphasis"
+    >{{facebookCtrl.facebookData.facebookFanPageSelected.label}}</span
+  >
 </p>
-<p class="text--small" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && facebookCtrl.disabledFanPages">
+<p
+  class="text--small"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && facebookCtrl.disabledFanPages"
+>
   <span class="icon-warning"></span>
-   {{ 'forms_integrate.error.disabledFanPages' | translate }}
-   <b><a ng-click="facebookCtrl.integrateAccount()" class="text--uppercase text-error"> {{ 'forms_integrate.error.retry' | translate }}</a></b>
+  {{ 'forms_integrate.error.disabledFanPages' | translate }}
+  <b
+    ><a
+      ng-click="facebookCtrl.integrateAccount()"
+      class="text--uppercase text-error"
+    >
+      {{ 'forms_integrate.error.retry' | translate }}</a
+    ></b
+  >
 </p>
 <button
   ng-show="(facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED
   || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETED)
   && !facebookCtrl.error && facebookCtrl.facebookData.fanPages.length && !facebookCtrl.disabledFanPages"
   class="button button--small button--alternative button-config"
-  ng-click="facebookCtrl.showSettings()">
-  {{ facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED ? 'forms_integrate.headers.integration_facebook.body.button_configure' : 'forms_integrate.headers.integration_facebook.body.button_configure_again' | translate }}
-  <span ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && facebookCtrl.processing"
-        class="icon-editor-saving ng-hide"></span>
+  ng-click="facebookCtrl.showSettings()"
+>
+  {{ facebookCtrl.integrationStatus ===
+  facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED ?
+  'forms_integrate.headers.integration_facebook.body.button_configure' :
+  'forms_integrate.headers.integration_facebook.body.button_configure_again' |
+  translate }}
+  <span
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED && facebookCtrl.processing"
+    class="icon-editor-saving ng-hide"
+  ></span>
 </button>
 
 <!-- settings -->
-<div class="form-integration-settings" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT">
+<div
+  class="form-integration-settings"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT"
+>
   <div>
-    <b><label class="label label-panel">{{ 'forms_integrate.headers.integration_facebook.body.label_select_fan_page' | translate }}</label></b>
-    <dp-editor-dropdown class="dropdown dropdown--large" ng-class="{'placeholder': facebookCtrl.facebookData.facebookFanPageSelected.label === ''}"
+    <b
+      ><label class="label label-panel"
+        >{{
+        'forms_integrate.headers.integration_facebook.body.label_select_fan_page'
+        | translate }}</label
+      ></b
+    >
+    <dp-editor-dropdown
+      class="dropdown dropdown--large"
+      ng-class="{'placeholder': facebookCtrl.facebookData.facebookFanPageSelected.label === ''}"
       options="facebookCtrl.facebookData.fanPages"
       label="facebookCtrl.facebookData.facebookFanPageSelected.label === '' ? ('forms_integrate.headers.integration_facebook.body.placeholder_select_fan_page' | translate) : facebookCtrl.facebookData.facebookFanPageSelected.label"
       value-selected="facebookCtrl.facebookData.facebookFanPageSelected"
       on-select-option="facebookCtrl.onFanPageSelected(option)"
       value-selected="facebookCtrl.facebookData.facebookFanPageSelected.value"
-      ng-disabled="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT">
+      ng-disabled="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT"
+    >
     </dp-editor-dropdown>
-    <b><label class="label label-panel">{{ 'forms_integrate.headers.integration_facebook.body.label_fb_tab_name' | translate }}</label></b>
-    <input type="text" maxlength="50" ng-model="facebookCtrl.facebookData.facebookTabName">
+    <b
+      ><label class="label label-panel"
+        >{{
+        'forms_integrate.headers.integration_facebook.body.label_fb_tab_name' |
+        translate }}</label
+      ></b
+    >
+    <input
+      type="text"
+      maxlength="50"
+      ng-model="facebookCtrl.facebookData.facebookTabName"
+    />
   </div>
   <div>
-    <b><label class="label label-panel">{{ 'forms_integrate.headers.integration_facebook.body.label_miniature' | translate }}</label></b>
+    <b
+      ><label class="label label-panel"
+        >{{ 'forms_integrate.headers.integration_facebook.body.label_miniature'
+        | translate }}</label
+      ></b
+    >
     <div class="form-integration-box">
       <div class="image-settings-container">
         <div class="image-container">
-          <span class="icon-element-image" ng-if="!facebookCtrl.facebookData.thumbnail"></span>
-          <img ng-if="facebookCtrl.facebookData.thumbnail" ng-src="{{facebookCtrl.facebookData.thumbnail}}"/>
+          <span
+            class="icon-element-image"
+            ng-if="!facebookCtrl.facebookData.thumbnail"
+          ></span>
+          <img
+            ng-if="facebookCtrl.facebookData.thumbnail"
+            ng-src="{{facebookCtrl.facebookData.thumbnail}}"
+          />
         </div>
         <div class="actions-container">
-          <button file-browser
-                  max-size="facebookCtrl.thumbnailMaxSize"
-                  error="facebookCtrl.imageError"
-                  file = "facebookCtrl.file"
-                  accept = "'image/x-png,image/jpeg'"
-                  >
+          <button
+            file-browser
+            max-size="facebookCtrl.thumbnailMaxSize"
+            error="facebookCtrl.imageError"
+            file="facebookCtrl.file"
+            accept="'image/x-png,image/jpeg'"
+          >
             <p class="text--small">
               <span class="icon-grid-edit"></span>
-              {{ 'forms_integrate.headers.integration_facebook.body.label_add_image' | translate }}
+              {{
+              'forms_integrate.headers.integration_facebook.body.label_add_image'
+              | translate }}
             </p>
           </button>
           <a ng-click="facebookCtrl.deleteImage()">
             <p class="text--small">
               <span class="icon-delete"></span>
-              {{ 'forms_integrate.headers.integration_facebook.body.label_delete' | translate }}
+              {{
+              'forms_integrate.headers.integration_facebook.body.label_delete' |
+              translate }}
             </p>
           </a>
         </div>
       </div>
       <div class="footer-container">
         <p ng-class="{'text-error': facebookCtrl.imageError}">
-          {{ 'forms_integrate.headers.integration_facebook.body.footer_text' | translate }}
+          {{ 'forms_integrate.headers.integration_facebook.body.footer_text' |
+          translate }}
         </p>
       </div>
     </div>
@@ -96,25 +177,42 @@
 </div>
 
 <!-- installed tab information -->
-<div ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_INSTALLED || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETE_CONFIRMATION">
+<div
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_INSTALLED || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETE_CONFIRMATION"
+>
   <p class="text--small">
     <span class="icon-check"></span>
-    {{ 'forms_integrate.headers.integration_facebook.body.success_text_1' | translate }} "<span class="text-emphasis">{{facebookCtrl.facebookData.facebookTabName}}</span>" {{ 'forms_integrate.headers.integration_facebook.body.success_text_2' | translate }}
+    {{ 'forms_integrate.headers.integration_facebook.body.success_text_1' |
+    translate }} "<span class="text-emphasis"
+      >{{facebookCtrl.facebookData.facebookTabName}}</span
+    >" {{ 'forms_integrate.headers.integration_facebook.body.success_text_2' |
+    translate }}
   </p>
   <div class="installed_tab_details">
     <div class="image-container">
-      <span class="icon-element-image" ng-if="!facebookCtrl.facebookData.thumbnail"></span>
-      <img ng-if="facebookCtrl.facebookData.thumbnail" ng-src="{{facebookCtrl.facebookData.thumbnail}}"/>
+      <span
+        class="icon-element-image"
+        ng-if="!facebookCtrl.facebookData.thumbnail"
+      ></span>
+      <img
+        ng-if="facebookCtrl.facebookData.thumbnail"
+        ng-src="{{facebookCtrl.facebookData.thumbnail}}"
+      />
     </div>
     <div class="actions-container">
       <p class="text--small">
-        {{ 'forms_integrate.headers.integration_facebook.body.label_integrated_account' | translate }} <b>{{facebookCtrl.facebookData.accountName}}</b>
+        {{
+        'forms_integrate.headers.integration_facebook.body.label_integrated_account'
+        | translate }} <b>{{facebookCtrl.facebookData.accountName}}</b>
       </p>
       <p class="text--small">
-        {{ 'forms_integrate.headers.integration_facebook.body.label_fan_page' | translate }} <b>{{facebookCtrl.facebookData.facebookFanPageSelected.label}}</b>
+        {{ 'forms_integrate.headers.integration_facebook.body.label_fan_page' |
+        translate }}
+        <b>{{facebookCtrl.facebookData.facebookFanPageSelected.label}}</b>
       </p>
       <p class="text--small">
-        {{ 'forms_integrate.headers.integration_facebook.body.label_fb_tab' | translate }} <b>{{facebookCtrl.facebookData.facebookTabName}}</b>
+        {{ 'forms_integrate.headers.integration_facebook.body.label_fb_tab' |
+        translate }} <b>{{facebookCtrl.facebookData.facebookTabName}}</b>
       </p>
     </div>
   </div>

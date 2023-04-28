@@ -1,41 +1,102 @@
 <div class="component" ng-class="{'delete-warning': showDeleteWarning}">
-
   <div class="dp-tooltip-top">
-    <span ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate">
+    <span
+      ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate"
+    >
     </span>
   </div>
 
   <div class="uid-label-component">{{component.uid}}</div>
   <div class="box" ng-if="component.thumbnailUrl === ''">
-    <img class="image image-complete" ng-if="!isDynamicCampaign()" ng-class="{ 'with-name' : component.name }" src="/../images/automation-campaign.svg" />
-    <img class="image image-incomplete" ng-if="!isDynamicCampaign()" ng-class="{ 'with-name' : component.name }" src="/../images/automation-campaign-grey.svg" />
-    <img class="image image-complete" ng-if="isAbandonedCart()" ng-class="{ 'with-name' : component.name }" src="/../images/automation-abandoned-cart.svg" />
-    <img class="image image-incomplete" ng-if="isAbandonedCart()" ng-class="{ 'with-name' : component.name }" src="/../images/automation-abandoned-cart-grey.svg" />
-    <img class="image image-complete" ng-if="isProductRetargeting()" ng-class="{ 'with-name' : component.name }" src="/../images/automation-retargeting.svg" />
-    <img class="image image-incomplete" ng-if="isProductRetargeting()" ng-class="{ 'with-name' : component.name }" src="/../images/automation-retargeting-grey.svg" />
-    <p ng-if="!component.name">{{ 'automation_editor.canvas.campaign_aspects' | translate }}</p>
+    <img
+      class="image image-complete"
+      ng-if="!isDynamicCampaign()"
+      ng-class="{ 'with-name' : component.name }"
+      src="/../images/automation-campaign.svg"
+    />
+    <img
+      class="image image-incomplete"
+      ng-if="!isDynamicCampaign()"
+      ng-class="{ 'with-name' : component.name }"
+      src="/../images/automation-campaign-grey.svg"
+    />
+    <img
+      class="image image-complete"
+      ng-if="isAbandonedCart()"
+      ng-class="{ 'with-name' : component.name }"
+      src="/../images/automation-abandoned-cart.svg"
+    />
+    <img
+      class="image image-incomplete"
+      ng-if="isAbandonedCart()"
+      ng-class="{ 'with-name' : component.name }"
+      src="/../images/automation-abandoned-cart-grey.svg"
+    />
+    <img
+      class="image image-complete"
+      ng-if="isProductRetargeting()"
+      ng-class="{ 'with-name' : component.name }"
+      src="/../images/automation-retargeting.svg"
+    />
+    <img
+      class="image image-incomplete"
+      ng-if="isProductRetargeting()"
+      ng-class="{ 'with-name' : component.name }"
+      src="/../images/automation-retargeting-grey.svg"
+    />
+    <p ng-if="!component.name">
+      {{ 'automation_editor.canvas.campaign_aspects' | translate }}
+    </p>
   </div>
-	<div class="box" ng-if="component.thumbnailUrl !== ''">
-		<img id="preview_image-{{component.id}}" class="image-thumb html-preview-img" ng-src="{{urlTimeStamp()}}" poll="true" dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg"/>
-		<p ng-if="!component.name" class="name">{{ 'automation_editor.canvas.campaign_placeholder' | translate }}</p>
-	</div>
-	<p class="name" ng-if="component.name && !showDeleteWarning">
-		<strong><ellipsis-with-tooltip text="component.name" css-class="multiline medium" multi-line="true"></ellipsis-with-tooltip></strong>
-	</p>
-	<div class="actions-element--container">
-		<span ng-click="openPreview(component)" class="icon-view" ng-class="{'disabled' : !component.thumbnailUrl}" ng-show="!showOnlyDeleteIcon"></span>
-		<span ng-click="editContent(component)" class="icon-edit" ng-class="{ 'disabled' : !canEdit() || !component.thumbnailUrl }" ng-show="!showOnlyDeleteIcon"></span>
-		<dp-editor-delete-component
+  <div class="box" ng-if="component.thumbnailUrl !== ''">
+    <img
+      id="preview_image-{{component.id}}"
+      class="image-thumb html-preview-img"
+      ng-src="{{urlTimeStamp()}}"
+      poll="true"
+      dp-on-error-src="../../../img/asyncPreview/container_80x80-with-icon.svg"
+    />
+    <p ng-if="!component.name" class="name">
+      {{ 'automation_editor.canvas.campaign_placeholder' | translate }}
+    </p>
+  </div>
+  <p class="name" ng-if="component.name && !showDeleteWarning">
+    <strong
+      ><ellipsis-with-tooltip
+        text="component.name"
+        css-class="multiline medium"
+        multi-line="true"
+      ></ellipsis-with-tooltip
+    ></strong>
+  </p>
+  <div class="actions-element--container">
+    <span
+      ng-click="openPreview(component)"
+      class="icon-view"
+      ng-class="{'disabled' : !component.thumbnailUrl}"
+      ng-show="!showOnlyDeleteIcon"
+    ></span>
+    <span
+      ng-click="editContent(component)"
+      class="icon-edit"
+      ng-class="{ 'disabled' : !canEdit() || !component.thumbnailUrl }"
+      ng-show="!showOnlyDeleteIcon"
+    ></span>
+    <dp-editor-delete-component
       click-validation="true"
       on-delete-component="$parent.removeComponent(component)"
       on-click-icon="canBeRemoved()"
       ng-mouseleave="showDeleteWarning = false;"
       ng-class="{'remove-campaign-confirmation' : showRemoveCampaignConfirmation}"
-      ng-click="showRemoveCampaignConfirmation = true;">
+      ng-click="showRemoveCampaignConfirmation = true;"
+    >
     </dp-editor-delete-component>
-	</div>
-	<div class="delete--warning">
-    <strong>{{'automation_editor.components.campaign.delete_warning.title' | translate}}</strong>
+  </div>
+  <div class="delete--warning">
+    <strong
+      >{{'automation_editor.components.campaign.delete_warning.title' |
+      translate}}</strong
+    >
   </div>
 </div>
 <dp-editor-new-step component="component" branch="branch"></dp-editor-new-step>

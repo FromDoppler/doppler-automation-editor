@@ -1,13 +1,13 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('PushComponent', ['BaseComponent', 'COMPONENT_TYPE', function(BaseComponent, COMPONENT_TYPE) {
-
+  angular.module('dopplerApp.automation.editor').factory('PushComponent', [
+    'BaseComponent',
+    'COMPONENT_TYPE',
+    function (BaseComponent, COMPONENT_TYPE) {
       function PushComponent(data) {
         BaseComponent.call(this, {
-          type: COMPONENT_TYPE.PUSH_NOTIFICATION
+          type: COMPONENT_TYPE.PUSH_NOTIFICATION,
         });
 
         this.id = 0;
@@ -23,10 +23,12 @@
       }
 
       PushComponent.prototype = Object.create(BaseComponent.prototype);
-      PushComponent.prototype.markup = '<dp-editor-push class="component--container push" component="component" branch="branch"></dp-editor-push>';
-      PushComponent.prototype.panelTemplate = '<div dp-editor-panel-push></div>';
+      PushComponent.prototype.markup =
+        '<dp-editor-push class="component--container push" component="component" branch="branch"></dp-editor-push>';
+      PushComponent.prototype.panelTemplate =
+        '<div dp-editor-panel-push></div>';
 
-      PushComponent.prototype.setData = function(data) {
+      PushComponent.prototype.setData = function (data) {
         BaseComponent.prototype.setData.call(this, data);
         if (data.hasOwnProperty('id')) {
           this.id = data.id;
@@ -48,27 +50,29 @@
         }
       };
 
-      PushComponent.prototype.checkCompleted = function() {
-        this.completed = this.pushMessageTitle !== ''
-        && this.pushMessageBody !== ''
-        && this.pushMessageTitle !== undefined
-        && this.pushMessageBody !== undefined
-        && this.pushMessageOnClickLink !== undefined
-        && this.pushMessageImageUrl !== undefined
-        && this.name !== '';
+      PushComponent.prototype.checkCompleted = function () {
+        this.completed =
+          this.pushMessageTitle !== '' &&
+          this.pushMessageBody !== '' &&
+          this.pushMessageTitle !== undefined &&
+          this.pushMessageBody !== undefined &&
+          this.pushMessageOnClickLink !== undefined &&
+          this.pushMessageImageUrl !== undefined &&
+          this.name !== '';
       };
 
-      PushComponent.prototype.getPropertiesToWatch = function() {
+      PushComponent.prototype.getPropertiesToWatch = function () {
         var properties = BaseComponent.prototype.getPropertiesToWatch();
         return properties.concat([
           'name',
           'pushMessageTitle',
           'pushMessageBody',
           'pushMessageOnClickLink',
-          'pushMessageImageUrl'
+          'pushMessageImageUrl',
         ]);
       };
 
       return PushComponent;
-    }]);
+    },
+  ]);
 })();

@@ -1,12 +1,35 @@
-<div id="{{id + '-inner'}}" class="dropdown--container" click-outside="close();" ng-click="show();" ng-class="{ 'is-visible': listVisible }">
-    <div class="dropdown-display" ng-class="{ clicked: listVisible }">
-        <input type="text" ng-show="list.length > 5 && listVisible" ng-model="searchText" class="search-text dropdown-input"/>
-        <span ng-show="list.length < 5 || !listVisible" ng-class="{'placeholder': display === placeholder}"  class="dropdown-label">{{display}}</span>
-        <span class="dropdown-arrow"></span>
-    </div>
-    <ul class="dropdown-list"  ng-class="{ scroll: scroll== true, up:dropup  }" >
-        <li class="dropdown-list-item" ng-click="select(item)" ng-class="{ 'is-selected': isSelected(item) }" ng-repeat="item in list| filter:filterByLabel">
-            <span class="dropdown-list-item--text" >{{property !== undefined ? item[property] : item}}</span>
-        </li>
-    </ul>
+<div
+  id="{{id + '-inner'}}"
+  class="dropdown--container"
+  click-outside="close();"
+  ng-click="show();"
+  ng-class="{ 'is-visible': listVisible }"
+>
+  <div class="dropdown-display" ng-class="{ clicked: listVisible }">
+    <input
+      type="text"
+      ng-show="list.length > 5 && listVisible"
+      ng-model="searchText"
+      class="search-text dropdown-input"
+    />
+    <span
+      ng-show="list.length < 5 || !listVisible"
+      ng-class="{'placeholder': display === placeholder}"
+      class="dropdown-label"
+      >{{display}}</span
+    >
+    <span class="dropdown-arrow"></span>
+  </div>
+  <ul class="dropdown-list" ng-class="{ scroll: scroll== true, up:dropup  }">
+    <li
+      class="dropdown-list-item"
+      ng-click="select(item)"
+      ng-class="{ 'is-selected': isSelected(item) }"
+      ng-repeat="item in list| filter:filterByLabel"
+    >
+      <span class="dropdown-list-item--text"
+        >{{property !== undefined ? item[property] : item}}</span
+      >
+    </li>
+  </ul>
 </div>

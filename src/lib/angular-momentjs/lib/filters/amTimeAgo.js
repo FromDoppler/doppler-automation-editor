@@ -1,11 +1,13 @@
 'use strict';
-angular.module('gdi2290.amTimeAgo')
-.directive('amTimeAgo', ['$moment', '$timeout', function($moment, $timeout) {
+angular.module('gdi2290.amTimeAgo').directive('amTimeAgo', [
+  '$moment',
+  '$timeout',
+  function ($moment, $timeout) {
     function isUndefined(value) {
-      return (typeof value === 'undefined') || (value === null) || (value === '');
+      return typeof value === 'undefined' || value === null || value === '';
     }
 
-    return function(scope, element, attrs) {
+    return function (scope, element, attrs) {
       var activeTimeout = null;
       var currentValue;
       var currentFormat;
@@ -22,7 +24,7 @@ angular.module('gdi2290.amTimeAgo')
         var howOld;
 
         if ($moment.then) {
-          $moment().then(function(moment) {
+          $moment().then(function (moment) {
             howOld = moment().diff(momentInstance, 'minute');
           });
         } else {
@@ -38,23 +40,25 @@ angular.module('gdi2290.amTimeAgo')
           secondsUntilUpdate = 300;
         }
 
-        activeTimeout = $timeout(function () {
-          updateTime(momentInstance);
-        }, secondsUntilUpdate * 1000, false);
+        activeTimeout = $timeout(
+          function () {
+            updateTime(momentInstance);
+          },
+          secondsUntilUpdate * 1000,
+          false
+        );
       }
 
       function updateMoment() {
         cancelTimer();
         if ($moment().then) {
-          $moment.then(function(moment) {
+          $moment.then(function (moment) {
             updateTime(moment(currentValue, currentFormat));
           });
         } else {
           updateTime($moment(currentValue, currentFormat));
         }
       }
-
-
 
       scope.$watch(attrs.amTimeAgo, function (value) {
         if (isUndefined(value)) {
@@ -86,6 +90,6 @@ angular.module('gdi2290.amTimeAgo')
       scope.$on('$destroy', function () {
         cancelTimer();
       });
-
     };
-}]);
+  },
+]);
