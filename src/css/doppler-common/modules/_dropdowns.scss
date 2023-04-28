@@ -55,8 +55,7 @@ dropdown {
         border: 0;
         height: 36px;
         box-shadow: none;
-      } 
-
+      }
     }
     .dropdown-list {
       display: block;
@@ -83,14 +82,14 @@ dropdown {
   text-align: left;
   height: 40px;
   line-height: 40px;
-  
-    .dropdown-arrow {
-      @include arrow(11px , 7px, "bottom", $color-lightgrey);
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+
+  .dropdown-arrow {
+    @include arrow(11px, 7px, 'bottom', $color-lightgrey);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 .dropdown-label {
@@ -107,7 +106,7 @@ dropdown {
 }
 
 .dropdown-arrow {
-  @include arrow(11px , 7px, "bottom", $color-lightgrey);
+  @include arrow(11px, 7px, 'bottom', $color-lightgrey);
   position: absolute;
   right: 10px;
   top: 50%;
@@ -121,10 +120,10 @@ dropdown {
   right: 0px;
   width: 30px;
   bottom: 0;
-  &:after{
-    @include arrow-after(11px, 7px, "bottom", $color-lightgrey);
+  &:after {
+    @include arrow-after(11px, 7px, 'bottom', $color-lightgrey);
     top: 40%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     left: 50%;
   }
 }
@@ -133,7 +132,7 @@ dropdown {
   top: 0;
   bottom: inherit;
   &:after {
-    @include arrow-after(11px, 7px, "top", $color-lightgrey);
+    @include arrow-after(11px, 7px, 'top', $color-lightgrey);
     top: 60%;
   }
 }
@@ -161,8 +160,8 @@ dropdown {
   font-size: $font-size--small;
   position: relative;
   &[disabled] {
-    pointer-events:none;
-    opacity:0.6;
+    pointer-events: none;
+    opacity: 0.6;
   }
   &:hover {
     background-color: $color-snow;
@@ -184,8 +183,8 @@ dropdown {
     display: flex;
     align-items: center;
     color: #999;
-    .blocked{
-      color: #E34F45;
+    .blocked {
+      color: #e34f45;
     }
   }
 }
@@ -200,7 +199,7 @@ dropdown {
 }
 
 .dropdown-input,
-.dropdown-input:focus, {
+.dropdown-input:focus {
   border: none;
   outline: none;
 }

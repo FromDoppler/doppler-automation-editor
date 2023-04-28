@@ -1,31 +1,33 @@
 'use strict';
 
-describe('prestashopCtrl tests', function() {
+describe('prestashopCtrl tests', function () {
   var $controller, $rootScope;
-  var $q, ModalService, $translate = {
-    instant: function(text){
-      return text;
-    },
-    onReady: function () {
-      return createResolvePromise({});
-    }
-  };
+  var $q,
+    ModalService,
+    $translate = {
+      instant: function (text) {
+        return text;
+      },
+      onReady: function () {
+        return createResolvePromise({});
+      },
+    };
 
   var prestashopServiceMock = {};
   var INTEGRATION_CODES = {
-    VTEX: 5
-  }
+    VTEX: 5,
+  };
 
   var INTEGRATION_ERROR_CODES = {};
 
   var IMPORTING_STATE_STR = {
-    IMPORTING_SUBSCRIBERS: 5
-  }
+    IMPORTING_SUBSCRIBERS: 5,
+  };
 
   beforeEach(module('dopplerApp.controlPanel'));
 
-  beforeEach(function() {
-    module(function($provide) {
+  beforeEach(function () {
+    module(function ($provide) {
       $provide.value('prestashopService', prestashopServiceMock);
       $provide.value('$translate', $translate);
       $provide.value('ModalService', ModalService);
@@ -35,13 +37,13 @@ describe('prestashopCtrl tests', function() {
     });
   });
 
-  beforeEach(inject(function(_$controller_, _$rootScope_, _$q_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_, _$q_) {
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     $q = _$q_;
   }));
 
-  it('should load ctrl without fail', function(){
+  it('should load ctrl without fail', function () {
     //Arrange
     mockGetStatusDisconnected();
     mockGetUserList();
@@ -49,7 +51,7 @@ describe('prestashopCtrl tests', function() {
     var prestaCtrl = $controller('prestashopCtrl', {});
   });
 
-  it('should connect to prestashop', function(){
+  it('should connect to prestashop', function () {
     // Arrange
     mockGetUserList();
     mockGetStatus();
@@ -61,7 +63,7 @@ describe('prestashopCtrl tests', function() {
     prestaCtrl.integrationData = {
       appKey: 'zfdsflksjfsld000',
       url: 'http://mysite.com',
-      listId: 15512
+      listId: 15512,
     };
 
     prestaCtrl.connect();
@@ -71,7 +73,7 @@ describe('prestashopCtrl tests', function() {
     expect(prestaCtrl.connected).toBeTruthy();
   });
 
-  it('should get status is connected on load', function(){
+  it('should get status is connected on load', function () {
     //Arrange
     mockGetStatus();
 
@@ -82,10 +84,9 @@ describe('prestashopCtrl tests', function() {
     // Assert
     expect(prestaCtrl.connected).toBeTruthy();
     expect(prestaCtrl.lists).toBe(undefined);
-
   });
 
-  it('should get sincronize and get list status without fail', function (){
+  it('should get sincronize and get list status without fail', function () {
     //Arrange
     mockGetStatus();
     mockDoManualSync();
@@ -96,72 +97,70 @@ describe('prestashopCtrl tests', function() {
     $rootScope.$apply();
 
     prestaCtrl.synchronize();
-
   });
 
-  function createResolvePromise(object){
+  function createResolvePromise(object) {
     var deferred = $q.defer();
     deferred.resolve(object);
     return deferred.promise;
   }
 
-  function mockDoManualSync(){
-    prestashopServiceMock.manualSync = function() {
-      var response = {
-        success: true
-      };
-      return createResolvePromise(response);
-    };
-  }
-
-  function mockGetListStatusReady(){
-    prestashopServiceMock.getChangedState = function() {
+  function mockDoManualSync() {
+    prestashopServiceMock.manualSync = function () {
       var response = {
         success: true,
-        arePending: false
       };
       return createResolvePromise(response);
     };
   }
 
-  function mockGetStatusDisconnected(){
-    prestashopServiceMock.getStatus = function() {
+  function mockGetListStatusReady() {
+    prestashopServiceMock.getChangedState = function () {
+      var response = {
+        success: true,
+        arePending: false,
+      };
+      return createResolvePromise(response);
+    };
+  }
+
+  function mockGetStatusDisconnected() {
+    prestashopServiceMock.getStatus = function () {
       var result = {
         success: true,
-        connected: false
+        connected: false,
       };
       return createResolvePromise(result);
     };
   }
 
-  function mockGetUserList(){
-    prestashopServiceMock.getUserLists = function() {
+  function mockGetUserList() {
+    prestashopServiceMock.getUserLists = function () {
       var listResult = {
         success: true,
-        lists: [{ IdList: 21255, ListName: "List1" }]
+        lists: [{ IdList: 21255, ListName: 'List1' }],
       };
       return createResolvePromise(listResult);
     };
   }
 
-  function mockConnect(){
-    prestashopServiceMock.connect = function() {
+  function mockConnect() {
+    prestashopServiceMock.connect = function () {
       var result = {
         success: true,
-        connect: true
+        connect: true,
       };
       return createResolvePromise(result);
     };
   }
 
-  function mockGetStatus(){
-    prestashopServiceMock.getStatus = function() {
+  function mockGetStatus() {
+    prestashopServiceMock.getStatus = function () {
       var result = {
         success: true,
-        connected: true
+        connected: true,
       };
       return createResolvePromise(result);
     };
   }
-
 });

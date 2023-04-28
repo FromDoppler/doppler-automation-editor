@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,10 +8,14 @@
   warningsStepsService.$inject = [
     '$injector',
     'COMPONENT_TYPE',
-    'conditionsDataservice'
+    'conditionsDataservice',
   ];
 
-  function warningsStepsService($injector, COMPONENT_TYPE, conditionsDataservice) {
+  function warningsStepsService(
+    $injector,
+    COMPONENT_TYPE,
+    conditionsDataservice
+  ) {
     var warningsSteps = {};
     var service = {
       createWarningsSteps: createWarningsSteps,
@@ -19,7 +23,7 @@
       removeWarningStep: removeWarningStep,
       getWarningsStepsCount: getWarningsStepsCount,
       getHasWarningSteps: getHasWarningSteps,
-      checkWarningStep: checkWarningStep
+      checkWarningStep: checkWarningStep,
     };
 
     function checkWarningStep(component) {
@@ -27,11 +31,10 @@
       if (automation.isInitialConditionComponent(component)) {
         if (automation.hasBlockedList()) {
           createWarningsSteps(COMPONENT_TYPE.INITIAL_CONDITION);
-        }
-        else {
+        } else {
           removeWarningStep({
-            type: COMPONENT_TYPE.INITIAL_CONDITION, 
-            uid: component.uid
+            type: COMPONENT_TYPE.INITIAL_CONDITION,
+            uid: component.uid,
           });
         }
       } else {
@@ -48,24 +51,30 @@
       var parentComponents = automation.getAllParentComponents();
 
       warningsSteps[componentType] = [];
-      _.each(parentComponents, function(parentComponent) {
+      _.each(parentComponents, function (parentComponent) {
         var tmpArray = [];
-        var parentChildren = parentComponent.type !== COMPONENT_TYPE.CONDITION ?
-          parentComponent.children :
-          conditionsDataservice.getAllConditionChildren(parentComponent.uid);
+        var parentChildren =
+          parentComponent.type !== COMPONENT_TYPE.CONDITION
+            ? parentComponent.children
+            : conditionsDataservice.getAllConditionChildren(
+                parentComponent.uid
+              );
 
-        _.each(parentChildren, function(child) {
+        _.each(parentChildren, function (child) {
           if (child.type === componentType && !child.completed) {
             tmpArray.push(child.uid);
           }
         });
         if (tmpArray.length) {
-          warningsSteps[componentType] = warningsSteps[componentType].concat(tmpArray);
+          warningsSteps[componentType] =
+            warningsSteps[componentType].concat(tmpArray);
         }
       });
 
-      if (componentType == COMPONENT_TYPE.INITIAL_CONDITION){
-        warningsSteps[componentType] = warningsSteps[componentType].concat(automation.getInitialConditionUid()); 
+      if (componentType == COMPONENT_TYPE.INITIAL_CONDITION) {
+        warningsSteps[componentType] = warningsSteps[componentType].concat(
+          automation.getInitialConditionUid()
+        );
       }
     }
 
@@ -88,7 +97,7 @@
 
     function getWarningsStepsCount() {
       var count = 0;
-      _.each(Object.keys(warningsSteps), function(objectType) {
+      _.each(Object.keys(warningsSteps), function (objectType) {
         count += warningsSteps[objectType].length;
       });
       return count;

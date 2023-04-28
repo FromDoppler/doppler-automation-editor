@@ -1,4 +1,4 @@
-@include keyframes (spinner) {
+@include keyframes(spinner) {
   0% {
     transform: rotate(0deg);
   }
@@ -7,13 +7,13 @@
   }
 }
 
-@include keyframes (loader) {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+@include keyframes(loader) {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes bounceIn {
@@ -46,8 +46,8 @@
     opacity: 1;
     transform: scale3d(1, 1, 1);
   }
- }
- .bounceIn {
+}
+.bounceIn {
   animation-duration: 1s;
   animation-name: bounceIn;
- }
+}

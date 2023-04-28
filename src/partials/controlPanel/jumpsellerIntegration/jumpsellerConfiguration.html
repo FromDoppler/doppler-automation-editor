@@ -1,14 +1,27 @@
-<div id="connectedCont" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-if="jumpseller.connected && !jumpseller.showMapping">
+<div
+  id="connectedCont"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  ng-if="jumpseller.connected && !jumpseller.showMapping"
+>
   <div>
     <div class="authentication-container connected">
       <div>
-        <span class="control-panel-section-title">{{ 'jumpseller_integration.connected.list_title' | translate }}</span>
-        <span class="control-panel-section-subtitle">{{ 'jumpseller_integration.connected.list_subtitle' | translate }}</span>
+        <span class="control-panel-section-title"
+          >{{ 'jumpseller_integration.connected.list_title' | translate }}</span
+        >
+        <span class="control-panel-section-subtitle"
+          >{{ 'jumpseller_integration.connected.list_subtitle' | translate
+          }}</span
+        >
       </div>
       <div class="button--frame">
-        <button type="button" ng-click="jumpseller.synchronizeAllLists();"
-                ng-class="{'spin': jumpseller.importingList && !jumpseller.disableSync}" ng-disabled="jumpseller.disableSync"
-                class="button reload-icon"></button>
+        <button
+          type="button"
+          ng-click="jumpseller.synchronizeAllLists();"
+          ng-class="{'spin': jumpseller.importingList && !jumpseller.disableSync}"
+          ng-disabled="jumpseller.disableSync"
+          class="button reload-icon"
+        ></button>
       </div>
     </div>
     <div ng-if="jumpseller.integratedLists.length === 0">
@@ -17,79 +30,183 @@
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
             <span id="messageBar" class="text--small">
-              {{ 'jumpseller_integration.connected.select_list_warning' | translate }}
+              {{ 'jumpseller_integration.connected.select_list_warning' |
+              translate }}
             </span>
           </div>
         </div>
       </div>
-      <hr class="full" style="width: calc(100% + 40px);" />
-      <div style="min-height:74px" class="loading--container components--center" dp-partial="angularjs/partials/shared/loading.html" ng-if="jumpseller.importingListDropdown && !jumpseller.isLoading"></div>
-      <div class="entity-selector-container flex-grid" ng-if="!jumpseller.importingListDropdown">
-        <p class="select-list-text">{{ 'jumpseller_integration.connected.select_list' | translate }}</p>
-        <dropdown class="dropdown dropdown--big" placeholder="{{ 'jumpseller_integration.connected.select_list_placeholder' | translate }}" id="dd-lists"
-                  list="jumpseller.allUserList" name="jumpseller.selectedListId" ng-model="jumpseller.selectedListId" ng-required="true"
-                  property="ListName" id-value="IdList" ng-disabled="!!jumpseller.allUserList && jumpseller.allUserList.length === 0 || jumpseller.isLoadingFields"></dropdown>
-        <button type="submit" ng-click="jumpseller.showMappingSection();" class="button button--primary"
-                ng-disabled="!jumpseller.selectedListId" ng-class="{'button--spinner' : jumpseller.isLoadingFields}">
+      <hr class="full" style="width: calc(100% + 40px)" />
+      <div
+        style="min-height: 74px"
+        class="loading--container components--center"
+        dp-partial="angularjs/partials/shared/loading.html"
+        ng-if="jumpseller.importingListDropdown && !jumpseller.isLoading"
+      ></div>
+      <div
+        class="entity-selector-container flex-grid"
+        ng-if="!jumpseller.importingListDropdown"
+      >
+        <p class="select-list-text">
+          {{ 'jumpseller_integration.connected.select_list' | translate }}
+        </p>
+        <dropdown
+          class="dropdown dropdown--big"
+          placeholder="{{ 'jumpseller_integration.connected.select_list_placeholder' | translate }}"
+          id="dd-lists"
+          list="jumpseller.allUserList"
+          name="jumpseller.selectedListId"
+          ng-model="jumpseller.selectedListId"
+          ng-required="true"
+          property="ListName"
+          id-value="IdList"
+          ng-disabled="!!jumpseller.allUserList && jumpseller.allUserList.length === 0 || jumpseller.isLoadingFields"
+        ></dropdown>
+        <button
+          type="submit"
+          ng-click="jumpseller.showMappingSection();"
+          class="button button--primary"
+          ng-disabled="!jumpseller.selectedListId"
+          ng-class="{'button--spinner' : jumpseller.isLoadingFields}"
+        >
           {{ 'jumpseller_integration.connected.next' | translate }}
           <span class="icon-editor-saving hide"></span>
         </button>
       </div>
     </div>
     <div ng-if="jumpseller.integratedLists.length">
-      <p class="select-list-text">{{ 'jumpseller_integration.connected.grid_title' | translate }}:</p>
-      <span class="control-panel-section-subtitle">  </span>
+      <p class="select-list-text">
+        {{ 'jumpseller_integration.connected.grid_title' | translate }}:
+      </p>
+      <span class="control-panel-section-subtitle"> </span>
       <table class="grid">
         <thead>
-        <th>{{ 'jumpseller_integration.connected.entity_name_grid' | translate }}</th>
-        <th>{{ 'jumpseller_integration.connected.list_name_grid' | translate }}</th>
-        <th>{{ 'jumpseller_integration.connected.last_synchronization_grid' | translate }}</th>
-        <th>{{ 'jumpseller_integration.connected.subscribers_count_grid' | translate }}</th>
-        <th>{{ 'jumpseller_integration.connected.actions_grid' | translate }}</th>
+          <th>
+            {{ 'jumpseller_integration.connected.entity_name_grid' | translate
+            }}
+          </th>
+          <th>
+            {{ 'jumpseller_integration.connected.list_name_grid' | translate }}
+          </th>
+          <th>
+            {{ 'jumpseller_integration.connected.last_synchronization_grid' |
+            translate }}
+          </th>
+          <th>
+            {{ 'jumpseller_integration.connected.subscribers_count_grid' |
+            translate }}
+          </th>
+          <th>
+            {{ 'jumpseller_integration.connected.actions_grid' | translate }}
+          </th>
         </thead>
         <tbody>
-          <tr ng-show="!jumpseller.importingList && integratedList.SubscribersListStatus !== 5" ng-repeat="integratedList in jumpseller.integratedLists">
-            <td ng-show="jumpseller.integrationToDelete != $index">{{ integratedList.ThirdPartyName }}</td>
-            <td class="list-name" ng-show="jumpseller.integrationToDelete != $index"><ellipsis-with-tooltip text="integratedList.Name" class="stand-alone"></ellipsis-with-tooltip></td>
-            <td ng-show="jumpseller.integrationToDelete != $index">{{ integratedList.LastUpdateFormatted ? integratedList.LastUpdateFormatted : '-'  }}</td>
-            <td ng-show="jumpseller.integrationToDelete != $index">{{ integratedList.SubscribersCount }}</td>
-            <td ng-show="jumpseller.integrationToDelete != $index" class="actions">
-              <span data-static-tooltip="{{ 'jumpseller_integration.connected.edit_tooltip' | translate }}">
-                <a target="_self" class="icon-grid-edit" ng-click="jumpseller.editMap(integratedList.IdList, integratedList.ThirdPartyId)"></a>
+          <tr
+            ng-show="!jumpseller.importingList && integratedList.SubscribersListStatus !== 5"
+            ng-repeat="integratedList in jumpseller.integratedLists"
+          >
+            <td ng-show="jumpseller.integrationToDelete != $index">
+              {{ integratedList.ThirdPartyName }}
+            </td>
+            <td
+              class="list-name"
+              ng-show="jumpseller.integrationToDelete != $index"
+            >
+              <ellipsis-with-tooltip
+                text="integratedList.Name"
+                class="stand-alone"
+              ></ellipsis-with-tooltip>
+            </td>
+            <td ng-show="jumpseller.integrationToDelete != $index">
+              {{ integratedList.LastUpdateFormatted ?
+              integratedList.LastUpdateFormatted : '-' }}
+            </td>
+            <td ng-show="jumpseller.integrationToDelete != $index">
+              {{ integratedList.SubscribersCount }}
+            </td>
+            <td
+              ng-show="jumpseller.integrationToDelete != $index"
+              class="actions"
+            >
+              <span
+                data-static-tooltip="{{ 'jumpseller_integration.connected.edit_tooltip' | translate }}"
+              >
+                <a
+                  target="_self"
+                  class="icon-grid-edit"
+                  ng-click="jumpseller.editMap(integratedList.IdList, integratedList.ThirdPartyId)"
+                ></a>
               </span>
-              <span data-static-tooltip="{{ 'jumpseller_integration.connected.delete_mode_grid.tooltip' | translate }}" class="to-left">
-                <a ng-click="!jumpseller.isLoadingFields ? jumpseller.integrationToDelete = $index : false"><img src="../../../images/grid-delete.svg"></a>
+              <span
+                data-static-tooltip="{{ 'jumpseller_integration.connected.delete_mode_grid.tooltip' | translate }}"
+                class="to-left"
+              >
+                <a
+                  ng-click="!jumpseller.isLoadingFields ? jumpseller.integrationToDelete = $index : false"
+                  ><img src="../../../images/grid-delete.svg"
+                /></a>
               </span>
             </td>
-            <td ng-show="jumpseller.integrationToDelete == $index" class="delete-confirmation-text" colspan="3">
+            <td
+              ng-show="jumpseller.integrationToDelete == $index"
+              class="delete-confirmation-text"
+              colspan="3"
+            >
               <span class="deleteConfirmationIcon"></span>
-              <span>{{ 'jumpseller_integration.connected.delete_mode_grid.message' | translate }}</span>
+              <span
+                >{{ 'jumpseller_integration.connected.delete_mode_grid.message'
+                | translate }}</span
+              >
             </td>
-            <td ng-show="jumpseller.integrationToDelete == $index" class="delete-confirmation-actions" colspan="2">
+            <td
+              ng-show="jumpseller.integrationToDelete == $index"
+              class="delete-confirmation-actions"
+              colspan="2"
+            >
               <span>
-                <a ng-click="!jumpseller.isLoadingFields ? jumpseller.integrationToDelete = null : false">
-                  {{ 'jumpseller_integration.connected.delete_mode_grid.cancel' | translate }}
+                <a
+                  ng-click="!jumpseller.isLoadingFields ? jumpseller.integrationToDelete = null : false"
+                >
+                  {{ 'jumpseller_integration.connected.delete_mode_grid.cancel'
+                  | translate }}
                 </a>
                 |
-                <a class="delete-text" ng-click="!jumpseller.isLoadingFields ? jumpseller.deleteList(integratedList.IdList) : false">
-                  {{ 'jumpseller_integration.connected.delete_mode_grid.delete' | translate }}
+                <a
+                  class="delete-text"
+                  ng-click="!jumpseller.isLoadingFields ? jumpseller.deleteList(integratedList.IdList) : false"
+                >
+                  {{ 'jumpseller_integration.connected.delete_mode_grid.delete'
+                  | translate }}
                 </a>
               </span>
             </td>
           </tr>
-          <tr ng-show="jumpseller.importingList || integratedList.SubscribersListStatus === 5" class="exportingList" ng-repeat="integratedList in jumpseller.integratedLists">
+          <tr
+            ng-show="jumpseller.importingList || integratedList.SubscribersListStatus === 5"
+            class="exportingList"
+            ng-repeat="integratedList in jumpseller.integratedLists"
+          >
             <td>{{ integratedList.ThirdPartyName }}</td>
             <td class="list-name sync">{{ integratedList.Name }}</td>
             <td colspan="3" class="status">
               <span class="icon-clock"></span>
-              <span>&nbsp;{{ 'jumpseller_integration.connected.synchronizing_grid' | translate }}</span>
+              <span
+                >&nbsp;{{ 'jumpseller_integration.connected.synchronizing_grid'
+                | translate }}</span
+              >
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="!!jumpseller.errorMessage.length">
-      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="!!jumpseller.errorMessage.length"
+    >
+      <div
+        id="messageBar"
+        class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+      >
         <span class="dp-message-icon"></span>
         <div class="dp-content-message">
           <span>{{ jumpseller.errorMessage }}</span>

@@ -7,20 +7,17 @@
 $gulp: true !default;
 
 %loadGulpPath {
-    @import '../../node_modules/normalize.css/normalize.css';
+  @import '../../node_modules/normalize.css/normalize.css';
 }
 
 %loadWebpackPath {
-    @import '/node_modules/normalize.css/normalize.css';
+  @import '/node_modules/normalize.css/normalize.css';
 }
 
 html {
-    @if $gulp == true {
-      @extend %loadGulpPath;
-    }
-    @else {
-      @extend %loadWebpackPath;
-    }
+  @if $gulp == true {
+    @extend %loadGulpPath;
+  } @else {
+    @extend %loadWebpackPath;
+  }
 }
-
-

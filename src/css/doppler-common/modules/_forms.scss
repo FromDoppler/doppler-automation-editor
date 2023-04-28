@@ -1,14 +1,14 @@
-input[type="text"] {
-   &::-ms-clear {
-      display: none;
+input[type='text'] {
+  &::-ms-clear {
+    display: none;
   }
 }
-input[type="text"].input--text,
-input[type="number"].input--text,
-input[type="email"].input--text,
-input[type="url"].input--text,
-input[type="date"].input--text,
-input[type="tel"].input--text,
+input[type='text'].input--text,
+input[type='number'].input--text,
+input[type='email'].input--text,
+input[type='url'].input--text,
+input[type='date'].input--text,
+input[type='tel'].input--text,
 textarea.textarea {
   background: $color-white;
   border-radius: $border-radius--default;
@@ -20,30 +20,32 @@ textarea.textarea {
   width: $size-full;
   line-height: 16px;
   &.half-size {
-    width:50%;
+    width: 50%;
   }
   &:focus {
-    border:1px solid $color-primary;
+    border: 1px solid $color-primary;
     outline: none;
   }
   &::-ms-clear {
-      display: none;
+    display: none;
   }
-  &.ng-invalid{
+  &.ng-invalid {
     &.ng-dirty,
     &.submitted {
       /*TODO remove when refactor automation styles*/
-      background: #FDFDFD !important;
-      border:1px solid $color-sylver !important;
+      background: #fdfdfd !important;
+      border: 1px solid $color-sylver !important;
     }
   }
   /*TODO: remove ng-invalid when refactor automation styles*/
-  &.ng-invalid.hasErrors, &.hasErrors{
+  &.ng-invalid.hasErrors,
+  &.hasErrors {
     border: 1px solid $color-red;
     border-color: $color-red !important;
   }
-  &.ng-invalid.hasWarning, &.hasWarning{
-    border: 1px solid  $color-primary;
+  &.ng-invalid.hasWarning,
+  &.hasWarning {
+    border: 1px solid $color-primary;
     border-color: $color-primary !important;
   }
   &.input--search {
@@ -56,23 +58,22 @@ textarea.textarea {
     width: 200px;
   }
   &::-webkit-input-placeholder {
-      color: $color-lightgrey;
-      font-style: italic;
+    color: $color-lightgrey;
+    font-style: italic;
   }
   &::-moz-placeholder {
-      color: $color-lightgrey;
-      font-style: italic;
+    color: $color-lightgrey;
+    font-style: italic;
   }
   &:disabled {
     background: $color-ghostwhite;
     border-color: $color-sylver;
-    color:$color-lightgrey;
-  };
-
+    color: $color-lightgrey;
+  }
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -87,7 +88,7 @@ input[type=number]::-webkit-outer-spin-button {
   color: $color-base;
   cursor: pointer;
 }
-.no-search-results{
+.no-search-results {
   margin-top: 40px;
   font-style: italic;
   color: $color-base;
@@ -96,7 +97,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .input--name {
   border: 0;
-  color: #2A2A2A;
+  color: #2a2a2a;
   font-weight: $font_weight-bolder;
   font-size: $font-size--small;
   min-width: 190px;
@@ -105,7 +106,7 @@ input[type=number]::-webkit-outer-spin-button {
   &:hover {
     border-bottom: 1px solid $color-darkgrey;
   }
-  &:not(:focus){
+  &:not(:focus) {
     padding: 5px 0px 5px 5px;
   }
   &:focus {
@@ -122,21 +123,19 @@ input[type=number]::-webkit-outer-spin-button {
       font-weight: normal;
     }
   }
-  &.ng-invalid.hasErrors{
-    border-bottom: 1px solid #E65B4C;
-    border-bottom-color: #E65B4C !important;
+  &.ng-invalid.hasErrors {
+    border-bottom: 1px solid #e65b4c;
+    border-bottom-color: #e65b4c !important;
   }
 }
-
-
 
 .label {
   color: $color-darkgrey;
   display: inline-block;
-    font-size: toem(15px);
-    font-weight: $font_weight-bolder;
-    margin-bottom: torem(5px);
-    padding-left: torem(5px);
+  font-size: toem(15px);
+  font-weight: $font_weight-bolder;
+  margin-bottom: torem(5px);
+  padding-left: torem(5px);
 }
 
 .label--panel {
@@ -213,13 +212,13 @@ span.error-message {
       }
     }
   }
-//TODO: (fcoronel) arrow
+  //TODO: (fcoronel) arrow
   .validation--container:after,
   .validation--container:before {
     bottom: $size-full;
     left: 10%;
     border: solid transparent;
-    content: " ";
+    content: ' ';
     height: 0;
     width: 0;
     position: absolute;
@@ -238,7 +237,7 @@ span.error-message {
     border-width: 6px;
     margin-left: -6px;
   }
-//TODO: (fcoronel) arrow
+  //TODO: (fcoronel) arrow
 
   &.floating {
     position: absolute;
@@ -267,11 +266,10 @@ span.error-message {
   justify-content: center;
   line-height: 1.3;
   padding-top: 10px;
-  flex-direction:column;
+  flex-direction: column;
   span,
   a {
     color: $color-red;
-
   }
   &.validation-warning {
     span,
@@ -284,7 +282,7 @@ span.error-message {
   }
   .accept-dmarc {
     text-align: right;
-    width:100%;
+    width: 100%;
     text-transform: uppercase;
     cursor: pointer;
     font-weight: $font_weight-bolder;
@@ -293,7 +291,6 @@ span.error-message {
     }
   }
 }
-
 
 /*CMN Toggle*/
 .dfl-cmn-toggle {
@@ -322,13 +319,14 @@ input.dfl-cmn-toggle-round {
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     border-radius: 20px;
-    &:before, &:after {
+    &:before,
+    &:after {
       display: block;
       position: absolute;
       top: 2px;
       left: 2px;
       bottom: 2px;
-      content: "";
+      content: '';
     }
     &:before {
       right: 2px;
@@ -415,7 +413,7 @@ input.cmn-toggle-round {
 
 .radio-custom {
   display: none;
-  &[checked="checked"]{
+  &[checked='checked'] {
     & + label {
       background: $color-green-light;
       border: 0;
@@ -428,8 +426,8 @@ input.cmn-toggle-round {
         border-radius: $size-full;
         background: $color-white;
         left: 50%;
-          transform: translate(-50%,-50%);
-          top: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
       }
     }
   }
@@ -442,7 +440,7 @@ input.cmn-toggle-round {
     border: 1px solid $color-sylver;
     border-radius: $size-full;
   }
-  &[disabled="disabled"] {
+  &[disabled='disabled'] {
     & + label {
       background: transparent;
       border: 1px solid $color-sylver;
@@ -455,28 +453,28 @@ input.cmn-toggle-round {
 
 .check-custom {
   display: none;
-  &[checked="checked"],
+  &[checked='checked'],
   &.checked {
     & + label {
       background: $color-green-light;
       border: 0;
       &::after {
         content: '';
-          width: 8px;
-          height: 5px;
-          position: absolute;
-          top: 4px;
-          left: 4px;
-          border: 2px solid #fcfff4;
-          border-top: none;
-          border-right: none;
-          background: transparent;
-          opacity: 1;
-          transform: rotate(-45deg);
+        width: 8px;
+        height: 5px;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        border: 2px solid #fcfff4;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 1;
+        transform: rotate(-45deg);
       }
     }
   }
-    &:disabled + label {
+  &:disabled + label {
     cursor: inherit;
     background: $color-sylver;
   }

@@ -1,56 +1,112 @@
 <!-- installing TAB -->
-<hr class="form-integration-divider">
+<hr class="form-integration-divider" />
 <button
   ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS && !facebookCtrl.error"
   class="button button--small button--alternative button-config"
   ng-class="{'button--spinner':facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS && facebookCtrl.processing}"
   ng-click="facebookCtrl.installTab()"
-  ng-disabled="facebookCtrl.facebookData.facebookFanPageSelected.label === '' || facebookCtrl.facebookData.facebookTabName === ''">
-  {{ 'forms_integrate.headers.integration_facebook.footer.button_install' | translate }}
-  <span ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS && facebookCtrl.processing"
-        class="icon-editor-saving ng-hide"></span>
+  ng-disabled="facebookCtrl.facebookData.facebookFanPageSelected.label === '' || facebookCtrl.facebookData.facebookTabName === ''"
+>
+  {{ 'forms_integrate.headers.integration_facebook.footer.button_install' |
+  translate }}
+  <span
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS && facebookCtrl.processing"
+    class="icon-editor-saving ng-hide"
+  ></span>
 </button>
 <!-- error for tab installing -->
-<p class="text--small text--error-inline" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS && facebookCtrl.error">
+<p
+  class="text--small text--error-inline"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED_SHOW_SETTINGS && facebookCtrl.error"
+>
   <span class="icon-warning"></span>
-  {{ facebookCtrl.tabError ? 'forms_integrate.error.install_tab' : 'forms_integrate.error.install' | translate }}&nbsp;
-  <b><a ng-click="facebookCtrl.error = false;" class="text--uppercase">{{ 'forms_integrate.error.cancel' | translate }}</a> <span ng-show="!facebookCtrl.tabError">| <a class="text-red text--uppercase" ng-click="facebookCtrl.installTab()">{{ 'forms_integrate.error.retry' | translate }}</a></span></b>
+  {{ facebookCtrl.tabError ? 'forms_integrate.error.install_tab' :
+  'forms_integrate.error.install' | translate }}&nbsp;
+  <b
+    ><a ng-click="facebookCtrl.error = false;" class="text--uppercase"
+      >{{ 'forms_integrate.error.cancel' | translate }}</a
+    >
+    <span ng-show="!facebookCtrl.tabError"
+      >|
+      <a class="text-red text--uppercase" ng-click="facebookCtrl.installTab()"
+        >{{ 'forms_integrate.error.retry' | translate }}</a
+      ></span
+    ></b
+  >
 </p>
 
 <!-- installed tab actions -->
-<div ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_INSTALLED">
+<div
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_INSTALLED"
+>
   <a ng-href="{{facebookCtrl.facebookData.tabUrl}}" target="_blank">
     <p class="text--small text--uppercase">
       <span class="icon-view"></span>
-      <b>{{ 'forms_integrate.headers.integration_facebook.footer.action_preview' | translate }}</b>
+      <b
+        >{{ 'forms_integrate.headers.integration_facebook.footer.action_preview'
+        | translate }}</b
+      >
     </p>
   </a>
   <a ng-click="facebookCtrl.editTab()">
     <p class="text--small text--uppercase">
       <span class="icon-grid-edit"></span>
-      <b>{{ 'forms_integrate.headers.integration_facebook.footer.action_edit_tab' | translate }}</b>
+      <b
+        >{{
+        'forms_integrate.headers.integration_facebook.footer.action_edit_tab' |
+        translate }}</b
+      >
     </p>
   </a>
   <a ng-click="facebookCtrl.showConfirmation()">
     <p class="text--small text--uppercase">
       <span class="icon-delete"></span>
-      <b>{{ 'forms_integrate.headers.integration_facebook.footer.action_delete_tab' | translate }}</b>
+      <b
+        >{{
+        'forms_integrate.headers.integration_facebook.footer.action_delete_tab'
+        | translate }}</b
+      >
     </p>
   </a>
 </div>
 <!-- delete tab actions -->
-<div ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETE_CONFIRMATION && !facebookCtrl.error">
+<div
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETE_CONFIRMATION && !facebookCtrl.error"
+>
   <p class="text--small">
     <span class="icon-delete"></span>
-    {{ 'forms_integrate.headers.integration_facebook.footer.message_confirmate' | translate }} {{facebookCtrl.facebookData.facebookTabName}}?
-    <b><a ng-click="facebookCtrl.cancelDelete()" class="text--uppercase">{{ 'forms_integrate.headers.integration_facebook.footer.action_cancel' | translate }}</a> | <a class="text-red text--uppercase" ng-click="facebookCtrl.deleteTab()">{{ 'forms_integrate.headers.integration_facebook.footer.action_confirm_delete' | translate }}</a></b>
+    {{ 'forms_integrate.headers.integration_facebook.footer.message_confirmate'
+    | translate }} {{facebookCtrl.facebookData.facebookTabName}}?
+    <b
+      ><a ng-click="facebookCtrl.cancelDelete()" class="text--uppercase"
+        >{{ 'forms_integrate.headers.integration_facebook.footer.action_cancel'
+        | translate }}</a
+      >
+      |
+      <a class="text-red text--uppercase" ng-click="facebookCtrl.deleteTab()"
+        >{{
+        'forms_integrate.headers.integration_facebook.footer.action_confirm_delete'
+        | translate }}</a
+      ></b
+    >
   </p>
 </div>
-<div ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETE_CONFIRMATION && facebookCtrl.error">
+<div
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETE_CONFIRMATION && facebookCtrl.error"
+>
   <p class="text--small">
     <span class="icon-warning"></span>
-    {{ 'forms_integrate.error.delete' | translate: {tabName: facebookCtrl.facebookData.facebookTabName} }}
-    <b><a ng-click="facebookCtrl.error=false;" class="text--uppercase">{{ 'forms_integrate.error.cancel' | translate }}</a> | <a class="text-red text--uppercase" ng-click="facebookCtrl.deleteTab()">{{ 'forms_integrate.error.retry' | translate }}</a></b>
+    {{ 'forms_integrate.error.delete' | translate: {tabName:
+    facebookCtrl.facebookData.facebookTabName} }}
+    <b
+      ><a ng-click="facebookCtrl.error=false;" class="text--uppercase"
+        >{{ 'forms_integrate.error.cancel' | translate }}</a
+      >
+      |
+      <a class="text-red text--uppercase" ng-click="facebookCtrl.deleteTab()"
+        >{{ 'forms_integrate.error.retry' | translate }}</a
+      ></b
+    >
   </p>
 </div>
 <!-- edit tab actions -->
@@ -59,21 +115,40 @@
   class="button button--small button--alternative button-config"
   ng-class="{'button--spinner':facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT && facebookCtrl.processing}"
   ng-click="facebookCtrl.confirmChanges()"
-  ng-disabled="facebookCtrl.facebookData.facebookFanPageSelected.label === '' || facebookCtrl.facebookData.facebookTabName === ''">
-  {{ 'forms_integrate.headers.integration_facebook.footer.action_save' | translate }}
-  <span ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT && facebookCtrl.processing"
-        class="icon-editor-saving ng-hide"></span>
+  ng-disabled="facebookCtrl.facebookData.facebookFanPageSelected.label === '' || facebookCtrl.facebookData.facebookTabName === ''"
+>
+  {{ 'forms_integrate.headers.integration_facebook.footer.action_save' |
+  translate }}
+  <span
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT && facebookCtrl.processing"
+    class="icon-editor-saving ng-hide"
+  ></span>
 </button>
-<div class="text--error-inline" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT && facebookCtrl.error">
+<div
+  class="text--error-inline"
+  ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT && facebookCtrl.error"
+>
   <p class="text--small">
     <span class="icon-warning"></span>
     {{ 'forms_integrate.error.edit' | translate }}
-    <b><a ng-click="facebookCtrl.error=false;" class="text--uppercase">{{ 'forms_integrate.error.cancel' | translate }}</a> | <a class="text-red text--uppercase" ng-click="facebookCtrl.confirmChanges()">{{ 'forms_integrate.error.retry' | translate }}</a></b>
+    <b
+      ><a ng-click="facebookCtrl.error=false;" class="text--uppercase"
+        >{{ 'forms_integrate.error.cancel' | translate }}</a
+      >
+      |
+      <a
+        class="text-red text--uppercase"
+        ng-click="facebookCtrl.confirmChanges()"
+        >{{ 'forms_integrate.error.retry' | translate }}</a
+      ></b
+    >
   </p>
 </div>
 <button
   ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_EDIT && !facebookCtrl.error"
   class="button button--small button-outline--light button-config"
-  ng-click="facebookCtrl.cancelChanges()">
-  {{ 'forms_integrate.headers.integration_facebook.footer.action_discard' | translate }}
+  ng-click="facebookCtrl.cancelChanges()"
+>
+  {{ 'forms_integrate.headers.integration_facebook.footer.action_discard' |
+  translate }}
 </button>

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('automation', function() {
+describe('automation', function () {
   beforeEach(module('dopplerApp.automation.editor'));
 
   var AutomationComponent;
@@ -20,38 +20,36 @@ describe('automation', function() {
 
   var DOMAIN_STATUS = {
     PENDING: 1,
-    VERIFIED: 2
+    VERIFIED: 2,
   };
 
   var $translate = {
-    instant: function(key) {
+    instant: function (key) {
       return 'text';
-    }
+    },
   };
 
   var settingsServiceMock = {
-    getSettings: function(data) {
+    getSettings: function (data) {
       var response = {
         domains: data.domains || [],
-        siteTrackingActive: data.siteTrackingActive || false
+        siteTrackingActive: data.siteTrackingActive || false,
       };
 
       var deferred = $q.defer();
       deferred.resolve(response);
       return deferred.promise;
-    }
+    },
   };
 
   var userFieldsDataservice = {
-    getDeletedFieldsByType: function(customFields, fieldType) {
-      return [{id: 1, fieldName: 'example' }];
-    }
-  }
+    getDeletedFieldsByType: function (customFields, fieldType) {
+      return [{ id: 1, fieldName: 'example' }];
+    },
+  };
 
-
-  beforeEach(function() {
-
-    module(function($provide) {
+  beforeEach(function () {
+    module(function ($provide) {
       $provide.value('$translate', $translate);
       $provide.value('DOMAIN_STATUS', DOMAIN_STATUS);
       $provide.value('userFieldsDataservice', userFieldsDataservice);
@@ -59,13 +57,22 @@ describe('automation', function() {
       $provide.value('goToService', goToService);
     });
 
-    inject(function($injector) {
+    inject(function ($injector) {
       automation = $injector.get('automation');
     });
-
   });
 
-  beforeEach(inject(function(_$q_,_settingsService_, _changesManager_, _AUTOMATION_TYPE_, _AUTOMATION_COMPLETED_STATE_, _$rootScope_, _COMPONENT_TYPE_, _FIELD_TYPE_, _FREQUENCY_TYPE_) {
+  beforeEach(inject(function (
+    _$q_,
+    _settingsService_,
+    _changesManager_,
+    _AUTOMATION_TYPE_,
+    _AUTOMATION_COMPLETED_STATE_,
+    _$rootScope_,
+    _COMPONENT_TYPE_,
+    _FIELD_TYPE_,
+    _FREQUENCY_TYPE_
+  ) {
     $q = _$q_;
     settingsService = _settingsService_;
     changesManager = _changesManager_;
@@ -77,18 +84,17 @@ describe('automation', function() {
     FREQUENCY_TYPE = _FREQUENCY_TYPE_;
   }));
 
-  it('should be able to load an empty suscription list automation and has an incomplete state', function() {
-
+  it('should be able to load an empty suscription list automation and has an incomplete state', function () {
     // Arrange
     var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
+    settingsService.getSettings = function () {
       return settingsServiceMock.getSettings({});
     };
 
     automation.setData({
-        type: COMPONENT_TYPE.AUTOMATION,
-        automationType: AUTOMATION_TYPE.SUBSCRIPTION_LIST,
-        id: 0
+      type: COMPONENT_TYPE.AUTOMATION,
+      automationType: AUTOMATION_TYPE.SUBSCRIPTION_LIST,
+      id: 0,
     });
 
     // Act
@@ -98,87 +104,22 @@ describe('automation', function() {
 
     // Assert
     expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.INCOMPLETE);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.INCOMPLETE
+    );
   });
 
-  it('should be able to load an empty site behavior automation with site tracking disabled', function() {
-
+  it('should be able to load an empty site behavior automation with site tracking disabled', function () {
     // Arrange
     var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
-      return settingsServiceMock.getSettings({siteTrackingActive: false});
-    };
-
-    automation.setData({
-        type: COMPONENT_TYPE.AUTOMATION,
-        automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
-        id: 0
-    });
-
-    // Act
-    automation.updateAutomationFlowState();
-    $rootScope.$apply();
-    var automationModel = automation.getModel();
-
-    // Assert
-    expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.WITH_SITE_TRACKING_DISABLED);
-  });
-
-  it('should be able to load a site behavior automation with deleted domains', function() {
-
-    // Arrange
-    var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
-      return settingsServiceMock.getSettings({siteTrackingActive: true});
-    };
-
-    automation.setData({
-        type: COMPONENT_TYPE.AUTOMATION,
-        automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
-        id: 0
-    });
-
-    var model = automation.getModel();
-    model.setData({
-      initialCondition: {
-        type: AUTOMATION_TYPE.SITE_BEHAVIOR,
-        parentUid: 0,
-        domains: [{ url: 'google.com', idDomain: 1}]
-      }
-    });
-
-    // Act
-    automation.updateAutomationFlowState();
-    $rootScope.$apply();
-    var automationModel = automation.getModel();
-
-    // Assert
-    expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.WITH_DELETED_DOMAIN);
-  });
-
-  it('should be able to load a site behavior automation with non registred domain', function() {
-
-    // Arrange
-    var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
-      return settingsServiceMock.getSettings({siteTrackingActive: true});
+    settingsService.getSettings = function () {
+      return settingsServiceMock.getSettings({ siteTrackingActive: false });
     };
 
     automation.setData({
       type: COMPONENT_TYPE.AUTOMATION,
       automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
-      id: 0
-    });
-
-    var model = automation.getModel();
-    model.setData({
-      initialCondition: {
-        type: AUTOMATION_TYPE.SITE_BEHAVIOR,
-        parentUid: 0,
-        domains: [{ url: 'google.com', idDomain: 0 }]
-      }
+      id: 0,
     });
 
     // Act
@@ -188,24 +129,95 @@ describe('automation', function() {
 
     // Assert
     expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.WITH_NON_REGISTERED_DOMAIN);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.WITH_SITE_TRACKING_DISABLED
+    );
   });
 
-  it('should be able to load a site behavior automation with non verified domain', function() {
-
+  it('should be able to load a site behavior automation with deleted domains', function () {
     // Arrange
     var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
+    settingsService.getSettings = function () {
+      return settingsServiceMock.getSettings({ siteTrackingActive: true });
+    };
+
+    automation.setData({
+      type: COMPONENT_TYPE.AUTOMATION,
+      automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
+      id: 0,
+    });
+
+    var model = automation.getModel();
+    model.setData({
+      initialCondition: {
+        type: AUTOMATION_TYPE.SITE_BEHAVIOR,
+        parentUid: 0,
+        domains: [{ url: 'google.com', idDomain: 1 }],
+      },
+    });
+
+    // Act
+    automation.updateAutomationFlowState();
+    $rootScope.$apply();
+    var automationModel = automation.getModel();
+
+    // Assert
+    expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.WITH_DELETED_DOMAIN
+    );
+  });
+
+  it('should be able to load a site behavior automation with non registred domain', function () {
+    // Arrange
+    var $scope = $rootScope.$new();
+    settingsService.getSettings = function () {
+      return settingsServiceMock.getSettings({ siteTrackingActive: true });
+    };
+
+    automation.setData({
+      type: COMPONENT_TYPE.AUTOMATION,
+      automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
+      id: 0,
+    });
+
+    var model = automation.getModel();
+    model.setData({
+      initialCondition: {
+        type: AUTOMATION_TYPE.SITE_BEHAVIOR,
+        parentUid: 0,
+        domains: [{ url: 'google.com', idDomain: 0 }],
+      },
+    });
+
+    // Act
+    automation.updateAutomationFlowState();
+    $rootScope.$apply();
+    var automationModel = automation.getModel();
+
+    // Assert
+    expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.WITH_NON_REGISTERED_DOMAIN
+    );
+  });
+
+  it('should be able to load a site behavior automation with non verified domain', function () {
+    // Arrange
+    var $scope = $rootScope.$new();
+    settingsService.getSettings = function () {
       return settingsServiceMock.getSettings({
         siteTrackingActive: true,
-        domains: [{ url: 'google.com', IdDomain: 1, status: DOMAIN_STATUS.PENDING }]
+        domains: [
+          { url: 'google.com', IdDomain: 1, status: DOMAIN_STATUS.PENDING },
+        ],
       });
     };
 
     automation.setData({
       type: COMPONENT_TYPE.AUTOMATION,
       automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
-      id: 0
+      id: 0,
     });
 
     var model = automation.getModel();
@@ -213,8 +225,8 @@ describe('automation', function() {
       initialCondition: {
         type: AUTOMATION_TYPE.SITE_BEHAVIOR,
         parentUid: 0,
-        domains: [{ url: 'google.com', idDomain: 1}]
-      }
+        domains: [{ url: 'google.com', idDomain: 1 }],
+      },
     });
 
     // Act
@@ -224,24 +236,27 @@ describe('automation', function() {
 
     // Assert
     expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.WITH_NON_VERIFIED_DOMAIN);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.WITH_NON_VERIFIED_DOMAIN
+    );
   });
 
-  it('should be able to load a site behavior automation with registred domain and verified', function() {
-
+  it('should be able to load a site behavior automation with registred domain and verified', function () {
     // Arrange
     var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
+    settingsService.getSettings = function () {
       return settingsServiceMock.getSettings({
         siteTrackingActive: true,
-        domains: [{ Url: 'google.com', IdDomain: 1, Status: DOMAIN_STATUS.VERIFIED }]
+        domains: [
+          { Url: 'google.com', IdDomain: 1, Status: DOMAIN_STATUS.VERIFIED },
+        ],
       });
     };
 
     automation.setData({
       type: COMPONENT_TYPE.AUTOMATION,
       automationType: AUTOMATION_TYPE.SITE_BEHAVIOR,
-      id: 0
+      id: 0,
     });
 
     var model = automation.getModel();
@@ -249,8 +264,10 @@ describe('automation', function() {
       initialCondition: {
         type: AUTOMATION_TYPE.SITE_BEHAVIOR,
         parentUid: 0,
-        domains: [{ url: 'google.com', idDomain: 1, status: DOMAIN_STATUS.VERIFIED}]
-      }
+        domains: [
+          { url: 'google.com', idDomain: 1, status: DOMAIN_STATUS.VERIFIED },
+        ],
+      },
     });
 
     // Act
@@ -260,21 +277,22 @@ describe('automation', function() {
 
     // Assert
     expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.INCOMPLETE);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.INCOMPLETE
+    );
   });
 
-  it('should be able to load a scheduled date automation with deleted fields', function() {
-
+  it('should be able to load a scheduled date automation with deleted fields', function () {
     // Arrange
     var $scope = $rootScope.$new();
-    settingsService.getSettings = function() {
+    settingsService.getSettings = function () {
       return settingsServiceMock.getSettings({});
     };
 
     automation.setData({
       type: COMPONENT_TYPE.AUTOMATION,
       automationType: AUTOMATION_TYPE.SCHEDULED_DATE,
-      id: 0
+      id: 0,
     });
 
     var model = automation.getModel();
@@ -286,12 +304,12 @@ describe('automation', function() {
           date: new Date().toISOString(),
           time: {
             hour: parseInt('11'),
-            minute: parseInt('04')
+            minute: parseInt('04'),
           },
           timezone: parseInt('21'),
-          type: FREQUENCY_TYPE.DAY_YEAR
-        }
-      }
+          type: FREQUENCY_TYPE.DAY_YEAR,
+        },
+      },
     });
 
     // Act
@@ -301,7 +319,8 @@ describe('automation', function() {
 
     // Assert
     expect(automationModel.type).toEqual(COMPONENT_TYPE.AUTOMATION);
-    expect(automationModel.completed).toBe(AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS);
+    expect(automationModel.completed).toBe(
+      AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS
+    );
   });
-
 });

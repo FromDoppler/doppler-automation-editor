@@ -1,17 +1,21 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorSubscriptionListCondition', dpEditorSubscriptionListCondition);
+    .directive(
+      'dpEditorSubscriptionListCondition',
+      dpEditorSubscriptionListCondition
+    );
 
   function dpEditorSubscriptionListCondition() {
     var directive = {
       restrict: 'E',
       scope: {
-        component: '='
+        component: '=',
       },
-      templateUrl: 'angularjs/partials/automation/editor/directives/components/initialConditions/dp-editor-subscription-list-condition.html'
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/components/initialConditions/dp-editor-subscription-list-condition.html',
     };
 
     return directive;

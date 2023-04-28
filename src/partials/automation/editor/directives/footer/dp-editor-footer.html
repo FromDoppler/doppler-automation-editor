@@ -1,34 +1,84 @@
-<div class="item" ng-if="listSelectionState === LIST_SELECTION_STATE.NONE && !showTinyEditor">
-  <button class="button button--small button-outline--primary" ng-click="saveAndRedirect('/Automation/Automation/AutomationApp/');">{{ 'automation_editor.buttons.exit' | translate }}</button>
+<div
+  class="item"
+  ng-if="listSelectionState === LIST_SELECTION_STATE.NONE && !showTinyEditor"
+>
+  <button
+    class="button button--small button-outline--primary"
+    ng-click="saveAndRedirect('/Automation/Automation/AutomationApp/');"
+  >
+    {{ 'automation_editor.buttons.exit' | translate }}
+  </button>
   <div class="right">
-    <span ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE && rootComponent.state !== AUTOMATION_STATE.PAUSED && isFlowComplete() !== AUTOMATION_COMPLETED_STATE.COMPLETED || hasNotSmsCredits()" class="tip-help"
-          ng-class="{'warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS && rootComponent.state !== AUTOMATION_STATE.ACTIVE, 'error': hasErrors() }">
-          <span ng-bind-html="getAutomationTipLabel()"></span>
-          <span class="icon-arrow-friendly"></span>
+    <span
+      ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE && rootComponent.state !== AUTOMATION_STATE.PAUSED && isFlowComplete() !== AUTOMATION_COMPLETED_STATE.COMPLETED || hasNotSmsCredits()"
+      class="tip-help"
+      ng-class="{'warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS && rootComponent.state !== AUTOMATION_STATE.ACTIVE, 'error': hasErrors() }"
+    >
+      <span ng-bind-html="getAutomationTipLabel()"></span>
+      <span class="icon-arrow-friendly"></span>
     </span>
-    <button class="button button--small button-outline--red button--space"
-            ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE || rootComponent.state === AUTOMATION_STATE.PAUSED"
-            ng-click="stopCampaign();">{{ 'automation_editor.buttons.stop_campaign' | translate }}</button>
-    <button class="button button--small button--primary"
-            ng-class="{'button--warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS, 'button--error': hasErrors()}"
-            ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE" ng-disabled="isFlowComplete() === AUTOMATION_COMPLETED_STATE.INCOMPLETE || hasErrors() || hasNotSmsCredits()"
-            ng-click="startCampaignWithDynamicCheck();">{{ getAutomationBtnLabel() }}</button>
-    <button class="button button--small button--error"
-            ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE"
-            ng-click="pauseCampaign();">{{ 'automation_editor.buttons.pause_campaign' | translate }}</button>
+    <button
+      class="button button--small button-outline--red button--space"
+      ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE || rootComponent.state === AUTOMATION_STATE.PAUSED"
+      ng-click="stopCampaign();"
+    >
+      {{ 'automation_editor.buttons.stop_campaign' | translate }}
+    </button>
+    <button
+      class="button button--small button--primary"
+      ng-class="{'button--warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS, 'button--error': hasErrors()}"
+      ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE"
+      ng-disabled="isFlowComplete() === AUTOMATION_COMPLETED_STATE.INCOMPLETE || hasErrors() || hasNotSmsCredits()"
+      ng-click="startCampaignWithDynamicCheck();"
+    >
+      {{ getAutomationBtnLabel() }}
+    </button>
+    <button
+      class="button button--small button--error"
+      ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE"
+      ng-click="pauseCampaign();"
+    >
+      {{ 'automation_editor.buttons.pause_campaign' | translate }}
+    </button>
   </div>
 </div>
 
 <div class="item" ng-if="listSelectionState !== LIST_SELECTION_STATE.NONE">
-  <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.buttons.back_to_editor' | translate }}</button>
+  <button
+    class="button button--small button-outline--primary"
+    ng-click="backToEditor()"
+  >
+    {{ 'automation_editor.buttons.back_to_editor' | translate }}
+  </button>
   <div class="right">
-    <span class="tip-help">{{ 'automation_editor.lists_grid.tip_help' | translate }}<span class="icon-arrow-friendly"></span></span>
-    <button class="button button--small button--primary" ng-disabled="!isEnabled" ng-click="confirmListSelection()">{{'automation_editor.buttons.confirm_selection' | translate }}</button>
+    <span class="tip-help"
+      >{{ 'automation_editor.lists_grid.tip_help' | translate }}<span
+        class="icon-arrow-friendly"
+      ></span
+    ></span>
+    <button
+      class="button button--small button--primary"
+      ng-disabled="!isEnabled"
+      ng-click="confirmListSelection()"
+    >
+      {{'automation_editor.buttons.confirm_selection' | translate }}
+    </button>
   </div>
 </div>
 <div class="item" ng-if="showTinyEditor">
-  <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.tiny_editor.return_button' | translate }}</button>
+  <button
+    class="button button--small button-outline--primary"
+    ng-click="backToEditor()"
+  >
+    {{ 'automation_editor.tiny_editor.return_button' | translate }}
+  </button>
   <div class="right">
-    <button class="button button--small button--primary" ng-disabled="selectedComponent.contentHtml.length === 0" ng-click="saveTinyEditorContent()">{{ 'automation_editor.tiny_editor.confirm_button' | translate }}</button>
+    <button
+      class="button button--small button--primary"
+      ng-disabled="selectedComponent.contentHtml.length === 0"
+      ng-click="saveTinyEditorContent()"
+    >
+      {{ 'automation_editor.tiny_editor.confirm_button' | translate }}
+    </button>
   </div>
 </div>

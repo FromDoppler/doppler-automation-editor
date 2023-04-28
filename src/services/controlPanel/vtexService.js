@@ -1,16 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .factory('vtexService', vtexService);
+  angular.module('dopplerApp').factory('vtexService', vtexService);
 
-  vtexService.$inject = [
-    '$http'
-  ];
+  vtexService.$inject = ['$http'];
 
   function vtexService($http) {
-
     var service = {
       getIntegrationStatus: getIntegrationStatus,
       connect: connect,
@@ -29,189 +24,207 @@
       getAssociatedFieldMapping: getAssociatedFieldMapping,
       updateRfmSettings: updateRfmSettings,
       getFieldTypes: getFieldTypes,
-      createField: createField
+      createField: createField,
     };
 
     return service;
 
     function getIntegrationStatus() {
-      return $http.get('/Integration/Integration/GetVtexIntegrationStatus')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetVtexIntegrationStatus')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function connect(userData) {
-      return $http.post('/Integration/Integration/ConnectVtex', userData)
-        .then(function(response) {
+      return $http
+        .post('/Integration/Integration/ConnectVtex', userData)
+        .then(function (response) {
           return response.data;
         });
     }
 
     function disconnect() {
-      return $http.post('/Integration/Integration/DisconnectVtex')
-        .then(function(response) {
+      return $http
+        .post('/Integration/Integration/DisconnectVtex')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getUserLists() {
-      return $http.get('/Integration/Integration/GetUserLists')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetUserLists')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getVtexEntities() {
-      return $http.get('/Integration/Integration/GetVtexEntities')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetVtexEntities')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getVtexFields(storeName, acronym) {
-      return $http.get('/Integration/Integration/GetVtexFields',
-        {
+      return $http
+        .get('/Integration/Integration/GetVtexFields', {
           params: {
             storeName: storeName,
-            acronym: acronym
-          }
+            acronym: acronym,
+          },
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function manualSync(){
-      return $http.get('/Integration/Integration/SynchAllVtexLists')
-        .then(function(response) {
+    function manualSync() {
+      return $http
+        .get('/Integration/Integration/SynchAllVtexLists')
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function synchVtexLists(idList){
-      return $http.post('/Integration/Integration/SynchVtexLists',
-        {
-          idSubscribersList: idList
+    function synchVtexLists(idList) {
+      return $http
+        .post('/Integration/Integration/SynchVtexLists', {
+          idSubscribersList: idList,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getChangedState(stateArray, idThirdPartyApp ){
-      return $http.post('/Integration/Integration/GetChangedStates',
-        {
+    function getChangedState(stateArray, idThirdPartyApp) {
+      return $http
+        .post('/Integration/Integration/GetChangedStates', {
           statusLists: stateArray,
-          idThirdPartyApp: idThirdPartyApp
+          idThirdPartyApp: idThirdPartyApp,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getListData(idList){
-      return $http.post('/Integration/Integration/GetSubscribersListInfo',
-        {
-          idList: idList
+    function getListData(idList) {
+      return $http
+        .post('/Integration/Integration/GetSubscribersListInfo', {
+          idList: idList,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getFields(){
-      return $http.get('/Automation/Automation/GetUserFields')
-        .then(function(response){
+    function getFields() {
+      return $http
+        .get('/Automation/Automation/GetUserFields')
+        .then(function (response) {
           var allFields = [];
-          if (response.data && response.data.basicFields && response.data.basicFields.length){
-            allFields = _.union(response.data.basicFields, response.data.customFields);
+          if (
+            response.data &&
+            response.data.basicFields &&
+            response.data.basicFields.length
+          ) {
+            allFields = _.union(
+              response.data.basicFields,
+              response.data.customFields
+            );
           }
           return allFields;
         });
     }
 
-    function associateVtexFieldMapping(idList, vtexFields){
-      var fieldMappings = _.map(vtexFields, function(vtexField){
+    function associateVtexFieldMapping(idList, vtexFields) {
+      var fieldMappings = _.map(vtexFields, function (vtexField) {
         var fieldMapping = {
           ColumnName: 'Void', // eslint-disable-line // TODO: delete this when it's deleted in BE
           ThirdPartyColumnName: vtexField.Name,
           IdField: vtexField.idDopplerField,
-          DateFormat: ''
+          DateFormat: '',
         };
         return fieldMapping;
       });
 
-      return $http.post('/Integration/Integration/AssociateVtexFieldMapping',
-        {
+      return $http
+        .post('/Integration/Integration/AssociateVtexFieldMapping', {
           IdList: idList,
-          FieldMappings: fieldMappings
+          FieldMappings: fieldMappings,
         })
-        .then(function(response){
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function integrateVtexList(list, entity){
-      return $http.post('/Integration/Integration/IntegrateVtexList',
-        {
+    function integrateVtexList(list, entity) {
+      return $http
+        .post('/Integration/Integration/IntegrateVtexList', {
           IdList: list.IdList,
           ListName: list.ListName,
           ListType: list.ListType,
           StoreName: entity.StoreName,
           ThirdPartyListName: entity.Name,
-          ThirdPartyListAcronym: entity.Acronym
+          ThirdPartyListAcronym: entity.Acronym,
         })
-        .then(function(response){
+        .then(function (response) {
           return response.data;
         });
     }
 
     function deleteList(idList) {
-      return $http.get('/Integration/Integration/DisconnectVtexList', {
-        params: { idSubscriberList: idList }})
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/DisconnectVtexList', {
+          params: { idSubscriberList: idList },
+        })
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getAssociatedFieldMapping(idList){
-      return $http.post('/Integration/Integration/GetVtexAssociatedFieldMapping',
-        {
-          idList: idList
+    function getAssociatedFieldMapping(idList) {
+      return $http
+        .post('/Integration/Integration/GetVtexAssociatedFieldMapping', {
+          idList: idList,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
     function updateRfmSettings(idThirdPartyApp, rfm) {
-      return $http.post('/Integration/Integration/UpdateRfmSettings',
-        {
+      return $http
+        .post('/Integration/Integration/UpdateRfmSettings', {
           idThirdPartyApp: idThirdPartyApp,
-          rfm: rfm
+          rfm: rfm,
         })
-        .then(function (response){
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getFieldTypes() {
-      return $http.get('/Integration/Integration/GetFieldTypes')
-        .then(function (response){
+      return $http
+        .get('/Integration/Integration/GetFieldTypes')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function createField(name, dataType, isPrivate) {
-      return $http.get('/Integration/Integration/CreateField',
-        {
+      return $http
+        .get('/Integration/Integration/CreateField', {
           params: {
             name: encodeURIComponent(name),
             dataType: dataType,
-            isPrivate: isPrivate
-          }
-        }).then(function (response){
+            isPrivate: isPrivate,
+          },
+        })
+        .then(function (response) {
           return response.data;
         });
     }

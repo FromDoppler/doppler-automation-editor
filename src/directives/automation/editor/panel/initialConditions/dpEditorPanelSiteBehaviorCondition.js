@@ -1,9 +1,12 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorPanelSiteBehaviorCondition', dpEditorPanelSiteBehaviorCondition);
+    .directive(
+      'dpEditorPanelSiteBehaviorCondition',
+      dpEditorPanelSiteBehaviorCondition
+    );
 
   dpEditorPanelSiteBehaviorCondition.$inject = [
     'selectedElementsService',
@@ -18,16 +21,29 @@
     'MAX_WEEKS_VERIFICATION',
     'utils',
     'TIME_UNIT',
-    'CONDITION_OPERATOR'
+    'CONDITION_OPERATOR',
   ];
 
-  function dpEditorPanelSiteBehaviorCondition(selectedElementsService, settingsService,
-    $translate, optionsListDataservice, DOMAIN_STATUS, automation, MAX_DAYS_VERIFICATION,
-    MAX_HOURS_VERIFICATION, MAX_MINUTES_VERIFICATION, MAX_WEEKS_VERIFICATION, utils, TIME_UNIT, CONDITION_OPERATOR) {
+  function dpEditorPanelSiteBehaviorCondition(
+    selectedElementsService,
+    settingsService,
+    $translate,
+    optionsListDataservice,
+    DOMAIN_STATUS,
+    automation,
+    MAX_DAYS_VERIFICATION,
+    MAX_HOURS_VERIFICATION,
+    MAX_MINUTES_VERIFICATION,
+    MAX_WEEKS_VERIFICATION,
+    utils,
+    TIME_UNIT,
+    CONDITION_OPERATOR
+  ) {
     var directive = {
       restrict: 'AE',
-      templateUrl: 'angularjs/partials/automation/editor/directives/panel/initialConditions/dp-editor-panel-site-behavior-condition.html',
-      link: link
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/panel/initialConditions/dp-editor-panel-site-behavior-condition.html',
+      link: link,
     };
 
     return directive;
@@ -37,7 +53,8 @@
       scope.selectedComponent = selectedElementsService.getSelectedComponent();
       scope.DOMAIN_STATUS = DOMAIN_STATUS;
       scope.timeUnitOptions = getTimeUnitOptions();
-      scope.timesBackAutomation = optionsListDataservice.getTimesBackAutomationOptions();
+      scope.timesBackAutomation =
+        optionsListDataservice.getTimesBackAutomationOptions();
       scope.booleanOptions = optionsListDataservice.getBooleanOptions();
       scope.visitedTimes = optionsListDataservice.getVisitedTimesOptions();
       scope.CONDITION_OPERATOR = CONDITION_OPERATOR;
@@ -48,25 +65,36 @@
         createDomain();
       }
 
-      scope.verifyIfDuplicated = function(domain, index) {
-        var lengthSameDomainWithRecent = scope.selectedComponent.domains.filter(function(ele) {
-          return ele.url === domain.url;
-        }).length;
+      scope.verifyIfDuplicated = function (domain, index) {
+        var lengthSameDomainWithRecent = scope.selectedComponent.domains.filter(
+          function (ele) {
+            return ele.url === domain.url;
+          }
+        ).length;
         if (lengthSameDomainWithRecent > 1) {
-          scope.siteBehaviorForm['url' + index].$setValidity('duplicated', false);
+          scope.siteBehaviorForm['url' + index].$setValidity(
+            'duplicated',
+            false
+          );
         } else {
-          scope.siteBehaviorForm['url' + index].$setValidity('duplicated', true);
+          scope.siteBehaviorForm['url' + index].$setValidity(
+            'duplicated',
+            true
+          );
         }
       };
 
-      scope.checkDuplicates = function() {
+      scope.checkDuplicates = function () {
         var testObject = {},
           index = 0;
 
-        scope.selectedComponent.domains.map(function(item) {
+        scope.selectedComponent.domains.map(function (item) {
           var itemPropertyName = item['url'];
           if (itemPropertyName in testObject) {
-            scope.siteBehaviorForm['url' + index].$setValidity('duplicated', false);
+            scope.siteBehaviorForm['url' + index].$setValidity(
+              'duplicated',
+              false
+            );
           } else {
             testObject[itemPropertyName] = item;
           }
@@ -74,19 +102,22 @@
         });
       };
 
-      element.ready(function() {
+      element.ready(function () {
         scope.checkDuplicates();
       });
 
-      settingsService.getSettings().then(function(response) {
+      settingsService.getSettings().then(function (response) {
         scope.domains = response.domains;
 
-        scope.validateUrlDomain = function(domain, index) {
+        scope.validateUrlDomain = function (domain, index) {
           scope.domainRegistrationError = false;
           scope.domainVerifiedError = false;
           scope.urlHasParameters = false;
 
-          var newDomain = domainValidator(scope.siteBehaviorForm['url' + index].$viewValue, index);
+          var newDomain = domainValidator(
+            scope.siteBehaviorForm['url' + index].$viewValue,
+            index
+          );
           if (!newDomain) {
             scope.domainRegistrationError = true;
           } else if (newDomain.Status !== DOMAIN_STATUS.VERIFIED) {
@@ -96,7 +127,11 @@
             scope.urlHasParameters = true;
           }
 
-          if (scope.domainRegistrationError || scope.domainVerifiedError || scope.urlHasParameters) {
+          if (
+            scope.domainRegistrationError ||
+            scope.domainVerifiedError ||
+            scope.urlHasParameters
+          ) {
             scope.siteBehaviorForm['url' + index].$setValidity('domain', false);
             return false;
           }
@@ -105,14 +140,16 @@
             scope.siteBehaviorForm['url' + index].$setValidity('domain', true);
           }
         };
-
       });
 
-      if (scope.selectedComponent.domains.length && scope.selectedComponent.domains[0].url) {
+      if (
+        scope.selectedComponent.domains.length &&
+        scope.selectedComponent.domains[0].url
+      ) {
         scope.showErrors = true;
       }
 
-      scope.onDomainBlur = function(event, domain) {
+      scope.onDomainBlur = function (event, domain) {
         // Remove http/https
         scope.showErrors = true;
         if (domain.url) {
@@ -121,33 +158,41 @@
         }
       };
 
-      scope.verificationTimePattern = (function() {
+      scope.verificationTimePattern = (function () {
         return {
-          test: function(time) {
+          test: function (time) {
             var formattedTime = parseFloat(time);
             var isValid = Number.isInteger(formattedTime);
 
             if (isValid) {
-              if (scope.selectedComponent.timeUnit === TIME_UNIT.HOURS
-                && (formattedTime < 1 || formattedTime > MAX_HOURS_VERIFICATION)) {
+              if (
+                scope.selectedComponent.timeUnit === TIME_UNIT.HOURS &&
+                (formattedTime < 1 || formattedTime > MAX_HOURS_VERIFICATION)
+              ) {
                 isValid = false;
               }
-              if (scope.selectedComponent.timeUnit === TIME_UNIT.DAYS
-                && (formattedTime < 1 || formattedTime > MAX_DAYS_VERIFICATION)) {
+              if (
+                scope.selectedComponent.timeUnit === TIME_UNIT.DAYS &&
+                (formattedTime < 1 || formattedTime > MAX_DAYS_VERIFICATION)
+              ) {
                 isValid = false;
               }
-              if (scope.selectedComponent.timeUnit === TIME_UNIT.MINUTES
-                && (formattedTime < 5 || formattedTime > MAX_MINUTES_VERIFICATION)) {
+              if (
+                scope.selectedComponent.timeUnit === TIME_UNIT.MINUTES &&
+                (formattedTime < 5 || formattedTime > MAX_MINUTES_VERIFICATION)
+              ) {
                 isValid = false;
               }
-              if (scope.selectedComponent.timeUnit === TIME_UNIT.WEEKS
-                && (formattedTime < 1 || formattedTime > MAX_WEEKS_VERIFICATION)) {
+              if (
+                scope.selectedComponent.timeUnit === TIME_UNIT.WEEKS &&
+                (formattedTime < 1 || formattedTime > MAX_WEEKS_VERIFICATION)
+              ) {
                 isValid = false;
               }
             }
 
             return isValid;
-          }
+          },
         };
       })();
 
@@ -155,26 +200,37 @@
         var existDomain;
 
         if (url && url.length) {
-          existDomain = _.find(scope.domains, function(domain) {
-            var cleanUrl = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0];
-            var cleanDomain = domain.Domain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0];
+          existDomain = _.find(scope.domains, function (domain) {
+            var cleanUrl = url
+              .replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
+              .split('/')[0];
+            var cleanDomain = domain.Domain.replace(
+              /^(?:https?:\/\/)?(?:www\.)?/i,
+              ''
+            ).split('/')[0];
             return cleanUrl === cleanDomain;
           });
 
           if (!existDomain) {
             scope.selectedComponent.domains[index].idDomain = 0;
-          } else if (scope.selectedComponent.domains[index].idDomain !== existDomain.IdDomain) {
-            scope.selectedComponent.domains[index].idDomain = existDomain.IdDomain;
+          } else if (
+            scope.selectedComponent.domains[index].idDomain !==
+            existDomain.IdDomain
+          ) {
+            scope.selectedComponent.domains[index].idDomain =
+              existDomain.IdDomain;
             scope.selectedComponent.domains[index].status = existDomain.Status;
           }
         }
 
-        return scope.selectedComponent.domains[index].idDomain ? existDomain : false;
+        return scope.selectedComponent.domains[index].idDomain
+          ? existDomain
+          : false;
       }
 
-      scope.onTimesBackChange = function(option) {
+      scope.onTimesBackChange = function (option) {
         scope.selectedComponent.setData({
-          timesBackAutomation: option.value
+          timesBackAutomation: option.value,
         });
       };
 
@@ -189,28 +245,39 @@
           url: '',
           status: DOMAIN_STATUS.PENDING,
           visitedPage: true,
-          visitedTimes: 1
+          visitedTimes: 1,
         });
       }
-      scope.onTimeUnitSelected = function(value) {
+      scope.onTimeUnitSelected = function (value) {
         var time = parseInt(scope.selectedComponent.verificationTime);
 
         scope.selectedComponent.timeUnit = value;
-        if (time < 0 || Number.isNaN(time)
-          || (scope.selectedComponent.timeUnit === TIME_UNIT.HOURS && (time < 1 || time > MAX_HOURS_VERIFICATION))
-          || (scope.selectedComponent.timeUnit === TIME_UNIT.DAYS && (time < 1 || time > MAX_DAYS_VERIFICATION))
-          || (scope.selectedComponent.timeUnit === TIME_UNIT.MINUTES && (time < 5 || time > MAX_MINUTES_VERIFICATION))
-          || (scope.selectedComponent.timeUnit === TIME_UNIT.WEEKS && (time < 1 || time > MAX_WEEKS_VERIFICATION))) { 
-          scope.siteBehaviorForm.verificationTime.$setValidity('pattern', false);
+        if (
+          time < 0 ||
+          Number.isNaN(time) ||
+          (scope.selectedComponent.timeUnit === TIME_UNIT.HOURS &&
+            (time < 1 || time > MAX_HOURS_VERIFICATION)) ||
+          (scope.selectedComponent.timeUnit === TIME_UNIT.DAYS &&
+            (time < 1 || time > MAX_DAYS_VERIFICATION)) ||
+          (scope.selectedComponent.timeUnit === TIME_UNIT.MINUTES &&
+            (time < 5 || time > MAX_MINUTES_VERIFICATION)) ||
+          (scope.selectedComponent.timeUnit === TIME_UNIT.WEEKS &&
+            (time < 1 || time > MAX_WEEKS_VERIFICATION))
+        ) {
+          scope.siteBehaviorForm.verificationTime.$setValidity(
+            'pattern',
+            false
+          );
         } else {
           scope.siteBehaviorForm.verificationTime.$setValidity('pattern', true);
         }
       };
 
-      scope.toggleOperator = function() {
-        var operator = scope.selectedComponent.operator === CONDITION_OPERATOR.AND ?
-          CONDITION_OPERATOR.OR :
-          CONDITION_OPERATOR.AND;
+      scope.toggleOperator = function () {
+        var operator =
+          scope.selectedComponent.operator === CONDITION_OPERATOR.AND
+            ? CONDITION_OPERATOR.OR
+            : CONDITION_OPERATOR.AND;
         scope.selectedComponent.operator = operator;
         setORSpecialCondition(operator);
       };
@@ -224,45 +291,50 @@
         }
       }
 
-      scope.addNewDomain = function() {
+      scope.addNewDomain = function () {
         createDomain();
       };
 
-      scope.onVisitedPageSelected = function(value, domain, field) {
+      scope.onVisitedPageSelected = function (value, domain, field) {
         domain[field] = value;
       };
 
-
-      scope.isEnableVisitedPage = function(index) {
-        return index && scope.selectedComponent.operator === CONDITION_OPERATOR.AND
-        && scope.selectedComponent.domains[0].visitedPage;
+      scope.isEnableVisitedPage = function (index) {
+        return (
+          index &&
+          scope.selectedComponent.operator === CONDITION_OPERATOR.AND &&
+          scope.selectedComponent.domains[0].visitedPage
+        );
       };
 
-      scope.isEnabledVerificationTime = function() {
-        return scope.selectedComponent.domains.length > 1 || scope.selectedComponent.domains[0].visitedTimes > 1;
+      scope.isEnabledVerificationTime = function () {
+        return (
+          scope.selectedComponent.domains.length > 1 ||
+          scope.selectedComponent.domains[0].visitedTimes > 1
+        );
       };
 
-      scope.toggleConfirmation = function(value) {
+      scope.toggleConfirmation = function (value) {
         scope.showConfirmation = value;
       };
 
-      scope.getShowConfirmation = function() {
+      scope.getShowConfirmation = function () {
         return scope.showConfirmation;
       };
 
-      scope.onDeleteComponent = function(index) {
+      scope.onDeleteComponent = function (index) {
         scope.selectedComponent.domains.splice(index, 1);
         scope.checkDuplicates();
       };
 
-      scope.selectedItem = function(index) {
+      scope.selectedItem = function (index) {
         scope.selectedIndex = index;
       };
 
       scope.showInitConditionMessage = function () {
         var isReplica = automation.getModel().isReplica;
         return scope.selectedComponent.completed === false && isReplica;
-      }
+      };
     }
   }
 })();

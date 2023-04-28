@@ -1,33 +1,89 @@
 <div class="panel-box-app panel-box-app--ctrlpanel">
   <h3>{{ 'site_tracking.title' | translate }}</h3>
   <div class="dp-library">
-    <p class="description text--small">{{ 'site_tracking.description' | translate }} <a href="{{ 'site_tracking.help_link' | translate }}" target="_blank">{{ 'site_tracking.help_text' | translate }}</a> <span class="big" data-static-tooltip="{{ 'site_tracking.doppler_tip' | translate }}" ><span class="icon-tip"></span></span></p>
+    <p class="description text--small">
+      {{ 'site_tracking.description' | translate }}
+      <a href="{{ 'site_tracking.help_link' | translate }}" target="_blank"
+        >{{ 'site_tracking.help_text' | translate }}</a
+      >
+      <span
+        class="big"
+        data-static-tooltip="{{ 'site_tracking.doppler_tip' | translate }}"
+        ><span class="icon-tip"></span
+      ></span>
+    </p>
   </div>
   <div class="enable-tracking--box flex-grid">
     <div class="switch">
       <span class="titip-top titip-fade">
-        <input id="enableSiteTracking" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-checked="siteTracking.isEnableSiteTracking" ng-change="siteTracking.enableDisabeSiteTracking()" ng-model="siteTracking.isEnableSiteTracking"><label for="enableSiteTracking"></label>
+        <input
+          id="enableSiteTracking"
+          class="cmn-toggle cmn-toggle-round"
+          type="checkbox"
+          ng-checked="siteTracking.isEnableSiteTracking"
+          ng-change="siteTracking.enableDisabeSiteTracking()"
+          ng-model="siteTracking.isEnableSiteTracking"
+        /><label for="enableSiteTracking"></label>
       </span>
     </div>
-    <label class="text--small"><strong>{{ siteTracking.isEnableSiteTracking ? 'site_tracking.disabled_site_tracking' : 'site_tracking.enable_site_tracking' | translate }}</strong></label>
+    <label class="text--small"
+      ><strong
+        >{{ siteTracking.isEnableSiteTracking ?
+        'site_tracking.disabled_site_tracking' :
+        'site_tracking.enable_site_tracking' | translate }}</strong
+      ></label
+    >
   </div>
-  <div ng-if="siteTracking.showDisabledSiteTrackingErrorMessage" class="error-messages--container">
-    <span class="error">{{ 'site_tracking.error_message_cant_disabled' | translate }}</span>
+  <div
+    ng-if="siteTracking.showDisabledSiteTrackingErrorMessage"
+    class="error-messages--container"
+  >
+    <span class="error"
+      >{{ 'site_tracking.error_message_cant_disabled' | translate }}</span
+    >
   </div>
 </div>
 <div class="panel-box-app panel-box-app--ctrlpanel">
   <div class="site-trackings-info--container">
-    <div class="site-trackings-domains--container flex-grid-v-center--s-between">
+    <div
+      class="site-trackings-domains--container flex-grid-v-center--s-between"
+    >
       <div>
         <h3>{{ 'site_tracking.active_domain_title' | translate }}</h3>
-        <p class="text--small">{{ 'site_tracking.active_domain_description' | translate }}</p>
+        <p class="text--small">
+          {{ 'site_tracking.active_domain_description' | translate }}
+        </p>
       </div>
-      <button class="button button--primary" ng-disabled="!siteTracking.isEnableSiteTracking" ng-click="siteTracking.openAddOrEditDomain()">{{ 'site_tracking.active_domain_button' | translate }}</button>
+      <button
+        class="button button--primary"
+        ng-disabled="!siteTracking.isEnableSiteTracking"
+        ng-click="siteTracking.openAddOrEditDomain()"
+      >
+        {{ 'site_tracking.active_domain_button' | translate }}
+      </button>
     </div>
-    <site-tracking-grid ng-if="siteTracking.showDomains" class="site-trackings--grid" open-edit-domain="siteTracking.openAddOrEditDomain(domain)" open-tracking-code="siteTracking.openTrackingCodeModal(domain)" verify-domain="siteTracking.verifyDomain(domain)" format-data="siteTracking.formatData(data)" domains="siteTracking.domains"></site-tracking-grid>
+    <site-tracking-grid
+      ng-if="siteTracking.showDomains"
+      class="site-trackings--grid"
+      open-edit-domain="siteTracking.openAddOrEditDomain(domain)"
+      open-tracking-code="siteTracking.openTrackingCodeModal(domain)"
+      verify-domain="siteTracking.verifyDomain(domain)"
+      format-data="siteTracking.formatData(data)"
+      domains="siteTracking.domains"
+    ></site-tracking-grid>
   </div>
 </div>
 <div class="site-trackings--buttons flex-grid-v-center--s-between">
-  <a href="/ControlPanel/ControlPanel?section=CampaignsPreferences" class="button button--alternative">{{ 'actions.back' | translate }}</a>
-  <a ng-if="siteTracking.isEnableSiteTracking" href="/ControlPanel/ControlPanel?section=CampaignsPreferences" ng-disabled="!siteTracking.domains.length" class="button button--primary">{{ 'actions.save' | translate }}</a>
+  <a
+    href="/ControlPanel/ControlPanel?section=CampaignsPreferences"
+    class="button button--alternative"
+    >{{ 'actions.back' | translate }}</a
+  >
+  <a
+    ng-if="siteTracking.isEnableSiteTracking"
+    href="/ControlPanel/ControlPanel?section=CampaignsPreferences"
+    ng-disabled="!siteTracking.domains.length"
+    class="button button--primary"
+    >{{ 'actions.save' | translate }}</a
+  >
 </div>

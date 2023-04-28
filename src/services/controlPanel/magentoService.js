@@ -1,16 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .factory('magentoService', magentoService);
+  angular.module('dopplerApp').factory('magentoService', magentoService);
 
-  magentoService.$inject = [
-    '$http'
-  ];
+  magentoService.$inject = ['$http'];
 
   function magentoService($http) {
-
     var service = {
       getIntegrationStatus: getIntegrationStatus,
       connect: connect,
@@ -29,163 +24,179 @@
       getAssociatedFieldMapping: getAssociatedFieldMapping,
       updateRfmSettings: updateRfmSettings,
       getFieldTypes: getFieldTypes,
-      createField: createField
+      createField: createField,
     };
 
     return service;
 
     function getIntegrationStatus() {
-      return $http.get('/Integration/Integration/GetMagentoIntegrationStatus')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetMagentoIntegrationStatus')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function connect(userData) {
-      return $http.post('/Integration/Integration/ConnectMagento', userData)
-        .then(function(response) {
+      return $http
+        .post('/Integration/Integration/ConnectMagento', userData)
+        .then(function (response) {
           return response.data;
         });
     }
 
     function disconnect() {
-      return $http.post('/Integration/Integration/DisconnectMagento')
-        .then(function(response) {
+      return $http
+        .post('/Integration/Integration/DisconnectMagento')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getUserLists() {
-      return $http.get('/Integration/Integration/GetMagentoUserLists')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetMagentoUserLists')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getMagentoEntities() {
-      return $http.get('/Integration/Integration/GetMagentoEntities')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetMagentoEntities')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getMagentoFields(entity) {
-      return $http.get('/Integration/Integration/GetMagentoFields',
-        {
+      return $http
+        .get('/Integration/Integration/GetMagentoFields', {
           params: {
-            entity: entity
-          }
+            entity: entity,
+          },
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function manualSync(){
-      return $http.get('/Integration/Integration/SynchAllMagentoLists')
-        .then(function(response) {
+    function manualSync() {
+      return $http
+        .get('/Integration/Integration/SynchAllMagentoLists')
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function synchMagentoLists(idList){
-      return $http.post('/Integration/Integration/SynchMagentoLists',
-        {
-          idSubscribersList: idList
+    function synchMagentoLists(idList) {
+      return $http
+        .post('/Integration/Integration/SynchMagentoLists', {
+          idSubscribersList: idList,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getChangedState(stateArray, idThirdPartyApp ){
-      return $http.post('/Integration/Integration/GetChangedStates',
-        {
+    function getChangedState(stateArray, idThirdPartyApp) {
+      return $http
+        .post('/Integration/Integration/GetChangedStates', {
           statusLists: stateArray,
-          idThirdPartyApp: idThirdPartyApp
+          idThirdPartyApp: idThirdPartyApp,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getListData(idList){
-      return $http.post('/Integration/Integration/GetSubscribersListInfo',
-        {
-          idList: idList
+    function getListData(idList) {
+      return $http
+        .post('/Integration/Integration/GetSubscribersListInfo', {
+          idList: idList,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getFields(){
-      return $http.get('/Automation/Automation/GetUserFields')
-        .then(function(response){
+    function getFields() {
+      return $http
+        .get('/Automation/Automation/GetUserFields')
+        .then(function (response) {
           var allFields = [];
-          if (response.data && response.data.basicFields && response.data.basicFields.length){
-            allFields = _.union(response.data.basicFields, response.data.customFields);
+          if (
+            response.data &&
+            response.data.basicFields &&
+            response.data.basicFields.length
+          ) {
+            allFields = _.union(
+              response.data.basicFields,
+              response.data.customFields
+            );
           }
           return allFields;
         });
     }
 
-    function associateMagentoFieldMapping(idList, magentoFields){
-      var fieldMappings = _.map(magentoFields, function(magentoFields){
+    function associateMagentoFieldMapping(idList, magentoFields) {
+      var fieldMappings = _.map(magentoFields, function (magentoFields) {
         var fieldMapping = {
           ColumnName: 'Void', // eslint-disable-line // TODO: delete this when it's deleted in BE
           ThirdPartyColumnName: magentoFields.Name,
           IdField: magentoFields.idDopplerField,
-          DateFormat: ''
+          DateFormat: '',
         };
         return fieldMapping;
       });
 
-      return $http.post('/Integration/Integration/AssociateMagentoFieldMapping',
-        {
+      return $http
+        .post('/Integration/Integration/AssociateMagentoFieldMapping', {
           IdList: idList,
-          FieldMappings: fieldMappings
+          FieldMappings: fieldMappings,
         })
-        .then(function(response){
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function integrateMagentoList(list, entity){
-      return $http.post('/Integration/Integration/integrateMagentoList',
-        {
+    function integrateMagentoList(list, entity) {
+      return $http
+        .post('/Integration/Integration/integrateMagentoList', {
           IdList: list.IdList,
           ListName: list.ListName,
           ListType: list.ListType,
           ThirdPartyListName: entity.DisplayName,
-          ThirdPartyListAcronym: entity.Name
+          ThirdPartyListAcronym: entity.Name,
         })
-        .then(function(response){
+        .then(function (response) {
           return response.data;
         });
     }
 
     function deleteList(idList) {
-      return $http.get('/Integration/Integration/DisconnectMagentoList', {
-        params: { idSubscriberList: idList }})
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/DisconnectMagentoList', {
+          params: { idSubscriberList: idList },
+        })
+        .then(function (response) {
           return response.data;
         });
     }
 
-    function getAssociatedFieldMapping(idList){
-      return $http.post('/Integration/Integration/GetMagentoAssociatedFieldMapping',
-        {
-          idList: idList
+    function getAssociatedFieldMapping(idList) {
+      return $http
+        .post('/Integration/Integration/GetMagentoAssociatedFieldMapping', {
+          idList: idList,
         })
-        .then(function(response) {
+        .then(function (response) {
           return response.data;
         });
     }
 
     function updateRfmSettings(idThirdPartyApp, rfm) {
-      return $http.post('/Integration/Integration/UpdateRfmSettings',
-        {
+      return $http
+        .post('/Integration/Integration/UpdateRfmSettings', {
           idThirdPartyApp: idThirdPartyApp,
           rfm: rfm,
         })
@@ -195,20 +206,21 @@
     }
 
     function getFieldTypes() {
-      return $http.get('/Integration/Integration/GetFieldTypes')
+      return $http
+        .get('/Integration/Integration/GetFieldTypes')
         .then(function (response) {
           return response.data;
         });
     }
 
     function createField(name, dataType, isPrivate) {
-      return $http.get('/Integration/Integration/CreateField',
-        {
+      return $http
+        .get('/Integration/Integration/CreateField', {
           params: {
             name: encodeURIComponent(name),
             dataType: dataType,
-            isPrivate: isPrivate
-          }
+            isPrivate: isPrivate,
+          },
         })
         .then(function (response) {
           return response.data;

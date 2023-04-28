@@ -1,23 +1,54 @@
-<div id="exit-editor" click-outside="closeDropdown()" ng-click="toogleExitOptions()" class="exit-options--container relative" ng-class="{ 'open': isOpen }">
-  <div class="text--selected">{{ 'automation_editor.breadcrumb.exit_editor' | translate }}</div>
+<div
+  id="exit-editor"
+  click-outside="closeDropdown()"
+  ng-click="toogleExitOptions()"
+  class="exit-options--container relative"
+  ng-class="{ 'open': isOpen }"
+>
+  <div class="text--selected">
+    {{ 'automation_editor.breadcrumb.exit_editor' | translate }}
+  </div>
   <span class="dropdown-arrow"></span>
   <ul>
     <li ng-repeat="item in exitOptions" ng-click="saveAndRedirect(item.url)">
-     {{ item.label }}
+      {{ item.label }}
     </li>
   </ul>
 </div>
-<span ng-if="!showAutomationTypes" class="text"> | {{'automation_editor.breadcrumb.' + rootComponent.automationType | translate }}</span>
+<span ng-if="!showAutomationTypes" class="text">
+  | {{'automation_editor.breadcrumb.' + rootComponent.automationType | translate
+  }}</span
+>
 <form ng-show="!showAutomationTypes" name="automationNameForm" novalidate>
-	<input id="automation-name" class="input--name" ng-class="{'disabled': rootComponent.state === AUTOMATION_STATE.ACTIVE}" ng-model="rootComponent.name" ng-focus="onFocusBreadcrum();showTip=true;" ng-blur="onBlurBreadcrum(rootComponent.name, true);showTip=false;" ng-disabled="rootComponent.state === AUTOMATION_STATE.ACTIVE" type="text" placeholder="{{'automation_editor.breadcrumb.placeholder' | translate }}" ng-class="{ 'hasErrors':automationNameForm.automationName.$invalid }" autocomplete="off"/>
-  <span  ng-hide="!showTip" class="doppler-tip html-tooltip--container to--bottom">
-      <span class="html-tooltip  medium to--left">
-          {{ 'automation_editor.breadcrumb.doppler_tip_part1' | translate }}
-          <i>{{ 'automation_editor.breadcrumb.doppler_tip_part2' | translate }}</i>
-      </span>
-      <span class="icon-tip"></span>
+  <input
+    id="automation-name"
+    class="input--name"
+    ng-class="{'disabled': rootComponent.state === AUTOMATION_STATE.ACTIVE}"
+    ng-model="rootComponent.name"
+    ng-focus="onFocusBreadcrum();showTip=true;"
+    ng-blur="onBlurBreadcrum(rootComponent.name, true);showTip=false;"
+    ng-disabled="rootComponent.state === AUTOMATION_STATE.ACTIVE"
+    type="text"
+    placeholder="{{'automation_editor.breadcrumb.placeholder' | translate }}"
+    ng-class="{ 'hasErrors':automationNameForm.automationName.$invalid }"
+    autocomplete="off"
+  />
+  <span
+    ng-hide="!showTip"
+    class="doppler-tip html-tooltip--container to--bottom"
+  >
+    <span class="html-tooltip medium to--left">
+      {{ 'automation_editor.breadcrumb.doppler_tip_part1' | translate }}
+      <i>{{ 'automation_editor.breadcrumb.doppler_tip_part2' | translate }}</i>
+    </span>
+    <span class="icon-tip"></span>
   </span>
-	<div class="error-messages--container floating" ng-show="rootComponent.name.length > 60">
-		<span class="error" >{{ 'templates_validation.maxlength' | translate }}</span>
-	</div>
+  <div
+    class="error-messages--container floating"
+    ng-show="rootComponent.name.length > 60"
+  >
+    <span class="error"
+      >{{ 'templates_validation.maxlength' | translate }}</span
+    >
+  </div>
 </form>

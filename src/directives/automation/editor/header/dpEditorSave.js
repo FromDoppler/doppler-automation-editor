@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,14 +10,21 @@
     '$translate',
     'automation',
     'changesManager',
-    '$location'
+    '$location',
   ];
 
-  function dpEditorSave($interval, $translate, automation, changesManager, $location) {
+  function dpEditorSave(
+    $interval,
+    $translate,
+    automation,
+    changesManager,
+    $location
+  ) {
     var directive = {
       restrict: 'E',
-      templateUrl: 'angularjs/partials/automation/editor/directives/header/dp-editor-save.html',
-      controller: ['$scope', controller]
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/header/dp-editor-save.html',
+      controller: ['$scope', controller],
     };
 
     return directive;
@@ -28,12 +35,12 @@
       var classes = {
         SAVE: 'icon-editor-save',
         SAVING: 'icon-editor-saving',
-        SAVED: 'icon-check'
+        SAVED: 'icon-check',
       };
       $scope.resources = {
         SAVE: $translate.instant('actions.save'),
         SAVING: $translate.instant('automation_editor.saving'),
-        SAVED: $translate.instant('automation_editor.saved')
+        SAVED: $translate.instant('automation_editor.saved'),
       };
       $scope.rootComponent = automation.getModel();
       $scope.stateText = $scope.resources.SAVED;
@@ -41,22 +48,28 @@
       $scope.disabled = true;
       automation.setIsProcessing(false);
 
-      $scope.$watch(changesManager.getUnsavedChanges, function(areUnsavedChanges) {
-        if (areUnsavedChanges) {
-          $scope.stateText = $scope.resources.SAVE;
-          $scope.stateClass = classes.SAVE;
-          $scope.disabled = false;
+      $scope.$watch(
+        changesManager.getUnsavedChanges,
+        function (areUnsavedChanges) {
+          if (areUnsavedChanges) {
+            $scope.stateText = $scope.resources.SAVE;
+            $scope.stateClass = classes.SAVE;
+            $scope.disabled = false;
+          }
         }
-      });
+      );
 
-      $scope.saveChanges = function() {
-        if ($scope.stateText !== $scope.resources.SAVE || !changesManager.getUnsavedChanges()
-          || automation.getIsProcessing()) {
+      $scope.saveChanges = function () {
+        if (
+          $scope.stateText !== $scope.resources.SAVE ||
+          !changesManager.getUnsavedChanges() ||
+          automation.getIsProcessing()
+        ) {
           return;
         }
         $scope.stateText = $scope.resources.SAVING;
         $scope.stateClass = classes.SAVING;
-        automation.saveChanges().then(function() {
+        automation.saveChanges().then(function () {
           updateSavingState();
         });
       };
@@ -80,7 +93,7 @@
       }
 
       //Autosave every 1 minute
-      interval = $interval(function() {
+      interval = $interval(function () {
         if (changesManager.getUnsavedChanges()) {
           $scope.saveChanges();
         }
@@ -88,7 +101,7 @@
 
       $scope.$on('UPDATE_SAVING_STATE', updateSavingState);
 
-      $scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function () {
         if (angular.isDefined(interval)) {
           $interval.cancel(interval);
           interval = undefined;

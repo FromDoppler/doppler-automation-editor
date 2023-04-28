@@ -1,12 +1,26 @@
-﻿
-	<div  class='{{graphclass}}'>
-		<div id='{{c3config.bindto.substr(1)}}' class='{{c3config.bindto.substr(1)}}' ng-show="type == 'c3'" >
-		</div>
-		<div ng-repeat="item in c3config" ng-show="type == 'funnel'">
-				<div class="funnel-bar" > 
-					<div class="full-bar" ng-class="{'no-border':(item.value/totalFunnel*100) < 100}" ng-style="{'width': item.percent}" ><div class="tooltip-cursor full-tooltip" tooltip><span class="tooltip-span">{{item.catname}} &nbsp; {{item.value | number}}</span> </div></div> 
-				</div>
-				<div class="funnel-bar-text">{{(item.value/totalFunnel*100 % 1 === 0) ?(item.value/totalFunnel*100 |number) : (item.value/totalFunnel*100 | number:2)  }} % {{item.catname}}</div>
-		</div>
-
-	</div>
+﻿<div class="{{graphclass}}">
+  <div
+    id="{{c3config.bindto.substr(1)}}"
+    class="{{c3config.bindto.substr(1)}}"
+    ng-show="type == 'c3'"
+  ></div>
+  <div ng-repeat="item in c3config" ng-show="type == 'funnel'">
+    <div class="funnel-bar">
+      <div
+        class="full-bar"
+        ng-class="{'no-border':(item.value/totalFunnel*100) < 100}"
+        ng-style="{'width': item.percent}"
+      >
+        <div class="tooltip-cursor full-tooltip" tooltip>
+          <span class="tooltip-span"
+            >{{item.catname}} &nbsp; {{item.value | number}}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="funnel-bar-text">
+      {{(item.value/totalFunnel*100 % 1 === 0) ?(item.value/totalFunnel*100
+      |number) : (item.value/totalFunnel*100 | number:2) }} % {{item.catname}}
+    </div>
+  </div>
+</div>

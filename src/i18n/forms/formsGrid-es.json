@@ -1,8 +1,8 @@
 {
-  "forms_grid" : {
+  "forms_grid": {
     "header": {
       "button": "Crear Formulario",
-      "headline" : "Formularios",
+      "headline": "Formularios",
       "subhead_a": "Aquí encontrarás todos tus Formularios de Suscripción incluyendo los que estén en borrador, publicados o con cambios sin publicar. Actualmente tienes ",
       "subhead_b": "Recuerda que puedes crear hasta {{maxForms}}.",
       "subhead_form": "Formulario.",
@@ -10,7 +10,7 @@
     },
     "headers": {
       "destiny_list": "Lista de destino",
-      "convertion_rate" :  "Tasa de conversión"
+      "convertion_rate": "Tasa de conversión"
     },
     "no_forms": {
       "headline": "¡Bienvenido a Formularios!",

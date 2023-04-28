@@ -1,5 +1,5 @@
 {
-  "forms_integrate" : {
+  "forms_integrate": {
     "error": {
       "install": "We couldn't install yout Facebook Tab",
       "install_tab": "The minimum amount required by Facebook to install Tabs is 2,000 fans.",
@@ -34,10 +34,10 @@
         "button_text": "Copy code"
       },
       "integration_link": {
-        "description" : "Link",
-        "title" : "Share the public URL of your Form",
-        "text" : "Use this option if you don't have a website but you want your Form appears publicly visible.",
-        "button_text_1" : "Copy URL"
+        "description": "Link",
+        "title": "Share the public URL of your Form",
+        "text": "Use this option if you don't have a website but you want your Form appears publicly visible.",
+        "button_text_1": "Copy URL"
       },
       "integration_landing": {
         "title": "Show your Form as Landing Page",
@@ -66,7 +66,7 @@
         }
       },
       "integration_wordpress": {
-        "description" : "Wordpress"
+        "description": "Wordpress"
       },
       "integration_iframe": {
         "description": "IFrame",
@@ -74,49 +74,49 @@
         "text": "Paste the following code into the place of your website's HTML where you want the form to appear."
       },
       "integration_facebook": {
-        "description" : "Facebook",
-        "header" : {
-          "title" : "Publish your Form in a Tab of your Facebook Page",
-          "text_1" : "To connect you need to be logged into your",
-          "bold_text" : "Facebook account.",
-          "text_2" : "Any doubts? Press",
-          "help_link_text" : "HELP",
+        "description": "Facebook",
+        "header": {
+          "title": "Publish your Form in a Tab of your Facebook Page",
+          "text_1": "To connect you need to be logged into your",
+          "bold_text": "Facebook account.",
+          "text_2": "Any doubts? Press",
+          "help_link_text": "HELP",
           "help_link": "https://help.fromdoppler.com/en/how-to-publish-a-doppler-form-on-a-facebook-fan-page",
-          "text_3" : "Connected account:",
-          "text_4" : "| Need assistance to configure next steps? Press",
-          "edit_text" : "edit"
+          "text_3": "Connected account:",
+          "text_4": "| Need assistance to configure next steps? Press",
+          "edit_text": "edit"
         },
-        "body" : {
-          "subtitle_1" : "Configure the Tab that you want to install in your Facebook Page",
-          "subtitle_2" : "Configure your Facebook Tab",
-          "button_integrate" : "Connect to Facebook",
-          "button_configure" : "Configure Facebook Tab",
-          "button_configure_again" : "Configure new Tab",
-          "tab_deleted_text_1" : "The Tab",
-          "tab_deleted_text_2" : "has been deleted from the Facebook Page",
-          "label_select_fan_page" : "Select a Facebook Page:",
-          "placeholder_select_fan_page" : "Select...",
-          "label_fb_tab_name" : "Name your Facebook Tab",
-          "label_miniature" : "Choose a Facebook Tab's thumbnail",
-          "label_add_image" : "Add image",
-          "label_delete" : "Remove",
-          "footer_text" : "* Recommended size 111 x 74 px. Maximum size 100 KB.",
-          "success_text_1" : "The Facebook Tab",
-          "success_text_2" : "has been successfully installed.",
-          "label_integrated_account" : "Connected Account:",
-          "label_fan_page" : "Facebook Page:",
-          "label_fb_tab" : "Facebook Tab:"
+        "body": {
+          "subtitle_1": "Configure the Tab that you want to install in your Facebook Page",
+          "subtitle_2": "Configure your Facebook Tab",
+          "button_integrate": "Connect to Facebook",
+          "button_configure": "Configure Facebook Tab",
+          "button_configure_again": "Configure new Tab",
+          "tab_deleted_text_1": "The Tab",
+          "tab_deleted_text_2": "has been deleted from the Facebook Page",
+          "label_select_fan_page": "Select a Facebook Page:",
+          "placeholder_select_fan_page": "Select...",
+          "label_fb_tab_name": "Name your Facebook Tab",
+          "label_miniature": "Choose a Facebook Tab's thumbnail",
+          "label_add_image": "Add image",
+          "label_delete": "Remove",
+          "footer_text": "* Recommended size 111 x 74 px. Maximum size 100 KB.",
+          "success_text_1": "The Facebook Tab",
+          "success_text_2": "has been successfully installed.",
+          "label_integrated_account": "Connected Account:",
+          "label_fan_page": "Facebook Page:",
+          "label_fb_tab": "Facebook Tab:"
         },
-        "footer" : {
-          "button_install" : "Install Facebook Tab",
-          "action_preview" : "Preview",
-          "action_edit_tab" : "Edit Tab",
-          "action_delete_tab" : "Delete Tab",
-          "message_confirmate" : "Are you sure you want to delete this Tab from your Facebook Page",
-          "action_cancel" : "Cancel",
-          "action_confirm_delete" : "Delete",
-          "action_save" : "Save Changes",
-          "action_discard" : "Discard Changes"
+        "footer": {
+          "button_install": "Install Facebook Tab",
+          "action_preview": "Preview",
+          "action_edit_tab": "Edit Tab",
+          "action_delete_tab": "Delete Tab",
+          "message_confirmate": "Are you sure you want to delete this Tab from your Facebook Page",
+          "action_cancel": "Cancel",
+          "action_confirm_delete": "Delete",
+          "action_save": "Save Changes",
+          "action_discard": "Discard Changes"
         }
       }
     }

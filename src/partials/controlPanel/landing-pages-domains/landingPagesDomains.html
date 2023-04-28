@@ -6,11 +6,19 @@
           <nav class="dp-breadcrumb">
             <ul>
               <li>
-                <a href="/ControlPanel/ControlPanel?section=AdvancedPreferences">
-                {{'landing_pages_domains.breadcrumb.control_panel' | translate }}
+                <a
+                  href="/ControlPanel/ControlPanel?section=AdvancedPreferences"
+                >
+                  {{'landing_pages_domains.breadcrumb.control_panel' | translate
+                  }}
                 </a>
               </li>
-              <li><span>{{'landing_pages_domains.breadcrumb.section' | translate }}</span></li>
+              <li>
+                <span
+                  >{{'landing_pages_domains.breadcrumb.section' | translate
+                  }}</span
+                >
+              </li>
             </ul>
           </nav>
           <h2>{{'landing_pages_domains.title' | translate }}</h2>
@@ -19,7 +27,11 @@
           <p>{{'landing_pages_domains.subhead' | translate}}</p>
         </div>
         <div class="col-sm-5 text-align--right">
-          <button class="dp-button button-medium primary-green" id="createCustomDomain" ng-click="openCreationModal()">
+          <button
+            class="dp-button button-medium primary-green"
+            id="createCustomDomain"
+            ng-click="openCreationModal()"
+          >
             {{'landing_pages_domains.create_button' | translate}}
           </button>
         </div>
@@ -35,59 +47,98 @@
     <table class="grid--default relative" ng-if="gridModel.displayed.length">
       <thead>
         <tr>
-          <th id="domain-name">{{'landing_pages_domains.grid.headers.domain_name' | translate }}</th>
-          <th id="domain-status">{{'landing_pages_domains.grid.headers.domain_status' | translate }}</th>
-          <th id="domain-date">{{'landing_pages_domains.grid.headers.validation_date' | translate }}</th>
-          <th id="domain-actions">{{'landing_pages_domains.grid.headers.actions' | translate }}</th>
+          <th id="domain-name">
+            {{'landing_pages_domains.grid.headers.domain_name' | translate }}
+          </th>
+          <th id="domain-status">
+            {{'landing_pages_domains.grid.headers.domain_status' | translate }}
+          </th>
+          <th id="domain-date">
+            {{'landing_pages_domains.grid.headers.validation_date' | translate
+            }}
+          </th>
+          <th id="domain-actions">
+            {{'landing_pages_domains.grid.headers.actions' | translate }}
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdCustomDomain}}">
+        <tr
+          ng-repeat="row in gridModel.displayed"
+          id="tr-{{row.IdCustomDomain}}"
+        >
           <td class="domain-name">{{row.Domain}}</td>
           <td class="domain-status">
             <span class="titip-top">
               <span class="{{getStatusIconClass(row)}}"></span>
-              <span class="titip-content" ng-bind-html="getStatusText(row)"></span>
+              <span
+                class="titip-content"
+                ng-bind-html="getStatusText(row)"
+              ></span>
             </span>
           </td>
           <td>
             <span ng-show="!row.row.VerifiedAt">{{row.VerifiedAt}}</span>
           </td>
           <td class="action-icons--container">
-
             <!-- verify button -->
-            <button class="button--primary extra_small main_buttons_green_small btn-verify"
+            <button
+              class="button--primary extra_small main_buttons_green_small btn-verify"
               ng-disabled="row.validating && processing"
-              ng-click="verify(row)">
-              <span ng-show="!row.validating">{{'actions.verify' | translate}}</span>
-              <span class="loading-icon loading-icon--small loading-icon--alternative" ng-show="row.validating"></span>
+              ng-click="verify(row)"
+            >
+              <span ng-show="!row.validating"
+                >{{'actions.verify' | translate}}</span
+              >
+              <span
+                class="loading-icon loading-icon--small loading-icon--alternative"
+                ng-show="row.validating"
+              ></span>
             </button>
 
             <!-- configure custom domain -->
-            <span class="titip-top" data-title="{{'landing_pages_domains.grid.actions.configure' | translate}}">
-              <span class="icon-configure domain-action"
+            <span
+              class="titip-top"
+              data-title="{{'landing_pages_domains.grid.actions.configure' | translate}}"
+            >
+              <span
+                class="icon-configure domain-action"
                 ng-class="{'disabled': row.IdDomainStatus === Enums.domainStatus.ADMIN_VALIDATION}"
-                ng-click="openConfigurationModal(row)">
+                ng-click="openConfigurationModal(row)"
+              >
               </span>
             </span>
 
             <!-- delete custom domain -->
             <div class="delete--container">
               <!-- delete icon -->
-              <span class="titip-top" data-title="{{'landing_pages_domains.grid.actions.delete' | translate}}">
-                <span class="icon-delete domain-action"
+              <span
+                class="titip-top"
+                data-title="{{'landing_pages_domains.grid.actions.delete' | translate}}"
+              >
+                <span
+                  class="icon-delete domain-action"
                   ng-class="{'disabled': row.IdDomainStatus === Enums.domainStatus.ENABLED}"
-                  ng-click="toggleDeleteConfirmation(row, true)">
+                  ng-click="toggleDeleteConfirmation(row, true)"
+                >
                 </span>
               </span>
               <!-- delete confirmation -->
-              <div class="delete-confirm" id="delete-confirmation" ng-if="row.deleting"
-                click-outside="toggleDeleteConfirmation(row, false)">
+              <div
+                class="delete-confirm"
+                id="delete-confirmation"
+                ng-if="row.deleting"
+                click-outside="toggleDeleteConfirmation(row, false)"
+              >
                 <div ng-if="!showDeleteError">
-                  <span ng-bind-html="'landing_pages_domains.delete.text' | translate: { domain : row.Domain }"></span>
+                  <span
+                    ng-bind-html="'landing_pages_domains.delete.text' | translate: { domain : row.Domain }"
+                  ></span>
                   <div class="actions--container">
-                    <span class="c-pointer cancel"
-                      ng-click="$event.stopPropagation();toggleDeleteConfirmation(row, false)">
+                    <span
+                      class="c-pointer cancel"
+                      ng-click="$event.stopPropagation();toggleDeleteConfirmation(row, false)"
+                    >
                       {{'landing_pages_domains.delete.cancel' | translate}}
                     </span>
                     <span class="divider">&#124;</span>
@@ -99,21 +150,26 @@
                 <div ng-if="showDeleteError">
                   <span>{{deleteErrorMessage}}</span>
                   <div class="actions--container">
-                    <span class="c-pointer confirm"
-                      ng-click="$event.stopPropagation();toggleDeleteConfirmation(row, false)">
-                      {{'landing_pages_domains.delete.error.agreed' | translate}}
+                    <span
+                      class="c-pointer confirm"
+                      ng-click="$event.stopPropagation();toggleDeleteConfirmation(row, false)"
+                    >
+                      {{'landing_pages_domains.delete.error.agreed' |
+                      translate}}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-
           </td>
         </tr>
       </tbody>
     </table>
     <div class="nav-button-bar flex-grid-v-center--s-between">
-      <a class="button button--alternative" href="/ControlPanel/ControlPanel?section=AdvancedPreferences">
+      <a
+        class="button button--alternative"
+        href="/ControlPanel/ControlPanel?section=AdvancedPreferences"
+      >
         {{'actions.back' | translate}}
       </a>
     </div>

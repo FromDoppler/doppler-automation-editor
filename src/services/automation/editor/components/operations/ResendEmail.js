@@ -1,10 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('ResendEmail', ['BaseOperation', function(BaseOperation) {
-
+  angular.module('dopplerApp.automation.editor').factory('ResendEmail', [
+    'BaseOperation',
+    function (BaseOperation) {
       function ResendEmail(data) {
         // Inherited constructor.
         BaseOperation.call(this, data);
@@ -19,7 +18,7 @@
       // Prototype inherence from BaseOperation.
       ResendEmail.prototype = Object.create(BaseOperation.prototype);
 
-      ResendEmail.prototype.setData = function(data) {
+      ResendEmail.prototype.setData = function (data) {
         BaseOperation.prototype.setData.call(this, data);
         if (data.hasOwnProperty('email')) {
           this.email = data.email;
@@ -29,10 +28,11 @@
         }
       };
 
-      ResendEmail.prototype.checkCompleted = function() {
+      ResendEmail.prototype.checkCompleted = function () {
         return !!(this.subject && this.email);
       };
 
       return ResendEmail;
-    }]);
+    },
+  ]);
 })();

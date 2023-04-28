@@ -1,22 +1,37 @@
-<div class="component relative" ng-class="{'delete-warning': showDeleteWarning}">
-
+<div
+  class="component relative"
+  ng-class="{'delete-warning': showDeleteWarning}"
+>
   <div class="dp-tooltip-top">
-    <span ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate">
+    <span
+      ng-bind-html="'automation_editor.canvas.goto_tooltip_infinite_flow_generation' | translate"
+    >
     </span>
   </div>
 
   <div class="uid-label-component">{{component.uid}}</div>
   <img class="image-complete" src="/../images/automation-delay.svg" />
   <img class="image-incomplete" src="/../images/automation-delay-grey.svg" />
-	<p ng-show="component.time.length == 0 || component.time == null">{{'automation_editor.canvas.wait_time_part1' | translate}}
-		<span class="time">(XX)</span> {{'automation_editor.canvas.time_placeholder' | translate}}
-	</p>
-  <p ng-show="component.time > 0"> {{'automation_editor.canvas.wait_time_part1' | translate}}
-  	<span class="time"><span class="selected">{{component.time}} {{getTimeUnitLabel()}}</span>
+  <p ng-show="component.time.length == 0 || component.time == null">
+    {{'automation_editor.canvas.wait_time_part1' | translate}}
+    <span class="time">(XX)</span> {{'automation_editor.canvas.time_placeholder'
+    | translate}}
   </p>
-	<p ng-show="component.time === 0 || component.time === '0'"> {{ 'automation_editor.canvas.right_now' | translate }}  </p>
+  <p ng-show="component.time > 0">
+    {{'automation_editor.canvas.wait_time_part1' | translate}}
+    <span class="time"
+      ><span class="selected"
+        >{{component.time}} {{getTimeUnitLabel()}}</span
+      ></span
+    >
+  </p>
+  <p ng-show="component.time === 0 || component.time === '0'">
+    {{ 'automation_editor.canvas.right_now' | translate }}
+  </p>
   <div class="actions-element--container">
-    <dp-editor-delete-component on-delete-component="$parent.removeComponent(component)"></dp-editor-delete-component>
+    <dp-editor-delete-component
+      on-delete-component="$parent.removeComponent(component)"
+    ></dp-editor-delete-component>
   </div>
 </div>
 <dp-editor-new-step component="component" branch="branch"></dp-editor-new-step>

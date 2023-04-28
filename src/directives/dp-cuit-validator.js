@@ -1,9 +1,7 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('dpCuitValidator', dpCuitValidator);
+  angular.module('dopplerApp').directive('dpCuitValidator', dpCuitValidator);
 
   dpCuitValidator.$inject = ['utils'];
 
@@ -11,7 +9,7 @@
     var directive = {
       restrict: 'A',
       require: 'ngModel',
-      link: link
+      link: link,
     };
 
     return directive;

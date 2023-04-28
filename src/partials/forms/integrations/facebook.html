@@ -1,13 +1,27 @@
 <div class="ng-hide" ng-show="!facebookCtrl.facebookLoading">
-<!-- HEADER -->
-<div ng-include="'angularjs/partials/forms/integrations/facebook/header.html'" class="form-integration-header"></div>
+  <!-- HEADER -->
+  <div
+    ng-include="'angularjs/partials/forms/integrations/facebook/header.html'"
+    class="form-integration-header"
+  ></div>
 
-<!-- BODY -->
-<div ng-include="'angularjs/partials/forms/integrations/facebook/body.html'" class="form-integration-body"></div>
+  <!-- BODY -->
+  <div
+    ng-include="'angularjs/partials/forms/integrations/facebook/body.html'"
+    class="form-integration-body"
+  ></div>
 
-<!-- FOOTER -->
-<div ng-include="'angularjs/partials/forms/integrations/facebook/footer.html'" class="form-integration-footer" ng-show="['no_tab_configured', 'no_fb_account', 'tab_deleted'].indexOf(facebookCtrl.integrationStatus) < 0"></div>
+  <!-- FOOTER -->
+  <div
+    ng-include="'angularjs/partials/forms/integrations/facebook/footer.html'"
+    class="form-integration-footer"
+    ng-show="['no_tab_configured', 'no_fb_account', 'tab_deleted'].indexOf(facebookCtrl.integrationStatus) < 0"
+  ></div>
 </div>
 
 <!-- LOADING SPINNER -->
-<div class="loading--container components--center small-spinner-container" ng-show="facebookCtrl.facebookLoading" dp-partial="angularjs/partials/shared/loading.html"></div>
+<div
+  class="loading--container components--center small-spinner-container"
+  ng-show="facebookCtrl.facebookLoading"
+  dp-partial="angularjs/partials/shared/loading.html"
+></div>

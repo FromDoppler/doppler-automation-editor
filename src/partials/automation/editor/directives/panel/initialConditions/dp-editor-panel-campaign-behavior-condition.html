@@ -2,91 +2,249 @@
   <div class="dp-wrap-message dp-wrap-info">
     <span class="dp-message-icon"></span>
     <div class="dp-content-message">
-      <p>{{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}</p>
+      <p>
+        {{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}
+      </p>
     </div>
   </div>
 </div>
 <div class="list-selection--panel">
-  <p class="title">{{ 'automation_editor.sidebar.scheduled_date_select_list_title' | translate }}</p>
+  <p class="title">
+    {{ 'automation_editor.sidebar.scheduled_date_select_list_title' | translate
+    }}
+  </p>
   <!-- list and segments selector -->
   <dp-editor-panel-subscribers-lists></dp-editor-panel-subscribers-lists>
-  <button ng-click="showListSelectionMultiple()" class="button button--small button--primary" ng-disabled="isReadOnly();">{{selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers ? 'automation_editor.sidebar.list_replace_button' : 'automation_editor.sidebar.scheduled_date_select_list_button' | translate }}</button>
+  <button
+    ng-click="showListSelectionMultiple()"
+    class="button button--small button--primary"
+    ng-disabled="isReadOnly();"
+  >
+    {{selectedComponent.suscriptionLists.length ||
+    selectedComponent.allSubscribers ?
+    'automation_editor.sidebar.list_replace_button' :
+    'automation_editor.sidebar.scheduled_date_select_list_button' | translate }}
+  </button>
 </div>
-<div ng-show="selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers">
+<div
+  ng-show="selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers"
+>
   <!-- frecuency selector -->
-  <p class="title title--alt">{{ 'automation_editor.sidebar.campaign_title' | translate }}</p>
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setFrequency(SEND_TYPE.INMEDIATE)">
-      <label class="frequency-text">{{ 'automation_editor.sidebar.campaign_send_now_title' | translate }}</label>
-      <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.campaign_send_now_description' | translate }} </p>
-      <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.INMEDIATE"></span>
+  <p class="title title--alt">
+    {{ 'automation_editor.sidebar.campaign_title' | translate }}
+  </p>
+  <div
+    class="frequency--selector disable--toggler"
+    ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}"
+    ng-click="setFrequency(SEND_TYPE.INMEDIATE)"
+  >
+    <label class="frequency-text"
+      >{{ 'automation_editor.sidebar.campaign_send_now_title' | translate
+      }}</label
+    >
+    <p class="frequency-text" ng-if="!selectedComponent.sendType">
+      {{ 'automation_editor.sidebar.campaign_send_now_description' | translate
+      }}
+    </p>
+    <span
+      class="icon-check"
+      ng-if="selectedComponent.sendType === SEND_TYPE.INMEDIATE"
+    ></span>
   </div>
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED}" ng-click="setFrequency(SEND_TYPE.SCHEDULED)">
-      <label class="frequency-text">{{ 'automation_editor.sidebar.campaign_send_scheduled_title' | translate }}</label>
-      <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.campaign_send_scheduled_description' | translate }} </p>
-      <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"></span>
+  <div
+    class="frequency--selector disable--toggler"
+    ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED}"
+    ng-click="setFrequency(SEND_TYPE.SCHEDULED)"
+  >
+    <label class="frequency-text"
+      >{{ 'automation_editor.sidebar.campaign_send_scheduled_title' | translate
+      }}</label
+    >
+    <p class="frequency-text" ng-if="!selectedComponent.sendType">
+      {{ 'automation_editor.sidebar.campaign_send_scheduled_description' |
+      translate }}
+    </p>
+    <span
+      class="icon-check"
+      ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"
+    ></span>
   </div>
   <form name="validationForm" novalidate>
-  <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED">
-    <div class="box relative">
-      <label class="label--panel">{{ 'automation_editor.sidebar.campaign_field_date' | translate }}</label>
-      <!-- datepicker selector -->
-  	 	<div class="input-datepicker--container relative">
-  			<input type="text" name="date" ng-click="dpPopup.show=true;" class="form-control input--text" ng-class="{hasErrors:validationForm.date.$invalid}" uib-datepicker-popup="{{format}}" is-open="dpPopup.show" datepicker-options="dateOptions" ng-model="frequency.date" ng-model-options="{ updateOn: 'blur' }" current-text="{{ 'automation_editor.sidebar.date_picker_current_text' | translate }}" ng-required="true" close-text="Close" ng-disabled="isReadOnly();" />
-        <span class="icon-calendar disable--toggler" ng-click="dpPopup.show=true;"></span>
-        <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
-      </div>
-    </div>
-    <!-- time and timezone selectors -->
-      <div class="box relative frequency-time--panel">
-        <label class="label--panel">{{ 'automation_editor.sidebar.campaign_field_hour' | translate }}</label>
-        <div class="flex-grid-v-center--s-between">
-          <dp-editor-dropdown ng-class="{hasErrors: validationForm.date.$invalid}"  class="dropdown dropdown--small disable--toggler" id="time" name="time" property="name" options="timeOptions" label="timeSelected.label" value-selected="timeSelected.value" on-select-option="onFrequencyAttributeSelected('time', option.value);" on-select-prev-option="onPrevTimeSelected()" on-select-next-option="onNextTimeSelected()" arrow-selection="true" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-          <dp-editor-dropdown ng-class="{hasErrors: validationForm.date.$invalid}" class="dropdown dropdown--large" id="timezone" name="timezone" property="name" options="timeZones" label="timezoneSelected.label" value-selected="timezoneSelected.value" on-select-option="onFrequencyAttributeSelected('timezone', option.value);" ng-disabled="isReadOnly();"></dp-editor-dropdown>
+    <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED">
+      <div class="box relative">
+        <label class="label--panel"
+          >{{ 'automation_editor.sidebar.campaign_field_date' | translate
+          }}</label
+        >
+        <!-- datepicker selector -->
+        <div class="input-datepicker--container relative">
+          <input
+            type="text"
+            name="date"
+            ng-click="dpPopup.show=true;"
+            class="form-control input--text"
+            ng-class="{hasErrors:validationForm.date.$invalid}"
+            uib-datepicker-popup="{{format}}"
+            is-open="dpPopup.show"
+            datepicker-options="dateOptions"
+            ng-model="frequency.date"
+            ng-model-options="{ updateOn: 'blur' }"
+            current-text="{{ 'automation_editor.sidebar.date_picker_current_text' | translate }}"
+            ng-required="true"
+            close-text="Close"
+            ng-disabled="isReadOnly();"
+          />
+          <span
+            class="icon-calendar disable--toggler"
+            ng-click="dpPopup.show=true;"
+          ></span>
+          <span class="read-only--tooltip" ng-show="isReadOnly();"
+            >{{'validation_messages.read_only_input' | translate }}</span
+          >
         </div>
-        <div ng-messages="validationForm['date'].$error"  class="error-messages--container" >
-  				<div ng-message="invalidDate" class="error">{{ 'validation_messages.invalid_date_time' | translate }}</div>
-  			</div>
       </div>
-      <div class="dp-library margin-t-25" ng-if="selectedComponent.hasStartDateExpired">
-        <div class="dp-wrap-message dp-wrap-cancel">
-          <span class="dp-message-icon"></span>
-          <div class="dp-content-message">
-            <p>{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error' | translate }} <a class="dp-message-link" target="_self" href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation">{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade' | translate }}</a></p>
+      <!-- time and timezone selectors -->
+      <div class="box relative frequency-time--panel">
+        <label class="label--panel"
+          >{{ 'automation_editor.sidebar.campaign_field_hour' | translate
+          }}</label
+        >
+        <div class="flex-grid-v-center--s-between">
+          <dp-editor-dropdown
+            ng-class="{hasErrors: validationForm.date.$invalid}"
+            class="dropdown dropdown--small disable--toggler"
+            id="time"
+            name="time"
+            property="name"
+            options="timeOptions"
+            label="timeSelected.label"
+            value-selected="timeSelected.value"
+            on-select-option="onFrequencyAttributeSelected('time', option.value);"
+            on-select-prev-option="onPrevTimeSelected()"
+            on-select-next-option="onNextTimeSelected()"
+            arrow-selection="true"
+            ng-disabled="isReadOnly();"
+          ></dp-editor-dropdown>
+          <dp-editor-dropdown
+            ng-class="{hasErrors: validationForm.date.$invalid}"
+            class="dropdown dropdown--large"
+            id="timezone"
+            name="timezone"
+            property="name"
+            options="timeZones"
+            label="timezoneSelected.label"
+            value-selected="timezoneSelected.value"
+            on-select-option="onFrequencyAttributeSelected('timezone', option.value);"
+            ng-disabled="isReadOnly();"
+          ></dp-editor-dropdown>
+        </div>
+        <div
+          ng-messages="validationForm['date'].$error"
+          class="error-messages--container"
+        >
+          <div ng-message="invalidDate" class="error">
+            {{ 'validation_messages.invalid_date_time' | translate }}
           </div>
         </div>
       </div>
-  </div>
-  <div ng-if="!!selectedComponent.sendType">
-  <!-- email notification -->
-    <p class="title add-email">{{ 'automation_editor.sidebar.campaign_notification_title' | translate }}</p>
-    <span class="text"><i>{{ 'automation_editor.sidebar.campaign_notification_text' | translate }}<b>{{ 'automation_editor.sidebar.campaign_max_emails' | translate : { maxConfEmails: maxConfirmationEmails} }}</b></i></span>
-    <div ng-repeat="item in confirmationEmailListTmp track by $index">
-  	  <div class="add-email--container">
-        <input class="input--text" type="email" name="Email{{$index}}" ng-maxlength="50" ng-required="true"
-          ng-pattern="REGEX_EMAIL"
-          ng-class="{'hasErrors': validationForm.Email{{$index}}.$touched && validationForm.Email{{$index}}.$invalid}"
-          ng-model="item.email"
-          ng-model-options="{updateOn: 'blur'}"
-          ng-blur="onBlurConfirmationEmail($event, $index)"
-          ng-disabled="isReadOnly();"/>
-        <span class="icon-delete disable--toggler" ng-click="deleteConfirmationEmail(item, $index)"></span>
-        <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
-  	  </div>
-  	  <div ng-messages="validationForm['Email'+$index].$error" ng-if="validationForm['Email'+$index].$touched" class="error-messages--container" >
-  			<div ng-message="pattern" class="error">{{ 'validation_messages.email' | translate }}</div>
-  			<div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate }}</div>
-  			<div ng-message="duplicated" class="error">{{ 'validation_messages.duplicated_email' | translate }}</div>
-  		</div>
-  	</div>
-    <p class="add-email-text">
-      <a class="link--default text--small disable--toggler" ng-class="{disabled: confirmationEmailListTmp.length === maxConfirmationEmails}" ng-click="addConfirmationEmail()"><span class="icon-add-element disable--toggler"></span>{{ 'automation_editor.sidebar.campaign_add_email' | translate }}</a>
-    </p>
-  </div>
+      <div
+        class="dp-library margin-t-25"
+        ng-if="selectedComponent.hasStartDateExpired"
+      >
+        <div class="dp-wrap-message dp-wrap-cancel">
+          <span class="dp-message-icon"></span>
+          <div class="dp-content-message">
+            <p>
+              {{
+              'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error'
+              | translate }}
+              <a
+                class="dp-message-link"
+                target="_self"
+                href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation"
+                >{{
+                'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade'
+                | translate }}</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="!!selectedComponent.sendType">
+      <!-- email notification -->
+      <p class="title add-email">
+        {{ 'automation_editor.sidebar.campaign_notification_title' | translate
+        }}
+      </p>
+      <span class="text"
+        ><i
+          >{{ 'automation_editor.sidebar.campaign_notification_text' | translate
+          }}<b
+            >{{ 'automation_editor.sidebar.campaign_max_emails' | translate : {
+            maxConfEmails: maxConfirmationEmails} }}</b
+          ></i
+        ></span
+      >
+      <div ng-repeat="item in confirmationEmailListTmp track by $index">
+        <div class="add-email--container">
+          <input
+            class="input--text"
+            type="email"
+            name="Email{{$index}}"
+            ng-maxlength="50"
+            ng-required="true"
+            ng-pattern="REGEX_EMAIL"
+            ng-class="{'hasErrors': validationForm.Email{{$index}}.$touched && validationForm.Email{{$index}}.$invalid}"
+            ng-model="item.email"
+            ng-model-options="{updateOn: 'blur'}"
+            ng-blur="onBlurConfirmationEmail($event, $index)"
+            ng-disabled="isReadOnly();"
+          />
+          <span
+            class="icon-delete disable--toggler"
+            ng-click="deleteConfirmationEmail(item, $index)"
+          ></span>
+          <span class="read-only--tooltip" ng-show="isReadOnly();"
+            >{{'validation_messages.read_only_input' | translate }}</span
+          >
+        </div>
+        <div
+          ng-messages="validationForm['Email'+$index].$error"
+          ng-if="validationForm['Email'+$index].$touched"
+          class="error-messages--container"
+        >
+          <div ng-message="pattern" class="error">
+            {{ 'validation_messages.email' | translate }}
+          </div>
+          <div ng-message="maxlength" class="error">
+            {{ 'validation_messages.maxlength' | translate }}
+          </div>
+          <div ng-message="duplicated" class="error">
+            {{ 'validation_messages.duplicated_email' | translate }}
+          </div>
+        </div>
+      </div>
+      <p class="add-email-text">
+        <a
+          class="link--default text--small disable--toggler"
+          ng-class="{disabled: confirmationEmailListTmp.length === maxConfirmationEmails}"
+          ng-click="addConfirmationEmail()"
+          ><span class="icon-add-element disable--toggler"></span>{{
+          'automation_editor.sidebar.campaign_add_email' | translate }}</a
+        >
+      </p>
+    </div>
   </form>
 </div>
 <span class="icon-globo"></span>
 <p class="help-tip">
   <strong>{{ 'automation_editor.sidebar.campaign_tip' | translate }}</strong>
   <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span>
-  <a ng-href="{{ 'automation_editor.sidebar.campaign_tip_link_url' | translate }}" class="link--default" target="_blank">{{ 'automation_editor.sidebar.list_tip_link_text' | translate }}</a>.
+  <a
+    ng-href="{{ 'automation_editor.sidebar.campaign_tip_link_url' | translate }}"
+    class="link--default"
+    target="_blank"
+    >{{ 'automation_editor.sidebar.list_tip_link_text' | translate }}</a
+  >.
 </p>

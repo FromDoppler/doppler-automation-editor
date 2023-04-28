@@ -1,14 +1,23 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('CampaignComponent', ['BaseComponent', 'CAMPAIGN_TYPE', 'COMPONENT_TYPE', 'emailLinksDataservice', 'TEST_OPTION', function(BaseComponent, CAMPAIGN_TYPE, COMPONENT_TYPE, emailLinksDataservice, TEST_OPTION) {
-
+  angular.module('dopplerApp.automation.editor').factory('CampaignComponent', [
+    'BaseComponent',
+    'CAMPAIGN_TYPE',
+    'COMPONENT_TYPE',
+    'emailLinksDataservice',
+    'TEST_OPTION',
+    function (
+      BaseComponent,
+      CAMPAIGN_TYPE,
+      COMPONENT_TYPE,
+      emailLinksDataservice,
+      TEST_OPTION
+    ) {
       function CampaignComponent(data) {
         // Inherited constructor.
         BaseComponent.call(this, {
-          type: COMPONENT_TYPE.CAMPAIGN
+          type: COMPONENT_TYPE.CAMPAIGN,
         });
 
         this.id = 0;
@@ -30,7 +39,10 @@
         this.idList = 0;
         this.emailList = '';
         this.innerHTML = '';
-        this.campaignType = data && data.campaignType ? data.campaignType : CAMPAIGN_TYPE.CAMPAIGN;
+        this.campaignType =
+          data && data.campaignType
+            ? data.campaignType
+            : CAMPAIGN_TYPE.CAMPAIGN;
         this.DomainKeyLabel = '';
         this.dkimEmail = '';
         this.idDomainKeySelected = '';
@@ -44,10 +56,12 @@
 
       // Prototype inherence from BaseComponent.
       CampaignComponent.prototype = Object.create(BaseComponent.prototype);
-      CampaignComponent.prototype.markup = '<dp-editor-campaign class="component--container campaign" component="component" branch="branch"></dp-editor-campaign>';
-      CampaignComponent.prototype.panelTemplate = '<div dp-editor-panel-campaign></div>';
+      CampaignComponent.prototype.markup =
+        '<dp-editor-campaign class="component--container campaign" component="component" branch="branch"></dp-editor-campaign>';
+      CampaignComponent.prototype.panelTemplate =
+        '<div dp-editor-panel-campaign></div>';
 
-      CampaignComponent.prototype.setData = function(data) {
+      CampaignComponent.prototype.setData = function (data) {
         BaseComponent.prototype.setData.call(this, data);
         emailLinksDataservice.addEmailComponentReference(this.uid);
 
@@ -125,7 +139,7 @@
         }
       };
 
-      CampaignComponent.prototype.getPropertiesToWatch = function() {
+      CampaignComponent.prototype.getPropertiesToWatch = function () {
         return [
           'subject',
           'fromName',
@@ -137,28 +151,29 @@
           'emailOption',
           'idList',
           'emailList',
-          'hasToIgnoreShippingLimit'
+          'hasToIgnoreShippingLimit',
         ];
       };
 
-      CampaignComponent.prototype.getCompletedPropertiesToWatch = function() {
-        return [
-          'name',
-          'subject',
-          'fromName',
-          'fromEmail',
-          'thumbnailUrl'
-        ];
+      CampaignComponent.prototype.getCompletedPropertiesToWatch = function () {
+        return ['name', 'subject', 'fromName', 'fromEmail', 'thumbnailUrl'];
       };
 
-      CampaignComponent.prototype.checkCompleted = function() {
+      CampaignComponent.prototype.checkCompleted = function () {
         BaseComponent.prototype.checkCompleted.call(this);
-        this.completed = this.completed && ((!!this.dkimEmail && this.fromEmail.indexOf(this.dkimEmail + '@' + this.DomainKeyLabel) !== -1) || (!!this.confirmedDomain &&
-         this.confirmedDomain.length > 0 && this.fromEmail.indexOf(this.confirmedDomain) !== -1));
+        this.completed =
+          this.completed &&
+          ((!!this.dkimEmail &&
+            this.fromEmail.indexOf(
+              this.dkimEmail + '@' + this.DomainKeyLabel
+            ) !== -1) ||
+            (!!this.confirmedDomain &&
+              this.confirmedDomain.length > 0 &&
+              this.fromEmail.indexOf(this.confirmedDomain) !== -1));
         return this.completed;
       };
 
-
       return CampaignComponent;
-    }]);
+    },
+  ]);
 })();

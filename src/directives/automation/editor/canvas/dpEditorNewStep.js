@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -18,17 +18,28 @@
     '$translate',
   ];
 
-  function dpEditorNewStep(automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE, AUTOMATION_TYPE, componentsDataservice,
-    CONDITION_BRANCH, selectedElementsService, goToService, $translate) {
+  function dpEditorNewStep(
+    automation,
+    CHANGE_TYPE,
+    changesManager,
+    COMPONENT_TYPE,
+    AUTOMATION_TYPE,
+    componentsDataservice,
+    CONDITION_BRANCH,
+    selectedElementsService,
+    goToService,
+    $translate
+  ) {
     var directive = {
       restrict: 'E',
       scope: {
         branch: '=',
         component: '=',
-        parentUid: '='
+        parentUid: '=',
       },
-      templateUrl: 'angularjs/partials/automation/editor/directives/canvas/dp-editor-new-step.html',
-      link: link
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/canvas/dp-editor-new-step.html',
+      link: link,
     };
 
     return directive;
@@ -37,17 +48,21 @@
       var automationType = automation.getModel().automationType;
       scope.stepOptions = componentsDataservice.getComponents();
       if (automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION) {
-        updateOptionsOnPushNotificationAutomationType();  
+        updateOptionsOnPushNotificationAutomationType();
       }
       scope.showStepOptions = false;
       scope.getReadOnlyLabel = automation.getReadOnlyLabel;
-      scope.addNewStep = function(option) {
+      scope.addNewStep = function (option) {
         var newComponent;
-        var newIndex = automation.getComponentIndex(scope.component, scope.parentUid
-          || scope.component.parentUid, scope.branch) + 1;
+        var newIndex =
+          automation.getComponentIndex(
+            scope.component,
+            scope.parentUid || scope.component.parentUid,
+            scope.branch
+          ) + 1;
         var rawData = {
           type: option.type,
-          parentUid: scope.parentUid || scope.component.parentUid
+          parentUid: scope.parentUid || scope.component.parentUid,
         };
 
         if (option.type === COMPONENT_TYPE.CAMPAIGN) {
@@ -65,7 +80,7 @@
           type: CHANGE_TYPE.ADD_COMPONENT,
           component: newComponent,
           index: newIndex,
-          branch: scope.branch
+          branch: scope.branch,
         });
 
         scope.showStepOptions = false;
@@ -73,40 +88,51 @@
       };
 
       scope.getToolTipContent = function (option) {
-        var toolTipMsg = ""
+        var toolTipMsg = '';
         switch (option.type) {
           case COMPONENT_TYPE.SMS:
-            toolTipMsg = $translate.instant('automation_editor.canvas.sms_new_step_not_credit');
+            toolTipMsg = $translate.instant(
+              'automation_editor.canvas.sms_new_step_not_credit'
+            );
             break;
           default:
         }
         return toolTipMsg;
-      }
+      };
 
       function updateOptionsOnPushNotificationAutomationType() {
         var componentsAvailablesForPushNotification = [
           COMPONENT_TYPE.DELAY,
           COMPONENT_TYPE.PUSH_NOTIFICATION,
           COMPONENT_TYPE.GOTO_STEP,
-          COMPONENT_TYPE.CONDITION
+          COMPONENT_TYPE.CONDITION,
         ];
         for (var i = 0; i < scope.stepOptions.length; i++) {
           scope.stepOptions[i].isEnable =
-            componentsAvailablesForPushNotification
-              .indexOf(scope.stepOptions[i].type) > -1;
+            componentsAvailablesForPushNotification.indexOf(
+              scope.stepOptions[i].type
+            ) > -1;
         }
       }
 
       function addConditionAndTransferChildren(rawData, index) {
-        var childrenToTransfer = automation.getChildrenToTransfer(rawData, index, scope.branch);
-        var newComponent = automation.addComponent(rawData, index, scope.branch);
+        var childrenToTransfer = automation.getChildrenToTransfer(
+          rawData,
+          index,
+          scope.branch
+        );
+        var newComponent = automation.addComponent(
+          rawData,
+          index,
+          scope.branch
+        );
         var parentUids = {
           new: newComponent.uid,
-          old: newComponent.parentUid
+          old: newComponent.parentUid,
         };
         var branch = {
           origin: scope.branch,
-          destiny: CONDITION_BRANCH.POSITIVE
+          destiny: CONDITION_BRANCH.POSITIVE,
         };
 
         // remove all lines and, after to transfer all the condition children, regenerate them.
@@ -120,7 +146,7 @@
           children: childrenToTransfer,
           component: newComponent,
           index: index,
-          parentUids: parentUids
+          parentUids: parentUids,
         });
 
         scope.showStepOptions = false;
@@ -130,7 +156,7 @@
         scope.$emit('ALTERING_CONDITION_FINISHED');
       }
 
-      scope.showComponentList = function() {
+      scope.showComponentList = function () {
         // set gotoStepOption enable when is end node
         var gotoStepOption = _.find(scope.stepOptions, function (stepOption) {
           return stepOption.type === COMPONENT_TYPE.GOTO_STEP;
@@ -143,28 +169,36 @@
         }
       };
 
-      scope.toggleComponentList = function() {
+      scope.toggleComponentList = function () {
         if (!automation.getIsAutomationActive()) {
           scope.showStepOptions = !scope.showStepOptions;
           goToService.updateLinePosition();
         }
       };
 
-      scope.isInitialCondition = function() {
+      scope.isInitialCondition = function () {
         return automation.isInitialConditionComponent(scope.component);
       };
 
-      scope.hasNext = function() {
-        return automation.hasNextComponent(scope.component, scope.parentUid || scope.component.parentUid, scope.branch);
+      scope.hasNext = function () {
+        return automation.hasNextComponent(
+          scope.component,
+          scope.parentUid || scope.component.parentUid,
+          scope.branch
+        );
       };
 
-      scope.isDynamicAutomation = function() {
+      scope.isDynamicAutomation = function () {
         return scope.component.type === COMPONENT_TYPE.DYNAMIC_CONTENT;
       };
 
-      scope.showWarning = function() {
-        return !scope.hasNext() && (scope.component.type === COMPONENT_TYPE.CONDITION
-          || scope.component.type === COMPONENT_TYPE.DELAY) && automation.getIsFlowComplete();
+      scope.showWarning = function () {
+        return (
+          !scope.hasNext() &&
+          (scope.component.type === COMPONENT_TYPE.CONDITION ||
+            scope.component.type === COMPONENT_TYPE.DELAY) &&
+          automation.getIsFlowComplete()
+        );
       };
     }
   }

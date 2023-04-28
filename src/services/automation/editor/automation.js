@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -31,10 +31,31 @@
     'goToService',
   ];
 
-  function automation($q, $rootScope, $timeout, $translate, $window, AUTOMATION_COMPLETED_STATE, AUTOMATION_STATE,
-    AUTOMATION_TYPE, automationDataservice, componentInterpreter, conditionsDataservice, COMPONENT_TYPE, CONDITION_TYPE,
-    emailLinksDataservice, FIELD_TYPE, FREQUENCY_TYPE, selectedElementsService, userFieldsDataservice,
-    warningsStepsService, settingsService, DOMAIN_STATUS, ModalService, goToService) {
+  function automation(
+    $q,
+    $rootScope,
+    $timeout,
+    $translate,
+    $window,
+    AUTOMATION_COMPLETED_STATE,
+    AUTOMATION_STATE,
+    AUTOMATION_TYPE,
+    automationDataservice,
+    componentInterpreter,
+    conditionsDataservice,
+    COMPONENT_TYPE,
+    CONDITION_TYPE,
+    emailLinksDataservice,
+    FIELD_TYPE,
+    FREQUENCY_TYPE,
+    selectedElementsService,
+    userFieldsDataservice,
+    warningsStepsService,
+    settingsService,
+    DOMAIN_STATUS,
+    ModalService,
+    goToService
+  ) {
     var promise;
     var model;
     var automationNamePromise;
@@ -50,7 +71,7 @@
       CONDITION_TYPE.RSS_TO_EMAIL,
       CONDITION_TYPE.CAMPAIGN_BEHAVIOR,
       CONDITION_TYPE.SITE_BEHAVIOR,
-      CONDITION_TYPE.PUSH
+      CONDITION_TYPE.PUSH,
     ];
     var parentComponents = {};
     var selectedTaskThirdPartySelected;
@@ -124,7 +145,7 @@
       domainHaveErrors: domainHaveErrors,
       applyDropDownChange: applyDropDownChange,
       hasBlockedList: hasBlockedList,
-      getInitialConditionUid: getInitialConditionUid
+      getInitialConditionUid: getInitialConditionUid,
     };
 
     return service;
@@ -143,16 +164,17 @@
             data: {
               type: COMPONENT_TYPE.AUTOMATION,
               automationType: getAutomationType(parseInt(idTaskType)),
-              id: 0
-            }
+              id: 0,
+            },
           };
           //test fix
           promise = $q.when(data);
         }
 
-        promise.then(function(response) {
-          selectedTaskThirdPartySelected = response.data.initialCondition ?
-            response.data.initialCondition.idThirdPartyApp : null;
+        promise.then(function (response) {
+          selectedTaskThirdPartySelected = response.data.initialCondition
+            ? response.data.initialCondition.idThirdPartyApp
+            : null;
           setData(response.data);
           isModelLoaded = true;
           checkCompleted();
@@ -168,42 +190,42 @@
       var automationType;
 
       switch (idTaskType) {
-      case 1:
-        automationType = AUTOMATION_TYPE.SUBSCRIPTION_LIST;
-        break;
-      case 3:
-        automationType = AUTOMATION_TYPE.SCHEDULED_DATE;
-        break;
-      case 4:
-        automationType = AUTOMATION_TYPE.RSS_TO_EMAIL;
-        break;
-      case 5:
-        automationType = AUTOMATION_TYPE.CAMPAIGN_BEHAVIOR;
-        break;
-      case 6:
-        automationType = AUTOMATION_TYPE.SITE_BEHAVIOR;
-        break;
-      case 7:
-        automationType = AUTOMATION_TYPE.ABANDONED_CART;
-        break;
-      case 8:
-        automationType = AUTOMATION_TYPE.VISITED_PRODUCTS;
-        break;
-      case 9:
-        automationType = AUTOMATION_TYPE.PENDING_ORDER;
-        break;
-      case 10:
-        automationType = AUTOMATION_TYPE.CONFIRMATION_ORDER;
+        case 1:
+          automationType = AUTOMATION_TYPE.SUBSCRIPTION_LIST;
           break;
-      case 11:
-        automationType = AUTOMATION_TYPE.PUSH_NOTIFICATION;
-        break;
-      case 12:
-        automationType = AUTOMATION_TYPE.SMS;
-        break;
-      default:
-        automationType = AUTOMATION_TYPE.NONE;
-        break;
+        case 3:
+          automationType = AUTOMATION_TYPE.SCHEDULED_DATE;
+          break;
+        case 4:
+          automationType = AUTOMATION_TYPE.RSS_TO_EMAIL;
+          break;
+        case 5:
+          automationType = AUTOMATION_TYPE.CAMPAIGN_BEHAVIOR;
+          break;
+        case 6:
+          automationType = AUTOMATION_TYPE.SITE_BEHAVIOR;
+          break;
+        case 7:
+          automationType = AUTOMATION_TYPE.ABANDONED_CART;
+          break;
+        case 8:
+          automationType = AUTOMATION_TYPE.VISITED_PRODUCTS;
+          break;
+        case 9:
+          automationType = AUTOMATION_TYPE.PENDING_ORDER;
+          break;
+        case 10:
+          automationType = AUTOMATION_TYPE.CONFIRMATION_ORDER;
+          break;
+        case 11:
+          automationType = AUTOMATION_TYPE.PUSH_NOTIFICATION;
+          break;
+        case 12:
+          automationType = AUTOMATION_TYPE.SMS;
+          break;
+        default:
+          automationType = AUTOMATION_TYPE.NONE;
+          break;
       }
 
       return automationType;
@@ -212,9 +234,11 @@
     function getAutomationName() {
       if (!automationNamePromise) {
         automationNamePromise = $q.defer();
-        automationDataservice.getAutomationDefaultName().then(function(response) {
-          automationNamePromise.resolve(response);
-        });
+        automationDataservice
+          .getAutomationDefaultName()
+          .then(function (response) {
+            automationNamePromise.resolve(response);
+          });
       }
 
       return automationNamePromise.promise;
@@ -225,7 +249,10 @@
     }
 
     function isReadOnly() {
-      return model.state === AUTOMATION_STATE.ACTIVE || model.state === AUTOMATION_STATE.PAUSED;
+      return (
+        model.state === AUTOMATION_STATE.ACTIVE ||
+        model.state === AUTOMATION_STATE.PAUSED
+      );
     }
 
     function isPaused() {
@@ -233,7 +260,9 @@
     }
 
     function getReadOnlyLabel() {
-      return isPaused() ? $translate.instant('validation_messages.paused_input') : $translate.instant('validation_messages.read_only_input');
+      return isPaused()
+        ? $translate.instant('validation_messages.paused_input')
+        : $translate.instant('validation_messages.read_only_input');
     }
 
     function buildAutomation(idTaskType) {
@@ -243,8 +272,8 @@
         initialCondition: {
           type: getConditionType(automationType),
           parentUid: model.uid,
-          automationType: automationType
-        }
+          automationType: automationType,
+        },
       });
       checkCompleted();
     }
@@ -252,42 +281,42 @@
     function getConditionType(automationType) {
       var condition;
       switch (automationType) {
-      case AUTOMATION_TYPE.SUBSCRIPTION_LIST:
-        condition = CONDITION_TYPE.SUBSCRIPTION_LIST;
-        break;
-      case AUTOMATION_TYPE.SCHEDULED_DATE:
-        condition = CONDITION_TYPE.SCHEDULED_DATE;
-        break;
-      case AUTOMATION_TYPE.RSS_TO_EMAIL:
-        condition = CONDITION_TYPE.RSS_TO_EMAIL;
-        break;
-      case AUTOMATION_TYPE.SMS:
-      case AUTOMATION_TYPE.CAMPAIGN_BEHAVIOR:
-        condition = CONDITION_TYPE.CAMPAIGN_BEHAVIOR;
-        break;
-      case AUTOMATION_TYPE.SITE_BEHAVIOR:
-        condition = CONDITION_TYPE.SITE_BEHAVIOR;
-        break;
-      case AUTOMATION_TYPE.ABANDONED_CART:
-        condition = CONDITION_TYPE.DYNAMIC_CONTENT;
-        break;
-      case AUTOMATION_TYPE.VISITED_PRODUCTS:
-        condition = CONDITION_TYPE.DYNAMIC_CONTENT;
-        break;
-      case AUTOMATION_TYPE.PENDING_ORDER:
-        condition = CONDITION_TYPE.DYNAMIC_CONTENT;
-        break;
-      case AUTOMATION_TYPE.CONFIRMATION_ORDER:
-        condition = CONDITION_TYPE.DYNAMIC_CONTENT;
+        case AUTOMATION_TYPE.SUBSCRIPTION_LIST:
+          condition = CONDITION_TYPE.SUBSCRIPTION_LIST;
           break;
-      case AUTOMATION_TYPE.PUSH_NOTIFICATION:
-        condition = CONDITION_TYPE.PUSH;
-        break;
-      case AUTOMATION_TYPE.NONE:
-        condition = CONDITION_TYPE.NONE;
-        break;
-      default:
-        throw new Error('Invalid automationType');
+        case AUTOMATION_TYPE.SCHEDULED_DATE:
+          condition = CONDITION_TYPE.SCHEDULED_DATE;
+          break;
+        case AUTOMATION_TYPE.RSS_TO_EMAIL:
+          condition = CONDITION_TYPE.RSS_TO_EMAIL;
+          break;
+        case AUTOMATION_TYPE.SMS:
+        case AUTOMATION_TYPE.CAMPAIGN_BEHAVIOR:
+          condition = CONDITION_TYPE.CAMPAIGN_BEHAVIOR;
+          break;
+        case AUTOMATION_TYPE.SITE_BEHAVIOR:
+          condition = CONDITION_TYPE.SITE_BEHAVIOR;
+          break;
+        case AUTOMATION_TYPE.ABANDONED_CART:
+          condition = CONDITION_TYPE.DYNAMIC_CONTENT;
+          break;
+        case AUTOMATION_TYPE.VISITED_PRODUCTS:
+          condition = CONDITION_TYPE.DYNAMIC_CONTENT;
+          break;
+        case AUTOMATION_TYPE.PENDING_ORDER:
+          condition = CONDITION_TYPE.DYNAMIC_CONTENT;
+          break;
+        case AUTOMATION_TYPE.CONFIRMATION_ORDER:
+          condition = CONDITION_TYPE.DYNAMIC_CONTENT;
+          break;
+        case AUTOMATION_TYPE.PUSH_NOTIFICATION:
+          condition = CONDITION_TYPE.PUSH;
+          break;
+        case AUTOMATION_TYPE.NONE:
+          condition = CONDITION_TYPE.NONE;
+          break;
+        default:
+          throw new Error('Invalid automationType');
       }
       return condition;
     }
@@ -295,7 +324,7 @@
     function setData(data) {
       model = componentInterpreter.createComponent(data);
       addComponentAsParent(model);
-      angular.forEach(data.children, function(child, index) {
+      angular.forEach(data.children, function (child, index) {
         addComponent(child, index);
       });
     }
@@ -311,7 +340,7 @@
         model.name = model.name.substr(0, 60);
       }
       savePromise = automationDataservice.saveChanges(model);
-      savePromise.then(function(response) {
+      savePromise.then(function (response) {
         if (response.data !== undefined) {
           model.setData({ id: response.data.id });
           if (response.data.delays) {
@@ -328,12 +357,18 @@
     }
 
     function updateEmailsId(emailsToUpdate) {
-      _.each(emailsToUpdate, function(emailData) {
+      _.each(emailsToUpdate, function (emailData) {
         var emailComponent = getComponentByUid(emailData.uid);
-        conditionsDataservice.updateConditionalData(emailComponent.uid, emailData);
+        conditionsDataservice.updateConditionalData(
+          emailComponent.uid,
+          emailData
+        );
         updateActionData(emailComponent.uid, emailData);
         if (emailData.hasOwnProperty('links')) {
-          emailLinksDataservice.updateLinksId(emailComponent.uid, emailData.links);
+          emailLinksDataservice.updateLinksId(
+            emailComponent.uid,
+            emailData.links
+          );
           delete emailData.links;
         }
         emailComponent.setData(emailData);
@@ -341,7 +376,7 @@
     }
 
     function updateDelaysId(delaysToUpdate) {
-      _.each(delaysToUpdate, function(delayData) {
+      _.each(delaysToUpdate, function (delayData) {
         var delayComponent = getComponentByUid(delayData.uid);
         delayComponent.setData(delayData);
       });
@@ -349,58 +384,73 @@
 
     function saveCampaign(campaign, htmlContent) {
       var defer = $q.defer();
-      automationDataservice.saveCampaign(model.id, campaign, htmlContent).then(function(response) {
-        getEmailLinks(campaign.id, defer, {
-          previewUrl: response.data.previewUrl,
-          links: []
+      automationDataservice
+        .saveCampaign(model.id, campaign, htmlContent)
+        .then(function (response) {
+          getEmailLinks(campaign.id, defer, {
+            previewUrl: response.data.previewUrl,
+            links: [],
+          });
         });
-      });
 
       return defer.promise;
     }
 
     function saveTinyEditorContent(idCampaign, html) {
       var defer = $q.defer();
-      automationDataservice.saveTinyEditorContent(idCampaign, html).then(function(response) {
-        getEmailLinks(idCampaign, defer, {
-          thumbnailUrl: response.data.thumbnailUrl,
-          links: []
+      automationDataservice
+        .saveTinyEditorContent(idCampaign, html)
+        .then(function (response) {
+          getEmailLinks(idCampaign, defer, {
+            thumbnailUrl: response.data.thumbnailUrl,
+            links: [],
+          });
         });
-      });
 
       return defer.promise;
     }
 
     function saveTemplateContent(idCampaign, idTemplate) {
       var defer = $q.defer();
-      automationDataservice.saveTemplateContent(idCampaign, idTemplate).then(function() {
-        getEmailLinks(idCampaign, defer, { links: [] });
-      });
+      automationDataservice
+        .saveTemplateContent(idCampaign, idTemplate)
+        .then(function () {
+          getEmailLinks(idCampaign, defer, { links: [] });
+        });
 
       return defer.promise;
     }
 
     function getEmailLinks(idCampaign, defer, data) {
-      automationDataservice.getEmailLinks(idCampaign).then(function(response) {
-        var emailComponentUid = getEmailComponentById(idCampaign).uid;
-        data.links = response.data;
-        emailLinksDataservice.updateEmailComponentLinks(emailComponentUid, data.links);
-        conditionsDataservice.validateConditionalsLinks(emailComponentUid);
-        checkConditionsCompletedState();
-        defer.resolve(data);
-      }, function() {
-        defer.resolve(data);
-      });
+      automationDataservice.getEmailLinks(idCampaign).then(
+        function (response) {
+          var emailComponentUid = getEmailComponentById(idCampaign).uid;
+          data.links = response.data;
+          emailLinksDataservice.updateEmailComponentLinks(
+            emailComponentUid,
+            data.links
+          );
+          conditionsDataservice.validateConditionalsLinks(emailComponentUid);
+          checkConditionsCompletedState();
+          defer.resolve(data);
+        },
+        function () {
+          defer.resolve(data);
+        }
+      );
     }
 
     function checkConditionsCompletedState() {
-      var conditionComponents = _.filter(parentComponents, function(parentComponent) {
-        return parentComponent.type === COMPONENT_TYPE.CONDITION;
-      });
+      var conditionComponents = _.filter(
+        parentComponents,
+        function (parentComponent) {
+          return parentComponent.type === COMPONENT_TYPE.CONDITION;
+        }
+      );
       if (!conditionComponents.length) {
         return;
       }
-      _.each(conditionComponents, function(condition) {
+      _.each(conditionComponents, function (condition) {
         condition.checkCompleted();
         warningsStepsService.checkWarningStep(condition);
       });
@@ -408,11 +458,11 @@
     }
 
     function checkActionsCompleted() {
-      var actionsComponents = _.filter(model.children, function(component) {
+      var actionsComponents = _.filter(model.children, function (component) {
         return component.type === COMPONENT_TYPE.ACTION;
       });
 
-      _.each(actionsComponents, function(action) {
+      _.each(actionsComponents, function (action) {
         action.checkCompleted();
       });
     }
@@ -431,14 +481,16 @@
     }
 
     function updateActionData(uidEmail, emailData) {
-      var actionsComponents = _.filter(model.children, function(component) {
-        return component.type === COMPONENT_TYPE.ACTION
-          && component.operation
-          && component.operation.email
-          && component.operation.email.uidEmail === uidEmail
-          && component.operation.email.uidEmail !== 0;
+      var actionsComponents = _.filter(model.children, function (component) {
+        return (
+          component.type === COMPONENT_TYPE.ACTION &&
+          component.operation &&
+          component.operation.email &&
+          component.operation.email.uidEmail === uidEmail &&
+          component.operation.email.uidEmail !== 0
+        );
       });
-      _.each(actionsComponents, function(action) {
+      _.each(actionsComponents, function (action) {
         if (emailData.hasOwnProperty('id')) {
           action.operation.email.idEmail = emailData.id;
         }
@@ -469,7 +521,7 @@
       //we need to do it to resize the canvas after ConditionComponent deletion
       if (childComponent.type === COMPONENT_TYPE.CONDITION) {
         delete parentComponents[childComponent.uid];
-        $timeout(function() {
+        $timeout(function () {
           resizeCanvas();
         });
       }
@@ -490,7 +542,7 @@
         return model.initialCondition;
       }
 
-      _.each(parentComponents, function(parent) {
+      _.each(parentComponents, function (parent) {
         found = parent.getChildByUid(uid);
 
         if (found) {
@@ -504,7 +556,7 @@
     function getEmailComponentById(idEmail) {
       var found;
 
-      _.each(parentComponents, function(parent) {
+      _.each(parentComponents, function (parent) {
         found = parent.getEmailChildById(idEmail);
 
         if (found) {
@@ -524,10 +576,15 @@
       do {
         parentComponent = getParentComponent(component.parentUid);
         if (parentComponent.type === COMPONENT_TYPE.CONDITION) {
-          branch = conditionsDataservice.getChildBranch(parentComponent.uid, component.uid);
+          branch = conditionsDataservice.getChildBranch(
+            parentComponent.uid,
+            component.uid
+          );
         }
         index = parentComponent.getChildIndex(component, branch);
-        emailComponents = emailComponents.concat(parentComponent.getEmailChildren(component.uid, index));
+        emailComponents = emailComponents.concat(
+          parentComponent.getEmailChildren(component.uid, index)
+        );
         component = parentComponent;
       } while (component.uid !== model.uid);
 
@@ -541,9 +598,11 @@
 
     function hasDynamicElement(idCampaign) {
       var defer = $q.defer();
-      automationDataservice.hasDynamicContent(model.id, idCampaign).then(function(result) {
-        defer.resolve((JSON.parse(result.data)));
-      });
+      automationDataservice
+        .hasDynamicContent(model.id, idCampaign)
+        .then(function (result) {
+          defer.resolve(JSON.parse(result.data));
+        });
       return defer.promise;
     }
 
@@ -556,7 +615,7 @@
       var newParentComponent = getParentComponent(parentUids.new);
       var oldParentComponent = getParentComponent(parentUids.old);
 
-      _.each(children, function(child) {
+      _.each(children, function (child) {
         oldParentComponent.removeChildComponent(child, branch.origin);
         child.parentUid = parentUids.new;
         newParentComponent.addChildComponent(child, index, branch.destiny);
@@ -608,7 +667,7 @@
       var defer = $q.defer();
 
       if (!countriesPromise) {
-        automationDataservice.getCountries().then(function(response) {
+        automationDataservice.getCountries().then(function (response) {
           defer.resolve(response.data.countries);
         });
         countriesPromise = defer.promise;
@@ -621,7 +680,7 @@
       var defer = $q.defer();
 
       if (!scoresPromise) {
-        automationDataservice.getScores().then(function(response) {
+        automationDataservice.getScores().then(function (response) {
           defer.resolve(response.data.scores);
         });
         scoresPromise = defer.promise;
@@ -634,7 +693,7 @@
       var defer = $q.defer();
 
       if (!originsPromise) {
-        automationDataservice.getOrigins().then(function(response) {
+        automationDataservice.getOrigins().then(function (response) {
           defer.resolve(response.data.origins);
         });
         originsPromise = defer.promise;
@@ -644,24 +703,30 @@
     }
 
     function startAutomationCampaign(idScheduledTask) {
-      return automationDataservice.startAutomationCampaign(idScheduledTask || model.id);
+      return automationDataservice.startAutomationCampaign(
+        idScheduledTask || model.id
+      );
     }
 
     function stopAutomationCampaign(idScheduledTask) {
-      return automationDataservice.stopAutomationCampaign(idScheduledTask || model.id);
+      return automationDataservice.stopAutomationCampaign(
+        idScheduledTask || model.id
+      );
     }
 
     function pauseAutomationCampaign(idScheduledTask) {
-      return automationDataservice.pauseAutomationCampaign(idScheduledTask || model.id);
+      return automationDataservice.pauseAutomationCampaign(
+        idScheduledTask || model.id
+      );
     }
 
     function setAutomationAsActive() {
-      saveChanges().then(function() {
+      saveChanges().then(function () {
         var errCode = {
           fieldUpdateFails: 35,
-          automationSubscribersListsBlocked: 192
-        }
-        startAutomationCampaign().then(function(response) {
+          automationSubscribersListsBlocked: 192,
+        };
+        startAutomationCampaign().then(function (response) {
           if (!response.data.success && response.data.ErrorCode) {
             switch (response.data.ErrorCode) {
               case errCode.fieldUpdateFails:
@@ -672,10 +737,10 @@
                 break;
               default:
                 // TODO: this keeps previous behavior before this changes.
-                // Instead this, we should let user know about the error. 
+                // Instead this, we should let user know about the error.
                 model.state = AUTOMATION_STATE.ACTIVE;
                 $window.location.href = '/Automation/Automation/AutomationApp/';
-            }            
+            }
           } else {
             model.state = AUTOMATION_STATE.ACTIVE;
             $window.location.href = '/Automation/Automation/AutomationApp/';
@@ -686,15 +751,16 @@
 
     function showBlockedListModal() {
       ModalService.showModal({
-        templateUrl: 'angularjs/partials/automation/automationWithBlockedListModal.html',
+        templateUrl:
+          'angularjs/partials/automation/automationWithBlockedListModal.html',
         controller: 'ModalYesOrNoCtrl',
         inputs: {
-          data: {}
-        }
+          data: {},
+        },
       });
     }
 
-    function checkCompleted(){
+    function checkCompleted() {
       model.isFlowComplete();
     }
 
@@ -707,7 +773,7 @@
     }
 
     function validateDomain(domains, actualDomain) {
-      var existDomain = _.find(domains, function(domain) {
+      var existDomain = _.find(domains, function (domain) {
         return actualDomain && actualDomain.idDomain === domain.IdDomain;
       });
       if (actualDomain.idDomain === 0 && actualDomain.url && !existDomain) {
@@ -721,9 +787,10 @@
 
     function updateAutomationSiteBehaviorFlowState(domains, siteTracking) {
       if (!siteTracking) {
-        model.completed = AUTOMATION_COMPLETED_STATE.WITH_SITE_TRACKING_DISABLED;
+        model.completed =
+          AUTOMATION_COMPLETED_STATE.WITH_SITE_TRACKING_DISABLED;
       } else {
-        _.each(model.initialCondition.domains, function(actualDomain) {
+        _.each(model.initialCondition.domains, function (actualDomain) {
           validateDomain(domains, actualDomain);
         });
       }
@@ -738,7 +805,9 @@
           case AUTOMATION_TYPE.VISITED_PRODUCTS:
           case AUTOMATION_TYPE.PENDING_ORDER:
             result = thirdPartyApps.filter(function (val) {
-              return val.IdThirdPartyApp === model.initialCondition.idThirdPartyApp;
+              return (
+                val.IdThirdPartyApp === model.initialCondition.idThirdPartyApp
+              );
             });
             break;
           default:
@@ -748,10 +817,16 @@
           model.completed = AUTOMATION_COMPLETED_STATE.WITH_NON_INTEGRATION;
           completed = false;
         } else if (model.automationType === AUTOMATION_TYPE.VISITED_PRODUCTS) {
-          completed = domainHaveErrors(result, model.initialCondition.idThirdPartyApp) === 0;
-        } else if (model.automationType === AUTOMATION_TYPE.ABANDONED_CART
-          && model.initialCondition.idThirdPartyApp === 3) {
-          completed = domainHaveErrors(result, model.initialCondition.idThirdPartyApp) === 0;
+          completed =
+            domainHaveErrors(result, model.initialCondition.idThirdPartyApp) ===
+            0;
+        } else if (
+          model.automationType === AUTOMATION_TYPE.ABANDONED_CART &&
+          model.initialCondition.idThirdPartyApp === 3
+        ) {
+          completed =
+            domainHaveErrors(result, model.initialCondition.idThirdPartyApp) ===
+            0;
         }
       }
       return completed;
@@ -761,21 +836,31 @@
       var deletedUserFields;
       var domains;
 
-      settingsService.getSettings().then(function(response) {
+      settingsService.getSettings().then(function (response) {
         domains = response.domains;
         siteTracking = response.siteTrackingActive;
-        $rootScope.thirdPartyAppsConnected = response.thirdPartyAppsListConnected;
+        $rootScope.thirdPartyAppsConnected =
+          response.thirdPartyAppsListConnected;
         thirdPartyAppsConnected = response.thirdPartyAppsListConnected;
 
-        if (model.completed !== AUTOMATION_COMPLETED_STATE.COMPLETED &&
-          model.completed !== AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS) {
+        if (
+          model.completed !== AUTOMATION_COMPLETED_STATE.COMPLETED &&
+          model.completed !== AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS
+        ) {
           model.completed = AUTOMATION_COMPLETED_STATE.INCOMPLETE;
         }
-        if (model.automationType === AUTOMATION_TYPE.SCHEDULED_DATE
-          || model.automationType === AUTOMATION_TYPE.RSS_TO_EMAIL) {
-          if (model.initialCondition.frequency && model.initialCondition.frequency.type === FREQUENCY_TYPE.DAY_YEAR) {
+        if (
+          model.automationType === AUTOMATION_TYPE.SCHEDULED_DATE ||
+          model.automationType === AUTOMATION_TYPE.RSS_TO_EMAIL
+        ) {
+          if (
+            model.initialCondition.frequency &&
+            model.initialCondition.frequency.type === FREQUENCY_TYPE.DAY_YEAR
+          ) {
             deletedUserFields = userFieldsDataservice.getDeletedFieldsByType(
-              model.initialCondition.frequency.customFields, FIELD_TYPE.DATE);
+              model.initialCondition.frequency.customFields,
+              FIELD_TYPE.DATE
+            );
             if (deletedUserFields.length) {
               model.completed = AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS;
               model.state = AUTOMATION_STATE.DRAFT;
@@ -783,27 +868,34 @@
               model.completed = AUTOMATION_COMPLETED_STATE.INCOMPLETE;
               model.isFlowComplete();
             }
-          } else if (model.completed === AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS) {
+          } else if (
+            model.completed === AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS
+          ) {
             model.completed = AUTOMATION_COMPLETED_STATE.INCOMPLETE;
             model.isFlowComplete();
           }
         } else if (model.automationType === AUTOMATION_TYPE.SITE_BEHAVIOR) {
           updateAutomationSiteBehaviorFlowState(domains, siteTracking);
-        } else if (model.automationType === AUTOMATION_TYPE.ABANDONED_CART
-          || model.automationType === AUTOMATION_TYPE.VISITED_PRODUCTS
-          || model.automationType === AUTOMATION_TYPE.PENDING_ORDER) {
-          var completed = updateAutomationDynamicContentFlowState(thirdPartyAppsConnected);
+        } else if (
+          model.automationType === AUTOMATION_TYPE.ABANDONED_CART ||
+          model.automationType === AUTOMATION_TYPE.VISITED_PRODUCTS ||
+          model.automationType === AUTOMATION_TYPE.PENDING_ORDER
+        ) {
+          var completed = updateAutomationDynamicContentFlowState(
+            thirdPartyAppsConnected
+          );
           model.initialCondition.completed = completed;
           model.isFlowComplete();
         }
       });
-
     }
 
     function getHtmlContent(idCampaign) {
-      return automationDataservice.getHtmlContent(idCampaign).then(function(response) {
-        return response;
-      });
+      return automationDataservice
+        .getHtmlContent(idCampaign)
+        .then(function (response) {
+          return response;
+        });
     }
 
     function getListsItems(url, params) {
@@ -822,7 +914,7 @@
       return automationDataservice.sendTestToEmails(emailList, idCampaign);
     }
 
-    function validateAndAutoCompleteRSS(url){
+    function validateAndAutoCompleteRSS(url) {
       return automationDataservice.validateAndAutoCompleteRSS(url);
     }
     /*TODO: This method should be removed when we start using the initial condition
@@ -832,9 +924,11 @@
     }
 
     function getHtmlContentForPreview(idCampaign) {
-      return automationDataservice.getHtmlContentForPreview(idCampaign).then(function(response) {
-        return response;
-      });
+      return automationDataservice
+        .getHtmlContentForPreview(idCampaign)
+        .then(function (response) {
+          return response;
+        });
     }
 
     function onEmailNameChange(uidEmail, newName) {
@@ -843,23 +937,29 @@
       // the Email name must be updated in the action operations
       $rootScope.$broadcast('CAMPAIGN.NAME_CHANGE', {
         name: newName,
-        uidEmail: uidEmail
+        uidEmail: uidEmail,
       });
     }
 
     function resizeCanvas(action) {
-      var rootCondition = _.find(model.children, function(child){
+      var rootCondition = _.find(model.children, function (child) {
         return child.type === COMPONENT_TYPE.CONDITION;
       });
 
       if (rootCondition) {
-        var editorCondition = document.querySelector('#conditions-' + rootCondition.uid);
+        var editorCondition = document.querySelector(
+          '#conditions-' + rootCondition.uid
+        );
         if (!editorCondition) {
           return;
         }
-        var conditionWidth = editorCondition.children[0].offsetWidth + editorCondition.children[1].offsetWidth;
+        var conditionWidth =
+          editorCondition.children[0].offsetWidth +
+          editorCondition.children[1].offsetWidth;
         conditionWidth += action === 'remove' ? -250 : 250;
-        var canvasContainer = document.querySelector('#canvas-elements--container');
+        var canvasContainer = document.querySelector(
+          '#canvas-elements--container'
+        );
         var canvas = document.querySelector('#editor-canvas');
         if (canvas.offsetWidth - 150 > conditionWidth) {
           canvasContainer.style.width = canvas.offsetWidth + 'px';
@@ -871,7 +971,9 @@
     }
 
     function centerCanvas() {
-      var canvasContainer = document.querySelector('#canvas-elements--container');
+      var canvasContainer = document.querySelector(
+        '#canvas-elements--container'
+      );
       var canvas = document.querySelector('#editor-canvas');
       var outer = canvas.offsetWidth;
       var inner = canvasContainer.offsetWidth;
@@ -881,7 +983,7 @@
 
     function toggleCollapsePanel(value) {
       isPanelCollapsed = value;
-      $timeout(function() {
+      $timeout(function () {
         resizeCanvas();
       }, 800);
     }
@@ -891,23 +993,25 @@
     }
 
     function getSiteBehaviorStatus() {
-      return automationDataservice.getSiteBehaviorStatus().then(function(status) {
-        return status;
-      });
+      return automationDataservice
+        .getSiteBehaviorStatus()
+        .then(function (status) {
+          return status;
+        });
     }
 
     function confirmDomain(domain) {
       var validDomainRegEx = new RegExp('^[A-Za-z0-9._%+-]+@' + domain + '$');
 
       _.chain(parentComponents)
-        .map(function(parent) {
+        .map(function (parent) {
           return parent.getEmailChildrenComponents();
         })
         .flatten()
-        .filter(function(campaign) {
+        .filter(function (campaign) {
           return validDomainRegEx.test(campaign.fromEmail);
         })
-        .each(function(campaign) {
+        .each(function (campaign) {
           campaign.confirmedDomain = domain;
           campaign.checkCompleted();
           warningsStepsService.checkWarningStep(campaign);
@@ -920,39 +1024,51 @@
       var result = [];
       if ($rootScope.thirdPartyAppsConnected.length !== 0) {
         switch (automationType) {
-        case AUTOMATION_TYPE.ABANDONED_CART:
-          result = $rootScope.thirdPartyAppsConnected.filter(function(val) {
-            return val.AbandonedCartEnabled === true && val.AbandonedCartCreated === false;
-          });
-          break;
-        case AUTOMATION_TYPE.VISITED_PRODUCTS:
-          result = $rootScope.thirdPartyAppsConnected.filter(function(val) {
-            return val.VisitedProductsEnabled === true && val.VisitedProductsCreated === false;
-          });
-          break;
-        case AUTOMATION_TYPE.PENDING_ORDER:
-          result = $rootScope.thirdPartyAppsConnected.filter(function (val) {
-            return val.PendingOrderEnabled === true && val.PendingOrderCreated === false;
-          });
+          case AUTOMATION_TYPE.ABANDONED_CART:
+            result = $rootScope.thirdPartyAppsConnected.filter(function (val) {
+              return (
+                val.AbandonedCartEnabled === true &&
+                val.AbandonedCartCreated === false
+              );
+            });
             break;
-        case AUTOMATION_TYPE.CONFIRMATION_ORDER:
-          result = $rootScope.thirdPartyAppsConnected.filter(function (val) {
-            return val.ConfirmationOrderEnabled === true && val.ConfirmationOrderCreated === false;
-          });
-          break;
-        default:
-          return false;
+          case AUTOMATION_TYPE.VISITED_PRODUCTS:
+            result = $rootScope.thirdPartyAppsConnected.filter(function (val) {
+              return (
+                val.VisitedProductsEnabled === true &&
+                val.VisitedProductsCreated === false
+              );
+            });
+            break;
+          case AUTOMATION_TYPE.PENDING_ORDER:
+            result = $rootScope.thirdPartyAppsConnected.filter(function (val) {
+              return (
+                val.PendingOrderEnabled === true &&
+                val.PendingOrderCreated === false
+              );
+            });
+            break;
+          case AUTOMATION_TYPE.CONFIRMATION_ORDER:
+            result = $rootScope.thirdPartyAppsConnected.filter(function (val) {
+              return (
+                val.ConfirmationOrderEnabled === true &&
+                val.ConfirmationOrderCreated === false
+              );
+            });
+            break;
+          default:
+            return false;
         }
       }
 
       if (selectedTaskThirdPartySelected) {
-        var selected = thirdPartyAppsConnected.find(function(obj) {
+        var selected = thirdPartyAppsConnected.find(function (obj) {
           return obj.IdThirdPartyApp === selectedTaskThirdPartySelected;
         });
-        if (selected){
+        if (selected) {
           result.push(selected);
         }
-      }      
+      }
 
       // Parse result for dropdown.
       var resultParsedWidthThirdPartyConnectedFormated = [];
@@ -961,7 +1077,7 @@
           label: result[i].Name,
           value: result[i].IdThirdPartyApp,
           DomainVerified: result[i].DomainVerified,
-          IdThirdPartyApp: result[i].IdThirdPartyApp
+          IdThirdPartyApp: result[i].IdThirdPartyApp,
         };
       }
 
@@ -970,9 +1086,13 @@
 
     function domainHaveErrors(productsStoreOptions, selectedOption) {
       var domainError = 0;
-      var domainVerified = productsStoreOptions.filter(function(val) {
-        return val.DomainVerified === true && val.IdThirdPartyApp === selectedOption;
-      }).length ? true : false;
+      var domainVerified = productsStoreOptions.filter(function (val) {
+        return (
+          val.DomainVerified === true && val.IdThirdPartyApp === selectedOption
+        );
+      }).length
+        ? true
+        : false;
       if (!siteTracking) {
         domainError = 3;
       } else if (!domainVerified) {
@@ -980,9 +1100,13 @@
       }
       if (domainError) {
         model.completed = AUTOMATION_COMPLETED_STATE.WITH_NON_REGISTERED_DOMAIN;
-      } else if (model.completed === AUTOMATION_COMPLETED_STATE.WITH_DELETED_DOMAIN ||
-        model.completed === AUTOMATION_COMPLETED_STATE.WITH_NON_VERIFIED_DOMAIN ||
-        model.completed === AUTOMATION_COMPLETED_STATE.WITH_NON_REGISTERED_DOMAIN) {
+      } else if (
+        model.completed === AUTOMATION_COMPLETED_STATE.WITH_DELETED_DOMAIN ||
+        model.completed ===
+          AUTOMATION_COMPLETED_STATE.WITH_NON_VERIFIED_DOMAIN ||
+        model.completed ===
+          AUTOMATION_COMPLETED_STATE.WITH_NON_REGISTERED_DOMAIN
+      ) {
         model.completed = AUTOMATION_COMPLETED_STATE.COMPLETED;
         domainError = 0;
       }
@@ -993,13 +1117,12 @@
       model.children[0].hasUnsavedChanges = true;
     }
 
-    function hasBlockedList(){
-      return model.initialCondition.suscriptionLists.some(
-      function(e){
+    function hasBlockedList() {
+      return model.initialCondition.suscriptionLists.some(function (e) {
         return e.ListStatus == 14;
-      })
-    } 
-    
+      });
+    }
+
     function getInitialConditionUid() {
       return model.initialCondition.uid;
     }

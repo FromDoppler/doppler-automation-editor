@@ -1,7 +1,12 @@
 <div class="grid-display payment-two-columns margin-t-20">
-  <div ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.ARGENTINA 
-  || smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.MEXICO">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.consumer_type' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.ARGENTINA 
+  || smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.MEXICO"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.consumer_type' | translate
+      }}</label
+    >
     <dropdown
       class="dropdown"
       placeholder="{{smsSettings.selectOptionPlaceholder}}"
@@ -12,17 +17,23 @@
       ng-model="smsSettings.paymentData.billingInformation.idConsumerType"
       ng-required="billingInformationForm.idConsumerType.$dirty || billingInformationForm.$submitted"
       property="description"
-      id-value="idConsumerType"></dropdown>
+      id-value="idConsumerType"
+    ></dropdown>
   </div>
-  <div ng-include="'angularjs/partials/controlPanel/smsSettings/smsPaymentMethods/dni.html'"
-      ng-if="smsSettings.showDNI(
+  <div
+    ng-include="'angularjs/partials/controlPanel/smsSettings/smsPaymentMethods/dni.html'"
+    ng-if="smsSettings.showDNI(
         smsSettings.paymentData.billingInformation.idCountry,
         smsSettings.selectedPaymentMethod,
         smsSettings.paymentData.billingInformation.idConsumerType
-        )">
-  </div>
-  <div ng-if="smsSettings.showCuit(smsSettings.paymentData.billingInformation.idConsumerType)">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.cuit' | translate }}</label>
+        )"
+  ></div>
+  <div
+    ng-if="smsSettings.showCuit(smsSettings.paymentData.billingInformation.idConsumerType)"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.cuit' | translate }}</label
+    >
     <input
       type="text"
       dp-integer-input
@@ -30,16 +41,25 @@
       ng-model="smsSettings.paymentData.billingInformation.cuit"
       name="cuit"
       class="input--text"
-      ng-maxlength="11",
-      ng-minlength="11",
-      maxlength="11",
-      minlength="11",
+      ng-maxlength="11"
+      ,
+      ng-minlength="11"
+      ,
+      maxlength="11"
+      ,
+      minlength="11"
+      ,
       ng-class="{ 'hasErrors' : billingInformationForm.cuit.$invalid }"
-      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"
+    />
   </div>
   <!-- COLOMBIA FIELDS-->
-  <div ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.COLOMBIA">
-    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.NIT' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.COLOMBIA"
+  >
+    <label class="label label--panel"
+      >* {{ 'form_labels.payment_ways.transfer.NIT' | translate }}</label
+    >
     <input
       type="text"
       dp-integer-input
@@ -47,32 +67,52 @@
       ng-model="smsSettings.paymentData.billingInformation.cuit"
       name="cuit"
       class="input--text"
-      ng-maxlength="16",
-      ng-minlength="6",
-      maxlength="16",
-      minlength="6",
+      ng-maxlength="16"
+      ,
+      ng-minlength="6"
+      ,
+      maxlength="16"
+      ,
+      minlength="6"
+      ,
       ng-class="{ 'hasErrors' : billingInformationForm.cuit.$invalid && billingInformationForm.$submitted}"
-      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"
+    />
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.COLOMBIA">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.company_name' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.COLOMBIA"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.company_name' | translate
+      }}</label
+    >
     <input
       type="text"
       ng-model="smsSettings.paymentData.billingInformation.companyName"
       name="companyName"
       class="input--text"
       ng-class="{ 'hasErrors' : billingInformationForm.companyName.$invalid }"
-      ng-required="billingInformationForm.companyName.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.companyName.$dirty || billingInformationForm.$submitted"
+    />
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.COLOMBIA">
-    <label class="label label--panel">* {{ 'form_labels.payment_ways.transfer.ResponsableIVA' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idCountry === smsSettings.COUNTRIES_WITH_TRANSFER.COLOMBIA"
+  >
+    <label class="label label--panel"
+      >* {{ 'form_labels.payment_ways.transfer.ResponsableIVA' | translate
+      }}</label
+    >
     <input
       class="radio-custom"
       type="radio"
       id="responsableIVAYes"
       name="ResponsableIVA"
-      ng-checked="smsSettings.paymentData.billingInformation.responsableIVA === true"/>
-    <label for="responsableIVAYes" ng-click="smsSettings.paymentData.billingInformation.responsableIVA = true"></label>
+      ng-checked="smsSettings.paymentData.billingInformation.responsableIVA === true"
+    />
+    <label
+      for="responsableIVAYes"
+      ng-click="smsSettings.paymentData.billingInformation.responsableIVA = true"
+    ></label>
     <span class="text--small margin-l-25 margin-r-30">
       {{ 'button_yes' | translate }}
     </span>
@@ -81,48 +121,75 @@
       type="radio"
       id="responsableIVANo"
       name="ResponsableIVA"
-      ng-checked="smsSettings.paymentData.billingInformation.responsableIVA === false"/>
-    <label for="responsableIVANo" ng-click="smsSettings.paymentData.billingInformation.responsableIVA = false"></label>
+      ng-checked="smsSettings.paymentData.billingInformation.responsableIVA === false"
+    />
+    <label
+      for="responsableIVANo"
+      ng-click="smsSettings.paymentData.billingInformation.responsableIVA = false"
+    ></label>
     <span class="text--small margin-l-25 margin-r-30">
       {{ 'button_no' | translate }}
     </span>
   </div>
 
-  <div ng-if="smsSettings.showCuit(smsSettings.paymentData.billingInformation.idConsumerType)">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.company_name' | translate }}</label>
+  <div
+    ng-if="smsSettings.showCuit(smsSettings.paymentData.billingInformation.idConsumerType)"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.company_name' | translate
+      }}</label
+    >
     <input
       type="text"
       ng-model="smsSettings.paymentData.billingInformation.companyName"
       name="companyName"
       class="input--text"
       ng-class="{ 'hasErrors' : billingInformationForm.companyName.$invalid }"
-      ng-required="billingInformationForm.companyName.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.companyName.$dirty || billingInformationForm.$submitted"
+    />
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.RFC' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.RFC' | translate }}</label
+    >
     <input
       type="text"
       dp-rfc-validator
       ng-model="smsSettings.paymentData.billingInformation.cuit"
       name="cuit"
-      ng-maxlength="16",
-      maxlength="16",
+      ng-maxlength="16"
+      ,
+      maxlength="16"
+      ,
       class="input--text text-uppercase"
       ng-class="{ 'hasErrors' : billingInformationForm.cuit.$invalid }"
-      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.cuit.$dirty || billingInformationForm.$submitted"
+    />
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.company_name' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.company_name' | translate
+      }}</label
+    >
     <input
       type="text"
       ng-model="smsSettings.paymentData.billingInformation.companyName"
       name="companyName"
       class="input--text"
       ng-class="{ 'hasErrors' : billingInformationForm.companyName.$invalid }"
-      ng-required="billingInformationForm.companyName.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.companyName.$dirty || billingInformationForm.$submitted"
+    />
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.CFDI' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.CFDI' | translate }}</label
+    >
     <dropdown
       class="dropdown"
       placeholder="{{smsSettings.selectOptionPlaceholder}}"
@@ -133,10 +200,16 @@
       ng-model="smsSettings.paymentData.billingInformation.CFDIUse"
       ng-required="billingInformationForm.CFDIUse.$dirty || billingInformationForm.$submitted"
       property="description"
-      id-value="id"></dropdown>
+      id-value="id"
+    ></dropdown>
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.payment_method' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.payment_method' | translate
+      }}</label
+    >
     <dropdown
       class="dropdown"
       placeholder="{{smsSettings.selectOptionPlaceholder}}"
@@ -147,10 +220,16 @@
       ng-model="smsSettings.paymentData.billingInformation.paymentType"
       ng-required="billingInformationForm.paymentType.$dirty || billingInformationForm.$submitted"
       property="description"
-      id-value="id"></dropdown>
+      id-value="id"
+    ></dropdown>
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.payment_type' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.idConsumerType === smsSettings.CONSUMER_TYPE.RFC"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.payment_type' | translate
+      }}</label
+    >
     <dropdown
       class="dropdown"
       placeholder="{{smsSettings.selectOptionPlaceholder}}"
@@ -161,31 +240,47 @@
       ng-model="smsSettings.paymentData.billingInformation.paymentWay"
       ng-required="billingInformationForm.paymentWay.$dirty || billingInformationForm.$submitted"
       property="description"
-      id-value="id"></dropdown>
+      id-value="id"
+    ></dropdown>
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.paymentWay === 'TRANSFER'">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.bank_name' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.paymentWay === 'TRANSFER'"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.bank_name' | translate }}</label
+    >
     <input
       type="text"
       ng-model="smsSettings.paymentData.billingInformation.bankName"
       name="bankName"
       class="input--text"
       ng-class="{ 'hasErrors' : billingInformationForm.bankName.$invalid }"
-      ng-required="billingInformationForm.bankName.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.bankName.$dirty || billingInformationForm.$submitted"
+    />
   </div>
-  <div ng-if="smsSettings.paymentData.billingInformation.paymentWay === 'TRANSFER'">
-    <label class="label label--panel">* {{ 'sms_settings.buy_screen.transfer.last_4_digits' | translate }}</label>
+  <div
+    ng-if="smsSettings.paymentData.billingInformation.paymentWay === 'TRANSFER'"
+  >
+    <label class="label label--panel"
+      >* {{ 'sms_settings.buy_screen.transfer.last_4_digits' | translate
+      }}</label
+    >
     <input
       type="text"
       dp-integer-input
       ng-model="smsSettings.paymentData.billingInformation.lastNumbers"
       name="lastNumbers"
       class="input--text"
-      ng-maxlength="4",
-      ng-minlength="4",
-      maxlength="4",
-      minlength="4",
+      ng-maxlength="4"
+      ,
+      ng-minlength="4"
+      ,
+      maxlength="4"
+      ,
+      minlength="4"
+      ,
       ng-class="{ 'hasErrors' : billingInformationForm.lastNumbers.$invalid }"
-      ng-required="billingInformationForm.lastNumbers.$dirty || billingInformationForm.$submitted"/>
+      ng-required="billingInformationForm.lastNumbers.$dirty || billingInformationForm.$submitted"
+    />
   </div>
 </div>

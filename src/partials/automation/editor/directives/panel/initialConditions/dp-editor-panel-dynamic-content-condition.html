@@ -1,67 +1,114 @@
 <div class="dynamic-content-condition--container">
-  <p class="title">{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.title' | translate }}</p>
+  <p class="title">
+    {{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.title'
+    | translate }}
+  </p>
   <div class="disable--toggler" ng-show="true">
-    <label class="label label--panel">*{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.ecommerce_label' | translate }}</label>
-    <dp-editor-dropdown options="productsStoreOptions"
-                        label="'automation_editor.sidebar.'+ selectedComponent.automationType +'.drop_down_options.option' + selectedComponent.idThirdPartyApp | translate"
-                        value-selected="selectedComponent.idThirdPartyApp"
-                        on-select-option="onProductStoreChange(option)"
-                        ng-class="{hasErrors: showDomainErrorMsg}"
-                        class="dropdown dropdown--full"></dp-editor-dropdown>
-    <div ng-show="showDomainErrorMsg" ng-messages="showDomainErrorMsg" class="error-messages--container">
-      <div class="error" ng-bind-html="'automation_editor.sidebar.visited_products.drop_down_ecommerce_errors.error' + showDomainErrorMsg | translate"></div>
+    <label class="label label--panel"
+      >*{{ 'automation_editor.sidebar.'+ selectedComponent.automationType
+      +'.ecommerce_label' | translate }}</label
+    >
+    <dp-editor-dropdown
+      options="productsStoreOptions"
+      label="'automation_editor.sidebar.'+ selectedComponent.automationType +'.drop_down_options.option' + selectedComponent.idThirdPartyApp | translate"
+      value-selected="selectedComponent.idThirdPartyApp"
+      on-select-option="onProductStoreChange(option)"
+      ng-class="{hasErrors: showDomainErrorMsg}"
+      class="dropdown dropdown--full"
+    ></dp-editor-dropdown>
+    <div
+      ng-show="showDomainErrorMsg"
+      ng-messages="showDomainErrorMsg"
+      class="error-messages--container"
+    >
+      <div
+        class="error"
+        ng-bind-html="'automation_editor.sidebar.visited_products.drop_down_ecommerce_errors.error' + showDomainErrorMsg | translate"
+      ></div>
     </div>
     <div ng-show="showIntervalTimeControl()">
-      <label class="label label--panel">*{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.time_label' | translate: { time : selectedComponent.eventIntervalMinutesLabel } }}</label>
-      <dp-editor-dropdown options="productsStoreTimeOptions"
-                        label="'automation_editor.sidebar.'+ selectedComponent.automationType +'.drop_down_time_options.option' + selectedComponent.eventIntervalMinutes | translate"
-                        value-selected="selectedComponent.eventIntervalMinutes"
-                        on-select-option="onProductStoreTimePassedChange(option)"
-                        class="dropdown dropdown--full"
-                        ng-disabled="isReadOnly()"></dp-editor-dropdown>
+      <label class="label label--panel"
+        >*{{ 'automation_editor.sidebar.'+ selectedComponent.automationType
+        +'.time_label' | translate: { time :
+        selectedComponent.eventIntervalMinutesLabel } }}</label
+      >
+      <dp-editor-dropdown
+        options="productsStoreTimeOptions"
+        label="'automation_editor.sidebar.'+ selectedComponent.automationType +'.drop_down_time_options.option' + selectedComponent.eventIntervalMinutes | translate"
+        value-selected="selectedComponent.eventIntervalMinutes"
+        on-select-option="onProductStoreTimePassedChange(option)"
+        class="dropdown dropdown--full"
+        ng-disabled="isReadOnly()"
+      ></dp-editor-dropdown>
     </div>
     <div ng-show="showWaitControl()">
       <div class="input--group input--group--alt">
-        <p class="title title-with-description">{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.wait_title' | translate }}</p>
+        <p class="title title-with-description">
+          {{ 'automation_editor.sidebar.'+ selectedComponent.automationType
+          +'.wait_title' | translate }}
+        </p>
       </div>
-      <label class="label label--panel">*{{'automation_editor.sidebar.'+ selectedComponent.automationType +'.wait_label' | translate }}</label>
+      <label class="label label--panel"
+        >*{{'automation_editor.sidebar.'+ selectedComponent.automationType
+        +'.wait_label' | translate }}</label
+      >
       <div class="input--group">
         <div class="flex-grid-v-center--s-between">
-          <dp-editor-dropdown options="productsStoreWaitOptions"
-                              label="'automation_editor.sidebar.'+ selectedComponent.automationType +'.drop_down_wait_options.option' + selectedComponent.eventWaitMinutes | translate"
-                              value-selected="selectedComponent.eventWaitMinutes"
-                              on-select-option="onProductStoreWaitPassedChange(option)"
-                              class="dropdown dropdown--full"
-                              ng-disabled="isReadOnly()"></dp-editor-dropdown>
+          <dp-editor-dropdown
+            options="productsStoreWaitOptions"
+            label="'automation_editor.sidebar.'+ selectedComponent.automationType +'.drop_down_wait_options.option' + selectedComponent.eventWaitMinutes | translate"
+            value-selected="selectedComponent.eventWaitMinutes"
+            on-select-option="onProductStoreWaitPassedChange(option)"
+            class="dropdown dropdown--full"
+            ng-disabled="isReadOnly()"
+          ></dp-editor-dropdown>
         </div>
       </div>
     </div>
 
     <div ng-show="showVerificationTimeControl()">
-      <label class="label label--panel">{{'automation_editor.components.initial_condition.site_behavior.panel.verification_time' | translate }}</label>
+      <label class="label label--panel"
+        >{{'automation_editor.components.initial_condition.site_behavior.panel.verification_time'
+        | translate }}</label
+      >
       <div class="input--group">
         <div class="flex-grid-v-center--s-between">
-          <input class="number input--text input-size--medium" name="verificationTime" type="text" pattern="\d*" maxlength="3"
-                 ng-pattern="verificationTimePattern"
-                 ng-class="{ 'hasErrors': siteBehaviorForm.verificationTime.$invalid}"
-                 ng-required="siteBehaviorForm.verificationTime.$dirty || selectedComponent.touched"
-                 placeholder="{{ 'automation_editor.components.initial_condition.site_behavior.panel.verification_time_placeholder' | translate }}"
-                 ng-model="selectedComponent.verificationTime" />
-          <dp-editor-dropdown class="dropdown dropdown--medium" id="dd-unit" name="unit"
-                              property="timeUnit"
-                              options="timeUnitOptions"
-                              label="'automation_editor.sidebar.time_unit.' + selectedComponent.timeUnit | translate"
-                              on-select-option="onTimeUnitSelected(option.value)"
-                              value-selected="selectedComponent.timeUnit"
-                              ng-disabled="isReadOnly();">
+          <input
+            class="number input--text input-size--medium"
+            name="verificationTime"
+            type="text"
+            pattern="\d*"
+            maxlength="3"
+            ng-pattern="verificationTimePattern"
+            ng-class="{ 'hasErrors': siteBehaviorForm.verificationTime.$invalid}"
+            ng-required="siteBehaviorForm.verificationTime.$dirty || selectedComponent.touched"
+            placeholder="{{ 'automation_editor.components.initial_condition.site_behavior.panel.verification_time_placeholder' | translate }}"
+            ng-model="selectedComponent.verificationTime"
+          />
+          <dp-editor-dropdown
+            class="dropdown dropdown--medium"
+            id="dd-unit"
+            name="unit"
+            property="timeUnit"
+            options="timeUnitOptions"
+            label="'automation_editor.sidebar.time_unit.' + selectedComponent.timeUnit | translate"
+            on-select-option="onTimeUnitSelected(option.value)"
+            value-selected="selectedComponent.timeUnit"
+            ng-disabled="isReadOnly();"
+          >
           </dp-editor-dropdown>
         </div>
-        <div ng-messages="siteBehaviorForm.verificationTime.$error" class="error-messages--container">
+        <div
+          ng-messages="siteBehaviorForm.verificationTime.$error"
+          class="error-messages--container"
+        >
           <div class="error" ng-message="pattern">
-            {{'automation_editor.components.condition.verification_time.error_' + selectedComponent.timeUnit | translate}}
+            {{'automation_editor.components.condition.verification_time.error_'
+            + selectedComponent.timeUnit | translate}}
           </div>
           <div class="error" ng-message="required">
-            {{'automation_editor.components.condition.verification_time.error_' + selectedComponent.timeUnit | translate}}
+            {{'automation_editor.components.condition.verification_time.error_'
+            + selectedComponent.timeUnit | translate}}
           </div>
         </div>
       </div>
@@ -70,14 +117,37 @@
     <div class="flex-grid" ng-show="showExcludeOutsaleProductsControl()">
       <div class="switch">
         <span class="titip-top titip-fade">
-          <input id="availableStock" class="dfl-cmn-toggle dfl-cmn-toggle-round" type="checkbox" ng-change="onAvailableStockChange(availableStock)" ng-checked="availableStock" ng-model="availableStock">
-          <label for="availableStock">
-          </label>
+          <input
+            id="availableStock"
+            class="dfl-cmn-toggle dfl-cmn-toggle-round"
+            type="checkbox"
+            ng-change="onAvailableStockChange(availableStock)"
+            ng-checked="availableStock"
+            ng-model="availableStock"
+          />
+          <label for="availableStock"> </label>
         </span>
       </div>
-      <label class="text--small"><strong>{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.stock_label' | translate }}</strong></label>
+      <label class="text--small"
+        ><strong
+          >{{ 'automation_editor.sidebar.'+ selectedComponent.automationType
+          +'.stock_label' | translate }}</strong
+        ></label
+      >
     </div>
   </div>
   <span class="icon-globo"></span>
-  <p class="help-tip"><strong>{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.list_tip' | translate }}</strong> <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span> <a ng-href="{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.list_tip_link_url' | translate }}" class="link--default" target="_blank">{{ 'automation_editor.sidebar.list_tip_link_text' | translate }}</a>.</p>
+  <p class="help-tip">
+    <strong
+      >{{ 'automation_editor.sidebar.'+ selectedComponent.automationType
+      +'.list_tip' | translate }}</strong
+    >
+    <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span>
+    <a
+      ng-href="{{ 'automation_editor.sidebar.'+ selectedComponent.automationType +'.list_tip_link_url' | translate }}"
+      class="link--default"
+      target="_blank"
+      >{{ 'automation_editor.sidebar.list_tip_link_text' | translate }}</a
+    >.
+  </p>
 </div>

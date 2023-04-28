@@ -1,18 +1,28 @@
 <div class="margin-t-20">
-  <label class="label label--panel">* {{ 'form_labels.fullname' | translate }}</label>
+  <label class="label label--panel"
+    >* {{ 'form_labels.fullname' | translate }}</label
+  >
   <input
     type="text"
     name="fullname"
     class="input--text"
     ng-model="billingInformation.billingInformationData.ccHolderFullName"
     ng-required="billingInformationForm.fullname.$dirty || billingInformationForm.$submitted"
-    ng-class="{ 'hasErrors' : billingInformationForm.fullname.$invalid }"/>
-  <div ng-messages="billingInformationForm.fullname.$error" class="error-messages--container" >
-    <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+    ng-class="{ 'hasErrors' : billingInformationForm.fullname.$invalid }"
+  />
+  <div
+    ng-messages="billingInformationForm.fullname.$error"
+    class="error-messages--container"
+  >
+    <div ng-message="required" class="error">
+      {{ 'validation_messages.required' | translate }}
+    </div>
   </div>
   <div class="grid-display payment-two-columns gap-30 padding-t-10 row-gap-10">
     <div>
-      <label class="label label--panel">* {{ 'form_labels.payment_ways.credit_card.type' | translate }}</label>
+      <label class="label label--panel"
+        >* {{ 'form_labels.payment_ways.credit_card.type' | translate }}</label
+      >
       <dropdown
         class="dropdown"
         placeholder="{{billingInformation.generalPlaceholder}}"
@@ -27,13 +37,22 @@
         ng-change="billingInformation.updateRegExCC(billingInformationForm.ccNumber.$viewValue);
           billingInformation.billingInformationData.ccNumberEncrypted === billingInformationForm.ccNumber.$viewValue ?
             billingInformation.billingInformationData.ccNumber = null : false;
-          billingInformation.billingInformationData.ccNumberEncrypted = null"></dropdown>
-      <div ng-messages="billingInformationForm.idCCType.$error" class="error-messages--container" >
-        <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+          billingInformation.billingInformationData.ccNumberEncrypted = null"
+      ></dropdown>
+      <div
+        ng-messages="billingInformationForm.idCCType.$error"
+        class="error-messages--container"
+      >
+        <div ng-message="required" class="error">
+          {{ 'validation_messages.required' | translate }}
+        </div>
       </div>
     </div>
     <div>
-      <label class="label label--panel">* {{ 'form_labels.payment_ways.credit_card.number' | translate }}</label>
+      <label class="label label--panel"
+        >* {{ 'form_labels.payment_ways.credit_card.number' | translate
+        }}</label
+      >
       <input
         type="text"
         dp-integer-input
@@ -49,16 +68,27 @@
           billingInformation.updateRegExCC(billingInformationForm.ccNumber.$viewValue)"
         ng-blur="!billingInformationForm.ccNumber.$viewValue ?
         billingInformation.billingInformationData.ccNumber = billingInformation.billingInformationData.ccNumberEncrypted : false;
-          billingInformation.updateRegExCC(billingInformation.billingInformationData.ccNumber)"/>
-      <div ng-messages="billingInformationForm.ccNumber.$error" class="error-messages--container" >
-        <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
-        <div ng-message="pattern" class="error">{{ 'validation_messages.number_pattern' | translate }}</div>
+          billingInformation.updateRegExCC(billingInformation.billingInformationData.ccNumber)"
+      />
+      <div
+        ng-messages="billingInformationForm.ccNumber.$error"
+        class="error-messages--container"
+      >
+        <div ng-message="required" class="error">
+          {{ 'validation_messages.required' | translate }}
+        </div>
+        <div ng-message="pattern" class="error">
+          {{ 'validation_messages.number_pattern' | translate }}
+        </div>
       </div>
     </div>
     <div>
       <div class="grid-display payment-two-columns gap-30">
         <div>
-          <label class="label label--panel">* {{ 'form_labels.payment_ways.credit_card.exp_date' | translate }}</label>
+          <label class="label label--panel"
+            >* {{ 'form_labels.payment_ways.credit_card.exp_date' | translate
+            }}</label
+          >
           <dropdown
             class="dropdown"
             placeholder="{{billingInformation.monthPlaceholder}}"
@@ -70,9 +100,15 @@
             id-value="id"
             ng-change="billingInformation.validateExpDate(billingInformationForm)"
             ng-required="billingInformationForm.ccExpMonth.$dirty || billingInformationForm.$submitted"
-            ng-class="{ 'hasErrors' : billingInformationForm.ccExpMonth.$invalid }"></dropdown>
-          <div ng-messages="billingInformationForm.ccExpMonth.$error" class="error-messages--container" >
-            <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+            ng-class="{ 'hasErrors' : billingInformationForm.ccExpMonth.$invalid }"
+          ></dropdown>
+          <div
+            ng-messages="billingInformationForm.ccExpMonth.$error"
+            class="error-messages--container"
+          >
+            <div ng-message="required" class="error">
+              {{ 'validation_messages.required' | translate }}
+            </div>
           </div>
         </div>
         <div>
@@ -87,19 +123,33 @@
             id-value="id"
             ng-change="billingInformation.validateExpDate(billingInformationForm)"
             ng-required="billingInformationForm.ccExpYear.$dirty || billingInformationForm.$submitted"
-            ng-class="{ 'hasErrors' : billingInformationForm.ccExpYear.$invalid }"></dropdown>
-          <div ng-messages="billingInformationForm.ccExpYear.$error" class="error-messages--container" >
-            <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+            ng-class="{ 'hasErrors' : billingInformationForm.ccExpYear.$invalid }"
+          ></dropdown>
+          <div
+            ng-messages="billingInformationForm.ccExpYear.$error"
+            class="error-messages--container"
+          >
+            <div ng-message="required" class="error">
+              {{ 'validation_messages.required' | translate }}
+            </div>
           </div>
         </div>
       </div>
-      <div ng-messages="billingInformationForm.ccExpMonth.$error" class="error-messages--container" >
-        <div ng-message="invalidExpDate" class="error">{{ 'validation_messages.exp_date' | translate }}</div>
+      <div
+        ng-messages="billingInformationForm.ccExpMonth.$error"
+        class="error-messages--container"
+      >
+        <div ng-message="invalidExpDate" class="error">
+          {{ 'validation_messages.exp_date' | translate }}
+        </div>
       </div>
     </div>
     <div>
-      <label class="label label--panel">* {{ 'form_labels.payment_ways.credit_card.cvv' | translate }}</label>
-      <input dp-integer-input
+      <label class="label label--panel"
+        >* {{ 'form_labels.payment_ways.credit_card.cvv' | translate }}</label
+      >
+      <input
+        dp-integer-input
         type="text"
         class="input--text"
         ng-class="{ 'hasErrors' : billingInformationForm.ccVerificationCode.$invalid}"
@@ -109,24 +159,39 @@
         ng-maxlength="{{ billingInformation.cvvLength }}"
         ng-minlenght="{{ billingInformation.cvvLength }}"
         maxlength="{{ billingInformation.cvvLength }}"
-        minlength="{{ billingInformation.cvvLength }}"/>
-      <div ng-messages="billingInformationForm.ccVerificationCode.$error" class="error-messages--container" >
-        <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
-        <div ng-message="maxlength" class="error">{{ 'validation_messages.number_pattern' | translate }}</div>
-        <div ng-message="minlength" class="error">{{ 'validation_messages.number_pattern' | translate }}</div>
+        minlength="{{ billingInformation.cvvLength }}"
+      />
+      <div
+        ng-messages="billingInformationForm.ccVerificationCode.$error"
+        class="error-messages--container"
+      >
+        <div ng-message="required" class="error">
+          {{ 'validation_messages.required' | translate }}
+        </div>
+        <div ng-message="maxlength" class="error">
+          {{ 'validation_messages.number_pattern' | translate }}
+        </div>
+        <div ng-message="minlength" class="error">
+          {{ 'validation_messages.number_pattern' | translate }}
+        </div>
       </div>
     </div>
-    <div ng-include="'angularjs/partials/controlPanel/billingInformation/dni.html'"
+    <div
+      ng-include="'angularjs/partials/controlPanel/billingInformation/dni.html'"
       ng-if="billingInformation.showDNI(
             billingInformation.billingInformationData.idCountry,
             billingInformation.billingInformationData.idPaymentMethod,
             billingInformation.billingInformationData.idConsumerTypeArgentina
-            )">
-    </div>
-    <div ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.MP">
+            )"
+    ></div>
+    <div
+      ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.MP"
+    >
       <div class="grid-display payment-two-columns gap-30">
         <div>
-          <label class="label label--panel">* {{ 'form_labels.document_type' | translate }}</label>
+          <label class="label label--panel"
+            >* {{ 'form_labels.document_type' | translate }}</label
+          >
           <dropdown
             class="dropdown"
             placeholder="{{billingInformation.generalPlaceholder}}"
@@ -138,14 +203,23 @@
             id-value="id"
             ng-change="billingInformation.updateIdentificationNumberLength(billingInformation.billingInformationData.ccIdentificationType)"
             ng-required="billingInformationForm.ccIdentificationType.$dirty || billingInformationForm.$submitted"
-            ng-class="{ 'hasErrors' : billingInformationForm.ccIdentificationType.$invalid }"></dropdown>
-          <div ng-messages="billingInformationForm.ccIdentificationType.$error" class="error-messages--container" >
-            <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
+            ng-class="{ 'hasErrors' : billingInformationForm.ccIdentificationType.$invalid }"
+          ></dropdown>
+          <div
+            ng-messages="billingInformationForm.ccIdentificationType.$error"
+            class="error-messages--container"
+          >
+            <div ng-message="required" class="error">
+              {{ 'validation_messages.required' | translate }}
+            </div>
           </div>
         </div>
         <div>
-          <label class="label label--panel">* {{ 'form_labels.document_number' | translate }}</label>
-          <input dp-integer-input
+          <label class="label label--panel"
+            >* {{ 'form_labels.document_number' | translate }}</label
+          >
+          <input
+            dp-integer-input
             type="text"
             class="input--text"
             ng-class="{ 'hasErrors' : billingInformationForm.ccIdentificationNumber.$invalid}"
@@ -155,22 +229,41 @@
             maxlength="20"
             ng-minlength="billingInformation.identificationNumberLength.min"
             ng-maxlength="billingInformation.identificationNumberLength.max"
-            ng-required="billingInformationForm.ccIdentificationNumber.$dirty || billingInformationForm.$submitted"/>
-          <div ng-messages="billingInformationForm.ccIdentificationNumber.$error" class="error-messages--container" >
-            <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
-            <div ng-message="maxlength" class="error">{{ 'validation_messages.number_pattern' | translate }}</div>
-            <div ng-message="minlength" class="error">{{ 'validation_messages.number_pattern' | translate }}</div>
+            ng-required="billingInformationForm.ccIdentificationNumber.$dirty || billingInformationForm.$submitted"
+          />
+          <div
+            ng-messages="billingInformationForm.ccIdentificationNumber.$error"
+            class="error-messages--container"
+          >
+            <div ng-message="required" class="error">
+              {{ 'validation_messages.required' | translate }}
+            </div>
+            <div ng-message="maxlength" class="error">
+              {{ 'validation_messages.number_pattern' | translate }}
+            </div>
+            <div ng-message="minlength" class="error">
+              {{ 'validation_messages.number_pattern' | translate }}
+            </div>
           </div>
         </div>
       </div>
-      <div ng-messages="billingInformationForm.ccIdentificationNumber.$error" class="error-messages--container" >
-        <div ng-message="invalidExpDate" class="error">{{ 'validation_messages.exp_date' | translate }}</div>
+      <div
+        ng-messages="billingInformationForm.ccIdentificationNumber.$error"
+        class="error-messages--container"
+      >
+        <div ng-message="invalidExpDate" class="error">
+          {{ 'validation_messages.exp_date' | translate }}
+        </div>
       </div>
     </div>
   </div>
-  <div class="mercado-pago--legals"
-    ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.MP">
-    <p class="text-bold">{{ 'billing_information.mp_legals.title' | translate }}</p>
+  <div
+    class="mercado-pago--legals"
+    ng-if="billingInformation.billingInformationData.idPaymentMethod === billingInformation.PAYMENT_METHOD.MP"
+  >
+    <p class="text-bold">
+      {{ 'billing_information.mp_legals.title' | translate }}
+    </p>
     <ul>
       <li class="text--small">
         {{ 'billing_information.mp_legals.legal_1' | translate }}

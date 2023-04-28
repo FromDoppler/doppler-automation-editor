@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,7 +8,7 @@
   settingsService.$inject = [
     '$q',
     'automationDataservice',
-    'userFieldsDataservice'
+    'userFieldsDataservice',
   ];
 
   function settingsService($q, automationDataservice, userFieldsDataservice) {
@@ -17,7 +17,7 @@
     var editorSettings = {};
     var service = {
       getSettings: getSettings,
-      getLoadedData: getLoadedData
+      getLoadedData: getLoadedData,
     };
 
     return service;
@@ -26,7 +26,7 @@
       var defer = $q.defer();
 
       if (_.isEmpty(editorSettings) && !promise) {
-        automationDataservice.getSettings().then(function(response) {
+        automationDataservice.getSettings().then(function (response) {
           editorSettings = response.data;
           userFieldsDataservice.load(editorSettings.customFields);
           defer.resolve(response.data);

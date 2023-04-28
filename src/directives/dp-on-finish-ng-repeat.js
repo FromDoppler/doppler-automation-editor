@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,17 +8,16 @@
   dpOnFinishNgRepeat.$inject = ['$timeout'];
 
   function dpOnFinishNgRepeat($timeout) {
-
     var directive = {
       restrict: 'A',
-      link: link
+      link: link,
     };
 
     return directive;
 
     function link(scope) {
       if (scope.$last === true) {
-        $timeout(function() {
+        $timeout(function () {
           scope.$emit('ngRepeatFinished');
         });
       }

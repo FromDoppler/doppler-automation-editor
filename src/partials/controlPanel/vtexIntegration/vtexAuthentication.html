@@ -1,98 +1,176 @@
-<form name="vtex.form" ng-submit="vtex.form.$valid && vtex.connect();" novalidate>
+<form
+  name="vtex.form"
+  ng-submit="vtex.form.$valid && vtex.connect();"
+  novalidate
+>
   <div>
-    <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="vtex.daysToDisconnection < 14 && vtex.connected">
-      <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+      ng-show="vtex.daysToDisconnection < 14 && vtex.connected"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'control_panel.integrations.connection_issues.title' | translate
+        }}</span
+      >
       <div class="dp-library margin-t-20 margin-b-20">
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
             <span id="messageBar" class="text--small">
-              {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'vtex_integration.name' | translate }}
+              {{ 'control_panel.integrations.connection_issues.subtitle' |
+              translate }} {{'vtex_integration.name' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+      <strong class="connection-issues-list-title">
+        {{ 'control_panel.integrations.connection_issues.list_title' | translate
+        }}
+      </strong>
       <ul>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_1' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_2' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_3' |
+          translate }}
+        </li>
       </ul>
       <br />
-      <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+      <span
+        >{{ 'control_panel.integrations.connection_issues.text_list_4' |
+        translate }}</span
+      >
       <hr class="full connection-issues-separator" />
       <p>
-        {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-        {{ vtex.firstValidationErrorDate}}
+        {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+        translate }} {{ vtex.firstValidationErrorDate}}
       </p>
       <strong>
         <span ng-if="vtex.daysToDisconnection > 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-          {{ vtex.daysToDisconnection }}
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+          | translate }} {{ vtex.daysToDisconnection }} {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+          | translate }}
         </span>
         <span ng-if="vtex.daysToDisconnection <= 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+          | translate }}
         </span>
       </strong>
     </div>
-    <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
-      <span class="control-panel-section-title">{{ 'vtex_integration.disconnected.title' | translate }} </span>
+    <div
+      id="main-panel"
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'vtex_integration.disconnected.title' | translate }}
+      </span>
       <span class="control-panel-section-subtitle">
         {{ 'vtex_integration.disconnected.subtitle' | translate }}
-        <a href="{{ 'vtex_integration.disconnected.help_link' | translate }}"
-           target="_blank">{{ 'vtex_integration.disconnected.help_text' | translate }}</a>
+        <a
+          href="{{ 'vtex_integration.disconnected.help_link' | translate }}"
+          target="_blank"
+          >{{ 'vtex_integration.disconnected.help_text' | translate }}</a
+        >
       </span>
-      <hr class="full" style="width: calc(100% + 40px);" />
+      <hr class="full" style="width: calc(100% + 40px)" />
       <section class="authentication-container" ng-if="!vtex.connected">
         <div class="authentication-elements">
-          <p class="select-list-text">{{ 'vtex_integration.disconnected.store' | translate }}</p>
-          <p class="select-list-text">{{ 'vtex_integration.disconnected.app_key' | translate }}</p>
-          <p class="select-list-text">{{ 'vtex_integration.disconnected.token' | translate }}</p>
-        </div>
-        <div class="authentication-elements">
-          <input type="text" ng-required="true"
-                 ng-class="{'input-validation-error':vtex.form.$submitted && !vtex.disconnected && (vtex.integrationData.store.$invalid || !vtex.integrationData.store)}"
-                 ng-model="vtex.integrationData.store" class="user-data-input"
-                 placeholder="{{ 'vtex_integration.disconnected.store_placeholder' | translate }}"
-                 maxlength="100" />
-          <input type="text" required
-                 ng-class="{'input-validation-error':vtex.form.$submitted && !vtex.disconnected && (vtex.integrationData.appKey.$invalid || !vtex.integrationData.appKey)}"
-                 ng-model="vtex.integrationData.appKey" class="user-data-input"
-                 placeholder="{{ 'vtex_integration.disconnected.app_key_placeholder' | translate }}"
-                 maxlength="250" />
-          <input type="text" required
-                 ng-class="{'input-validation-error':vtex.form.$submitted && !vtex.disconnected && (vtex.integrationData.token.$invalid || !vtex.integrationData.token)}"
-                 ng-model="vtex.integrationData.token" class="user-data-input"
-                 placeholder="{{ 'vtex_integration.disconnected.token_placeholder' | translate }}"
-                 maxlength="250" />
-        </div>
-      </section>
-      <section class="authentication-container connected" ng-show="vtex.connected">
-        <div class="authentication-elements">
-          <p>
-            {{ 'vtex_integration.connected.store' | translate }} <strong>{{ vtex.connectedStore }}</strong>
+          <p class="select-list-text">
+            {{ 'vtex_integration.disconnected.store' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'vtex_integration.disconnected.app_key' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'vtex_integration.disconnected.token' | translate }}
           </p>
         </div>
-        <button type='button' class="button button--alternative"
-                ng-click="vtex.disconnectWarning()" ng-disabled="vtex.importingAllLists">
+        <div class="authentication-elements">
+          <input
+            type="text"
+            ng-required="true"
+            ng-class="{'input-validation-error':vtex.form.$submitted && !vtex.disconnected && (vtex.integrationData.store.$invalid || !vtex.integrationData.store)}"
+            ng-model="vtex.integrationData.store"
+            class="user-data-input"
+            placeholder="{{ 'vtex_integration.disconnected.store_placeholder' | translate }}"
+            maxlength="100"
+          />
+          <input
+            type="text"
+            required
+            ng-class="{'input-validation-error':vtex.form.$submitted && !vtex.disconnected && (vtex.integrationData.appKey.$invalid || !vtex.integrationData.appKey)}"
+            ng-model="vtex.integrationData.appKey"
+            class="user-data-input"
+            placeholder="{{ 'vtex_integration.disconnected.app_key_placeholder' | translate }}"
+            maxlength="250"
+          />
+          <input
+            type="text"
+            required
+            ng-class="{'input-validation-error':vtex.form.$submitted && !vtex.disconnected && (vtex.integrationData.token.$invalid || !vtex.integrationData.token)}"
+            ng-model="vtex.integrationData.token"
+            class="user-data-input"
+            placeholder="{{ 'vtex_integration.disconnected.token_placeholder' | translate }}"
+            maxlength="250"
+          />
+        </div>
+      </section>
+      <section
+        class="authentication-container connected"
+        ng-show="vtex.connected"
+      >
+        <div class="authentication-elements">
+          <p>
+            {{ 'vtex_integration.connected.store' | translate }}
+            <strong>{{ vtex.connectedStore }}</strong>
+          </p>
+        </div>
+        <button
+          type="button"
+          class="button button--alternative"
+          ng-click="vtex.disconnectWarning()"
+          ng-disabled="vtex.importingAllLists"
+        >
           {{ 'vtex_integration.connected.disconnect' | translate }}
         </button>
       </section>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="vtex.autoSyncDisabled && vtex.connected && vtex.integratedLists.length">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="vtex.autoSyncDisabled && vtex.connected && vtex.integratedLists.length"
+      >
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span class="text--small">
               {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-              <a target="_self" href="{{vtex.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+              <a
+                target="_self"
+                href="{{vtex.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+                >{{ 'control_panel.integrations.sync_disabled.link_text' |
+                translate }}</a
+              >
               {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="vtex.connectionError">
-        <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="vtex.connectionError"
+      >
+        <div
+          id="messageBar"
+          class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+        >
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span>{{ vtex.errorMsg }}</span>
@@ -101,15 +179,27 @@
       </div>
     </div>
   </div>
-  <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!vtex.connected">
-      <a class="button button--alternative" ng-disabled="vtex.connecting"
-          href="{{vtex.webAppUrl}}/Integrations#native-integrations"
-          id="back-button">{{ 'actions.cancel' | translate }}</a>
-      <button type="submit" id="save_info" ng-disabled="vtex.connecting"
-          ng-class="{'button--spinner' : vtex.connecting}" ng-click="vtex.disconnected = false;"
-          class="button button--primary">
-          {{ 'actions.connect' | translate }}
-          <span class="icon-editor-saving" ng-show="vtex.connecting"></span>
-      </button>
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between"
+    ng-show="!vtex.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="vtex.connecting"
+      href="{{vtex.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <button
+      type="submit"
+      id="save_info"
+      ng-disabled="vtex.connecting"
+      ng-class="{'button--spinner' : vtex.connecting}"
+      ng-click="vtex.disconnected = false;"
+      class="button button--primary"
+    >
+      {{ 'actions.connect' | translate }}
+      <span class="icon-editor-saving" ng-show="vtex.connecting"></span>
+    </button>
   </div>
 </form>

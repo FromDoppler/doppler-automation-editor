@@ -5,9 +5,7 @@
     .module('dopplerApp.automation.editor')
     .factory('goToService', goToService);
 
-  goToService.$inject = [
-    'warningsStepsService',
-  ];
+  goToService.$inject = ['warningsStepsService'];
 
   function goToService(warningsStepsService) {
     var GOTO_SELECTION_OPTS = {
@@ -39,7 +37,7 @@
       endPlugColor: '#999',
       startSocketGravity: [0, 300],
       endSocketGravity: [0, -300],
-      dash: false
+      dash: false,
     };
 
     var goToComponents = {};
@@ -56,25 +54,41 @@
       markComponentInGotoSelection: markComponentInGotoSelection,
       markComponentsInGotoSelection: markComponentsInGotoSelection,
       unmarkAllComponentsInGotoSelection: unmarkAllComponentsInGotoSelection,
-      removeAllGotoLinesButSavingComponentsRegistration: removeAllGotoLinesButSavingComponentsRegistration,
-      regenerateGotoLinesFromComponentsRegistration: regenerateGotoLinesFromComponentsRegistration,
+      removeAllGotoLinesButSavingComponentsRegistration:
+        removeAllGotoLinesButSavingComponentsRegistration,
+      regenerateGotoLinesFromComponentsRegistration:
+        regenerateGotoLinesFromComponentsRegistration,
       drawGoToLineBetweenComponents: drawGoToLineBetweenComponents,
     };
     return service;
 
     function drawGoToLine(lineObject) {
-      var options = lineObject.applyGotoSelectionStyle ? GOTO_SELECTION_OPTS : DEFAULT_LINE_OPTS;
-      var line = new LeaderLine(lineObject.sourceElement, lineObject.targetElement, options);
+      var options = lineObject.applyGotoSelectionStyle
+        ? GOTO_SELECTION_OPTS
+        : DEFAULT_LINE_OPTS;
+      var line = new LeaderLine(
+        lineObject.sourceElement,
+        lineObject.targetElement,
+        options
+      );
       return line;
     }
 
     function drawGoToLineBetweenComponents(lineSetup) {
       if (lineSetup.sourceComponentUid && lineSetup.targetComponentUid) {
-        var sourceElementId = '#component_'.concat(lineSetup.sourceComponentUid);
-        var targetElementId = '#component_'.concat(lineSetup.targetComponentUid);
+        var sourceElementId = '#component_'.concat(
+          lineSetup.sourceComponentUid
+        );
+        var targetElementId = '#component_'.concat(
+          lineSetup.targetComponentUid
+        );
         return drawGoToLine({
-          sourceElement: document.querySelector(sourceElementId).getElementsByClassName('component')[0],
-          targetElement: document.querySelector(targetElementId).getElementsByClassName('component')[0],
+          sourceElement: document
+            .querySelector(sourceElementId)
+            .getElementsByClassName('component')[0],
+          targetElement: document
+            .querySelector(targetElementId)
+            .getElementsByClassName('component')[0],
           applyGotoSelectionStyle: lineSetup.applyGotoSelectionStyle,
         });
       }
@@ -125,7 +139,9 @@
     function setAllGotoLinesWithDefaultStyle() {
       for (var key in goToComponents) {
         if (goToComponents[key].line) {
-          goToComponents[key].line = applyDefaultStyle(goToComponents[key].line);
+          goToComponents[key].line = applyDefaultStyle(
+            goToComponents[key].line
+          );
         }
       }
     }
@@ -151,7 +167,9 @@
       }
 
       var targetElementId = '#component_'.concat(elementUid);
-      var component = document.querySelector(targetElementId).getElementsByClassName('component')[0];
+      var component = document
+        .querySelector(targetElementId)
+        .getElementsByClassName('component')[0];
       if (component) {
         if (hasToMark) {
           classes.forEach(function (c) {

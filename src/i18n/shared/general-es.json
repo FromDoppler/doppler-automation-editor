@@ -241,7 +241,7 @@
       "type": "Tipo",
       "creation_date": "Fecha de Creación",
       "actions": "Acciones",
-      "country":  "País"
+      "country": "País"
     },
     "search": "Buscar...",
     "convertion_rate_tooltip": "% de Usuarios que completaron el Formulario sobre el número de personas únicas que lo visitaron."

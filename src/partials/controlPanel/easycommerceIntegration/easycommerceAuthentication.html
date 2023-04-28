@@ -1,96 +1,162 @@
-<form name="easycommerce.form" ng-if="easycommerce.sourceType === easycommerce.mvcSourceType" ng-submit="easycommerce.form.$valid && easycommerce.connect()" novalidate>
+<form
+  name="easycommerce.form"
+  ng-if="easycommerce.sourceType === easycommerce.mvcSourceType"
+  ng-submit="easycommerce.form.$valid && easycommerce.connect()"
+  novalidate
+>
   <div>
-    <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="easycommerce.daysToDisconnection < 14 && easycommerce.connected">
-      <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+    <div
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+      ng-show="easycommerce.daysToDisconnection < 14 && easycommerce.connected"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'control_panel.integrations.connection_issues.title' | translate
+        }}</span
+      >
       <div class="dp-library margin-t-20 margin-b-20">
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
             <span id="messageBar" class="text--small">
-              {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'easycommerce_integration.name' | translate }}
+              {{ 'control_panel.integrations.connection_issues.subtitle' |
+              translate }} {{'easycommerce_integration.name' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+      <strong class="connection-issues-list-title">
+        {{ 'control_panel.integrations.connection_issues.list_title' | translate
+        }}
+      </strong>
       <ul>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-        <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_1' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_2' |
+          translate }}
+        </li>
+        <li class="connection-issues-list-item">
+          {{ 'control_panel.integrations.connection_issues.text_list_3' |
+          translate }}
+        </li>
       </ul>
       <br />
-      <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+      <span
+        >{{ 'control_panel.integrations.connection_issues.text_list_4' |
+        translate }}</span
+      >
       <hr class="full connection-issues-separator" />
       <p>
-        {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-        {{ easycommerce.firstValidationErrorDate}}
+        {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+        translate }} {{ easycommerce.firstValidationErrorDate}}
       </p>
       <strong>
         <span ng-if="easycommerce.daysToDisconnection > 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-          {{ easycommerce.daysToDisconnection }}
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+          | translate }} {{ easycommerce.daysToDisconnection }} {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+          | translate }}
         </span>
         <span ng-if="easycommerce.daysToDisconnection <= 1">
-          {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+          {{
+          'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+          | translate }}
         </span>
       </strong>
     </div>
-    <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box">
-      <span class="control-panel-section-title">{{ 'easycommerce_integration.disconnected.title' | translate }} </span>
+    <div
+      id="main-panel"
+      class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    >
+      <span class="control-panel-section-title"
+        >{{ 'easycommerce_integration.disconnected.title' | translate }}
+      </span>
       <span class="control-panel-section-subtitle">
         {{ 'easycommerce_integration.disconnected.subtitle' | translate }}
         <!--<a href="{{ 'easycommerce_integration.disconnected.help_link' | translate }}"
     target="_blank">{{ 'easycommerce_integration.disconnected.help_text' | translate }}</a>-->
       </span>
-      <hr class="full" style="width: calc(100% + 40px);" />
+      <hr class="full" style="width: calc(100% + 40px)" />
       <section class="authentication-container" ng-if="!easycommerce.connected">
         <div class="authentication-elements">
-          <p class="select-list-text">{{ 'easycommerce_integration.disconnected.store' | translate }}</p>
-          <p class="select-list-text">{{ 'easycommerce_integration.disconnected.app_key' | translate }}</p>
-        </div>
-        <div class="authentication-elements">
-          <input type="text"
-                 ng-required="true"
-                 ng-class="{'input-validation-error':easycommerce.form.$submitted && !easycommerce.disconnected && (easycommerce.integrationData.store.$invalid || !easycommerce.integrationData.store)}"
-                 ng-model="easycommerce.integrationData.store"
-                 class="user-data-input"
-                 placeholder="{{ 'easycommerce_integration.disconnected.store_placeholder' | translate }}"
-                 maxlength="100" />
-          <input type="text"
-                 required
-                 ng-class="{'input-validation-error':easycommerce.form.$submitted && !easycommerce.disconnected && (easycommerce.integrationData.appKey.$invalid || !easycommerce.integrationData.appKey)}"
-                 ng-model="easycommerce.integrationData.appKey"
-                 class="user-data-input"
-                 placeholder="{{ 'easycommerce_integration.disconnected.app_key_placeholder' | translate }}"
-                 maxlength="250" />
-        </div>
-      </section>
-      <section class="authentication-container connected" ng-show="easycommerce.connected">
-        <div class="authentication-elements">
-          <p>
-            {{ 'easycommerce_integration.connected.store' | translate }} <strong>{{ easycommerce.connectedStore }}</strong>
+          <p class="select-list-text">
+            {{ 'easycommerce_integration.disconnected.store' | translate }}
+          </p>
+          <p class="select-list-text">
+            {{ 'easycommerce_integration.disconnected.app_key' | translate }}
           </p>
         </div>
-        <button type='button' class="button button--alternative"
-                ng-click="easycommerce.disconnectWarning()" ng-disabled="easycommerce.importingAllLists">
+        <div class="authentication-elements">
+          <input
+            type="text"
+            ng-required="true"
+            ng-class="{'input-validation-error':easycommerce.form.$submitted && !easycommerce.disconnected && (easycommerce.integrationData.store.$invalid || !easycommerce.integrationData.store)}"
+            ng-model="easycommerce.integrationData.store"
+            class="user-data-input"
+            placeholder="{{ 'easycommerce_integration.disconnected.store_placeholder' | translate }}"
+            maxlength="100"
+          />
+          <input
+            type="text"
+            required
+            ng-class="{'input-validation-error':easycommerce.form.$submitted && !easycommerce.disconnected && (easycommerce.integrationData.appKey.$invalid || !easycommerce.integrationData.appKey)}"
+            ng-model="easycommerce.integrationData.appKey"
+            class="user-data-input"
+            placeholder="{{ 'easycommerce_integration.disconnected.app_key_placeholder' | translate }}"
+            maxlength="250"
+          />
+        </div>
+      </section>
+      <section
+        class="authentication-container connected"
+        ng-show="easycommerce.connected"
+      >
+        <div class="authentication-elements">
+          <p>
+            {{ 'easycommerce_integration.connected.store' | translate }}
+            <strong>{{ easycommerce.connectedStore }}</strong>
+          </p>
+        </div>
+        <button
+          type="button"
+          class="button button--alternative"
+          ng-click="easycommerce.disconnectWarning()"
+          ng-disabled="easycommerce.importingAllLists"
+        >
           {{ 'easycommerce_integration.connected.disconnect' | translate }}
         </button>
       </section>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="easycommerce.autoSyncDisabled && easycommerce.connected  && easycommerce.integratedLists.length">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="easycommerce.autoSyncDisabled && easycommerce.connected  && easycommerce.integratedLists.length"
+      >
         <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span class="text--small">
               {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-              <a target="_self" href="{{easycommerce.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+              <a
+                target="_self"
+                href="{{easycommerce.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+                >{{ 'control_panel.integrations.sync_disabled.link_text' |
+                translate }}</a
+              >
               {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
             </span>
           </div>
         </div>
       </div>
-      <div class="dp-library margin-t-20 margin-b-20" ng-show="easycommerce.connectionError">
-        <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+      <div
+        class="dp-library margin-t-20 margin-b-20"
+        ng-show="easycommerce.connectionError"
+      >
+        <div
+          id="messageBar"
+          class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+        >
           <span class="dp-message-icon"></span>
           <div class="dp-content-message dp-content-full">
             <span>{{ easycommerce.errorMsg }}</span>
@@ -99,13 +165,25 @@
       </div>
     </div>
   </div>
-  <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!easycommerce.connected">
-    <a class="button button--alternative" ng-disabled="easycommerce.connecting"
-       href="{{easycommerce.webAppUrl}}/Integrations#native-integrations"
-       id="back-button">{{ 'actions.cancel' | translate }}</a>
-    <button type="submit" id="save_info" ng-disabled="easycommerce.connecting"
-            ng-class="{'button--spinner' : easycommerce.connecting}" ng-click="easycommerce.disconnected = false;"
-            class="button button--primary">
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between"
+    ng-show="!easycommerce.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="easycommerce.connecting"
+      href="{{easycommerce.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <button
+      type="submit"
+      id="save_info"
+      ng-disabled="easycommerce.connecting"
+      ng-class="{'button--spinner' : easycommerce.connecting}"
+      ng-click="easycommerce.disconnected = false;"
+      class="button button--primary"
+    >
       {{ 'actions.connect' | translate }}
       <span class="icon-editor-saving" ng-show="easycommerce.connecting"></span>
     </button>

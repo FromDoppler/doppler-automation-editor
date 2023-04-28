@@ -1,64 +1,111 @@
-<form name="miTienda.form" ng-if="miTienda.sourceType === miTienda.mvcSourceType" ng-submit="miTienda.form.$valid && miTienda.connect()" novalidate>
-  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="miTienda.daysToDisconnection < 14 && miTienda.connected">
-    <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+<form
+  name="miTienda.form"
+  ng-if="miTienda.sourceType === miTienda.mvcSourceType"
+  ng-submit="miTienda.form.$valid && miTienda.connect()"
+  novalidate
+>
+  <div
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="miTienda.daysToDisconnection < 14 && miTienda.connected"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'control_panel.integrations.connection_issues.title' | translate
+      }}</span
+    >
     <div class="dp-library margin-t-20 margin-b-20">
       <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message">
           <span id="messageBar" class="text--small">
-            {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'miTienda_integration.name' | translate }}
+            {{ 'control_panel.integrations.connection_issues.subtitle' |
+            translate }} {{'miTienda_integration.name' | translate }}
           </span>
         </div>
       </div>
     </div>
-    <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+    <strong class="connection-issues-list-title">
+      {{ 'control_panel.integrations.connection_issues.list_title' | translate
+      }}
+    </strong>
     <ul>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_1' |
+        translate }}
+      </li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_2' |
+        translate }}
+      </li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_3' |
+        translate }}
+      </li>
     </ul>
     <br />
-    <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+    <span
+      >{{ 'control_panel.integrations.connection_issues.text_list_4' | translate
+      }}</span
+    >
     <hr class="full connection-issues-separator" />
     <p>
-      {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-      {{ miTienda.firstValidationErrorDate}}
+      {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+      translate }} {{ miTienda.firstValidationErrorDate}}
     </p>
     <strong>
       <span ng-if="miTienda.daysToDisconnection > 1">
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-        {{ miTienda.daysToDisconnection }}
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+        {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+        | translate }} {{ miTienda.daysToDisconnection }} {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+        | translate }}
       </span>
       <span ng-if="miTienda.daysToDisconnection <= 1">
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+        {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+        | translate }}
       </span>
     </strong>
   </div>
-  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="!miTienda.connected">
-    <span class="control-panel-section-title">{{ 'miTienda_integration.disconnected.title' | translate }} </span>
+  <div
+    id="main-panel"
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="!miTienda.connected"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'miTienda_integration.disconnected.title' | translate }}
+    </span>
     <span class="control-panel-section-subtitle">
       {{ 'miTienda_integration.disconnected.subtitle' | translate }}
       <!--<a href="{{ 'miTienda_integration.disconnected.help_link' | translate }}"
         target="_blank">{{ 'miTienda_integration.disconnected.help_text' | translate }}</a>-->
     </span>
-    <hr class="full" style="width: calc(100% + 40px);" />
+    <hr class="full" style="width: calc(100% + 40px)" />
     <section class="authentication-container" ng-if="!miTienda.connected">
       <div class="authentication-elements">
-        <p class="select-list-text">{{ 'miTienda_integration.disconnected.app_key' | translate }}</p>
+        <p class="select-list-text">
+          {{ 'miTienda_integration.disconnected.app_key' | translate }}
+        </p>
       </div>
       <div class="authentication-elements">
-        <input type="text"
-               required
-               ng-class="{'input-validation-error':miTienda.form.$submitted && !miTienda.disconnected && (miTienda.integrationData.appKey.$invalid || !miTienda.integrationData.appKey)}"
-               ng-model="miTienda.integrationData.appKey"
-               class="user-data-input"
-               placeholder="{{ 'miTienda_integration.disconnected.app_key_placeholder' | translate }}"
-               maxlength="250" />
+        <input
+          type="text"
+          required
+          ng-class="{'input-validation-error':miTienda.form.$submitted && !miTienda.disconnected && (miTienda.integrationData.appKey.$invalid || !miTienda.integrationData.appKey)}"
+          ng-model="miTienda.integrationData.appKey"
+          class="user-data-input"
+          placeholder="{{ 'miTienda_integration.disconnected.app_key_placeholder' | translate }}"
+          maxlength="250"
+        />
       </div>
     </section>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="miTienda.connectionError">
-      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="miTienda.connectionError"
+    >
+      <div
+        id="messageBar"
+        class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+      >
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full">
           <span>{{ miTienda.errorMsg }}</span>
@@ -66,42 +113,73 @@
       </div>
     </div>
   </div>
-  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="miTienda.connected">
-    <span class="control-panel-section-title">{{ 'miTienda_integration.connected.title' | translate }} </span>
+  <div
+    id="main-panel"
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="miTienda.connected"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'miTienda_integration.connected.title' | translate }}
+    </span>
     <span class="control-panel-section-subtitle">
       {{ 'miTienda_integration.connected.subtitle' | translate }}
     </span>
     <section class="authentication-container connected">
       <div class="authentication-elements">
         <p>
-          {{ 'miTienda_integration.connected.store' | translate }} <strong>{{ miTienda.connectedStore }}</strong>
+          {{ 'miTienda_integration.connected.store' | translate }}
+          <strong>{{ miTienda.connectedStore }}</strong>
         </p>
       </div>
-      <button type='button' class="button button--alternative"
-              ng-click="miTienda.disconnectWarning()" ng-disabled="miTienda.importingAllLists">
+      <button
+        type="button"
+        class="button button--alternative"
+        ng-click="miTienda.disconnectWarning()"
+        ng-disabled="miTienda.importingAllLists"
+      >
         {{ 'miTienda_integration.connected.disconnect' | translate }}
       </button>
     </section>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="miTienda.autoSyncDisabled && miTienda.integratedLists.length">
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="miTienda.autoSyncDisabled && miTienda.integratedLists.length"
+    >
       <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full">
           <span class="text--small">
             {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-            <a target="_self" href="{{miTienda.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+            <a
+              target="_self"
+              href="{{miTienda.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+              >{{ 'control_panel.integrations.sync_disabled.link_text' |
+              translate }}</a
+            >
             {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
           </span>
         </div>
       </div>
     </div>
   </div>
-  <div class="nav-button-bar flex-grid-v-center--s-between" ng-show="!miTienda.connected">
-    <a class="button button--alternative" ng-disabled="miTienda.connecting"
-       href="{{miTienda.webAppUrl}}/Integrations#native-integrations"
-       id="back-button">{{ 'actions.cancel' | translate }}</a>
-    <button type="submit" id="save_info" ng-disabled="miTienda.connecting"
-            ng-class="{'button--spinner' : miTienda.connecting}" ng-click="miTienda.disconnected = false;"
-            class="button button--primary">
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between"
+    ng-show="!miTienda.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="miTienda.connecting"
+      href="{{miTienda.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
+    <button
+      type="submit"
+      id="save_info"
+      ng-disabled="miTienda.connecting"
+      ng-class="{'button--spinner' : miTienda.connecting}"
+      ng-click="miTienda.disconnected = false;"
+      class="button button--primary"
+    >
       {{ 'actions.connect' | translate }}
       <span class="icon-editor-saving" ng-show="miTienda.connecting"></span>
     </button>

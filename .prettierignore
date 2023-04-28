@@ -1,0 +1,6 @@
+# Ignore artifacts:
+dist
+node_modules
+app
+cdn-helpers
+e2e-test

@@ -25,11 +25,10 @@ div[uib-datepicker-popup-wrap] {
         background: $color-ghostwhite;
         display: inline-block;
         padding: 5px;
-        border:1px solid $color-ghostwhite;
+        border: 1px solid $color-ghostwhite;
         &.text-muted {
           display: none;
         }
-
       }
       &:hover span {
         border-color: $color-primary;
@@ -57,34 +56,36 @@ div[uib-datepicker-popup-wrap] {
       text-align: center;
       width: auto;
       padding: 5px;
-      border:1px solid $color-ghostwhite;
+      border: 1px solid $color-ghostwhite;
       margin: 5px 5px 0;
       &:hover {
         border-color: $color-primary;
       }
     }
     .btn-info {
-      background: $color-primary
+      background: $color-primary;
     }
     .btn-info:hover {
       border-color: $color-ghostwhite;
     }
   }
 
-  .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-      cursor: not-allowed;
-      -webkit-box-shadow: none;
-      box-shadow: none;
+  .btn.disabled,
+  .btn[disabled],
+  fieldset[disabled] .btn {
+    cursor: not-allowed;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: $color-snow;
+    color: $color-sylver;
+    &:hover,
+    &:hover span {
+      border-color: $color-snow;
+    }
+    span {
       background: $color-snow;
-      color: $color-sylver;
-      &:hover,
-      &:hover span{
-        border-color:$color-snow;
-      }
-      span {
-        background: $color-snow;
-        border-color: $color-snow;
-      }
+      border-color: $color-snow;
+    }
   }
   .pull-left,
   .pull-right,
@@ -105,13 +106,13 @@ div[uib-datepicker-popup-wrap] {
     }
     .pull-left {
       &::after {
-        @include arrow-after(7px, 8px, "left", $color-base);
+        @include arrow-after(7px, 8px, 'left', $color-base);
         top: 4px;
       }
     }
     .pull-right {
       &::after {
-        @include arrow-after(7px, 8px, "right", $color-base);
+        @include arrow-after(7px, 8px, 'right', $color-base);
         top: 4px;
       }
     }
@@ -128,8 +129,8 @@ div[uib-datepicker-popup-wrap] {
   .uib-title strong {
     font-size: $font-size--small;
     color: $color-darkgrey;
-  margin-bottom: 15px;
-  display: inline-block;
+    margin-bottom: 15px;
+    display: inline-block;
   }
   .uib-close,
   .uib-clear {
@@ -151,7 +152,7 @@ div[uib-daypicker] {
   border-top: 1px solid $color-primary;
   text-align: center;
   margin-top: 10px;
-    padding: 5px 10px 0;
+  padding: 5px 10px 0;
   span {
     display: inline-block;
   }
@@ -160,6 +161,5 @@ div[uib-daypicker] {
     font-size: $font-size--small;
     color: $color-base;
     font-weight: $font_weight-bolder;
-
   }
 }

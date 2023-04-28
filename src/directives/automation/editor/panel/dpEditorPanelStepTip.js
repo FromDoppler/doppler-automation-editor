@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,7 +8,8 @@
   function dpEditorPanelStepTip() {
     var directive = {
       restrict: 'AE',
-      templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-step-tip.html'
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-step-tip.html',
     };
 
     return directive;

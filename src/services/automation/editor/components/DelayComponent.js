@@ -1,14 +1,14 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('DelayComponent', ['BaseComponent', 'COMPONENT_TYPE', function(BaseComponent, COMPONENT_TYPE) {
-
+  angular.module('dopplerApp.automation.editor').factory('DelayComponent', [
+    'BaseComponent',
+    'COMPONENT_TYPE',
+    function (BaseComponent, COMPONENT_TYPE) {
       function DelayComponent(data) {
         // Inherited constructor.
         BaseComponent.call(this, {
-          type: COMPONENT_TYPE.DELAY
+          type: COMPONENT_TYPE.DELAY,
         });
 
         this.id = 0;
@@ -23,10 +23,12 @@
 
       // Prototype inherence from BaseComponent.
       DelayComponent.prototype = Object.create(BaseComponent.prototype);
-      DelayComponent.prototype.markup = '<dp-editor-delay class="component--container delay" component="component" branch="branch"></dp-editor-delay>';
-      DelayComponent.prototype.panelTemplate = '<div dp-editor-panel-delay></div>';
+      DelayComponent.prototype.markup =
+        '<dp-editor-delay class="component--container delay" component="component" branch="branch"></dp-editor-delay>';
+      DelayComponent.prototype.panelTemplate =
+        '<div dp-editor-panel-delay></div>';
 
-      DelayComponent.prototype.setData = function(data) {
+      DelayComponent.prototype.setData = function (data) {
         BaseComponent.prototype.setData.call(this, data);
         if (data.hasOwnProperty('id')) {
           this.id = data.id;
@@ -42,18 +44,16 @@
         }
       };
 
-      DelayComponent.prototype.checkCompleted = function() {
+      DelayComponent.prototype.checkCompleted = function () {
         this.completed = Number.isInteger(parseInt(this.time));
       };
 
-      DelayComponent.prototype.getPropertiesToWatch = function() {
+      DelayComponent.prototype.getPropertiesToWatch = function () {
         var properties = BaseComponent.prototype.getPropertiesToWatch();
-        return properties.concat([
-          'time',
-          'timeUnit'
-        ]);
+        return properties.concat(['time', 'timeUnit']);
       };
 
       return DelayComponent;
-    }]);
+    },
+  ]);
 })();

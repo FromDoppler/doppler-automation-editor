@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,20 +9,20 @@
     '$scope',
     'close',
     'data',
-    'jumpsellerService'
+    'jumpsellerService',
   ];
 
   function modalYesOrNoJumpsellerCtrl($scope, close, data, jumpsellerService) {
     $scope.data = data;
 
-    $scope.close = function(result) {
+    $scope.close = function (result) {
       close(result);
     };
 
-    $scope.disconnect = function(){
+    $scope.disconnect = function () {
       $scope.disconnecting = true;
-      jumpsellerService.disconnect().then(function(response){
-        if (response.success){
+      jumpsellerService.disconnect().then(function (response) {
+        if (response.success) {
           $scope.disconnecting = false;
           close(true);
         } else {

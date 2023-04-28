@@ -1,26 +1,71 @@
-<div ng-if="isInitialCondition()" class="add-element--container" ng-class="{'disabled': !component.completed, 'hideTip' : !component.completed, 'hasNext': hasNext()}" ng-disabled=" !component.completed" ng-click="$event.stopPropagation();">
-	<span class="icon-add-element" ng-class="{'remove': showStepOptions && component.completed }" ng-click="component.completed && showComponentList()"></span>
+<div
+  ng-if="isInitialCondition()"
+  class="add-element--container"
+  ng-class="{'disabled': !component.completed, 'hideTip' : !component.completed, 'hasNext': hasNext()}"
+  ng-disabled=" !component.completed"
+  ng-click="$event.stopPropagation();"
+>
+  <span
+    class="icon-add-element"
+    ng-class="{'remove': showStepOptions && component.completed }"
+    ng-click="component.completed && showComponentList()"
+  ></span>
   <span class="read-only--tooltip">{{ getReadOnlyLabel(); }}</span>
-  <div class="tip-help--container add-element" ng-show="!hasNext() && !showStepOptions && component.completed">
-		<span class="icon-arrow-friendly"></span>
-		<span class="tip-help" ng-bind-html="'automation_editor.canvas.tip_add_element' | translate"></span>
-	</div>
+  <div
+    class="tip-help--container add-element"
+    ng-show="!hasNext() && !showStepOptions && component.completed"
+  >
+    <span class="icon-arrow-friendly"></span>
+    <span
+      class="tip-help"
+      ng-bind-html="'automation_editor.canvas.tip_add_element' | translate"
+    ></span>
+  </div>
 </div>
-<div ng-if="!isInitialCondition()" class="add-element--container" ng-class="{'hasNext': hasNext()}" ng-disabled="hasNext()" ng-click="$event.stopPropagation();">
-	<span class="icon-add-element" ng-class="{'remove': showStepOptions, 'warning' : showWarning()}" ng-click="showComponentList()"></span>
+<div
+  ng-if="!isInitialCondition()"
+  class="add-element--container"
+  ng-class="{'hasNext': hasNext()}"
+  ng-disabled="hasNext()"
+  ng-click="$event.stopPropagation();"
+>
+  <span
+    class="icon-add-element"
+    ng-class="{'remove': showStepOptions, 'warning' : showWarning()}"
+    ng-click="showComponentList()"
+  ></span>
   <span class="read-only--tooltip">{{ getReadOnlyLabel(); }}</span>
 </div>
-<div class="add-step-type--container" ng-show="showStepOptions" ng-click="$event.stopPropagation();" click-outside="toggleComponentList()">
+<div
+  class="add-step-type--container"
+  ng-show="showStepOptions"
+  ng-click="$event.stopPropagation();"
+  click-outside="toggleComponentList()"
+>
   <img class="arrow" src="/../images/automation-arrow-canvas.svg" />
   <p>{{'automation_editor.canvas.add_step_title' | translate}}</p>
   <div class="container">
-    <div class="item" ng-repeat="option in stepOptions" ng-click="addNewStep(option)" ng-if="option.isEnable" ng-class="{ 'dp-tooltip-container': option.hasWarning }">
-      <div class="dp-tooltip-top" ng-if="option.hasWarning" ng-click="$event.stopPropagation();">
+    <div
+      class="item"
+      ng-repeat="option in stepOptions"
+      ng-click="addNewStep(option)"
+      ng-if="option.isEnable"
+      ng-class="{ 'dp-tooltip-container': option.hasWarning }"
+    >
+      <div
+        class="dp-tooltip-top"
+        ng-if="option.hasWarning"
+        ng-click="$event.stopPropagation();"
+      >
         <span class="dp-span-tooltip" ng-bind-html="getToolTipContent(option)">
         </span>
       </div>
       <img ng-src="{{option.svg_path}}" />
-      <img class="hover" ng-class="option.label" ng-src="{{option.svg_hover_path}}" />
+      <img
+        class="hover"
+        ng-class="option.label"
+        ng-src="{{option.svg_hover_path}}"
+      />
       <span>{{'automation_editor.canvas.' + option.label | translate}}</span>
     </div>
   </div>

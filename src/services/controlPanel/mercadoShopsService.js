@@ -1,16 +1,13 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp')
     .factory('mercadoShopsService', mercadoShopsService);
 
-  mercadoShopsService.$inject = [
-    '$http'
-  ];
+  mercadoShopsService.$inject = ['$http'];
 
   function mercadoShopsService($http) {
-
     var service = {
       getIntegrationStatus: getIntegrationStatus,
       disconnect: disconnect,
@@ -26,45 +23,57 @@
       getChangedState: getChangedState,
       getListData: getListData,
       getFieldTypes: getFieldTypes,
-      createField: createField
+      createField: createField,
     };
 
     return service;
 
     function getIntegrationStatus() {
-      return $http.get('/Integration/Integration/GetMercadoShopsIntegrationStatus')
-        .then(function(response) {
+      return $http
+        .get('/Integration/Integration/GetMercadoShopsIntegrationStatus')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function disconnect() {
-      return $http.post('/Integration/Integration/DisconnectMercadoShops')
-        .then(function(response) {
+      return $http
+        .post('/Integration/Integration/DisconnectMercadoShops')
+        .then(function (response) {
           return response.data;
         });
     }
 
     function getUserLists() {
-      return $http.get('/Integration/Integration/GetMercadoShopsUserLists')
+      return $http
+        .get('/Integration/Integration/GetMercadoShopsUserLists')
         .then(function (response) {
           return response.data;
         });
     }
 
     function getMercadoShopsFields() {
-      return $http.get('/Integration/Integration/GetMercadoShopsFields')
+      return $http
+        .get('/Integration/Integration/GetMercadoShopsFields')
         .then(function (response) {
           return response.data;
         });
     }
 
     function getUserFields() {
-      return $http.get('/Automation/Automation/GetUserFields')
+      return $http
+        .get('/Automation/Automation/GetUserFields')
         .then(function (response) {
           var allFields = [];
-          if (response.data && response.data.basicFields && response.data.basicFields.length) {
-            allFields = _.union(response.data.basicFields, response.data.customFields);
+          if (
+            response.data &&
+            response.data.basicFields &&
+            response.data.basicFields.length
+          ) {
+            allFields = _.union(
+              response.data.basicFields,
+              response.data.customFields
+            );
           }
           return allFields;
         });
@@ -76,15 +85,15 @@
           ColumnName: 'Void', // eslint-disable-line // TODO: delete this when it's deleted in BE
           ThirdPartyColumnName: field.Name,
           IdField: field.idDopplerField,
-          DateFormat: ''
+          DateFormat: '',
         };
         return fieldMapping;
       });
 
-      return $http.post('/Integration/Integration/AssociateMercadoShopsFieldMapping',
-        {
+      return $http
+        .post('/Integration/Integration/AssociateMercadoShopsFieldMapping', {
           IdList: idList,
-          FieldMappings: fieldMappings
+          FieldMappings: fieldMappings,
         })
         .then(function (response) {
           return response.data;
@@ -92,9 +101,9 @@
     }
 
     function synchLists(idList) {
-      return $http.post('/Integration/Integration/SynchMercadoShopsLists',
-        {
-          idSubscribersList: idList
+      return $http
+        .post('/Integration/Integration/SynchMercadoShopsLists', {
+          idSubscribersList: idList,
         })
         .then(function (response) {
           return response.data;
@@ -102,13 +111,13 @@
     }
 
     function integrateList(list, entity) {
-      return $http.post('/Integration/Integration/IntegrateMercadoShopsList',
-        {
+      return $http
+        .post('/Integration/Integration/IntegrateMercadoShopsList', {
           IdList: list.IdList,
           ListName: list.ListName,
           ListType: list.ListType,
           ThirdPartyListName: entity.DisplayName,
-          ThirdPartyListAcronym: entity.Name
+          ThirdPartyListAcronym: entity.Name,
         })
         .then(function (response) {
           return response.data;
@@ -116,36 +125,41 @@
     }
 
     function deleteList(idList) {
-      return $http.get('/Integration/Integration/DisconnectMercadoShopsList', {
-        params: { idSubscriberList: idList }
-      })
-        .then(function (response) {
-          return response.data;
-        });
-    }
-
-    function getAssociatedFieldMapping(idList) {
-      return $http.post('/Integration/Integration/GetMercadoShopsAssociatedFieldMapping',
-        {
-          idList: idList
+      return $http
+        .get('/Integration/Integration/DisconnectMercadoShopsList', {
+          params: { idSubscriberList: idList },
         })
         .then(function (response) {
           return response.data;
         });
     }
 
+    function getAssociatedFieldMapping(idList) {
+      return $http
+        .post(
+          '/Integration/Integration/GetMercadoShopsAssociatedFieldMapping',
+          {
+            idList: idList,
+          }
+        )
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     function manualSync() {
-      return $http.get('/Integration/Integration/SynchAllMercadoShopsLists')
+      return $http
+        .get('/Integration/Integration/SynchAllMercadoShopsLists')
         .then(function (response) {
           return response.data;
         });
     }
 
     function getChangedState(stateArray, idThirdPartyApp) {
-      return $http.post('/Integration/Integration/GetChangedStates',
-        {
+      return $http
+        .post('/Integration/Integration/GetChangedStates', {
           statusLists: stateArray,
-          idThirdPartyApp: idThirdPartyApp
+          idThirdPartyApp: idThirdPartyApp,
         })
         .then(function (response) {
           return response.data;
@@ -153,9 +167,9 @@
     }
 
     function getListData(idList) {
-      return $http.post('/Integration/Integration/GetSubscribersListInfo',
-        {
-          idList: idList
+      return $http
+        .post('/Integration/Integration/GetSubscribersListInfo', {
+          idList: idList,
         })
         .then(function (response) {
           return response.data;
@@ -163,20 +177,21 @@
     }
 
     function getFieldTypes() {
-      return $http.get('/Integration/Integration/GetFieldTypes')
+      return $http
+        .get('/Integration/Integration/GetFieldTypes')
         .then(function (response) {
           return response.data;
         });
     }
 
     function createField(name, dataType, isPrivate) {
-      return $http.get('/Integration/Integration/CreateField',
-        {
+      return $http
+        .get('/Integration/Integration/CreateField', {
           params: {
             name: encodeURIComponent(name),
             dataType: dataType,
-            isPrivate: isPrivate
-          }
+            isPrivate: isPrivate,
+          },
         })
         .then(function (response) {
           return response.data;

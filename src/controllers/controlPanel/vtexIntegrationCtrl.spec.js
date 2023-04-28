@@ -1,13 +1,13 @@
 'use strict';
 
-describe('vtex integration', function() {
+describe('vtex integration', function () {
   beforeEach(module('dopplerApp.controlPanel'));
 
   var vtexDataMock = {
-    getStatus: function(connected){
+    getStatus: function (connected) {
       var result;
       if (connected) {
-        result =  {
+        result = {
           success: true,
           connected: true,
           lastSyncDate: '01/01/2011',
@@ -17,48 +17,48 @@ describe('vtex integration', function() {
           idThirdPartyApp: 5,
           IdList: 155,
           model: { AccountName: 'dopplerStore' },
-          integratedLists: [{IdList:5002}]
+          integratedLists: [{ IdList: 5002 }],
         };
       } else {
-        result =  {
+        result = {
           success: false,
-          connected: false
+          connected: false,
         };
       }
       var deferred = $q.defer();
       deferred.resolve(result);
       return deferred.promise;
     },
-    getUserLists: function(connected) {
-       var listResult;
-       if (!connected) {
-        listResult =  {
-          lists: [{ IdList: 5002 }, {IdList:5003}],
-          listId: 1225,
-          success: true
-        };
-      } else {
-        listResult =  {
+    getUserLists: function (connected) {
+      var listResult;
+      if (!connected) {
+        listResult = {
           lists: [{ IdList: 5002 }, { IdList: 5003 }],
           listId: 1225,
           success: true,
-          idListDefault: 0
+        };
+      } else {
+        listResult = {
+          lists: [{ IdList: 5002 }, { IdList: 5003 }],
+          listId: 1225,
+          success: true,
+          idListDefault: 0,
         };
       }
       var deferred = $q.defer();
       deferred.resolve(listResult);
       return deferred.promise;
     },
-    getUserEntities: function(connected) {
+    getUserEntities: function (connected) {
       var listResult;
       if (!connected) {
-        listResult =  {
-          lists: { entities: ["Entity1", "Entity2"] },
-          success: true
+        listResult = {
+          lists: { entities: ['Entity1', 'Entity2'] },
+          success: true,
         };
       } else {
-        listResult =  {
-          lists: { entities: ["Entity1", "Entity2"] },
+        listResult = {
+          lists: { entities: ['Entity1', 'Entity2'] },
           success: true,
         };
       }
@@ -66,45 +66,45 @@ describe('vtex integration', function() {
       deferred.resolve(listResult);
       return deferred.promise;
     },
-    getChangedListState: function(pending){
+    getChangedListState: function (pending) {
       var response;
       if (!pending) {
-        response =  {
+        response = {
           arePending: false,
-          success: true
+          success: true,
         };
       } else {
-        response =  {
+        response = {
           arePending: true,
-          success: true
+          success: true,
         };
       }
       var deferred = $q.defer();
       deferred.resolve(response);
       return deferred.promise;
     },
-    connect_success: function(){
-      var result =  {
+    connect_success: function () {
+      var result = {
         success: true,
         lastSyncDate: '01/01/2001',
-        store: 'other store'
+        store: 'other store',
       };
       var deferred = $q.defer();
       deferred.resolve(result);
       return deferred.promise;
     },
-    getSyncListData: function(){
-       var result =  {
-        SubscribersCount: 3
+    getSyncListData: function () {
+      var result = {
+        SubscribersCount: 3,
       };
       var deferred = $q.defer();
       deferred.resolve(result);
       return deferred.promise;
     },
-    getFields: function(){
-      var result =  {
+    getFields: function () {
+      var result = {
         success: true,
-        fields: []
+        fields: [],
       };
       var deferred = $q.defer();
       deferred.resolve(result);
@@ -113,7 +113,7 @@ describe('vtex integration', function() {
     getFieldTypes: function () {
       var result = {
         success: true,
-        types: []
+        types: [],
       };
       var deferred = $q.defer();
       deferred.resolve(result);
@@ -124,13 +124,13 @@ describe('vtex integration', function() {
         index: null,
         name: '',
         dataType: 2,
-        isPrivate: "true",
-        error: null
+        isPrivate: 'true',
+        error: null,
       };
       var deferred = $q.defer();
       deferred.resolve(result);
       return deferred.promise;
-    }
+    },
   };
 
   var vtexServiceMock = {
@@ -138,27 +138,27 @@ describe('vtex integration', function() {
     getUserLists: {},
     getUserEntities: {},
     getChangedState: {},
-    getListData: {}
+    getListData: {},
   };
 
   var INTEGRATION_CODES = {
-    VTEX: 5
-  }
+    VTEX: 5,
+  };
   var IMPORTING_STATE = {
-    IMPORTING_SUBSCRIBERS: 5
-  }
+    IMPORTING_SUBSCRIBERS: 5,
+  };
 
   var IMPORTING_STATE_STR = {
-    IMPORTING_SUBSCRIBERS: 5
-  }
+    IMPORTING_SUBSCRIBERS: 5,
+  };
 
   var BASIC_FIELD = {
-    EMAIL: 5
-  }
+    EMAIL: 5,
+  };
 
   var VTEX_FIELD_TYPE = {
-    EMAIL: 'Email'
-  }
+    EMAIL: 'Email',
+  };
 
   var FIELD_TYPE = {
     BOOLEAN: 0,
@@ -172,26 +172,26 @@ describe('vtex integration', function() {
     ORIGIN: 8,
     SCORE: 9,
     PHONE: 10,
-    PERMISSION: 11
-  }
+    PERMISSION: 11,
+  };
 
-  var $translate =  {
-    instant: function (text){
+  var $translate = {
+    instant: function (text) {
       return text;
     },
-    onReady: function(text) {
+    onReady: function (text) {
       var deferred = $q.defer();
       deferred.resolve(text);
       return deferred.promise;
-    }
+    },
   };
   var $controller, $rootScope;
   var ModalService;
   var $q;
   var $timeout;
 
-  beforeEach(function() {
-    module(function($provide) {
+  beforeEach(function () {
+    module(function ($provide) {
       $provide.value('$translate', $translate);
       $provide.value('vtexService', vtexServiceMock);
       $provide.value('ModalService', ModalService);
@@ -205,25 +205,24 @@ describe('vtex integration', function() {
     });
   });
 
-  beforeEach(inject(function(_$controller_, _$rootScope_, _$q_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_, _$q_) {
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     $q = _$q_;
   }));
 
-
-  xit('load page with not connected user', function() {
+  xit('load page with not connected user', function () {
     var $scope = $rootScope.$new();
 
-    vtexServiceMock.getIntegrationStatus = function() {
+    vtexServiceMock.getIntegrationStatus = function () {
       return vtexDataMock.getStatus(false);
     };
 
-    vtexServiceMock.getUserLists = function(){
+    vtexServiceMock.getUserLists = function () {
       return vtexDataMock.getUserLists(false);
     };
 
-    vtexServiceMock.getUserEntities = function(){
+    vtexServiceMock.getUserEntities = function () {
       return vtexDataMock.getUserEntities(false);
     };
 
@@ -233,40 +232,39 @@ describe('vtex integration', function() {
       $translate: $translate,
       ModalService: ModalService,
       vtexService: vtexServiceMock,
-      $timeout: $timeout
+      $timeout: $timeout,
     });
-     $rootScope.$apply();
+    $rootScope.$apply();
 
     // Assert
     expect(vtexController).not.toBeUndefined();
     expect(vtexController.connected).toBeFalsy();
-
   });
 
-  it('load page with connected user', function() {
+  it('load page with connected user', function () {
     var $scope = $rootScope.$new();
 
-    vtexServiceMock.getIntegrationStatus = function() {
-       return vtexDataMock.getStatus(true);
+    vtexServiceMock.getIntegrationStatus = function () {
+      return vtexDataMock.getStatus(true);
     };
 
-    vtexServiceMock.getChangedState = function(){
+    vtexServiceMock.getChangedState = function () {
       return vtexDataMock.getChangedListState(false);
     };
 
-    vtexServiceMock.getListData = function() {
+    vtexServiceMock.getListData = function () {
       return vtexDataMock.getSyncListData();
-    }
+    };
 
-    vtexServiceMock.getUserLists = function(){
+    vtexServiceMock.getUserLists = function () {
       return vtexDataMock.getUserLists(true);
     };
 
-    vtexServiceMock.getVtexEntities = function(){
+    vtexServiceMock.getVtexEntities = function () {
       return vtexDataMock.getUserEntities(true);
     };
 
-    vtexServiceMock.getFields = function(){
+    vtexServiceMock.getFields = function () {
       return vtexDataMock.getFields();
     };
 
@@ -280,14 +278,13 @@ describe('vtex integration', function() {
       $translate: $translate,
       ModalService: ModalService,
       vtexService: vtexServiceMock,
-      $timeout: $timeout
+      $timeout: $timeout,
     });
     $rootScope.$apply();
     // Assert
     expect(vtexController).not.toBeUndefined();
     expect(vtexController.connected).toBeTruthy();
     expect(vtexController.connectedStore).not.toBeUndefined();
-
   });
 
   it('filters user list with already integrated lists', function () {
@@ -300,7 +297,7 @@ describe('vtex integration', function() {
 
     vtexServiceMock.getListData = function () {
       return vtexDataMock.getSyncListData();
-    }
+    };
 
     vtexServiceMock.getUserLists = function () {
       return vtexDataMock.getUserLists(true);
@@ -316,14 +313,14 @@ describe('vtex integration', function() {
       $translate: $translate,
       ModalService: ModalService,
       vtexService: vtexServiceMock,
-      $timeout: $timeout
+      $timeout: $timeout,
     });
     $rootScope.$apply();
     // Assert
     expect(vtexController.integratedLists).not.toBeUndefined();
     expect(vtexController.userList).not.toBeUndefined();
-    expect(vtexController.userList.length).toBeLessThan(vtexController.allUserList.length);
-
+    expect(vtexController.userList.length).toBeLessThan(
+      vtexController.allUserList.length
+    );
   });
-
 });

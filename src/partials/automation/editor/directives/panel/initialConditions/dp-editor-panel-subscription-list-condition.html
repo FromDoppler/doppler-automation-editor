@@ -2,20 +2,46 @@
   <div class="dp-wrap-message dp-wrap-info">
     <span class="dp-message-icon"></span>
     <div class="dp-content-message">
-      <p>{{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}</p>
+      <p>
+        {{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}
+      </p>
     </div>
   </div>
 </div>
 <div>
   <p class="title">{{ 'automation_editor.sidebar.list_title' | translate }}</p>
-  <div class="selected-list disable--toggler" ng-show="selectedComponent.suscriptionList.ListName">
-    <span class="text"><strong>{{ 'automation_editor.sidebar.list_selected' | translate }}</strong></span>
+  <div
+    class="selected-list disable--toggler"
+    ng-show="selectedComponent.suscriptionList.ListName"
+  >
+    <span class="text"
+      ><strong
+        >{{ 'automation_editor.sidebar.list_selected' | translate }}</strong
+      ></span
+    >
     <div>
       <span class="icon-check"></span>
       <span class="name">{{ selectedComponent.suscriptionList.ListName }}</span>
     </div>
   </div>
-  <button ng-click="showListSelectionSimple()" class="button button--primary button--small" ng-disabled="isReadOnly();">{{ selectedComponent.suscriptionList.ListName ? 'automation_editor.sidebar.list_replace_button' : 'automation_editor.sidebar.list_select_button' | translate }}</button>
+  <button
+    ng-click="showListSelectionSimple()"
+    class="button button--primary button--small"
+    ng-disabled="isReadOnly();"
+  >
+    {{ selectedComponent.suscriptionList.ListName ?
+    'automation_editor.sidebar.list_replace_button' :
+    'automation_editor.sidebar.list_select_button' | translate }}
+  </button>
   <span class="icon-globo"></span>
-  <p class="help-tip"><strong>{{ 'automation_editor.sidebar.list_tip' | translate }}</strong> <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span> <a ng-href="{{ 'automation_editor.sidebar.list_tip_link_url' | translate }}" class="link--default" target="_blank">{{ 'automation_editor.sidebar.list_tip_link_text' | translate }}</a>.</p>
+  <p class="help-tip">
+    <strong>{{ 'automation_editor.sidebar.list_tip' | translate }}</strong>
+    <span>{{ 'automation_editor.sidebar.list_tip_part2' | translate }}</span>
+    <a
+      ng-href="{{ 'automation_editor.sidebar.list_tip_link_url' | translate }}"
+      class="link--default"
+      target="_blank"
+      >{{ 'automation_editor.sidebar.list_tip_link_text' | translate }}</a
+    >.
+  </p>
 </div>

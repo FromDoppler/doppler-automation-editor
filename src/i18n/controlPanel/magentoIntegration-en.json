@@ -62,7 +62,6 @@
         "button": "Create",
         "required_message": "Ouch! This field is required"
       }
-
     },
     "status": {
       "title": "Your Adobe Commerce store is already connected to Doppler",

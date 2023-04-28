@@ -23,7 +23,7 @@ $font_weight-bolder: bold;
 //   Font Family
 // -------------------------------------
 
-$font-family--base: "proxima-nova", helvetica, arial, sans-serif;
+$font-family--base: 'proxima-nova', helvetica, arial, sans-serif;
 
 // -------------------------------------
 //   @font-face
@@ -43,23 +43,23 @@ $color-primary: #fbb224;
 $color-yellow: #e69333;
 $color-lightyellow: #fde577;
 $color-darkyellow: #e58900;
-$color-green : #33ad73;
+$color-green: #33ad73;
 $color-green-light: #65c192;
 $color-darkgreen: #008046;
 $color-lightred: #ec8a83;
 $color-red: #e34f45;
 $color-darkred: #a63a33;
-$color-sylver : #ccc;
+$color-sylver: #ccc;
 $color-snow: #eaeaea;
 $color-dark: #000;
 $color-white: #fff;
 $color-ghostwhite: #f2f2f2;
-$color-old-ghostwhite: #F0F0F0;
-$color-old-gray-border: #E0E0E0;
-$color-lightgray-line: #E5E5E5;
-$color-lightgreen: #EBF7F1;
-$color-grey-alpha-15: rgba(105,105,105,.15);
-$color-blue: #0172CB;
+$color-old-ghostwhite: #f0f0f0;
+$color-old-gray-border: #e0e0e0;
+$color-lightgray-line: #e5e5e5;
+$color-lightgreen: #ebf7f1;
+$color-grey-alpha-15: rgba(105, 105, 105, 0.15);
+$color-blue: #0172cb;
 
 // -------------------------------------
 //   Backgrounds
@@ -77,31 +77,44 @@ $size-full: 100%;
 //   Transition
 // -------------------------------------
 
-$transition-default :all .3s ease;
+$transition-default: all 0.3s ease;
 
 // -------------------------------------
 //   Breakpoints
 // -------------------------------------
 
 $doppler-breakpoints: (
-  'desktop-fhd': (max-width: 1920px),
-  'desktop': (max-width: 1366px),
-  'ipad': (min-width: 1023px, max-width: 1024px),
-  'isdesktop': (min-width: 1024px),
-  'ismobile': (max-width: 1024px),
-  'iphone': (max-width: 980px)
+  'desktop-fhd': (
+    max-width: 1920px,
+  ),
+  'desktop': (
+    max-width: 1366px,
+  ),
+  'ipad': (
+    min-width: 1023px,
+    max-width: 1024px,
+  ),
+  'isdesktop': (
+    min-width: 1024px,
+  ),
+  'ismobile': (
+    max-width: 1024px,
+  ),
+  'iphone': (
+    max-width: 980px,
+  ),
 );
 
 // -------------------------------------
 //   Other
 // -------------------------------------
 
-$border-radius--default : 3px;
-$wrapper-max-width : 1300px;
+$border-radius--default: 3px;
+$wrapper-max-width: 1300px;
 $padding-wrapper: 6.5%;
 $padding-header-footer: 2%;
 $header-footer-height: 70px;
 %disable-element {
-  opacity: .5;
+  opacity: 0.5;
   pointer-events: none;
-};
+}

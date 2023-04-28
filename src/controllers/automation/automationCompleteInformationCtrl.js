@@ -1,9 +1,12 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation')
-    .controller('automationCompleteInformationCtrl', automationCompleteInformationCtrl);
+    .controller(
+      'automationCompleteInformationCtrl',
+      automationCompleteInformationCtrl
+    );
 
   automationCompleteInformationCtrl.$inject = [
     '$scope',
@@ -11,10 +14,17 @@
     'taskService',
     'summaryTaskService',
     'close',
-    'Constants'
+    'Constants',
   ];
 
-  function automationCompleteInformationCtrl($scope, $translate, taskService, summaryTaskService, close, Constants) {
+  function automationCompleteInformationCtrl(
+    $scope,
+    $translate,
+    taskService,
+    summaryTaskService,
+    close,
+    Constants
+  ) {
     $translate.use(mainMenuData.user.lang);
     $scope.pageLoading = true;
     $scope.NameAttributePattern = Constants.NameAttributePattern;
@@ -26,46 +36,55 @@
     var iti = null;
     var smsForm = null;
 
-    $translate.onReady().then(function() {
-      summaryTaskService.getContactInformation().then(function(response) {
+    $translate.onReady().then(function () {
+      summaryTaskService.getContactInformation().then(function (response) {
         if (response.data.success) {
           $scope.model = response.data.model;
           $scope.model.Countries[0].IdCountry = undefined;
           $scope.model.States[0].IdState = undefined;
           $scope.pageLoading = false;
           $scope.model.Industries.map(function (data) {
-            return { 'IdIndustry': data.IdIndustry, 'Description': data.Description };
+            return {
+              IdIndustry: data.IdIndustry,
+              Description: data.Description,
+            };
           });
           $scope.model.Industries.splice(0, 0, {
-            'Description': $translate.instant('CompleteInformation_IndustryDefault'),
-            'IdIndustry': undefined
+            Description: $translate.instant(
+              'CompleteInformation_IndustryDefault'
+            ),
+            IdIndustry: undefined,
           });
         }
         initializePhoneInput();
       });
     });
 
-    $scope.loadStates = function() {
+    $scope.loadStates = function () {
       if ($scope.model.IdCountry !== undefined) {
-        summaryTaskService.getStatesByCountry($scope.model.IdCountry).then(function(response) {
-          $scope.model.States = response.data;
-          $scope.model.IdState = $scope.model.States[0].IdState;
-        });
+        summaryTaskService
+          .getStatesByCountry($scope.model.IdCountry)
+          .then(function (response) {
+            $scope.model.States = response.data;
+            $scope.model.IdState = $scope.model.States[0].IdState;
+          });
       }
       $scope.model.CountryDirty = true;
     };
 
-    $scope.saveContactInfo = function() {
+    $scope.saveContactInfo = function () {
       if ($scope.CompleteInformation.$valid) {
         var saveModel = $scope.model;
         saveModel.States = null;
         saveModel.Countries = null;
 
-        summaryTaskService.saveContactInfo($scope.model).then(function(response) {
-          if (response.data.success) {
-            $scope.close('ok');
-          }
-        });
+        summaryTaskService
+          .saveContactInfo($scope.model)
+          .then(function (response) {
+            if (response.data.success) {
+              $scope.close('ok');
+            }
+          });
       }
     };
 
@@ -81,13 +100,22 @@
             nationalMode: true,
             separateDialCode: false,
             autoPlaceholder: 'aggressive',
-            preferredCountries: ['ar', 'mx', 'co', 'es', 'ec', 'cl', 'pe', 'us'],
+            preferredCountries: [
+              'ar',
+              'mx',
+              'co',
+              'es',
+              'ec',
+              'cl',
+              'pe',
+              'us',
+            ],
             initialCountry: 'ar',
-            customContainer: 'dropdown--full'
+            customContainer: 'dropdown--full',
           });
           window.clearInterval(interval);
           $scope.changePhoneNumber(smsForm);
-          inputRef.addEventListener('countrychange', function() {
+          inputRef.addEventListener('countrychange', function () {
             $scope.changePhoneNumber(smsForm);
           });
         }
@@ -108,31 +136,31 @@
           evaluateIntlError(iti.getValidationError(), smsForm);
         } else {
           smsForm.PhoneNumber.$error = {
-            'required': true
+            required: true,
           };
         }
       }
-    }
+    };
 
     function evaluateIntlError(errorCode, smsForm) {
       switch (errorCode) {
-      case 0:
-        smsForm.PhoneNumber.$error = {
-          'pattern': true,
-          'required': false
-        };
-        break;
-      case 3:
-        smsForm.PhoneNumber.$error = {
-          'maxlength': true,
-          'required': false
-        };
-        break;
-      default:
-        smsForm.PhoneNumber.$error = {
-          'pattern': true,
-          'required': false
-        };
+        case 0:
+          smsForm.PhoneNumber.$error = {
+            pattern: true,
+            required: false,
+          };
+          break;
+        case 3:
+          smsForm.PhoneNumber.$error = {
+            maxlength: true,
+            required: false,
+          };
+          break;
+        default:
+          smsForm.PhoneNumber.$error = {
+            pattern: true,
+            required: false,
+          };
       }
     }
   }

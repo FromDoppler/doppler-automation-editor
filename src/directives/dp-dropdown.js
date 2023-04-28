@@ -1,14 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('dropdown', dropdown);
+  angular.module('dopplerApp').directive('dropdown', dropdown);
 
   dropdown.$inject = ['$document', '$timeout'];
 
   function dropdown($document, $timeout) {
-
     var directive = {
       restrict: 'E',
       templateUrl: 'angularjs/partials/shared/dropdown.html',
@@ -21,10 +18,10 @@
         ngDisabled: '=',
         dropup: '@',
         id: '@',
-        placeholder: '@'
+        placeholder: '@',
       },
       require: 'ngModel',
-      link: link
+      link: link,
     };
 
     return directive;
@@ -37,9 +34,8 @@
       scope.searchText = '';
       scope.display = '';
 
-
-      $timeout(function() {
-        var selectedItem = _.find(scope.list, function(item) {
+      $timeout(function () {
+        var selectedItem = _.find(scope.list, function (item) {
           return item[scope.idValue] === scope.selected;
         });
         if (selectedItem) {
@@ -47,34 +43,36 @@
         } else if (scope.placeholder && !scope.display) {
           scope.display = scope.placeholder;
         }
-
       });
 
-      scope.filterByLabel = function(value){
+      scope.filterByLabel = function (value) {
         var text = value[scope.property];
         text = (text + '').toLowerCase();
         return text.indexOf(scope.searchText.toLowerCase()) === 0;
       };
 
-      scope.select = function(item) {
-        scope.selected = scope.idValue !== undefined ? item[scope.idValue] : item;
+      scope.select = function (item) {
+        scope.selected =
+          scope.idValue !== undefined ? item[scope.idValue] : item;
         scope.display = item[scope.property];
         modelCtrl.$setViewValue(item[scope.idValue]);
       };
 
-      scope.isSelected = function(item) {
+      scope.isSelected = function (item) {
         if (scope.selected === undefined) {
           return false;
         }
-        return scope.property !== undefined ? item[scope.idValue] === scope.selected : item === scope.selected;
+        return scope.property !== undefined
+          ? item[scope.idValue] === scope.selected
+          : item === scope.selected;
       };
 
-      scope.show = function() {
+      scope.show = function () {
         if (!scope.ngDisabled) {
           scope.listVisible = !scope.listVisible;
           if (scope.listVisible) {
             scope.searchText = '';
-            $timeout(function(){
+            $timeout(function () {
               scope.searchInput.focus();
             }, 300);
           }
@@ -86,12 +84,13 @@
         }
       };
 
-      scope.close = function() {
+      scope.close = function () {
         scope.listVisible = false;
       };
 
-      elem.bind('click', function(event) {
-        var isClickedElementChildOfDropDown = event.target.className.indexOf(scope.dropdownElementClass) !== -1 ||
+      elem.bind('click', function (event) {
+        var isClickedElementChildOfDropDown =
+          event.target.className.indexOf(scope.dropdownElementClass) !== -1 ||
           event.target.className.indexOf('dropdown-arrow') !== -1 ||
           event.target.className.indexOf('dropdown-label') !== -1 ||
           event.target.className.indexOf('dropdown-display') !== -1;
@@ -103,7 +102,7 @@
         scope.$apply();
       });
 
-      scope.$watch('selected', function(newValue) {
+      scope.$watch('selected', function (newValue) {
         if (scope.list !== undefined) {
           if (scope.idValue === undefined) {
             for (var i = 0, len = scope.list.length; i < len; i++) {
@@ -124,17 +123,14 @@
           }
         }
         if (newValue === null) {
-          var selectedItem = _.find(scope.list, function(item) {
+          var selectedItem = _.find(scope.list, function (item) {
             return item[scope.idValue] === scope.newValue;
           });
           if (!selectedItem && scope.placeholder) {
             scope.display = scope.placeholder;
           }
         }
-
       });
     }
-
   }
-
 })();

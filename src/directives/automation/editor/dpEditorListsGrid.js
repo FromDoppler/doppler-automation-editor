@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -16,42 +16,64 @@
     'selectedElementsService',
     'utils',
     'warningsStepsService',
-    'BLOCKED_STATUS'
+    'BLOCKED_STATUS',
   ];
 
-  function dpEditorListsGrid($rootScope, $translate, automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE,
-    gridService, selectedElementsService, utils, warningsStepsService, BLOCKED_STATUS) {
+  function dpEditorListsGrid(
+    $rootScope,
+    $translate,
+    automation,
+    CHANGE_TYPE,
+    changesManager,
+    COMPONENT_TYPE,
+    gridService,
+    selectedElementsService,
+    utils,
+    warningsStepsService,
+    BLOCKED_STATUS
+  ) {
     var directive = {
       restrict: 'E',
-      templateUrl: 'angularjs/partials/automation/editor/directives/dp-editor-lists-grid.html',
-      controller: controller
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/dp-editor-lists-grid.html',
+      controller: controller,
     };
 
     return directive;
 
     function controller($scope) {
-      $scope.showHeader = $scope.$parent.showHeader !== undefined ? $scope.$parent.showHeader : true;
+      $scope.showHeader =
+        $scope.$parent.showHeader !== undefined
+          ? $scope.$parent.showHeader
+          : true;
       $scope.blockedStatus = BLOCKED_STATUS.VALUE;
       var checked = false;
       var selectedItemOptions = {
         selectedItem: getSelectedItem(),
         keyToCompare: 'IdSubscribersList',
-        keyChecked: 'IsChecked'
+        keyChecked: 'IsChecked',
       };
       var selectedItemId = 0;
-      if (selectedItemOptions.selectedItem && selectedItemOptions.selectedItem.IdSubscribersList) {
+      if (
+        selectedItemOptions.selectedItem &&
+        selectedItemOptions.selectedItem.IdSubscribersList
+      ) {
         selectedItemId = selectedItemOptions.selectedItem.IdSubscribersList;
       }
 
-      $scope.listTitle = $scope.listTitle || $translate.instant('automation_editor.lists_grid.title');
+      $scope.listTitle =
+        $scope.listTitle ||
+        $translate.instant('automation_editor.lists_grid.title');
       $scope.showHelpLink = !$scope.listSubtitle;
-      $scope.listSubtitle = $scope.listSubtitle || $translate.instant('automation_editor.lists_grid.description');
+      $scope.listSubtitle =
+        $scope.listSubtitle ||
+        $translate.instant('automation_editor.lists_grid.description');
 
       $scope.gridModel = gridService.initGrid({
         getDataUrl: '/Automation/Task/GetSubscribersLists',
         isSelectElementGrid: true,
         idListsOrSegmentFilter: 2,
-        selectedItemOptions: selectedItemOptions
+        selectedItemOptions: selectedItemOptions,
       });
 
       $scope.gridModel.getLabels();
@@ -60,9 +82,10 @@
 
       function getSelectedItem() {
         var selectedComponent = selectedElementsService.getSelectedComponent();
-        if (selectedComponent){
+        if (selectedComponent) {
           if (selectedComponent.type === COMPONENT_TYPE.CONDITION) {
-            return selectedElementsService.getSelectedConditional().subscriptionList;
+            return selectedElementsService.getSelectedConditional()
+              .subscriptionList;
           } else if (selectedComponent.type === COMPONENT_TYPE.ACTION) {
             return selectedComponent.operation.suscriptionList;
           }
@@ -71,9 +94,12 @@
         return {};
       }
 
-      $scope.selectRow = function(item) {
-        if (!item.IsChecked && (!this.isDisabled(item) || item.IdSubscribersList === selectedItemId)) {
-          var result = _.find($scope.gridModel.displayed, function(item){
+      $scope.selectRow = function (item) {
+        if (
+          !item.IsChecked &&
+          (!this.isDisabled(item) || item.IdSubscribersList === selectedItemId)
+        ) {
+          var result = _.find($scope.gridModel.displayed, function (item) {
             return item.IsChecked === true;
           });
           if (result) {
@@ -88,7 +114,7 @@
         }
       };
 
-      $scope.isDisabled = function(row) {
+      $scope.isDisabled = function (row) {
         return row.ListStatus === $scope.blockedStatus;
       };
 
@@ -96,7 +122,7 @@
         return row.IdSubscribersList === selectedItemId;
       };
 
-      $scope.$on('COMPONENT_LIST.CONFIRM_SELECTION', function() {
+      $scope.$on('COMPONENT_LIST.CONFIRM_SELECTION', function () {
         if (!$scope.gridModel.selectedItem) {
           return;
         }
@@ -110,26 +136,30 @@
           path = 'operation.suscriptionList';
           data = {
             operation: {
-              suscriptionList: $scope.gridModel.selectedItem
-            }
+              suscriptionList: $scope.gridModel.selectedItem,
+            },
           };
         } else {
           path = 'suscriptionList';
           data = {
-            suscriptionList: $scope.gridModel.selectedItem
+            suscriptionList: $scope.gridModel.selectedItem,
           };
         }
 
-        oldComponentData = JSON.parse(JSON.stringify(utils.getDeepValue(selectedComponent, path)));
+        oldComponentData = JSON.parse(
+          JSON.stringify(utils.getDeepValue(selectedComponent, path))
+        );
         selectedComponent.setData(data);
-        newComponentData = JSON.parse(JSON.stringify(utils.getDeepValue(selectedComponent, path)));
+        newComponentData = JSON.parse(
+          JSON.stringify(utils.getDeepValue(selectedComponent, path))
+        );
 
         changesManager.add({
           type: CHANGE_TYPE.PROPERTY,
           uid: selectedComponent.uid,
           key: path,
           oldValue: angular.copy(oldComponentData),
-          newValue: angular.copy(newComponentData)
+          newValue: angular.copy(newComponentData),
         });
 
         selectedComponent.checkCompleted();
@@ -138,7 +168,7 @@
         warningsStepsService.checkWarningStep(selectedComponent);
       });
 
-      $scope.$on('CONDITIONAL_LIST.CONFIRM_SELECTION', function() {
+      $scope.$on('CONDITIONAL_LIST.CONFIRM_SELECTION', function () {
         var selectedConditional;
 
         if (!$scope.gridModel.selectedItem) {
@@ -146,7 +176,7 @@
         }
         selectedConditional = selectedElementsService.getSelectedConditional();
         selectedConditional.setData({
-          subscriptionList: $scope.gridModel.selectedItem
+          subscriptionList: $scope.gridModel.selectedItem,
         });
       });
     }

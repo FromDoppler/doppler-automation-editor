@@ -1,86 +1,162 @@
-<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
-    ng-show="bmwCrm.connected && bmwCrm.showMapping">
-    <div>
-        <div class="authentication-container connected">
-            <div>
-                <span class="control-panel-section-title">{{ 'bmwcrm_integration.mapping.title' | translate }}</span>
-                <span class="control-panel-section-subtitle">{{ 'bmwcrm_integration.mapping.subtitle' | translate }}</span>
-            </div>
-        </div>
-        <hr class="full" style="width: calc(100% + 40px);" />
-        <p class="integration-information-text">{{ 'bmwcrm_integration.mapping.selected_data_entity' | translate }}: <strong>{{ bmwCrm.selectedEntity.description }}</strong>
-        </p>
-        <p class="integration-information-text">{{ 'bmwcrm_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ bmwCrm.selectedList.ListName }}</strong></p>
-        <div class="dp-library margin-t-20 margin-b-20">
-          <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
-            <span class="dp-message-icon"></span>
-            <div class="dp-content-message">
-              <span id="messageBar" class="text--small">
-                {{ 'bmwcrm_integration.mapping.email_field_message' | translate }}
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="mapping-container">
-          <div ng-repeat="field in bmwCrm.bmwCrmFields" dp-on-finish-ng-repeat>
-            <div class="grayPanel-box flex-grid">
-              <div>
-                <p>{{ 'bmwcrm_integration.mapping.data_entity_field' | translate }}: <b>{{ bmwCrm.getFiledName(field.Name) }}</b></p>
-              </div>
-              <div>
-                <select id="dd-userFields{{$index}}"
-                        name="select-field{{$index}}"
-                        ng-model="field.idDopplerField"
-                        property="name"
-                        id-value="idField"
-                        ng-options="field.idField as field.name for field in bmwCrm.userFields  | filter:bmwCrm.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
-                        ng-click="bmwCrm.errorMessage=''"
-                        class="selector field-selector"
-                        ng-required="true"
-                        ng-change="bmwCrm.fieldChange($index, field.idDopplerField)">
-                  <option value="" disabled="disabled">{{'bmwcrm_integration.mapping.select_field_placeholder' | translate}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="createCustomField-box" ng-show="$index == bmwCrm.newField.index">
-              <input type="text" class="name" id="Name" name="Name" value="" ng-model="bmwCrm.newField.name" maxlength="50" ng-click="bmwCrm.newField.error=''">
-              <select id="dd-fieldTypes{{$index}}"
-                      name="select-field-type{{$index}}"
-                      ng-model="bmwCrm.newField.dataType"
-                      ng-options="type.id as type.name for type in bmwCrm.fieldTypes"
-                      class="selector customFieldTypeDropDown"
-                      ng-required="true"
-                      ng-disabled="true">
-              </select>
-              <div class="visibility-container">
-                <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="bmwCrm.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'bmwcrm_integration.mapping.new_field.public_opt' | translate}}</label>
-                <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="bmwCrm.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'bmwcrm_integration.mapping.new_field.private_opt' | translate}}</label>
-              </div>
-              <div class="validationTooltip-container" ng-show="bmwCrm.newField.error">
-                <span class="validationTooltip-image"></span>
-                <span class="validation-tooltip">{{ bmwCrm.newField.error }}</span>
-              </div>
-              <input type="submit" value="{{'bmwcrm_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="bmwCrm.createField($index)">
-            </div>
-          </div>
-        </div>
+<div
+  id="mapping-panel"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  ng-show="bmwCrm.connected && bmwCrm.showMapping"
+>
+  <div>
+    <div class="authentication-container connected">
+      <div>
+        <span class="control-panel-section-title"
+          >{{ 'bmwcrm_integration.mapping.title' | translate }}</span
+        >
+        <span class="control-panel-section-subtitle"
+          >{{ 'bmwcrm_integration.mapping.subtitle' | translate }}</span
+        >
+      </div>
     </div>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="!!bmwCrm.errorMessage.length">
-      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+    <hr class="full" style="width: calc(100% + 40px)" />
+    <p class="integration-information-text">
+      {{ 'bmwcrm_integration.mapping.selected_data_entity' | translate }}:
+      <strong>{{ bmwCrm.selectedEntity.description }}</strong>
+    </p>
+    <p class="integration-information-text">
+      {{ 'bmwcrm_integration.mapping.selected_subscriber_list' | translate }}:
+      <strong>{{ bmwCrm.selectedList.ListName }}</strong>
+    </p>
+    <div class="dp-library margin-t-20 margin-b-20">
+      <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
-        <div class="dp-content-message dp-content-full">
-          <span>{{ bmwCrm.errorMessage }}</span>
+        <div class="dp-content-message">
+          <span id="messageBar" class="text--small">
+            {{ 'bmwcrm_integration.mapping.email_field_message' | translate }}
+          </span>
         </div>
       </div>
     </div>
-    <div class="nav-button-bar flex-grid-v-center--s-between">
-        <button ng-click="bmwCrm.goBack()" class="button button--alternative">
-                {{ 'bmwcrm_integration.mapping.back' | translate }}
-        </button>
-        <button ng-class="{'button--spinner' : bmwCrm.isMapping}" ng-click="bmwCrm.mapFields()"
-                class="button button--primary">
-          {{ 'bmwcrm_integration.mapping.synchronize' | translate }}
-          <span class="icon-editor-saving hide"></span>
-        </button>
+    <div class="mapping-container">
+      <div ng-repeat="field in bmwCrm.bmwCrmFields" dp-on-finish-ng-repeat>
+        <div class="grayPanel-box flex-grid">
+          <div>
+            <p>
+              {{ 'bmwcrm_integration.mapping.data_entity_field' | translate }}:
+              <b>{{ bmwCrm.getFiledName(field.Name) }}</b>
+            </p>
+          </div>
+          <div>
+            <select
+              id="dd-userFields{{$index}}"
+              name="select-field{{$index}}"
+              ng-model="field.idDopplerField"
+              property="name"
+              id-value="idField"
+              ng-options="field.idField as field.name for field in bmwCrm.userFields  | filter:bmwCrm.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+              ng-click="bmwCrm.errorMessage=''"
+              class="selector field-selector"
+              ng-required="true"
+              ng-change="bmwCrm.fieldChange($index, field.idDopplerField)"
+            >
+              <option value="" disabled="disabled">
+                {{'bmwcrm_integration.mapping.select_field_placeholder' |
+                translate}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="createCustomField-box"
+          ng-show="$index == bmwCrm.newField.index"
+        >
+          <input
+            type="text"
+            class="name"
+            id="Name"
+            name="Name"
+            value=""
+            ng-model="bmwCrm.newField.name"
+            maxlength="50"
+            ng-click="bmwCrm.newField.error=''"
+          />
+          <select
+            id="dd-fieldTypes{{$index}}"
+            name="select-field-type{{$index}}"
+            ng-model="bmwCrm.newField.dataType"
+            ng-options="type.id as type.name for type in bmwCrm.fieldTypes"
+            class="selector customFieldTypeDropDown"
+            ng-required="true"
+            ng-disabled="true"
+          ></select>
+          <div class="visibility-container">
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-public{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="bmwCrm.newField.isPrivate"
+                value="false"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-public{{$index}}"
+              >{{'bmwcrm_integration.mapping.new_field.public_opt' |
+              translate}}</label
+            >
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-private{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="bmwCrm.newField.isPrivate"
+                value="true"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-private{{$index}}"
+              >{{'bmwcrm_integration.mapping.new_field.private_opt' |
+              translate}}</label
+            >
+          </div>
+          <div
+            class="validationTooltip-container"
+            ng-show="bmwCrm.newField.error"
+          >
+            <span class="validationTooltip-image"></span>
+            <span class="validation-tooltip">{{ bmwCrm.newField.error }}</span>
+          </div>
+          <input
+            type="submit"
+            value="{{'bmwcrm_integration.mapping.new_field.button' | translate}}"
+            class="main_buttons_green_small submit"
+            ng-click="bmwCrm.createField($index)"
+          />
+        </div>
+      </div>
     </div>
+  </div>
+  <div
+    class="dp-library margin-t-20 margin-b-20"
+    ng-show="!!bmwCrm.errorMessage.length"
+  >
+    <div
+      id="messageBar"
+      class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+    >
+      <span class="dp-message-icon"></span>
+      <div class="dp-content-message dp-content-full">
+        <span>{{ bmwCrm.errorMessage }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="nav-button-bar flex-grid-v-center--s-between">
+    <button ng-click="bmwCrm.goBack()" class="button button--alternative">
+      {{ 'bmwcrm_integration.mapping.back' | translate }}
+    </button>
+    <button
+      ng-class="{'button--spinner' : bmwCrm.isMapping}"
+      ng-click="bmwCrm.mapFields()"
+      class="button button--primary"
+    >
+      {{ 'bmwcrm_integration.mapping.synchronize' | translate }}
+      <span class="icon-editor-saving hide"></span>
+    </button>
+  </div>
 </div>

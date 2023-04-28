@@ -2,7 +2,7 @@
 
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
-var mountFolder = function(connect, dir) {
+var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
@@ -12,7 +12,7 @@ var mountFolder = function(connect, dir) {
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
 
@@ -20,22 +20,23 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     bwr: grunt.file.readJSON('bower.json'),
     concat: {
-      dist:{}
+      dist: {},
     },
     ngAnnotate: {
-      dist: {}
+      dist: {},
     },
     uglify: {
       options: {
         report: 'min',
         enclose: {
-          'this': 'window',
+          this: 'window',
           'this.angular': 'angular',
-          'void 0': 'undefined'
+          'void 0': 'undefined',
         },
-        banner: '/*\n  <%= pkg.name %> - v<%= pkg.version %> \n  ' +
-          '<%= grunt.template.today("yyyy-mm-dd") %>\n*/\n'+
-        ''
+        banner:
+          '/*\n  <%= pkg.name %> - v<%= pkg.version %> \n  ' +
+          '<%= grunt.template.today("yyyy-mm-dd") %>\n*/\n' +
+          '',
       },
       dist: {
         options: {
@@ -43,44 +44,40 @@ module.exports = function(grunt) {
           mangle: true,
           compress: {
             global_defs: {
-              'DEBUG': false
+              DEBUG: false,
             },
-            dead_code: true
+            dead_code: true,
           },
-          sourceMap: '<%= bwr.name %>.min.js.map'
+          sourceMap: '<%= bwr.name %>.min.js.map',
         },
         files: {
-          '<%= bwr.name %>.min.js': ['./lib/index.js', './lib/*/*.js']
-        }
+          '<%= bwr.name %>.min.js': ['./lib/index.js', './lib/*/*.js'],
+        },
       },
       src: {
         options: {
           beautify: true,
           mangle: false,
-          compress: false
+          compress: false,
         },
         files: {
-          '<%= bwr.name %>.js': ['./lib/index.js', './lib/*/*.js']
-        }
-      }
+          '<%= bwr.name %>.js': ['./lib/index.js', './lib/*/*.js'],
+        },
+      },
     },
     watch: {
       livereload: {
         options: {
-          livereload: LIVERELOAD_PORT
+          livereload: LIVERELOAD_PORT,
         },
-        files: [
-          'example/{,*/}*.html',
-          'example/{,*/}*.js',
-          '{,*/}*.js'
-        ]
-      }
+        files: ['example/{,*/}*.html', 'example/{,*/}*.js', '{,*/}*.js'],
+      },
     },
     connect: {
       options: {
         port: '3000',
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
+        hostname: 'localhost',
       },
       livereload: {
         options: {
@@ -89,25 +86,24 @@ module.exports = function(grunt) {
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'example'),
-              mountFolder(connect, '.')
+              mountFolder(connect, '.'),
             ];
-          }
-        }
-      }
-
+          },
+        },
+      },
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
       },
       gruntfile: {
-        src: 'Gruntfile.js'
+        src: 'Gruntfile.js',
       },
       lib: {
-        src: ['lib/**/*.js']
-      }
+        src: ['lib/**/*.js'],
+      },
     },
-     complexity: {
+    complexity: {
       generic: {
         src: ['lib/**/*.js'],
         options: {
@@ -116,31 +112,22 @@ module.exports = function(grunt) {
           errorsOnly: false, // show only maintainability errors
           cyclomatic: 3,
           halstead: 8,
-          maintainability: 100
-        }
-      }
-    }
+          maintainability: 100,
+        },
+      },
+    },
   });
 
   grunt.registerTask('server', function (target) {
-    grunt.task.run([
-      'connect:livereload',
-      'watch'
-    ]);
+    grunt.task.run(['connect:livereload', 'watch']);
   });
 
   grunt.registerTask('test', [
     // 'complexity',
-    'jshint'
+    'jshint',
   ]);
 
-  grunt.registerTask('build', [
-    'concat',
-    'ngAnnotate',
-    'uglify'
-  ]);
+  grunt.registerTask('build', ['concat', 'ngAnnotate', 'uglify']);
 
-  grunt.registerTask('default', [
-    'build'
-  ]);
+  grunt.registerTask('default', ['build']);
 };

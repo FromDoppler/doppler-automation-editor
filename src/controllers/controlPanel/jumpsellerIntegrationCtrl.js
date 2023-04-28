@@ -15,12 +15,21 @@
     'IMPORTING_STATE',
     'IMPORTING_STATE_STR',
     '$timeout',
-    'FIELD_TYPE'
+    'FIELD_TYPE',
   ];
 
-  function jumpsellerIntegrationCtrl($scope, $translate, ModalService,
-    jumpsellerService, INTEGRATION_CODES, BASIC_FIELD, IMPORTING_STATE,
-    IMPORTING_STATE_STR, $timeout, FIELD_TYPE) {
+  function jumpsellerIntegrationCtrl(
+    $scope,
+    $translate,
+    ModalService,
+    jumpsellerService,
+    INTEGRATION_CODES,
+    BASIC_FIELD,
+    IMPORTING_STATE,
+    IMPORTING_STATE_STR,
+    $timeout,
+    FIELD_TYPE
+  ) {
     var vm = this;
     vm.isLoading = true;
     vm.connectionError = false;
@@ -30,48 +39,49 @@
     vm.errorMessage = '';
     vm.integratedLists = [];
     vm.newField = null;
-    
-    $translate.onReady().then(function() {
+
+    $translate.onReady().then(function () {
       vm.getStatus(true);
       loadDopplerFields();
       loadFieldTypes();
     });
 
     vm.getStatus = function () {
-      return jumpsellerService.getIntegrationStatus()
-        .then(function (result) {
-          if (result.success) {
-            if (!!result.model) { // eslint-disable-line
-              vm.connectedAccount = result.model.AccountName;
-              vm.daysToDisconnection = result.model.DaysToDisconnection;
-              vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
-              vm.allUserList === vm.getUserList();
-              vm.integratedLists = result.integratedLists;
-              vm.disableSync = result.integratedLists.length === 0;
-              vm.actionNeeded = result.actionNeeded;
-              vm.autoSyncDisabled = result.model.SyncDisabled;
-            }
-          } else {
-            vm.connectionError = true;
-            vm.errorMsg = $translate.instant('jumpseller_integration.disconnected.connection_error');
+      return jumpsellerService.getIntegrationStatus().then(function (result) {
+        if (result.success) {
+          if (!!result.model) {
+            // eslint-disable-line
+            vm.connectedAccount = result.model.AccountName;
+            vm.daysToDisconnection = result.model.DaysToDisconnection;
+            vm.firstValidationErrorDate = result.model.FirstValidationErrorDate;
+            vm.allUserList === vm.getUserList();
+            vm.integratedLists = result.integratedLists;
+            vm.disableSync = result.integratedLists.length === 0;
+            vm.actionNeeded = result.actionNeeded;
+            vm.autoSyncDisabled = result.model.SyncDisabled;
           }
-          vm.newField = newFieldDefaults();
-          vm.isLoading = false;
-          vm.connected = !!result.model;
-          vm.webAppUrl = result.webAppUrl;
-        });
+        } else {
+          vm.connectionError = true;
+          vm.errorMsg = $translate.instant(
+            'jumpseller_integration.disconnected.connection_error'
+          );
+        }
+        vm.newField = newFieldDefaults();
+        vm.isLoading = false;
+        vm.connected = !!result.model;
+        vm.webAppUrl = result.webAppUrl;
+      });
     };
 
     vm.getUserList = function () {
       vm.isLoading = true;
-      jumpsellerService.getUserLists()
-        .then(function (listResult) {
-          if (listResult.success) {
-            vm.allUserList = listResult.lists;
-            vm.setDefultList();
-          }
-          vm.isLoading = false;
-        });
+      jumpsellerService.getUserLists().then(function (listResult) {
+        if (listResult.success) {
+          vm.allUserList = listResult.lists;
+          vm.setDefultList();
+        }
+        vm.isLoading = false;
+      });
     };
 
     vm.setDefultList = function () {
@@ -93,7 +103,11 @@
           vm.getStatus();
         } else {
           vm.connectionError = true;
-          vm.errorMsg = result.errorMsg.length ? result.errorMsg : $translate.instant('jumpseller_integration.disconnected.connection_error');
+          vm.errorMsg = result.errorMsg.length
+            ? result.errorMsg
+            : $translate.instant(
+                'jumpseller_integration.disconnected.connection_error'
+              );
         }
         vm.connecting = false;
       });
@@ -103,14 +117,19 @@
       ModalService.showModal({
         templateUrl: 'angularjs/partials/shared/modalYesOrNoVtex.html',
         controller: 'modalYesOrNoJumpsellerCtrl',
-        inputs: {data:
-          {
-            title: $translate.instant('jumpseller_integration.connected.disconnect_popup.title'),
-            description: $translate.instant('jumpseller_integration.connected.disconnect_popup.description'),
+        inputs: {
+          data: {
+            title: $translate.instant(
+              'jumpseller_integration.connected.disconnect_popup.title'
+            ),
+            description: $translate.instant(
+              'jumpseller_integration.connected.disconnect_popup.description'
+            ),
             buttonCancelLabel: $translate.instant('actions.cancel'),
             buttonPrimaryLabel: $translate.instant('actions.disconnect'),
-            buttonPrimaryClass: 'button--primary button--small'
-          }}
+            buttonPrimaryClass: 'button--primary button--small',
+          },
+        },
       }).then(function (modal) {
         modal.close.then(function (result) {
           if (result) {
@@ -134,10 +153,9 @@
           list.SubscribersListStatus = IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
           return list;
         });
-        jumpsellerService.manualSync()
-          .then(function () {
-            vm.checkListState();
-          });
+        jumpsellerService.manualSync().then(function () {
+          vm.checkListState();
+        });
         $timeout(function () {
           vm.disableSync = vm.importingAllLists;
         }, 2500);
@@ -153,7 +171,8 @@
 
       vm.selectedList = list;
 
-      jumpsellerService.getJumpsellerFields()
+      jumpsellerService
+        .getJumpsellerFields()
         .then(function (listResult) {
           if (listResult.success) {
             vm.jumpsellerFields = listResult.fields;
@@ -177,7 +196,8 @@
 
     vm.deleteList = function (idList) {
       vm.isLoading = true;
-      jumpsellerService.deleteList(idList)
+      jumpsellerService
+        .deleteList(idList)
         .then(function (listResult) {
           if (listResult.success) {
             vm.getStatus();
@@ -211,7 +231,8 @@
       vm.selectedListId = idList;
       vm.isLoading = true;
       vm.errorMessage = '';
-      jumpsellerService.getAssociatedFieldMapping(idList)
+      jumpsellerService
+        .getAssociatedFieldMapping(idList)
         .then(function (result) {
           if (result.success && result.fields.length > 0) {
             vm.showMappingSection(result.fields);
@@ -237,7 +258,8 @@
     };
 
     vm.synchronizeList = function (idList) {
-      jumpsellerService.synchLists(idList)
+      jumpsellerService
+        .synchLists(idList)
         .then(function (listResult) {
           if (listResult.success) {
             vm.showMapping = false;
@@ -254,57 +276,77 @@
     vm.checkListState = function () {
       vm.stateArray = [];
       // only check lists in process
-      var allInProcess = _.filter(vm.integratedLists, function (integratedList) {
-        return integratedList.SubscribersListStatus === IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
-      });
+      var allInProcess = _.filter(
+        vm.integratedLists,
+        function (integratedList) {
+          return (
+            integratedList.SubscribersListStatus ===
+            IMPORTING_STATE.IMPORTING_SUBSCRIBERS
+          );
+        }
+      );
       vm.stateArray = _.map(allInProcess, function (list) {
-        return { 'IdSubscribersList': list.IdList, 'CurrentStatus': IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS };
+        return {
+          IdSubscribersList: list.IdList,
+          CurrentStatus: IMPORTING_STATE_STR.IMPORTING_SUBSCRIBERS,
+        };
       });
 
       if (allInProcess.length) {
         vm.disableSync = true;
         vm.importingAllLists = true;
 
-        if (!vm.timer) { //eslint-disable-line
+        if (!vm.timer) {
+          //eslint-disable-line
           (function tick() {
-            jumpsellerService.getChangedState(vm.stateArray, vm.idThirdPartyApp).then(function (response) {
-              if (response.arePending) {
-                vm.timer = $timeout(tick, 1000);
-              } else {
-                vm.importingAllLists = false;
-                vm.disableSync = false;
-                vm.timer = undefined;
-                vm.disableSync = false;
-              }
-              if (response.changedSates.length) {
-                for (var i = 0; i < response.changedSates.length; i++) {
-                  var currentList = response.changedSates[i];
-                  updateListData(currentList.IdSubscribersList, response.syncDate);
+            jumpsellerService
+              .getChangedState(vm.stateArray, vm.idThirdPartyApp)
+              .then(function (response) {
+                if (response.arePending) {
+                  vm.timer = $timeout(tick, 1000);
+                } else {
+                  vm.importingAllLists = false;
+                  vm.disableSync = false;
+                  vm.timer = undefined;
+                  vm.disableSync = false;
                 }
-              }
-            });
+                if (response.changedSates.length) {
+                  for (var i = 0; i < response.changedSates.length; i++) {
+                    var currentList = response.changedSates[i];
+                    updateListData(
+                      currentList.IdSubscribersList,
+                      response.syncDate
+                    );
+                  }
+                }
+              });
           })();
         }
       }
     };
 
     function loadDopplerFields() {
-      jumpsellerService.getUserFields()
+      jumpsellerService
+        .getUserFields()
         .then(function (listResult) {
           if (listResult.length) {
             vm.userFields = listResult;
             vm.userFields.unshift({
               idField: -1,
-              name: $translate.instant('jumpseller_integration.mapping.add_field_option'),
+              name: $translate.instant(
+                'jumpseller_integration.mapping.add_field_option'
+              ),
               DataType: 0,
               Value: null,
-              DopplerFieldTypeId: -1
+              DopplerFieldTypeId: -1,
             });
             vm.userFields.unshift({
               idField: 0,
-              name: $translate.instant('jumpseller_integration.mapping.skip_column_option'),
+              name: $translate.instant(
+                'jumpseller_integration.mapping.skip_column_option'
+              ),
               DataType: 0,
-              Value: null
+              Value: null,
             });
             vm.isLoading = false;
           }
@@ -333,9 +375,12 @@
     }
 
     function insertEmailAtTheBeginningIfExists() {
-      var jumpsellerFieldsExtracted = _.partition(vm.jumpsellerFields, function (field) {
-        return field.Name === 'email';
-      });
+      var jumpsellerFieldsExtracted = _.partition(
+        vm.jumpsellerFields,
+        function (field) {
+          return field.Name === 'email';
+        }
+      );
 
       var emailFields = jumpsellerFieldsExtracted[0];
 
@@ -347,27 +392,41 @@
 
     function showGeneralMappingError(errorMessage) {
       vm.isLoading = false;
-      vm.errorMessage = !!errorMessage ? errorMessage : $translate.instant('validation_messages.connection_error'); // eslint-disable-line no-extra-boolean-cast
+      vm.errorMessage = !!errorMessage
+        ? errorMessage
+        : $translate.instant('validation_messages.connection_error'); // eslint-disable-line no-extra-boolean-cast
       $timeout(function () {
         vm.errorMessage = '';
       }, 8000);
     }
 
     function validateEmptyEmail() {
-      var emailFieldSelected = _.find(vm.jumpsellerFields, function (jumpsellerField) {
-        return jumpsellerField.idDopplerField === BASIC_FIELD.EMAIL;
-      });
+      var emailFieldSelected = _.find(
+        vm.jumpsellerFields,
+        function (jumpsellerField) {
+          return jumpsellerField.idDopplerField === BASIC_FIELD.EMAIL;
+        }
+      );
 
-      emailFieldSelected ? vm.errorMessage = '' : showGeneralMappingError($translate.instant('jumpseller_integration.mapping.empty_email_error_message'));
+      emailFieldSelected
+        ? (vm.errorMessage = '')
+        : showGeneralMappingError(
+            $translate.instant(
+              'jumpseller_integration.mapping.empty_email_error_message'
+            )
+          );
       return !!emailFieldSelected;
-    };
+    }
 
     function integrateAndSynchronize() {
       var entity = {
-        DisplayName: $translate.instant('jumpseller_integration.connected.lists.customers'),
-        Name: 'customers'
-      }
-      jumpsellerService.integrateList(vm.selectedList, entity)
+        DisplayName: $translate.instant(
+          'jumpseller_integration.connected.lists.customers'
+        ),
+        Name: 'customers',
+      };
+      jumpsellerService
+        .integrateList(vm.selectedList, entity)
         .then(function (listResult) {
           if (listResult.success) {
             vm.selectedListId = listResult.idList;
@@ -381,19 +440,25 @@
     }
 
     function mapFieldsAndSynchronize() {
-      jumpsellerService.associateFieldMapping(vm.selectedListId,
-        _.filter(vm.jumpsellerFields, function (entity) {
-          return entity.idDopplerField && entity.idDopplerField !== 0;
-        })
-      )
+      jumpsellerService
+        .associateFieldMapping(
+          vm.selectedListId,
+          _.filter(vm.jumpsellerFields, function (entity) {
+            return entity.idDopplerField && entity.idDopplerField !== 0;
+          })
+        )
         .then(function (listResult) {
           if (listResult.success) {
             vm.synchronizeList(vm.selectedListId);
             vm.getStatus().then(function () {
-              var currentList = _.find(vm.integratedLists, function (integratedList) {
-                return integratedList.IdList === vm.selectedListId;
-              });
-              currentList.SubscribersListStatus === IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
+              var currentList = _.find(
+                vm.integratedLists,
+                function (integratedList) {
+                  return integratedList.IdList === vm.selectedListId;
+                }
+              );
+              currentList.SubscribersListStatus ===
+                IMPORTING_STATE.IMPORTING_SUBSCRIBERS;
               vm.checkListState();
               vm.selectedEntityId = null;
               vm.selectedListId = null;
@@ -405,7 +470,7 @@
           vm.isMapping = false;
           vm.getStatus();
         });
-    };
+    }
 
     function updateListData(idList, syncDate) {
       jumpsellerService.getListData(idList).then(function (responseListData) {
@@ -423,7 +488,8 @@
     }
 
     function loadFieldTypes() {
-      jumpsellerService.getFieldTypes()
+      jumpsellerService
+        .getFieldTypes()
         .then(function (types) {
           vm.fieldTypes = types;
         })
@@ -434,15 +500,18 @@
 
     vm.fieldFilter = function (dopplerFieldId, dopplerFieldTypeId) {
       return function (field) {
-        return (field.idField === 0 || field.idField === -1)
-          || (field.idField === dopplerFieldId)
-          || (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField));
+        return (
+          field.idField === 0 ||
+          field.idField === -1 ||
+          field.idField === dopplerFieldId ||
+          (field.type == dopplerFieldTypeId && fieldNotUsed(field.idField))
+        );
       };
-    }
+    };
 
     function fieldNotUsed(idField) {
       return !_.find(vm.jumpsellerFields, function (selectedField) {
-        return selectedField.idDopplerField === idField
+        return selectedField.idDopplerField === idField;
       });
     }
 
@@ -452,13 +521,15 @@
         vm.newField.index = index;
         vm.newField.dataType = getFieldDataType(index);
         _.forEach(vm.jumpsellerFields, function (field, fIndex) {
-          field.idDopplerField = field.idDopplerField == -1 && fIndex != index ? null : field.idDopplerField;
+          field.idDopplerField =
+            field.idDopplerField == -1 && fIndex != index
+              ? null
+              : field.idDopplerField;
         });
-      }
-      else if (vm.newField.index == index && value != -1) {
+      } else if (vm.newField.index == index && value != -1) {
         vm.newField = newFieldDefaults();
       }
-    }
+    };
 
     function getFieldDataType(index) {
       var fieldTypeId = vm.jumpsellerFields[index].DopplerFieldTypeId;
@@ -470,30 +541,35 @@
 
     vm.createField = function (index) {
       if (vm.newField.name) {
-        jumpsellerService .createField(vm.newField.name, vm.newField.dataType, vm.newField.isPrivate)
+        jumpsellerService
+          .createField(
+            vm.newField.name,
+            vm.newField.dataType,
+            vm.newField.isPrivate
+          )
           .then(function (res) {
             if (res.success) {
               vm.userFields.push(res.field);
               vm.jumpsellerFields[index].idDopplerField = res.field.idField;
               vm.newField = newFieldDefaults();
-            }
-            else {
+            } else {
               vm.newField.error = res.errorMessage;
             }
-          })
+          });
+      } else {
+        vm.newField.error = $translate.instant(
+          'jumpseller_integration.mapping.new_field.required_message'
+        );
       }
-      else {
-        vm.newField.error = $translate.instant('jumpseller_integration.mapping.new_field.required_message');
-      }
-    }
+    };
 
     function newFieldDefaults() {
       return {
         index: null,
         name: '',
         dataType: FIELD_TYPE.STRING,
-        isPrivate: "true",
-        error: null
+        isPrivate: 'true',
+        error: null,
       };
     }
   }

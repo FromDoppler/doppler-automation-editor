@@ -1,10 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp.automation.editor')
-    .factory('BooleanField', ['BaseField', function(BaseField) {
-
+  angular.module('dopplerApp.automation.editor').factory('BooleanField', [
+    'BaseField',
+    function (BaseField) {
       function BooleanField(data) {
         // Inherited constructor.
         BaseField.call(this, data);
@@ -17,7 +16,7 @@
 
       // Prototype inherence from BaseField.
       BooleanField.prototype = Object.create(BaseField.prototype);
-      BooleanField.prototype.setData = function(data) {
+      BooleanField.prototype.setData = function (data) {
         BaseField.prototype.setData.call(this, data);
         if (data.hasOwnProperty('value')) {
           this.value = data.value;
@@ -27,10 +26,11 @@
         }
       };
 
-      BooleanField.prototype.checkCompleted = function() {
+      BooleanField.prototype.checkCompleted = function () {
         return !this.deleted;
       };
 
       return BooleanField;
-    }]);
+    },
+  ]);
 })();

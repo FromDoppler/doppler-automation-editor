@@ -1,29 +1,29 @@
 {
-  "subscribers_scoring" : {
+  "subscribers_scoring": {
     "title": "Subscribers Scoring Admin",
     "description": "Customize the criteria you want to use to qualify each Subscriber. If you don't, the scoring will be based on a suggestion for a good performance analysis. The Subscribers will be scored 24 hours after you've defined the values for each category. Any doubts? Press",
-    "help" : "HELP",
-    "help_link" : "https://help.fromdoppler.com/en/how-subscribers-scoring-works",
+    "help": "HELP",
+    "help_link": "https://help.fromdoppler.com/en/how-subscribers-scoring-works",
     "openings": "Openings",
     "clicks": "Clicks",
     "last": "Last",
     "months": "months",
     "clicks_exceed_open_error": "Ouch! Clicks must be the same or less than the openings.",
     "stars_description": {
-      "first_part_bold" : "Score a Subscriber as",
+      "first_part_bold": "Score a Subscriber as",
       "stars_singular": "star",
       "stars_plural": "stars",
       "second_part": "when he has registered at least"
     },
-    "two_stars" : {
+    "two_stars": {
       "description": "These values depend on those entered in the 3-stars scoring parameters.",
       "error_message": "Ouch! The values must be less than those entered in the higher scoring."
     },
-    "one_star" : {
+    "one_star": {
       "description": "These values can't be modified, simply serve as a reference depend on those entered in the 2-stars scoring parameters."
     },
     "period_title": "Score based on Subscriber activity during the",
-    "button_back" : "Back",
-    "button_save" : "Save"
+    "button_back": "Back",
+    "button_save": "Save"
   }
 }

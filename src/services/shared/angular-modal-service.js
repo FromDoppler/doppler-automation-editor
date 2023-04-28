@@ -4,20 +4,34 @@
 
 /***** JSLint Config *****/
 /*global angular  */
-(function() {
-
+(function () {
   'use strict';
 
   var module = angular.module('angularModalService', []);
 
-  module.factory('ModalService', ['$document', '$compile', '$controller', '$http', '$rootScope', '$q', '$timeout', '$templateCache',
-    function($document, $compile, $controller, $http, $rootScope, $q, $timeout, $templateCache) {
-
+  module.factory('ModalService', [
+    '$document',
+    '$compile',
+    '$controller',
+    '$http',
+    '$rootScope',
+    '$q',
+    '$timeout',
+    '$templateCache',
+    function (
+      $document,
+      $compile,
+      $controller,
+      $http,
+      $rootScope,
+      $q,
+      $timeout,
+      $templateCache
+    ) {
       //  Get the body of the document, we'll add the modal to this.
       var body = $document.find('body');
 
       function ModalService() {
-
         var self = this;
 
         //  Returns a promise which gets the template, either
@@ -32,15 +46,15 @@
             var cachedTemplate = $templateCache.get(templateUrl);
             if (cachedTemplate !== undefined) {
               deferred.resolve(cachedTemplate);
-            // if not, let's grab the template for the first time
+              // if not, let's grab the template for the first time
             } else {
               $http({ method: 'GET', url: templateUrl, cache: true })
-                .then(function(result) {
-                // save template into the cache and return the template
+                .then(function (result) {
+                  // save template into the cache and return the template
                   $templateCache.put(templateUrl, result.data);
                   deferred.resolve(result.data);
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                   deferred.reject(error);
                 });
             }
@@ -50,8 +64,7 @@
           return deferred.promise;
         }
 
-        self.showModal = function(options) {
-
+        self.showModal = function (options) {
           //  Create a deferred we'll resolve when the modal is ready.
           var deferred = $q.defer();
 
@@ -64,9 +77,8 @@
 
           //  Get the actual html of the template.
           getTemplate(options.template, options.templateUrl)
-            .then(function(template) {
-
-            //  Create a new scope for the modal.
+            .then(function (template) {
+              //  Create a new scope for the modal.
               var modalScope = $rootScope.$new();
 
               //  Create the inputs object to the controller - this will include
@@ -78,14 +90,14 @@
               var closeDeferred = $q.defer();
               var inputs = {
                 $scope: modalScope,
-                close: function(result, delay) {
+                close: function (result, delay) {
                   if (delay === undefined || delay === null) {
                     delay = 0;
                   }
-                  $timeout(function() {
+                  $timeout(function () {
                     closeDeferred.resolve(result);
                   }, delay);
-                }
+                },
               };
 
               //  If we have provided any inputs, pass them to the controller.
@@ -115,30 +127,28 @@
                 controller: modalController,
                 scope: modalScope,
                 element: modalElement,
-                close: closeDeferred.promise
+                close: closeDeferred.promise,
               };
 
               //  When close is resolved, we'll clean up the scope and element.
-              modal.close.then(function() {
-              //  Clean up the scope
+              modal.close.then(function () {
+                //  Clean up the scope
                 modalScope.$destroy();
                 //  Remove the element from the dom.
                 modalElement.remove();
               });
 
               deferred.resolve(modal);
-
             })
-            .catch(function(error) {
+            .catch(function (error) {
               deferred.reject(error);
             });
 
           return deferred.promise;
         };
-
       }
 
       return new ModalService();
-    }]);
-
-}());
+    },
+  ]);
+})();

@@ -1,15 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp')
     .controller('ModalWithInputCtrl', ModalWithInputCtrl);
 
-  ModalWithInputCtrl.$inject = [
-    '$scope',
-    'close',
-    'data'
-  ];
+  ModalWithInputCtrl.$inject = ['$scope', 'close', 'data'];
 
   function ModalWithInputCtrl($scope, close, data) {
     $scope.data = data;
@@ -18,11 +14,11 @@
     $scope.data.regex = $scope.data.regex || '';
     $scope.data.patternErrorMessage = $scope.data.patternErrorMessage || '';
 
-    $scope.close = function(isConfirmed) {
+    $scope.close = function (isConfirmed) {
       if ($scope.validationForm.$valid || !isConfirmed) {
         var result = {
           isConfirmed: isConfirmed,
-          name: $scope.data.fieldValue
+          name: $scope.data.fieldValue,
         };
         close(result);
       }

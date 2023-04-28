@@ -1,91 +1,172 @@
-<form name="mercadoShops.form" ng-submit="mercadoShops.connect(mercadoShops);" novalidate>
-  <div class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="mercadoShops.daysToDisconnection < 14 && mercadoShops.connected">
-    <span class="control-panel-section-title">{{ 'control_panel.integrations.connection_issues.title' | translate }}</span>
+<form
+  name="mercadoShops.form"
+  ng-submit="mercadoShops.connect(mercadoShops);"
+  novalidate
+>
+  <div
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="mercadoShops.daysToDisconnection < 14 && mercadoShops.connected"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'control_panel.integrations.connection_issues.title' | translate
+      }}</span
+    >
     <div class="dp-library margin-t-20 margin-b-20">
       <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message">
           <span id="messageBar" class="text--small">
-            {{ 'control_panel.integrations.connection_issues.subtitle' | translate }} {{'mercado_shops_integration.name' | translate }}
+            {{ 'control_panel.integrations.connection_issues.subtitle' |
+            translate }} {{'mercado_shops_integration.name' | translate }}
           </span>
         </div>
       </div>
     </div>
-    <strong class="connection-issues-list-title"> {{ 'control_panel.integrations.connection_issues.list_title' | translate }} </strong>
+    <strong class="connection-issues-list-title">
+      {{ 'control_panel.integrations.connection_issues.list_title' | translate
+      }}
+    </strong>
     <ul>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_1' | translate }}</li>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_2' | translate }}</li>
-      <li class="connection-issues-list-item">{{ 'control_panel.integrations.connection_issues.text_list_3' | translate }}</li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_1' |
+        translate }}
+      </li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_2' |
+        translate }}
+      </li>
+      <li class="connection-issues-list-item">
+        {{ 'control_panel.integrations.connection_issues.text_list_3' |
+        translate }}
+      </li>
     </ul>
     <br />
-    <span>{{ 'control_panel.integrations.connection_issues.text_list_4' | translate }}</span>
+    <span
+      >{{ 'control_panel.integrations.connection_issues.text_list_4' | translate
+      }}</span
+    >
     <hr class="full connection-issues-separator" />
     <p>
-      {{ 'control_panel.integrations.connection_issues.last_connection_text' | translate }}
-      {{ mercadoShops.firstValidationErrorDate}}
+      {{ 'control_panel.integrations.connection_issues.last_connection_text' |
+      translate }} {{ mercadoShops.firstValidationErrorDate}}
     </p>
     <strong>
       <span ng-if="mercadoShops.daysToDisconnection > 1">
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_1' | translate }}
-        {{ mercadoShops.daysToDisconnection }}
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_plural_2' | translate }}
+        {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_plural_1'
+        | translate }} {{ mercadoShops.daysToDisconnection }} {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_plural_2'
+        | translate }}
       </span>
       <span ng-if="mercadoShops.daysToDisconnection <= 1">
-        {{ 'control_panel.integrations.connection_issues.days_to_disconnect_singular' | translate }}
+        {{
+        'control_panel.integrations.connection_issues.days_to_disconnect_singular'
+        | translate }}
       </span>
     </strong>
   </div>
-  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="!mercadoShops.connected">
-    <span class="control-panel-section-title">{{ 'mercado_shops_integration.disconnected.title' | translate }} </span>
+  <div
+    id="main-panel"
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="!mercadoShops.connected"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'mercado_shops_integration.disconnected.title' | translate }}
+    </span>
     <span class="control-panel-section-subtitle">
       {{ 'mercado_shops_integration.disconnected.subtitle' | translate }}
-      <a href="{{ 'mercado_shops_integration.disconnected.help_link' | translate }}"
-         target="_blank" ng-trim="false">{{ 'mercado_shops_integration.disconnected.help_text' | translate }}</a>
+      <a
+        href="{{ 'mercado_shops_integration.disconnected.help_link' | translate }}"
+        target="_blank"
+        ng-trim="false"
+        >{{ 'mercado_shops_integration.disconnected.help_text' | translate }}</a
+      >
     </span>
-    <hr class="full" style="width: calc(100% + 40px);" />
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="mercadoShops.connectionError">
-      <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+    <hr class="full" style="width: calc(100% + 40px)" />
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="mercadoShops.connectionError"
+    >
+      <div
+        id="messageBar"
+        class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+      >
         <span class="dp-message-icon"></span>
         <div class="dp-content-message">
           <span>{{ mercadoShops.errorMsg }}</span>
         </div>
       </div>
     </div>
-    <div id="connection-error-mercado-libre" class="message-validation validation-error ng-hide">
+    <div
+      id="connection-error-mercado-libre"
+      class="message-validation validation-error ng-hide"
+    >
       <span id="connection-error-mercado-libre-span"></span>
     </div>
-    <span class="control-panel-section-subtitle select-list-text" ng-class="display-flex-force">
-      {{ 'mercado_shops_integration.disconnected.select_country_text' | translate }}
+    <span
+      class="control-panel-section-subtitle select-list-text"
+      ng-class="display-flex-force"
+    >
+      {{ 'mercado_shops_integration.disconnected.select_country_text' |
+      translate }}
     </span>
     <div class="country-selector-container">
       <ul>
-        <li ng-repeat="country in mercadoShops.countries"><a class="{{ 'ctry-' + country }}" href="" ng-click="mercadoShops.connect(country)">{{ 'mercado_shops_integration.disconnected.countries.' + country  | translate }}</a></li>
+        <li ng-repeat="country in mercadoShops.countries">
+          <a
+            class="{{ 'ctry-' + country }}"
+            href=""
+            ng-click="mercadoShops.connect(country)"
+            >{{ 'mercado_shops_integration.disconnected.countries.' + country |
+            translate }}</a
+          >
+        </li>
       </ul>
     </div>
   </div>
 
-  <div id="main-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box" ng-show="mercadoShops.connected">
-    <span class="control-panel-section-title">{{ 'mercado_shops_integration.connected.title' | translate }} </span>
+  <div
+    id="main-panel"
+    class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+    ng-show="mercadoShops.connected"
+  >
+    <span class="control-panel-section-title"
+      >{{ 'mercado_shops_integration.connected.title' | translate }}
+    </span>
     <span class="control-panel-section-subtitle">
       {{ 'mercado_shops_integration.connected.subtitle' | translate }}
     </span>
     <section class="authentication-container connected">
       <div class="authentication-elements">
         <p>
-          {{ 'mercado_shops_integration.connected.store' | translate }} <strong>{{ mercadoShops.connectedAccount }}</strong>
+          {{ 'mercado_shops_integration.connected.store' | translate }}
+          <strong>{{ mercadoShops.connectedAccount }}</strong>
         </p>
       </div>
-      <button type='button' class="button button--alternative" ng-click="mercadoShops.disconnectWarning()" ng-disabled="mercadoShops.importingAllLists">
+      <button
+        type="button"
+        class="button button--alternative"
+        ng-click="mercadoShops.disconnectWarning()"
+        ng-disabled="mercadoShops.importingAllLists"
+      >
         {{ 'mercado_shops_integration.connected.disconnect' | translate }}
       </button>
     </section>
-    <div class="dp-library margin-t-20 margin-b-20" ng-show="mercadoShops.autoSyncDisabled && mercadoShops.integratedLists.length">
+    <div
+      class="dp-library margin-t-20 margin-b-20"
+      ng-show="mercadoShops.autoSyncDisabled && mercadoShops.integratedLists.length"
+    >
       <div class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full">
           <span class="text--small">
             {{ 'control_panel.integrations.sync_disabled.text1' | translate }}
-            <a target="_self" href="{{mercadoShops.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}">{{ 'control_panel.integrations.sync_disabled.link_text' | translate }}</a>
+            <a
+              target="_self"
+              href="{{mercadoShops.webAppUrl}}{{ 'control_panel.integrations.sync_disabled.link' | translate }}"
+              >{{ 'control_panel.integrations.sync_disabled.link_text' |
+              translate }}</a
+            >
             {{ 'control_panel.integrations.sync_disabled.text2' | translate }}
           </span>
         </div>
@@ -93,9 +174,17 @@
     </div>
   </div>
 
-  <div class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth" ng-class="{'display-flex-force': !mercadoShops.connected}" ng-show="!mercadoShops.connected">
-    <a class="button button--alternative" ng-disabled="mercadoShops.connecting"
-       href="{{mercadoShops.webAppUrl}}/Integrations#native-integrations"
-       id="back-button">{{ 'actions.cancel' | translate }}</a>
+  <div
+    class="nav-button-bar flex-grid-v-center--s-between nav-bar-auth"
+    ng-class="{'display-flex-force': !mercadoShops.connected}"
+    ng-show="!mercadoShops.connected"
+  >
+    <a
+      class="button button--alternative"
+      ng-disabled="mercadoShops.connecting"
+      href="{{mercadoShops.webAppUrl}}/Integrations#native-integrations"
+      id="back-button"
+      >{{ 'actions.cancel' | translate }}</a
+    >
   </div>
 </form>

@@ -1,108 +1,216 @@
 <div class="grayPanel-box grayPanel-box-relative automation-box--container">
-	<div class="reports-elements-container">
-		<h2 id="task_name_title" class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Title' | translate}}</h2>
-		<p id="task_name_subtitle" class="task-section-subtitle">{{'ScheduledTask_Reports_Graphic_Subtitle' | translate}}</p>
-	</div>
-	<hr />
-	<div class="openClickGraphic--container" >
+  <div class="reports-elements-container">
+    <h2 id="task_name_title" class="sectionBox-title-secondary">
+      {{'ScheduledTask_Reports_Title' | translate}}
+    </h2>
+    <p id="task_name_subtitle" class="task-section-subtitle">
+      {{'ScheduledTask_Reports_Graphic_Subtitle' | translate}}
+    </p>
+  </div>
+  <hr />
+  <div class="openClickGraphic--container">
+    <dpgraph c3config="donutGraphData" type="'c3'" ng-if="loaded"></dpgraph>
 
+    <div class="donut-data">
+      <div class="percent-rect open">
+        {{(result!= undefined && result.TotalSentCount > 0)? donutData.open:
+        '0.0' }} %
+      </div>
+      <span class="percent-text"
+        >{{result!= undefined? result.TotalDistinctOpenedMailCount: 0}}</span
+      ><span class="percent-text-desc"
+        >{{'ScheduledTask_Reports_MenuOpened' | translate}}</span
+      >
 
-		<dpgraph c3config ="donutGraphData" type="'c3'" ng-if="loaded" ></dpgraph>
+      <div class="percent-rect notopen">
+        {{(result!= undefined && result.TotalSentCount > 0)?(donutData.notopen):
+        '0.0' }} %
+      </div>
+      <span class="percent-text"
+        >{{result != undefined ? result.TotalUnopenedMailCount : 0}}</span
+      ><span class="percent-text-desc"
+        >{{'ScheduledTask_Reports_MenuNotOpened' | translate}}
+      </span>
 
+      <div class="percent-rect bounced">
+        {{(result!= undefined && result.TotalSentCount > 0)?donutData.bounced:
+        '0.0' }} %
+      </div>
+      <span class="percent-text"
+        >{{(result != undefined)?(result.TotalHardBouncedMailCount +
+        result.TotalSoftBouncedMailCount):'0.0'}}</span
+      ><span class="percent-text-desc"
+        >{{'ScheduledTask_Reports_MenuBounced' | translate}}
+      </span>
+    </div>
+    <div class="click-through-rate">
+      <span
+        >{{'ScheduledTask_Reports_ClickRate' | translate}} {{(result!= undefined
+        && result.TotalClickThroughOpenRate > 0)? (donutData.CTOR) : '0.0' }}
+        %</span
+      >
+    </div>
+  </div>
 
-		<div class="donut-data" >
-			<div class="percent-rect open">{{(result!= undefined && result.TotalSentCount > 0)? donutData.open: '0.0' }} %</div>
-			<span class="percent-text">{{result!= undefined? result.TotalDistinctOpenedMailCount: 0}}</span><span class="percent-text-desc">{{'ScheduledTask_Reports_MenuOpened' | translate}}</span>
-
-			<div class="percent-rect notopen">{{(result!= undefined && result.TotalSentCount > 0)?(donutData.notopen): '0.0' }} %</div>
-			<span class="percent-text">{{result != undefined ? result.TotalUnopenedMailCount : 0}}</span><span class="percent-text-desc">{{'ScheduledTask_Reports_MenuNotOpened' | translate}} </span>
-
-			<div class="percent-rect bounced">{{(result!= undefined && result.TotalSentCount > 0)?donutData.bounced: '0.0' }} %</div>
-			<span class="percent-text">{{(result != undefined)?(result.TotalHardBouncedMailCount + result.TotalSoftBouncedMailCount):'0.0'}}</span><span class="percent-text-desc">{{'ScheduledTask_Reports_MenuBounced' | translate}} </span>
-		</div>
-			<div class="click-through-rate">
-				<span>{{'ScheduledTask_Reports_ClickRate' | translate}} {{(result!= undefined && result.TotalClickThroughOpenRate > 0)? (donutData.CTOR) : '0.0' }} %</span>
-			</div>
-	</div>
-
-
-	<div class="openClickData--container">
-		<h4>{{'ScheduledTask_Reports_DonutData_Title' | translate}}</h4>
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_SentEmails' | translate}}</span> <span class="text-value">{{(result != undefined)? (result.TotalSentCount|number) : 0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_DeliveredEmail' | translate}} </span> <span class="text-value">{{(result != undefined)? result.TotalDeliveryCount : 0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_Resent' | translate}} </span> <span class="text-value">{{(result != undefined)? result.TotalForwarded : 0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_Opens' | translate}}</span> <span class="text-value">{{(result != undefined)?result.TotalOpenedMailCount : 0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_LastOpen' | translate}}</span> <span class="text-value">{{(result == undefined || result.TotalOpenedMailCount == 0 ? "--" : result.LastOpenedEmailDate | date :dateTimeFormat)}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_UniqueClick' | translate}}</span> <span class="text-value">({{(result != undefined && result.TotalClickCount != 0)? donutData.uniqueClickPercent: 0 }}%) {{(result != undefined)? result.TotalUniqueClickPerCampaignCount : 0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_UniqueOpen' | translate}}</span> <span class="text-value">{{(result != undefined)? result.TotalDistinctOpenedMailCount : 0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_TotalClick' | translate}}</span> <span class="text-value">{{(result != undefined)?result.TotalClickCount:0}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_LastClick' | translate}}</span> <span class="text-value">{{(result == undefined || result.TotalClickCount == 0? "--" : result.LastClickedEmailDate|date :dateTimeFormat)}}</span><br />
-		<span class="text-descriptor">{{'ScheduledTask_Reports_DonutData_AmountRemoved' | translate}}</span> <span class="text-value">{{(result != undefined)?result.TotalUnsubscribersCount : 0}}</span><br />
-	</div>
+  <div class="openClickData--container">
+    <h4>{{'ScheduledTask_Reports_DonutData_Title' | translate}}</h4>
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_SentEmails' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result != undefined)? (result.TotalSentCount|number) : 0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_DeliveredEmail' | translate}}
+    </span>
+    <span class="text-value"
+      >{{(result != undefined)? result.TotalDeliveryCount : 0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_Resent' | translate}}
+    </span>
+    <span class="text-value"
+      >{{(result != undefined)? result.TotalForwarded : 0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_Opens' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result != undefined)?result.TotalOpenedMailCount : 0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_LastOpen' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result == undefined || result.TotalOpenedMailCount == 0 ? "--" :
+      result.LastOpenedEmailDate | date :dateTimeFormat)}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_UniqueClick' | translate}}</span
+    >
+    <span class="text-value"
+      >({{(result != undefined && result.TotalClickCount != 0)?
+      donutData.uniqueClickPercent: 0 }}%) {{(result != undefined)?
+      result.TotalUniqueClickPerCampaignCount : 0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_UniqueOpen' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result != undefined)? result.TotalDistinctOpenedMailCount : 0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_TotalClick' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result != undefined)?result.TotalClickCount:0}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_LastClick' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result == undefined || result.TotalClickCount == 0? "--" :
+      result.LastClickedEmailDate|date :dateTimeFormat)}}</span
+    ><br />
+    <span class="text-descriptor"
+      >{{'ScheduledTask_Reports_DonutData_AmountRemoved' | translate}}</span
+    >
+    <span class="text-value"
+      >{{(result != undefined)?result.TotalUnsubscribersCount : 0}}</span
+    ><br />
+  </div>
 </div>
 <div class="grayPanel-box grayPanel-box-relative automation-box--container">
-		<div class="reports-elements-container">
-				<h2  class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Opens_Title' | translate}}</h2>
-				<p  class="task-section-subtitle">{{'ScheduledTask_Reports_Opens_Subtitle' | translate}}</p>
-		</div>
-		<hr />
+  <div class="reports-elements-container">
+    <h2 class="sectionBox-title-secondary">
+      {{'ScheduledTask_Reports_Opens_Title' | translate}}
+    </h2>
+    <p class="task-section-subtitle">
+      {{'ScheduledTask_Reports_Opens_Subtitle' | translate}}
+    </p>
+  </div>
+  <hr />
 
-	<dpgraph c3config ="openGraphData" type="'c3'" ng-if="loaded" ></dpgraph>
-
+  <dpgraph c3config="openGraphData" type="'c3'" ng-if="loaded"></dpgraph>
 </div>
 <div class="grayPanel-box grayPanel-box-relative automation-box--container">
-		<div class="reports-elements-container">
-				<h2  class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Clicks_Title' | translate}}</h2>
-				<p  class="task-section-subtitle">{{'ScheduledTask_Reports_Clicks_Subtitle' | translate}}</p>
-		</div>
-		<hr />
+  <div class="reports-elements-container">
+    <h2 class="sectionBox-title-secondary">
+      {{'ScheduledTask_Reports_Clicks_Title' | translate}}
+    </h2>
+    <p class="task-section-subtitle">
+      {{'ScheduledTask_Reports_Clicks_Subtitle' | translate}}
+    </p>
+  </div>
+  <hr />
 
-	<dpgraph c3config ="clickGraphData" type="'c3'"  ng-if="loaded"></dpgraph>
-
-
+  <dpgraph c3config="clickGraphData" type="'c3'" ng-if="loaded"></dpgraph>
 </div>
 <div>
-<div class="small-gray--container">
-	<div class="grayPanel-box grayPanel-box-relative automation-box--container">
-		<div class="reports-elements-container">
-					<h2  class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Funnel_Title' | translate}}</h2>
-					<p  class="task-section-subtitle">{{'ScheduledTask_Reports_Funnel_Subtitle' | translate}}</p>
-		</div>
-		<hr />
+  <div class="small-gray--container">
+    <div class="grayPanel-box grayPanel-box-relative automation-box--container">
+      <div class="reports-elements-container">
+        <h2 class="sectionBox-title-secondary">
+          {{'ScheduledTask_Reports_Funnel_Title' | translate}}
+        </h2>
+        <p class="task-section-subtitle">
+          {{'ScheduledTask_Reports_Funnel_Subtitle' | translate}}
+        </p>
+      </div>
+      <hr />
 
-		<!-- funnel graph -->
-		<dpgraph c3config ="funnelArray" type="'funnel'" ng-if="loaded" ></dpgraph>
-		<!-- funnel graph -->
+      <!-- funnel graph -->
+      <dpgraph c3config="funnelArray" type="'funnel'" ng-if="loaded"></dpgraph>
+      <!-- funnel graph -->
+    </div>
+  </div>
 
-	</div>
+  <div class="small-gray--container engagement">
+    <div class="grayPanel-box grayPanel-box-relative automation-box--container">
+      <div class="reports-elements-container">
+        <h2 class="sectionBox-title-secondary">
+          {{'ScheduledTask_Reports_Engagement_Title' | translate}}
+        </h2>
+        <p class="task-section-subtitle">
+          {{'ScheduledTask_Reports_Engagement_Subtitle' | translate}}
+        </p>
+      </div>
+      <hr />
+      <div class="engagement--container">
+        <table class="engagement-table" ng-if="engagementList.length > 0">
+          <thead>
+            <tr>
+              <th>{{'ScheduledTask_Reports_Engagement_Points'|translate}}</th>
+              <th>{{'ScheduledTask_Reports_Engagement_Email'|translate}}</th>
+              <th>{{'ScheduledTask_Reports_Engagement_Name'|translate}}</th>
+            </tr>
+          </thead>
+          <tr ng-repeat="item in engagementList |limitTo:5">
+            <td>{{ item.points }}</td>
+            <td>
+              <span
+                ng-class="{'titip-top titip-fade':item.email.length > 32}"
+                data-title="{{item.email}}"
+                ><span class="email-data">{{ item.email }}</span></span
+              >
+            </td>
+            <td>
+              <span
+                ng-class="{'titip-top titip-fade':item.name.length > 20}"
+                data-title="{{item.name}}"
+              >
+                <span class="name-data">{{ item.name }}</span></span
+              >
+            </td>
+          </tr>
+        </table>
+        <a ng-class="{inactive:engagementList.length == 0}" ng-if=""
+          >{{'ScheduledTask_Reports_Engagement_DownloadList' |translate}}</a
+        >
+        <span class="no-activity-message" ng-if="engagementList.length == 0"
+          >{{'ScheduledTask_Reports_Graphic_EmptyEngagement' | translate}}</span
+        >
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="small-gray--container engagement" >
-	<div class="grayPanel-box grayPanel-box-relative automation-box--container">
-		<div class="reports-elements-container">
-			<h2  class="sectionBox-title-secondary">{{'ScheduledTask_Reports_Engagement_Title' | translate}}</h2>
-			<p  class="task-section-subtitle">{{'ScheduledTask_Reports_Engagement_Subtitle' | translate}}</p>
-		</div>
-		<hr />
-		<div class="engagement--container">
-			<table  class="engagement-table" ng-if="engagementList.length > 0">
-				<thead>
-					<tr>
-						<th>{{'ScheduledTask_Reports_Engagement_Points'|translate}}</th>
-						<th>{{'ScheduledTask_Reports_Engagement_Email'|translate}}</th>
-						<th>{{'ScheduledTask_Reports_Engagement_Name'|translate}}</th>
-					</tr>
-				</thead>
-				<tr ng-repeat="item in engagementList |limitTo:5">
-					<td>{{ item.points }}</td>
-					<td> <span ng-class="{'titip-top titip-fade':item.email.length > 32}" data-title="{{item.email}}" ><span class="email-data">{{ item.email }}</span></span></td>
-					<td><span ng-class="{'titip-top titip-fade':item.name.length > 20}" data-title="{{item.name}}" > <span class="name-data">{{ item.name }}</span></span></td>
-				  </tr>
-			</table>
-			<a ng-class="{inactive:engagementList.length == 0}" ng-if="">{{'ScheduledTask_Reports_Engagement_DownloadList' |translate}}</a>
-			<span class="no-activity-message" ng-if="engagementList.length == 0">{{'ScheduledTask_Reports_Graphic_EmptyEngagement' | translate}}</span>
-		</div>
-	</div>
-</div>
-</div>
-

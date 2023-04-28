@@ -1,16 +1,26 @@
 <div class="domain-title--section">
   <div>
-    <span class="control-panel-section-title">{{ "control_panel.dkim.grid_title" | translate }}</span>
+    <span class="control-panel-section-title"
+      >{{ "control_panel.dkim.grid_title" | translate }}</span
+    >
     <span class="control-panel-section-subtitle">
-      {{'control_panel.dkim.grid_description' | translate}}<br/>
+      {{'control_panel.dkim.grid_description' | translate}}<br />
       {{'control_panel.dkim.grid_amount_of_domains_allowed_part1' | translate}}
       <strong>
-        {{'control_panel.dkim.grid_amount_of_domains_allowed_part2' | translate: {domainsCount: gridModel.displayed.length} }}
+        {{'control_panel.dkim.grid_amount_of_domains_allowed_part2' | translate:
+        {domainsCount: gridModel.displayed.length} }}
       </strong>
-      {{'control_panel.dkim.grid_amount_of_domains_allowed_part3' | translate: {maxDomains: maxDomains} }}
+      {{'control_panel.dkim.grid_amount_of_domains_allowed_part3' | translate:
+      {maxDomains: maxDomains} }}
     </span>
   </div>
-  <input class="save-button submit main_buttons_green_big" type="button" ng-click="openPopup()" ng-disabled="gridModel.displayed.length >= maxDomains" value="{{ 'control_panel.dkim.create_button' | translate }}"/>
+  <input
+    class="save-button submit main_buttons_green_big"
+    type="button"
+    ng-click="openPopup()"
+    ng-disabled="gridModel.displayed.length >= maxDomains"
+    value="{{ 'control_panel.dkim.create_button' | translate }}"
+  />
 </div>
 <section class="ng-hide" ng-show="!gridModel.firstTimeLoad">
   <div class="wrapper wrapper--default">
@@ -28,25 +38,41 @@
       <thead>
         <tr>
           <th>
-            <a class='no-clickable'>{{'control_panel.dkim.grid_columns.domain_status' | translate}}</a>
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.domain_status' |
+              translate}}</a
+            >
           </th>
           <th>
-            <a class='no-clickable' >{{'control_panel.dkim.grid_columns.domain_name' | translate}}</a>
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.domain_name' | translate}}</a
+            >
           </th>
-           <th class="default--row">
-            <a class='no-clickable' >{{'control_panel.dkim.grid_columns.is_default' | translate}}</a>
-          </th>
-          <th >
-            <a class='no-clickable' >{{'control_panel.dkim.grid_columns.dkim_state' | translate}}</a>
-          </th>
-          <th>
-            <a class='no-clickable' >{{'control_panel.dkim.grid_columns.spf_state' | translate}}</a>
+          <th class="default--row">
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.is_default' | translate}}</a
+            >
           </th>
           <th>
-            <a class='no-clickable' >{{'control_panel.dkim.grid_columns.validation_date' | translate}}</a>
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.dkim_state' | translate}}</a
+            >
+          </th>
+          <th>
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.spf_state' | translate}}</a
+            >
+          </th>
+          <th>
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.validation_date' |
+              translate}}</a
+            >
           </th>
           <th class="actions--row">
-            <a class='no-clickable' >{{'control_panel.dkim.grid_columns.actions' | translate}}</a>
+            <a class="no-clickable"
+              >{{'control_panel.dkim.grid_columns.actions' | translate}}</a
+            >
           </th>
         </tr>
       </thead>
@@ -54,30 +80,62 @@
         <tr ng-repeat="row in gridModel.displayed" id="tr-{{row.DomainId}}">
           <td ng-show="!row.deleting">
             <!-- domain state (1)disabled or (2)enabled -->
-            <div class="switch" id="switch-{{row.DomainId}}"
-              ng-show="row.DomainStatus === Enums.DkimState.ENABLED || row.DomainStatus === Enums.DkimState.DISABLED">
-              <span class="titip-top titip-fade" data-title="{{getStatusText(row)}}">
-                <input class="cmn-toggle cmn-toggle-round" id="{{row.DomainId}}" type="checkbox"
-                  ng-checked="row.DomainStatus === Enums.DkimState.ENABLED" ng-model="row.DomainStatus" ng-true-value="2"
-                  ng-false-value="1" ng-change="change(row)">
+            <div
+              class="switch"
+              id="switch-{{row.DomainId}}"
+              ng-show="row.DomainStatus === Enums.DkimState.ENABLED || row.DomainStatus === Enums.DkimState.DISABLED"
+            >
+              <span
+                class="titip-top titip-fade"
+                data-title="{{getStatusText(row)}}"
+              >
+                <input
+                  class="cmn-toggle cmn-toggle-round"
+                  id="{{row.DomainId}}"
+                  type="checkbox"
+                  ng-checked="row.DomainStatus === Enums.DkimState.ENABLED"
+                  ng-model="row.DomainStatus"
+                  ng-true-value="2"
+                  ng-false-value="1"
+                  ng-change="change(row)"
+                />
                 <label for="{{row.DomainId}}"></label>
               </span>
             </div>
             <!-- domain state (3) NO_USER_CONF -->
-            <div class="switch" ng-show="row.DomainStatus === Enums.DkimState.NO_USER_CONF">
-              <span class="titip-top titip-fade" data-title="{{getStatusText(row)}}">
-                <input class="cmn-toggle cmn-toggle-round" id="{{row.DomainId}}" type="checkbox" value=1 ng-true-value="2" ng-false-value="1">
+            <div
+              class="switch"
+              ng-show="row.DomainStatus === Enums.DkimState.NO_USER_CONF"
+            >
+              <span
+                class="titip-top titip-fade"
+                data-title="{{getStatusText(row)}}"
+              >
+                <input
+                  class="cmn-toggle cmn-toggle-round"
+                  id="{{row.DomainId}}"
+                  type="checkbox"
+                  value="1"
+                  ng-true-value="2"
+                  ng-false-value="1"
+                />
                 <label class="pending" for="{{row.DomainId}}"></label>
                 <div class="disabled"></div>
+              </span>
             </div>
 
             <!-- domain state (4)validating -->
-            <div class="switch" ng-show="row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION" >
+            <div
+              class="switch"
+              ng-show="row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION"
+            >
               <span class="configure titip-top titip-fade">
-                  <span class="icon-clock"></span>
-                  <span class="titip-content text-sm">
+                <span class="icon-clock"></span>
+                <span class="titip-content text-sm">
                   <strong>{{getStatusText(row)}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.verifying' | translate"></span>
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.verifying' | translate"
+                  ></span>
                 </span>
               </span>
             </div>
@@ -88,174 +146,299 @@
             </span>
           </td>
           <td class="status-column relative" ng-show="!row.deleting">
-            <input class="radio-custom" id="radio-{{row.DomainId}}" type="radio" name="selectList"
-              ng-disabled="row.DomainStatus !== Enums.DkimState.ENABLED" ng-checked="row.IsDefault" ng-click="selectRow(row)"/>
+            <input
+              class="radio-custom"
+              id="radio-{{row.DomainId}}"
+              type="radio"
+              name="selectList"
+              ng-disabled="row.DomainStatus !== Enums.DkimState.ENABLED"
+              ng-checked="row.IsDefault"
+              ng-click="selectRow(row)"
+            />
             <label for="radio-{{row.DomainId}}"></label>
           </td>
           <td ng-show="!row.deleting">
-
             <!-- dkim state (1) error -->
-            <div class="switch" ng-show="row.DkimStatus === 1" >
+            <div class="switch" ng-show="row.DkimStatus === 1">
               <span class="configure titip-top titip-fade">
                 <span class="icon-warning"></span>
                 <span class="titip-content text-sm">
-                  <strong>{{'control_panel.dkim.validation_states.message-'+ row.DkimStatus | translate}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate"></span>
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.DkimStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (2) ok -->
-            <div class="switch" ng-show="row.DkimStatus === 2" >
+            <div class="switch" ng-show="row.DkimStatus === 2">
               <span class="configure titip-top titip-fade" data-title="">
                 <span class="icon-check"></span>
                 <span class="titip-content text-sm">
-                    <strong>{{'control_panel.dkim.validation_states.message-'+ row.DkimStatus | translate}}</strong>
-                    <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate"></span>
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.DkimStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (3) No config -->
-            <div class="switch" ng-show="row.DkimStatus === 3" >
+            <div class="switch" ng-show="row.DkimStatus === 3">
               <span class="configure titip-top titip-fade">
                 <span class="icon-grid-draft"></span>
-                 <span class="titip-content text-sm">
-                  <strong>{{'control_panel.dkim.validation_states.message-'+ row.DkimStatus | translate}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate:{protocol:'DKIM'}"></span>
+                <span class="titip-content text-sm">
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.DkimStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate:{protocol:'DKIM'}"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (4) Pending -->
-            <div class="switch" ng-show="row.DkimStatus === 4 && row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION" >
+            <div
+              class="switch"
+              ng-show="row.DkimStatus === 4 && row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION"
+            >
               <span class="configure titip-top titip-fade">
-                <span >&bull;&bull;&bull;</span>
+                <span>&bull;&bull;&bull;</span>
                 <span class="titip-content text-sm">
-                  <strong>{{'control_panel.dkim.validation_states.message-'+ row.DkimStatus | translate}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate"></span>
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.DkimStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.DkimStatus | translate"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (4) Pending  with Admin validation-->
-            <div class="switch" ng-show="row.DkimStatus === 4 && row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION" >
+            <div
+              class="switch"
+              ng-show="row.DkimStatus === 4 && row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION"
+            >
               <span class="configure titip-top titip-fade">
                 <span class="icon-clock"></span>
                 <span class="titip-content text-sm">
                   <strong>{{getStatusText(row)}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.verifying' | translate"></span>
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.verifying' | translate"
+                  ></span>
                 </span>
               </span>
             </div>
-
           </td>
           <td ng-show="!row.deleting">
             <!-- dkim state (1) error -->
-            <div class="switch" ng-show="row.SpfStatus === 1" >
+            <div class="switch" ng-show="row.SpfStatus === 1">
               <span class="configure titip-top titip-fade">
                 <span class="icon-warning"></span>
                 <span class="titip-content text-sm">
-                  <strong>{{'control_panel.dkim.validation_states.message-'+ row.SpfStatus | translate}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate"></span>
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.SpfStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (2) ok -->
-            <div class="switch" ng-show="row.SpfStatus === 2" >
+            <div class="switch" ng-show="row.SpfStatus === 2">
               <span class="configure titip-top titip-fade" data-title="">
                 <span class="icon-check"></span>
                 <span class="titip-content text-sm">
-                    <strong>{{'control_panel.dkim.validation_states.message-'+ row.SpfStatus | translate}}</strong>
-                    <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate"></span>
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.SpfStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (3) No config -->
-            <div class="switch" ng-show="row.SpfStatus === 3" >
+            <div class="switch" ng-show="row.SpfStatus === 3">
               <span class="configure titip-top titip-fade">
                 <span class="icon-grid-draft"></span>
-                 <span class="titip-content text-sm">
-                  <strong>{{'control_panel.dkim.validation_states.message-'+ row.SpfStatus | translate}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate: {protocol:'SPF'}"></span>
+                <span class="titip-content text-sm">
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.SpfStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate: {protocol:'SPF'}"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (4) Pending -->
-            <div class="switch" ng-show="row.SpfStatus === 4 && row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION" >
+            <div
+              class="switch"
+              ng-show="row.SpfStatus === 4 && row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION"
+            >
               <span class="configure titip-top titip-fade">
-                <span >&bull;&bull;&bull;</span>
+                <span>&bull;&bull;&bull;</span>
                 <span class="titip-content text-sm">
-                  <strong>{{'control_panel.dkim.validation_states.message-'+ row.SpfStatus | translate}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate"></span>
+                  <strong
+                    >{{'control_panel.dkim.validation_states.message-'+
+                    row.SpfStatus | translate}}</strong
+                  >
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.description-'+ row.SpfStatus | translate"
+                  ></span>
                 </span>
               </span>
             </div>
 
             <!-- dkim state (4) Pending  with Admin validation-->
-            <div class="switch" ng-show="row.SpfStatus === 4 && row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION" >
+            <div
+              class="switch"
+              ng-show="row.SpfStatus === 4 && row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION"
+            >
               <span class="configure titip-top titip-fade">
                 <span class="icon-clock"></span>
                 <span class="titip-content text-sm">
                   <strong>{{getStatusText(row)}}</strong>
-                  <span ng-bind-html="'control_panel.dkim.validation_states.verifying' | translate"></span>
+                  <span
+                    ng-bind-html="'control_panel.dkim.validation_states.verifying' | translate"
+                  ></span>
                 </span>
               </span>
             </div>
-
           </td>
           <td ng-show="!row.deleting">
             <span>{{row.LastValidationDate}}</span>
           </td>
           <td ng-show="!row.deleting">
             <div class="action-column--icon-container">
-                <a class="submit extra_small main_buttons_green_small" ng-if="row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION" ng-click="verify(row)">
-                  <span ng-show="!row.validating">
-                    {{'actions.verify' | translate}}
-                  </span>
-                  <span ng-show="row.validating" class="loading-icon loading-icon--small loading-icon--alternative"></span>
-                </a>
-
-                <!-- disabled button -->
-                <a class="submit extra_small main_buttons_green_small disabled" ng-if="row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION" >
-                    {{'actions.verify' | translate}}
-                </a>
-
-                <!-- disabled button -->
-                <span ng-if="row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION">
-                  <a><span class="icon icon-configure disabled"/></a>
+              <a
+                class="submit extra_small main_buttons_green_small"
+                ng-if="row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION"
+                ng-click="verify(row)"
+              >
+                <span ng-show="!row.validating">
+                  {{'actions.verify' | translate}}
                 </span>
+                <span
+                  ng-show="row.validating"
+                  class="loading-icon loading-icon--small loading-icon--alternative"
+                ></span>
+              </a>
 
-                <span class="configure titip-top titip-fade" data-title="{{ 'actions.configure' | translate}}" ng-if="row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION">
-                  <a ng-click="configureDkim(row)"><span class="icon-configure"/></a>
-                </span>
+              <!-- disabled button -->
+              <a
+                class="submit extra_small main_buttons_green_small disabled"
+                ng-if="row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION"
+              >
+                {{'actions.verify' | translate}}
+              </a>
 
-                <span class="titip-top titip-fade" ng-hide="row.DomainStatus === Enums.DkimState.ENABLED"
-                data-title="{{ 'actions.delete' | translate}}" >
-                  <a ng-click="row.deleting=true">
-                  <img src="../../../images/grid-delete.svg"></a>
-                </span>
+              <!-- disabled button -->
+              <span
+                ng-if="row.DomainStatus === Enums.DkimState.ADMIN_VALIDATION"
+              >
+                <a><span class="icon icon-configure disabled" /></a>
+              </span>
 
-                 <a  ng-show="row.DomainStatus === Enums.DkimState.ENABLED" class="icon-trash" ng-class="{'disabled icon-trash':row.DomainStatus === Enums.DkimState.ENABLED}">
-                  <img src="../../../images/grid-delete.svg"></a>
+              <span
+                class="configure titip-top titip-fade"
+                data-title="{{ 'actions.configure' | translate}}"
+                ng-if="row.DomainStatus !== Enums.DkimState.ADMIN_VALIDATION"
+              >
+                <a ng-click="configureDkim(row)"
+                  ><span class="icon-configure"
+                /></a>
+              </span>
 
+              <span
+                class="titip-top titip-fade"
+                ng-hide="row.DomainStatus === Enums.DkimState.ENABLED"
+                data-title="{{ 'actions.delete' | translate}}"
+              >
+                <a ng-click="row.deleting=true">
+                  <img src="../../../images/grid-delete.svg"
+                /></a>
+              </span>
+
+              <a
+                ng-show="row.DomainStatus === Enums.DkimState.ENABLED"
+                class="icon-trash"
+                ng-class="{'disabled icon-trash':row.DomainStatus === Enums.DkimState.ENABLED}"
+              >
+                <img src="../../../images/grid-delete.svg"
+              /></a>
             </div>
           </td>
-          <td colspan="6" class="delete-confirmation" ng-cloak ng-show="row.deleting">
-            <span class="deleteConfirmationIcon"></span><span ng-bind-html="'control_panel.dkim.delete_message' | translate:{ 'domainName' : row.DomainName } "></span>
+          <td
+            colspan="6"
+            class="delete-confirmation"
+            ng-cloak
+            ng-show="row.deleting"
+          >
+            <span class="deleteConfirmationIcon"></span
+            ><span
+              ng-bind-html="'control_panel.dkim.delete_message' | translate:{ 'domainName' : row.DomainName } "
+            ></span>
           </td>
-          <td colspan="1" ng-cloak class="delete-confirmation right" ng-show="row.deleting">
-            <a id="cancel-delete-{{$index}}" ng-cloak ng-click="row.deleting=false">{{ 'actions.cancel' | translate }} </a> | <a id="accept-delete-{{$index}}" ng-cloak ng-click="deleteRowConfirmed(row)">{{ 'actions.delete' | translate }}</a> </td>
+          <td
+            colspan="1"
+            ng-cloak
+            class="delete-confirmation right"
+            ng-show="row.deleting"
+          >
+            <a
+              id="cancel-delete-{{$index}}"
+              ng-cloak
+              ng-click="row.deleting=false"
+              >{{ 'actions.cancel' | translate }}
+            </a>
+            |
+            <a
+              id="accept-delete-{{$index}}"
+              ng-cloak
+              ng-click="deleteRowConfirmed(row)"
+              >{{ 'actions.delete' | translate }}</a
+            >
+          </td>
         </tr>
       </tbody>
     </table>
-    <div class="no-search-results" ng-show="gridModel.displayed.length === 0 && (gridModel.searchText.length > 0 || gridModel.labelSelected !== 0)"> {{ 'empty_search' | translate }} </div>
-    <div class="no-search-results" ng-show="gridModel.displayed.length === 0 && gridModel.searchText.length === 0 && gridModel.labelSelected === 0"> {{ 'control_panel.dkim.no_domains' | translate }} </div>
+    <div
+      class="no-search-results"
+      ng-show="gridModel.displayed.length === 0 && (gridModel.searchText.length > 0 || gridModel.labelSelected !== 0)"
+    >
+      {{ 'empty_search' | translate }}
+    </div>
+    <div
+      class="no-search-results"
+      ng-show="gridModel.displayed.length === 0 && gridModel.searchText.length === 0 && gridModel.labelSelected === 0"
+    >
+      {{ 'control_panel.dkim.no_domains' | translate }}
+    </div>
   </div>
 </section>
-<div class="loading--container components--center loading--container--editor-grid" ng-show="gridModel.firstTimeLoad">
+<div
+  class="loading--container components--center loading--container--editor-grid"
+  ng-show="gridModel.firstTimeLoad"
+>
   <span class="loading-icon"></span>
 </div>

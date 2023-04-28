@@ -1,17 +1,17 @@
 'use strict';
 
-describe('BaseComponent', function() {
+describe('BaseComponent', function () {
   beforeEach(module('dopplerApp.automation.editor'));
 
   var BaseComponent;
   var COMPONENT_TYPE;
 
-  beforeEach(inject(function(_BaseComponent_, _COMPONENT_TYPE_) {
+  beforeEach(inject(function (_BaseComponent_, _COMPONENT_TYPE_) {
     BaseComponent = _BaseComponent_;
     COMPONENT_TYPE = _COMPONENT_TYPE_;
   }));
 
-  it('should be able to instantiate a new EMPTY base component', function() {
+  it('should be able to instantiate a new EMPTY base component', function () {
     // Act
     var emptyBaseComponent = new BaseComponent();
 
@@ -23,14 +23,14 @@ describe('BaseComponent', function() {
     expect(emptyBaseComponent.completed).toEqual(false);
   });
 
-  it('should be able to instantiate a new base component', function() {
+  it('should be able to instantiate a new base component', function () {
     // Arrange
     var baseComponentParams = {
       data: {
         parentUid: 3,
         completed: false,
-        touched: true
-      }
+        touched: true,
+      },
     };
 
     // Act
@@ -43,7 +43,4 @@ describe('BaseComponent', function() {
     expect(baseComponent.parentUid).toBe(baseComponentParams.data.parentUid);
     expect(baseComponent.touched).toBe(baseComponentParams.data.touched);
   });
-
-
-
 });

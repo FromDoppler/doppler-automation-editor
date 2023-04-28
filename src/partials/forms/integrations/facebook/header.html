@@ -1,27 +1,71 @@
-<p class="title">{{ 'forms_integrate.headers.integration_facebook.header.title' | translate }}</p>
+<p class="title">
+  {{ 'forms_integrate.headers.integration_facebook.header.title' | translate }}
+</p>
 <!-- With no Account -->
 <div>
-  <p class="text--small" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT">
-    {{ 'forms_integrate.headers.integration_facebook.header.text_1' | translate }}
-    <b>{{ 'forms_integrate.headers.integration_facebook.header.bold_text' | translate }}</b>
-    {{ 'forms_integrate.headers.integration_facebook.header.text_2' | translate }}
-    <a ng-href="{{'forms_integrate.headers.integration_facebook.header.help_link' | translate}}" target="_blank">{{ 'forms_integrate.headers.integration_facebook.header.help_link_text' | translate }}</a>.
+  <p
+    class="text--small"
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT"
+  >
+    {{ 'forms_integrate.headers.integration_facebook.header.text_1' | translate
+    }}
+    <b
+      >{{ 'forms_integrate.headers.integration_facebook.header.bold_text' |
+      translate }}</b
+    >
+    {{ 'forms_integrate.headers.integration_facebook.header.text_2' | translate
+    }}
+    <a
+      ng-href="{{'forms_integrate.headers.integration_facebook.header.help_link' | translate}}"
+      target="_blank"
+      >{{ 'forms_integrate.headers.integration_facebook.header.help_link_text' |
+      translate }}</a
+    >.
   </p>
-  <p class="text--small text--framed" ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT && facebookCtrl.error">
+  <p
+    class="text--small text--framed"
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT && facebookCtrl.error"
+  >
     <span class="icon-warning"></span>
-     {{ 'forms_integrate.error.connectionError' | translate }}
-    <a ng-click="facebookCtrl.error=false" class="text--uppercase regular"> {{ 'forms_integrate.error.cancel' | translate }}</a>
-     | <b><a ng-click="facebookCtrl.integrateAccount()" class="text--uppercase text-error"> {{ 'forms_integrate.error.retry' | translate }}</a></b>
+    {{ 'forms_integrate.error.connectionError' | translate }}
+    <a ng-click="facebookCtrl.error=false" class="text--uppercase regular">
+      {{ 'forms_integrate.error.cancel' | translate }}</a
+    >
+    |
+    <b
+      ><a
+        ng-click="facebookCtrl.integrateAccount()"
+        class="text--uppercase text-error"
+      >
+        {{ 'forms_integrate.error.retry' | translate }}</a
+      ></b
+    >
   </p>
 </div>
 <!-- With Account but not tab configured -->
-<p class="text--small" ng-show="facebookCtrl.integrationStatus !== facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT">
+<p
+  class="text--small"
+  ng-show="facebookCtrl.integrationStatus !== facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT"
+>
   <span class="icon-check"></span>
   {{ 'forms_integrate.headers.integration_facebook.header.text_3' | translate }}
-  <span class="text-emphasis">{{facebookCtrl.facebookData.accountName}}</span><span ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETED">.
-  <!-- <b><a href="" target="_blank" class="text--uppercase">&nbsp;{{ 'forms_integrate.headers.integration_facebook.header.edit_text' | translate }}</a></b> -->
-</span>
+  <span class="text-emphasis">{{facebookCtrl.facebookData.accountName}}</span
+  ><span
+    ng-show="facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED || facebookCtrl.integrationStatus === facebookCtrl.FORM_INTEGRATION_FB_STATE.TAB_DELETED"
+    >.
+    <!-- <b><a href="" target="_blank" class="text--uppercase">&nbsp;{{ 'forms_integrate.headers.integration_facebook.header.edit_text' | translate }}</a></b> -->
+  </span>
   {{ 'forms_integrate.headers.integration_facebook.header.text_4' | translate }}
-  <b><a ng-href="{{'forms_integrate.headers.integration_facebook.header.help_link' | translate}}" target="_blank">{{ 'forms_integrate.headers.integration_facebook.header.help_link_text' | translate }}</a></b>.
+  <b
+    ><a
+      ng-href="{{'forms_integrate.headers.integration_facebook.header.help_link' | translate}}"
+      target="_blank"
+      >{{ 'forms_integrate.headers.integration_facebook.header.help_link_text' |
+      translate }}</a
+    ></b
+  >.
 </p>
-<hr class="form-integration-divider" ng-show="facebookCtrl.integrationStatus !== facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT">
+<hr
+  class="form-integration-divider"
+  ng-show="facebookCtrl.integrationStatus !== facebookCtrl.FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT"
+/>

@@ -16,7 +16,7 @@
       top: 0;
       width: $size-full;
       height: $size-full;
-      background: rgba(255,255,255,.6);
+      background: rgba(255, 255, 255, 0.6);
     }
   }
 
@@ -26,7 +26,7 @@
     }
 
     &:hover {
-      background: rgba(251,178,36,0.10);
+      background: rgba(251, 178, 36, 0.1);
     }
   }
 
@@ -65,7 +65,7 @@
         color: $color-lightgrey;
 
         span {
-          opacity: .6;
+          opacity: 0.6;
         }
       }
     }
@@ -86,7 +86,7 @@
       }
     }
 
-    [class^=icon-] {
+    [class^='icon-'] {
       font-size: 12px;
     }
 
@@ -147,7 +147,7 @@
   .icons--container {
     text-align: right;
 
-    [class^=icon-] {
+    [class^='icon-'] {
       font-size: 16px;
 
       &:hover {
@@ -246,8 +246,8 @@
     }
 
     span.valign-center {
-        display:flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -258,8 +258,8 @@
   .delete-confirmation {
     background: $color-white;
     height: 40px;
-    border-top: 1px solid #E55A4C;
-    box-shadow: 0 -1px 0 0 #E55A4C inset;
+    border-top: 1px solid #e55a4c;
+    box-shadow: 0 -1px 0 0 #e55a4c inset;
 
     &.right {
       text-align: right;
@@ -275,7 +275,7 @@
       text-transform: uppercase;
 
       &:hover {
-        color: $color-darkgrey
+        color: $color-darkgrey;
       }
 
       &:last-child {
@@ -307,52 +307,52 @@
     text-align: center;
 
     &.label1 {
-      background: #DFB2CD;
-      color: #772E59;
+      background: #dfb2cd;
+      color: #772e59;
     }
 
     &.label2 {
-      background: #9B7EAF;
+      background: #9b7eaf;
       color: $color-dark;
     }
 
     &.label3 {
-      background: #ADB5D9;
-      color: #3B416E;
+      background: #adb5d9;
+      color: #3b416e;
     }
 
     &.label4 {
-      background: #A3D9DB;
-      color: #0D4949;
+      background: #a3d9db;
+      color: #0d4949;
     }
 
     &.label5 {
-      background: #A9D7B6;
-      color: #1A7B40;
+      background: #a9d7b6;
+      color: #1a7b40;
     }
 
     &.label6 {
-      background: #DDE9B3;
-      color: #5F8A3D;
+      background: #dde9b3;
+      color: #5f8a3d;
     }
 
     &.label7 {
-      background: #FBF4B0;
+      background: #fbf4b0;
       color: #978400;
     }
 
     &.label8 {
-      background: #FFD6A5;
-      color: #84490B;
+      background: #ffd6a5;
+      color: #84490b;
     }
 
     &.label9 {
-      background: #FABFA0;
-      color: #AC412E;
+      background: #fabfa0;
+      color: #ac412e;
     }
 
     &.label10 {
-      background: #F7B59F;
+      background: #f7b59f;
       color: #762126;
     }
   }
@@ -403,7 +403,7 @@
       text-decoration: none;
 
       &:hover {
-        color: $color-darkgrey
+        color: $color-darkgrey;
       }
 
       &:last-child {
@@ -444,7 +444,8 @@
     position: relative;
     width: $size-full;
   }
-  dropdown, dp-editor-dropdown {
+  dropdown,
+  dp-editor-dropdown {
     margin-left: 20px;
   }
   .icon-check {
@@ -472,7 +473,7 @@
     bottom: -19px;
     left: 0;
     &:before {
-      @include arrow-after(18px, 12px, "bottom", $color-ghostwhite);
+      @include arrow-after(18px, 12px, 'bottom', $color-ghostwhite);
       bottom: 11px;
     }
   }
@@ -482,7 +483,8 @@
   }
 }
 
-.sms-dashboard, .billingInformation-dashboard {
+.sms-dashboard,
+.billingInformation-dashboard {
   h3 {
     background: none;
   }
@@ -498,9 +500,9 @@
     height: 40px;
     line-height: 40px;
   }
-  .paymentSettings{
+  .paymentSettings {
     margin: 40px 0;
-    input[type="text"] {
+    input[type='text'] {
       width: 100%;
       margin-bottom: 0;
     }
@@ -512,7 +514,8 @@
       width: 100%;
     }
   }
-  .icon-add-element, .icon-money {
+  .icon-add-element,
+  .icon-money {
     font-size: $font-size--base;
   }
   .mercado-pago--icon {
@@ -637,7 +640,7 @@
         border-top: 1px solid $color-lightgrey;
       }
 
-      div{
+      div {
         &:first-child {
           margin: auto 0;
         }
@@ -668,7 +671,7 @@
       border-bottom: 1px solid $color-grey-border;
     }
     .price-calc--container {
-      margin: 55px 0 30px
+      margin: 55px 0 30px;
     }
     hr {
       margin: 20px 0 15px;
@@ -721,7 +724,7 @@
     }
 
     .total-price {
-      font-size: $font-size--medium
+      font-size: $font-size--medium;
     }
 
     .total-price-text {

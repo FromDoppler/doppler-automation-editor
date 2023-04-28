@@ -1,17 +1,50 @@
 <div>
-  <div class="sms-dashboard panel-box-app panel-box-app--ctrlpanel" ng-include="'angularjs/partials/controlPanel/smsSettings/smsSettings.html'" ng-show="smsSettings.screenToShow === 'settingsScreen'"></div>
-  <div class="sms-dashboard panel-box-app panel-box-app--ctrlpanel" ng-include="'angularjs/partials/controlPanel/smsSettings/smsCalcCredit.html'" ng-show="smsSettings.screenToShow === 'calcCreditScreen'"></div>
-  <div ng-include="'angularjs/partials/controlPanel/smsSettings/smsBuyScreen.html'" ng-show="smsSettings.screenToShow === 'buyScreen'"></div>
+  <div
+    class="sms-dashboard panel-box-app panel-box-app--ctrlpanel"
+    ng-include="'angularjs/partials/controlPanel/smsSettings/smsSettings.html'"
+    ng-show="smsSettings.screenToShow === 'settingsScreen'"
+  ></div>
+  <div
+    class="sms-dashboard panel-box-app panel-box-app--ctrlpanel"
+    ng-include="'angularjs/partials/controlPanel/smsSettings/smsCalcCredit.html'"
+    ng-show="smsSettings.screenToShow === 'calcCreditScreen'"
+  ></div>
+  <div
+    ng-include="'angularjs/partials/controlPanel/smsSettings/smsBuyScreen.html'"
+    ng-show="smsSettings.screenToShow === 'buyScreen'"
+  ></div>
 </div>
 <div>
   <!-- Buttons for: Settings Screen -->
-  <a class="button button--alternative" ng-show="smsSettings.screenToShow === 'settingsScreen'" href="/ControlPanel/ControlPanel?section=AdvancedPreferences">{{ 'actions.back' | translate }}</a>
-  <a class="button button--primary floatRight" ng-show="smsSettings.screenToShow === 'settingsScreen'"
-     ng-click="smsSettings.saveChanges()" ng-class="{'button--spinner' : smsSettings.saving}" ng-disabled="!smsSettings.enableSave">
+  <a
+    class="button button--alternative"
+    ng-show="smsSettings.screenToShow === 'settingsScreen'"
+    href="/ControlPanel/ControlPanel?section=AdvancedPreferences"
+    >{{ 'actions.back' | translate }}</a
+  >
+  <a
+    class="button button--primary floatRight"
+    ng-show="smsSettings.screenToShow === 'settingsScreen'"
+    ng-click="smsSettings.saveChanges()"
+    ng-class="{'button--spinner' : smsSettings.saving}"
+    ng-disabled="!smsSettings.enableSave"
+  >
     {{ 'actions.save' | translate }}
     <span class="icon-editor-saving" ng-show="smsSettings.saving"></span>
   </a>
   <!-- Buttons for: Calc Credit Screen -->
-  <a class="button button--alternative" ng-show="smsSettings.screenToShow === 'calcCreditScreen'" ng-click="smsSettings.screenToShow ='settingsScreen'">{{ 'actions.back' | translate }}</a>
-  <a class="button button--primary floatRight" ng-show="smsSettings.screenToShow === 'calcCreditScreen' && !smsSettings.isCM" type="button" ng-disabled="!smsSettings.creditToBuy || smsSettings.creditToBuy < smsSettings.minPurchase" ng-click="smsSettings.showBuyScreen()">{{ 'sms_settings.calc_credit_screen.button_next' | translate }}</a>
+  <a
+    class="button button--alternative"
+    ng-show="smsSettings.screenToShow === 'calcCreditScreen'"
+    ng-click="smsSettings.screenToShow ='settingsScreen'"
+    >{{ 'actions.back' | translate }}</a
+  >
+  <a
+    class="button button--primary floatRight"
+    ng-show="smsSettings.screenToShow === 'calcCreditScreen' && !smsSettings.isCM"
+    type="button"
+    ng-disabled="!smsSettings.creditToBuy || smsSettings.creditToBuy < smsSettings.minPurchase"
+    ng-click="smsSettings.showBuyScreen()"
+    >{{ 'sms_settings.calc_credit_screen.button_next' | translate }}</a
+  >
 </div>

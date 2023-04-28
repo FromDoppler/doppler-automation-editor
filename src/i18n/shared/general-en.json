@@ -50,9 +50,9 @@
     "url_pattern_error_message": "¡Ouch! The URL is invalid.",
     "https_url_pattern_error_message": "¡Ouch! Enter a URL that begins with https://"
   },
-  "footer" : {
-    "allRightReserved" : "All rights reserved",
-    "iso" : "ISO Quality Certification 9001:2008",
+  "footer": {
+    "allRightReserved": "All rights reserved",
+    "iso": "ISO Quality Certification 9001:2008",
     "privacy": "Privacy Policy & Legals.",
     "privacy_link": "https://fromdoppler.com/en/privacy-policy"
   },
@@ -93,9 +93,9 @@
       }
     }
   },
-  "button_cancel" : "Cancel",
-  "button_send" : "Send",
-  "button_accept" : "Accept",
+  "button_cancel": "Cancel",
+  "button_send": "Send",
+  "button_accept": "Accept",
   "button_yes": "Yes",
   "button_no": "No",
   "help_link_text": "HELP",
@@ -126,29 +126,29 @@
     "replicate_automation_disabled": "It's not possible to replicate"
   },
   "modal_process_file": {
-    "title" : "Remove multiple Subscribers at once",
-    "subtitle" : "Import a file with the Emails you want to remove from your Lists. Attention! Once removed, if you wish to add them back, you'll have to ask for their approval. ",
+    "title": "Remove multiple Subscribers at once",
+    "subtitle": "Import a file with the Emails you want to remove from your Lists. Attention! Once removed, if you wish to add them back, you'll have to ask for their approval. ",
     "button_remove_subs": "Remove Subscribers",
     "processed_title": "The Subscribers you've selected are being removed",
     "processed_subtitle": "We will send a report to your email when the process is completed.",
     "button_processed_add": "Upload a new List",
     "import_dragAndDrop_description": "You can choose between a comma-separated file (.csv) or a plain text one (.txt). If it's too big, you can convert it into a .zip. Also, if you have doubts we can help you out! Just press ",
     "import_dragAndDrop_InvalidFileType": "Oops! Keep in mind that your file must be a .csv, .txt. or .zip",
-    "helpLink" : "http://help.fromdoppler.com/?lang=en",
-    "dragAndDrop_fallbackMsg" : "Your browser does not support drag'n'drop file uploads.",
-    "dropButton_ready" : "Browse for your file",
-    "dropMessage_ready" : "Drag and drop your <b>File</b> here or ",
-    "dropMessage_importing" : "Importing <b>{{fileName}}</b>",
-    "dropMessage_imported" : "You've imported <b>{{fileName}}</b>",
-    "dropButton_importedWithError" : "Import another file",
-    "errorMessage_maxFiles" : "Ouch! You cannot upload 2 files at the same time.",
-    "errorMessage_fileSize" : "Oops! The size of your file is larger than fileSize MB",
-    "dropButton_imported" : "Replace file",
-    "selected_file" : "You've selected <b>{{fileName}}</b>"
+    "helpLink": "http://help.fromdoppler.com/?lang=en",
+    "dragAndDrop_fallbackMsg": "Your browser does not support drag'n'drop file uploads.",
+    "dropButton_ready": "Browse for your file",
+    "dropMessage_ready": "Drag and drop your <b>File</b> here or ",
+    "dropMessage_importing": "Importing <b>{{fileName}}</b>",
+    "dropMessage_imported": "You've imported <b>{{fileName}}</b>",
+    "dropButton_importedWithError": "Import another file",
+    "errorMessage_maxFiles": "Ouch! You cannot upload 2 files at the same time.",
+    "errorMessage_fileSize": "Oops! The size of your file is larger than fileSize MB",
+    "dropButton_imported": "Replace file",
+    "selected_file": "You've selected <b>{{fileName}}</b>"
   },
-  "empty_filter" : "No Filter",
-  "empty_label" : "No Label",
-  "empty_search" : "Ups! No matches found for searched criteria.",
+  "empty_filter": "No Filter",
+  "empty_label": "No Label",
+  "empty_search": "Ups! No matches found for searched criteria.",
   "control_panel": {
     "dkim": {
       "title": "DKIM & SPF setup",

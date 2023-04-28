@@ -8,9 +8,6 @@
 //   Variables
 // -------------------------------------
 
-
-
-
 // -------------------------------------
 //   Base
 // -------------------------------------
@@ -20,44 +17,44 @@
   display: flex;
   justify-content: center;
   min-height: 530px;
-    &.loading--container--editor-grid {
-      height: calc(100% - 198px);
-      background-color: $color-white;
-    }
-    &.loading--full {
-        width: $size-full;
-        height: $size-full;
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: rgba(255,255,255,.6);
-    }
+  &.loading--container--editor-grid {
+    height: calc(100% - 198px);
+    background-color: $color-white;
+  }
+  &.loading--full {
+    width: $size-full;
+    height: $size-full;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.6);
+  }
 }
 .loading-icon {
   border-radius: 50%;
-    position: relative;
-    text-indent: -9999em;
-    border-top: 5px solid $color-sylver;
-    border-right: 5px solid $color-sylver;
-    border-bottom: 5px solid $color-sylver;
-    border-left: 5px solid $color-lightgrey;
-    animation:loading 0.7s linear infinite;
-    width: 50px;
-    height: 50px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 5px solid $color-sylver;
+  border-right: 5px solid $color-sylver;
+  border-bottom: 5px solid $color-sylver;
+  border-left: 5px solid $color-lightgrey;
+  animation: loading 0.7s linear infinite;
+  width: 50px;
+  height: 50px;
 }
 
 .loading-icon--alternative {
-    border-left: 5px solid $color-white;
+  border-left: 5px solid $color-white;
 }
 
 .loading-icon--medium {
-    border-width: 3px;
-    width: 32px;
-    height: 32px;
+  border-width: 3px;
+  width: 32px;
+  height: 32px;
 }
 
 .loading-icon--small {
-    border-width: 2px;
-    width: 20px;
-    height: 20px;
+  border-width: 2px;
+  width: 20px;
+  height: 20px;
 }

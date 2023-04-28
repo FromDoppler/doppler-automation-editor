@@ -1,2 +1,2 @@
-import "./automation";
-import "./shared";
+import './automation';
+import './shared';

@@ -1,24 +1,38 @@
-<div id="steps-dropdown" click-outside="closeDropdown()" ng-click="hasWarningSteps() && toogleStepsContainer()" class="steps--container relative" ng-class="{ 'open': isOpen, 'has-warnings' : hasWarningSteps() }">
-	<div ng-if="!hasSteps() && !hasBlockedList()" class="container">
-		<span class="incomplete-icon"></span>
-		<div>
-			{{ 'automation_editor.steps.without_recorded' | translate }}
-		</div>
-	</div>
-	<div ng-if="hasSteps() || hasBlockedList()" class="container" ng-class="{'steps-warning': hasWarningSteps()}" >
-		<span ng-class="{'icon-check' : !hasWarningSteps(), 'icon-warning' : hasWarningSteps()}"></span>
-		<div>
-			<span ng-show="hasWarningSteps()">{{warningStepsCount()}}</span>
-			{{ getWarningLabel() }}
-		</div>
-	</div>
-	<span class="dropdown-arrow" ng-show="hasWarningSteps()"></span>
-	<ul>
-
-		<li ng-repeat="componentType in componentTypes" class="text--small" ng-show="warningsSteps[componentType].length" ng-click="selectComponent(componentType)">
-			<img ng-src="../../images/automation-{{componentType}}-grey.svg" />
-			<span class="number">{{warningsSteps[componentType].length || 0}}</span>
-			{{ getComponentWarningLabel(componentType) }}
-		</li>
-	</ul>
+<div
+  id="steps-dropdown"
+  click-outside="closeDropdown()"
+  ng-click="hasWarningSteps() && toogleStepsContainer()"
+  class="steps--container relative"
+  ng-class="{ 'open': isOpen, 'has-warnings' : hasWarningSteps() }"
+>
+  <div ng-if="!hasSteps() && !hasBlockedList()" class="container">
+    <span class="incomplete-icon"></span>
+    <div>{{ 'automation_editor.steps.without_recorded' | translate }}</div>
+  </div>
+  <div
+    ng-if="hasSteps() || hasBlockedList()"
+    class="container"
+    ng-class="{'steps-warning': hasWarningSteps()}"
+  >
+    <span
+      ng-class="{'icon-check' : !hasWarningSteps(), 'icon-warning' : hasWarningSteps()}"
+    ></span>
+    <div>
+      <span ng-show="hasWarningSteps()">{{warningStepsCount()}}</span>
+      {{ getWarningLabel() }}
+    </div>
+  </div>
+  <span class="dropdown-arrow" ng-show="hasWarningSteps()"></span>
+  <ul>
+    <li
+      ng-repeat="componentType in componentTypes"
+      class="text--small"
+      ng-show="warningsSteps[componentType].length"
+      ng-click="selectComponent(componentType)"
+    >
+      <img ng-src="../../images/automation-{{componentType}}-grey.svg" />
+      <span class="number">{{warningsSteps[componentType].length || 0}}</span>
+      {{ getComponentWarningLabel(componentType) }}
+    </li>
+  </ul>
 </div>

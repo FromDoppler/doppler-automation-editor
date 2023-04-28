@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -11,12 +11,20 @@
     'data',
     'headerService',
     'ModalService',
-    '$translate'
+    '$translate',
   ];
 
-  function ModalUpgradePlanCtrl($scope, close, data, headerService, ModalService, $translate) {
+  function ModalUpgradePlanCtrl(
+    $scope,
+    close,
+    data,
+    headerService,
+    ModalService,
+    $translate
+  ) {
     $scope.data = data;
-    $scope.data.maxlength = $scope.data.maxlength !== undefined ? $scope.data.maxlength : 50;
+    $scope.data.maxlength =
+      $scope.data.maxlength !== undefined ? $scope.data.maxlength : 50;
     var domain = data.urlbase;
     $scope.sentEmail = false;
     $scope.submitted = false;
@@ -34,19 +42,21 @@
       $scope.submitted = true;
       if ($scope.upgradePlanForm.$valid) {
         $scope.isLoading = true;
-        headerService.sendEmailUpgradePlan($scope.model, domain).then(function (result) {
-          if (result.success) {
-            if ($scope.model.IdClientTypePlanSelected > 0) {
-              $scope.isLoading = false;
-              $scope.openPopup();
-            } else {
-              $scope.sentEmail = true;
-              setTimeout(function () {
-                close(true);
-              }, 3000);
+        headerService
+          .sendEmailUpgradePlan($scope.model, domain)
+          .then(function (result) {
+            if (result.success) {
+              if ($scope.model.IdClientTypePlanSelected > 0) {
+                $scope.isLoading = false;
+                $scope.openPopup();
+              } else {
+                $scope.sentEmail = true;
+                setTimeout(function () {
+                  close(true);
+                }, 3000);
+              }
             }
-          }
-        });
+          });
       }
     };
 
@@ -57,19 +67,23 @@
       })[0];
 
       return ModalService.showModal({
-        templateUrl: 'angularjs/partials/shared/modalConfirmationUpgradePlan.html',
+        templateUrl:
+          'angularjs/partials/shared/modalConfirmationUpgradePlan.html',
         controller: 'ModalUpgradePlanCtrl',
         inputs: {
           data: {
             model: $scope.model,
             planSelected: planSelected,
-            subtitle: $scope.data.idUserType === 4 ? 'confirmation-upgrade-plan-popup.subtitle_subscribers' : 'confirmation-upgrade-plan-popup.subtitle_high_volumen'
-          }
-        }
+            subtitle:
+              $scope.data.idUserType === 4
+                ? 'confirmation-upgrade-plan-popup.subtitle_subscribers'
+                : 'confirmation-upgrade-plan-popup.subtitle_high_volumen',
+          },
+        },
       });
-    }
+    };
 
-    $scope.close = function(result) {
+    $scope.close = function (result) {
       parent.location.reload(true);
     };
   }

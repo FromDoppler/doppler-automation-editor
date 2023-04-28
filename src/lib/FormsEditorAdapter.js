@@ -5,12 +5,11 @@
  */
 /*eslint-disable no-unused-vars*/
 var FormsEditorAdapter = {
-
   /**
    * Constructor
    */
-  constructor: function(http) {
-    this.$http = http
+  constructor: function (http) {
+    this.$http = http;
   },
 
   /**
@@ -19,12 +18,12 @@ var FormsEditorAdapter = {
    * User information should be handled by integration API/bundle since it's related to Form ID.
    * @returns {Promise} - User account information.
    */
-  getAccountInformation: function() {},
+  getAccountInformation: function () {},
 
-  getSettings: function(params) {
-    return this.$http.get( '/Lists/Form/GetSettings', {
-      params: params
-      });
+  getSettings: function (params) {
+    return this.$http.get('/Lists/Form/GetSettings', {
+      params: params,
+    });
   },
 
   /* Fields and Lists */
@@ -33,7 +32,7 @@ var FormsEditorAdapter = {
    * @param {text} searchText - text to filter Fields
    * @returns {Promise}
    */
-  getUserFields: function() {
+  getUserFields: function () {
     //searchText as param
     var searchText = '';
     return this.$http.get('/MSFormsEditor/Editor/GetUserFields');
@@ -61,7 +60,7 @@ var FormsEditorAdapter = {
   },
   getSubscriberListInfo: function (params) {
     return this.$http.get('/Lists/Form/GetSubscribersListInfo/', {
-      params: params
+      params: params,
     });
   },
 
@@ -69,16 +68,16 @@ var FormsEditorAdapter = {
    * Gets available lists.
    * @returns {Promise}
    */
-  getSubscriberLists: function(param) {
-    return this.$http.get( '/Lists/Form/GetSubscribersLists', {
-        params: {
-          idLabel: param.idLabel,
-          searchText: param.searchQuery,
-          page: param.page,
-          cantPerPage: param.itemsPerPage//,
-          //sort: sort, TODO: enable when the sort is developed
-          //sortdir: sortdir
-        }
+  getSubscriberLists: function (param) {
+    return this.$http.get('/Lists/Form/GetSubscribersLists', {
+      params: {
+        idLabel: param.idLabel,
+        searchText: param.searchQuery,
+        page: param.page,
+        cantPerPage: param.itemsPerPage, //,
+        //sort: sort, TODO: enable when the sort is developed
+        //sortdir: sortdir
+      },
     });
   },
 
@@ -88,7 +87,7 @@ var FormsEditorAdapter = {
    * @param {Number} id - Form ID.
    * @returns {Promise}
    */
-  getForm: function(id) {
+  getForm: function (id) {
     return this.$http.get('/Lists/Form/GetFormModel?idForm=' + id);
   },
 
@@ -100,8 +99,8 @@ var FormsEditorAdapter = {
    * @param {Object} form - Form entity described as a JSON Object.
    * @returns {Promise} - HTTP response information.
    */
-  saveForm: function(form) {
-    return this.$http.post( '/Lists/Form/SaveFormModel', form);
+  saveForm: function (form) {
+    return this.$http.post('/Lists/Form/SaveFormModel', form);
   },
   publishForm: function (form) {
     return this.$http.post('/Lists/Form/PublishFormModel', form);
@@ -117,8 +116,8 @@ var FormsEditorAdapter = {
    * @param {String} sortingCriteria
    * @returns {Promise} - Images matching the searching criteria.
    */
-  getImages: function(params) {
-    return this.$http.get( '/Campaigns/Editor/GetImageGallery', params);
+  getImages: function (params) {
+    return this.$http.get('/Campaigns/Editor/GetImageGallery', params);
   },
 
   /**
@@ -127,7 +126,7 @@ var FormsEditorAdapter = {
    * @param {Object} data - Image data.
    * @returns {Promise} - HTTP response information.
    */
-  uploadImage: function() {
+  uploadImage: function () {
     return '/Campaigns/Editor/UploadImage';
   },
 
@@ -144,8 +143,8 @@ var FormsEditorAdapter = {
    * Get the list of  labels for subscribers lists
    * @returns {Promise} - HTTP response information.
    */
-  getUserLabels: function() {
-  	return this.$http.get('/Lists/Form/GetAllUserLabels');
+  getUserLabels: function () {
+    return this.$http.get('/Lists/Form/GetAllUserLabels');
   },
 
   pollRequestUrl: function (pollRequest) {
@@ -159,18 +158,27 @@ var FormsEditorAdapter = {
   },
 
   getFormName: function (params) {
-  	return this.$http.get('/Lists/Form/GetFormName', params);
+    return this.$http.get('/Lists/Form/GetFormName', params);
   },
   isValidDomain: function (params) {
-    return this.$http.get('/Automation/Automation/ValidatePrivateDomain?domain='+ params.domain);
+    return this.$http.get(
+      '/Automation/Automation/ValidatePrivateDomain?domain=' + params.domain
+    );
   },
   sendEmail: function (params) {
-    return this.$http.get('/Automation/Automation/SendPrivateDomainEmail?email=' + params.email);
+    return this.$http.get(
+      '/Automation/Automation/SendPrivateDomainEmail?email=' + params.email
+    );
   },
   isValidCode: function (params) {
-    return this.$http.get('/Automation/Automation/IsValidCode?code=' + params.code + "&email=" + params.email);
+    return this.$http.get(
+      '/Automation/Automation/IsValidCode?code=' +
+        params.code +
+        '&email=' +
+        params.email
+    );
   },
   getDopplerFilesAuthToken: function () {
     return this.$http.get('/DopplerFiles/GetAuthorizationToken');
-  }
+  },
 };

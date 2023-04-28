@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,14 +10,20 @@
     '$location',
     '$translate',
     'customDomainService',
-    'formsService'
+    'formsService',
   ];
 
-  function FormIntegrateLandingCtrl($interpolate, $location, $translate, customDomainService, formsService) {
+  function FormIntegrateLandingCtrl(
+    $interpolate,
+    $location,
+    $translate,
+    customDomainService,
+    formsService
+  ) {
     var vm = this;
-    vm.REGEX_PAGENAME = '^[a-zA-Z0-9\-]+$'; // eslint-disable-line no-useless-escape
+    vm.REGEX_PAGENAME = '^[a-zA-Z0-9-]+$'; // eslint-disable-line no-useless-escape
 
-    vm.$onInit = function() {
+    vm.$onInit = function () {
       var urlParams = $location.search();
       var integrationData = formsService.getIntegrationData();
 
@@ -42,18 +48,17 @@
     };
 
     function loadCustomDomains() {
-      customDomainService.getAllVerified()
-        .then(function(verifiedDomains) {
-          if (verifiedDomains && verifiedDomains.length) {
-            vm.customDomains = verifiedDomains;
-            if (!vm.currentCustomDomain && !vm.avoidPreselectionLogic) {
-              vm.onDomainTypeSelected('custom');
-            }
+      customDomainService.getAllVerified().then(function (verifiedDomains) {
+        if (verifiedDomains && verifiedDomains.length) {
+          vm.customDomains = verifiedDomains;
+          if (!vm.currentCustomDomain && !vm.avoidPreselectionLogic) {
+            vm.onDomainTypeSelected('custom');
           }
-        });
+        }
+      });
     }
 
-    vm.onDomainTypeSelected = function(domainType) {
+    vm.onDomainTypeSelected = function (domainType) {
       if (vm.selectedDomainType === domainType) {
         return;
       }
@@ -80,22 +85,23 @@
       }
     }
 
-    vm.confirmUsingDopplerDomain = function() {
+    vm.confirmUsingDopplerDomain = function () {
       var params = {
         IdForm: vm.idForm,
         CustomDomain: null,
         DomainOverwrittenByUser: true,
         FormNickName: vm.pageNameDoppler,
-        Url: vm.getUrlWithDopplerDomain()
+        Url: vm.getUrlWithDopplerDomain(),
       };
-      formsService.saveFormLandingDistributionSettings(params)
-        .then(function() {
+      formsService
+        .saveFormLandingDistributionSettings(params)
+        .then(function () {
           vm.focusedPageNameInput = false;
           updatePageName(vm.pageNameDoppler);
           updateIntegrationData();
           vm.landingForm.pageNameDoppler.$setValidity('duplicate', true);
         })
-        .catch(function(response) {
+        .catch(function (response) {
           var errorKey = response.data.error;
 
           if (errorKey === 'FormNameExisting') {
@@ -106,7 +112,7 @@
         });
     };
 
-    vm.confirmUsingCustomDomain = function(customDomain) {
+    vm.confirmUsingCustomDomain = function (customDomain) {
       if (customDomain) {
         vm.currentCustomDomain = customDomain;
       }
@@ -118,16 +124,17 @@
         CustomDomain: vm.currentCustomDomain.Domain,
         DomainOverwrittenByUser: true,
         FormNickName: vm.pageNameCustom,
-        Url: vm.getUrlWithCustomDomain()
+        Url: vm.getUrlWithCustomDomain(),
       };
-      formsService.saveFormLandingDistributionSettings(params)
-        .then(function() {
+      formsService
+        .saveFormLandingDistributionSettings(params)
+        .then(function () {
           vm.focusedPageNameInput = false;
           updatePageName(vm.pageNameCustom);
           updateIntegrationData();
           vm.landingForm.pageNameCustom.$setValidity('duplicate', true);
         })
-        .catch(function(response) {
+        .catch(function (response) {
           var errorKey = response.data.error;
 
           if (errorKey === 'FormNameExisting') {
@@ -138,8 +145,11 @@
         });
     };
 
-    vm.clearDuplicateError = function(inputName) {
-      if (vm.landingForm[inputName].$invalid && vm.landingForm[inputName].$error.duplicate) {
+    vm.clearDuplicateError = function (inputName) {
+      if (
+        vm.landingForm[inputName].$invalid &&
+        vm.landingForm[inputName].$error.duplicate
+      ) {
         vm.landingForm[inputName].$setValidity('duplicate', true);
       }
     };
@@ -152,10 +162,13 @@
 
     function updateIntegrationData() {
       formsService.updateIntegrationData('FormNickName', vm.pageName);
-      formsService.updateIntegrationData('CustomDomain', vm.currentCustomDomain);
+      formsService.updateIntegrationData(
+        'CustomDomain',
+        vm.currentCustomDomain
+      );
     }
 
-    vm.cancelPageNameEdition = function() {
+    vm.cancelPageNameEdition = function () {
       vm.focusedPageNameInput = false;
       if (vm.selectedDomainType === 'doppler') {
         vm.pageNameDoppler = vm.pageName;
@@ -166,31 +179,35 @@
       }
     };
 
-    vm.openNewTab = function(url) {
+    vm.openNewTab = function (url) {
       window.open(url, '_blank');
     };
 
-    vm.getCustomDomainsSelectorLabel = function() {
+    vm.getCustomDomainsSelectorLabel = function () {
       if (vm.currentCustomDomain) {
         return vm.currentCustomDomain.Domain;
       } else if (vm.customDomains.length === 1) {
         return vm.customDomains[0].Domain;
       }
 
-      return $translate.instant('forms_integrate.headers.integration_landing.custom_domain.dropdown_placeholder');
+      return $translate.instant(
+        'forms_integrate.headers.integration_landing.custom_domain.dropdown_placeholder'
+      );
     };
 
-    vm.getUrlWithDopplerDomain = function() {
-      return vm.pageNameDoppler ? vm.baseDopplerUrl + '/' + vm.pageNameDoppler : vm.baseDopplerUrl;
+    vm.getUrlWithDopplerDomain = function () {
+      return vm.pageNameDoppler
+        ? vm.baseDopplerUrl + '/' + vm.pageNameDoppler
+        : vm.baseDopplerUrl;
     };
 
-    vm.getUrlWithCustomDomain = function() {
+    vm.getUrlWithCustomDomain = function () {
       if (vm.selectedDomainType !== 'custom' || !vm.currentCustomDomain) {
         return;
       }
       var data = {
         customDomain: vm.currentCustomDomain.Domain,
-        pageName: vm.pageNameCustom
+        pageName: vm.pageNameCustom,
       };
       var customDomainUrl = $interpolate(vm.formCustomDomainUrl)(data);
       if (!data.pageName) {
@@ -200,7 +217,7 @@
       return customDomainUrl;
     };
 
-    vm.onFocus = function() {
+    vm.onFocus = function () {
       vm.focusedPageNameInput = true;
     };
   }

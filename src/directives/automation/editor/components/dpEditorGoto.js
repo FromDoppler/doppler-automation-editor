@@ -5,19 +5,18 @@
     .module('dopplerApp.automation.editor')
     .directive('dpEditorGoto', dpEditorGoto);
 
-  dpEditorGoto.$inject = [
-    'goToService'
-  ];
+  dpEditorGoto.$inject = ['goToService'];
 
   function dpEditorGoto(goToService) {
     var directive = {
       restrict: 'E',
       scope: {
         branch: '=',
-        component: '='
+        component: '=',
       },
-      templateUrl: 'angularjs/partials/automation/editor/directives/components/dp-editor-goto.html',
-      link: link
+      templateUrl:
+        'angularjs/partials/automation/editor/directives/components/dp-editor-goto.html',
+      link: link,
     };
 
     return directive;
@@ -31,9 +30,13 @@
 
       scope.removeGotoComponent = function (component) {
         goToService.removeGotoLine(selectedComponent.uid);
-        goToService.markComponentInGotoSelection(selectedComponent.goto, false, ['goto-connected']);
+        goToService.markComponentInGotoSelection(
+          selectedComponent.goto,
+          false,
+          ['goto-connected']
+        );
         scope.$parent.removeComponent(component);
-      }
+      };
 
       // draw go to line
       // TODO: improve method to start to draw the lines, now is waiting 1,5 seg.

@@ -1,14 +1,14 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp')
-    .factory('readFile', function($window, $q) {
+    .factory('readFile', function ($window, $q) {
       function readFile(file) {
         var deferred = $q.defer(),
           reader = new $window.FileReader();
 
-        reader.onload = function(ev) {
+        reader.onload = function (ev) {
           var content = ev.target.result;
           deferred.resolve(content);
         };
@@ -22,31 +22,31 @@
     .directive('fileBrowser', fileBrowser);
 
   function fileBrowser(readFile) {
-
     var directive = {
-      template: '<input type="file" style="display: none;" accept="{{accept}}"/>' +
+      template:
+        '<input type="file" style="display: none;" accept="{{accept}}"/>' +
         '<ng-transclude></ng-transclude>',
       transclude: true,
       scope: {
         maxSize: '=?',
         error: '=',
         file: '=',
-        accept: '=?'
+        accept: '=?',
       },
-      link: link
+      link: link,
     };
 
     return directive;
 
     function link(scope, element) {
       var fileInput = element.children('input[file]');
-      fileInput.on('change', function(event) {
+      fileInput.on('change', function (event) {
         var file = event.target.files[0];
         scope.error = false;
-        if (file && scope.maxSize >= file.size || !scope.maxSize) {
-          readFile(file).then(function() {
+        if ((file && scope.maxSize >= file.size) || !scope.maxSize) {
+          readFile(file).then(function () {
             scope.file = file;
-            scope.$emit('onSelectedFile', {file: file});
+            scope.$emit('onSelectedFile', { file: file });
           });
         } else {
           scope.error = true;
@@ -54,11 +54,9 @@
         }
       });
 
-      element.on('click', function() {
+      element.on('click', function () {
         fileInput[0].click();
       });
     }
-
   }
-
 })();

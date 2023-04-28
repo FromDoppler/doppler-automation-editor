@@ -1,65 +1,135 @@
-<div id="mapping-panel" class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
-     ng-if="vtex.connected && vtex.showMapping">
+<div
+  id="mapping-panel"
+  class="grayPanel-box grayPanel-controlPanel-box grayPanelPadding-box"
+  ng-if="vtex.connected && vtex.showMapping"
+>
   <div>
     <div class="authentication-container connected">
       <div>
-        <span class="control-panel-section-title">{{ 'vtex_integration.mapping.title' | translate }}</span>
-        <span class="control-panel-section-subtitle">{{ 'vtex_integration.mapping.subtitle' | translate }}</span>
+        <span class="control-panel-section-title"
+          >{{ 'vtex_integration.mapping.title' | translate }}</span
+        >
+        <span class="control-panel-section-subtitle"
+          >{{ 'vtex_integration.mapping.subtitle' | translate }}</span
+        >
       </div>
     </div>
-    <hr class="full" style="width: calc(100% + 40px);" />
+    <hr class="full" style="width: calc(100% + 40px)" />
     <p class="integration-information-text">
-      {{ 'vtex_integration.mapping.selected_data_entity' | translate }}: <strong>{{ vtex.selectedEntity.description }}</strong>
+      {{ 'vtex_integration.mapping.selected_data_entity' | translate }}:
+      <strong>{{ vtex.selectedEntity.description }}</strong>
     </p>
     <p class="integration-information-text">
-      {{ 'vtex_integration.mapping.selected_subscriber_list' | translate }}: <strong>{{ vtex.selectedList.ListName }}</strong>
+      {{ 'vtex_integration.mapping.selected_subscriber_list' | translate }}:
+      <strong>{{ vtex.selectedList.ListName }}</strong>
     </p>
     <div class="mapping-container">
       <div ng-repeat="field in vtex.vtexFields" dp-on-finish-ng-repeat>
         <div class="grayPanel-box flex-grid">
           <div>
-            <p>{{ 'vtex_integration.mapping.data_entity_field' | translate }}: <b>{{ vtex.getFiledName(field.DisplayName) }}</b></p>
+            <p>
+              {{ 'vtex_integration.mapping.data_entity_field' | translate }}:
+              <b>{{ vtex.getFiledName(field.DisplayName) }}</b>
+            </p>
           </div>
           <div>
-            <select id="dd-userFields{{$index}}"
-                    name="select-field{{$index}}"
-                    ng-model="field.idDopplerField"
-                    property="name"
-                    id-value="idField"
-                    ng-options="field.idField as field.name for field in vtex.userFields  | filter:vtex.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
-                    ng-click="vtex.errorMessage=''"
-                    class="selector field-selector"
-                    ng-required="true"
-                    ng-change="vtex.fieldChange($index, field.idDopplerField)">
-              <option value="" disabled="disabled">{{'vtex_integration.mapping.select_field_placeholder' | translate}}</option>
+            <select
+              id="dd-userFields{{$index}}"
+              name="select-field{{$index}}"
+              ng-model="field.idDopplerField"
+              property="name"
+              id-value="idField"
+              ng-options="field.idField as field.name for field in vtex.userFields  | filter:vtex.fieldFilter(field.idDopplerField, field.DopplerFieldTypeId)"
+              ng-click="vtex.errorMessage=''"
+              class="selector field-selector"
+              ng-required="true"
+              ng-change="vtex.fieldChange($index, field.idDopplerField)"
+            >
+              <option value="" disabled="disabled">
+                {{'vtex_integration.mapping.select_field_placeholder' |
+                translate}}
+              </option>
             </select>
           </div>
         </div>
-        <div class="createCustomField-box" ng-show="$index == vtex.newField.index">
-          <input type="text" class="name" id="Name" name="Name" value="" ng-model="vtex.newField.name" maxlength="50" ng-click="vtex.newField.error=''">
-          <select id="dd-fieldTypes{{$index}}"
-                  name="select-field-type{{$index}}"
-                  ng-model="vtex.newField.dataType"
-                  ng-options="type.id as type.name for type in vtex.fieldTypes"
-                  class="selector customFieldTypeDropDown"
-                  ng-required="true"
-                  ng-disabled="true">
-          </select>
+        <div
+          class="createCustomField-box"
+          ng-show="$index == vtex.newField.index"
+        >
+          <input
+            type="text"
+            class="name"
+            id="Name"
+            name="Name"
+            value=""
+            ng-model="vtex.newField.name"
+            maxlength="50"
+            ng-click="vtex.newField.error=''"
+          />
+          <select
+            id="dd-fieldTypes{{$index}}"
+            name="select-field-type{{$index}}"
+            ng-model="vtex.newField.dataType"
+            ng-options="type.id as type.name for type in vtex.fieldTypes"
+            class="selector customFieldTypeDropDown"
+            ng-required="true"
+            ng-disabled="true"
+          ></select>
           <div class="visibility-container">
-            <div class="radio"><input type="radio" id="is-public{{$index}}" formControlName="mode{{$index}}" ng-model="vtex.newField.isPrivate" value="false" style="opacity:unset"></div><label for="is-public{{$index}}">{{'vtex_integration.mapping.new_field.public_opt' | translate}}</label>
-            <div class="radio"><input type="radio" id="is-private{{$index}}" formControlName="mode{{$index}}" ng-model="vtex.newField.isPrivate" value="true" style="opacity:unset"></div><label for="is-private{{$index}}">{{'vtex_integration.mapping.new_field.private_opt' | translate}}</label>
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-public{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="vtex.newField.isPrivate"
+                value="false"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-public{{$index}}"
+              >{{'vtex_integration.mapping.new_field.public_opt' |
+              translate}}</label
+            >
+            <div class="radio">
+              <input
+                type="radio"
+                id="is-private{{$index}}"
+                formControlName="mode{{$index}}"
+                ng-model="vtex.newField.isPrivate"
+                value="true"
+                style="opacity: unset"
+              />
+            </div>
+            <label for="is-private{{$index}}"
+              >{{'vtex_integration.mapping.new_field.private_opt' |
+              translate}}</label
+            >
           </div>
-          <div class="validationTooltip-container" ng-show="vtex.newField.error">
+          <div
+            class="validationTooltip-container"
+            ng-show="vtex.newField.error"
+          >
             <span class="validationTooltip-image"></span>
             <span class="validation-tooltip">{{ vtex.newField.error }}</span>
           </div>
-          <input type="submit" value="{{'vtex_integration.mapping.new_field.button' | translate}}" class="main_buttons_green_small submit" ng-click="vtex.createField($index)">
+          <input
+            type="submit"
+            value="{{'vtex_integration.mapping.new_field.button' | translate}}"
+            class="main_buttons_green_small submit"
+            ng-click="vtex.createField($index)"
+          />
         </div>
       </div>
     </div>
   </div>
-  <div class="dp-library margin-t-20 margin-b-20" ng-show="!!vtex.errorMessage.length">
-    <div id="messageBar" class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel">
+  <div
+    class="dp-library margin-t-20 margin-b-20"
+    ng-show="!!vtex.errorMessage.length"
+  >
+    <div
+      id="messageBar"
+      class="col-md-12 m-b-12 dp-wrap-message dp-wrap-cancel"
+    >
       <span class="dp-message-icon"></span>
       <div class="dp-content-message dp-content-full">
         <span>{{ vtex.errorMessage }}</span>
@@ -70,8 +140,11 @@
     <button ng-click="vtex.goBack()" class="button button--alternative">
       {{ 'vtex_integration.mapping.back' | translate }}
     </button>
-    <button ng-class="{'button--spinner' : vtex.isMapping}" ng-click="vtex.mapFields()"
-            class="button button--primary">
+    <button
+      ng-class="{'button--spinner' : vtex.isMapping}"
+      ng-click="vtex.mapFields()"
+      class="button button--primary"
+    >
       {{ 'vtex_integration.mapping.next' | translate }}
       <span class="icon-editor-saving hide"></span>
     </button>

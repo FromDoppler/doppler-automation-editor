@@ -3,25 +3,75 @@
 <!--dp-editor-panel-->
 <dp-editor-panel></dp-editor-panel>
 <!--dp-editor-canvas-->
-<dp-editor-canvas id="editor-canvas" class="components--center" dp-editor-zoom scalable="container-elements" ng-class="{'automation-active': isReadOnly(), 'automation-paused': isPaused()}" ng-click="loadInitialPanel($event)"></dp-editor-canvas>
+<dp-editor-canvas
+  id="editor-canvas"
+  class="components--center"
+  dp-editor-zoom
+  scalable="container-elements"
+  ng-class="{'automation-active': isReadOnly(), 'automation-paused': isPaused()}"
+  ng-click="loadInitialPanel($event)"
+></dp-editor-canvas>
 <!-- dp-editor-list-grid-->
-<dp-editor-lists-grid id="editorListsGrid" ng-if="listSelectionState === LIST_SELECTION_STATE.SIMPLE"></dp-editor-lists-grid>
+<dp-editor-lists-grid
+  id="editorListsGrid"
+  ng-if="listSelectionState === LIST_SELECTION_STATE.SIMPLE"
+></dp-editor-lists-grid>
 <!--dp-templates-->
-<dp-templates id="editorTemplate" ng-if="showTemplates && !isDynamicAutomation" privates-description="{{ 'automation_editor.templates.privates_description' | translate }}" publics-description="{{ 'automation_editor.templates.privates_description' | translate }}" select-button="true" disable-menu="true" all-templates="true"></dp-templates>
-<dp-templates id="editorTemplateDynamic" ng-if="showTemplates && isDynamicAutomation" privates-description="{{ 'automation_editor.templates.privates_description_' + automationData.automationType | translate }}" publics-description="{{ 'automation_editor.templates.privates_description_' + automationData.automationType | translate }}" select-button="true" disable-menu="true" all-templates="true"></dp-templates>
+<dp-templates
+  id="editorTemplate"
+  ng-if="showTemplates && !isDynamicAutomation"
+  privates-description="{{ 'automation_editor.templates.privates_description' | translate }}"
+  publics-description="{{ 'automation_editor.templates.privates_description' | translate }}"
+  select-button="true"
+  disable-menu="true"
+  all-templates="true"
+></dp-templates>
+<dp-templates
+  id="editorTemplateDynamic"
+  ng-if="showTemplates && isDynamicAutomation"
+  privates-description="{{ 'automation_editor.templates.privates_description_' + automationData.automationType | translate }}"
+  publics-description="{{ 'automation_editor.templates.privates_description_' + automationData.automationType | translate }}"
+  select-button="true"
+  disable-menu="true"
+  all-templates="true"
+></dp-templates>
 <!-- dp-editor-tiny-editor -->
-<dp-editor-html-editor-slider id="tinyEditor" id="tinyEditor" ng-if="showTinyEditor"></dp-editor-html-editor-slider>
+<dp-editor-html-editor-slider
+  id="tinyEditor"
+  id="tinyEditor"
+  ng-if="showTinyEditor"
+></dp-editor-html-editor-slider>
 <!--dp-editor-import-html-->
-<dp-editor-import-html class="background--white" ng-if="showImportHtml"></dp-editor-import-html>
+<dp-editor-import-html
+  class="background--white"
+  ng-if="showImportHtml"
+></dp-editor-import-html>
 <!--dp-create-list-->
-<dp-create-list id="createListTemplate" ng-if="showCreateListTemplate"></dp-create-list>
+<dp-create-list
+  id="createListTemplate"
+  ng-if="showCreateListTemplate"
+></dp-create-list>
 <!-- dp-editor-list-grid-->
-<dp-editor-lists-scheduled-grid ng-if="listSelectionState === LIST_SELECTION_STATE.MULTIPLE"></dp-editor-lists-scheduled-grid>
+<dp-editor-lists-scheduled-grid
+  ng-if="listSelectionState === LIST_SELECTION_STATE.MULTIPLE"
+></dp-editor-lists-scheduled-grid>
 <!-- dp-editor-domains-grid -->
-<dp-editor-domains-grid ng-if="domainSelectionState === DOMAINS_SELECTION_STATE.SHOWING"></dp-editor-domains-grid>
+<dp-editor-domains-grid
+  ng-if="domainSelectionState === DOMAINS_SELECTION_STATE.SHOWING"
+></dp-editor-domains-grid>
 <!-- automation types directive -->
-<dp-editor-types ng-if="showAutomationTypes" class="editor--modal"></dp-editor-types>
+<dp-editor-types
+  ng-if="showAutomationTypes"
+  class="editor--modal"
+></dp-editor-types>
 <!--dp-editor-footer-->
-<dp-editor-footer class="dp-editor-footer" ng-show="!showTemplates  && !showImportHtml || ((automationData.automationType === AUTOMATION_TYPE.SCHEDULED_DATE || automationData.automationType === AUTOMATION_TYPE.RSS_TO_EMAIL) && listSelectionState === LIST_SELECTION_STATE.NONE) "></dp-editor-footer>
+<dp-editor-footer
+  class="dp-editor-footer"
+  ng-show="!showTemplates  && !showImportHtml || ((automationData.automationType === AUTOMATION_TYPE.SCHEDULED_DATE || automationData.automationType === AUTOMATION_TYPE.RSS_TO_EMAIL) && listSelectionState === LIST_SELECTION_STATE.NONE) "
+></dp-editor-footer>
 <!-- loader -->
-<div ng-show="isProcessing()" class="loading--container loading--full components--center" dp-partial="angularjs/partials/shared/loading.html"></div>
+<div
+  ng-show="isProcessing()"
+  class="loading--container loading--full components--center"
+  dp-partial="angularjs/partials/shared/loading.html"
+></div>

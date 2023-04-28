@@ -1,53 +1,140 @@
-<h3 class="control-panel-section-title">{{ 'sms_settings.calc_credit_screen.title' | translate }}</h3>
-<p class="description text--small">{{ 'sms_settings.calc_credit_screen.subtitle' | translate }} <a target="_blank" href="{{ 'sms_settings.calc_credit_screen.help_link' | translate }}">{{ 'help_link_text' | translate }}</a>.</p>
+<h3 class="control-panel-section-title">
+  {{ 'sms_settings.calc_credit_screen.title' | translate }}
+</h3>
+<p class="description text--small">
+  {{ 'sms_settings.calc_credit_screen.subtitle' | translate }}
+  <a
+    target="_blank"
+    href="{{ 'sms_settings.calc_credit_screen.help_link' | translate }}"
+    >{{ 'help_link_text' | translate }}</a
+  >.
+</p>
 <div class="sms-dashboard--container">
-  <div class="calculator--container" ng-class="{ 'padding-t-20' : $index === 0 }" ng-repeat="country in smsSettings.estimateCountriesList" dp-on-finish-ng-repeat>
+  <div
+    class="calculator--container"
+    ng-class="{ 'padding-t-20' : $index === 0 }"
+    ng-repeat="country in smsSettings.estimateCountriesList"
+    dp-on-finish-ng-repeat
+  >
     <div class="close" ng-if="$index !== 0">
-      <span class="icon-close" ng-click="smsSettings.deleteCountryToEstimate($index)"></span>
+      <span
+        class="icon-close"
+        ng-click="smsSettings.deleteCountryToEstimate($index)"
+      ></span>
     </div>
     <div class="grid-display calculator-grid">
-        <div>
-            <label class="label label--panel">{{ 'sms_settings.calc_credit_screen.country_grid.country' | translate }}</label>
-            <dropdown
-              class="dropdown"
-              placeholder="{{smsSettings.countryPlaceholder}}"
-              id="dd-countries{{country.id}}"
-              list="smsSettings.availableCountriesToEstimate"
-              property="name"
-              id-value="regionCode"
-              ng-model="country.regionCode"
-              ng-required="true"
-              ng-disabled="smsSettings.availableCountriesToEstimate.length === 0"
-              ng-change="smsSettings.updateEstimateScreenInformation(country.regionCode);"></dropdown>
-          </div>
-          <div>
-            <label class="label label--panel">{{ 'sms_settings.calc_credit_screen.country_grid.count' | translate }}</label>
-            <input type="text" ng-blur="country.count = country.count || '0'" dp-integer-input ng-change="smsSettings.updatePrices()" class="input--text" ng-model="country.count" ng-disabled="country.regionCode === null">
-            <span class="text--small" ng-show="country.regionCode !== null">{{ 'sms_settings.calc_credit_screen.country_grid.average' | translate }} US$ {{ country.price | number:5 }}</span>
-          </div>
-          <div class="self-align-center self-justify-center"><span>{{ 'sms_settings.calc_credit_screen.country_grid.total' | translate }}</span></div>
-          <div class="self-align-center self-justify-center"><span class="price" ng-show="(country.price || 0) * country.count !== 0">US$ {{ smsSettings.getRoundedPrice((country.price || 0), country.count) | number:2 }}</span></div>
+      <div>
+        <label class="label label--panel"
+          >{{ 'sms_settings.calc_credit_screen.country_grid.country' | translate
+          }}</label
+        >
+        <dropdown
+          class="dropdown"
+          placeholder="{{smsSettings.countryPlaceholder}}"
+          id="dd-countries{{country.id}}"
+          list="smsSettings.availableCountriesToEstimate"
+          property="name"
+          id-value="regionCode"
+          ng-model="country.regionCode"
+          ng-required="true"
+          ng-disabled="smsSettings.availableCountriesToEstimate.length === 0"
+          ng-change="smsSettings.updateEstimateScreenInformation(country.regionCode);"
+        ></dropdown>
+      </div>
+      <div>
+        <label class="label label--panel"
+          >{{ 'sms_settings.calc_credit_screen.country_grid.count' | translate
+          }}</label
+        >
+        <input
+          type="text"
+          ng-blur="country.count = country.count || '0'"
+          dp-integer-input
+          ng-change="smsSettings.updatePrices()"
+          class="input--text"
+          ng-model="country.count"
+          ng-disabled="country.regionCode === null"
+        />
+        <span class="text--small" ng-show="country.regionCode !== null"
+          >{{ 'sms_settings.calc_credit_screen.country_grid.average' | translate
+          }} US$ {{ country.price | number:5 }}</span
+        >
+      </div>
+      <div class="self-align-center self-justify-center">
+        <span
+          >{{ 'sms_settings.calc_credit_screen.country_grid.total' | translate
+          }}</span
+        >
+      </div>
+      <div class="self-align-center self-justify-center">
+        <span class="price" ng-show="(country.price || 0) * country.count !== 0"
+          >US$ {{ smsSettings.getRoundedPrice((country.price || 0),
+          country.count) | number:2 }}</span
+        >
+      </div>
     </div>
   </div>
   <div class="total-price--container margin-b-20 grid-display">
     <div>
-      <a class="text--small padding-t-15" ng-click="smsSettings.addCountryToEstimate(null)" ng-class="smsSettings.isAddCountryToEstimateEnable() ? '' : 'disabled'">
+      <a
+        class="text--small padding-t-15"
+        ng-click="smsSettings.addCountryToEstimate(null)"
+        ng-class="smsSettings.isAddCountryToEstimateEnable() ? '' : 'disabled'"
+      >
         <span class="icon-add-element"></span>
-        <strong class="text-uppercase">{{ 'sms_settings.calc_credit_screen.add_country' | translate }}</strong>
+        <strong class="text-uppercase"
+          >{{ 'sms_settings.calc_credit_screen.add_country' | translate
+          }}</strong
+        >
       </a>
       <ul class="padding-t-30">
         <li>
-            <span class="sms-condition--text">&bull; {{ 'sms_settings.calc_credit_screen.legal_1' | translate }}</span>
+          <span class="sms-condition--text"
+            >&bull; {{ 'sms_settings.calc_credit_screen.legal_1' | translate
+            }}</span
+          >
         </li>
         <li>
-            <span class="sms-condition--text">&bull; {{ 'sms_settings.calc_credit_screen.legal_2_part1' | translate }} <a target="_blank" href="{{ 'sms_settings.calc_credit_screen.legal_2_link' | translate }}">{{ 'sms_settings.calc_credit_screen.legal_2_link_text' | translate }}</a> {{ 'sms_settings.calc_credit_screen.legal_2_part2' | translate }}</span>
+          <span class="sms-condition--text"
+            >&bull; {{ 'sms_settings.calc_credit_screen.legal_2_part1' |
+            translate }}
+            <a
+              target="_blank"
+              href="{{ 'sms_settings.calc_credit_screen.legal_2_link' | translate }}"
+              >{{ 'sms_settings.calc_credit_screen.legal_2_link_text' |
+              translate }}</a
+            >
+            {{ 'sms_settings.calc_credit_screen.legal_2_part2' | translate
+            }}</span
+          >
         </li>
       </ul>
-      <p class="padding-t-30"><strong>{{ 'sms_settings.calc_credit_screen.contact_us' | translate }} <a target="_blank" href="{{ 'sms_settings.calc_credit_screen.contact_us_link' | translate }}">{{ 'sms_settings.calc_credit_screen.contact_us_link_text' | translate }}</a></strong></p>
+      <p class="padding-t-30">
+        <strong
+          >{{ 'sms_settings.calc_credit_screen.contact_us' | translate }}
+          <a
+            target="_blank"
+            href="{{ 'sms_settings.calc_credit_screen.contact_us_link' | translate }}"
+            >{{ 'sms_settings.calc_credit_screen.contact_us_link_text' |
+            translate }}</a
+          ></strong
+        >
+      </p>
     </div>
     <div class="self-align-center self-justify-right">
-      <p class="total-price-text margin-t-20"><strong>{{ 'sms_settings.calc_credit_screen.total_price' | translate }}</strong></p>
-      <p class="text--small" ng-class="{ 'red-color-font' : smsSettings.creditToBuy < smsSettings.minPurchase,  'light-grey-color-font' : smsSettings.creditToBuy > smsSettings.minPurchase}">{{ 'sms_settings.calc_credit_screen.min_purchase' | translate }}: US$ {{smsSettings.minPurchase | number:2}}</p>
+      <p class="total-price-text margin-t-20">
+        <strong
+          >{{ 'sms_settings.calc_credit_screen.total_price' | translate
+          }}</strong
+        >
+      </p>
+      <p
+        class="text--small"
+        ng-class="{ 'red-color-font' : smsSettings.creditToBuy < smsSettings.minPurchase,  'light-grey-color-font' : smsSettings.creditToBuy > smsSettings.minPurchase}"
+      >
+        {{ 'sms_settings.calc_credit_screen.min_purchase' | translate }}: US$
+        {{smsSettings.minPurchase | number:2}}
+      </p>
     </div>
     <div class="self-align-center self-justify-right margin-right-15">
       <span class="total-price">

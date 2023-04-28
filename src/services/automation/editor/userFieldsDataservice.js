@@ -1,13 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('dopplerApp.automation.editor')
     .service('userFieldsDataservice', userFieldsDataservice);
 
-  userFieldsDataservice.$inject = [
-    '$http'
-  ];
+  userFieldsDataservice.$inject = ['$http'];
 
   function userFieldsDataservice($http) {
     var userFields = [];
@@ -21,27 +19,27 @@
       getDeletedFieldsByType: getDeletedFieldsByType,
       getPhoneCustoms: getPhoneCustoms,
       load: load,
-      sendSmsTest: sendSmsTest
+      sendSmsTest: sendSmsTest,
     };
 
     return service;
 
     function load(fields) {
-      userFields = _.map(fields, function(field) {
+      userFields = _.map(fields, function (field) {
         return {
           id: field.IdField,
           type: field.DataType,
           name: field.IsBasicField ? field.SampleValue : field.Name,
           embed: field.Embed,
           isBasic: field.IsBasicField,
-          label: field.Name
+          label: field.Name,
         };
       });
       userFields = _.sortBy(userFields, 'id');
     }
 
     function findField(idField) {
-      return _.find(userFields, function(field) {
+      return _.find(userFields, function (field) {
         return field.id === idField;
       });
     }
@@ -51,13 +49,13 @@
     }
 
     function getCustomFields() {
-      return _.filter(userFields, function(field) {
+      return _.filter(userFields, function (field) {
         return !field.isBasic;
       });
     }
 
     function getFieldsByType(type) {
-      return _.filter(userFields, function(field) {
+      return _.filter(userFields, function (field) {
         return field.type === type;
       });
     }
@@ -68,9 +66,12 @@
 
     function getDeletedField(fieldInUse, fieldsToCompare) {
       var fieldsArray = fieldsToCompare || userFields;
-      return fieldInUse && _.findIndex(fieldsArray, function(dateField) {
-        return dateField.id === fieldInUse.id;
-      });
+      return (
+        fieldInUse &&
+        _.findIndex(fieldsArray, function (dateField) {
+          return dateField.id === fieldInUse.id;
+        })
+      );
     }
 
     function getDeletedFieldsByType(fieldsInUse, type) {
@@ -78,12 +79,12 @@
       var deletedFields = [];
 
       if (fieldsToCompare.length) {
-        _.each(fieldsInUse, function(fieldInUse, index) {
+        _.each(fieldsInUse, function (fieldInUse, index) {
           var fieldIndex = getDeletedField(fieldInUse, fieldsToCompare);
           if (fieldIndex === -1) {
             deletedFields.push({
               instance: fieldInUse,
-              index: index
+              index: index,
             });
           }
         });
@@ -93,15 +94,17 @@
     }
 
     function getPhoneCustoms() {
-      return $http.get('/Automation/Automation/GetPhoneCustoms').then(function(response) {
-        return _.map(response.data.phonesFields, function(field) {
-          return {
-            id: field.idField,
-            type: field.type,
-            name: field.name
-          };
+      return $http
+        .get('/Automation/Automation/GetPhoneCustoms')
+        .then(function (response) {
+          return _.map(response.data.phonesFields, function (field) {
+            return {
+              id: field.idField,
+              type: field.type,
+              name: field.name,
+            };
+          });
         });
-      });
     }
 
     function sendSmsTest(data) {

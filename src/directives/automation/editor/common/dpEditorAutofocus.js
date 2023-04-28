@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,15 +10,15 @@
       restrict: 'A',
       link: link,
       scope: {
-        autofocus: '=dpEditorAutofocus'
-      }
+        autofocus: '=dpEditorAutofocus',
+      },
     };
 
     return directive;
 
     function link(scope, element) {
       if (scope.autofocus) {
-        $timeout(function() {
+        $timeout(function () {
           element[0].focus();
         });
       }

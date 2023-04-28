@@ -9,7 +9,7 @@ addons:
 
 cache:
   directories:
-    - "$HOME/.npm"
+    - '$HOME/.npm'
 
 install:
   - npm install

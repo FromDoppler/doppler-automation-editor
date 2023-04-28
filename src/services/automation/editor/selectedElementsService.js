@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -23,11 +23,10 @@
       addComponentElement: addComponentElement,
       getComponentElement: getComponentElement,
       scrollIntoElement: scrollIntoElement,
-      scrollIntoProperty: scrollIntoProperty
+      scrollIntoProperty: scrollIntoProperty,
     };
 
     return service;
-
 
     //Returns the selected component
     function getSelectedComponent() {
@@ -76,7 +75,10 @@
     }
 
     function scrollIntoElement(uid) {
-      if (componentsElements[uid] && !isElementVisibleInCanvas(componentsElements[uid])) {
+      if (
+        componentsElements[uid] &&
+        !isElementVisibleInCanvas(componentsElements[uid])
+      ) {
         componentsElements[uid].scrollIntoView(true);
       }
     }
@@ -91,10 +93,17 @@
     }
 
     function isElementVisibleInCanvas(element) {
-      var canvasRect = document.querySelector('dp-editor-canvas').getBoundingClientRect();
-      var elementRect = element.querySelector('.component--container').getBoundingClientRect();
+      var canvasRect = document
+        .querySelector('dp-editor-canvas')
+        .getBoundingClientRect();
+      var elementRect = element
+        .querySelector('.component--container')
+        .getBoundingClientRect();
 
-      return elementRect.top > canvasRect.top && elementRect.bottom < canvasRect.bottom;
+      return (
+        elementRect.top > canvasRect.top &&
+        elementRect.bottom < canvasRect.bottom
+      );
     }
   }
 })();

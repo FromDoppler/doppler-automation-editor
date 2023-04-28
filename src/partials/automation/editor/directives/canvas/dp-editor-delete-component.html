@@ -1,4 +1,15 @@
 <span class="icon-delete" ng-click="toggleConfirmation(true)"></span>
-<div class="delete-element--confirmation" ng-class="{'active' : showConfirmation}">
-  <span ng-click="toggleConfirmation(false)">{{ 'actions.cancel' | translate }}</span> | <span class="delete" ng-click="toggleConfirmation(false); onDeleteComponent();">{{ 'actions.delete' | translate }}</span>
+<div
+  class="delete-element--confirmation"
+  ng-class="{'active' : showConfirmation}"
+>
+  <span ng-click="toggleConfirmation(false)"
+    >{{ 'actions.cancel' | translate }}</span
+  >
+  |
+  <span
+    class="delete"
+    ng-click="toggleConfirmation(false); onDeleteComponent();"
+    >{{ 'actions.delete' | translate }}</span
+  >
 </div>

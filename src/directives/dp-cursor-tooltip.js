@@ -1,28 +1,23 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('tooltip', tooltip);
+  angular.module('dopplerApp').directive('tooltip', tooltip);
 
   function tooltip() {
-
     var directive = {
       restrict: 'A',
-      link: link
+      link: link,
     };
 
     return directive;
 
     function link(scope, element) {
-      element[0].parentElement.addEventListener('mousemove', function(e) {
-      //find X & Y coodrinates
+      element[0].parentElement.addEventListener('mousemove', function (e) {
+        //find X & Y coodrinates
         var xy = getEventOffsetXY(e);
         element[0].style.top = xy[1] + 'px';
         element[0].style.left = xy[0] + 10 + 'px';
       });
-
-
 
       function getEventOffsetXY(evt) {
         if (evt.offsetX !== null) {
@@ -31,7 +26,7 @@
 
         var obj = evt.target || evt.srcElement;
         setPageTopLeft(obj);
-        return [(evt.clientX - obj.pageLeft), (evt.clientY - obj.pageTop)];
+        return [evt.clientX - obj.pageLeft, evt.clientY - obj.pageTop];
       }
 
       function setPageTopLeft(o) {
@@ -47,9 +42,7 @@
 
         obj.pageTop = top;
         obj.pageLeft = left;
-
       }
     }
   }
-
 })();

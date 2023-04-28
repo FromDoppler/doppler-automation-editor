@@ -1,111 +1,326 @@
-<section ng-if="!totalTasks" class="section--content background--white section--grid-empty flex-grid-v-center">
+<section
+  ng-if="!totalTasks"
+  class="section--content background--white section--grid-empty flex-grid-v-center"
+>
   <div class="wrapper text--center components--center wrapper--default">
-    <img src="../../../images/automation-type-5.svg">
+    <img src="../../../images/automation-type-5.svg" />
     <h2>{{ 'automation_grid_emtpy.title' | translate }}</h2>
-    <p class="description">{{ 'automation_grid_emtpy.description' | translate }} <br /><br /><strong>{{ 'automation_grid_emtpy.description2' | translate }}</strong> <br /><a class="link--default"  href="{{ 'automation_grid_emtpy.link_url' | translate }}" target="_blank">{{ 'automation_grid_emtpy.link_text' | translate }}</a></p>
-    <a target="_self" href="/Automation/EditorConfig?idTaskType=0" class="button button--primary">{{ 'automation_grid_header.button' | translate }}</a>
+    <p class="description">
+      {{ 'automation_grid_emtpy.description' | translate }} <br /><br /><strong
+        >{{ 'automation_grid_emtpy.description2' | translate }}</strong
+      >
+      <br /><a
+        class="link--default"
+        href="{{ 'automation_grid_emtpy.link_url' | translate }}"
+        target="_blank"
+        >{{ 'automation_grid_emtpy.link_text' | translate }}</a
+      >
+    </p>
+    <a
+      target="_self"
+      href="/Automation/EditorConfig?idTaskType=0"
+      class="button button--primary"
+      >{{ 'automation_grid_header.button' | translate }}</a
+    >
   </div>
 </section>
 <div ng-if="totalTasks">
   <div class="dp-library">
     <header class="hero-banner">
       <div class="dp-container">
-      <div class="dp-rowflex">
-       <div class="col-sm-12 col-md-12 col-lg-12">
-        <h2>{{ 'automation_grid_header.title' | translate }}</h2>
-       </div>
-       <div class="col-sm-7">
-        <p> {{ 'automation_grid_header.description' | translate }}
-          <span ng-if="totalTasks !== 0">
-            {{ 'automation_grid_header.quantity_part1' | translate }}
-            <strong>
-            {{ totalTasks }}
-            {{ totalTasks != 1 ? 'automation_grid_header.quantity_part2' : 'automation_grid_header.quantity_campaign' | translate }}
-            </strong>
-          </span>
-          <span ng-if="totalTasks === 0">
-            {{ 'automation_grid_header.empty_part1' | translate }}
-            <strong>
-            {{ 'automation_grid_header.empty_part2' | translate }}
-            </strong>
-          </span>
-          </p>
-       </div>
-       <div class="col-sm-5 text-align--right">
-        <a target="_self" href="/Automation/EditorConfig?idTaskType=0" class="dp-button button-medium primary-green">{{ 'automation_grid_header.button' | translate }}</a>
-       </div>
+        <div class="dp-rowflex">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <h2>{{ 'automation_grid_header.title' | translate }}</h2>
+          </div>
+          <div class="col-sm-7">
+            <p>
+              {{ 'automation_grid_header.description' | translate }}
+              <span ng-if="totalTasks !== 0">
+                {{ 'automation_grid_header.quantity_part1' | translate }}
+                <strong>
+                  {{ totalTasks }} {{ totalTasks != 1 ?
+                  'automation_grid_header.quantity_part2' :
+                  'automation_grid_header.quantity_campaign' | translate }}
+                </strong>
+              </span>
+              <span ng-if="totalTasks === 0">
+                {{ 'automation_grid_header.empty_part1' | translate }}
+                <strong>
+                  {{ 'automation_grid_header.empty_part2' | translate }}
+                </strong>
+              </span>
+            </p>
+          </div>
+          <div class="col-sm-5 text-align--right">
+            <a
+              target="_self"
+              href="/Automation/EditorConfig?idTaskType=0"
+              class="dp-button button-medium primary-green"
+              >{{ 'automation_grid_header.button' | translate }}</a
+            >
+          </div>
+        </div>
       </div>
-      </div>
-      </header>
+    </header>
   </div>
-    <div class="grid--container">
+  <div class="grid--container">
     <div class="wrapper">
       <div class="search-container">
-        <input class="input--text input--search" ng-model="gridModel.searchText" type="text" placeholder="{{ 'grid.search' | translate }}" ng-change="gridModel.search(gridModel.searchText)"/>
+        <input
+          class="input--text input--search"
+          ng-model="gridModel.searchText"
+          type="text"
+          placeholder="{{ 'grid.search' | translate }}"
+          ng-change="gridModel.search(gridModel.searchText)"
+        />
         <span class="icon-search" ng-show="!gridModel.searchText"></span>
-        <span class="icon-close" ng-show="gridModel.searchText" ng-click="gridModel.cleanSearch()"></span>
+        <span
+          class="icon-close"
+          ng-show="gridModel.searchText"
+          ng-click="gridModel.cleanSearch()"
+        ></span>
       </div>
-      <table class="grid--default relative" infinite-scroll="gridModel.onScroll" infinite-scroll-distance="200" ng-show="gridModel.displayed.length > 0">
+      <table
+        class="grid--default relative"
+        infinite-scroll="gridModel.onScroll"
+        infinite-scroll-distance="200"
+        ng-show="gridModel.displayed.length > 0"
+      >
         <thead>
           <tr>
-            <th id="StatusId" ng-class="{'active' : gridModel.currentSort == 'STATUS'}"><a ng-click="gridModel.sort('STATUS')">{{ 'grid.headers.status' | translate }} <span ng-class="gridModel.setArrowClass('STATUS')"></span></a></th>
-            <th id="Type" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'TYPE'" ng-class="{'active' : gridModel.currentSort == 'TYPE'}"><a ng-click="gridModel.sort('TYPE')"> {{ 'grid.headers.type' | translate }} <span ng-class="gridModel.setArrowClass('TYPE')"></span></a></th>
-            <th id="Name" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'NAME'" ng-class="{'active' : gridModel.currentSort == 'NAME'}"><a ng-click="gridModel.sort('NAME')">{{ 'grid.headers.name' | translate }} <span ng-class="gridModel.setArrowClass('NAME')"></span></a></th>
-            <th id="CreationDate" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'CREATION_DATE'" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}"><a ng-click="gridModel.sort('CREATION_DATE')">{{ 'grid.headers.creation_date' | translate }} <span ng-class="gridModel.setArrowClass('CREATION_DATE')"></span></a></th>
-            <th id="Actions"><span>{{ 'grid.headers.actions' | translate }}</span></th>
+            <th
+              id="StatusId"
+              ng-class="{'active' : gridModel.currentSort == 'STATUS'}"
+            >
+              <a ng-click="gridModel.sort('STATUS')"
+                >{{ 'grid.headers.status' | translate }}
+                <span ng-class="gridModel.setArrowClass('STATUS')"></span
+              ></a>
+            </th>
+            <th
+              id="Type"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'TYPE'"
+              ng-class="{'active' : gridModel.currentSort == 'TYPE'}"
+            >
+              <a ng-click="gridModel.sort('TYPE')">
+                {{ 'grid.headers.type' | translate }}
+                <span ng-class="gridModel.setArrowClass('TYPE')"></span
+              ></a>
+            </th>
+            <th
+              id="Name"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'NAME'"
+              ng-class="{'active' : gridModel.currentSort == 'NAME'}"
+            >
+              <a ng-click="gridModel.sort('NAME')"
+                >{{ 'grid.headers.name' | translate }}
+                <span ng-class="gridModel.setArrowClass('NAME')"></span
+              ></a>
+            </th>
+            <th
+              id="CreationDate"
+              ng-mouseleave="columnHover = ''"
+              ng-mouseover="columnHover = 'CREATION_DATE'"
+              ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}"
+            >
+              <a ng-click="gridModel.sort('CREATION_DATE')"
+                >{{ 'grid.headers.creation_date' | translate }}
+                <span ng-class="gridModel.setArrowClass('CREATION_DATE')"></span
+              ></a>
+            </th>
+            <th id="Actions">
+              <span>{{ 'grid.headers.actions' | translate }}</span>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdScheduledTask}}" delete-message="{{delete-id==row.IdScheduledTask}}">
-            <td colspan="3" class="delete-confirmation" ng-cloak ng-show="row.deleting">
-              <span class="icon-warning"></span><span ng-bind-html="'grid_messages.delete_message' | translate:{ 'campaignName' : row.Name } "></span>
+          <tr
+            ng-repeat="row in gridModel.displayed"
+            id="tr-{{row.IdScheduledTask}}"
+            delete-message="{{delete-id==row.IdScheduledTask}}"
+          >
+            <td
+              colspan="3"
+              class="delete-confirmation"
+              ng-cloak
+              ng-show="row.deleting"
+            >
+              <span class="icon-warning"></span
+              ><span
+                ng-bind-html="'grid_messages.delete_message' | translate:{ 'campaignName' : row.Name } "
+              ></span>
             </td>
-            <td colspan="2" ng-cloak class="delete-confirmation right" ng-show="row.deleting"><a id="cancel-delete-{{$index}}" ng-cloak ng-click="row.deleting=false" > {{ 'actions.cancel' | translate }} </a> | <a id="accept-delete-{{$index}}" ng-cloak ng-click="deleteRowConfirmed(row)">{{ 'actions.delete' | translate }}</a> </td>
+            <td
+              colspan="2"
+              ng-cloak
+              class="delete-confirmation right"
+              ng-show="row.deleting"
+            >
+              <a
+                id="cancel-delete-{{$index}}"
+                ng-cloak
+                ng-click="row.deleting=false"
+              >
+                {{ 'actions.cancel' | translate }}
+              </a>
+              |
+              <a
+                id="accept-delete-{{$index}}"
+                ng-cloak
+                ng-click="deleteRowConfirmed(row)"
+                >{{ 'actions.delete' | translate }}</a
+              >
+            </td>
 
-            <td colspan="3" class="delete-confirmation" ng-cloak ng-show="row.cfDeleted">
-              <span class="icon-warning"></span><span ng-bind-html="'grid_messages.custom_field_deleted' | translate "></span>
+            <td
+              colspan="3"
+              class="delete-confirmation"
+              ng-cloak
+              ng-show="row.cfDeleted"
+            >
+              <span class="icon-warning"></span
+              ><span
+                ng-bind-html="'grid_messages.custom_field_deleted' | translate "
+              ></span>
             </td>
-            <td colspan="2" ng-cloak class="delete-confirmation right" ng-show="row.cfDeleted"><a id="cancel-delete-{{$index}}" ng-cloak ng-click="row.cfDeleted=false" > {{ 'actions.cancel' | translate }} </a> | <a id="accept-delete-{{$index}}" ng-cloak href="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}"> {{ 'actions.edit' | translate }}</a> </td>
+            <td
+              colspan="2"
+              ng-cloak
+              class="delete-confirmation right"
+              ng-show="row.cfDeleted"
+            >
+              <a
+                id="cancel-delete-{{$index}}"
+                ng-cloak
+                ng-click="row.cfDeleted=false"
+              >
+                {{ 'actions.cancel' | translate }}
+              </a>
+              |
+              <a
+                id="accept-delete-{{$index}}"
+                ng-cloak
+                href="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}"
+              >
+                {{ 'actions.edit' | translate }}</a
+              >
+            </td>
 
             <td class="status-column" ng-show="!row.deleting && !row.cfDeleted">
-              <div data-static-tooltip="{{getStatusText(row)}}" class="inline-block">
+              <div
+                data-static-tooltip="{{getStatusText(row)}}"
+                class="inline-block"
+              >
                 <img ng-src="/images/status-{{getImageText(row)}}.svg" />
               </div>
             </td>
-            <td class="type-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'TYPE'}"><span class="task-type-label">{{row.Type}}</span></td>
-            <td class="name-column dp-library" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'NAME'}">
+            <td
+              class="type-column"
+              ng-show="!row.deleting && !row.cfDeleted"
+              ng-class="{'active' : gridModel.currentSort == 'TYPE'}"
+            >
+              <span class="task-type-label">{{row.Type}}</span>
+            </td>
+            <td
+              class="name-column dp-library"
+              ng-show="!row.deleting && !row.cfDeleted"
+              ng-class="{'active' : gridModel.currentSort == 'NAME'}"
+            >
               <div class="dp-icon-wrapper">
-                <span><ellipsis-with-tooltip text="row.Name" url="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}"></ellipsis-with-tooltip></span>
-                <div ng-if="row.IsAssociatedToBlockedList" class="tooltiptext dp-tooltip-container">
-                  <span class="dp-icon-blocked" aria-label="{{ 'automation_grid_body.blocked_list' | translate }}">{{ 'automation_grid_body.blocked_list' | translate }}</span>
+                <span
+                  ><ellipsis-with-tooltip
+                    text="row.Name"
+                    url="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}"
+                  ></ellipsis-with-tooltip
+                ></span>
+                <div
+                  ng-if="row.IsAssociatedToBlockedList"
+                  class="tooltiptext dp-tooltip-container"
+                >
+                  <span
+                    class="dp-icon-blocked"
+                    aria-label="{{ 'automation_grid_body.blocked_list' | translate }}"
+                    >{{ 'automation_grid_body.blocked_list' | translate }}</span
+                  >
                   <div class="dp-tooltip-top blocked-list-tooltip">
-                    <span>{{ 'automation_grid_body.blocked_list_tooltip' | translate }} <a class="color--green" href="{{ 'automation_grid_body.blocked_list_tooltip_link_url' | translate }}">{{ 'automation_grid_body.blocked_list_tooltip_link_text' | translate }}</a></span>
+                    <span
+                      >{{ 'automation_grid_body.blocked_list_tooltip' |
+                      translate }}
+                      <a
+                        class="color--green"
+                        href="{{ 'automation_grid_body.blocked_list_tooltip_link_url' | translate }}"
+                        >{{
+                        'automation_grid_body.blocked_list_tooltip_link_text' |
+                        translate }}</a
+                      ></span
+                    >
                   </div>
                 </div>
               </div>
             </td>
-            <td class="date-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}">{{row.CreationDate | date: gridModel.dateFormat}}</td>
+            <td
+              class="date-column"
+              ng-show="!row.deleting && !row.cfDeleted"
+              ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}"
+            >
+              {{row.CreationDate | date: gridModel.dateFormat}}
+            </td>
 
-            <td class="actions-column" ng-show="!row.deleting && !row.cfDeleted">
+            <td
+              class="actions-column"
+              ng-show="!row.deleting && !row.cfDeleted"
+            >
               <div class="icons--container">
-                <span ng-show="{{row.StatusId !== AUTOMATION_STATE.DRAFT}}" data-static-tooltip="{{ 'automation_grid_reports' | translate}}">
-                  <a target="_self" class="icon-grid-reports" id="reports-{{row.IdScheduledTask}}" href="/Automation/ReportTask/Index?showAll=true&idScheduledTask={{row.IdScheduledTask}}&eventType={{row.EventType}}"></a>
+                <span
+                  ng-show="{{row.StatusId !== AUTOMATION_STATE.DRAFT}}"
+                  data-static-tooltip="{{ 'automation_grid_reports' | translate}}"
+                >
+                  <a
+                    target="_self"
+                    class="icon-grid-reports"
+                    id="reports-{{row.IdScheduledTask}}"
+                    href="/Automation/ReportTask/Index?showAll=true&idScheduledTask={{row.IdScheduledTask}}&eventType={{row.EventType}}"
+                  ></a>
                 </span>
-                <span data-static-tooltip="{{ (row.IsEnableToReplicate ? 'actions.replicate_automation' : 'actions.replicate_automation_disabled') | translate }}" ng-show="replicateAutomationEnabled">
-                  <a class="icon-duplicate" ng-click="openReplicationPopup(row.IdScheduledTask, row.AutomationTaskType)" id="duplicate-{{row.IdScheduledTask}}" ng-class="{ 'disabled': !row.IsEnableToReplicate }"></a>
+                <span
+                  data-static-tooltip="{{ (row.IsEnableToReplicate ? 'actions.replicate_automation' : 'actions.replicate_automation_disabled') | translate }}"
+                  ng-show="replicateAutomationEnabled"
+                >
+                  <a
+                    class="icon-duplicate"
+                    ng-click="openReplicationPopup(row.IdScheduledTask, row.AutomationTaskType)"
+                    id="duplicate-{{row.IdScheduledTask}}"
+                    ng-class="{ 'disabled': !row.IsEnableToReplicate }"
+                  ></a>
                 </span>
                 <span data-static-tooltip="{{ 'actions.edit' | translate }}">
-                  <a target="_self" class="icon-grid-edit" ng-href="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}" id="edit-{{row.IdScheduledTask}}"></a>
+                  <a
+                    target="_self"
+                    class="icon-grid-edit"
+                    ng-href="/Automation/EditorConfig?idScheduledTask={{row.IdScheduledTask}}&automationType={{row.EventType}}"
+                    id="edit-{{row.IdScheduledTask}}"
+                  ></a>
                 </span>
-                <span data-static-tooltip="{{ 'actions.delete' | translate }}" class="to-left">
-                  <a id="delete-{{row.IdScheduledTask}}" ng-click="disableDeletedRows(); row.deleting=true" ><img src="../../../images/grid-delete.svg" /></a>
+                <span
+                  data-static-tooltip="{{ 'actions.delete' | translate }}"
+                  class="to-left"
+                >
+                  <a
+                    id="delete-{{row.IdScheduledTask}}"
+                    ng-click="disableDeletedRows(); row.deleting=true"
+                    ><img src="../../../images/grid-delete.svg"
+                  /></a>
                 </span>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
-      <div class="no-search-results" ng-show="gridModel.displayed.length == 0"> {{ 'empty_search' | translate }} </div>
+      <div class="no-search-results" ng-show="gridModel.displayed.length == 0">
+        {{ 'empty_search' | translate }}
+      </div>
     </div>
   </div>
 </div>

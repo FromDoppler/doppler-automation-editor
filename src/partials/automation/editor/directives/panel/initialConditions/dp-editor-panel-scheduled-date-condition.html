@@ -2,52 +2,124 @@
   <div class="dp-wrap-message dp-wrap-info">
     <span class="dp-message-icon"></span>
     <div class="dp-content-message">
-      <p>{{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}</p>
+      <p>
+        {{'automation_editor.sidebar.replicaSetinitConditioMsg' | translate}}
+      </p>
     </div>
   </div>
 </div>
 <div>
-  <p class="title">{{ 'automation_editor.sidebar.scheduled_date_title' | translate }}</p>
+  <p class="title">
+    {{ 'automation_editor.sidebar.scheduled_date_title' | translate }}
+  </p>
 
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': selectedComponent.frequency, 'selected': selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK}" ng-click="setFrequency(FREQUENCY_TYPE.DAY_WEEK)">
-    <label class="frequency-text">{{ 'automation_editor.sidebar.scheduled_date_day_week_title' | translate }}</label>
-    <p class="frequency-text" ng-if="!selectedComponent.frequency"> {{ 'automation_editor.sidebar.scheduled_date_day_week_description' | translate }} </p>
-    <span class="icon-check" ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK"></span>
+  <div
+    class="frequency--selector disable--toggler"
+    ng-class="{'condensed': selectedComponent.frequency, 'selected': selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK}"
+    ng-click="setFrequency(FREQUENCY_TYPE.DAY_WEEK)"
+  >
+    <label class="frequency-text"
+      >{{ 'automation_editor.sidebar.scheduled_date_day_week_title' | translate
+      }}</label
+    >
+    <p class="frequency-text" ng-if="!selectedComponent.frequency">
+      {{ 'automation_editor.sidebar.scheduled_date_day_week_description' |
+      translate }}
+    </p>
+    <span
+      class="icon-check"
+      ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK"
+    ></span>
   </div>
 
-  <div class="frequency--selector disable--toggler"  ng-class="{'condensed': selectedComponent.frequency, 'selected': selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH}" ng-click="setFrequency(FREQUENCY_TYPE.DAY_MONTH)">
-    <label class="frequency-text">{{ 'automation_editor.sidebar.scheduled_date_day_month_title' | translate }}</label>
-    <p class="frequency-text" ng-if="!selectedComponent.frequency"> {{ 'automation_editor.sidebar.scheduled_date_day_month_description' | translate }} </p>
-    <span class="icon-check" ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH"></span>
+  <div
+    class="frequency--selector disable--toggler"
+    ng-class="{'condensed': selectedComponent.frequency, 'selected': selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH}"
+    ng-click="setFrequency(FREQUENCY_TYPE.DAY_MONTH)"
+  >
+    <label class="frequency-text"
+      >{{ 'automation_editor.sidebar.scheduled_date_day_month_title' | translate
+      }}</label
+    >
+    <p class="frequency-text" ng-if="!selectedComponent.frequency">
+      {{ 'automation_editor.sidebar.scheduled_date_day_month_description' |
+      translate }}
+    </p>
+    <span
+      class="icon-check"
+      ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH"
+    ></span>
   </div>
 
-  <div class="frequency--selector disable--toggler"  ng-class="{'condensed': selectedComponent.frequency, 'selected': selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR}" ng-click="setFrequency(FREQUENCY_TYPE.DAY_YEAR)">
-    <label class="frequency-text">{{ 'automation_editor.sidebar.scheduled_date_day_year_title' | translate }}</label>
-    <p class="frequency-text" ng-if="!selectedComponent.frequency"> {{ 'automation_editor.sidebar.scheduled_date_day_year_description' | translate }} </p>
-    <span class="icon-check" ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR"></span>
+  <div
+    class="frequency--selector disable--toggler"
+    ng-class="{'condensed': selectedComponent.frequency, 'selected': selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR}"
+    ng-click="setFrequency(FREQUENCY_TYPE.DAY_YEAR)"
+  >
+    <label class="frequency-text"
+      >{{ 'automation_editor.sidebar.scheduled_date_day_year_title' | translate
+      }}</label
+    >
+    <p class="frequency-text" ng-if="!selectedComponent.frequency">
+      {{ 'automation_editor.sidebar.scheduled_date_day_year_description' |
+      translate }}
+    </p>
+    <span
+      class="icon-check"
+      ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR"
+    ></span>
   </div>
   <!-- day week frequency -->
   <div ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK">
-    <div class="frequency--panel" >
-      <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_week_days_title' | translate }}</p>
+    <div class="frequency--panel">
+      <p class="text">
+        {{ 'automation_editor.sidebar.scheduled_date_select_week_days_title' |
+        translate }}
+      </p>
       <div class="day--selector disable--toggler" ng-repeat="day in weekDays">
-        <input class="check-custom" id="check{{day.value}}" type="checkbox"
+        <input
+          class="check-custom"
+          id="check{{day.value}}"
+          type="checkbox"
           ng-class="{'checked': day.selected}"
           ng-model="day.selected"
           ng-change="onDayWeekSelected(day)"
-          ng-disabled="isReadOnly();"/>
-        <label ng-click="day.selected = !day.selected; onDayWeekSelected(day);"></label>
-        <label class="day" for="check{{day.value}}">{{day.label}}</label>        
+          ng-disabled="isReadOnly();"
+        />
+        <label
+          ng-click="day.selected = !day.selected; onDayWeekSelected(day);"
+        ></label>
+        <label class="day" for="check{{day.value}}">{{day.label}}</label>
       </div>
     </div>
   </div>
   <!-- day month frequency -->
   <div ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH">
-    <div class="frequency--panel" >
-      <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_month_day_title' | translate }}</p>
-      <dp-editor-dropdown class="dropdown dropdown--full" id="dayMonth" name="dayMonth" property="name" options="dayNumberOptions" label="dayMonthSelected.label" on-select-option="onFrequencyAttributeSelected('day', option.value)" value-selected="dayMonthSelected.value" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-      <span class="tip">{{ 'automation_editor.sidebar.scheduled_date_select_month_day_tip' | translate }}</span>
-      <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
+    <div class="frequency--panel">
+      <p class="text">
+        {{ 'automation_editor.sidebar.scheduled_date_select_month_day_title' |
+        translate }}
+      </p>
+      <dp-editor-dropdown
+        class="dropdown dropdown--full"
+        id="dayMonth"
+        name="dayMonth"
+        property="name"
+        options="dayNumberOptions"
+        label="dayMonthSelected.label"
+        on-select-option="onFrequencyAttributeSelected('day', option.value)"
+        value-selected="dayMonthSelected.value"
+        ng-disabled="isReadOnly();"
+      ></dp-editor-dropdown>
+      <span class="tip"
+        >{{ 'automation_editor.sidebar.scheduled_date_select_month_day_tip' |
+        translate }}</span
+      >
+      <span
+        class="read-only--tooltip positive--alignment"
+        ng-show="isReadOnly();"
+        >{{'validation_messages.read_only_input' | translate }}</span
+      >
     </div>
   </div>
   <!-- day year frequency -->
@@ -55,48 +127,123 @@
     <!-- custom fields -->
     <form id="customFieldForm" name="customFieldForm">
       <div class="frequency--panel">
-        <p class="text">{{'automation_editor.sidebar.scheduled_date_select_custom_field' | translate}}</p>
-        <div class="frequency--custom-field" ng-repeat="field in selectedComponent.frequency.customFields track by $index">
+        <p class="text">
+          {{'automation_editor.sidebar.scheduled_date_select_custom_field' |
+          translate}}
+        </p>
+        <div
+          class="frequency--custom-field"
+          ng-repeat="field in selectedComponent.frequency.customFields track by $index"
+        >
           <div class="item">
-            <dp-editor-dropdown class="dropdown dropdown--full" id="customField{{$index}}" name="customField{{$index}}" property="customField{{$index}}"
+            <dp-editor-dropdown
+              class="dropdown dropdown--full"
+              id="customField{{$index}}"
+              name="customField{{$index}}"
+              property="customField{{$index}}"
               ng-class="{'hasErrors': customFieldForm.customField{{$index}}.$invalid}"
               ng-model="field"
               options="availableDateFields"
               label="field.label"
               on-select-option="onCustomFieldSelected(option, field, $index)"
               value-selected="field"
-              ng-disabled="isReadOnly();">
+              ng-disabled="isReadOnly();"
+            >
             </dp-editor-dropdown>
-            <span class="icon-delete" ng-class="{'disabled' : selectedComponent.frequency.customFields.length === 1 || isReadOnly()}" ng-click="onCustomFieldRemoved(field)"></span>
-            <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
+            <span
+              class="icon-delete"
+              ng-class="{'disabled' : selectedComponent.frequency.customFields.length === 1 || isReadOnly()}"
+              ng-click="onCustomFieldRemoved(field)"
+            ></span>
+            <span class="read-only--tooltip" ng-show="isReadOnly();"
+              >{{'validation_messages.read_only_input' | translate }}</span
+            >
           </div>
-          <div ng-messages="customFieldForm['customField'+$index].$error" class="error-messages--container" >
-              <div ng-message="deletedField" class="error">{{ 'validation_messages.inexistent_field' | translate }}</div>
+          <div
+            ng-messages="customFieldForm['customField'+$index].$error"
+            class="error-messages--container"
+          >
+            <div ng-message="deletedField" class="error">
+              {{ 'validation_messages.inexistent_field' | translate }}
+            </div>
           </div>
         </div>
-        <p class="link--default text--small add-custom-field disable--toggler" ng-show="availableDateFields.length" ng-click="addNewCustomField()">
+        <p
+          class="link--default text--small add-custom-field disable--toggler"
+          ng-show="availableDateFields.length"
+          ng-click="addNewCustomField()"
+        >
           <span class="icon-add-element"></span>
-          {{'automation_editor.sidebar.scheduled_date_add_custom_field' | translate}}
+          {{'automation_editor.sidebar.scheduled_date_add_custom_field' |
+          translate}}
         </p>
       </div>
     </form>
     <!-- day moment -->
     <div class="frequency--panel">
-      <p class="text">{{'automation_editor.sidebar.scheduled_date_select_day_moment' | translate}}</p>
+      <p class="text">
+        {{'automation_editor.sidebar.scheduled_date_select_day_moment' |
+        translate}}
+      </p>
       <form name="momentDaysForm">
         <div class="flex-grid-v-center--s-between">
-          <div class="frequency--moment-day" ng-class="{'hasErrors': momentDaysForm.days.$invalid}" ng-show="dayMomentSelected.value === 1 || dayMomentSelected.value === 2">
-            <input class="number input--text" ng-model="selectedComponent.frequency.momentDays" name="days" type="text" pattern="^[1-9][0-9]?$" maxlength="2" min="1" placeholder="00" ng-model-options="{updateOn: 'blur'}" ng-disabled="isReadOnly();" required>
-            <span>{{!selectedComponent.frequency.momentDays || selectedComponent.frequency.momentDays.toString() === '1' ? 'automation_editor.sidebar.time_unit.day' : 'automation_editor.sidebar.time_unit.days' | translate}}</span>
+          <div
+            class="frequency--moment-day"
+            ng-class="{'hasErrors': momentDaysForm.days.$invalid}"
+            ng-show="dayMomentSelected.value === 1 || dayMomentSelected.value === 2"
+          >
+            <input
+              class="number input--text"
+              ng-model="selectedComponent.frequency.momentDays"
+              name="days"
+              type="text"
+              pattern="^[1-9][0-9]?$"
+              maxlength="2"
+              min="1"
+              placeholder="00"
+              ng-model-options="{updateOn: 'blur'}"
+              ng-disabled="isReadOnly();"
+              required
+            />
+            <span
+              >{{!selectedComponent.frequency.momentDays ||
+              selectedComponent.frequency.momentDays.toString() === '1' ?
+              'automation_editor.sidebar.time_unit.day' :
+              'automation_editor.sidebar.time_unit.days' | translate}}</span
+            >
           </div>
-          <dp-editor-dropdown class="dropdown dropdown--full" ng-class="{'dropdown--large': dayMomentSelected.value === 1 || dayMomentSelected.value === 2}" id="moment" name="moment" property="name" options="dayMoments" label="dayMomentSelected.label" on-select-option="onFrequencyAttributeSelected('momentId', option.value)" value-selected="dayMomentSelected.value" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-          <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
+          <dp-editor-dropdown
+            class="dropdown dropdown--full"
+            ng-class="{'dropdown--large': dayMomentSelected.value === 1 || dayMomentSelected.value === 2}"
+            id="moment"
+            name="moment"
+            property="name"
+            options="dayMoments"
+            label="dayMomentSelected.label"
+            on-select-option="onFrequencyAttributeSelected('momentId', option.value)"
+            value-selected="dayMomentSelected.value"
+            ng-disabled="isReadOnly();"
+          ></dp-editor-dropdown>
+          <span
+            class="read-only--tooltip positive--alignment"
+            ng-show="isReadOnly();"
+            >{{'validation_messages.read_only_input' | translate }}</span
+          >
         </div>
         <!-- error messages -->
-        <div class="error-messages--container" ng-messages="momentDaysForm.days.$error">
-          <div ng-message="pattern" class="error">{{'automation_editor.sidebar.scheduled_date_day_number_error' | translate}}</div>
+        <div
+          class="error-messages--container"
+          ng-messages="momentDaysForm.days.$error"
+        >
+          <div ng-message="pattern" class="error">
+            {{'automation_editor.sidebar.scheduled_date_day_number_error' |
+            translate}}
+          </div>
         </div>
-        <span class="tip">{{ 'automation_editor.sidebar.scheduled_date_select_day_moment_tip' | translate }}</span>
+        <span class="tip"
+          >{{ 'automation_editor.sidebar.scheduled_date_select_day_moment_tip' |
+          translate }}</span
+        >
       </form>
     </div>
   </div>
@@ -104,32 +251,102 @@
   <div ng-if="selectedComponent.frequency">
     <!-- time and timezone selectors -->
     <div class="box relative frequency-time--panel">
-      <label class="label--panel">{{ 'automation_editor.sidebar.scheduled_date_select_week_time' | translate }}</label>
+      <label class="label--panel"
+        >{{ 'automation_editor.sidebar.scheduled_date_select_week_time' |
+        translate }}</label
+      >
       <div class="flex-grid-v-center--s-between">
-        <dp-editor-dropdown class="dropdown dropdown--small disable--toggler" id="time" name="time" property="name" options="timeOptions" label="timeSelected.label" value-selected="timeSelected.value" on-select-option="onFrequencyAttributeSelected('time', option.value)" on-select-prev-option="onPrevTimeSelected()" on-select-next-option="onNextTimeSelected()" arrow-selection="true" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-        <dp-editor-dropdown class="dropdown dropdown--large" id="timezone" name="timezone" property="name" options="timeZones" label="timezoneSelected.label" value-selected="timezoneSelected.value" on-select-option="onFrequencyAttributeSelected('timezone', option.value)" ng-disabled="isReadOnly();"></dp-editor-dropdown>
+        <dp-editor-dropdown
+          class="dropdown dropdown--small disable--toggler"
+          id="time"
+          name="time"
+          property="name"
+          options="timeOptions"
+          label="timeSelected.label"
+          value-selected="timeSelected.value"
+          on-select-option="onFrequencyAttributeSelected('time', option.value)"
+          on-select-prev-option="onPrevTimeSelected()"
+          on-select-next-option="onNextTimeSelected()"
+          arrow-selection="true"
+          ng-disabled="isReadOnly();"
+        ></dp-editor-dropdown>
+        <dp-editor-dropdown
+          class="dropdown dropdown--large"
+          id="timezone"
+          name="timezone"
+          property="name"
+          options="timeZones"
+          label="timezoneSelected.label"
+          value-selected="timezoneSelected.value"
+          on-select-option="onFrequencyAttributeSelected('timezone', option.value)"
+          ng-disabled="isReadOnly();"
+        ></dp-editor-dropdown>
       </div>
-      <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
-      <div class="dp-library margin-t-25" ng-if="selectedComponent.hasStartDateExpired">
+      <span class="read-only--tooltip" ng-show="isReadOnly();"
+        >{{'validation_messages.read_only_input' | translate }}</span
+      >
+      <div
+        class="dp-library margin-t-25"
+        ng-if="selectedComponent.hasStartDateExpired"
+      >
         <div class="dp-wrap-message dp-wrap-cancel">
           <span class="dp-message-icon"></span>
           <div class="dp-content-message">
-            <p>{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error' | translate }} <a class="dp-message-link" target="_self" href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation">{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade' | translate }}</a></p>
+            <p>
+              {{
+              'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error'
+              | translate }}
+              <a
+                class="dp-message-link"
+                target="_self"
+                href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation"
+                >{{
+                'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade'
+                | translate }}</a
+              >
+            </p>
           </div>
         </div>
       </div>
     </div>
     <!-- list selector -->
     <div class="list-selection--panel disable--toggler">
-      <p class="title">{{ 'automation_editor.sidebar.scheduled_date_select_list_title' | translate }}</p>
+      <p class="title">
+        {{ 'automation_editor.sidebar.scheduled_date_select_list_title' |
+        translate }}
+      </p>
       <dp-editor-panel-subscribers-lists></dp-editor-panel-subscribers-lists>
-      <button ng-click="showListSelectionMultiple()" class="button button--small button--primary" ng-disabled="isReadOnly();">{{selectedComponent.suscriptionLists.length || selectedComponent.allSubscribers ? 'automation_editor.sidebar.list_replace_button' : 'automation_editor.sidebar.scheduled_date_select_list_button' | translate }}</button>
+      <button
+        ng-click="showListSelectionMultiple()"
+        class="button button--small button--primary"
+        ng-disabled="isReadOnly();"
+      >
+        {{selectedComponent.suscriptionLists.length ||
+        selectedComponent.allSubscribers ?
+        'automation_editor.sidebar.list_replace_button' :
+        'automation_editor.sidebar.scheduled_date_select_list_button' |
+        translate }}
+      </button>
     </div>
   </div>
   <!-- doppler tip -->
   <div ng-if="!selectedComponent.frequency">
     <span class="icon-globo"></span>
-    <p class="help-tip"><strong>{{ 'automation_editor.sidebar.scheduled_date_tip' | translate }}</strong> <span>{{ 'automation_editor.sidebar.scheduled_date_tip_part2' | translate }}</span>
-    <a ng-href="{{ 'automation_editor.sidebar.scheduled_date_tip_link_url' | translate }}" class="link--default" target="_blank">{{ 'help_link_text' | translate }}</a>.</p>
+    <p class="help-tip">
+      <strong
+        >{{ 'automation_editor.sidebar.scheduled_date_tip' | translate
+        }}</strong
+      >
+      <span
+        >{{ 'automation_editor.sidebar.scheduled_date_tip_part2' | translate
+        }}</span
+      >
+      <a
+        ng-href="{{ 'automation_editor.sidebar.scheduled_date_tip_link_url' | translate }}"
+        class="link--default"
+        target="_blank"
+        >{{ 'help_link_text' | translate }}</a
+      >.
+    </p>
   </div>
 </div>

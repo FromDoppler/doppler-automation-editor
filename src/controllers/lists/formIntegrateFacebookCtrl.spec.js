@@ -1,6 +1,6 @@
 'use strict';
 
-describe('integrateFacebookController', function() {
+describe('integrateFacebookController', function () {
   beforeEach(module('dopplerApp.forms'));
 
   var $translate;
@@ -10,7 +10,7 @@ describe('integrateFacebookController', function() {
   var facebookService = {
     hasPermissionInFacebook: {},
     getFacebookDataModel: {},
-    saveTab: {}
+    saveTab: {},
   };
   var spyPermission;
 
@@ -18,52 +18,57 @@ describe('integrateFacebookController', function() {
     NO_FB_ACCOUNT: 'no_fb_account',
     NO_TAB_CONFIGURED: 'no_tab_configured',
     NO_TAB_CONFIGURED_SHOW_SETTINGS: 'no_tab_configured_show_settings',
-    TAB_INSTALLED:'tab_installed',
+    TAB_INSTALLED: 'tab_installed',
     TAB_DELETED: 'tab_deleted',
-    TAB_DELETE_CONFIRMATION: 'tab_delete_confirmation'
-  }
+    TAB_DELETE_CONFIRMATION: 'tab_delete_confirmation',
+  };
 
   var FORM_INTEGRATION_ERROR_CODE = {
-    TAB_ERROR_CODE: 219
-  }
+    TAB_ERROR_CODE: 219,
+  };
 
-  beforeEach(function() {
-    module(function($provide) {
+  beforeEach(function () {
+    module(function ($provide) {
       $provide.value('$translate', $translate);
     });
 
-    module(function($provide) {
+    module(function ($provide) {
       $provide.value('FORM_INTEGRATION_FB_STATE', FORM_INTEGRATION_FB_STATE);
     });
 
-    module(function($provide) {
-      $provide.value('FORM_INTEGRATION_ERROR_CODE', FORM_INTEGRATION_ERROR_CODE);
+    module(function ($provide) {
+      $provide.value(
+        'FORM_INTEGRATION_ERROR_CODE',
+        FORM_INTEGRATION_ERROR_CODE
+      );
     });
 
-    module(function($provide) {
+    module(function ($provide) {
       $provide.value('$scope', $scope);
     });
-
   });
 
-  it('should have correct state when no account connected', inject(function(_$rootScope_,_$controller_, _$location_, $q) {
-    facebookService.hasPermissionInFacebook =  function(){
+  it('should have correct state when no account connected', inject(function (
+    _$rootScope_,
+    _$controller_,
+    _$location_,
+    $q
+  ) {
+    facebookService.hasPermissionInFacebook = function () {
       var deferred = $q.defer();
       deferred.resolve(false);
-      return deferred.promise
+      return deferred.promise;
     };
 
-    $controller = _$controller_('FormIntegrateFacebookCtrl',
-    {
+    $controller = _$controller_('FormIntegrateFacebookCtrl', {
       $scope: _$rootScope_.$new(),
       $translate: $translate,
       FORM_INTEGRATION_FB_STATE: FORM_INTEGRATION_FB_STATE,
       FORM_INTEGRATION_ERROR_CODE: FORM_INTEGRATION_ERROR_CODE,
       facebookService: facebookService,
-      $location: _$location_
+      $location: _$location_,
     });
     _$rootScope_.$apply();
-
 
     //Assert
     expect($controller.facebookData.accountName).toEqual('');
@@ -74,11 +79,17 @@ describe('integrateFacebookController', function() {
     expect($controller.facebookData.facebookFanPageSelected.value).toEqual('');
     expect($controller.facebookData.facebookTabName).toEqual('');
     expect($controller.facebookData.idInstalledTab).toEqual(0);
-    expect($controller.integrationStatus).toEqual(FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT);
-
+    expect($controller.integrationStatus).toEqual(
+      FORM_INTEGRATION_FB_STATE.NO_FB_ACCOUNT
+    );
   }));
 
-  it('should have correct state when account conected and no tab installed', inject(function(_$rootScope_,_$controller_, _$location_, $q) {
+  it('should have correct state when account conected and no tab installed', inject(function (
+    _$rootScope_,
+    _$controller_,
+    _$location_,
+    $q
+  ) {
     var onlyAccountModel = {
       FanPageList: [],
       TabName: '',
@@ -87,29 +98,28 @@ describe('integrateFacebookController', function() {
       TabUrl: '',
       IdFacebookTabSetting: 0,
       FanPageName: '',
-      FanPageId: ''
+      FanPageId: '',
     };
 
-    spyOn(facebookService, 'hasPermissionInFacebook').and.callFake(function(){
+    spyOn(facebookService, 'hasPermissionInFacebook').and.callFake(function () {
       var deferred = $q.defer();
       deferred.resolve(true);
-      return deferred.promise
+      return deferred.promise;
     });
 
-    spyOn(facebookService, 'getFacebookDataModel').and.callFake(function(){
+    spyOn(facebookService, 'getFacebookDataModel').and.callFake(function () {
       var deferred = $q.defer();
       deferred.resolve(onlyAccountModel);
-      return deferred.promise
+      return deferred.promise;
     });
 
-    $controller = _$controller_('FormIntegrateFacebookCtrl',
-    {
+    $controller = _$controller_('FormIntegrateFacebookCtrl', {
       $scope: _$rootScope_.$new(),
       $translate: $translate,
       FORM_INTEGRATION_FB_STATE: FORM_INTEGRATION_FB_STATE,
       FORM_INTEGRATION_ERROR_CODE: FORM_INTEGRATION_ERROR_CODE,
       facebookService: facebookService,
-      $location: _$location_
+      $location: _$location_,
     });
     _$rootScope_.$apply();
 
@@ -122,11 +132,17 @@ describe('integrateFacebookController', function() {
     expect($controller.facebookData.facebookFanPageSelected.value).toEqual('');
     expect($controller.facebookData.facebookTabName).toEqual('');
     expect($controller.facebookData.idInstalledTab).toEqual(0);
-    expect($controller.integrationStatus).toEqual(FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED);
-
+    expect($controller.integrationStatus).toEqual(
+      FORM_INTEGRATION_FB_STATE.NO_TAB_CONFIGURED
+    );
   }));
 
-  it('should have correct state and data when tab installed', inject(function(_$rootScope_,_$controller_, _$location_, $q) {
+  it('should have correct state and data when tab installed', inject(function (
+    _$rootScope_,
+    _$controller_,
+    _$location_,
+    $q
+  ) {
     var onlyAccountModel = {
       FanPageList: [],
       TabName: 'Nueva Tab',
@@ -135,38 +151,37 @@ describe('integrateFacebookController', function() {
       TabUrl: '',
       IdFacebookTabSetting: 0,
       FanPageName: '',
-      FanPageId: ''
+      FanPageId: '',
     };
 
-    spyOn(facebookService, 'hasPermissionInFacebook').and.callFake(function(){
+    spyOn(facebookService, 'hasPermissionInFacebook').and.callFake(function () {
       var deferred = $q.defer();
       deferred.resolve(true);
-      return deferred.promise
+      return deferred.promise;
     });
 
-    spyOn(facebookService, 'getFacebookDataModel').and.callFake(function(){
+    spyOn(facebookService, 'getFacebookDataModel').and.callFake(function () {
       var deferred = $q.defer();
       deferred.resolve(onlyAccountModel);
-      return deferred.promise
+      return deferred.promise;
     });
 
-    spyOn(facebookService, 'saveTab').and.callFake(function(){
+    spyOn(facebookService, 'saveTab').and.callFake(function () {
       var deferred = $q.defer();
       var response = {
-        success : true
-      }
+        success: true,
+      };
       deferred.resolve(response);
-      return deferred.promise
+      return deferred.promise;
     });
 
-    $controller = _$controller_('FormIntegrateFacebookCtrl',
-    {
+    $controller = _$controller_('FormIntegrateFacebookCtrl', {
       $scope: _$rootScope_.$new(),
       $translate: $translate,
       FORM_INTEGRATION_FB_STATE: FORM_INTEGRATION_FB_STATE,
       FORM_INTEGRATION_ERROR_CODE: FORM_INTEGRATION_ERROR_CODE,
       facebookService: facebookService,
-      $location: _$location_
+      $location: _$location_,
     });
 
     $controller.installTab();
@@ -182,9 +197,8 @@ describe('integrateFacebookController', function() {
     expect($controller.facebookData.facebookFanPageSelected.value).toEqual('');
     expect($controller.facebookData.facebookTabName).toEqual('Nueva Tab');
     expect($controller.facebookData.idInstalledTab).toEqual(0);
-    expect($controller.integrationStatus).toEqual(FORM_INTEGRATION_FB_STATE.TAB_INSTALLED);
-
+    expect($controller.integrationStatus).toEqual(
+      FORM_INTEGRATION_FB_STATE.TAB_INSTALLED
+    );
   }));
-
 });
-

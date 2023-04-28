@@ -1,15 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dp-dropzone', [])
-    .directive('dpDropzone', dpDropzone);
-
+  angular.module('dp-dropzone', []).directive('dpDropzone', dpDropzone);
 
   function dpDropzone() {
-
     var directive = {
-      link: link
+      link: link,
     };
 
     return directive;
@@ -20,11 +16,9 @@
       // create a Dropzone for the element with the given options
       dropzone = new Dropzone(element[0], config.options); //eslint-disable-line no-undef
       // bind the given event handlers
-      angular.forEach(config.eventHandlers, function(handler, event) {
+      angular.forEach(config.eventHandlers, function (handler, event) {
         dropzone.on(event, handler);
       });
     }
-
   }
-
 })();

@@ -1,62 +1,62 @@
 {
-  "templates_title" : "Elige una Plantilla",
-  "templates_description" : "Selecciona una Plantilla para enviar una nueva Campaña. También podrás duplicarla, editarla o crear una.",
-  "templates_public_title" : "Elige una Plantilla",
-  "templates_publics_breadcrum" : "Crear Plantilla",
-  "templates_public_description" : "Crea una pieza desde cero o selecciona una Plantilla Prediseñada para personalizarla.",
+  "templates_title": "Elige una Plantilla",
+  "templates_description": "Selecciona una Plantilla para enviar una nueva Campaña. También podrás duplicarla, editarla o crear una.",
+  "templates_public_title": "Elige una Plantilla",
+  "templates_publics_breadcrum": "Crear Plantilla",
+  "templates_public_description": "Crea una pieza desde cero o selecciona una Plantilla Prediseñada para personalizarla.",
   "templates_empty": {
-    "description" : "Personaliza una Plantilla a tu gusto, y una vez finalizado el proceso de edición, podrás guardarla en la sección Mis Plantillas para utilizar esta versión cada vez que quieras.",
-    "description_link_text" : "Aprende cómo editar una Plantilla.",
-    "description_link_url" : "https://help.fromdoppler.com/es/como-editar-una-plantilla/"
+    "description": "Personaliza una Plantilla a tu gusto, y una vez finalizado el proceso de edición, podrás guardarla en la sección Mis Plantillas para utilizar esta versión cada vez que quieras.",
+    "description_link_text": "Aprende cómo editar una Plantilla.",
+    "description_link_url": "https://help.fromdoppler.com/es/como-editar-una-plantilla/"
   },
-  "templates_create" : "Crear Plantilla",
-  "templates_card" : {
+  "templates_create": "Crear Plantilla",
+  "templates_card": {
     "delete": "Eliminar",
     "duplicate": "Duplicar",
-    "edit" : "Editar Plantilla",
-    "new_campaign" : "Crear Campaña",
+    "edit": "Editar Plantilla",
+    "new_campaign": "Crear Campaña",
     "rename": "Renombrar",
     "view_online": "Ver versión online",
     "viewonline_tooltip": {
       "link": "VER PLANES",
       "text": "Esta funcionalidad es <br> exclusiva para cuentas con <br> Plan Pago. "
     },
-    "select" : "Seleccionar",
+    "select": "Seleccionar",
     "select_and_edit": "Seleccionar y editar",
     "use_as_is": "Seleccionar sin editar"
   },
   "templates_new_popup": {
-    "title" : "Nombrar Nueva Plantilla",
+    "title": "Nombrar Nueva Plantilla",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla nulla vitae vulputate scelerisque. Nunc nec augue at dui vulputate sagittis.",
-    "input" : "Newsletter Plantilla",
+    "input": "Newsletter Plantilla",
     "button_primary": "Crear"
   },
   "templates_rename_popup": {
-    "title" : "Renombrar Plantilla",
+    "title": "Renombrar Plantilla",
     "description": "Escribe un nuevo nombre para identificar a tu Plantilla.",
     "button_primary": "Guardar"
   },
   "templates_duplicate_popup": {
-    "title" : "Duplicar Plantilla",
+    "title": "Duplicar Plantilla",
     "description": "Colócale un nombre a esta nueva versión de tu Plantilla para poder diferenciarla.",
     "button_primary": "Duplicar",
-    "name" : "Copia de {{name}}"
+    "name": "Copia de {{name}}"
   },
   "templates_delete_popup": {
-    "title" : "¿Quieres eliminar {{name}}?",
+    "title": "¿Quieres eliminar {{name}}?",
     "description": "Ten en cuenta que no podrás recuperar la Plantilla una vez eliminada.",
     "button_primary": "Eliminar"
   },
-  "templates_total_campaigns" : "Campañas",
-  "filter_by_category" : "Filtrar por categoria",
-  "all_categories" : "Todas las Categorías",
+  "templates_total_campaigns": "Campañas",
+  "filter_by_category": "Filtrar por categoria",
+  "all_categories": "Todas las Categorías",
   "button_cancel": "Cancelar",
   "button_delete": "Eliminar",
   "button_save": "Guardar",
-  "templates_validation" : {
-      "required" : "¡Ouch! Este es un campo requerido.",
-      "maxlength" : "¡Ouch! Has alcanzado la longitud máxima permitida.",
-      "duplicated" : "¡Ouch! Ese nombre ya existe."
+  "templates_validation": {
+    "required": "¡Ouch! Este es un campo requerido.",
+    "maxlength": "¡Ouch! Has alcanzado la longitud máxima permitida.",
+    "duplicated": "¡Ouch! Ese nombre ya existe."
   },
-  "image_placeholder_text" : "Generando miniatura."
+  "image_placeholder_text": "Generando miniatura."
 }

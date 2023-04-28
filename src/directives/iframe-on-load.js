@@ -1,29 +1,23 @@
-(function() {
+(function () {
   'use strict';
 
-  angular
-    .module('dopplerApp')
-    .directive('iframeOnload', iframeLoad);
-
+  angular.module('dopplerApp').directive('iframeOnload', iframeLoad);
 
   function iframeLoad() {
-
     var directive = {
       restrict: 'A',
       link: link,
       scope: {
-        callBack: '&iframeOnload'
-      }
+        callBack: '&iframeOnload',
+      },
     };
 
     return directive;
 
     function link(scope, element) {
-      element.on('load', function(){
+      element.on('load', function () {
         return scope.callBack();
       });
     }
-
   }
-
 })();
