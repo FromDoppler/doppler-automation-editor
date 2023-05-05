@@ -1,4 +1,4 @@
-var automation_en_translations = {
+export const automation_en_translations = {
   "automation_editor": {
     "date_format": "MM/dd/yyyy",
     "breadcrumb": {
@@ -20,7 +20,8 @@ var automation_en_translations = {
       "visited_products": "Product Retargeting: ",
       "pending_order": "Pending Payment: ",
       "confirmation_order": "Successful Payment: ",
-      "push_notification": "Push Notifications: "
+      "push_notification": "Push Notifications: ",
+      "sms": "Mass SMS sending: "
     },
     "buttons": {
       "exit": "Exit and edit later",
@@ -52,6 +53,7 @@ var automation_en_translations = {
       "add_step_title": "Add a step to your Automation Flow",
       "tip_add_element": "Start defining the steps in your<br />Automation Flow",
       "tip_initial_condition": "Set the Flow starting point up from the side menu",
+      "tip_initial_condition_blocked": "There are contacts that affect the quality of your sendings",
       "wait_time_part1": "Wait",
       "campaign_aspects": "Define your shipment information",
       "right_now": "Inmediately",
@@ -502,7 +504,7 @@ var automation_en_translations = {
       "footer_tip": "Select a List and continue editing your Email Automation Campaign",
       "segments": " (Segment)",
       "doppler_tip": "Create a Segment based on different criterias like your Subscriber's age or location.",
-      "all_contacts": "Send to all my contacts (All your Lists will be selected)",
+      "all_contacts": "Send to all my contacts",
       "blocked_list": "There’re Subscribers that affect the quality of your List. Learn more.",
       "blocked_list_link": "Learn more.",
       "blocked_list_href": "https://help.fromdoppler.com/en/blocked-lists",
@@ -701,6 +703,9 @@ var automation_en_translations = {
       "list_tip": "Do you have any doubt about how to create a Signup-based Automation Campaign?",
       "list_tip_part2": "Press",
       "list_selected": "You've selected",
+      "list_blocked_tooltip": "The List was blocked.",
+      "list_blocked_tooltip_more_information": "Check it at lists and segments.",
+      "list_or_segment_blocked": "You can't include locked Lists or Segments.",
       "list_all_my_contacts_selected": "All my contacts",
       "list_tip_link_text": "Help",
       "list_tip_link_url": "https://help.fromdoppler.com/en/como-crear-email-automation-ingreso-lista/",
@@ -785,7 +790,7 @@ var automation_en_translations = {
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce",
           "option11": "easycommerce",
           "option14": "MiTienda"
@@ -816,10 +821,11 @@ var automation_en_translations = {
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce",
           "option11": "easycommerce",
-          "option14": "MiTienda"
+          "option14": "MiTienda",
+          "option15": "Jumpseller"
         },
         "drop_down_time_options": {
           "option0": "24 hours",
@@ -833,7 +839,6 @@ var automation_en_translations = {
           "option30240": "3 Weeks"
         },
         "drop_down_ecommerce_errors": {
-          "error2": "Ouch! You haven't enabled the On-Site Tracking free trial. <a href='/Automation/EditorConfig?idTaskType=0'  class='text--underline' target='_self'>ENABLE IT NOW</a>.",
           "error3": "Ouch! You haven't enable the On-Site Tracking feature. <a href='/ControlPanel/CampaignsPreferences/SiteTrackingSettings' class='text--underline' target='_self'>ENABLE IT NOW</a>.",
           "error4": "Ouch! You haven't added and verified the domain of the Website you want to track down. <a href='/ControlPanel/CampaignsPreferences/SiteTrackingSettings' class='text--underline' target='_self'>DO IT NOW</a>."
         }
@@ -855,7 +860,7 @@ var automation_en_translations = {
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce"
         },
         "drop_down_time_options": {
@@ -881,7 +886,7 @@ var automation_en_translations = {
           "option5": "Vtex",
           "option6": "PrestaShop",
           "option7": "Shopify",
-          "option8": "Magento",
+          "option8": "Adobe Commerce",
           "option10": "WooCommerce"
         }
       },
@@ -913,7 +918,8 @@ var automation_en_translations = {
       "push_notification_not_defined": "Undefined Push",
       "push_notifications_not_defined": "Undefined Push",
       "goto_not_defined": "Undefined Go to Step",
-      "gotos_not_defined": "Undefined Go to Steps"
+      "gotos_not_defined": "Undefined Go to Steps",
+      "initial_condition_not_defined": "Intial condition blocked"
     },
     "saved": "Saved",
     "saving": "Saving",
@@ -972,6 +978,36 @@ var automation_en_translations = {
       "header_domain_column": "Domains"
     }
   },
+  "automationTemplates": {
+    "breadcrumb": {
+      "level0": "Mis flujos automatizados",
+      "level1": "Crear automation"
+    },
+    "title": "Campañas automatizadas",
+    "description0": "¡Ahorra tiempo y esfuerzo con Automatizaciones!",
+    "description1": "Crea flujos personalizados que envíen tus campañas automáticamente según las acciones que realicen tus suscriptores. Desde bienvenidas hasta carritos abandonados, las posibilidades son infinitas.",
+    "description2": "Obtén mejores resultados y haz crecer tu negocio mientras tus campañas se ejecutan automáticamente.",
+    "help": {
+      "url": "#",
+      "title": "Aprende más sobre Automation"
+    },
+    "board": {
+      "title": "Elige un flujo prediseñado o crea uno desde cero ",
+      "description": "Los flujos prediseñados son plantillas con varias acciones ya incorporadas. Ahorra tiempo y adáptalos a gusto."
+    },
+    "info": {
+      "title0": "Crear flujo desde cero",
+      "description0": "Define tu mismo las condiciones y acciones que dispararán tus campañas creando un flujo personalizado.",
+      "title1": "Revalidacion de suscriptores",
+      "description1": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
+      "title2": "Descuento cumpleaños",
+      "description2": "Los cumpleaños son una oportunidad perfecta para construir una mejor relación con tu cliente.",
+      "title3": "Nuevo Contacto",
+      "description3": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
+      "title4": "Carrito abandonado",
+      "description4": "Úsalo para crear una secuencia de emails y animar a las personas que estuvieron cerca de completar una compra."
+    }
+  },
   "automationTypes": {
     "info": {
       "title3": "Scheduled Date",
@@ -1001,7 +1037,12 @@ var automation_en_translations = {
       "title11": "Push Notifications",
       "description11": "Send alerts with special offers or relevant information to your Website or E-commerce visitors.",
       "start11_message": "You have at least one verified domain. CREATE YOUR AUTOMATION",
+      "title12": "Mass SMS sending",
+      "description12": "Use automated SMS messages to enhance your omnichannel strategy.",
+      "start12_message": "Reach your contacts with direct messages on their phones.",
       "buy": "BUY NOW",
+      "buySms": "ESTIMATE COST",
+      "buySms_message": "First estimate the cost by country and charge funds for these campaigns.",
       "error_message": "Ouch! There are no verified domains.",
       "continue": "CONTINUE",
       "warning_message": "Pst! You need to enable the functionality and verify the added domains.",
@@ -1053,51 +1094,50 @@ var automation_en_translations = {
     "button_cancel": "Go later",
     "button_action": "View Lists"
   },
-  "General_Required_Field": "Ouch! This field is required.",
-  "ScheduledTask_AutomationMain_Grid_Pager": "Show More Results",
-
-  "CompleteInformation_Title": "Fill in the missing contact information",
-  "CompleteInformation_Subtitle": "In order to continue, we need to know a little more about you. Please fill in the missing info in the form below.",
-  "CompleteInformation_FirstName": "First Name",
-  "CompleteInformation_LastName": "Last Name",
-  "CompleteInformation_Address": "Address",
-  "CompleteInformation_Country": "Country",
-  "CompleteInformation_State": "State/Province",
-  "CompleteInformation_City": "City",
-  "CompleteInformation_PhoneNumber": "Phone Number",
-  "CompleteInformation_ZipCode": "Zip Code",
-  "CompleteInformation_RequiredMessage": "We're sure you already know it. But the fields marked with * are required. Thank you!",
-  "CompleteInformation_SaveButton": "Save",
+  "General_Required_Field" : "Ouch! This field is required.",
+  "ScheduledTask_AutomationMain_Grid_Pager" : "Show More Results",
+  "CompleteInformation_Title" : "Fill in the missing contact information",
+  "CompleteInformation_Subtitle" : "In order to continue, we need to know a little more about you. Please fill in the missing info in the form below.",
+  "CompleteInformation_FirstName" : "First Name",
+  "CompleteInformation_LastName" : "Last Name",
+  "CompleteInformation_Address" : "Address",
+  "CompleteInformation_Country" : "Country",
+  "CompleteInformation_State" : "State/Province",
+  "CompleteInformation_City" : "City",
+  "CompleteInformation_PhoneNumber" : "Phone Number",
+  "CompleteInformation_ZipCode" : "Zip Code",
+  "CompleteInformation_RequiredMessage" : "We're sure you already know it. But the fields marked with * are required. Thank you!",
+  "CompleteInformation_SaveButton" : "Save",
   "CompleteInformation_Company": "Company",
   "CompleteInformation_Industry": "Industry",
   "CompleteInformation_IndustryDefault": "Choose your industry",
-  "General_Invalid_Field": "Invalid characters.",
-  "General_MaxLength_Field": "Ouch! You've reached the maximum number of characters.",
+  "General_Invalid_Field" : "Invalid characters.",
+  "General_MaxLength_Field" : "Ouch! You've reached the maximum number of characters.",
 
-  "automation_grid_header": {
-    "title": "Automation Campaigns",
-    "description": "Here you will find all your Automation Campaigns including the ones that are in draft, ready to send or inactive. ",
-    "quantity_part1": "You have created ",
-    "quantity_part2": " Campaigns in total.",
-    "empty_part1": "You haven't created ",
-    "empty_part2": "any Campaigns yet.",
-    "quantity_campaign": " Campaign.",
-    "button": "Create Automation Campaign"
+  "automation_grid_header" : {
+    "title" : "Automation Campaigns",
+    "description" : "Here you will find all your Automation Campaigns including the ones that are in draft, ready to send or inactive. ",
+      "quantity_part1" : "You have created ",
+      "quantity_part2" : " Campaigns in total.",
+      "empty_part1" : "You haven't created ",
+      "empty_part2" : "any Campaigns yet.",
+      "quantity_campaign": " Campaign.",
+    "button" : "Create Automation Campaign"
   },
-  "automation_grid_search": "Search...",
-  "automation_grid_headers": {
-    "status": "Status",
-    "type": "Type",
-    "name": "Automation Campaign Name",
-    "creation_date": "Created",
-    "email_sent_amount": "Sendings",
-    "actions": "Actions"
+  "automation_grid_search" : "Search...",
+  "automation_grid_headers" : {
+    "status" : "Status",
+    "type" : "Type",
+    "name" : "Automation Campaign Name",
+    "creation_date" : "Created",
+    "email_sent_amount" : "Sendings",
+    "actions" : "Actions"
   },
-  "automation_grid_reports": "Reports",
-  "automation_grid_status": {
-    "draft": "Draft",
-    "active": "Active",
-    "paused": "Paused",
+  "automation_grid_reports" : "Reports",
+  "automation_grid_status" : {
+    "draft" : "Draft",
+    "active" : "Active",
+    "paused" : "Paused",
     "stopped": "Stopped"
   },
   "automation_grid_emtpy": {
@@ -1108,14 +1148,14 @@ var automation_en_translations = {
     "link_url": "https://help.fromdoppler.com/en/how-to-use-email-automation"
   },
   "grid_messages": {
-    "delete_message": "This Campaign <strong>\"{{campaignName}}\"</strong> will be deleted permanently.  Are you sure?",
-    "custom_field_deleted": "The Date Field selected has been removed. Select another or create a new one to start your Automation."
+      "delete_message" : "This Campaign <strong>\"{{campaignName}}\"</strong> will be deleted permanently.  Are you sure?",
+      "custom_field_deleted": "The Date Field selected has been removed. Select another or create a new one to start your Automation."
   },
-  "automation_grid_start_automation_errors": {
-    "error_code_197": "Enable the On-Site Tracking functionality to activate the Campaign.",
-    "error_code_214": "You must add a Website to your Automation to active the Campaign.",
-    "error_code_215": "You must verify the Website asociated to your Automation to active the Campaign.",
-    "error_code_216": "This functionality is enabled only for accounts with Paid Plan."
+  "automation_grid_start_automation_errors" : {
+    "error_code_197" : "Enable the On-Site Tracking functionality to activate the Campaign.",
+    "error_code_214" : "You must add a Website to your Automation to active the Campaign.",
+    "error_code_215" : "You must verify the Website asociated to your Automation to active the Campaign.",
+    "error_code_216" : "This functionality is enabled only for accounts with Paid Plan."
   },
   "automation_replicate": {
     "modal": {
@@ -1126,6 +1166,12 @@ var automation_en_translations = {
       "submit_buttton": "Confirm",
       "warning_one_option": "Automation type change is not allowed for this replica."
     }
+  },
+  "automation_grid_body": {
+    "blocked_list": "Automation blocked",
+    "blocked_list_tooltip": "The automation is blocked because there are contacts that affect the quality of your sendings. Restart it after",
+    "blocked_list_tooltip_link_text": "checking your lists and segments.",
+    "blocked_list_tooltip_link_url": "/Lists/SubscribersList"
   },
   "General_Required_Field": "Ouch! This field is required.",
   "ScheduledTask_Reports_Title": "Delivery Rate and Summary",
@@ -1140,6 +1186,7 @@ var automation_en_translations = {
   "ScheduledTask_Reports_Grid_Header_TotalClicks": "Total Clicks",
   "ScheduledTask_Reports_Grid_Header_Unsubscribe": "Unsubscribe",
   "ScheduledTask_Reports_Grid_Title": "Daily Grid",
+  "ScheduledTask_Reports_Grid_Title_Monthly": "Monthly Grid",
   "ScheduledTask_Reports_Grid_Subtitle": "Discover a detailed daily grid of your Email Automation Campaign's most valuable information.",
   "ScheduledTask_Reports_Grid_Day": "Date",
   "ScheduledTask_Reports_Grid_Sent": "Sent",
@@ -1150,6 +1197,7 @@ var automation_en_translations = {
   "ScheduledTask_Reports_Grid_Shared": "Shared",
   "ScheduledTask_Reports_Grid_CTOR": "CTOR",
   "ScheduledTask_Reports_Filter_Action": "Filter by Campaign",
+  "ScheduledTask_Reports_Filter_Action_Push": "Filter by Push",
   "ScheduledTask_Reports_CancelFilter": "Cancel",
   "ScheduledTask_Reports_Filter": "Filter",
   "ScheduledTask_Reports_GraphicReport": "Graphics",
@@ -1287,9 +1335,9 @@ var automation_en_translations = {
     "url_pattern_error_message": "¡Ouch! The URL is invalid.",
     "https_url_pattern_error_message": "¡Ouch! Enter a URL that begins with https://"
   },
-  "footer": {
-    "allRightReserved": "All rights reserved",
-    "iso": "ISO Quality Certification 9001:2008",
+  "footer" : {
+    "allRightReserved" : "All rights reserved",
+    "iso" : "ISO Quality Certification 9001:2008",
     "privacy": "Privacy Policy & Legals.",
     "privacy_link": "https://fromdoppler.com/en/privacy-policy"
   },
@@ -1330,9 +1378,9 @@ var automation_en_translations = {
       }
     }
   },
-  "button_cancel": "Cancel",
-  "button_send": "Send",
-  "button_accept": "Accept",
+  "button_cancel" : "Cancel",
+  "button_send" : "Send",
+  "button_accept" : "Accept",
   "button_yes": "Yes",
   "button_no": "No",
   "help_link_text": "HELP",
@@ -1363,29 +1411,29 @@ var automation_en_translations = {
     "replicate_automation_disabled": "It's not possible to replicate"
   },
   "modal_process_file": {
-    "title": "Remove multiple Subscribers at once",
-    "subtitle": "Import a file with the Emails you want to remove from your Lists. Attention! Once removed, if you wish to add them back, you'll have to ask for their approval. ",
+    "title" : "Remove multiple Subscribers at once",
+    "subtitle" : "Import a file with the Emails you want to remove from your Lists. Attention! Once removed, if you wish to add them back, you'll have to ask for their approval. ",
     "button_remove_subs": "Remove Subscribers",
     "processed_title": "The Subscribers you've selected are being removed",
     "processed_subtitle": "We will send a report to your email when the process is completed.",
     "button_processed_add": "Upload a new List",
     "import_dragAndDrop_description": "You can choose between a comma-separated file (.csv) or a plain text one (.txt). If it's too big, you can convert it into a .zip. Also, if you have doubts we can help you out! Just press ",
     "import_dragAndDrop_InvalidFileType": "Oops! Keep in mind that your file must be a .csv, .txt. or .zip",
-    "helpLink": "http://help.fromdoppler.com/?lang=en",
-    "dragAndDrop_fallbackMsg": "Your browser does not support drag'n'drop file uploads.",
-    "dropButton_ready": "Browse for your file",
-    "dropMessage_ready": "Drag and drop your <b>File</b> here or ",
-    "dropMessage_importing": "Importing <b>{{fileName}}</b>",
-    "dropMessage_imported": "You've imported <b>{{fileName}}</b>",
-    "dropButton_importedWithError": "Import another file",
-    "errorMessage_maxFiles": "Ouch! You cannot upload 2 files at the same time.",
-    "errorMessage_fileSize": "Oops! The size of your file is larger than fileSize MB",
-    "dropButton_imported": "Replace file",
-    "selected_file": "You've selected <b>{{fileName}}</b>"
+    "helpLink" : "http://help.fromdoppler.com/?lang=en",
+    "dragAndDrop_fallbackMsg" : "Your browser does not support drag'n'drop file uploads.",
+    "dropButton_ready" : "Browse for your file",
+    "dropMessage_ready" : "Drag and drop your <b>File</b> here or ",
+    "dropMessage_importing" : "Importing <b>{{fileName}}</b>",
+    "dropMessage_imported" : "You've imported <b>{{fileName}}</b>",
+    "dropButton_importedWithError" : "Import another file",
+    "errorMessage_maxFiles" : "Ouch! You cannot upload 2 files at the same time.",
+    "errorMessage_fileSize" : "Oops! The size of your file is larger than fileSize MB",
+    "dropButton_imported" : "Replace file",
+    "selected_file" : "You've selected <b>{{fileName}}</b>"
   },
-  "empty_filter": "No Filter",
-  "empty_label": "No Label",
-  "empty_search": "Ups! No matches found for searched criteria.",
+  "empty_filter" : "No Filter",
+  "empty_label" : "No Label",
+  "empty_search" : "Ups! No matches found for searched criteria.",
   "control_panel": {
     "dkim": {
       "title": "DKIM & SPF setup",
@@ -1462,6 +1510,12 @@ var automation_en_translations = {
         "days_to_disconnect_plural_1": "If the problem continues during the next",
         "days_to_disconnect_plural_2": "days, we'll have to disconnect it. We'll notify you if we do it.",
         "days_to_disconnect_singular": "If the problem continues, we’ll have to disconnect it tomorrow. We'll notify you if we do it."
+      },
+      "sync_disabled": {
+        "text1": "Auto sync is paused because your account has expired. ",
+        "text2": " and take the most of all the Doppler’s functions.",
+        "link": "/plan-selection/premium/by-contacts?origin=warning_integration",
+        "link_text": "Hire a plan"
       }
     }
   },
@@ -1499,4 +1553,3 @@ var automation_en_translations = {
     "subtitle_high_volumen": "You have just hired a new Monthly Plan to send unlimited Campaigns up to <b>{{subscribersNumber}} Emails.</b> We’ll send you an email with more details about the new Plan."
   }
 }
-
