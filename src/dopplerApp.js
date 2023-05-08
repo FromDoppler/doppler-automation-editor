@@ -31,6 +31,8 @@ angular.module('interceptorModule', []).service('httpInterceptor', ['$rootScope'
   };
 }]);
 
+import { automation_en_translations } from './i18n/automation-dicc-en.js';
+import { automation_es_translations } from './i18n/automation-dicc-es.js';
 
 angular.module('dopplerApp', ['pascalprecht.translate', 'ngSanitize', 'interceptorModule', 'angularModalService', 'ngMessages', 'dopplerApp.controlPanel', 'dopplerApp.automation', 'dopplerApp.templates', 'dopplerApp.lists', 'dopplerApp.forms'])
 .config(['$httpProvider', '$translateProvider', '$locationProvider', function ($httpProvider, $translateProvider, $locationProvider) {
@@ -43,112 +45,9 @@ angular.module('dopplerApp', ['pascalprecht.translate', 'ngSanitize', 'intercept
   });
 
   $translateProvider
-    .useStaticFilesLoader({
-      files: [{
-       prefix: '/angularjs/i18n/shared/general-',
-       suffix: '.json'
-    },{
-        prefix: '/angularjs/i18n/automation/automationGrid-',
-        suffix: '.json'
-      },
-     {
-       prefix: '/angularjs/i18n/templates/template-',
-       suffix: '.json'
-     },
-    {
-      prefix: '/angularjs/i18n/automation/automationReportsTask-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/automation/automationEditor-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/forms/formsGrid-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/controlPanel/controlPanelSiteTracking-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/controlPanel/controlPanelSubscribersScoring-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/controlPanel/landingPagesDomains-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/controlPanel/vtexIntegration-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/controlPanel/zohoCrmIntegration-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/forms/formsIntegrate-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/forms/formTypes-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/subscribers/addMassiveSubscribers-',
-      suffix: '.json'
-    },
-    {
-      prefix: '/angularjs/i18n/controlPanel/prestashop-',
-      suffix: '.json'
-     },
-     {
-      prefix: '/angularjs/i18n/controlPanel/magentoIntegration-',
-      suffix: '.json'
-     },
-     {
-      prefix: '/angularjs/i18n/controlPanel/wooCommerceIntegration-',
-      suffix: '.json'
-     },
-     {
-      prefix: '/angularjs/i18n/controlPanel/smsSettings-',
-      suffix: '.json'
-     },
-     {
-      prefix: '/angularjs/i18n/controlPanel/billingInformation-',
-      suffix: '.json'
-     },
-     {
-       prefix: '/angularjs/i18n/controlPanel/tiendanubeIntegration-',
-      suffix: '.json'
-     },
-     {
-      prefix: '/angularjs/i18n/controlPanel/easycommerceIntegration-',
-      suffix: '.json'
-     },
-     {
-       prefix: '/angularjs/i18n/controlPanel/bmwCrmIntegration-',
-      suffix: '.json'
-     },
-     {
-       prefix: '/angularjs/i18n/controlPanel/mercadoLibreIntegration-',
-      suffix: '.json'
-     },
-     {
-       prefix: '/angularjs/i18n/controlPanel/mercadoShopsIntegration-',
-      suffix: '.json'
-     },
-     {
-       prefix: '/angularjs/i18n/controlPanel/miTiendaIntegration-',
-       suffix: '.json'
-     },
-     {
-       prefix: '/angularjs/i18n/controlPanel/rfmSettings-',
-       suffix: '.json'
-     }
-    ]
-    }).useSanitizeValueStrategy('escapeParameters');
+  .translations('en', automation_en_translations)
+  .translations('es', automation_es_translations)
+  .useSanitizeValueStrategy('escapeParameters');
   if (typeof(mainMenuData) !== 'undefined'){
     $translateProvider.preferredLanguage(mainMenuData.user.lang);
   }
