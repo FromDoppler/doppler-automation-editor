@@ -10,6 +10,10 @@
         ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}"
         ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" 
         ng-if="item.Status !== 'hidden'">
+        <div class="aplication-types--new-feature  {{lang}}"
+          data-text="{{ 'automationTypes.info.new_feature' | translate }}" 
+          ng-if="item.IsNewFeature && item.Status !== 'repeated'">
+        </div>
         <div class="aplication-types-description--container">
           <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
           <p class="text--small">{{ 'automationTypes.info.description' + item.Type | translate }}</p>
