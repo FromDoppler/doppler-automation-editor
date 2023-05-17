@@ -74,6 +74,7 @@
           $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + response.data.id + '&automationType=' +  automation.getAutomationType(parseInt(scope.selectedType));
         });
       };
+
       scope.integrationsList = function(automationType) {
         var result = [];
         switch (automationType) {
