@@ -132,7 +132,10 @@
     function load(idTaskType, idScheduledTask) {
       // hack to hide main scroll just for automation
       // TODO fix it #goto issues
-      document.querySelector('html').style.overflow = 'hidden';
+      // Added rule idTaskType !== 0 for automation type for visual issue
+      if(idTaskType !== 0){
+        document.querySelector('html').style.overflow = 'hidden';
+      }
       var defer = $q.defer();
 
       if (!promise) {
