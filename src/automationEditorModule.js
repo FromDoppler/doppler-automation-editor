@@ -58,15 +58,6 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
             automation.setIsProcessing(true);
             defaultNamePromise.then(function() {
                 if((changesManager.getUnsavedChanges() && $scope.rootComponent.state !== AUTOMATION_STATE.ACTIVE) || hasErrors) {
-                    if (hasErrors) {
-                        $scope.rootComponent.state = AUTOMATION_STATE.DRAFT;
-                        $window.location.href = path;
-                    }
-                    automation.saveChanges().then(function(response) {
-                        $window.location.href = path;
-                    }, function(error) {
-                        automation.setIsProcessing(false);
-                    });
                 } else {
                     $window.location.href = path;
                 }
