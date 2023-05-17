@@ -28,7 +28,6 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
     LIST_SELECTION_STATE, AUTOMATION_COMPLETED_STATE, $rootScope, DOMAINS_SELECTION_STATE) {
         var urlParams = $location.search();
         var defaultNamePromise;
-
         $scope.automationData = automationData.data;
         $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;
         $scope.LIST_SELECTION_STATE = LIST_SELECTION_STATE;
@@ -42,28 +41,23 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
                                     || automationData.data.automationType === AUTOMATION_TYPE.PENDING_ORDER
                                     || automationData.data.automationType === AUTOMATION_TYPE.CONFIRMATION_ORDER;
         $scope.showTinyEditor = false;
-        $scope.showAutomationTypes = automationData.data.automationType === AUTOMATION_TYPE.NONE;
         $scope.isProcessing = automation.getIsProcessing;
         $scope.isAutomationActive = automation.getIsAutomationActive;
 
         automationLocaleService.setLocale();
 
         $scope.saveAndRedirect = function(path) {
-            if ($scope.showAutomationTypes) {
-                $window.location.href = path;
+            if(!$scope.rootComponent.name) {
+                defaultNamePromise = $scope.onBlurBreadcrum('');
             } else {
-                if(!$scope.rootComponent.name) {
-                    defaultNamePromise = $scope.onBlurBreadcrum('');
-                } else {
-                    defaultNamePromise = $q(function(resolve, reject) {
-                    resolve();
-                    })
-                }
-                var hasErrors = automationHasErrors(automation.getIsFlowComplete());
-                automation.setIsProcessing(true);
-                defaultNamePromise.then(function() {
-                    if((changesManager.getUnsavedChanges() && $scope.rootComponent.state !== AUTOMATION_STATE.ACTIVE)
-                    || hasErrors) {
+                defaultNamePromise = $q(function(resolve, reject) {
+                resolve();
+                })
+            }
+            var hasErrors = automationHasErrors(automation.getIsFlowComplete());
+            automation.setIsProcessing(true);
+            defaultNamePromise.then(function() {
+                if((changesManager.getUnsavedChanges() && $scope.rootComponent.state !== AUTOMATION_STATE.ACTIVE) || hasErrors) {
                     if (hasErrors) {
                         $scope.rootComponent.state = AUTOMATION_STATE.DRAFT;
                         $window.location.href = path;
@@ -73,11 +67,10 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
                     }, function(error) {
                         automation.setIsProcessing(false);
                     });
-                    } else {
-                        $window.location.href = path;
-                    }
-                })
-            }
+                } else {
+                    $window.location.href = path;
+                }
+            })
         };
     
         if($scope.automationData.state === AUTOMATION_STATE.ACTIVE) {
@@ -113,10 +106,6 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
             type === AUTOMATION_TYPE.PENDING_ORDER ||
             type === AUTOMATION_TYPE.CONFIRMATION_ORDER;
             automationData.data.automationType = $scope.isDynamicAutomation ? type : null;
-        };
-
-        $scope.toggleTypesView = function(value) {
-            $scope.showAutomationTypes = value;
         };
 
         $scope.$on('TEMPLATES.CLOSE_TEMPLATES_VIEW', function() {
