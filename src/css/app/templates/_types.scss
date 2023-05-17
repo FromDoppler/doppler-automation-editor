@@ -6,6 +6,14 @@ $imagesPath: "../images" !default;
     height: 40px;
     margin-bottom: 35px;
   }
+  @for $i from 0 through 12 {
+    .automation-types--#{$i} {
+      &::before {
+        background: url(#{$imagesPath}/automation-type-#{$i}.svg) no-repeat center center;
+        background-size: 50%;
+      } 
+    }
+  }
 }
 
 .aplication-types--items {
@@ -209,5 +217,19 @@ $imagesPath: "../images" !default;
 
   .notification--container {
     background: $color-red;
+  }
+}
+
+dp-editor-types {
+  .aplication-types--items {
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 121px;
+      width: 121px;
+      top: -10px;
+      left: -20px;
+    }
   }
 }
