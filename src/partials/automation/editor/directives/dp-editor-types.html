@@ -1,12 +1,19 @@
-<section class="section--default background--white">
+<section class="background--white">
   <div class="wrapper wrapper--default">
-    <header class="grid-title-section">
+    <header class="grid-title-type-section">
         <h2>{{ 'automationTypes.automation_task_header.title' | translate }}</h2>
         <p>{{ 'automationTypes.automation_task_header.description' | translate }}</p>
     </header>
     <div class="aplication-types--container flex-grid-v-center" ng-show="!isLoading">
-      <div target="_self" class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} {{lang}}" ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}" ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" data-text="{{ 'automationTypes.info.new_feature' | translate }}" ng-if="item.Status !== 'hidden'">
-        <img ng-src="../../../images/automation-type-{{ item.Type }}.svg" />
+      <div target="_self" 
+        class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} automation-types--{{item.Type}}"
+        ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}"
+        ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" 
+        ng-if="item.Status !== 'hidden'">
+        <div class="aplication-types--new-feature  {{lang}}"
+          data-text="{{ 'automationTypes.info.new_feature' | translate }}" 
+          ng-if="item.IsNewFeature && item.Status !== 'repeated'">
+        </div>
         <div class="aplication-types-description--container">
           <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
           <p class="text--small">{{ 'automationTypes.info.description' + item.Type | translate }}</p>
