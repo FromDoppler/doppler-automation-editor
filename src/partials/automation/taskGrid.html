@@ -1,13 +1,6 @@
 <dp-editor-types ng-if="automationView === 'TYPES'" class="editor--modal"></dp-editor-types>
-<section ng-if="!totalTasks && automationView === 'GRID'" class="section--content background--white section--grid-empty flex-grid-v-center padding-t-20 dp-library">
-  <div class="wrapper text--center components--center wrapper--default">
-    <img src="../../../images/automation-type-5.svg">
-    <h2>{{ 'automation_grid_emtpy.title' | translate }}</h2>
-    <p class="description">{{ 'automation_grid_emtpy.description' | translate }} <br /><br /><strong>{{ 'automation_grid_emtpy.description2' | translate }}</strong> <br /><a class="link--default"  href="{{ 'automation_grid_emtpy.link_url' | translate }}" target="_blank">{{ 'automation_grid_emtpy.link_text' | translate }}</a></p>
-    <button class="dp-button button-medium primary-green" ng-click="automationViewNavegate({view:'TYPES', url:'selectAutomationType'})">{{ 'automation_grid_header.button' | translate }}</button>
-  </div>
-</section>
-<div ng-if="totalTasks && automationView === 'GRID'">
+<dp-editor-template  ng-if="automationView === 'TEMPLATES'" class="editor--modal"></dp-editor-template>
+<div ng-if="automationView === 'GRID'">
   <div class="dp-library">
     <header class="hero-banner">
       <div class="dp-container">
@@ -33,7 +26,7 @@
           </p>
        </div>
        <div class="col-sm-5 text-align--right">
-        <button class="dp-button button-medium primary-green" ng-click="automationViewNavegate({view:'TYPES', url:'selectAutomationType'})">{{ 'automation_grid_header.button' | translate }}</button>
+        <button class="dp-button button-medium primary-green" ng-click="automationViewNavegate({view:'TEMPLATES', url:'selectAutomationTemplate'})">{{ 'automation_grid_header.button' | translate }}</button>
        </div>
       </div>
       </div>
