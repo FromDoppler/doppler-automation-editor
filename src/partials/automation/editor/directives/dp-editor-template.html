@@ -1,0 +1,65 @@
+<section class="background--white dp-library">
+  <header class="hero-banner">
+    <div class="dp-container">
+      <div class="dp-rowflex">
+        <div class="col-sm-7">
+          <nav class="dp-breadcrumb" ng-if="totalTasks > 0">
+            <ul>
+              <li><a href="javascript:history.back()">{{ 'automationTemplates.breadcrumb.level0' | translate }}</a></li>
+              <li>{{ 'automationTemplates.breadcrumb.level1' | translate }}</li>
+            </ul>
+          </nav>
+          <h2>{{ 'automationTemplates.title' | translate }}</h2>
+          <p>{{ 'automationTemplates.description0' | translate }}</p>
+          <p>{{ 'automationTemplates.description1' | translate }}</p>
+          <p>{{ 'automationTemplates.description2' | translate }}</p>
+          <br>
+          <a href="{{ 'automationTemplates.help.url' | translate }}">{{ 'automationTemplates.help.title' | translate }}</a>
+        </div>
+        <div class="col-sm-5 dp-automation-shape"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrapper wrapper--default dp-container">
+    <header class="grid-title-type-section">
+        <h2>{{ 'automationTemplates.board.title' | translate }}</h2>
+        <p>{{ 'automationTemplates.board.description' | translate }}</p>
+    </header>
+    <div class="aplication-types--container flex-grid-v-center" ng-show="!isLoading">
+      <div target="_self"
+        class="aplication-types--items aplication-types--{{item.Status}} automation-types--{{item.Type}} {{lang}}"
+        ng-class="{'aplication-types--new-feature' : item.IsNewFeature, 'is--blank-template': item.IdAutomationTemplate === 0, 'is--selected': item.Type === selectedType}"
+        ng-repeat="item in templates"
+        ng-click="selectAutomationTemplate(item.IdAutomationTemplate, item.Status)"
+        data-text="{{ 'automationTypes.info.new_feature' | translate }}"
+        ng-if="item.Status !== 'hidden'">
+        <div class="aplication-types-description--container">
+          <p class="title">{{ 'automationTemplates.info.title' + item.IdAutomationTemplate | translate }}</p>
+          <p class="text--small">{{ 'automationTemplates.info.description' + item.IdAutomationTemplate | translate }}</p>
+        </div>
+        <div ng-if="item.Status !== 'active' || item.IsNewFeature" class="notification--container flex-grid">
+          <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
+          <span ng-if="item.Status !== 'active'" class="{{ item.Status }}">
+            <span ng-if="item.Status === 'repeated'">
+              {{ 'automationTypes.info.repeated_message_for_unique_available_integration' | translate }}
+            </span>
+            <span ng-if="item.Status === 'integration'">
+              {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
+            </span>
+            <a ng-if="item.Status === 'integration' || item.Status === 'repeated'" ng-href="{{webappUrl}}/integrations">{{ 'automationTypes.info.integration' | translate }}</a>
+          </span>
+        </div> 
+      </div>
+    </div>
+    <div class="loading--container components--center" ng-show="isLoading">
+      <span class="loading-icon"></span>
+    </div>
+  </div>
+</section>
+
+<div class="dp-editor-footer" ng-if="totalTasks > 0">
+  <div class="item">
+    <button class="button button--small button-outline--primary" ng-click="returnGrid()">{{ 'actions.cancel' | translate }}</button>
+  </div>
+</div>

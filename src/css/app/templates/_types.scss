@@ -219,6 +219,7 @@ $imagesPath: "../images" !default;
   }
 }
 
+dp-editor-template,
 dp-editor-types {
   .aplication-types--items {
     &::before {
@@ -232,6 +233,27 @@ dp-editor-types {
     }
     .aplication-types-description--container{
       margin: 10px 0 0 20%;
+
+.is--blank-template {
+  border: 1px dashed #33AD73;
+  .aplication-types-description--container {
+    .title {
+      color: $color-darkgreen;
+    }
+  }
+}
+
+dp-editor-template {
+  .hero-banner{
+    background-color: #FFFBEF;
+    p{
+      padding: 5px 0;
+    }
+    .dp-automation-shape{
+      background-position: center;
+      background-size: 40%;
+      background-repeat: no-repeat;
+      background-image: url(#{$imagesPath}/automation-shapes.svg);
     }
   }
 }

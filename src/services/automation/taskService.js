@@ -18,6 +18,8 @@
       deleteTask: deleteTask,
       getAutomationTypeList: getAutomationTypeList,
       createReplica: createReplica,
+      getAutomationTemplateList: getAutomationTemplateList,
+      createAutomationFromTemplate: createAutomationFromTemplate,
     };
 
     return service;
@@ -58,6 +60,31 @@
         })
         .then(function(response){
           return response.data.automationTypeList;
+        });
+    }
+
+    function getAutomationTemplateList() {
+      return $http
+        .get('/Automation/Task/GetAutomationTemplatesList')
+        .then(function(response){
+          const blankTemplate = {
+            "IdAutomationTemplate": 0,
+            "Type": "0",
+            "Status": "active"
+          }
+          return [blankTemplate].concat(response.data.automationTemplateList);
+        });
+    }
+
+    function createAutomationFromTemplate(idAutomationTemplate) {
+      return $http
+        .get('/Automation/Task/CreateAutomationFromTemplate', {
+          params: {
+            idAutomationTemplate: idAutomationTemplate,
+          }
+        })
+        .then(function(response){
+          return response.data;
         });
     }
 
