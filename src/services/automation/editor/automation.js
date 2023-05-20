@@ -91,6 +91,7 @@
       getParentComponent: getParentComponent,
       getReadOnlyLabel: getReadOnlyLabel,
       getSiteBehaviorStatus: getSiteBehaviorStatus,
+      getAutomationType: getAutomationType,
       hasNextComponent: hasNextComponent,
       hasDynamicElement: hasDynamicElement,
       hasSmsComponent: hasSmsComponent,
