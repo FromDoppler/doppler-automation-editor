@@ -21,6 +21,7 @@
     $scope.rows = 10;
     $scope.tasksQuantity = '';
     $scope.totalTasks = 0;
+    $scope.automationView = getViewByUrl();
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
     $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;
     $scope.gridModel = gridService.initGrid({
@@ -33,6 +34,10 @@
       loadData();
     });
 
+    const baseUrl = $window.location.protocol.concat('//')
+      .concat($window.location.host)
+      .concat('/Automation/Automation/AutomationApp/');
+
     function loadData() {
       $scope.gridModel.getListData().then(function(response) {
         $scope.totalTasks = $scope.totalTasks === 0 ? response.data.tasksQuantity : $scope.totalTasks;
@@ -41,6 +46,18 @@
         $scope.gridLoading = false;
         $scope.replicateAutomationEnabled = response.data.ReplicateAutomationEnabled;
       });
+    }
+
+    $scope.automationViewNavegate = function(navegate) {
+      if(navegate.view && navegate.url){
+        $scope.automationView = navegate.view;
+        navegatePushState(navegate);
+      }
+    }
+
+    function navegatePushState(navegate){
+      const newUrl = baseUrl.concat(navegate.url);
+      $window.history.pushState({ automationView : navegate.view }, '', newUrl);
     }
 
     $scope.disableDeletedRows = function() {
@@ -108,6 +125,19 @@
         throw new Error('Status with unknown number cannot be parsed.');
       }
     }
+
+    function getViewByUrl(){
+      return  $window.location.href.indexOf("/selectAutomationType") > 0 ? 'TYPES': 'GRID';
+    }
+
+    window.addEventListener("popstate", function (evt) {
+      $scope.automationView = getViewByUrl();
+      $scope.$apply();
+    });
+
+    $scope.returnPreviosPage = function() {
+      $window.history.back();
+    };
 
   }
 
