@@ -70,7 +70,7 @@
 
       scope.buildAutomation = function() {
         automation.buildAutomation(scope.selectedType);
-        automation.saveChanges().then(function(){
+        automation.saveChanges().then(function(response){
           $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + response.data.id + '&automationType=' +  automation.getAutomationType(parseInt(scope.selectedType));
         });
       };
