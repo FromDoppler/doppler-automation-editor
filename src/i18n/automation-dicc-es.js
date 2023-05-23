@@ -982,12 +982,12 @@ export const automation_es_translations = {
       "level0": "Mis flujos automatizados",
       "level1": "Crear automation"
     },
-    "title": "Campañas automatizadas",
+    "title": "Automation",
     "description0": "¡Ahorra tiempo y esfuerzo con Automatizaciones!",
-    "description1": "Crea flujos personalizados que envíen tus campañas automáticamente según las acciones que realicen tus suscriptores. Desde bienvenidas hasta carritos abandonados, las posibilidades son infinitas.",
+    "description1": "Crea flujos personalizados que envíen tus campañas automáticamente según las acciones que realicen tus suscriptores. Desde bienvenidas hasta carritos abandonados, las posibilidades son infinitas. ",
     "description2": "Obtén mejores resultados y haz crecer tu negocio mientras tus campañas se ejecutan automáticamente.",
     "help": {
-      "url": "#",
+      "url": "https://help.fromdoppler.com/es/como-utilizar-email-automation/",
       "title": "Aprende más sobre Automation"
     },
     "board": {
@@ -998,13 +998,13 @@ export const automation_es_translations = {
       "title0": "Crear flujo desde cero",
       "description0": "Define tu mismo las condiciones y acciones que dispararán tus campañas creando un flujo personalizado.",
       "title1": "Revalidacion de suscriptores",
-      "description1": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
-      "title2": "Descuento cumpleaños",
-      "description2": "Los cumpleaños son una oportunidad perfecta para construir una mejor relación con tu cliente.",
-      "title3": "Nuevo Contacto",
-      "description3": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
+      "description1": "Confirma, a través de un envío, aquellos contactos que desean continuar recibiendo tus comunicaciones.",
+      "title2": "Saludo de cumpleaños",
+      "description2": "Programa un email personalizado en esa fecha especial para tu usuario.",
+      "title3": "Bienvenida a nuevos contactos",
+      "description3": "Envía un email de bienvenida a los nuevos suscriptores que ingresen la lista asociada.",
       "title4": "Carrito abandonado",
-      "description4": "Úsalo para crear una secuencia de emails y animar a las personas que estuvieron cerca de completar una compra."
+      "description4": "Crea una secuencia de emails que recuerde a las personas la finalización de su compra."
     }
   },
   "automationTypes": {

@@ -980,32 +980,32 @@ export const automation_en_translations = {
   },
   "automationTemplates": {
     "breadcrumb": {
-      "level0": "Mis flujos automatizados",
-      "level1": "Crear automation"
+      "level0": "Your automated flows",
+      "level1": "Create Automation"
     },
-    "title": "Campañas automatizadas",
-    "description0": "¡Ahorra tiempo y esfuerzo con Automatizaciones!",
-    "description1": "Crea flujos personalizados que envíen tus campañas automáticamente según las acciones que realicen tus suscriptores. Desde bienvenidas hasta carritos abandonados, las posibilidades son infinitas.",
-    "description2": "Obtén mejores resultados y haz crecer tu negocio mientras tus campañas se ejecutan automáticamente.",
+    "title": "Automation",
+    "description0": "Save time and effort with Automations!",
+    "description1": "Create custom flows that send your campaigns automatically based on the actions your subscribers take. From welcomes to abandoned carts, the possibilities are endless.",
+    "description2": "Get better results and grow your business while your campaigns run automatically.",
     "help": {
-      "url": "#",
-      "title": "Aprende más sobre Automation"
+      "url": "https://help.fromdoppler.com/en/how-to-use-email-automation?utm_source=direct",
+      "title": "Learn more about Automation"
     },
     "board": {
-      "title": "Elige un flujo prediseñado o crea uno desde cero ",
-      "description": "Los flujos prediseñados son plantillas con varias acciones ya incorporadas. Ahorra tiempo y adáptalos a gusto."
+      "title": "Choose a pre-built flow or create one from scratch",
+      "description": "Pre-built flows are templates with various actions already built in. Save time and adapt them to taste."
     },
     "info": {
-      "title0": "Crear flujo desde cero",
-      "description0": "Define tu mismo las condiciones y acciones que dispararán tus campañas creando un flujo personalizado.",
-      "title1": "Revalidacion de suscriptores",
-      "description1": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
-      "title2": "Descuento cumpleaños",
-      "description2": "Los cumpleaños son una oportunidad perfecta para construir una mejor relación con tu cliente.",
-      "title3": "Nuevo Contacto",
-      "description3": "Envía un email de bienvenida a los contacto suscritos a través de un formulario de Doppler.",
-      "title4": "Carrito abandonado",
-      "description4": "Úsalo para crear una secuencia de emails y animar a las personas que estuvieron cerca de completar una compra."
+      "title0": "Create flow from scratch",
+      "description0": "Define the conditions and actions that will trigger your campaigns by creating a personalized flow.",
+      "title1": "Revalidation of subscribers",
+      "description1": "Confirm, through a shipment, those contacts who wish to continue receiving your communications.",
+      "title2": "Birthday greeting",
+      "description2": "Schedule a personalized email on that special date for your user.",
+      "title3": "Welcome to new contacts",
+      "description3": "Send a welcome email to new subscribers who join the associated list.",
+      "title4": "Abandonded cart",
+      "description4": "Create an email sequence that reminds people of the completion of their purchase."
     }
   },
   "automationTypes": {
