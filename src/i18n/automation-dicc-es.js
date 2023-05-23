@@ -1115,8 +1115,8 @@ export const automation_es_translations = {
 	"General_MaxLength_Field" : "¡Ouch! Has alcanzado la cantidad máxima de caracteres.",
 
 	"automation_grid_header" : {
-		"title" : "Campañas de Automation",
-		"description" : "Aquí encontrarás todas tus Campañas de Automation ya sea que estén en borrador, pausadas o activas. ",
+		"title" : "Mis flujos automatizados",
+		"description" : "Aquí encontrarás todas tus flujos automatizados, ya sea que se encuentren en borrador, listas para enviar, inactivas o en proceso de envío.  ",
     	"quantity_part1" : "Actualmente tienes ",
     	"empty_part1" : "Actualmente no tienes ",
     	"empty_part2" : "ninguna Campaña.",
