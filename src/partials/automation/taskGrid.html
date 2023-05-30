@@ -1,6 +1,6 @@
-<dp-editor-types ng-if="automationView === 'TYPES'" class="editor--modal"></dp-editor-types>
-<dp-editor-template  ng-if="automationView === 'TEMPLATES'" class="editor--modal"></dp-editor-template>
-<div ng-if="automationView === 'GRID'">
+<dp-editor-types ng-if="automationView === AUTOMATION_VIEW.TYPES" class="editor--modal"></dp-editor-types>
+<dp-editor-template  ng-if="automationView === AUTOMATION_VIEW.TEMPLATES" class="editor--modal"></dp-editor-template>
+<div ng-if="automationView === AUTOMATION_VIEW.GRID">
   <div class="dp-library">
     <header class="hero-banner">
       <div class="dp-container">
@@ -26,7 +26,7 @@
           </p>
        </div>
        <div class="col-sm-5 text-align--right">
-        <button class="dp-button button-medium primary-green" ng-click="automationViewNavegate({view:'TEMPLATES', url:'selectAutomationTemplate'})">{{ 'automation_grid_header.button' | translate }}</button>
+        <button class="dp-button button-medium primary-green" ng-click="automationViewNavegate({view: AUTOMATION_VIEW.TEMPLATES, url:'selectAutomationTemplate'})">{{ 'automation_grid_header.button' | translate }}</button>
        </div>
       </div>
       </div>

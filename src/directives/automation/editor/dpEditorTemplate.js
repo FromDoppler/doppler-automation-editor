@@ -31,7 +31,7 @@
       scope.selectAutomationTemplate = function(idAutomationTemplate, status) {
         if (status === 'active') {
           if(idAutomationTemplate == 0){
-            scope.automationViewNavegate({view:'TYPES', url:'selectAutomationType'})
+            scope.automationViewNavegate({view: scope.AUTOMATION_VIEW.TYPES, url:'selectAutomationType'})
           } else {
             taskService.createAutomationFromTemplate(idAutomationTemplate)
             .then(function(data) {
