@@ -6,9 +6,9 @@
     </header>
     <div class="aplication-types--container flex-grid-v-center" ng-show="!isLoading">
       <div target="_self" 
-        class="flex-grid-v-center--s-between aplication-types--items aplication-types--{{item.Status}} automation-types--{{item.Type}}"
+        class="aplication-types--items aplication-types--{{item.Status}} automation-types--{{item.Type}}"
         ng-class="{'aplication-types--new-feature' : item.IsNewFeature && item.Status !== 'repeated', 'is--selected': item.Type === selectedType}"
-        ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)" 
+        ng-repeat="item in types" ng-click="selectAutomationType(item.Type, item.Status)"
         ng-if="item.Status !== 'hidden'">
         <div class="aplication-types--new-feature  {{lang}}"
           data-text="{{ 'automationTypes.info.new_feature' | translate }}" 

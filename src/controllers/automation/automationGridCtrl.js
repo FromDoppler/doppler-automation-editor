@@ -11,17 +11,19 @@
     '$translate',
     'AUTOMATION_STATE',
     'AUTOMATION_TYPE',
+    'AUTOMATION_VIEW',
     'gridService',
     'ModalService',
     '$window'
   ];
 
-  function AutomationGridCtrl($scope, _, $translate, AUTOMATION_STATE, AUTOMATION_TYPE, gridService, modalService, $window) {
+  function AutomationGridCtrl($scope, _, $translate, AUTOMATION_STATE, AUTOMATION_TYPE, AUTOMATION_VIEW, gridService, modalService, $window) {
     $scope.isLoading = true;
     $scope.rows = 10;
     $scope.tasksQuantity = '';
     $scope.totalTasks = 0;
     $scope.automationView = getViewByUrl();
+    $scope.AUTOMATION_VIEW = AUTOMATION_VIEW;
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
     $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;
     $scope.gridModel = gridService.initGrid({
@@ -45,6 +47,10 @@
         $scope.isLoading = false;
         $scope.gridLoading = false;
         $scope.replicateAutomationEnabled = response.data.ReplicateAutomationEnabled;
+        if($scope.totalTasks === 0) {
+          navegatePushState({view:'TEMPLATES', url:'selectAutomationTemplate'});
+          $scope.automationView = 'TEMPLATES';
+        }
       });
     }
 
@@ -70,6 +76,10 @@
       $scope.gridModel.deleteRow(row, 'IdScheduledTask', {idTask: row.IdScheduledTask} ).then(function(response){
         if (response.data.success) {
           $scope.totalTasks--;
+          if($scope.totalTasks === 0) {
+            navegatePushState({view:'TEMPLATES', url:'selectAutomationTemplate'});
+            $scope.automationView = 'TEMPLATES';
+          }
         }
       });
     };
@@ -127,7 +137,8 @@
     }
 
     function getViewByUrl(){
-      return  $window.location.href.indexOf("/selectAutomationType") > 0 ? 'TYPES': 'GRID';
+      return  $window.location.href.indexOf("/selectAutomationType") > 0 ? AUTOMATION_VIEW.TYPES:
+        $window.location.href.indexOf("/selectAutomationTemplate") > 0 ? AUTOMATION_VIEW.TEMPLATES: AUTOMATION_VIEW.GRID;
     }
 
     window.addEventListener("popstate", function (evt) {

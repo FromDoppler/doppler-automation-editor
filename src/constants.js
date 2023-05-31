@@ -449,6 +449,12 @@ var EMAIL_EDITOR_TYPE = {
   UNLAYER: 5
 };
 
+var AUTOMATION_VIEW = {
+  GRID: 1,
+  TYPES: 2,
+  TEMPLATES: 3
+};
+
 angular.module('dopplerApp')
   .constant("Enums", Enums)
   .constant("REGEX", Regex)
@@ -475,7 +481,8 @@ angular.module('dopplerApp')
   .constant("MX_TYPE_OF_PAYMENT", MxTypeOfPayment)
   .constant("BILLING_SYSTEM", BiilingSystem)
   .constant('PUSH_CONFIGURATION_STATUS', PushConfigurationStatus)
-  .constant('EMAIL_EDITOR_TYPE', EMAIL_EDITOR_TYPE);
+  .constant('EMAIL_EDITOR_TYPE', EMAIL_EDITOR_TYPE)
+  .constant('AUTOMATION_VIEW', AUTOMATION_VIEW);
 
 angular.module('dopplerApp.automation.editor')
   .constant('AUTOMATION_STATE',AutomationState)
