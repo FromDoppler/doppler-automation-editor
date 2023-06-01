@@ -1137,12 +1137,12 @@ export const automation_en_translations = {
   "automation_grid_header" : {
     "title" : "Your automated flows",
     "description" : "Here you will find all your automated flows, whether they are in draft, ready to send, inactive, or in the process of sending. ",
-      "quantity_part1" : "You have created ",
-      "quantity_part2" : " Campaigns in total.",
+      "quantity_part1" : "Currently, you have ",
+      "quantity_part2" : " Automations in total.",
       "empty_part1" : "You haven't created ",
-      "empty_part2" : "any Campaigns yet.",
-      "quantity_campaign": " Campaign.",
-    "button" : "Create Automation Campaign"
+      "empty_part2" : "any Automation yet.",
+      "quantity_campaign": " Automation.",
+    "button" : "Create Automation"
   },
   "automation_grid_search" : "Search...",
   "automation_grid_headers" : {

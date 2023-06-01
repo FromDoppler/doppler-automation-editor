@@ -1136,13 +1136,13 @@ export const automation_es_translations = {
 
 	"automation_grid_header" : {
 		"title" : "Mis flujos automatizados",
-		"description" : "Aquí encontrarás todas tus flujos automatizados, ya sea que se encuentren en borrador, listas para enviar, inactivas o en proceso de envío.  ",
+		"description" : "Aquí encontrarás todos tus flujos automatizados, ya sea que se encuentren en borrador, listos para enviar, inactivos o en proceso de envío.  ",
     	"quantity_part1" : "Actualmente tienes ",
     	"empty_part1" : "Actualmente no tienes ",
-    	"empty_part2" : "ninguna Campaña.",
-    	"quantity_part2" : "  Campañas.",
-    	"quantity_campaign": " Campaña.",
-		"button" : "Crear Campaña de Automation"
+    	"empty_part2" : "ningun flujo automatizado.",
+    	"quantity_part2" : "  flujos automatizados.",
+    	"quantity_campaign": " flujo automatizado.",
+		"button" : "Crear Automation"
 	},
 	"automation_grid_search" : "Buscar...",
 	"automation_grid_headers" : {
