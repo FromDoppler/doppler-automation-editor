@@ -38,6 +38,7 @@ dp-editor-header,
   z-index: 6;
 }
 
+dp-editor-template-preview,
 dp-editor-template,
 dp-editor-types {
   .dp-editor-footer {
@@ -71,7 +72,6 @@ dp-editor-types {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: $size-full;
   }
   .button--space {
     margin-right: 10px;

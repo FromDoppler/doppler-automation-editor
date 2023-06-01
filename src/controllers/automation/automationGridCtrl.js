@@ -22,6 +22,7 @@
     $scope.rows = 10;
     $scope.tasksQuantity = '';
     $scope.totalTasks = 0;
+    $scope.automationTemplateSelected = -1;
     $scope.automationView = getViewByUrl();
     $scope.AUTOMATION_VIEW = AUTOMATION_VIEW;
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
@@ -150,6 +151,9 @@
       $window.history.back();
     };
 
+    $scope.setAutomationTemplateSelected = function (automationTemplateSelected){
+      $scope.automationTemplateSelected = automationTemplateSelected;
+    }
   }
 
 })();

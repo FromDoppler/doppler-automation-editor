@@ -990,6 +990,7 @@ export const automation_es_translations = {
       "url": "https://help.fromdoppler.com/es/como-utilizar-email-automation/",
       "title": "Aprende más sobre Automation"
     },
+    "create_template": "Usar esta plantilla",
     "board": {
       "title": "Elige un flujo prediseñado o crea uno desde cero ",
       "description": "Los flujos prediseñados son plantillas con varias acciones ya incorporadas. Ahorra tiempo y adáptalos a gusto."
@@ -1005,7 +1006,26 @@ export const automation_es_translations = {
       "description3": "Envía un email de bienvenida a los nuevos suscriptores que ingresen la lista asociada.",
       "title4": "Carrito abandonado",
       "description4": "Crea una secuencia de emails que recuerde a las personas la finalización de su compra."
-    }
+    },
+    "templatePreview" : {
+      "flowAllow": "Este flujo permitirá:",
+      "description1": "Confirma, a través de un envío, aquellos contactos que desean continuar recibiendo tus comunicaciones.",
+      "description2": "Programa un email personalizado en esa fecha especial para tu usuario.",
+      "description3": "Envía un email de bienvenida a los nuevos suscriptores que ingresen la lista asociada.",
+      "description4": "Crea una secuencia de emails que recuerde a las personas la finalización de su compra.",
+      "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca.",
+      "template_1_allow_item1": "Crear y segmentar en dos listas: validados y no validados.",
+      "template_1_allow_item2": "Accionar estratégicamente sobre los usuarios interesados.",
+      "template_2_allow_item0": "Realizar este envío teniendo completo el campo de fecha de cumpleaños.",
+      "template_2_allow_item1": "Mantener el contacto del usuario con tu marca.",
+      "template_2_allow_item2": "Ofrecer contenido o una promoción exclusiva.",
+      "template_3_allow_item0": "Causar una agradable primera impresión en tus suscriptores.",
+      "template_3_allow_item1": "Asociar a una lista principal de nuevos contactos.",
+      "template_3_allow_item2": "Ofrecer contenido exclusivo.",
+      "template_4_allow_item0": "Definir diferentes condiciones de envíos.",
+      "template_4_allow_item1": "Recordar a los usuarios aquellos productos que abandonó.",
+      "template_4_allow_item2": "Hacer envíos, si cuentas con una integración de ecommerce activa.",
+    },
   },
   "automationTypes": {
     "info": {

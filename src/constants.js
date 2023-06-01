@@ -452,7 +452,8 @@ var EMAIL_EDITOR_TYPE = {
 var AUTOMATION_VIEW = {
   GRID: 1,
   TYPES: 2,
-  TEMPLATES: 3
+  TEMPLATES: 3,
+  TEMPLATE_PREVIEW: 4
 };
 
 angular.module('dopplerApp')
