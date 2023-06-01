@@ -29,7 +29,6 @@
       scope.types = [];
       scope.isLoading = true;
       scope.integrationsListLength = 0;
-      scope.lang = mainMenuData.user.lang;
       automation.updateAutomationFlowState();
       automation.load(0);
 
