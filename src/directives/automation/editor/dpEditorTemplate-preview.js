@@ -20,7 +20,7 @@
 
     function link(scope) {
       scope.createAutomationFromTemplate = function() {
-        taskService.createAutomationFromTemplate(scope.automationTemplateSelected)
+        taskService.createAutomationFromTemplate(scope.idAutomationTemplateSelected)
         .then(function(data) {
           if(data.success === true){
             $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + data.idScheduledTask + '&automationType=' +  data.scheduledTaskType;
