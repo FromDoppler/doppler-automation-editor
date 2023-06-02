@@ -6,10 +6,10 @@
           <nav class="dp-breadcrumb">
             <ul>
               <li ng-if="totalTasks > 0">
-                <button type="button" ng-click="automationViewNavegate({view: AUTOMATION_VIEW.GRID, url:'#'})" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level0' | translate }}</button>
+                <button type="button" ng-click="automationViewNavegate(AUTOMATION_VIEW.GRID)" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level0' | translate }}</button>
               </li>
               <li>
-                <button type="button" ng-click="automationViewNavegate({view: AUTOMATION_VIEW.TEMPLATES, url:'selectAutomationTemplate'})" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level1' | translate }}</button>
+                <button type="button" ng-click="automationViewNavegate(AUTOMATION_VIEW.TEMPLATES)" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level1' | translate }}</button>
               </li>
               <li>{{ 'automationTemplates.info.title' + idAutomationTemplateSelected | translate }}</li>
             </ul>
@@ -35,7 +35,7 @@
 
 <div class="dp-editor-footer">
   <div class="item">
-    <button class="button button--small button-outline--primary" ng-click="automationViewNavegate({view: AUTOMATION_VIEW.TEMPLATES, url:'selectAutomationTemplate'})">{{ 'actions.cancel' | translate }}</button>
+    <button class="button button--small button-outline--primary" ng-click="automationViewNavegate(AUTOMATION_VIEW.TEMPLATES)">{{ 'actions.cancel' | translate }}</button>
     <button class="button button--small button--primary" ng-click="createAutomationFromTemplate()" >{{ 'automationTemplates.create_template' | translate }}</button>
   </div>
 </div>

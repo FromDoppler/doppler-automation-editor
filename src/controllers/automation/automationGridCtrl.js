@@ -24,10 +24,10 @@
     $scope.totalTasks = 0;
     $scope.idAutomationTemplateSelected = -1;
     $scope.lang = mainMenuData.user.lang;
-    $scope.automationView = getViewByUrl();
     $scope.AUTOMATION_VIEW = AUTOMATION_VIEW;
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
     $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;
+    $scope.automationView = getViewByUrl();
     $scope.gridModel = gridService.initGrid({
       getDataUrl: '/Automation/Automation/GetAutomationTasks',
       deleteRowUrl: '/Automation/Task/DeleteTask'
@@ -50,22 +50,17 @@
         $scope.gridLoading = false;
         $scope.replicateAutomationEnabled = response.data.ReplicateAutomationEnabled;
         if($scope.totalTasks === 0) {
-          navegatePushState({view:'TEMPLATES', url:'selectAutomationTemplate'});
-          $scope.automationView = 'TEMPLATES';
+          $scope.automationViewNavegate($scope.AUTOMATION_VIEW.TEMPLATES);
         }
       });
     }
 
     $scope.automationViewNavegate = function(navegate) {
-      if(navegate.view && navegate.url){
-        $scope.automationView = navegate.view;
-        navegatePushState(navegate);
+      if(navegate) {
+        $scope.automationView = navegate;
+        const newUrl = baseUrl.concat(navegate);
+        $window.history.pushState({ automationView : navegate }, '', newUrl);
       }
-    }
-
-    function navegatePushState(navegate){
-      const newUrl = baseUrl.concat(navegate.url);
-      $window.history.pushState({ automationView : navegate.view }, '', newUrl);
     }
 
     $scope.disableDeletedRows = function() {
@@ -79,8 +74,7 @@
         if (response.data.success) {
           $scope.totalTasks--;
           if($scope.totalTasks === 0) {
-            navegatePushState({view:'TEMPLATES', url:'selectAutomationTemplate'});
-            $scope.automationView = 'TEMPLATES';
+            $scope.automationViewNavegate($scope.AUTOMATION_VIEW.TEMPLATES);
           }
         }
       });
@@ -139,8 +133,8 @@
     }
 
     function getViewByUrl(){
-      return  $window.location.href.indexOf("/selectAutomationType") > 0 ? AUTOMATION_VIEW.TYPES:
-        $window.location.href.indexOf("/selectAutomationTemplate") > 0 ? AUTOMATION_VIEW.TEMPLATES: AUTOMATION_VIEW.GRID;
+      return  $window.location.href.indexOf("/selectAutomationType") > 0 ? $scope.AUTOMATION_VIEW.TYPES:
+        $window.location.href.indexOf("/selectAutomationTemplate") > 0 ? $scope.AUTOMATION_VIEW.TEMPLATES: $scope.AUTOMATION_VIEW.GRID;
     }
 
     window.addEventListener("popstate", function (evt) {

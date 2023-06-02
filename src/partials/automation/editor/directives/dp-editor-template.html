@@ -6,7 +6,7 @@
           <nav class="dp-breadcrumb" ng-if="totalTasks > 0">
             <ul>
               <li>
-                <button type="button" ng-click="automationViewNavegate({view: AUTOMATION_VIEW.GRID, url:'#'})" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level0' | translate }}</button>
+                <button type="button" ng-click="automationViewNavegate(AUTOMATION_VIEW.GRID)" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level0' | translate }}</button>
               </li>
               <li>{{ 'automationTemplates.breadcrumb.level1' | translate }}</li>
             </ul>
@@ -62,6 +62,6 @@
 
 <div class="dp-editor-footer" ng-if="totalTasks > 0">
   <div class="item">
-    <button class="button button--small button-outline--primary" ng-click="automationViewNavegate({view: AUTOMATION_VIEW.GRID, url:'#'})">{{ 'actions.cancel' | translate }}</button>
+    <button class="button button--small button-outline--primary" ng-click="automationViewNavegate(AUTOMATION_VIEW.GRID)">{{ 'actions.cancel' | translate }}</button>
   </div>
 </div>

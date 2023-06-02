@@ -31,10 +31,10 @@
       scope.selectAutomationTemplate = function(idAutomationTemplate, status) {
         if (status === 'active') {
           if(idAutomationTemplate == 0){
-            scope.automationViewNavegate({view: scope.AUTOMATION_VIEW.TYPES, url:'selectAutomationType'})
+            scope.automationViewNavegate(scope.AUTOMATION_VIEW.TYPES)
           } else {
             scope.setAutomationTemplateSelected(idAutomationTemplate);
-            scope.automationViewNavegate({view: scope.AUTOMATION_VIEW.TEMPLATE_PREVIEW, url:'selectAutomationTemplatePreview'})
+            scope.automationViewNavegate(scope.AUTOMATION_VIEW.TEMPLATE_PREVIEW)
           }
         }
       };
