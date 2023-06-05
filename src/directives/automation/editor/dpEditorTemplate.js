@@ -31,14 +31,10 @@
       scope.selectAutomationTemplate = function(idAutomationTemplate, status) {
         if (status === 'active') {
           if(idAutomationTemplate == 0){
-            scope.automationViewNavegate({view: scope.AUTOMATION_VIEW.TYPES, url:'selectAutomationType'})
+            scope.automationViewNavegate(scope.AUTOMATION_VIEW.TYPES)
           } else {
-            taskService.createAutomationFromTemplate(idAutomationTemplate)
-            .then(function(data) {
-              if(data.success === true){
-                $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + data.idScheduledTask + '&automationType=' +  data.scheduledTaskType;
-              }
-            });
+            scope.setAutomationTemplateSelected(idAutomationTemplate);
+            scope.automationViewNavegate(scope.AUTOMATION_VIEW.TEMPLATE_PREVIEW)
           }
         }
       };

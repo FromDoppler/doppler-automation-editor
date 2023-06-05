@@ -1,0 +1,41 @@
+<section class="background--white dp-library">
+  <header class="hero-banner">
+    <div class="dp-container">
+      <div class="dp-rowflex">
+        <div class="col-sm-6">
+          <nav class="dp-breadcrumb">
+            <ul>
+              <li ng-if="totalTasks > 0">
+                <button type="button" ng-click="automationViewNavegate(AUTOMATION_VIEW.GRID)" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level0' | translate }}</button>
+              </li>
+              <li>
+                <button type="button" ng-click="automationViewNavegate(AUTOMATION_VIEW.TEMPLATES)" class="dp-button link-green">{{ 'automationTemplates.breadcrumb.level1' | translate }}</button>
+              </li>
+              <li>{{ 'automationTemplates.info.title' + idAutomationTemplateSelected | translate }}</li>
+            </ul>
+          </nav>
+          <h1>{{ 'automationTemplates.info.title' + idAutomationTemplateSelected | translate }}</h1>
+          <p>{{ 'automationTemplates.templatePreview.description' + idAutomationTemplateSelected | translate }}</p>
+          <span class="dp-automation-template-items-allow">{{ 'automationTemplates.templatePreview.flowAllow' | translate }}</span>
+          <ul class="dp-automation-template-preview-suggest-uses">
+            <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item0' | translate }}</li>
+            <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item1' | translate }}</li>
+            <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item2' | translate }}</li>
+          </ul>
+          <br>
+          <a href="{{ 'automationTemplates.help.url' | translate }}">{{ 'automationTemplates.help.title' | translate }}</a>
+        </div>
+        <div class="col-sm-6 dp-automation-template-preview-image">
+          <div class="dp-automation-template-preview-image-{{idAutomationTemplateSelected}}-{{lang}}"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+</section> 
+
+<div class="dp-editor-footer">
+  <div class="item">
+    <button class="button button--small button-outline--primary" ng-click="automationViewNavegate(AUTOMATION_VIEW.TEMPLATES)">{{ 'actions.cancel' | translate }}</button>
+    <button class="button button--small button--primary" ng-click="createAutomationFromTemplate()" >{{ 'automationTemplates.create_template' | translate }}</button>
+  </div>
+</div>

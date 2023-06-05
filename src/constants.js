@@ -450,9 +450,10 @@ var EMAIL_EDITOR_TYPE = {
 };
 
 var AUTOMATION_VIEW = {
-  GRID: 1,
-  TYPES: 2,
-  TEMPLATES: 3
+  GRID: '#',
+  TYPES: 'selectAutomationType',
+  TEMPLATES: 'selectAutomationTemplate',
+  TEMPLATE_PREVIEW: 'selectAutomationTemplatePreview'
 };
 
 angular.module('dopplerApp')

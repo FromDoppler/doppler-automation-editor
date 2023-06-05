@@ -991,6 +991,7 @@ export const automation_en_translations = {
       "url": "https://help.fromdoppler.com/en/how-to-use-email-automation?utm_source=direct",
       "title": "Learn more about Automation"
     },
+    "create_template": "Use pre-built flow",
     "board": {
       "title": "Choose a pre-built flow or create one from scratch",
       "description": "Pre-built flows are templates with various actions already built in. Save time and adapt them to taste."
@@ -1006,7 +1007,26 @@ export const automation_en_translations = {
       "description3": "Send a welcome email to new subscribers who join the associated list.",
       "title4": "Abandonded cart",
       "description4": "Create an email sequence that reminds people of the completion of their purchase."
-    }
+    },
+    "templatePreview" : {
+      "flowAllow": "This flow will allow:",
+      "description1": "Confirm, through a communication, those contacts who wish to continue receiving your communications.",
+      "description2": "Schedule a personalized email on that special date for your user.",
+      "description3": "Send a welcome email to new subscribers who join the associated list.",
+      "description4": "Create an email sequence that reminds people of the completion of their purchase.",
+      "template_1_allow_item0": "Know who wants to continue in contact with your brand.",
+      "template_1_allow_item1": "Create and segment into two lists: validated and not validated.",
+      "template_1_allow_item2": "Strategically act on interested users.",
+      "template_2_allow_item0": "Make this shipment having the birthday date field complete.",
+      "template_2_allow_item1": "Maintain user contact with your brand.",
+      "template_2_allow_item2": "Offer exclusive content or promotion.",
+      "template_3_allow_item0": "Make a nice first impression on your subscribers.",
+      "template_3_allow_item1": "Associate to a master list of new contacts.",
+      "template_3_allow_item2": "Offer exclusive content.",
+      "template_4_allow_item0": "Define different shipping conditions.",
+      "template_4_allow_item1": "Remind users of products they abandoned.",
+      "template_4_allow_item2": "Ship, if you have an active ecommerce integration.",
+    },
   },
   "automationTypes": {
     "info": {
@@ -1117,12 +1137,12 @@ export const automation_en_translations = {
   "automation_grid_header" : {
     "title" : "Your automated flows",
     "description" : "Here you will find all your automated flows, whether they are in draft, ready to send, inactive, or in the process of sending. ",
-      "quantity_part1" : "You have created ",
-      "quantity_part2" : " Campaigns in total.",
+      "quantity_part1" : "Currently, you have ",
+      "quantity_part2" : " Automations in total.",
       "empty_part1" : "You haven't created ",
-      "empty_part2" : "any Campaigns yet.",
-      "quantity_campaign": " Campaign.",
-    "button" : "Create Automation Campaign"
+      "empty_part2" : "any Automation yet.",
+      "quantity_campaign": " Automation.",
+    "button" : "Create Automation"
   },
   "automation_grid_search" : "Search...",
   "automation_grid_headers" : {
