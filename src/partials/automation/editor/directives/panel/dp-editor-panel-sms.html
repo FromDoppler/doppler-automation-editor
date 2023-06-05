@@ -48,8 +48,17 @@
 <div class="input--group">
   <label class="label label--panel">*{{ 'automation_editor.sidebar.sms_text' | translate }}</label>
   <span class="span--sms">{{ 'automation_editor.sidebar.sms_text_desc' | translate }}</span>
-    <div ng-if="hasColombiaCodeSmsActive" class="dp-sms-colombia-warning dp-library">
+  <div class="dp-sms-message-warning dp-library">
     <div class="dp-wrap-message dp-wrap-warning">
+      <span class="dp-message-icon"></span>
+      <div class="dp-content-message">
+        <p>
+          {{ 'automation_editor.sidebar.sms_shorteners_warning_msg' | translate }}
+          <a ng-href="{{ 'automation_editor.sidebar.sms_shorteners_warning_link'| translate }}" class="dp-message-link" target="_blank">{{ 'automation_editor.sidebar.sms_shorteners_warning_link_label' | translate }}</a>
+        </p>
+      </div>
+    </div>
+    <div ng-if="hasColombiaCodeSmsActive" class="margin-t-10 dp-wrap-message dp-wrap-warning">
       <span class="dp-message-icon"></span>
       <div class="dp-content-message">
         <p>
