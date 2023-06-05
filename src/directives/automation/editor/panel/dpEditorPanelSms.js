@@ -129,24 +129,28 @@
       scope.sendSmsTest = function(smsForm) {
         var data = {
           message: scope.selectedComponent.smsText,
-          phoneNumber: scope.selectedComponent.smsPhoneNumberTest
+          phoneNumber: scope.selectedComponent.smsPhoneNumberTest,
+          idScheduledTask: automation.getModel().id
         };
         if (smsForm.$valid) {
           scope.sendingSmsTest = true;
+
+          // TODO: fix errors handling
           userFieldsDataservice.sendSmsTest(data).then(function(response) {
             if (response.data.ErrorCode) {
               switch (response.data.ErrorCode) {
-              case 251:
+              case 254:
                 scope.isSmsPhoneNumberTestInvalidByChangeCountry = false;
                 smsForm.smsPhoneNumberTest.$error = {
                   'isSmsPhoneNumberTestValid': true,
                   'required': false,
                   'funds': false,
                   'genericPhone': false,
-                  'countryNotActive': false
+                  'countryNotActive': false,
+                  smsLimitsReached: false
                 };
                 break;
-              case 253:
+              case 256:
                 scope.isSmsPhoneNumberTestInvalidByChangeCountry = false;
                 scope.countryUsed = iti.getSelectedCountryData().name;
                 smsForm.smsPhoneNumberTest.$error = {
@@ -154,17 +158,30 @@
                   'required': false,
                   'funds': false,
                   'genericPhone': false,
-                  'countryNotActive': true
+                  'countryNotActive': true,
+                  smsLimitsReached: false
                 };
                 break;
-              case 254:
+              case 257:
                 scope.isSmsPhoneNumberTestInvalidByChangeCountry = false;
                 smsForm.smsPhoneNumberTest.$error = {
                   'isSmsPhoneNumberTestValid': false,
                   'required': false,
                   'funds': true,
                   'genericPhone': false,
-                  'countryNotActive': false
+                  'countryNotActive': false,
+                  smsLimitsReached: false
+                };
+                break;
+              case 260:
+                scope.isSmsPhoneNumberTestInvalidByChangeCountry = false;
+                smsForm.smsPhoneNumberTest.$error = {
+                  'isSmsPhoneNumberTestValid': false,
+                  'required': false,
+                  'funds': false,
+                  'genericPhone': false,
+                  'countryNotActive': false,
+                  smsLimitsReached: true
                 };
                 break;
               default:

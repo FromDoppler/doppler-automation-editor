@@ -103,6 +103,7 @@
     <div ng-message="genericPhone" class="error">{{ 'validation_messages.phone_generic_error' | translate }}</div>
     <div ng-message="funds" class="error">{{ 'validation_messages.phone_funds_insuficient' | translate }}&nbsp;<a class="text-underline" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'actions.buy_now' | translate }}</a></div>
     <div ng-message="countryNotActive" class="error">{{ 'validation_messages.phone_country_not_active' | translate:{ 'countryName' : countryUsed} }}&nbsp;<a class="text-underline" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'actions.activate_now' | translate }}</a></div>
+    <div ng-message="smsLimitsReached" class="error">{{ 'validation_messages.sms_tests_limit_reached' | translate }}</div>
     <div ng-message="isSmsPhoneNumberTestValid" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
     <div ng-message="isSmsPhoneNumberTestInvalidTooShort" class="error">{{ 'validation_messages.phone_pattern_too_short' | translate }}</div>
     <div ng-message="isSmsPhoneNumberTestInvalidTooLong" class="error">{{ 'validation_messages.phone_pattern_too_long' | translate }}</div>

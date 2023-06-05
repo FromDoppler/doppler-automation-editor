@@ -1347,6 +1347,7 @@ export const automation_en_translations = {
     "phone_funds_insuficient": "Ouch! You don't have enough funds to send this test.",
     "phone_generic_error": "Ouch! An error has occurred, please try again later.",
     "phone_country_not_active": "Ouch! {{countryName}} isn't active in your SMS Dashboard.",
+    "sms_tests_limit_reached": "Maximum test sms reached.",
     "invalid_cuit": "Invalid CUIT.",
     "invalid_nit": "Invalid NIT.",
     "invalid_rfc": "Invalid RFC.",
