@@ -52,7 +52,7 @@
               <a ng-if="item.Status === 'buySms'" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
               <a ng-if="item.Status === 'error' || item.Status === 'warning'" href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings" class="text--uppercase">{{ item.Status === 'error' ? 'automationTypes.info.continue' : 'actions.start' | translate }}</a>
               <a ng-if="item.Status === 'demo'" ng-click="showPopup()">{{ 'automationTypes.info.activate' | translate }}</a>
-              <a ng-if="!item.MakeAvailableToEdition && (item.Status === 'integration' || item.Status === 'repeated')" href="/ControlPanel/ControlPanel#AdvancedPreferences">{{ 'automationTypes.info.integration' | translate }}</a>
+              <a ng-if="!item.MakeAvailableToEdition && (item.Status === 'integration' || item.Status === 'repeated')" ng-href="{{webappUrl}}/integrations">{{ 'automationTypes.info.integration' | translate }}</a>
               <a ng-if="item.MakeAvailableToEdition" href="/Automation/EditorConfig?idScheduledTask={{ item.ScheduledTaskId }}&automationType={{ item.AutomationTypeDescription }}">{{ 'automationTypes.info.edit_automation' | translate }}</a>
             </span>
           </div>
