@@ -24,6 +24,7 @@
     $scope.totalTasks = 0;
     $scope.idAutomationTemplateSelected = -1;
     $scope.lang = mainMenuData.user.lang;
+    $scope.webappUrl = mainMenuData.homeUrl;
     $scope.AUTOMATION_VIEW = AUTOMATION_VIEW;
     $scope.AUTOMATION_STATE = AUTOMATION_STATE;
     $scope.AUTOMATION_TYPE = AUTOMATION_TYPE;

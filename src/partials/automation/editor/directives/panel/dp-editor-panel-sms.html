@@ -48,8 +48,17 @@
 <div class="input--group">
   <label class="label label--panel">*{{ 'automation_editor.sidebar.sms_text' | translate }}</label>
   <span class="span--sms">{{ 'automation_editor.sidebar.sms_text_desc' | translate }}</span>
-    <div ng-if="hasColombiaCodeSmsActive" class="dp-sms-colombia-warning dp-library">
+  <div class="dp-sms-message-warning dp-library">
     <div class="dp-wrap-message dp-wrap-warning">
+      <span class="dp-message-icon"></span>
+      <div class="dp-content-message">
+        <p>
+          {{ 'automation_editor.sidebar.sms_shorteners_warning_msg' | translate }}
+          <a ng-href="{{ 'automation_editor.sidebar.sms_shorteners_warning_link'| translate }}" class="dp-message-link" target="_blank">{{ 'automation_editor.sidebar.sms_shorteners_warning_link_label' | translate }}</a>
+        </p>
+      </div>
+    </div>
+    <div ng-if="hasColombiaCodeSmsActive" class="margin-t-10 dp-wrap-message dp-wrap-warning">
       <span class="dp-message-icon"></span>
       <div class="dp-content-message">
         <p>
@@ -103,6 +112,7 @@
     <div ng-message="genericPhone" class="error">{{ 'validation_messages.phone_generic_error' | translate }}</div>
     <div ng-message="funds" class="error">{{ 'validation_messages.phone_funds_insuficient' | translate }}&nbsp;<a class="text-underline" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'actions.buy_now' | translate }}</a></div>
     <div ng-message="countryNotActive" class="error">{{ 'validation_messages.phone_country_not_active' | translate:{ 'countryName' : countryUsed} }}&nbsp;<a class="text-underline" href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'actions.activate_now' | translate }}</a></div>
+    <div ng-message="smsLimitsReached" class="error">{{ 'validation_messages.sms_tests_limit_reached' | translate }}</div>
     <div ng-message="isSmsPhoneNumberTestValid" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
     <div ng-message="isSmsPhoneNumberTestInvalidTooShort" class="error">{{ 'validation_messages.phone_pattern_too_short' | translate }}</div>
     <div ng-message="isSmsPhoneNumberTestInvalidTooLong" class="error">{{ 'validation_messages.phone_pattern_too_long' | translate }}</div>
