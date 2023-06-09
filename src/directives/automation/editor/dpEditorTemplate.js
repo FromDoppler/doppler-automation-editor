@@ -40,7 +40,7 @@
 
       function sortTemplateCards(templatesCardsUnsorted){
         return templateCardOrder.reduce((templates, templateId) => {
-          return templates.concat(templatesCardsUnsorted[templateId])
+          return templates.concat(templatesCardsUnsorted.find(({IdAutomationTemplate}) => IdAutomationTemplate === templateId))
         }, [])
       }
 
