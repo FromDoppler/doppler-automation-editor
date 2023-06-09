@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 module.exports = {
   entry: {
-    lib: [
+    app: [
       path.resolve(__dirname, './src/lib/angular/angular.js'),
       path.resolve(__dirname, './src/lib/angular-animate.js'),
       path.resolve(__dirname, './src/lib/ui-bootstrap-tpls-2.5.0.js'),
@@ -20,12 +20,10 @@ module.exports = {
       path.resolve(__dirname, './src/lib/moment.min.js'),
       path.resolve(__dirname, './src/lib/intlTelInput/intlTelInput.js'),
       path.resolve(__dirname, './src/lib/intlTelInput/utils.js'),
-    ],
-    app: [
       path.resolve(__dirname, './dist/static/js/app.js'),
       path.resolve(__dirname, './dist/static/js/template.min.js'),
+      path.resolve(__dirname, './dist/static/js/directives.js'),
     ],
-    directives: path.resolve(__dirname, './dist/static/js/directives.js'),
     styles: path.resolve(__dirname, './dist/static/css/styles.css'),
   },
     mode: "development", 
