@@ -22,9 +22,31 @@
       scope.templates = [];
       scope.isLoading = true;
 
+      const TEMPLATES = {
+        EMPTY: 0,
+        REVALIDATION_SUBSCRIBERS: 1,
+        BIRTHDAY_GREETING: 2,
+        WELCOME_NEW_CONTACTS: 3,
+        ABANDONED_CART: 4
+      };
+
+      const templateCardOrder = [
+        TEMPLATES.EMPTY,
+        TEMPLATES.WELCOME_NEW_CONTACTS,
+        TEMPLATES.BIRTHDAY_GREETING,
+        TEMPLATES.ABANDONED_CART,
+        TEMPLATES.REVALIDATION_SUBSCRIBERS
+      ];
+
+      function sortTemplateCards(templatesCardsUnsorted){
+        return templateCardOrder.reduce((templates, templateId) => {
+          return templates.concat(templatesCardsUnsorted.find(({IdAutomationTemplate}) => IdAutomationTemplate === templateId))
+        }, [])
+      }
+
       taskService.getAutomationTemplateList()
-      .then(function(data) {
-        scope.templates = data;
+      .then(function(templatesCards) {
+        scope.templates = sortTemplateCards(templatesCards);
         scope.isLoading = false;
       });
       
