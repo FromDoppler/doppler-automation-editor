@@ -992,7 +992,8 @@ export const automation_en_translations = {
     "description2": "Get better results and grow your business while your campaigns run automatically.",
     "help": {
       "url": "https://help.fromdoppler.com/en/how-to-use-email-automation?utm_source=direct",
-      "title": "Learn more about Automation"
+      "label": "Learn more about Automation here",
+      "title": "Do you have any doubts? "
     },
     "create_template": "Use pre-built flow",
     "board": {

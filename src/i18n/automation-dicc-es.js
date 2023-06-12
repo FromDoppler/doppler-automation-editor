@@ -991,7 +991,8 @@ export const automation_es_translations = {
     "description2": "Obtén mejores resultados y haz crecer tu negocio mientras tus campañas se ejecutan automáticamente.",
     "help": {
       "url": "https://help.fromdoppler.com/es/como-utilizar-email-automation/",
-      "title": "Aprende más sobre Automation"
+      "label": "Aprende más sobre Automation",
+      "title": "¿Tienes dudas?",
     },
     "create_template": "Usar esta plantilla",
     "board": {
