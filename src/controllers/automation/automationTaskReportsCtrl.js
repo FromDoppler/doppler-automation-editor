@@ -7,13 +7,10 @@
 
   automationTaskReportsCtrl.$inject = [
     '$scope',
-    '$rootScope',
     '$location',
-    'taskService',
     'summaryTaskService',
     'automationReportsService',
     '$translate',
-    'accountInformation',
     '_',
     '$sce',
     '$filter',
@@ -21,18 +18,18 @@
     'utils'
   ];
 
-  function automationTaskReportsCtrl($scope, $rootScope, $location, taskService, summaryTaskService,
-    automationReportsService, $translate, accountInformation, _, $sce, $filter, ModalService, utils) {
+  function automationTaskReportsCtrl($scope, $location, summaryTaskService,
+    automationReportsService, $translate,  _, $sce, $filter, ModalService, utils) {
     $scope.email = mainMenuData.user.email;
     $scope.pageLoading = true;
     $scope.idScheduledTask = $location.search().idScheduledTask === undefined ? 0 :
       parseInt($location.search().idScheduledTask);
     $scope.idAction = $location.search().idAction ? parseInt($location.search().idAction) : 0;
     var showAll = !!$location.search().showAll;
-    $scope.account = accountInformation;
-    $translate.use($scope.account.Lang);
-    $scope.dateFormat = $scope.account.Lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
-    $scope.dateTimeFormat = $scope.account.Lang === 'es' ? 'dd/MM/yyyy - h:mm:ss a' : 'MM/dd/yyyy - h:mm:ss a';
+    $scope.lang = mainMenuData.user.lang;
+    $translate.use($scope.lang);
+    $scope.dateFormat = $scope.lang === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
+    $scope.dateTimeFormat = $scope.lang === 'es' ? 'dd/MM/yyyy - h:mm:ss a' : 'MM/dd/yyyy - h:mm:ss a';
     $scope.showActionFilter = false;
     $scope.showSmsFilter = false;
     $scope.showPushFilter = false;
