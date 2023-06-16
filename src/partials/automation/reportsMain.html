@@ -14,13 +14,13 @@
             </ul>
           </nav>
         </div>
+        <h2 id="task_name_title" class="sectionBox-title">{{taskName}}</h2>
       </div>
     </div>
   </header>
   </div>
 
 		<div class="automation-summary-section" id="reports-header"> <!-- header -->
-				<h2 id="task_name_title" class="sectionBox-title">{{taskName}}</h2>
       <ul class="menu-horizontal">
         <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==0}" ng-click="onClickTabReport(0)">{{ 'ScheduledTask_Reports_Campaigns_title' | translate }}</li>
         <li ng-show="reportsType!=2" class="item-menu" ng-class="{'active':reportsType==1}" ng-click="onClickTabReport(1)">{{ 'ScheduledTask_Reports_Sms_title' | translate }}</li>
