@@ -8,9 +8,6 @@
 //   Variables
 // -------------------------------------
 
-
-
-
 // -------------------------------------
 //   Base
 // -------------------------------------
@@ -19,7 +16,7 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  min-height: 530px;
+  min-height: 730px;
     &.loading--container--editor-grid {
       height: calc(100% - 198px);
       background-color: $color-white;
