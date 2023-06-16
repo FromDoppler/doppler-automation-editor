@@ -18,6 +18,8 @@ module.exports = {
       path.resolve(__dirname, './src/lib/underscore-min.js'),
       path.resolve(__dirname, './src/lib/angular-momentjs/angular-momentjs.js'),
       path.resolve(__dirname, './src/lib/moment.min.js'),
+      path.resolve(__dirname, './src/lib/d3.min.js'),
+      path.resolve(__dirname, './src/lib/c3.min.js'),
       path.resolve(__dirname, './src/lib/intlTelInput/intlTelInput.js'),
       path.resolve(__dirname, './src/lib/intlTelInput/utils.js'),
       path.resolve(__dirname, './dist/static/js/app.js'),

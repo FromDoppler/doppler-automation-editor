@@ -37,6 +37,7 @@ module.exports = {
         path.resolve(__dirname, './src/css/app/styles.scss'),
         path.resolve(__dirname, './src/css/app/_shame.scss'),// ver
         path.resolve(__dirname, './src/css/doppler-common/common.scss'),
+        path.resolve(__dirname, './src/css/report/ReportsTask.scss'),
       ]
     },
     mode: "development",
