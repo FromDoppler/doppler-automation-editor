@@ -999,11 +999,11 @@
     }
 
     function hasBlockedList(){
-      return model.initialCondition.suscriptionLists.some(
-      function(e){
-        return e.ListStatus == 14;
-      })
-    } 
+      return model.initialCondition.suscriptionLists &&
+        model.initialCondition.suscriptionLists.some(function(e) {
+          return e.ListStatus == 14;
+        });
+    }
     
     function getInitialConditionUid() {
       return model.initialCondition.uid;
