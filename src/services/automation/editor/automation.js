@@ -999,7 +999,8 @@
     }
 
     function hasBlockedList(){
-      return model.initialCondition.suscriptionLists &&
+      return model.initialCondition &&
+        model.initialCondition.suscriptionLists &&
         model.initialCondition.suscriptionLists.some(function(e) {
           return e.ListStatus == 14;
         });
