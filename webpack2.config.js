@@ -1,6 +1,7 @@
 const path = require("path");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 module.exports = {
   entry: {
     app: [
@@ -70,6 +71,19 @@ module.exports = {
         filename: 'static/css/[name].[contenthash:8].css',
         chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
       }),
+      new ReplaceInFileWebpackPlugin([{
+        dir: './dist/static/js',
+        test: /app\.[0-9a-f]{8}\.js$/,
+        rules: [{
+            search: /Automation\/EditorConfig/g,
+            replace: 'AutomationMFE/EditorConfig'
+          },
+          {
+            search: /Automation\/Automation\/AutomationApp/g,
+            replace: 'AutomationMFE/Automation/AutomationApp'
+          }
+        ]
+      }]),
       new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
         publicPath: "https://cdn.fromdoppler.com/doppler-automation-editor-mfe/",

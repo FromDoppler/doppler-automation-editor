@@ -1,7 +1,7 @@
 var app = angular.module('dopplerApp.automation.editor', ['ngAnimate', 'ui.bootstrap', 'ngRoute', 'dp-dropzone']);//'ui.router'
 
 app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$locationProvider' $stateProvider, $locationProvider
-    $routeProvider.when('/Automation/EditorConfig?', {
+    $routeProvider.when('/AutomationMFE/EditorConfig?', {
         templateUrl: 'angularjs/partials/automation/editor/index.html',
         resolve: {
             automationData: ['$location', 'automation', '$translate','settingsService', '$q', function($location, automation, $translate, settingsService, $q) {
