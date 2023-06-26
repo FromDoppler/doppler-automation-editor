@@ -1576,5 +1576,64 @@ export const automation_en_translations = {
     "title": "Done!",
     "subtitle_subscribers": "You have just hired a new Monthly Plan to send unlimited Campaigns up to <b>{{subscribersNumber}} Contacts.</b> We’ll send you an email with more details about the new Plan.",
     "subtitle_high_volumen": "You have just hired a new Monthly Plan to send unlimited Campaigns up to <b>{{subscribersNumber}} Emails.</b> We’ll send you an email with more details about the new Plan."
-  }
+  },
+  "templates_title" : "Choose a Template",
+  "templates_description" : "Select a customized Template to send a new Campaign. Also, you can duplicate it, edit it or create one.",
+  "templates_public_title" : "Choose a Template",
+  "templates_publics_breadcrum" : "Create Template",
+  "templates_public_description" : "Create your Email from scratch or select a Predesigned Template to customize it.",
+  "templates_empty": {
+    "description" : "Customize a Template and once you finish the edition, you can save it into the My Templates section to use this new version as many times you want.",
+    "description_link_text" : "Learn how to edit a Template.",
+    "description_link_url" : "https://help.fromdoppler.com/en/como-editar-una-plantilla/"
+  },
+  "templates_create" : "Create Template",
+  "templates_card" : {
+    "delete": "Delete",
+    "duplicate": "Duplicate",
+    "edit" : "Edit Template",
+    "new_campaign": "Create Campaign",
+    "rename": "Rename",
+    "view_online": "See online",
+    "viewonline_tooltip": {
+      "link": "SEE PLANS",
+      "text": "This feature is only available <br> for accounts  with a <br> Paid Plan. "
+    },
+    "select" : "Select",
+    "select_and_edit": "Select and edit",
+    "use_as_is": "Select without editing"
+  },
+  "templates_new_popup": {
+    "title" : "Nombrar Nueva Plantilla",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla nulla vitae vulputate scelerisque. Nunc nec augue at dui vulputate sagittis.",
+    "input" : "Newsletter Plantilla"
+  },
+  "templates_rename_popup": {
+    "title" : "Rename Template",
+    "description": "Write a new name to identify your Template.",
+    "button_primary": "Save"
+  },
+  "templates_duplicate_popup": {
+    "title" : "Duplicate Template",
+    "description": "Put a name to this new version of your Template to differentiate it.",
+    "name" : "Copy of {{name}}",
+    "button_primary": "Duplicate"
+  },
+  "templates_delete_popup": {
+    "title" : "Do you want to delete {{name}}?",
+    "description": "Note that you can not recover the Template once removed.",
+    "button_primary": "Delete"
+  },
+  "templates_total_campaigns" : "Campaigns",
+  "filter_by_category" : "Filter by category",
+  "all_categories" : "All Categories",
+  "button_cancel": "Cancel",
+  "button_delete": "Delete",
+  "button_save": "Save",
+  "templates_validation" : {
+      "required" : "Ouch! This field is required.",
+      "maxlength" : "Ouch! You have reached the maximum allowed length.",
+      "duplicated" : "Ouch! That name already exists."
+  },
+  "image_placeholder_text" : "Generating thumbnail."
 }
