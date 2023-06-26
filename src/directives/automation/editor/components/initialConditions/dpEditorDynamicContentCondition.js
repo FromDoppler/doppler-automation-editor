@@ -3,9 +3,20 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorDynamicContentCondition', ['automation', 'COMPONENT_TYPE', 'selectedElementsService', dpEditorDynamicContentCondition]);
+    .directive('dpEditorDynamicContentCondition', [
+      'automation',
+      'COMPONENT_TYPE',
+      'selectedElementsService',
+      'changesManager',
+      dpEditorDynamicContentCondition
+    ]);
 
-  function dpEditorDynamicContentCondition(automation, COMPONENT_TYPE, selectedElementsService) {
+  function dpEditorDynamicContentCondition(
+    automation,
+    COMPONENT_TYPE,
+    selectedElementsService,
+    changesManager
+  ) {
     var directive = {
       restrict: 'E',
       scope: {
@@ -52,6 +63,8 @@
           type: COMPONENT_TYPE.CAMPAIGN
         };
         automation.addComponent(campaign, scope.$parent.component.parentUid);
+        changesManager.setUnsavedChanges(true);
+
         selectedElementsService.setSelectedComponent(scope.component);
       }
     }
