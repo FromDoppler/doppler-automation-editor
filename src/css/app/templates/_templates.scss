@@ -19,8 +19,6 @@
 }
 
 .section--templates {
-  // padding-top: toem(60px);
-  padding-bottom: toem(90px);
   header {
     align-items: flex-end;
     // border-bottom: 1px solid #E0E0E0;
@@ -217,5 +215,6 @@
 .automation-editor--container {
   .section--templates {
     padding-top: toem(100px);
+    padding-bottom: toem(90px);
   }
 }
