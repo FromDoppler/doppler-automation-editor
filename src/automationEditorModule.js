@@ -130,7 +130,7 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
 
         if(urlParams && urlParams.idCampaign) {
             $scope.$evalAsync(function() {
-            campaignComponent = automation.getEmailComponentById(parseInt(urlParams.idCampaign));
+            const campaignComponent = automation.getEmailComponentById(parseInt(urlParams.idCampaign));
             if(campaignComponent) {
                 selectedElementsService.setSelectedComponent(campaignComponent);
                 /*Add save with unsaved changes in true because need in paused automation*/
