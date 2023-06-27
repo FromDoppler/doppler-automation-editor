@@ -5,9 +5,9 @@
     .module('onImageErrorSrc', [])
     .directive('dpOnErrorSrc', dpOnErrorSrc);
 
-  dpOnErrorSrc.$inject = ['$timeout', '$compile', '$translate', 'pollService'];
+  dpOnErrorSrc.$inject = ['$compile', '$translate', 'pollService'];
 
-  function dpOnErrorSrc($timeout, $compile, $translate, pollService) {
+  function dpOnErrorSrc($compile, $translate, pollService) {
 
     var directive = {
       link: link,
