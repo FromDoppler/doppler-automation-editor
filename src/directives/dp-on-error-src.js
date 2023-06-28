@@ -5,9 +5,9 @@
     .module('onImageErrorSrc', [])
     .directive('dpOnErrorSrc', dpOnErrorSrc);
 
-  dpOnErrorSrc.$inject = ['$timeout', '$compile', '$translate'];
+  dpOnErrorSrc.$inject = ['$compile', '$translate', 'pollService'];
 
-  function dpOnErrorSrc($timeout, $compile, $translate) {
+  function dpOnErrorSrc($compile, $translate, pollService) {
 
     var directive = {
       link: link,
@@ -69,7 +69,6 @@
         }
       });
 
-      /*poll function on polling.js*/
       element.bind('error', function() {
         if (attrs.src !== attrs.dpOnErrorSrc) {
           //on error just once
@@ -84,7 +83,7 @@
             }
             scope.originalThumbnailUrl = attrs.src;
             scope.isOngoningPull = true;
-            poll(scope.pollingOptions); //eslint-disable-line no-undef
+            pollService.poll(scope.pollingOptions);
             if (attrs.showEye !== undefined) {
               addEye(scope, element);
             }
