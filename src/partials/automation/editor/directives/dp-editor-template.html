@@ -42,7 +42,7 @@
         ng-if="item.Status !== 'hidden'">
         <div class="aplication-types--new-feature  {{lang}}"
           data-text="{{ 'automationTypes.info.new_feature' | translate }}" 
-          ng-if="item.IsNewFeature && item.Status !== 'repeated'">
+          ng-if="item.IsNewFeature">
         </div>
         <div class="aplication-types-description--container">
           <p class="title">{{ 'automationTemplates.info.title' + item.IdAutomationTemplate | translate }}</p>
