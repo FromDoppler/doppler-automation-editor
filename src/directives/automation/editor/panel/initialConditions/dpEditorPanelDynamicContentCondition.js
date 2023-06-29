@@ -34,6 +34,7 @@
       // set default idThirdPartyApp value on the first time
       if (!scope.selectedComponent.idThirdPartyApp) {
         handleThidPartyAppChange(scope.productsStoreOptions[0].value);
+        changesManager.setUnsavedChanges(true);
       }
 
       function handleThidPartyAppChange(value) {
@@ -45,15 +46,6 @@
         }
         scope.selectedComponent.setData({
           idThirdPartyApp: value,
-        });
-        automation.applyDropDownChange();
-
-        changesManager.add({
-          type: CHANGE_TYPE.PROPERTY,
-          uid: scope.selectedComponent.uid,
-          key: 'idThirdPartyApp',
-          oldValue: scope.selectedComponent.idThirdPartyApp,
-          newValue: value,
         });
       }
 
@@ -102,6 +94,17 @@
 
       scope.onProductStoreChange = function (option) {
         handleThidPartyAppChange(option.value);
+
+        automation.applyDropDownChange();
+
+        changesManager.add({
+          type: CHANGE_TYPE.PROPERTY,
+          uid: scope.selectedComponent.uid,
+          key: 'idThirdPartyApp',
+          oldValue: scope.selectedComponent.idThirdPartyApp,
+          newValue: option.value,
+        });
+
         automation.updateAutomationFlowState();
       };
 
