@@ -30,8 +30,24 @@
       scope.timeUnitOptions = optionsListDataservice.getTimeUnitOptions();
 
       scope.productsStoreOptions = automation.getProductStoresList(scope.selectedComponent.automationType);
-      scope.selectedComponent.idThirdPartyApp = scope.selectedComponent.idThirdPartyApp ||
-        scope.productsStoreOptions[0].value;
+
+      // set default idThirdPartyApp value on the first time
+      if (!scope.selectedComponent.idThirdPartyApp) {
+        handleThidPartyAppChange(scope.productsStoreOptions[0].value);
+        changesManager.setUnsavedChanges(true);
+      }
+
+      function handleThidPartyAppChange(value) {
+        if (scope.selectedComponent.automationType === AUTOMATION_TYPE.VISITED_PRODUCTS) {
+          scope.showDomainErrorMsg = automation.domainHaveErrors(scope.productsStoreOptions, value);
+        } else if (scope.selectedComponent.automationType === AUTOMATION_TYPE.ABANDONED_CART
+          && value === INTEGRATION_CODES.TIENDANUBE) {
+          scope.showDomainErrorMsg = automation.domainHaveErrors(scope.productsStoreOptions, value);
+        }
+        scope.selectedComponent.setData({
+          idThirdPartyApp: value,
+        });
+      }
 
       switch (scope.selectedComponent.automationType) {
         case AUTOMATION_TYPE.VISITED_PRODUCTS:
@@ -77,15 +93,8 @@
       scope.selectedComponent.eventIntervalMinutesLabel = $translate.instant('automation_editor.sidebar.' + scope.selectedComponent.automationType + '.drop_down_time_options.option' + scope.selectedComponent.eventIntervalMinutes);
 
       scope.onProductStoreChange = function (option) {
-        if (scope.selectedComponent.automationType === AUTOMATION_TYPE.VISITED_PRODUCTS) {
-          scope.showDomainErrorMsg = automation.domainHaveErrors(scope.productsStoreOptions, option.value);
-        } else if (scope.selectedComponent.automationType === AUTOMATION_TYPE.ABANDONED_CART
-          && option.value === INTEGRATION_CODES.TIENDANUBE) {
-          scope.showDomainErrorMsg = automation.domainHaveErrors(scope.productsStoreOptions, option.value);
-        }
-        scope.selectedComponent.setData({
-          idThirdPartyApp: option.value
-        });
+        handleThidPartyAppChange(option.value);
+
         automation.applyDropDownChange();
 
         changesManager.add({
@@ -93,7 +102,7 @@
           uid: scope.selectedComponent.uid,
           key: 'idThirdPartyApp',
           oldValue: scope.selectedComponent.idThirdPartyApp,
-          newValue: option.value
+          newValue: option.value,
         });
 
         automation.updateAutomationFlowState();

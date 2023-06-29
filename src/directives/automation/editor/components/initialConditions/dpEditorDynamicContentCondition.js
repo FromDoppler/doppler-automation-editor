@@ -7,7 +7,6 @@
       'automation',
       'COMPONENT_TYPE',
       'selectedElementsService',
-      'changesManager',
       dpEditorDynamicContentCondition
     ]);
 
@@ -15,7 +14,6 @@
     automation,
     COMPONENT_TYPE,
     selectedElementsService,
-    changesManager
   ) {
     var directive = {
       restrict: 'E',
@@ -63,8 +61,11 @@
           type: COMPONENT_TYPE.CAMPAIGN
         };
         automation.addComponent(campaign, scope.$parent.component.parentUid);
-        changesManager.setUnsavedChanges(true);
+      }
 
+      // On the first time the idThirdPartyApp will be null, 
+      // so the app put focus on the initial condition in order to be changed
+      if (!scope.component.idThirdPartyApp) {
         selectedElementsService.setSelectedComponent(scope.component);
       }
     }
