@@ -72,7 +72,13 @@
             "Type": "0",
             "Status": "active"
           }
-          return [blankTemplate].concat(response.data.automationTemplateList);
+          const templatesCard = response.data.automationTemplateList.map((template) => {
+            return {
+              ...template,
+              IsNewFeature: true
+            }
+          });
+          return [blankTemplate].concat(templatesCard);
         });
     }
 
