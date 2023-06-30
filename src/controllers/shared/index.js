@@ -1,5 +1,6 @@
 import "./footerCtrl.js";
 import "./headerCtrl.js";
+import "./previewCtrl.js";
 import "./modalConfigureDkimCtrl.js";
 import "./modalCreateDkimCtrl.js";
 import "./modalNoDynamicElementCtrl.js";
