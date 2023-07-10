@@ -256,7 +256,6 @@ $fontPath: '/fonts' !default;
   dp-templates,
   dp-editor-html-editor-slider,
   dp-editor-import-html,
-  dp-create-list,
   .editor--modal {
     background: $color-ghostwhite;
     height: calc(100% - 0px);
@@ -474,6 +473,7 @@ dp-editor-html-editor-slider {
     }
 }
 
+dp-create-list,
 dp-editor-lists-grid,
 dp-editor-lists-scheduled-grid {
   background: $color-white;
