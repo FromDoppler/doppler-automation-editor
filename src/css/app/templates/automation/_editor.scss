@@ -477,13 +477,17 @@ dp-create-list,
 dp-editor-lists-grid,
 dp-editor-lists-scheduled-grid {
   background: $color-white;
-  height: calc(100% - 144px);
+  height: calc(100% - 74px);
   overflow-y: auto;
   width: $size-full;
   left: 0;
   position: absolute;
   top: 74px;
   z-index: 10;
+  .section--content {
+    height: calc(100% - 74px);
+    overflow-y: auto;
+  }
   section {
     .wrapper {
       padding-top: 55px;
