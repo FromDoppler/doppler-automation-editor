@@ -3,7 +3,7 @@
   <p>{{ 'automation_editor.lists_grid_empty.description' | translate }}</p>
   <button ng-click="saveAndRedirect('/Lists/List');" class="button button--small button--alternative button--link">{{ 'automation_editor.lists_grid_empty.action' | translate }}</button>
 </section>
-<div ng-if="!gridModel.isEmptyGrid">
+<div ng-if="!gridModel.isEmptyGrid" class="section--content">
   <div class="dp-library">
     <header class="hero-banner" ng-show="showHeader">
       <div class="dp-container">
@@ -75,5 +75,15 @@
   </section>
   <div class="loading--container components--center loading--container--editor-grid" ng-show="gridModel.firstTimeLoad">
     <span class="loading-icon"></span>
+  </div>
+</div>
+
+<div class="dp-editor-footer">
+  <div class="item">
+    <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.buttons.back_to_editor' | translate }}</button>
+    <div class="right">
+      <span class="tip-help">{{'automation_editor.lists_scheduled_grid.footer_tip' | translate}}<span class="icon-arrow-friendly"></span></span>
+      <button class="button button--small button--primary" ng-disabled="!checked" ng-click="confirmListSelection();">{{ 'automation_editor.buttons.confirm_selection' | translate }}</button>
+    </div>
   </div>
 </div>
