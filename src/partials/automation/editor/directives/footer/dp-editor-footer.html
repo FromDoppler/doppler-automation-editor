@@ -18,17 +18,3 @@
             ng-click="pauseCampaign();">{{ 'automation_editor.buttons.pause_campaign' | translate }}</button>
   </div>
 </div>
-
-<div class="item" ng-if="listSelectionState !== LIST_SELECTION_STATE.NONE">
-  <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.buttons.back_to_editor' | translate }}</button>
-  <div class="right">
-    <span class="tip-help">{{ 'automation_editor.lists_grid.tip_help' | translate }}<span class="icon-arrow-friendly"></span></span>
-    <button class="button button--small button--primary" ng-disabled="!isEnabled" ng-click="confirmListSelection()">{{'automation_editor.buttons.confirm_selection' | translate }}</button>
-  </div>
-</div>
-<div class="item" ng-if="showTinyEditor">
-  <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.tiny_editor.return_button' | translate }}</button>
-  <div class="right">
-    <button class="button button--small button--primary" ng-disabled="selectedComponent.contentHtml.length === 0" ng-click="saveTinyEditorContent()">{{ 'automation_editor.tiny_editor.confirm_button' | translate }}</button>
-  </div>
-</div>
