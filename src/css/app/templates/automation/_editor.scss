@@ -256,7 +256,6 @@ $fontPath: '/fonts' !default;
   dp-templates,
   dp-editor-html-editor-slider,
   dp-editor-import-html,
-  dp-create-list,
   .editor--modal {
     background: $color-ghostwhite;
     height: calc(100% - 0px);
@@ -474,16 +473,21 @@ dp-editor-html-editor-slider {
     }
 }
 
+dp-create-list,
 dp-editor-lists-grid,
 dp-editor-lists-scheduled-grid {
   background: $color-white;
-  height: calc(100% - 144px);
+  height: calc(100% - 74px);
   overflow-y: auto;
   width: $size-full;
   left: 0;
   position: absolute;
   top: 74px;
   z-index: 10;
+  .section--content {
+    height: calc(100% - 74px);
+    overflow-y: auto;
+  }
   section {
     .wrapper {
       padding-top: 55px;
@@ -515,39 +519,19 @@ dp-editor-lists-scheduled-grid {
 }
 dp-editor-domains-grid {
   background: $color-white;
-  height: calc(100% - 144px);
-  overflow-y: auto;
+  height: calc(100% - 74px);
   width: $size-full;
   left: 0;
   position: absolute;
   top: 74px;
   z-index: 10;
 
-  section {
-    .wrapper {
-      padding-top: 55px;
-      padding-bottom: 40px;
-    }
-  }
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .search-container {
-    position: relative;
-    flex: 71%;
-    margin-right: 25px;
-  }
-
-  dropdown,
-  dp-editor-dropdown {
-    flex: 29%;
+  .section--content {
+    height: calc(100% - 74px);
+    overflow-y: auto;
   }
 
   .section--grid-empty {
-    height: 100%;
     padding: 4em 7% 6em !important;
 
     p {
@@ -581,27 +565,6 @@ dp-editor-lists-scheduled-grid {
   }
   .checkbox--container {
     padding-top: 20px;
-    span {
-      margin-left: 25px;
-      color: $color-base
-    }
-  }
-}
-
-dp-editor-domains-grid {
-  height: calc(100% - 74px);
-
-  & > section {
-    height: calc(100% - 79px);
-    overflow-y: auto;
-    margin-bottom: 5px;
-    padding-bottom: 50px;
-    padding: 0 !important;
-  }
-
-  .checkbox--container {
-    padding-top: 20px;
-
     span {
       margin-left: 25px;
       color: $color-base

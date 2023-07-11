@@ -48,7 +48,7 @@
   <div class="item">
     <button class="button button--small button-outline--primary" ng-click="backToEditor()">{{ 'automation_editor.buttons.back_to_editor' | translate }}</button>
     <div class="right">
-      <button class="button button--small button--primary" ng-disabled="gridModel.selectedItems.length === 0" ng-click="saveSelectedItems();">{{ 'automation_editor.buttons.confirm_selection' | translate }}</button>
+      <button class="button button--small button--primary" ng-disabled="gridModel.isEmptyGrid || gridModel.selectedItems.length === 0" ng-click="saveSelectedItems();">{{ 'automation_editor.buttons.confirm_selection' | translate }}</button>
     </div>
   </div>
 </div>

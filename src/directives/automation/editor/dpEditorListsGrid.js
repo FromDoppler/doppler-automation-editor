@@ -6,7 +6,6 @@
     .directive('dpEditorListsGrid', dpEditorListsGrid);
 
   dpEditorListsGrid.$inject = [
-    '$rootScope',
     '$translate',
     'automation',
     'CHANGE_TYPE',
@@ -16,11 +15,12 @@
     'selectedElementsService',
     'utils',
     'warningsStepsService',
+    'LIST_SELECTION_STATE',
     'BLOCKED_STATUS'
   ];
 
-  function dpEditorListsGrid($rootScope, $translate, automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE,
-    gridService, selectedElementsService, utils, warningsStepsService, BLOCKED_STATUS) {
+  function dpEditorListsGrid($translate, automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE,
+    gridService, selectedElementsService, utils, warningsStepsService, LIST_SELECTION_STATE, BLOCKED_STATUS) {
     var directive = {
       restrict: 'E',
       templateUrl: 'angularjs/partials/automation/editor/directives/dp-editor-lists-grid.html',
@@ -32,7 +32,7 @@
     function controller($scope) {
       $scope.showHeader = $scope.$parent.showHeader !== undefined ? $scope.$parent.showHeader : true;
       $scope.blockedStatus = BLOCKED_STATUS.VALUE;
-      var checked = false;
+      $scope.checked = false;
       var selectedItemOptions = {
         selectedItem: getSelectedItem(),
         keyToCompare: 'IdSubscribersList',
@@ -81,10 +81,7 @@
           }
           item.IsChecked = true;
           $scope.gridModel.selectedItem = item;
-          if (!checked) {
-            $rootScope.$broadcast('SUSCRIPTION_LIST.ENABLE_BUTTON');
-          }
-          checked = true;
+          $scope.checked = true;
         }
       };
 
@@ -96,59 +93,62 @@
         return row.IdSubscribersList === selectedItemId;
       };
 
-      $scope.$on('COMPONENT_LIST.CONFIRM_SELECTION', function() {
+      $scope.confirmListSelection = function() {
         if (!$scope.gridModel.selectedItem) {
           return;
         }
-        var data;
-        var newComponentData;
-        var oldComponentData;
-        var path;
         var selectedComponent = selectedElementsService.getSelectedComponent();
+        // TODO: Analize else branch
+        if(selectedComponent.type !== COMPONENT_TYPE.CONDITION) {
+          var data;
+          var newComponentData;
+          var oldComponentData;
+          var path;
+          var selectedComponent = selectedElementsService.getSelectedComponent();
 
-        if (selectedComponent.type === COMPONENT_TYPE.ACTION) {
-          path = 'operation.suscriptionList';
-          data = {
-            operation: {
+          if (selectedComponent.type === COMPONENT_TYPE.ACTION) {
+            path = 'operation.suscriptionList';
+            data = {
+              operation: {
+                suscriptionList: $scope.gridModel.selectedItem
+              }
+            };
+          } else {
+            path = 'suscriptionList';
+            data = {
               suscriptionList: $scope.gridModel.selectedItem
-            }
-          };
+            };
+          }
+
+          oldComponentData = JSON.parse(JSON.stringify(utils.getDeepValue(selectedComponent, path)));
+          selectedComponent.setData(data);
+          newComponentData = JSON.parse(JSON.stringify(utils.getDeepValue(selectedComponent, path)));
+
+          changesManager.add({
+            type: CHANGE_TYPE.PROPERTY,
+            uid: selectedComponent.uid,
+            key: path,
+            oldValue: angular.copy(oldComponentData),
+            newValue: angular.copy(newComponentData)
+          });
+
+          selectedComponent.checkCompleted();
+          automation.checkCompleted();
+          automation.checkActionsCompleted();
+          warningsStepsService.checkWarningStep(selectedComponent);
         } else {
-          path = 'suscriptionList';
-          data = {
-            suscriptionList: $scope.gridModel.selectedItem
-          };
+          var selectedConditional = selectedElementsService.getSelectedConditional();
+          selectedConditional.setData({
+            subscriptionList: $scope.gridModel.selectedItem
+          });
+
         }
+        $scope.backToEditor();
+      };
 
-        oldComponentData = JSON.parse(JSON.stringify(utils.getDeepValue(selectedComponent, path)));
-        selectedComponent.setData(data);
-        newComponentData = JSON.parse(JSON.stringify(utils.getDeepValue(selectedComponent, path)));
-
-        changesManager.add({
-          type: CHANGE_TYPE.PROPERTY,
-          uid: selectedComponent.uid,
-          key: path,
-          oldValue: angular.copy(oldComponentData),
-          newValue: angular.copy(newComponentData)
-        });
-
-        selectedComponent.checkCompleted();
-        automation.checkCompleted();
-        automation.checkActionsCompleted();
-        warningsStepsService.checkWarningStep(selectedComponent);
-      });
-
-      $scope.$on('CONDITIONAL_LIST.CONFIRM_SELECTION', function() {
-        var selectedConditional;
-
-        if (!$scope.gridModel.selectedItem) {
-          return;
-        }
-        selectedConditional = selectedElementsService.getSelectedConditional();
-        selectedConditional.setData({
-          subscriptionList: $scope.gridModel.selectedItem
-        });
-      });
+      $scope.backToEditor = function() {
+        $scope.toggleListSelection(LIST_SELECTION_STATE.NONE);
+      };
     }
   }
 })();

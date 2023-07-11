@@ -46,19 +46,6 @@
         return !scope.hasSmsCredit && automation.hasSmsComponent();
       }
 
-      scope.backToEditor = function() {
-        scope.toggleListSelection(LIST_SELECTION_STATE.NONE);
-      };
-
-      scope.confirmListSelection = function() {
-        var selectedComponent = selectedElementsService.getSelectedComponent();
-
-        $rootScope.$broadcast(selectedComponent.type !== COMPONENT_TYPE.CONDITION ?
-          'COMPONENT_LIST.CONFIRM_SELECTION' :
-          'CONDITIONAL_LIST.CONFIRM_SELECTION');
-        scope.backToEditor();
-      };
-
       scope.startCampaignWithDynamicCheck = function() {
         var automationType = automation.getModel().automationType;
         if (automationType === AUTOMATION_TYPE.ABANDONED_CART
