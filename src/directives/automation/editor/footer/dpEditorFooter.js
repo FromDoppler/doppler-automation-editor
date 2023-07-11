@@ -74,6 +74,7 @@
 
       $rootScope.startCampaign = function() {
         selectedElementsService.unsetSelectedComponent();
+        automation.setIsProcessing(true);
         if (scope.isRegistrationCompleted) {
           automation.setAutomationAsActive();
         } else {
@@ -115,6 +116,10 @@
             });
           });
       };
+
+      scope.isProcessing = function() {
+        return automation.getIsProcessing();
+      }
 
       scope.$on('SUSCRIPTION_LIST.ENABLE_BUTTON', function() {
         scope.isEnabled = true;

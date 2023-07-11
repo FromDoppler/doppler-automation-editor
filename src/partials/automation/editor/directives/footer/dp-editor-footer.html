@@ -1,4 +1,4 @@
-<div class="item" ng-if="listSelectionState === LIST_SELECTION_STATE.NONE && !showTinyEditor">
+<div class="item dp-library" ng-if="listSelectionState === LIST_SELECTION_STATE.NONE && !showTinyEditor">
   <button class="button button--small button-outline--primary" ng-click="saveAndRedirect('/Automation/Automation/AutomationApp/');">{{ 'automation_editor.buttons.exit' | translate }}</button>
   <div class="right">
     <span ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE && rootComponent.state !== AUTOMATION_STATE.PAUSED && isFlowComplete() !== AUTOMATION_COMPLETED_STATE.COMPLETED || hasNotSmsCredits()" class="tip-help"
@@ -6,14 +6,14 @@
           <span ng-bind-html="getAutomationTipLabel()"></span>
           <span class="icon-arrow-friendly"></span>
     </span>
-    <button class="button button--small button-outline--red button--space"
+    <button class="dp-button button--small button-outline--red button--space"
             ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE || rootComponent.state === AUTOMATION_STATE.PAUSED"
             ng-click="stopCampaign();">{{ 'automation_editor.buttons.stop_campaign' | translate }}</button>
-    <button class="button button--small button--primary"
-            ng-class="{'button--warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS, 'button--error': hasErrors()}"
+    <button class="dp-button button--small primary-green"
+            ng-class="{'button--warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS, 'button--error': hasErrors(), 'button--loading': isProcessing() }"
             ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE" ng-disabled="isFlowComplete() === AUTOMATION_COMPLETED_STATE.INCOMPLETE || hasErrors() || hasNotSmsCredits()"
             ng-click="startCampaignWithDynamicCheck();">{{ getAutomationBtnLabel() }}</button>
-    <button class="button button--small button--error"
+    <button class="dp-button button--small button--error"
             ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE"
             ng-click="pauseCampaign();">{{ 'automation_editor.buttons.pause_campaign' | translate }}</button>
   </div>
