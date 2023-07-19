@@ -1636,5 +1636,6 @@ export const automation_es_translations = {
       "maxlength" : "¡Ouch! Has alcanzado la longitud máxima permitida.",
       "duplicated" : "¡Ouch! Ese nombre ya existe."
   },
-  "image_placeholder_text" : "Generando miniatura."
+  "image_placeholder_text" : "Generando miniatura.",
+  "NewEditorRibbonContent": "Nuevo Editor"
 }
