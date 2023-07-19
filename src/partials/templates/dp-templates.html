@@ -51,7 +51,7 @@
 				<div class="item" ng-repeat="template in templates">
 					<div ng-if="template.EditorType === EMAIL_EDITOR_TYPE.UNLAYER"
 						class="dp-ribbon dp-ribbon-top-left dp-ribbon-violet">
-						<span>Editor Beta</span>
+						<span>{{ 'NewEditorRibbonContent' | translate }}</span>
 					</div>
 					<div class="img-container">
 						<img ng-src="{{ getNoCacheUrl(template.TemplatePreviewUrl) }}" poll="true" show-eye="true"
