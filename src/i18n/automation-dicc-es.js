@@ -985,10 +985,8 @@ export const automation_es_translations = {
       "level0": "Mis flujos automatizados",
       "level1": "Crear automation"
     },
-    "title": "Automation",
-    "description0": "¡Ahorra tiempo y esfuerzo con Automatizaciones!",
-    "description1": "Crea flujos personalizados que envíen tus campañas automáticamente según las acciones que realicen tus suscriptores. Desde bienvenidas hasta carritos abandonados, las posibilidades son infinitas. ",
-    "description2": "Obtén mejores resultados y haz crecer tu negocio mientras tus campañas se ejecutan automáticamente.",
+    "title": "Crear Automation",
+    "description": "Crea flujos personalizados que envíen tus Campañas automáticamente según las acciones que realicen tus Contactos. Desde bienvenidas hasta carritos abandonados, ¡las posibilidades son infinitas!",
     "help": {
       "url": "https://help.fromdoppler.com/es/como-utilizar-email-automation/",
       "label": "Aprende más sobre Automation",
@@ -1007,7 +1005,7 @@ export const automation_es_translations = {
       "title2": "Saludo de cumpleaños",
       "description2": "Programa un Email personalizado en esa fecha especial para tus Contactos.",
       "title3": "Bienvenida a nuevos Contactos",
-      "description3": "Envía un email de bienvenida a los nuevos Contactos que ingresen la lista asociada.",
+      "description3": "Envía un Email de bienvenida a los nuevos Contactos que ingresen la lista asociada.",
       "title4": "Carrito Abandonado",
       "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra."
     },
@@ -1015,7 +1013,7 @@ export const automation_es_translations = {
       "flowAllow": "Este flujo permitirá:",
       "description1": "Confirma, a través de un envío, aquellos Contactos que desean continuar recibiendo tus comunicaciones.",
       "description2": "Programa un Email personalizado en esa fecha especial para tus Contactos.",
-      "description3": "Envía un email saludando a tus usuarios cuando se unen a tu comunidad.",
+      "description3": "Envía un Email saludando a tus usuarios cuando se unen a tu comunidad.",
       "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
