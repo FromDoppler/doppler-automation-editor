@@ -986,10 +986,8 @@ export const automation_en_translations = {
       "level0": "Your automated flows",
       "level1": "Create Automation"
     },
-    "title": "Automation",
-    "description0": "Save time and effort with Automations!",
-    "description1": "Create custom flows that send your campaigns automatically based on the actions your subscribers take. From welcomes to abandoned carts, the possibilities are endless.",
-    "description2": "Get better results and grow your business while your campaigns run automatically.",
+    "title": "Create Automation",
+    "description": "Create custom flows that send your Campaigns automatically based on the actions your Contacts take. From welcomes to abandoned carts, the possibilities are endless!",
     "help": {
       "url": "https://help.fromdoppler.com/en/how-to-use-email-automation?utm_source=direct",
       "label": "Learn more about Automation here",
@@ -1002,7 +1000,7 @@ export const automation_en_translations = {
     },
     "info": {
       "title0": "Create flow from scratch",
-      "description0": "Define the conditions and actions that will trigger your campaigns by creating a personalized flow.",
+      "description0": "Define the conditions and actions that will trigger your Campaigns by creating a personalized flow.",
       "title1": "Revalidation of Contacts",
       "description1": "Confirm, through a shipment, those Contacts who wish to continue receiving your communications.",
       "title2": "Birthday greeting",
@@ -1014,9 +1012,9 @@ export const automation_en_translations = {
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
-      "description1": "Confirm, through a shipment, those contacts who wish to continue receiving your communications.",
+      "description1": "Confirm, through a shipment, those Contacts who wish to continue receiving your communications.",
       "description2": "Schedule a personalized Email on that special date for your Contacts.",
-      "description3": "Send an email greeting your users when they join your community.",
+      "description3": "Send an Email greeting your users when they join your community.",
       "description4": "Create a sequence of Emails that motivates users to buy those products that they left in the cart.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
