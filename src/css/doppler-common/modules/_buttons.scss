@@ -130,6 +130,15 @@ button {
   }
 }
 
+/*dp-library fix */
+.dp-library {
+  button.button-outline--red {
+    border: solid 1px;
+  }
+  button.button--error {
+    color: $color-white;
+  }
+}
 
 ///Spinner button
 ///example
