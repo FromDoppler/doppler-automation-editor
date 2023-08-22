@@ -138,6 +138,10 @@ button {
   button.button--error {
     color: $color-white;
   }
+
+  button.button-outline--primary {
+    border: solid 1px;
+  }
 }
 
 ///Spinner button

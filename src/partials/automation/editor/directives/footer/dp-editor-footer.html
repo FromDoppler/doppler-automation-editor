@@ -1,6 +1,6 @@
 <div class="item dp-library" ng-if="listSelectionState === LIST_SELECTION_STATE.NONE && !showTinyEditor">
-  <button class="button button--small button-outline--primary" ng-click="saveAndRedirect('/Automation/Automation/AutomationApp/');">{{ 'automation_editor.buttons.exit' | translate }}</button>
-  <div class="right">
+  <button class="dp-button button--small button-outline--primary" ng-click="saveAndRedirect('/Automation/Automation/AutomationApp/');">{{ 'automation_editor.buttons.exit' | translate }}</button>
+  <div class="right display-flex">
     <span ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE && rootComponent.state !== AUTOMATION_STATE.PAUSED && isFlowComplete() !== AUTOMATION_COMPLETED_STATE.COMPLETED || hasNotSmsCredits()" class="tip-help"
           ng-class="{'warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS && rootComponent.state !== AUTOMATION_STATE.ACTIVE, 'error': hasErrors() }">
           <span ng-bind-html="getAutomationTipLabel()"></span>
