@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdSubscribersList}}" ng-click="selectRow(row)">
+          <tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdSubscribersList}}" ng-click="selectRow(row)" ng-hide="mustBeHidden(row)">
             <td class="status-column relative">
               <input class="radio-custom" type="radio" id="radio-{{row.IdSubscribersList}}" name="selectList" ng-class="{'first-selected' : isFirstSelected(row)}" ng-checked="row.IsChecked" ng-disabled="isDisabled(row)"/>
               <label for="radio-{{row.IdSubscribersList}}"></label>
