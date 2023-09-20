@@ -16,11 +16,13 @@
     'utils',
     'warningsStepsService',
     'LIST_SELECTION_STATE',
-    'BLOCKED_STATUS'
+    'BLOCKED_STATUS',
+    'ACTION_TYPE',
+    'CONDITION_TYPE'
   ];
 
   function dpEditorListsGrid($translate, automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE,
-    gridService, selectedElementsService, utils, warningsStepsService, LIST_SELECTION_STATE, BLOCKED_STATUS) {
+    gridService, selectedElementsService, utils, warningsStepsService, LIST_SELECTION_STATE, BLOCKED_STATUS, ACTION_TYPE, CONDITION_TYPE) {
     var directive = {
       restrict: 'E',
       templateUrl: 'angularjs/partials/automation/editor/directives/dp-editor-lists-grid.html',
@@ -149,6 +151,15 @@
       $scope.backToEditor = function() {
         $scope.toggleListSelection(LIST_SELECTION_STATE.NONE);
       };
+
+      /* conditional rules to avoid possible automation infinity loops */
+      $scope.mustBeHidden = function(row) {
+        var selectedComponent = selectedElementsService.getSelectedComponent();
+        return selectedComponent.type === COMPONENT_TYPE.ACTION &&
+          selectedComponent.operation.type === ACTION_TYPE.ASSOCIATE_SUBSCRIBER_TO_LIST &&
+          automation.getModel().initialCondition.type === CONDITION_TYPE.SUBSCRIPTION_LIST &&
+          row.IdSubscribersList === automation.getModel().initialCondition.suscriptionList.IdSubscribersList;
+      }
     }
   }
 })();
