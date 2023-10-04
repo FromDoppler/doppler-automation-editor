@@ -894,8 +894,35 @@
       }
     }
     span {
+      display: flex;
+      width: 30px;
+      height: 30px;
       font-size: $font-size--big;
       border: 1px solid $color-white;
+      &.dp-icon-share-facebook{
+        background-size: contain;
+        background-image: url(https://cdn.fromdoppler.com/unlayer-editor/assets/color_square_facebook.png);
+      }
+      &.dp-icon-share-googlemas{
+        background-size: contain;
+        background-image: url(https://cdn.fromdoppler.com/unlayer-editor/assets/color_square_google.png);
+      }
+      &.dp-icon-share-linkedin{
+        background-size: contain;
+        background-image: url(https://cdn.fromdoppler.com/unlayer-editor/assets/color_square_linkedin.png);
+      }
+      &.dp-icon-share-pinterest{
+        background-size: contain;
+        background-image: url(https://cdn.fromdoppler.com/unlayer-editor/assets/color_square_pinterest.png);
+      }
+      &.dp-icon-share-twitter{
+        background-size: contain;
+        background-image: url(https://cdn.fromdoppler.com/unlayer-editor/assets/color_square_twitter_x.png);
+      }
+      &.dp-icon-share-whatsapp{
+        background-size: contain;
+        background-image: url(https://cdn.fromdoppler.com/unlayer-editor/assets/color_square_whatsapp.png);
+      }
       &.active {
         box-shadow: 0 0 0 2px $color-primary;
       }
@@ -1018,24 +1045,6 @@
         max-width: 265px;
       }
     }
-  }
-  .icon-share-facebook {
-    color: #3B589C;
-  }
-  .icon-share-googlemas {
-    color: #D95132;
-  }
-  .icon-share-linkedin {
-    color: #097BBA;
-  }
-  .icon-share-pinterest {
-    color: #CA3837;
-  }
-  .icon-share-twitter {
-    color: #26B7EC;
-  }
-  .icon-share-whatsapp {
-    color: #25D366;
   }
 
   .dp-editor-panel-condition {
