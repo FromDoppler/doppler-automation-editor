@@ -1008,7 +1008,9 @@ export const automation_es_translations = {
       "title3": "Bienvenida a nuevos Contactos",
       "description3": "Envía un Email de bienvenida a los nuevos Contactos que ingresen la lista asociada.",
       "title4": "Carrito Abandonado",
-      "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra."
+      "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra.",
+      "title5": "Envío de SMS Masivos",
+      "description5": "Usa mensajes SMS automatizados para potenciar tu estrategias de omnicanalidad.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",

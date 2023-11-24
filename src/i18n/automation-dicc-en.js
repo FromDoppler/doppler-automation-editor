@@ -1009,7 +1009,9 @@ export const automation_en_translations = {
       "title3": "Welcome to new Contacts",
       "description3": "Send a welcome Email to new subscribers who join the associated list.",
       "title4": "Abandonded Cart",
-      "description4": "Create an Email sequence that reminds potencials customers of the completion of their purchase."
+      "description4": "Create an Email sequence that reminds potencials customers of the completion of their purchase.",
+      "title5": "Mass SMS sending",
+      "description5": "Use automated SMS messages to enhance your omnichannel strategy.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
