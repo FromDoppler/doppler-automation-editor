@@ -21,6 +21,10 @@
             <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item0' | translate }}</li>
             <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item1' | translate }}</li>
             <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item2' | translate }}</li>
+            <!-- Verify that a 4th item is defined to be displayed -->
+            <li ng-if="('automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item3' | translate) !== 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item3'">
+              {{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item3' | translate }}
+            </li>
           </ul>
           <div class="margin-t-25">
             <div class="dp-wrap-isologo--small dp--italic">
