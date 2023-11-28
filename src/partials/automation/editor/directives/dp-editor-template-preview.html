@@ -18,9 +18,10 @@
           <p>{{ 'automationTemplates.templatePreview.description' + idAutomationTemplateSelected | translate }}</p>
           <span class="dp-automation-template-items-allow">{{ 'automationTemplates.templatePreview.flowAllow' | translate }}</span>
           <ul class="dp-automation-template-preview-suggest-uses">
-            <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item0' | translate }}</li>
-            <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item1' | translate }}</li>
-            <li>{{ 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item2' | translate }}</li>
+             <!-- define the quantity according to the max number of items to be displayed -->
+             <li ng-repeat="itemIndex in getRange(4)" ng-if="translationExists(getItemTranslationKey(idAutomationTemplateSelected, itemIndex))">
+              {{ getItemTranslationKey(idAutomationTemplateSelected, itemIndex) | translate }}
+            </li>
           </ul>
           <div class="margin-t-25">
             <div class="dp-wrap-isologo--small dp--italic">

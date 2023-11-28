@@ -1009,7 +1009,9 @@ export const automation_en_translations = {
       "title3": "Welcome to new Contacts",
       "description3": "Send a welcome Email to new subscribers who join the associated list.",
       "title4": "Abandonded Cart",
-      "description4": "Create an Email sequence that reminds potencials customers of the completion of their purchase."
+      "description4": "Create an Email sequence that reminds potencials customers of the completion of their purchase.",
+      "title5": "Mass SMS sending",
+      "description5": "Use automated SMS messages to enhance your omnichannel strategy.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
@@ -1017,6 +1019,7 @@ export const automation_en_translations = {
       "description2": "Schedule a personalized Email on that special date for your Contacts.",
       "description3": "Send an Email greeting your users when they join your community.",
       "description4": "Create a sequence of Emails that motivates users to buy those products that they left in the cart.",
+      "description5": "Sending mass SMS is a great way to complement your email automation strategy. If you're not already using SMS in your campaigns, we'll tell you why this Doppler tool is a great addition to your business.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1029,6 +1032,10 @@ export const automation_en_translations = {
       "template_4_allow_item0": "Define different shipping conditions",
       "template_4_allow_item1": "Remind users of products they abandoned",
       "template_4_allow_item2": "Ship, if you have an active ecommerce integration",
+      "template_5_allow_item0": "Welcome new subscribers to your community.",
+      "template_5_allow_item1": "Send offers and promotions.",
+      "template_5_allow_item2": "Invite subscribers to exclusive events.",
+      "template_5_allow_item3": "Send reminders and alerts to your subscribers.",
     },
   },
   "automationTypes": {

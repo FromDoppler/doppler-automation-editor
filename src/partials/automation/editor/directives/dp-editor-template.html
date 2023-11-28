@@ -56,6 +56,11 @@
               {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
             </span>
             <a ng-if="item.Status === 'integration' || item.Status === 'repeated'" ng-href="{{webappUrl}}/integrations">{{ 'automationTypes.info.integration' | translate }}</a>
+            <!-- buySms -->
+            <span ng-if="item.Status === 'buySms'">
+              {{ 'automationTypes.info.buySms_message' | translate }}
+            </span>
+            <a ng-if="item.Status === 'buySms'" ng-href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
           </span>
         </div> 
       </div>

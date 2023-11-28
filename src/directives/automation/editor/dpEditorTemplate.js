@@ -27,7 +27,8 @@
         REVALIDATION_SUBSCRIBERS: 1,
         BIRTHDAY_GREETING: 2,
         WELCOME_NEW_CONTACTS: 3,
-        ABANDONED_CART: 4
+        ABANDONED_CART: 4,
+        SMS: 5,
       };
 
       const templateCardOrder = [
@@ -35,7 +36,8 @@
         TEMPLATES.WELCOME_NEW_CONTACTS,
         TEMPLATES.BIRTHDAY_GREETING,
         TEMPLATES.ABANDONED_CART,
-        TEMPLATES.REVALIDATION_SUBSCRIBERS
+        TEMPLATES.REVALIDATION_SUBSCRIBERS,
+        TEMPLATES.SMS,
       ];
 
       function sortTemplateCards(templatesCardsUnsorted){

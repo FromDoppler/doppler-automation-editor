@@ -6,10 +6,12 @@
     .directive('dpEditorTemplatePreview', dpEditorTemplatePreview);
 
     dpEditorTemplatePreview.$inject = [
-    'taskService', '$window'
+    'taskService',
+    '$window',
+    '$translate',
   ];
 
-  function dpEditorTemplatePreview(taskService, $window) {
+  function dpEditorTemplatePreview(taskService, $window, $translate) {
     var directive = {
       restrict: 'E',
       link: link,
@@ -26,6 +28,18 @@
             $window.location.href = '/Automation/EditorConfig?idScheduledTask=' + data.idScheduledTask + '&automationType=' +  data.scheduledTaskType;
           }
         });
+      };
+
+      scope.getRange = function(count) {
+        return Array.from({ length: count }, (_, index) => index);
+      };
+
+      scope.translationExists = function(translationKey) {
+        return $translate.instant(translationKey) !== translationKey;
+      };
+    
+      scope.getItemTranslationKey = function(idAutomationTemplateSelected, index) {
+        return 'automationTemplates.templatePreview.template_' + idAutomationTemplateSelected + '_allow_item' + index;
       };
     }
   }

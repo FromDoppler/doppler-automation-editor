@@ -1008,7 +1008,9 @@ export const automation_es_translations = {
       "title3": "Bienvenida a nuevos Contactos",
       "description3": "Envía un Email de bienvenida a los nuevos Contactos que ingresen la lista asociada.",
       "title4": "Carrito Abandonado",
-      "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra."
+      "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra.",
+      "title5": "Envío de SMS Masivos",
+      "description5": "Usa mensajes SMS automatizados para potenciar tu estrategias de omnicanalidad.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1016,6 +1018,7 @@ export const automation_es_translations = {
       "description2": "Programa un Email personalizado en esa fecha especial para tus Contactos.",
       "description3": "Envía un Email saludando a tus usuarios cuando se unen a tu comunidad.",
       "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra.",
+      "description5": "Enviar SMS masivos es un complemento perfecto de tu estrategia de Email Automation. Si aún no estás usando SMS en tus campañas, te contamos por qué esta herramienta de Doppler aporta un diferencial para tu negocio.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1028,6 +1031,10 @@ export const automation_es_translations = {
       "template_4_allow_item0": "Definir diferentes condiciones de envíos",
       "template_4_allow_item1": "Recordar a los usuarios aquellos productos que abandonaron",
       "template_4_allow_item2": "Hacer envíos, si cuentas con una integración de ecommerce activa",
+      "template_5_allow_item0": "Bienvenida a una comunidad o Lista de suscriptores.",
+      "template_5_allow_item1": "Envío de ofertas y promociones.",
+      "template_5_allow_item2": "Invitaciones exclusivas a eventos.",
+      "template_5_allow_item3": "Recordatorios y alertas que tus Suscriptores deban tener en cuenta.",
     },
   },
   "automationTypes": {
