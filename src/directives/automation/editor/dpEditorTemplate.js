@@ -40,10 +40,13 @@
         TEMPLATES.SMS,
       ];
 
-      function sortTemplateCards(templatesCardsUnsorted){
+      function sortTemplateCards(templatesCardsUnsorted) {
         return templateCardOrder.reduce((templates, templateId) => {
-          return templates.concat(templatesCardsUnsorted.find(({IdAutomationTemplate}) => IdAutomationTemplate === templateId))
-        }, [])
+          const matchingTemplate = templatesCardsUnsorted.find(({ IdAutomationTemplate }) => IdAutomationTemplate === templateId);
+      
+          // Verify template existence before to concatenate
+          return matchingTemplate ? templates.concat(matchingTemplate) : templates;
+        }, []);
       }
 
       taskService.getAutomationTemplateList()
