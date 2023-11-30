@@ -1022,6 +1022,7 @@ export const automation_en_translations = {
       "description3": "Send an Email greeting your users when they join your community.",
       "description4": "Create a sequence of Emails that motivates users to buy those products that they left in the cart.",
       "description5": "Sending mass SMS is a great way to complement your email automation strategy. If you're not already using SMS in your campaigns, we'll tell you why this Doppler tool is a great addition to your business.",
+      "description6": "Customer retention strategies are essential to building a lasting relationship with customers, generating trust, and encouraging repeat purchases and referrals.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1038,6 +1039,9 @@ export const automation_en_translations = {
       "template_5_allow_item1": "Send offers and promotions.",
       "template_5_allow_item2": "Invite subscribers to exclusive events.",
       "template_5_allow_item3": "Send reminders and alerts to your subscribers.",
+      "template_6_allow_item0": "Keep customers coming back for your products or services.",
+      "template_6_allow_item1": "Add a personal touch to your communication.",
+      "template_6_allow_item2": "Welcome new customers to your store.",
     },
   },
   "automationTypes": {
