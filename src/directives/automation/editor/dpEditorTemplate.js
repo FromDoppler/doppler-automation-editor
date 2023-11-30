@@ -29,6 +29,7 @@
         WELCOME_NEW_CONTACTS: 3,
         ABANDONED_CART: 4,
         SMS: 5,
+        FIRST_PURCHASE: 6,
       };
 
       const templateCardOrder = [
@@ -38,6 +39,7 @@
         TEMPLATES.ABANDONED_CART,
         TEMPLATES.REVALIDATION_SUBSCRIBERS,
         TEMPLATES.SMS,
+        TEMPLATES.FIRST_PURCHASE,
       ];
 
       function sortTemplateCards(templatesCardsUnsorted) {

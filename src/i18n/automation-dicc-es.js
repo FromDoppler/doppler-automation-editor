@@ -1011,6 +1011,8 @@ export const automation_es_translations = {
       "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra.",
       "title5": "Envío de SMS Masivos",
       "description5": "Usa mensajes SMS automatizados para potenciar tu estrategias de omnicanalidad.",
+      "title6": "Agradecimiento primera compra",
+      "description6": "Envía un email de bienvenida cuando un cliente realiza su primera compra.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",

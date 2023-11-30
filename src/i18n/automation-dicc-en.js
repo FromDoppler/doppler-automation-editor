@@ -1012,6 +1012,8 @@ export const automation_en_translations = {
       "description4": "Create an Email sequence that reminds potencials customers of the completion of their purchase.",
       "title5": "Mass SMS sending",
       "description5": "Use automated SMS messages to enhance your omnichannel strategy.",
+      "title6": "Thank you for your purchase",
+      "description6": "Send a welcome email after a customer makes their first purchase.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
