@@ -1002,7 +1002,7 @@ export const automation_es_translations = {
       "title0": "Crear flujo desde cero",
       "description0": "Define las condiciones y acciones que dispararán tus Campañas creando un flujo personalizado.",
       "title1": "Revalidación de Contactos",
-      "description1": "Confirma, a través de un envío, aquellos Contactos que desean continuar recibiendo tus comunicaciones.",
+      "description1": "Confirma a través de un envío aquellos Contactos que desean continuar recibiendo tus comunicaciones.",
       "title2": "Saludo de cumpleaños",
       "description2": "Programa un Email personalizado en esa fecha especial para tus Contactos.",
       "title3": "Bienvenida a nuevos Contactos",
