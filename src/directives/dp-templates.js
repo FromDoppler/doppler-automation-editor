@@ -66,7 +66,7 @@
       var pageStart = 0;
       var urlRandomTimeParam = new Date().getTime();
       var isLoadingPreview = false;
-      var defaultCategorySelected = 1;
+      var defaultCategorySelected = 0;
 
       var redirectToEditorCampaign = function (idCampaign, editorType) {
         window.location.href = templatesService.getEditorCampaignUrl(idCampaign, editorType);
@@ -157,7 +157,7 @@
             if ($scope.allTemplates) {
               $scope.categories.push({ IdTemplateCategory: -2, Name: $translate.instant('templates_title')});
             }
-            $scope.categories.push(allCategories);
+            $scope.categories.unshift(allCategories);
             $scope.categorySelected = { IdTemplateCategory: $scope.categories[0].IdTemplateCategory };
             if ($scope.categoryFilter){
               var category = _.find(result, function(cat){
