@@ -1013,6 +1013,8 @@ export const automation_es_translations = {
       "description5": "Usa mensajes de texto automatizados para potenciar tu estrategia de omnicanalidad.",
       "title6": "Agradecimiento primera compra",
       "description6": "Envía un email de bienvenida cuando un cliente realiza su primera compra.",
+      "title7": "Visita a la pagina",
+      "description7": "Programa un email personalizado cuando tu cliente visita tu sitio web.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",

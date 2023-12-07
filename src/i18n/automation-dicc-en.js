@@ -1014,6 +1014,8 @@ export const automation_en_translations = {
       "description5": "Use automated text messages to boost your omnichannel strategy.",
       "title6": "Thank you for your purchase",
       "description6": "Send a welcome email after a customer makes their first purchase.",
+      "title7": "Website visit",
+      "description7": "Send a personalized email to your customer when they visit your website.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
