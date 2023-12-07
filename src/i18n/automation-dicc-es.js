@@ -1024,6 +1024,7 @@ export const automation_es_translations = {
       "description4": "Crea una secuencia de Emails que recuerde a tus potenciales clientes la finalización de su compra.",
       "description5": "Complementa tu estrategia de Automation, con el envío de mensajes de texto para contactar con tus usuarios.",
       "description6": "Las estrategias de fidelización son fundamentales para crear una relación duradera con los clientes, generar confianza y fomentar nuevas compras y recomendaciones.",
+      "description7": "Muchas personas que visitan una tienda no realizan una compra en el momento. Para aumentar las ventas, es importante recordarles sobre su visita y los productos que más les llamaron la atención. Esto ayudará a generar presencia y a incentivar la compra.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1042,6 +1043,8 @@ export const automation_es_translations = {
       "template_6_allow_item0": "Consigue que sigan comprando tus productos o servicios.",
       "template_6_allow_item1": "Agrega un toque personal a tu comunicación.",
       "template_6_allow_item2": "Da la bienvenida a los nuevos clientes a tu tienda.",
+      "template_7_allow_item0": "Envía mensajes personalizados que sean relevantes para el cliente.",
+      "template_7_allow_item1": "Mantén el contacto con los clientes para que no se olviden de ti.",
     },
   },
   "automationTypes": {
