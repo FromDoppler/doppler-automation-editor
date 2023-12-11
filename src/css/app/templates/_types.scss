@@ -285,7 +285,7 @@ dp-editor-template-preview {
   }
 
 
-  @for $i from 1 through 6 {
+  @for $i from 1 through 7 {
     .dp-automation-template-preview-image-#{$i}-es{
       background-image: url(#{$imagesPath}/automation_template/automation-template_#{$i}_es.jpg);
       background-repeat: no-repeat;
