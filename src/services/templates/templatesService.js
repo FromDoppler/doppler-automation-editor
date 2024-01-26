@@ -33,12 +33,17 @@
 
     return service;
 
-    function ensureExitParameterWithCurrentUrl(parameters) {
+    function ensureExitParameterWithCurrentUrl(parameters, idCampaign) {
       parameters = parameters || {};
       // I am not using destructuring because I think it is not
       // compatible with current build tools versions
+      // TODO Analize HasDynamicContent https://github.com/MakingSense/Doppler/blob/c37468fa59cb017dbca2744436217d83a16a69ed/Doppler.Application.Automation/Services/Classes/AutomationService.cs#L808
+      // to get a right result the automation needs preview save
       if (!parameters.exit) {
         parameters.exit = $location.absUrl();
+      }
+      if (parameters.exit && idCampaign) {
+        parameters.exit = parameters.exit.concat(`&idCampaign=${idCampaign}`);
       }
       return parameters;
     }
@@ -102,7 +107,7 @@
 
     function getEditorTemplateUrl (id, editorType, parameters) {
       switch (editorType) {
-        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerTemplateEditorUrl(id, ensureExitParameterWithCurrentUrl(parameters));
+        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerTemplateEditorUrl(id, ensureExitParameterWithCurrentUrl(parameters, idCampaign));
         case EMAIL_EDITOR_TYPE.MSEDITOR:
         default: return '/MSEditor/Editor?idTemplate=' + id;
       }
@@ -110,7 +115,7 @@
 
     function getEditorCampaignUrl (idCampaign, editorType, parameters) {
       switch (editorType) {
-        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerCampaignEditorUrl(idCampaign, ensureExitParameterWithCurrentUrl(parameters));
+        case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerCampaignEditorUrl(idCampaign, ensureExitParameterWithCurrentUrl(parameters, idCampaign));
         case EMAIL_EDITOR_TYPE.MSEDITOR:
         default: return '/MSEditor/Editor?idCampaign=' + idCampaign;
       }
@@ -127,7 +132,7 @@
     }
 
     function redirectToUnlayerEditorForTemplateCreation(baseTemplateId, parameters) {
-      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForTemplateCreation(baseTemplateId, ensureExitParameterWithCurrentUrl(parameters));
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForTemplateCreation(baseTemplateId, ensureExitParameterWithCurrentUrl(parameters, idCampaign));
     }
 
     function createMSEditorTemplateFromPublicAndRedirect(baseTemplateId, onFail) {
@@ -145,7 +150,7 @@
     function createTemplateFromPublicAndRedirect(baseTemplateId, editorType, parameters, onFail) {
       switch (editorType) {
         case EMAIL_EDITOR_TYPE.UNLAYER:
-          redirectToUnlayerEditorForTemplateCreation(baseTemplateId, ensureExitParameterWithCurrentUrl(parameters));
+          redirectToUnlayerEditorForTemplateCreation(baseTemplateId, ensureExitParameterWithCurrentUrl(parameters, idCampaign));
           break;
         case EMAIL_EDITOR_TYPE.MSEDITOR:
         default:
@@ -172,7 +177,7 @@
         return false;
       }
 
-      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(idCampaign, baseTemplateId, ensureExitParameterWithCurrentUrl(parameters));
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(idCampaign, baseTemplateId, ensureExitParameterWithCurrentUrl(parameters, idCampaign));
       return true;
     }
 
@@ -194,7 +199,7 @@
         return false;
       }
 
-      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(idCampaign, baseTemplateId, ensureContinueParameterWithCurrentUrl(parameters));
+      window.location.href = unlayerEditorHelper.getUnlayerEditorUrlForSetCampaignContentFromTemplate(idCampaign, baseTemplateId, ensureContinueParameterWithCurrentUrl(parameters, idCampaign));
       return true;
     }
 
