@@ -97,6 +97,20 @@
       } else {
         getTemplates(0, true);
       }
+      
+      $scope.getInfiniteScrollElement = function() {
+        const automationType = $location.search().automationType;
+        if (
+            automationType === AUTOMATION_TYPE.VISITED_PRODUCTS ||
+            automationType === AUTOMATION_TYPE.ABANDONED_CART ||
+            automationType === AUTOMATION_TYPE.PENDING_ORDER ||
+            automationType === AUTOMATION_TYPE.CONFIRMATION_ORDER
+          ) {
+          return 'editorTemplateDynamic';
+        } else {
+          return 'editorTemplate';
+        }
+      };
 
       function getTemplates(categoryId, privateTemplates) {
         if ($scope.isLoadingTemplates) {
