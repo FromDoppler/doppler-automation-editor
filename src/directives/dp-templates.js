@@ -97,6 +97,10 @@
       } else {
         getTemplates(0, true);
       }
+      
+      $scope.getInfiniteScrollElement = function() {
+        return document.getElementsByTagName("dp-templates")[0].id || 'editorTemplate';
+      };
 
       function getTemplates(categoryId, privateTemplates) {
         if ($scope.isLoadingTemplates) {

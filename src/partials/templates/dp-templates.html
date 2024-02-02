@@ -46,7 +46,7 @@
 					</div>
 				</div>
 			</header>
-			<div class="items" infinite-scroll="onScroll" infinite-scroll-element="editorTemplate"
+			<div class="items" infinite-scroll="onScroll" infinite-scroll-element="{{ getInfiniteScrollElement() }}"
 				infinite-scroll-distance="200">
 				<div class="item" ng-repeat="template in templates">
 					<div ng-if="template.EditorType === EMAIL_EDITOR_TYPE.UNLAYER"
