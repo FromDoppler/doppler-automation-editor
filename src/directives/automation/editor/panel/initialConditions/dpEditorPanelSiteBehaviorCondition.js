@@ -239,7 +239,16 @@
       };
 
       scope.isEnabledVerificationTime = function() {
-        return scope.selectedComponent.domains.length > 1 || scope.selectedComponent.domains[0].visitedTimes > 1;
+        const visitedTimesMoreThanOne = scope.selectedComponent.domains.some(
+          (domain) => domain.visitedTimes > 1,
+        );
+        const result =
+          (scope.selectedComponent.operator === CONDITION_OPERATOR.AND && scope.selectedComponent.domains.length > 1) ||
+          visitedTimesMoreThanOne;
+        scope.selectedComponent.verificationTime = result
+          ? scope.selectedComponent.verificationTime
+          : 0;
+        return result;
       };
 
       scope.toggleConfirmation = function(value) {
