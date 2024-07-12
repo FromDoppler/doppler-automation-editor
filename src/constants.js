@@ -53,6 +53,7 @@ var AutomationType = {
   CONFIRMATION_ORDER: 'confirmation_order',
   PUSH_NOTIFICATION: 'push_notification',
   SMS: 'sms',
+  WHATSAPP: 'whatsapp',
 };
 
 var AutomationTypeIds = {
@@ -100,8 +101,14 @@ var ComponentType = {
   SMS: 'sms',
   DYNAMIC_CONTENT: 'dynamic_content',
   PUSH_NOTIFICATION: 'push_notification',
-  GOTO_STEP: 'goto'
+  GOTO_STEP: 'goto',
+  WHATSAPP: 'whatsapp',
 };
+
+var WhatsappWarningType = {
+  CREDIT: 'credit',
+  ROOM: 'room',
+}
 
 var CampaignType = {
   CAMPAIGN: 'campaign',
@@ -522,4 +529,5 @@ angular.module('dopplerApp.automation.editor')
   .constant('DYNAMIC_CONTENT_HOURS', dynamicContentHours)
   .constant('BLOCKED_STATUS', BlockedListStatus)
   .constant('AUTOMATION_TYPE_IDS', AutomationTypeIds)
-  .constant('DOMAINS_SELECTION_STATE', DomainsSelectionState);
+  .constant('DOMAINS_SELECTION_STATE', DomainsSelectionState)
+  .constant('WHATSAPP_WARNING_TYPE', WhatsappWarningType);
