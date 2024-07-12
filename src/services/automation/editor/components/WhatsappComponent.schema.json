@@ -1,0 +1,12 @@
+{
+  "uid": 0,
+  "name":  "",
+  "parentUid": 0,
+  "completed": false,
+  "touched" : false,
+  "templateId": 0,
+  "templateContent": "",
+  "roomId": 0,
+  "roomName":"",
+  "roomPhone":""
+}
