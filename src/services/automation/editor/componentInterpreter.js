@@ -50,7 +50,8 @@
     'AbandonedCartInformation',
     'PushComponent',
     'PushNotificationCondition',
-    'GotoComponent'
+    'GotoComponent',
+    'WhatsappComponent',
   ];
 
   function componentInterpreter(ActionComponent, AutomationComponent, BooleanField, CAMPAIGN_TYPE, CampaignBehavior,
@@ -61,7 +62,7 @@
     SubscriptionListCondition, TextField, AddSubscriberToList, ResendEmail, ConsentField, OriginField,
     ScoreField, SiteBehavior, RemoveSubscriberFromList, ChangeSubscriberField, SmsComponent,
     DynamicContentCondition, AbandonedCartInformation, PushComponent, PushNotificationCondition,
-    GotoComponent  ) {
+    GotoComponent, WhatsappComponent) {
     var service = {
       createComponent: createComponent,
       createCondition: createCondition,
@@ -117,6 +118,10 @@
 
         case COMPONENT_TYPE.GOTO_STEP:
         component = new GotoComponent(rawComponent);
+        break;
+
+        case COMPONENT_TYPE.WHATSAPP:
+        component = new WhatsappComponent(rawComponent);
         break;
 
       default:
