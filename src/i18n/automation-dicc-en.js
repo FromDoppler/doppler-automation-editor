@@ -944,6 +944,8 @@ export const automation_en_translations = {
       "actions_not_defined": "Undefined Actions",
       "sms_not_defined": "Undefined Sms",
       "smss_not_defined": "Undefined Sms",
+      "whatsapp_not_defined": "Undefined Whatsapp",
+      "whatsapps_not_defined": "Undefined Whatsapps",
       "push_notification_not_defined": "Undefined Push",
       "push_notifications_not_defined": "Undefined Push",
       "goto_not_defined": "Undefined Go to Step",

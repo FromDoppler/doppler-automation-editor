@@ -944,6 +944,8 @@ export const automation_es_translations = {
       "actions_not_defined": "Acciones sin definir",
       "sms_not_defined": "Sms sin definir",
       "smss_not_defined": "Sms sin definir",
+      "whatsapp_not_defined": "Whatsapp sin definir",
+      "whatsapps_not_defined": "Whatsapps sin definir",
       "push_notification_not_defined": "Push sin definir",
       "push_notifications_not_defined": "Push sin definir",
       "goto_not_defined": "Ir al Paso sin definir",
