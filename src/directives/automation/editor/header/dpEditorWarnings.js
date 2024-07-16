@@ -25,7 +25,7 @@
     return directive;
 
     function link(scope) {
-      scope.componentTypes = ['delay', 'campaign', 'action', 'condition', 'sms', 'push_notification', 'goto', 'initial_condition'];
+      scope.componentTypes = ['delay', 'campaign', 'action', 'condition', 'sms', 'push_notification', 'goto', 'initial_condition', 'whatsapp'];
       scope.isOpen = false;
       scope.warningsSteps = warningsStepsService.getAllWarningsSteps();
       scope.warningStepsCount = warningsStepsService.getWarningsStepsCount;

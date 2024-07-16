@@ -146,6 +146,14 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: $font_weight-bolder;
 }
 
+.whatsapp-content {
+  border: 1px solid #ccc;
+  border-radius: $border-radius--default;
+  min-height: 120px;
+  margin-bottom: 30px;
+  padding: 5px;
+}
+
 .span--sms {
   color: $color-lightgrey;
   display: block;

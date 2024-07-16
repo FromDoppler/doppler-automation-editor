@@ -21,7 +21,8 @@ export const automation_es_translations = {
       "pending_order": "Pago Pendiente: ",
       "confirmation_order": "Pago Confirmado: ",
       "push_notification": "Notificaciones Push: ",
-      "sms": "Envío de SMS masivos: "
+      "sms": "Envío de SMS masivos: ",
+      "whatsapp": "Envío de WhastApp: ",
     },
 		"buttons": {
 		"exit": "Salir y editar luego",
@@ -72,7 +73,13 @@ export const automation_es_translations = {
     "goto_step_connection_label": "Conexión",
     "goto_icon": "Conectar",
     "goto_tooltip_invalid_connection_to_goto": "Elige otro tipo de paso. <br /> No puedes vincular dos “Conectar”",
-    "goto_tooltip_infinite_flow_generation": "Elige otro paso. <br /> Si lo conectaras con este, crearías un flujo infinito."
+    "goto_tooltip_infinite_flow_generation": "Elige otro paso. <br /> Si lo conectaras con este, crearías un flujo infinito.",
+    "whatsapp_icon": "Whatsapp",
+    "whatsapp_placeholder": "Define tu Whatsapp",
+    'whatsapp': "Enviar la plantilla",
+    "whatsapp_new_step_not_credit": "Realiza Up-grade en tu plan para poder acceder a Whatsapp Automation.<br><a target='_self' href='#'>Haz click aquí</a>",
+    "whatsapp_new_step_not_room": "Crea una sala de WhatsApp y una plantilla desde Conversaciones.<br><a target='_self' href='https://conversations.fromdoppler.com'>Haz click aquí</a>",
+
 	},
 	"components": {
     "initial_condition": {
@@ -901,7 +908,27 @@ export const automation_es_translations = {
       "push_uploader_title" : "Imagen (opcional)",
       "push_uploader_retry_button" : "reintentar",
       "push_uploader_drag_title" : "Arrastra aquí o",
-      "push_uploader_button" : "Selecciona una imagen"
+      "push_uploader_button" : "Selecciona una imagen",
+      "whatsapp_non_room_error": "Para utilizar esta funcionalidad necesitas tener al menos una sala creada.",
+      "whatsapp_non_room_error_url": "https://conversations.fromdoppler.com/apps/list-channels",
+      "whatsapp_non_room_error_url_link": "Crear Sala",
+      "whatsapp_non_template_error": "Para utilizar esta funcionalidad necesitas tener al menos una plantilla creada en esta sala.",
+      "whatsapp_non_template_error_url": "https://conversations.fromdoppler.com/apps/template/all",
+      "whatsapp_non_template_error_url_link": "Crear Plantilla",
+      "whatsapp": {
+        "title": "Crea tus envío de Whatsapp Automation",
+        "name": "Nombre whatsapp ",
+        "room_select": "Seleccionar Sala",
+        "room_phone": "Teléfono asociado",
+        "phone_field": "Campo teléfono",
+        "template_select": "Seleccionar Plantilla",
+        "set_field": "Seteo de variables de reemplazo",
+        "send_test_title": "Realiza un envío de prueba a un teléfono específico",
+        "send_test_description": "Escribe el número de teléfono al que quieres realizar tu envío de prueba. El costo de este envío de prueba se descontará de tu dinero disponible.",
+        "help_tip": "¿Tienes dudas sobre cómo crear tus campañas de Whatsapp Automation?",
+        "help_tip_link": "Lee más en el HELP CENTER.",
+        "help_tip_link_url": "",
+      }
     },
     "steps": {
       "without_recorded": "SIN PASOS REGISTRADOS",
@@ -918,6 +945,8 @@ export const automation_es_translations = {
       "actions_not_defined": "Acciones sin definir",
       "sms_not_defined": "Sms sin definir",
       "smss_not_defined": "Sms sin definir",
+      "whatsapp_not_defined": "Whatsapp sin definir",
+      "whatsapps_not_defined": "Whatsapps sin definir",
       "push_notification_not_defined": "Push sin definir",
       "push_notifications_not_defined": "Push sin definir",
       "goto_not_defined": "Ir al Paso sin definir",

@@ -17,6 +17,7 @@
           this.name = '';
           this.lastEmailIdName = 0;
           this.lastSmsIdName = 0;
+          this.lastWhatsappIdName = 0;
           this.state = AUTOMATION_STATE.DRAFT;
           this.completed = AUTOMATION_COMPLETED_STATE.INCOMPLETE;
 
@@ -60,6 +61,9 @@
           }
           if (data.hasOwnProperty('lastSmsIdName')) {
             this.lastSmsIdName = data.lastSmsIdName;
+          }
+          if (data.hasOwnProperty('lastWhatsappIdName')) {
+            this.lastWhatsappIdName = data.lastWhatsappIdName;
           }
           if (data.hasOwnProperty('initialCondition')) {
             if (!this.initialCondition) {

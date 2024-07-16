@@ -312,6 +312,7 @@
     &.delete-warning {
       border: 1px solid $color-red !important;
     }
+    &.whatsapp,
     &.sms {
       .component {
        align-items: start !important;
@@ -324,6 +325,7 @@
     }
     &.goto,
     &.sms,
+    &.whatsapp,
     &.push,
     &.delay,
     &.condition,
@@ -349,7 +351,8 @@
     &.condition,
     &.action,
     &.push,
-    &.sms {
+    &.sms,
+    &.whatsapp {
       .component {
         position: relative;
         text-align: left;
@@ -402,6 +405,23 @@
       }
     }
     &.sms {
+      .container-name {
+        margin-bottom: 45px;
+        padding: 0 25px;
+        &.name {
+          background: $color-white;
+          border-top: 1px solid $color-sylver;
+          padding: 10px;
+          margin: 0;
+          text-align: center;
+          position: absolute;
+          bottom: 1px;
+          left: 0;
+          width: $size-full;
+        }
+      }
+    }
+    &.whatsapp {
       .container-name {
         margin-bottom: 45px;
         padding: 0 25px;
@@ -516,8 +536,8 @@
     border-radius: $border-radius--default;
     border: 1px solid $color-sylver;
     box-shadow: 0 0 0 4px $color-snow;
-    padding: 30px 40px 35px;
-    width: 440px;
+    padding: 30px 30px 35px;
+    width: 480px;
     margin: 15px auto 0;
     position: absolute;
     cursor: auto;
