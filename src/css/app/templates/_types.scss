@@ -6,7 +6,7 @@ $imagesPath: "../images" !default;
     height: 40px;
     margin-bottom: 35px;
   }
-  @for $i from 0 through 12 {
+  @for $i from 0 through 13 {
     .automation-types--#{$i} {
       &::before {
         background: url(#{$imagesPath}/automation-type-#{$i}.svg) no-repeat center center;
@@ -285,7 +285,7 @@ dp-editor-template-preview {
   }
 
 
-  @for $i from 1 through 7 {
+  @for $i from 1 through 8 {
     .dp-automation-template-preview-image-#{$i}-es{
       background-image: url(#{$imagesPath}/automation_template/automation-template_#{$i}_es.jpg);
       background-repeat: no-repeat;

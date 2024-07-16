@@ -31,6 +31,7 @@
         SMS: 5,
         FIRST_PURCHASE: 6,
         WEBSITE_VISIT: 7,
+        WHATSAPP: 8,
       };
 
       const templateCardOrder = [
@@ -42,6 +43,7 @@
         TEMPLATES.SMS,
         TEMPLATES.FIRST_PURCHASE,
         TEMPLATES.WEBSITE_VISIT,
+        TEMPLATES.WHATSAPP,
       ];
 
       function sortTemplateCards(templatesCardsUnsorted) {

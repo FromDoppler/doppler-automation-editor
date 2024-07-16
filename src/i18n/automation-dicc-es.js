@@ -1015,6 +1015,8 @@ export const automation_es_translations = {
       "description6": "Envía un email de bienvenida cuando un cliente realiza su primera compra.",
       "title7": "Visita a la pagina",
       "description7": "Programa un email personalizado cuando tu cliente visita tu sitio web.",
+      "title8": "Envío de WhatsApp",
+      "description8": "Envía mensajes automatizados de WhatsApp para potenciar tus Campañas.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1025,6 +1027,7 @@ export const automation_es_translations = {
       "description5": "Complementa tu estrategia de Automation, con el envío de mensajes de texto para contactar con tus usuarios.",
       "description6": "Las estrategias de fidelización son fundamentales para crear una relación duradera con los clientes, generar confianza y fomentar nuevas compras y recomendaciones.",
       "description7": "Muchas personas que visitan una tienda no realizan una compra en el momento. Para aumentar las ventas, es importante recordarles sobre su visita y los productos que más les llamaron la atención. Esto ayudará a generar presencia y a incentivar la compra.",
+      "description8": "Complementa tu estrategia de Email Automation, con este servicio de mensajería instantánea. Descubre por qué esta herramienta aporta un diferencial para tu negocio.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1045,6 +1048,10 @@ export const automation_es_translations = {
       "template_6_allow_item2": "Da la bienvenida a los nuevos clientes a tu tienda.",
       "template_7_allow_item0": "Envía mensajes personalizados que sean relevantes para el cliente.",
       "template_7_allow_item1": "Mantén el contacto con los clientes para que no se olviden de ti.",
+      "template_8_allow_item0": "Dar la bienvenida a una comunidad o Lista de suscriptores",
+      "template_8_allow_item1": "Enviar ofertas y promociones.",
+      "template_8_allow_item2": "Invitar comunicaciones exclusivas a eventos.",
+      "template_8_allow_item3": "Recordar a tus Contactos alertas importantes.",
     },
   },
   "automationTypes": {
