@@ -63,6 +63,19 @@
             </span>
             <a ng-if="item.Status === 'buySms'" ng-href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
 
+
+             <!-- buy whatsApp credit -->
+             <span ng-if="item.Status === 'whatsappCredit'">
+              {{ 'automationTypes.info.whatsappCredit_message' | translate }}
+            </span>
+            <a ng-if="item.Status === 'whatsappCredit'" ng-href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.whatsappCredit' | translate }}</a>
+
+             <!-- Configure chat room or template -->
+             <span ng-if="item.Status === 'whatsappRoomTemplateUndefined'">
+              {{ 'automationTypes.info.whatsappRoomTemplateUndefined_message' | translate }}
+            </span>
+            <a ng-if="item.Status === 'whatsappRoomTemplateUndefined'" ng-href="https://conversations.fromdoppler.com/">{{ 'automationTypes.info.whatsappRoomTemplateUndefined' | translate }}</a>
+
             <span ng-if="item.Status === 'error' || item.Status === 'warning'">
               {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
             </span>
