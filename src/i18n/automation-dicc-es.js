@@ -21,7 +21,8 @@ export const automation_es_translations = {
       "pending_order": "Pago Pendiente: ",
       "confirmation_order": "Pago Confirmado: ",
       "push_notification": "Notificaciones Push: ",
-      "sms": "Envío de SMS masivos: "
+      "sms": "Envío de SMS masivos: ",
+      "whatsapp": "Envío de WhastApp: ",
     },
 		"buttons": {
 		"exit": "Salir y editar luego",
