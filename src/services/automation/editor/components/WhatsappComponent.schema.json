@@ -4,9 +4,16 @@
   "parentUid": 0,
   "completed": false,
   "touched" : false,
-  "templateId": 0,
-  "templateContent": "",
-  "roomId": 0,
-  "roomName":"",
-  "roomPhone":""
+  "room": {
+    "id": 0,
+    "name": "",
+    "phoneNumber": ""
+  },
+  "template" : {
+    "roomId": 0,
+    "id": 0,
+    "name": "",
+    "content": "",
+    "variables": []
+  }
 }
