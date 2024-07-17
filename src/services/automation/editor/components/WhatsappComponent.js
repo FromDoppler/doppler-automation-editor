@@ -43,10 +43,10 @@
           this.field = data.field;
         }
         if (data.hasOwnProperty('room')) {
-          this.roomId = data.room;
+          this.room = data.room;
         }
         if (data.hasOwnProperty('template')) {
-          this.templateId = data.template;
+          this.template = data.template;
         }
         if (data.hasOwnProperty('name')) {
           this.name = data.name;
