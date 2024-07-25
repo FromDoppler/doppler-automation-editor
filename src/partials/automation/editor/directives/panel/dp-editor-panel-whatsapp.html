@@ -94,20 +94,61 @@
 
   <div ng-bind-html="selectedComponent.template.content" class="whatsapp-content"></div>
 
+  <div ng-if="headerVariables.length > 0">
+    <p class="title" >
+      {{ 'automation_editor.sidebar.whatsapp.set_head_field' | translate }}
+    </p>
+    <div class="input--group" ng-repeat="variable in headerVariables">
+      <label class="label label--panel">*{{ 'automation_editor.sidebar.whatsapp.variable' | translate }} <strong>{{</strong>{{variable.name}}<strong>}}</strong></label>
+      <dp-editor-dropdown class="full"
+        options="userFields"
+        ng-class="{'placeholder': selectedComponent.field, 'hasError': test()}"
+        label="selectedComponent.field.name ? variable.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
+        on-select-option="onVariableSelected(option, variable)"
+        key-value="'id'"
+        key-label="'name'"
+        value-selected="variable.field.id"
+        ng-disabled="isReadOnly();">
+      </dp-editor-dropdown>
+    </div>
+  </div>
 
-  <div class="input--group">
-    <label class="label label--panel">{{ 'automation_editor.sidebar.sms_text_test' | translate }}</label>
-    <span class="span--sms">{{ 'automation_editor.sidebar.sms_text_test_desc' | translate }}</span>
+  <div ng-if="bodyVariables.length > 0">
+    <p class="title" >
+      {{ 'automation_editor.sidebar.whatsapp.set_body_field' | translate }}
+    </p>
+    <div class="input--group" ng-repeat="variable in bodyVariables">
+      <label class="label label--panel">*{{ 'automation_editor.sidebar.whatsapp.variable' | translate }} <strong>{{</strong>{{variable.name}}<strong>}}</strong></label>
+      <dp-editor-dropdown class="full"
+        options="userFields"
+        ng-class="{'placeholder': selectedComponent.field, 'hasError': test()}"
+        label="selectedComponent.field.name ? variable.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
+        on-select-option="onVariableSelected(option, variable)"
+        key-value="'id'"
+        key-label="'name'"
+        value-selected="variable.field.id"
+        ng-disabled="isReadOnly();">
+      </dp-editor-dropdown>
+    </div>
+  </div>
+
+ 
+  <div class="input--group  dp-library">
+    <label class="label label--panel">{{ 'automation_editor.sidebar.whatsapp.whatsapp_test' | translate }}</label>
+    <span class="span--sms">{{ 'automation_editor.sidebar.whatsapp.whatsapp_test_desc' | translate }}</span>
     <div class="display-flex">
-      <input id="phone_whatsapp" type="tel" class="input-sms input--text"
-            ng-model="selectedComponent.whatsappPhoneNumberTest"
-            ng-required="whatsappForm.whatsappPhoneNumberTest.$dirty || selectedComponent.touched"
-            name="whatsappPhoneNumberTest"
-            ng-class="{'hasErrors': whatsappForm.whatsappPhoneNumberTest.$error && whatsappForm.whatsappPhoneNumberTest.$dirty || isSmsPhoneNumberTestInvalidByChangeCountry}"
-            maxlength="160"
-            ng-disabled="isReadOnly();"
-            ng-change="changePhoneNumber(whatsappForm)" />
-      <button class="button-test-sms button button--small button--primary" ng-class="{'button--spinner' : sendingWhatsappTest}" ng-disabled="whatsappForm.whatsappPhoneNumberTest.$error" ng-click="sendWhatsappTest(whatsappForm)">
+      <input id="phone_whatsapp" type="tel" class="input--text"
+        ng-model="selectedComponent.whatsappPhoneNumberTest"
+        ng-required="whatsappForm.whatsappPhoneNumberTest.$dirty || selectedComponent.touched"
+        name="whatsappPhoneNumberTest"
+        ng-class="{'hasErrors': whatsappForm.whatsappPhoneNumberTest.$error && whatsappForm.whatsappPhoneNumberTest.$dirty || isSmsPhoneNumberTestInvalidByChangeCountry}"
+        maxlength="160"
+        ng-disabled="isReadOnly();"
+        ng-change="changePhoneNumber(whatsappForm)" />
+      <button class="button-test-sms button button--small button--primary"
+        ng-class="{'button--spinner' : sendingWhatsappTest}"
+        ng-disabled="whatsappForm.whatsappPhoneNumberTest.$error"
+        ng-click="sendWhatsappTest()">
         {{ 'automation_editor.sidebar.campaign_send_test_send_button' | translate }}
         <span class="icon-editor-saving hide"></span>
       </button>
@@ -120,6 +161,12 @@
       <div ng-message="isWhatsappPhoneNumberTestInvalidTooLong" class="error">{{ 'validation_messages.phone_pattern_too_long' | translate }}</div>
       <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
       <div ng-show="isWhatsappPhoneNumberTestInvalidByChangeCountry" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
+    </div>
+    <div class="dp-temporal-message margin-t-15" ng-show="showWhatsappSendResultMessage">
+      <div class="dp-wrap-message" ng-class="sendWhatsappMessageResultClass">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message dp-content-full" ng-bind-html="sendWhatsappResultMessageText"></div>
+      </div>
     </div>
   </div>
 

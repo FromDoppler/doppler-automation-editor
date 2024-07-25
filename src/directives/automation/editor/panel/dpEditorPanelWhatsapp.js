@@ -7,14 +7,16 @@
 
   dpEditorPanelWhatsapp.$inject = [
     'userFieldsDataservice',
+    'whatsappDataservice',
     'REGEX',
     'automation',
     'COMPONENT_TYPE',
     'changesManager',
-    'settingsService'
+    '$translate',
+    '$timeout',
   ];
 
-  function dpEditorPanelWhatsapp(userFieldsDataservice, REGEX, automation, COMPONENT_TYPE, changesManager, settingsService) {
+  function dpEditorPanelWhatsapp(userFieldsDataservice, whatsappDataservice, REGEX, automation, COMPONENT_TYPE, changesManager, $translate, $timeout) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-whatsapp.html',
@@ -24,86 +26,58 @@
     return directive;
 
     function link(scope) {
+      const SHOW_RESULT_SEND_MESSAGE_TIME_MS = 2500;
+      const SHOW_MESSAGE_STATUS = {
+        SUCCESS: 'success',
+        ERROR: 'error',
+      };
+      const SEND_MESSAGE_TEXT_SUCCESS = $translate.instant('automation_editor.sidebar.whatsapp.send_message_success');
+      const SEND_MESSAGE_TEXT_ERROR = $translate.instant('automation_editor.sidebar.whatsapp.send_message_error');
+      scope.sendWhatsappMessageResultClass = '';
+      scope.showWhatsappSendResultMessage = false;
+      scope.sendWhatsappResultMessageText = '';
+
       var iti = null;
       var whatsappForm = null;
       scope.sendingWhatsappTest = false;
       scope.selectedComponent.touched = false;
       scope.phoneOptions = [];
-      scope.roomOptions = [];
-      scope.templateOptions = [];
+      scope.showTemplateEmptyWarning = false;
+
+      scope.userFields = userFieldsDataservice.getAllFields();
+      scope.roomOptions = undefined;
+      scope.templateOptions = undefined;
       scope.REGEX_SMS = REGEX.REGEX_SMS;
       scope.isLoaded = false;
       scope.getReadOnlyLabel = automation.getReadOnlyLabel;
 
+
+      scope.headerVariables = [];
+      scope.bodyVariables = [];
+
+      if(scope.selectedComponent.template.variables.length > 0) {
+        scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
+        scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
+      }
+
       scope.$watch('selectedComponent.name', evaluateWhatsappName);
 
-      scope.roomOptions = [
-        {
-          id: 1,
-          name: 'Sala 1',
-          phoneNumber: '+1111'
-        },
-        {
-          id: 2,
-          name: 'Sala 2',
-          phoneNumber: '+1112'
-        },
-        {
-          id: 3,
-          name: 'Sala 3',
-          phoneNumber: '+1113'
-        }
-      ];
-
-      scope.templateOptions = [
-        {
-          id: 1,
-          roomId: 1,
-          name: 'Plantilla 1',
-          content: '<div><strong>Plantilla 1</strong><p>contenido plantilla 1</p></div>'
-        },
-        {
-          id: 2,
-          roomId: 1,
-          name: 'Plantilla 2',
-          content: '<div><strong>Plantilla 2</strong><p>contenido plantilla 2</p></div>'
-        },
-        {
-          id: 3,
-          roomId: 1,
-          name: 'Plantilla 3',
-          content: '<div><strong>Plantilla 3</strong><p>contenido plantilla 3</p></div>'
-        },
-        {
-          id: 4,
-          roomId: 2,
-          name: 'Plantilla 4',
-          content: '<div><strong>Plantilla 4</strong><p>contenido plantilla 4</p></div>'
-        },
-        {
-          id: 5,
-          roomId: 2,
-          name: 'Plantilla 5',
-          content: '<div><strong>Plantilla 5</strong><p>Hola {{{1}}}</p></div>',
-          variables: [
-            {
-              VariableId: 1,
-              name: 'nombre',
-              field: {
-                  "IdField": 319,
-                  "Name": "Nombre",
-                  "Embed": "[[[first_name]]]",
-                  "SampleValue": "FIRST_NAME",
-                  "DataType": 2,
-                  "IsPrivate": false,
-                  "IsBasicField": true,
-                  "IsReadOnly": false,
-                  "PermissionText": ""
-              }
+      whatsappDataservice.getWhatsappRooms()
+        .then(function(response){
+          if(response.success){
+            scope.roomOptions = response.rooms;
+            scope.templateOptions = [];
+            if(scope.roomOptions.length > 0 && scope.selectedComponent.room) {
+              const roomId = scope.selectedComponent.room.id;
+              whatsappDataservice.getWhatsappTemplatesByRoom(roomId)
+              .then(function(templateData){
+                if(templateData.success){
+                  scope.templateOptions = templateData.templates;
+                }
+              });
             }
-          ]
-        },
-      ];
+          }
+        });
 
       userFieldsDataservice.getPhoneCustoms()
         .then(function(data){
@@ -144,11 +118,6 @@
         return scope.phoneOptions.length === 0;
       };
 
-      scope.charactersCountChange = function(value) {
-        scope.charactersCount = value ? value.length : 0;
-        scope.WhatsappPartsCount = value ? getWhatsappPartsCount(scope.selectedComponent.WhatsappText) : 0;
-      };
-
       scope.onPhoneTypeSelected = function(rawFieldData, oldField) {
         if (oldField && oldField.name === rawFieldData.name) {
           return;
@@ -161,7 +130,14 @@
           return;
         }
         scope.selectedComponent.room = rawFieldData;
-        //filter templatesOption
+        scope.showTemplateEmptyWarning = true;
+        scope.selectedComponent.template = null;
+        whatsappDataservice.getWhatsappTemplatesByRoom(rawFieldData.id)
+          .then(function(templateData){
+            if(templateData.success){
+              scope.templateOptions = templateData.templates;
+            }
+          });
       };
 
       scope.onWhatsappTemplateSelected = function(rawFieldData, oldField) {
@@ -169,8 +145,18 @@
           return;
         }
         scope.selectedComponent.template = rawFieldData;
+        scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
+        scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
       };
 
+      scope.onVariableSelected = function(fieldSelected, element) {
+        const index = scope.selectedComponent.template.variables.indexOf(element);
+        if(scope.selectedComponent.template.variables[index].field &&
+          scope.selectedComponent.template.variables[index].field.id == fieldSelected.id){
+          return;
+        }
+        scope.selectedComponent.template.variables[index].field = fieldSelected;
+      };
 
       function evaluateName() {
         if (!scope.selectedComponent.name) {
@@ -197,9 +183,43 @@
          }
       }
 
-      scope.sendWhatsappTest = function(whatsappForm) {
-        console.log('send Whatsapp Test ')
+      scope.sendWhatsappTest = function() {
+        if (scope.selectedComponent.whatsappPhoneNumberTest !== '' && scope.selectedComponent.template) {
+          var data = {
+            phoneNumber: scope.selectedComponent.whatsappPhoneNumberTest,
+            templateId: scope.selectedComponent.template.id
+          };
+          scope.sendingWhatsappTest = true;
+          whatsappDataservice.sendWhatsappTest(data)
+          .then(function(response){
+            $timeout(function () { 
+              setSendMessageContent('');
+            }, SHOW_RESULT_SEND_MESSAGE_TIME_MS );
+            setSendMessageContent(response.data.success? SHOW_MESSAGE_STATUS.SUCCESS: SHOW_MESSAGE_STATUS.ERROR);
+            scope.sendingWhatsappTest = false;
+            scope.selectedComponent.whatsappPhoneNumberTest = '';
+          });
+        }
       };
+
+      function setSendMessageContent(status) {
+        switch (status) {
+          case SHOW_MESSAGE_STATUS.ERROR:
+            scope.showWhatsappSendResultMessage = true;
+            scope.sendWhatsappMessageResultClass = 'dp-wrap-warning';
+            scope.sendWhatsappResultMessageText = SEND_MESSAGE_TEXT_ERROR;
+            break;
+          case SHOW_MESSAGE_STATUS.SUCCESS:
+            scope.showWhatsappSendResultMessage = true;
+            scope.sendWhatsappMessageResultClass = 'dp-wrap-success';
+            scope.sendWhatsappResultMessageText = SEND_MESSAGE_TEXT_SUCCESS;
+            break;
+          default:
+            scope.showWhatsappSendResultMessage = false;
+            scope.sendWhatsappMessageResultClass = '';
+            scope.sendWhatsappResultMessageText = '';
+        }
+      }
 
       function setIncrementedNumber() {
         scope.selectedComponent.name = COMPONENT_TYPE.whatsapp.toUpperCase() + '_' + ++scope.rootComponent.lastWhatsappIdName;
