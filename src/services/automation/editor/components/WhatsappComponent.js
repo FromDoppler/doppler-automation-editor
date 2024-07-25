@@ -23,12 +23,22 @@
           id: 0,
           name: '',
           content: '',
+          headerText: '',
+          bodyText: '',
+          footerText: '',
           variables: [],
         }
         
         if (data) {
           this.setData(data);
         }
+      }
+
+      function checkCompleted_whatsapp_template_variable(variable) {
+        if(variable.length === 0) {
+          return true;
+        }
+        return !variable.some((x) => x['field'] == undefined)
       }
 
       // Prototype inherence from BaseComponent.
@@ -47,6 +57,13 @@
         }
         if (data.hasOwnProperty('template')) {
           this.template = data.template;
+          // temporal hardcode fix beplic mock adapt
+          if(data.template){
+            const content = data.template.content? data.template.content.split('|'): [];
+            data.template.headerText = content[0];
+            data.template.bodyText = content[1];
+            data.template.footerText = content[2];
+          }
         }
         if (data.hasOwnProperty('name')) {
           this.name = data.name;
@@ -57,7 +74,7 @@
       };
 
       WhatsappComponent.prototype.checkCompleted = function() {
-        this.completed = !!this.field && this.room.id !== 0 && this.template.id !== 0 && this.name !== '';
+        this.completed = !!this.field && !!this.room  && !!this.template && this.name !== '' && !!checkCompleted_whatsapp_template_variable(this.template.variables);
       };
 
       WhatsappComponent.prototype.getPropertiesToWatch = function() {
