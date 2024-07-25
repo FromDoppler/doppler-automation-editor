@@ -26,12 +26,6 @@
     function getComponents() {
       var automationType = automation.getModel().automationType;
       return [{
-        label: 'delay_icon',
-        svg_path: '/../images/automation-delay.svg', // eslint-disable-line
-        svg_hover_path: '/../images/automation-delay-hover.svg', // eslint-disable-line
-        type: COMPONENT_TYPE.DELAY,
-        isEnable: true
-      }, {
         label: 'campaign_icon',
         svg_path: '/../images/automation-campaign.svg', // eslint-disable-line
         svg_hover_path: '/../images/automation-campaign-hover.svg', // eslint-disable-line
@@ -39,6 +33,26 @@
         isEnable: true,
         campaignType: automationType === AUTOMATION_TYPE.RSS_TO_EMAIL ?
           CAMPAIGN_TYPE.CAMPAIGN_RSS : automationType
+      }, {
+        label: 'sms_icon',
+        svg_path: '/../images/automation-sms.svg', // eslint-disable-line
+        svg_hover_path: '/../images/automation-sms-hover.svg', // eslint-disable-line
+        type: COMPONENT_TYPE.SMS,
+        isEnable: settings.isSmsEnable,
+        hasWarning: !settings.hasSmsCredits //does not have a sms credit is a warnig to show
+      }, {
+        label: 'whatsapp_icon',
+        svg_path: '/../images/automation-whatsapp.svg', // eslint-disable-line
+        svg_hover_path: '/../images/automation-whatsapp-hover.svg', // eslint-disable-line
+        type: COMPONENT_TYPE.WHATSAPP,
+        isEnable: settings.isWhatsappEnable && automationType === AUTOMATION_TYPE.WHATSAPP,
+        hasWarning: settings.hasWhatsappWarning, //CREDIT|ROOM
+      }, {
+        label: 'push_icon',
+        svg_path: '/../images/automation-push_notification.svg', // eslint-disable-line
+        svg_hover_path: '/../images/automation-push_notification-hover.svg', // eslint-disable-line
+        type: COMPONENT_TYPE.PUSH_NOTIFICATION,
+        isEnable: settings.isPushEnable && automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION
       }, {
         label: 'condition_icon',
         svg_path: '/../images/automation-condition.svg', // eslint-disable-line
@@ -52,25 +66,11 @@
         type: COMPONENT_TYPE.ACTION,
         isEnable: true
       }, {
-        label: 'sms_icon',
-        svg_path: '/../images/automation-sms.svg', // eslint-disable-line
-        svg_hover_path: '/../images/automation-sms-hover.svg', // eslint-disable-line
-        type: COMPONENT_TYPE.SMS,
-        isEnable: settings.isSmsEnable,
-        hasWarning: !settings.hasSmsCredits //does not have a sms credit is a warnig to show
-      }, {
-        label: 'push_icon',
-        svg_path: '/../images/automation-push_notification.svg', // eslint-disable-line
-        svg_hover_path: '/../images/automation-push_notification-hover.svg', // eslint-disable-line
-        type: COMPONENT_TYPE.PUSH_NOTIFICATION,
-        isEnable: settings.isPushEnable && automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION
-      }, {
-        label: 'whatsapp_icon',
-        svg_path: '/../images/automation-whatsapp.svg', // eslint-disable-line
-        svg_hover_path: '/../images/automation-whatsapp-hover.svg', // eslint-disable-line
-        type: COMPONENT_TYPE.WHATSAPP,
-        isEnable: settings.isWhatsappEnable && automationType === AUTOMATION_TYPE.WHATSAPP,
-        hasWarning: settings.hasWhatsappWarning, //CREDIT|ROOM
+        label: 'delay_icon',
+        svg_path: '/../images/automation-delay.svg', // eslint-disable-line
+        svg_hover_path: '/../images/automation-delay-hover.svg', // eslint-disable-line
+        type: COMPONENT_TYPE.DELAY,
+        isEnable: true
       }, {
         label: 'goto_icon',
         svg_path: '/../images/automation-goto.svg', // eslint-disable-line
