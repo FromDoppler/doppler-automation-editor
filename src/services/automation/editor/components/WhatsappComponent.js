@@ -31,6 +31,13 @@
         }
       }
 
+      function checkCompleted_whatsapp_template_variable(variable) {
+        if(variable.length === 0) {
+          return true;
+        }
+        return !variable.some((x) => x['field'] == undefined)
+      }
+
       // Prototype inherence from BaseComponent.
       WhatsappComponent.prototype = Object.create(BaseComponent.prototype);
       WhatsappComponent.prototype.markup = '<dp-editor-whatsapp class="component--container whatsapp" component="component" branch="branch"></dp-editor-whatsapp>';
@@ -57,7 +64,7 @@
       };
 
       WhatsappComponent.prototype.checkCompleted = function() {
-        this.completed = !!this.field && this.room.id !== 0 && this.template.id !== 0 && this.name !== '';
+        this.completed = !!this.field && !!this.room  && !!this.template && this.name !== '' && !!checkCompleted_whatsapp_template_variable(this.template.variables);
       };
 
       WhatsappComponent.prototype.getPropertiesToWatch = function() {
