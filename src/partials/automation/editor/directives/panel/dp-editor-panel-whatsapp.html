@@ -92,7 +92,11 @@
     </div>
   </div>
 
-  <div ng-bind-html="selectedComponent.template.content" class="whatsapp-content"></div>
+  <div class="whatsapp-content">
+    <p ng-bind-html="selectedComponent.template.headerText"></p>
+    <p ng-bind-html="selectedComponent.template.bodyText"></p>
+    <p ng-bind-html="selectedComponent.template.footerText"></p>
+  </div>
 
   <div ng-if="headerVariables.length > 0">
     <p class="title" >

@@ -23,6 +23,9 @@
           id: 0,
           name: '',
           content: '',
+          headerText: '',
+          bodyText: '',
+          footerText: '',
           variables: [],
         }
         
@@ -54,6 +57,13 @@
         }
         if (data.hasOwnProperty('template')) {
           this.template = data.template;
+          // temporal hardcode fix beplic mock adapt
+          if(data.template){
+            const content = data.template.content? data.template.content.split('|'): [];
+            data.template.headerText = content[0];
+            data.template.bodyText = content[1];
+            data.template.footerText = content[2];
+          }
         }
         if (data.hasOwnProperty('name')) {
           this.name = data.name;
