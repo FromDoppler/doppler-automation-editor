@@ -3,9 +3,9 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorPanel', ['automation', 'selectedElementsService', 'COMPONENT_TYPE', 'CONDITION_TYPE', '$compile', dpEditorPanel]);
+    .directive('dpEditorPanel', ['automation', 'selectedElementsService', 'AUTOMATION_TYPE', 'COMPONENT_TYPE', 'CONDITION_TYPE', '$compile', dpEditorPanel]);
 
-  function dpEditorPanel(automation, selectedElementsService, COMPONENT_TYPE, CONDITION_TYPE, $compile) {
+  function dpEditorPanel(automation, selectedElementsService, AUTOMATION_TYPE, COMPONENT_TYPE, CONDITION_TYPE, $compile) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel.html',
@@ -39,6 +39,7 @@
       scope.toggleCollapsePanel = automation.toggleCollapsePanel;
       scope.isScrollOnTop = true;
       scope.selectedComponent = selectedElementsService.getSelectedComponent();
+      scope.automationType = scope.automationData.automationType;
 
       scope.scrollBehaviour = function(isScrollOnTop){
         scope.isScrollOnTop = isScrollOnTop;
@@ -55,7 +56,8 @@
       scope.hasReports = function() {
         return scope.selectedComponent 
         && scope.selectedComponent.type !== COMPONENT_TYPE.PUSH_NOTIFICATION
-        && scope.selectedComponent.type !== CONDITION_TYPE.PUSH;
+        && scope.selectedComponent.type !== CONDITION_TYPE.PUSH
+        && scope.automationType !== AUTOMATION_TYPE.WHATSAPP;
       };
     }
   }
