@@ -25,7 +25,7 @@
       <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.campaign_send_scheduled_description' | translate }} </p>
       <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"></span>
   </div>
-  <form name="validationForm" novalidate>
+  <form name="validationForm" novalidate ng-if="isCampaignBehaviorAutomationType">
   <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED">
     <div class="box relative">
       <label class="label--panel">{{ 'automation_editor.sidebar.campaign_field_date' | translate }}</label>

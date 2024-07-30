@@ -83,7 +83,7 @@
 
             <td class="actions-column" ng-show="!row.deleting && !row.cfDeleted">
               <div class="icons--container">
-                <span ng-show="{{row.StatusId !== AUTOMATION_STATE.DRAFT}}" data-static-tooltip="{{ 'automation_grid_reports' | translate}}">
+                <span ng-show="{{row.StatusId !== AUTOMATION_STATE.DRAFT && row.EventType != AUTOMATION_TYPE.WHATSAPP}}" data-static-tooltip="{{ 'automation_grid_reports' | translate}}">
                   <a target="_self" class="icon-grid-reports" id="reports-{{row.IdScheduledTask}}" href="/Automation/ReportTask/Index?showAll=true&idScheduledTask={{row.IdScheduledTask}}&eventType={{row.EventType}}"></a>
                 </span>
                 <span data-static-tooltip="{{ (row.IsEnableToReplicate ? 'actions.replicate_automation' : 'actions.replicate_automation_disabled') | translate }}" ng-show="replicateAutomationEnabled">

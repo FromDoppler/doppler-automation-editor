@@ -80,7 +80,7 @@
             toolTipMsg = $translate.instant('automation_editor.canvas.sms_new_step_not_credit');
             break;
           case COMPONENT_TYPE.WHATSAPP:
-            toolTipMsg = option.hasWarning.toUpperCase()  === WHATSAPP_WARNING_TYPE.CREDIT ?
+            toolTipMsg = option.hasWarning  === WHATSAPP_WARNING_TYPE.CREDIT ?
              $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit'):
              $translate.instant('automation_editor.canvas.whatsapp_new_step_not_room');
             break;

@@ -9,11 +9,12 @@
     'COMPONENT_TYPE',
     'automation',
     'AUTOMATION_TYPE',
+    'WHATSAPP_WARNING_TYPE',
     'CAMPAIGN_TYPE',
     'settingsService'
   ];
 
-  function componentsDataservice(COMPONENT_TYPE, automation, AUTOMATION_TYPE, CAMPAIGN_TYPE, settingsService) {
+  function componentsDataservice(COMPONENT_TYPE, automation, AUTOMATION_TYPE, WHATSAPP_WARNING_TYPE, CAMPAIGN_TYPE, settingsService) {
 
     var settings = settingsService.getLoadedData();
 
@@ -46,7 +47,7 @@
         svg_hover_path: '/../images/automation-whatsapp-hover.svg', // eslint-disable-line
         type: COMPONENT_TYPE.WHATSAPP,
         isEnable: settings.isWhatsappEnable && automationType === AUTOMATION_TYPE.WHATSAPP,
-        hasWarning: settings.hasWhatsappWarning, //CREDIT|ROOM
+        hasWarning: !settings.hasWhatsappCredits? WHATSAPP_WARNING_TYPE.CREDIT : !settings.hasWhatsappRooms? WHATSAPP_WARNING_TYPE.ROOM : false,
       }, {
         label: 'push_icon',
         svg_path: '/../images/automation-push_notification.svg', // eslint-disable-line

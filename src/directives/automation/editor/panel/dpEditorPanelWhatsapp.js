@@ -55,7 +55,7 @@
       scope.headerVariables = [];
       scope.bodyVariables = [];
 
-      if(scope.selectedComponent.template.variables.length > 0) {
+      if(scope.selectedComponent.template && scope.selectedComponent.template.variables.length > 0) {
         scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
         scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
       }
@@ -66,7 +66,6 @@
         .then(function(response){
           if(response.success){
             scope.roomOptions = response.rooms;
-            scope.templateOptions = [];
             if(scope.roomOptions.length > 0 && scope.selectedComponent.room) {
               const roomId = scope.selectedComponent.room.id;
               whatsappDataservice.getWhatsappTemplatesByRoom(roomId)
