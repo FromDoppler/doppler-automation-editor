@@ -25,7 +25,7 @@
       <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.campaign_send_scheduled_description' | translate }} </p>
       <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"></span>
   </div>
-  <form name="validationForm" novalidate ng-if="isCampaignBehaviorAutomationType">
+  <form name="validationForm" novalidate>
   <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED">
     <div class="box relative">
       <label class="label--panel">{{ 'automation_editor.sidebar.campaign_field_date' | translate }}</label>
@@ -56,7 +56,7 @@
         </div>
       </div>
   </div>
-  <div ng-if="!!selectedComponent.sendType">
+  <div ng-if="!!selectedComponent.sendType && isCampaignBehaviorAutomationType">
   <!-- email notification -->
     <p class="title add-email">{{ 'automation_editor.sidebar.campaign_notification_title' | translate }}</p>
     <span class="text"><i>{{ 'automation_editor.sidebar.campaign_notification_text' | translate }}<b>{{ 'automation_editor.sidebar.campaign_max_emails' | translate : { maxConfEmails: maxConfirmationEmails} }}</b></i></span>
