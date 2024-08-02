@@ -191,7 +191,9 @@
         if (scope.selectedComponent.whatsappPhoneNumberTest !== '' && scope.selectedComponent.template) {
           var data = {
             phoneNumber: scope.selectedComponent.whatsappPhoneNumberTest,
-            templateId: scope.selectedComponent.template.id
+            templateId: scope.selectedComponent.template.id,
+            roomId: scope.selectedComponent.room.id,
+            phoneRoom: scope.selectedComponent.room.phoneNumber
           };
           scope.sendingWhatsappTest = true;
           whatsappDataservice.sendWhatsappTest(data)
