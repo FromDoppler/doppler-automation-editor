@@ -36,14 +36,14 @@
 
       const templateCardOrder = [
         TEMPLATES.EMPTY,
+        TEMPLATES.WHATSAPP,
+        TEMPLATES.WEBSITE_VISIT,
+        TEMPLATES.FIRST_PURCHASE,
+        TEMPLATES.SMS,
         TEMPLATES.WELCOME_NEW_CONTACTS,
         TEMPLATES.BIRTHDAY_GREETING,
         TEMPLATES.ABANDONED_CART,
         TEMPLATES.REVALIDATION_SUBSCRIBERS,
-        TEMPLATES.SMS,
-        TEMPLATES.FIRST_PURCHASE,
-        TEMPLATES.WEBSITE_VISIT,
-        TEMPLATES.WHATSAPP,
       ];
 
       function sortTemplateCards(templatesCardsUnsorted) {
