@@ -17,6 +17,7 @@
       changeStatus: changeStatus,
       deleteTask: deleteTask,
       getAutomationTypeList: getAutomationTypeList,
+      getReplicateTypeList: getReplicateTypeList,
       createReplica: createReplica,
       getAutomationTemplateList: getAutomationTemplateList,
       createAutomationFromTemplate: createAutomationFromTemplate,
@@ -51,15 +52,23 @@
       });
     }
 
-    function getAutomationTypeList(replicationTypeSource) {
+    function getAutomationTypeList() {
       return $http
-        .get('/Automation/Task/GetAutomationTypeList', {
+        .get('/Automation/Task/GetAutomationTypeList')
+        .then(function(response){
+          return response.data.automationTypeList;
+        });
+    }
+
+    function getReplicateTypeList(replicationTypeSource) {
+      return $http
+        .get('/Automation/Task/GetReplicateTypeList', {
           params: {
             replicationTypeSource: replicationTypeSource,
           }
         })
         .then(function(response){
-          return response.data.automationTypeList;
+          return response.data.replicateTypeList;
         });
     }
 

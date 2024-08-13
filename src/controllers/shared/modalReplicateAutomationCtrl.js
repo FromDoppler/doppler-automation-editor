@@ -34,7 +34,7 @@
     }
 
     taskService
-      .getAutomationTypeList($scope.data.automationTaskType)
+      .getReplicateTypeList($scope.data.automationTaskType)
       .then(function (automationTypes) {
         var mappedTypes = automationTypes
           .filter(function (t) {
