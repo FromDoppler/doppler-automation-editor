@@ -17,6 +17,7 @@
       changeStatus: changeStatus,
       deleteTask: deleteTask,
       getAutomationTypeList: getAutomationTypeList,
+      getReplicateTypeList: getReplicateTypeList,
       createReplica: createReplica,
       getAutomationTemplateList: getAutomationTemplateList,
       createAutomationFromTemplate: createAutomationFromTemplate,
@@ -60,6 +61,18 @@
         })
         .then(function(response){
           return response.data.automationTypeList;
+        });
+    }
+
+    function getReplicateTypeList(replicationTypeSource) {
+      return $http
+        .get('/Automation/Task/GetReplicateTypeList', {
+          params: {
+            replicationTypeSource: replicationTypeSource,
+          }
+        })
+        .then(function(response){
+          return response.data.replicateTypeList;
         });
     }
 
