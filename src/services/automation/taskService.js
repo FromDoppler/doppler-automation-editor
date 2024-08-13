@@ -52,13 +52,9 @@
       });
     }
 
-    function getAutomationTypeList(replicationTypeSource) {
+    function getAutomationTypeList() {
       return $http
-        .get('/Automation/Task/GetAutomationTypeList', {
-          params: {
-            replicationTypeSource: replicationTypeSource,
-          }
-        })
+        .get('/Automation/Task/GetAutomationTypeList')
         .then(function(response){
           return response.data.automationTypeList;
         });
