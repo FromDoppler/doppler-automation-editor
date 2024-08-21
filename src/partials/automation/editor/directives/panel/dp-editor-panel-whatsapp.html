@@ -92,11 +92,7 @@
     </div>
   </div>
 
-  <div class="whatsapp-content">
-    <p ng-bind-html="selectedComponent.template.headerText"></p>
-    <p ng-bind-html="selectedComponent.template.bodyText"></p>
-    <p ng-bind-html="selectedComponent.template.footerText"></p>
-  </div>
+  <iframe class="whatsapp-content" id="whatsapp_template_iframe"></iframe>
 
   <div ng-if="headerVariables.length > 0">
     <p class="title" >
