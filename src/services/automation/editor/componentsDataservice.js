@@ -46,7 +46,7 @@
         svg_path: '/../images/automation-whatsapp.svg', // eslint-disable-line
         svg_hover_path: '/../images/automation-whatsapp-hover.svg', // eslint-disable-line
         type: COMPONENT_TYPE.WHATSAPP,
-        isEnable: settings.isWhatsappEnable && automationType === AUTOMATION_TYPE.WHATSAPP,
+        isEnable: settings.isWhatsappEnable,
         hasWarning: !settings.hasWhatsappCredits? WHATSAPP_WARNING_TYPE.CREDIT : !settings.hasWhatsappRooms? WHATSAPP_WARNING_TYPE.ROOM : false,
       }, {
         label: 'push_icon',
