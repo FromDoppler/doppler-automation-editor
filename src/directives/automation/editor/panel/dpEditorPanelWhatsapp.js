@@ -94,8 +94,8 @@
       function applyIntlInput() {
         inputRef = document.getElementById('phone_whatsapp');
         iframeRef = document.getElementById('whatsapp_template_iframe');
-        if (iframeRef !== null) { 
-          iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
+        if (iframeRef !== null && scope.selectedComponent.template) { 
+          iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
         }
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
@@ -150,7 +150,7 @@
         scope.selectedComponent.template = rawFieldData;
         scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
         scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
-        iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
+        iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
       };
 
       scope.onVariableSelected = function(fieldSelected, element, whatsappForm) {
