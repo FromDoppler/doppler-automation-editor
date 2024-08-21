@@ -88,14 +88,14 @@
         });
       
       var inputRef = null;
+      var iframeRef = null;
       var interval;
-      
-      const iframeRef = document.getElementById('whatsapp_template_iframe');
-      if (iframeRef !== null && scope.selectedComponent.template) { 
-        iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
-      }
 
       function applyIntlInput() {
+        iframeRef = document.getElementById('whatsapp_template_iframe');
+        if (iframeRef !== null && scope.selectedComponent.template) { 
+          iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
+        }
         inputRef = document.getElementById('phone_whatsapp');
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
