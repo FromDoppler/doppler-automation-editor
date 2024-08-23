@@ -1110,7 +1110,7 @@ export const automation_es_translations = {
       "start8_message": "Ya has integrado Doppler con ",
       "title9": "Pago Pendiente",
       "description9": "Recuérdales a tus usuarios que tienen un Pago Pendiente y anímalos a completar la compra.",
-      "tiendanube_content": "Ahora para Tiendanube, <br />¡pronto para todos!",
+      "pending_or_confirmed_order_content": "Ahora para Tiendanube y Woocommerce, <br />¡pronto para todos!",
       "start9_message": "Ya has integrado Doppler con ",
       "title10": "Pago Confirmado",
       "description10": "Programa Emails para notificar a tus clientes que has recibido su pago.",
