@@ -1393,6 +1393,7 @@ export const automation_en_translations = {
     "maxlength": "Ouch! You've reached the maximum number of characters.",
     "minlength": "Ouch! The number is too short.",
     "required": "Ouch! This is a required field.",
+    "required_whatsapp_send_test": "Ouch! The variables are required fields to send a WhatsApp message.",
     "required_checkbox": "Ouch! You must select at least one option.",
     "number_pattern": "Invalid Number.",
     "number_pattern_3digits": "Ouch! The number you entered is invalid. Please type a value between 0 and 999.",

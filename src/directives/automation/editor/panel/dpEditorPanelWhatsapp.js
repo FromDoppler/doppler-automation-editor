@@ -153,13 +153,14 @@
           .concat(rawFieldData.footerText  || '');
       };
 
-      scope.onVariableSelected = function(fieldSelected, element) {
+      scope.onVariableSelected = function(fieldSelected, element, whatsappForm) {
         const index = scope.selectedComponent.template.variables.indexOf(element);
         if(scope.selectedComponent.template.variables[index].field &&
           scope.selectedComponent.template.variables[index].field.id == fieldSelected.id){
           return;
         }
         scope.selectedComponent.template.variables[index].field = fieldSelected;
+        whatsappForm.whatsappPhoneNumberTest.$error = false;
       };
 
       function evaluateName() {
@@ -187,13 +188,26 @@
          }
       }
 
-      scope.sendWhatsappTest = function() {
-        if (scope.selectedComponent.whatsappPhoneNumberTest !== '' && scope.selectedComponent.template) {
+      function getVariables(array) {
+        return array.reduce((previousValue, item) => {
+          return [...previousValue].concat((item.field)?[item.field.name]:[]);
+        }, []);
+      }
+
+      scope.sendWhatsappTest = function(whatsappForm) {
+        const headerVariables = getVariables(scope.headerVariables);
+        const bodyVariables = getVariables(scope.bodyVariables);
+        
+        if (scope.selectedComponent.whatsappPhoneNumberTest !== '' && scope.selectedComponent.template &&
+          (headerVariables.length + bodyVariables.length) === scope.selectedComponent.template.variables.length 
+        ) {
           var data = {
             phoneNumber: scope.selectedComponent.whatsappPhoneNumberTest,
             templateId: scope.selectedComponent.template.id,
             roomId: scope.selectedComponent.room.id,
-            phoneRoom: scope.selectedComponent.room.phoneNumber
+            phoneRoom: scope.selectedComponent.room.phoneNumber,
+            headerVariables: headerVariables,
+            bodyVariables: bodyVariables
           };
           scope.sendingWhatsappTest = true;
           whatsappDataservice.sendWhatsappTest(data)
@@ -205,6 +219,11 @@
             scope.sendingWhatsappTest = false;
             scope.selectedComponent.whatsappPhoneNumberTest = '';
           });
+        } else {
+          whatsappForm.whatsappPhoneNumberTest.$error = {
+            'isWhatsappPhoneNumberTestValid': true,
+            'variableRequired': true
+          };
         }
       };
 
