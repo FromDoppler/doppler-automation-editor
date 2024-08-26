@@ -1052,6 +1052,8 @@ export const automation_en_translations = {
       "description7": "Send a personalized email to your customer when they visit your website.",
       "title8": "WhatsApp Sending",
       "description8": "Send automated WhatsApp messages to boost your Campaigns.",
+      "title9": "Pending payment reminder",
+      "description9": "Send Email Notifications to customers who make an online purchase and have not made payment.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
@@ -1063,6 +1065,7 @@ export const automation_en_translations = {
       "description6": "Customer retention strategies are essential to building a lasting relationship with customers, generating trust, and encouraging repeat purchases and referrals.",
       "description7": "Many people who visit a website do not make a purchase immediately. To increase sales, it is important to remind them of their visit and the products that caught their attention the most. This will help to generate awareness and encourage them to buy.",
       "description8": "Complement your Email Automation Strategy with this instant messaging service. Discover why this tool provides a differential for your business.",
+      "description9": "Keeping customers informed about the status of their purchases is essential to providing a great experience and motivating future purchases. In the event that a payment has not been processed correctly, it is important to inform the customer what happened and offer instructions for retrying or contact information for assistance.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1087,6 +1090,9 @@ export const automation_en_translations = {
       "template_8_allow_item1": "Send offers and promotions.",
       "template_8_allow_item2": "Invite exclusive communications to events.",
       "template_8_allow_item3": "Remind your Contacts of important alerts.",
+      "template_9_allow_item0": "Send an Email notifying that the payment was not completed.",
+      "template_9_allow_item1": "Inform the user about a possible payment error.",
+      "template_9_allow_item2": "View items pending purchase.",
     },
   },
   "automationTypes": {

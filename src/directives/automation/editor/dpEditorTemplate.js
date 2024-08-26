@@ -32,11 +32,13 @@
         FIRST_PURCHASE: 6,
         WEBSITE_VISIT: 7,
         WHATSAPP: 8,
+        PENDING_PAYMENT_REMINDER: 9,
       };
 
       const templateCardOrder = [
         TEMPLATES.EMPTY,
         TEMPLATES.WHATSAPP,
+        TEMPLATES.PENDING_PAYMENT_REMINDER,
         TEMPLATES.WEBSITE_VISIT,
         TEMPLATES.FIRST_PURCHASE,
         TEMPLATES.SMS,
