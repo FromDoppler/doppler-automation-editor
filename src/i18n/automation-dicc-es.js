@@ -1052,6 +1052,8 @@ export const automation_es_translations = {
       "description7": "Programa un email personalizado cuando tu cliente visita tu sitio web.",
       "title8": "Envío de WhatsApp",
       "description8": "Envía mensajes automatizados de WhatsApp para potenciar tus Campañas.",
+      "title9": "Recordatorio pago pendiente",
+      "description9": "Envía notificaciones por Email a un cliente que realizó una compra online y no finalizó el pago.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
