@@ -1065,6 +1065,7 @@ export const automation_es_translations = {
       "description6": "Las estrategias de fidelización son fundamentales para crear una relación duradera con los clientes, generar confianza y fomentar nuevas compras y recomendaciones.",
       "description7": "Muchas personas que visitan una tienda no realizan una compra en el momento. Para aumentar las ventas, es importante recordarles sobre su visita y los productos que más les llamaron la atención. Esto ayudará a generar presencia y a incentivar la compra.",
       "description8": "Complementa tu estrategia de Email Automation, con este servicio de mensajería instantánea. Descubre por qué esta herramienta aporta un diferencial para tu negocio.",
+      "description9": "Mantén informados a tus clientes sobre el estado de sus compras para brindar una excelente experiencia y motivar futuras compras. En caso de que un pago no se haya procesado correctamente, es importante informar al cliente lo sucedido y ofrecerle instrucciones para reintentarlo o medios de contacto para recibir ayuda.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1089,6 +1090,9 @@ export const automation_es_translations = {
       "template_8_allow_item1": "Enviar ofertas y promociones.",
       "template_8_allow_item2": "Invitar comunicaciones exclusivas a eventos.",
       "template_8_allow_item3": "Recordar a tus Contactos alertas importantes.",
+      "template_9_allow_item0": "Enviar un Email notificando que el pago no fue concretado.",
+      "template_9_allow_item1": "Informar al usuario sobre un posible error en el pago.",
+      "template_9_allow_item2": "Revisar los artículos pendientes de compra.",
     },
   },
   "automationTypes": {
