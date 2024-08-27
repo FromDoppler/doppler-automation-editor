@@ -15,7 +15,7 @@
             </ul>
           </nav>
           <h1>{{ 'automationTemplates.info.title' + idAutomationTemplateSelected | translate }}</h1>
-          <p>{{ 'automationTemplates.templatePreview.description' + idAutomationTemplateSelected | translate }}</p>
+          <p ng-bind-html="'automationTemplates.templatePreview.description' + idAutomationTemplateSelected | translate"></p>
           <span class="dp-automation-template-items-allow">{{ 'automationTemplates.templatePreview.flowAllow' | translate }}</span>
           <ul class="dp-automation-template-preview-suggest-uses">
              <!-- define the quantity according to the max number of items to be displayed -->
