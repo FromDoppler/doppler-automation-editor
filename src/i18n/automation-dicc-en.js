@@ -1068,6 +1068,7 @@ export const automation_en_translations = {
       "description7": "Many people who visit a website do not make a purchase immediately. To increase sales, it is important to remind them of their visit and the products that caught their attention the most. This will help to generate awareness and encourage them to buy.",
       "description8": "Complement your Email Automation Strategy with this instant messaging service. Discover why this tool provides a differential for your business.",
       "description9": "Keeping customers informed about the status of their purchases is essential to providing a great experience and motivating future purchases.<br> In the event that a payment has not been processed correctly, it is important <b>to inform the customer what happened and offer instructions for retrying</b> or contact information for assistance.",
+      "description10": "It is important to keep your customers informed about the status of their purchases at every step of the process. An excellent experience is essential <b>to motivate new purchases and recommendations</b>. In this case, you are notified about a payment that was successfully processed.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1095,6 +1096,8 @@ export const automation_en_translations = {
       "template_9_allow_item0": "Send an Email notifying that the payment was not completed.",
       "template_9_allow_item1": "Inform the user about a possible payment error.",
       "template_9_allow_item2": "View items pending purchase.",
+      "template_10_allow_item0": "Send an Email notifying that the payment has been completed.",
+      "template_10_allow_item1": "View purchased items.",
     },
   },
   "automationTypes": {

@@ -1068,6 +1068,7 @@ export const automation_es_translations = {
       "description7": "Muchas personas que visitan una tienda no realizan una compra en el momento. Para aumentar las ventas, es importante recordarles sobre su visita y los productos que más les llamaron la atención. Esto ayudará a generar presencia y a incentivar la compra.",
       "description8": "Complementa tu estrategia de Email Automation, con este servicio de mensajería instantánea. Descubre por qué esta herramienta aporta un diferencial para tu negocio.",
       "description9": "Mantén informados a tus clientes sobre el estado de sus compras para brindar una excelente experiencia y motivar futuras compras.<br> En caso de que un pago no se haya procesado correctamente, es importante <b>informar al cliente lo sucedido y ofrecerle instrucciones para reintentarlo</b> o medios de contacto para recibir ayuda.",
+      "description10": "Informa a tus clientes sobre el estado de sus compras en cada paso del proceso. Brindar una excelente experiencia es algo <b>fundamental para motivar nuevas compras y recomendaciones</b>. En este caso se notifica sobre un pago que fue procesado con éxito.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1095,6 +1096,8 @@ export const automation_es_translations = {
       "template_9_allow_item0": "Enviar un Email notificando que el pago no fue concretado.",
       "template_9_allow_item1": "Informar al usuario sobre un posible error en el pago.",
       "template_9_allow_item2": "Revisar los artículos pendientes de compra.",
+      "template_10_allow_item0": "Enviar un Email notificando que el pago fue concretado.",
+      "template_10_allow_item1": "Chequear los artículos comprados.",
     },
   },
   "automationTypes": {
