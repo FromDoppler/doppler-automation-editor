@@ -1054,6 +1054,8 @@ export const automation_es_translations = {
       "description8": "Envía mensajes automatizados de WhatsApp para potenciar tus Campañas.",
       "title9": "Recordatorio pago pendiente",
       "description9": "Envía notificaciones por Email a un cliente que realizó una compra online y no finalizó el pago.",
+      "title10": "Pago confirmado",
+      "description10": "Envía un Email luego de que un cliente completa el pago de una compra.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",

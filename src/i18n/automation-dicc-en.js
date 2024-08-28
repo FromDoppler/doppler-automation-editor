@@ -1054,6 +1054,8 @@ export const automation_en_translations = {
       "description8": "Send automated WhatsApp messages to boost your Campaigns.",
       "title9": "Pending payment reminder",
       "description9": "Send Email Notifications to customers who make an online purchase and have not made payment.",
+      "title10": "Payment confirmed",
+      "description10": "Send an Email after a customer completes payment for a purchase.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
