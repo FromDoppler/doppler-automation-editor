@@ -16,11 +16,12 @@
     'CONDITION_BRANCH',
     'selectedElementsService',
     'goToService',
+    'whatsappDataservice',
     '$translate',
   ];
 
   function dpEditorNewStep(automation, CHANGE_TYPE, changesManager, COMPONENT_TYPE, AUTOMATION_TYPE, WHATSAPP_WARNING_TYPE, componentsDataservice,
-    CONDITION_BRANCH, selectedElementsService, goToService, $translate) {
+    CONDITION_BRANCH, selectedElementsService, goToService, whatsappDataservice, $translate) {
     var directive = {
       restrict: 'E',
       scope: {
@@ -35,6 +36,7 @@
     return directive;
 
     function link(scope) {
+      const conversationsLink = whatsappDataservice.getConversationsLink();
       var automationType = automation.getModel().automationType;
       scope.stepOptions = componentsDataservice.getComponents();
       if (automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION) {
@@ -74,15 +76,15 @@
       };
 
       scope.getToolTipContent = function (option) {
-        var toolTipMsg = ""
+        var toolTipMsg = '';
         switch (option.type) {
           case COMPONENT_TYPE.SMS:
             toolTipMsg = $translate.instant('automation_editor.canvas.sms_new_step_not_credit');
             break;
           case COMPONENT_TYPE.WHATSAPP:
             toolTipMsg = option.hasWarning  === WHATSAPP_WARNING_TYPE.CREDIT ?
-             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit'):
-             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_room');
+             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit').replace('{{URL}}', conversationsLink):
+             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_room').replace('{{URL}}', conversationsLink);
             break;
           default:
         }

@@ -35,7 +35,7 @@
     <div class="error-messages--container" ng-if="roomOptions.length === 0">
       <div class="error">
       {{ 'automation_editor.sidebar.whatsapp_non_room_error' | translate }}
-      <a href='automation_editor.sidebar.whatsapp_non_room_error_url_link' | translate>{{ 'automation_editor.sidebar.whatsapp_non_room_error_url_link' | translate }}</a>
+      <a ng-href="{{ conversationsLink }}">{{ 'automation_editor.sidebar.whatsapp_non_room_error_url_link' | translate }}</a>
       </div>
     </div>
   </div>
@@ -87,7 +87,7 @@
     <div class="error-messages--container" ng-if="templateOptions.length === 0">
       <div class="error">
       {{ 'automation_editor.sidebar.whatsapp_non_template_error' | translate }}
-      <a href='automation_editor.sidebar.whatsapp_non_template_error_url_link' | translate>{{ 'automation_editor.sidebar.whatsapp_non_template_error_url_link' | translate }}</a>
+      <a ng-href="{{ conversationsLink }}">{{ 'automation_editor.sidebar.whatsapp_non_template_error_url_link' | translate }}</a>
       </div>
     </div>
   </div>

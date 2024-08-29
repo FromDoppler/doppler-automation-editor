@@ -50,7 +50,7 @@
       scope.REGEX_SMS = REGEX.REGEX_SMS;
       scope.isLoaded = false;
       scope.getReadOnlyLabel = automation.getReadOnlyLabel;
-
+      scope.conversationsLink = whatsappDataservice.getConversationsLink();
       scope.headerVariables = [];
       scope.bodyVariables = [];
 
