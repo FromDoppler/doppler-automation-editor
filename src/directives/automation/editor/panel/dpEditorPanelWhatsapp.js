@@ -71,9 +71,13 @@
               .then(function(templateData){
                 if(templateData.success){
                   scope.templateOptions = templateData.templates;
+                } else {
+                  scope.roomOptions = [];
                 }
               });
             }
+          } else {
+            scope.roomOptions = [];
           }
         });
 
@@ -139,6 +143,8 @@
           .then(function(templateData){
             if(templateData.success){
               scope.templateOptions = templateData.templates;
+            } else {
+              scope.templateOptions = [];
             }
           });
       };
