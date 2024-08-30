@@ -83,8 +83,8 @@
             break;
           case COMPONENT_TYPE.WHATSAPP:
             toolTipMsg = option.hasWarning  === WHATSAPP_WARNING_TYPE.CREDIT ?
-             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit').replace('{{URL}}', conversationsLink):
-             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_room').replace('{{URL}}', conversationsLink);
+             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit', { URL: conversationsLink }):
+             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_room', { URL: conversationsLink });
             break;
           default:
         }
