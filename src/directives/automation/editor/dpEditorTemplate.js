@@ -6,10 +6,10 @@
     .directive('dpEditorTemplate', dpEditorTemplate);
 
   dpEditorTemplate.$inject = [
-    'taskService', '$window'
+    'taskService', 'whatsappDataservice', '$window'
   ];
 
-  function dpEditorTemplate(taskService, $window) {
+  function dpEditorTemplate(taskService, whatsappDataservice, $window) {
     var directive = {
       restrict: 'E',
       link: link,
@@ -19,6 +19,7 @@
     return directive;
 
     function link(scope) {
+      scope.conversationsLink = whatsappDataservice.getConversationsLink();
       scope.templates = [];
       scope.isLoading = true;
 

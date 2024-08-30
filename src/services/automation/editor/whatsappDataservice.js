@@ -6,18 +6,25 @@
     .service('whatsappDataservice', whatsappDataservice);
 
   whatsappDataservice.$inject = [
-    '$http'
+    '$http',
+    'settingsService'
   ];
 
-  function whatsappDataservice($http) {
+  function whatsappDataservice($http,settingsService) {
    
     var service = {
       getWhatsappRooms: getWhatsappRooms,
       getWhatsappTemplatesByRoom: getWhatsappTemplatesByRoom,
-      sendWhatsappTest: sendWhatsappTest
+      sendWhatsappTest: sendWhatsappTest,
+      getConversationsLink: getConversationsLink
     };
 
     return service;
+
+    function getConversationsLink () {
+      const defaultLink = 'https://conversations.fromdoppler.com/external-login';
+      return settingsService.getLoadedData().urlConversations || defaultLink;
+    }
 
     function getWhatsappRooms(){
       return $http.get('/Automation/Task/GetWhatsappRooms').then(function(response) {

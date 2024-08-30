@@ -77,8 +77,8 @@ export const automation_es_translations = {
     "whatsapp_icon": "Whatsapp",
     "whatsapp_placeholder": "Define tu Whatsapp",
     'whatsapp': "Enviar la plantilla",
-    "whatsapp_new_step_not_credit": "Realiza Up-grade en tu plan para poder acceder a Whatsapp Automation.<br><a target='_self' href='#'>Haz click aquí</a>",
-    "whatsapp_new_step_not_room": "Crea una sala de WhatsApp y una plantilla desde Conversaciones.<br><a target='_self' href='https://conversations.fromdoppler.com'>Haz click aquí</a>",
+    "whatsapp_new_step_not_credit": "Realiza Up-grade en tu plan para poder acceder a Whatsapp Automation.<br><a target='_self' href='{{URL}}'>Haz click aquí</a>",
+    "whatsapp_new_step_not_room": "Crea una sala de WhatsApp y una plantilla desde Conversaciones.<br><a target='_self' href='{{URL}}'>Haz click aquí</a>",
 
 	},
 	"components": {
