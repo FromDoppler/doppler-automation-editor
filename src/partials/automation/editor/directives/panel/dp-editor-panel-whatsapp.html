@@ -1,4 +1,3 @@
-<script src="/angularjs/intlTelInput.min.js?1566391628801"></script>
 <p class="title">{{ 'automation_editor.sidebar.whatsapp.title' | translate }}</p>
 <form name="whatsappForm" class="form--container" ng-if="isLoaded" novalidate>
 
@@ -103,10 +102,10 @@
       <dp-editor-dropdown class="full"
         options="userFields"
         ng-class="{'placeholder': selectedComponent.field}"
-        label="selectedComponent.field.name ? variable.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
+        label="selectedComponent.field.label ? variable.field.label : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
         on-select-option="onVariableSelected(option, variable, whatsappForm)"
         key-value="'id'"
-        key-label="'name'"
+        key-label="'label'"
         value-selected="variable.field.id"
         ng-disabled="isReadOnly();">
       </dp-editor-dropdown>
@@ -122,10 +121,10 @@
       <dp-editor-dropdown class="full"
         options="userFields"
         ng-class="{'placeholder': selectedComponent.field}"
-        label="selectedComponent.field.name ? variable.field.name : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
+        label="selectedComponent.field.label ? variable.field.label : 'automation_editor.components.condition.conditionals.subscriber_information.label_field' | translate"
         on-select-option="onVariableSelected(option, variable, whatsappForm)"
         key-value="'id'"
-        key-label="'name'"
+        key-label="'label'"
         value-selected="variable.field.id"
         ng-disabled="isReadOnly();">
       </dp-editor-dropdown>
