@@ -103,8 +103,10 @@
         inputRef = document.getElementById('phone_whatsapp');
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
-            nationalMode: true,
-            separateDialCode: false,
+            placeholderNumberType: 'MOBILE',
+            validationNumberType: 'MOBILE',
+            nationalMode: false,
+            separateDialCode: true,
             autoPlaceholder: 'aggressive',
             preferredCountries: ['ar', 'mx', 'co', 'es', 'ec', 'cl', 'pe', 'us'],
             initialCountry: 'ar'
