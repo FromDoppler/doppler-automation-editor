@@ -161,6 +161,11 @@
         iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
       };
 
+      scope.getOptionLabel = function(id) {
+        const field = scope.userFields.filter((field) => field.id === id)[0]
+        return (field)? field.label : '';
+      };
+
       scope.onVariableSelected = function(fieldSelected, element, whatsappForm) {
         const index = scope.selectedComponent.template.variables.indexOf(element);
         if(scope.selectedComponent.template.variables[index].field &&
