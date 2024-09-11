@@ -37,6 +37,7 @@
 
     function link(scope) {
       const conversationsLink = whatsappDataservice.getConversationsLink();
+      const conversationsPlanLink = whatsappDataservice.getConversationsPlanLink();
       var automationType = automation.getModel().automationType;
       scope.stepOptions = componentsDataservice.getComponents();
       if (automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION) {
@@ -83,7 +84,7 @@
             break;
           case COMPONENT_TYPE.WHATSAPP:
             toolTipMsg = option.hasWarning  === WHATSAPP_WARNING_TYPE.CREDIT ?
-             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit', { URL: conversationsLink }):
+             $translate.instant('automation_editor.canvas.whatsapp_new_step_not_credit', { URL: conversationsPlanLink }):
              $translate.instant('automation_editor.canvas.whatsapp_new_step_not_room', { URL: conversationsLink });
             break;
           default:
