@@ -51,6 +51,7 @@
       scope.isLoaded = false;
       scope.getReadOnlyLabel = automation.getReadOnlyLabel;
       scope.conversationsLink = whatsappDataservice.getConversationsLink();
+      scope.conversationsPlanLink = whatsappDataservice.getConversationsPlanLink();
       scope.headerVariables = [];
       scope.bodyVariables = [];
 
