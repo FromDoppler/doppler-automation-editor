@@ -7,16 +7,18 @@
 
   whatsappDataservice.$inject = [
     '$http',
-    'settingsService'
+    'settingsService',
+    '$window'
   ];
 
-  function whatsappDataservice($http,settingsService) {
+  function whatsappDataservice($http, settingsService, $window) {
    
     var service = {
       getWhatsappRooms: getWhatsappRooms,
       getWhatsappTemplatesByRoom: getWhatsappTemplatesByRoom,
       sendWhatsappTest: sendWhatsappTest,
-      getConversationsLink: getConversationsLink
+      getConversationsLink: getConversationsLink,
+      getConversationsPlanLink: getConversationsPlanLink
     };
 
     return service;
@@ -24,6 +26,16 @@
     function getConversationsLink () {
       const defaultLink = 'https://conversations.fromdoppler.com/external-login';
       return settingsService.getLoadedData().urlConversations || defaultLink;
+    }
+
+    function getConversationsPlanLink () {
+      const mainMenuData = $window['mainMenuData'];
+      if(mainMenuData !== 'undefined') {
+        const userPlanType = mainMenuData.user.plan.planType;
+        return (userPlanType === 1)? 
+          mainMenuData.user.plan.buttonUrl : // free user
+          mainMenuData.homeUrl.concat('/buy-conversation?buyType=2'); // premium user
+      }
     }
 
     function getWhatsappRooms(){
