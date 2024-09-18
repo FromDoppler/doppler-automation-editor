@@ -157,6 +157,7 @@
           return;
         }
         scope.selectedComponent.template = rawFieldData;
+        scope.selectedComponent.template.link = rawFieldData.parameterHeader;
         scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
         scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
         iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
@@ -220,6 +221,8 @@
             templateId: scope.selectedComponent.template.id,
             roomId: scope.selectedComponent.room.id,
             phoneRoom: scope.selectedComponent.room.phoneNumber,
+            link: scope.selectedComponent.template.link,
+            headerType: scope.selectedComponent.template.headerType,
             headerVariables: headerVariables,
             bodyVariables: bodyVariables
           };
