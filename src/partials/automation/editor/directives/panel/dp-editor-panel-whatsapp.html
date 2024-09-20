@@ -93,7 +93,7 @@
 
   <iframe class="whatsapp-content" id="whatsapp_template_iframe"></iframe>
 
-  <div ng-if="headerVariables.length > 0">
+  <div ng-if="headerVariables.length > 0 && (selectedComponent.template.headerType == 'TEXT' || selectedComponent.template.headerType == undefined)">
     <p class="title" >
       {{ 'automation_editor.sidebar.whatsapp.set_head_field' | translate }}
     </p>
