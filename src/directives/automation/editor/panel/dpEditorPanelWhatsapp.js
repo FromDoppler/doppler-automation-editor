@@ -54,6 +54,7 @@
       scope.conversationsPlanLink = whatsappDataservice.getConversationsPlanLink();
       scope.headerVariables = [];
       scope.bodyVariables = [];
+      scope.automationId = automation.getModel().id;
 
       if(scope.selectedComponent.template && scope.selectedComponent.template.variables.length > 0) {
         scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
@@ -217,6 +218,7 @@
           (headerVariables.length + bodyVariables.length) === scope.selectedComponent.template.variables.length 
         ) {
           var data = {
+            automationId: scope.automationId,
             phoneNumber: scope.selectedComponent.whatsappPhoneNumberTest,
             templateId: scope.selectedComponent.template.id,
             roomId: scope.selectedComponent.room.id,
