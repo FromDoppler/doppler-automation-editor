@@ -129,6 +129,12 @@
           accept="{{multimediaType.acceptedFileTypes}}"
           ng-disabled="isReadOnly();"
         >
+        <div class="dp-temporal-message margin-t-15" ng-show="showWhatsappUploadFileResultMessage">
+          <div class="dp-wrap-message dp-wrap-warning">
+            <span class="dp-message-icon"></span>
+            <div class="dp-content-message" ng-bind-html="sendWhatsappUploadFileResultMessageText"></div>
+          </div>
+        </div>
       </div>
   </div>
 

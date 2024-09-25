@@ -37,6 +37,8 @@
       scope.sendWhatsappMessageResultClass = '';
       scope.showWhatsappSendResultMessage = false;
       scope.sendWhatsappResultMessageText = '';
+      scope.showWhatsappUploadFileResultMessage = false;
+      scope.sendWhatsappUploadFileResultMessageText = '';
 
       const multimediaConstraint = {
         VIDEO: {
@@ -308,6 +310,17 @@
         scope.statusUploader = 'pending';
         const imageFile = e.target.files[0];
         if (imageFile) {
+          const maxSize = scope.multimediaType.maxSise;
+          if(imageFile.size > maxSize * 1024 * 1024) {
+            scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_fileSize_message_error', {fileSize: maxSize});
+            scope.showWhatsappUploadFileResultMessage = true;
+            scope.statusUploader = 'init';
+            scope.$apply();
+            $timeout(() => {
+              scope.showWhatsappUploadFileResultMessage = false;
+            }, SHOW_RESULT_SEND_MESSAGE_TIME_MS);
+            return;
+          }
           
           const formData = new FormData();
           formData.append('file', imageFile);
@@ -318,6 +331,11 @@
               scope.selectedComponent.template.link = response.data.imageUrl;
               iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
             } else {
+              scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: imageFile.name});
+              scope.showWhatsappUploadFileResultMessage = true;
+              $timeout(() => { 
+                scope.showWhatsappUploadFileResultMessage = false;
+              }, SHOW_RESULT_SEND_MESSAGE_TIME_MS);
             }
             scope.statusUploader = 'init';
            });
