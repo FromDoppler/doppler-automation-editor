@@ -923,6 +923,7 @@ export const automation_en_translations = {
         "phone_field": "Telephone field",
         "template_select": "Select template:",
         "set_head_field": "Header changeables setting",
+        "set_head_file": "Update multimedia content",
         "set_body_field": "Setting Message changeables",
         "send_test_title": "Make a test send to a specific phone",
         "send_test_description": "Enter the phone number to which you want to send your test shipment. The cost of this test shipment will be deducted from your available money.",
@@ -934,6 +935,9 @@ export const automation_en_translations = {
         "whatsapp_test_desc": "Enter the phone number to which you want to send your test shipment. The cost of this test shipment will be deducted from your available money.",
         "send_message_success": "Your message has been delivered",
         "send_message_error": "Ouch! An error has occurred, please try again later",
+        "file_uploader_button": "Select a file",
+        "upload_file_message_error" : "Ouch! An error has occurred while uploading the file <b>{{fileName}}</b>",
+        "upload_fileSize_message_error": "Oops! The size of your file is larger than <b>{{fileSize}}</b> MB",
       }
     },
     "steps": {

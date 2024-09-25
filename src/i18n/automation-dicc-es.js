@@ -923,6 +923,7 @@ export const automation_es_translations = {
         "phone_field": "Campo teléfono",
         "template_select": "Seleccionar Plantilla",
         "set_head_field": "Seteo de variable de Encabezado",
+        "set_head_file": "Cambiar contenido multimedia",
         "set_body_field": "Seteo de variables de Mensaje",
         "send_test_title": "Realiza un envío de prueba a un teléfono específico",
         "send_test_description": "Escribe el número de teléfono al que quieres realizar tu envío de prueba. El costo de este envío de prueba se descontará de tu dinero disponible.",
@@ -934,6 +935,9 @@ export const automation_es_translations = {
         "whatsapp_test_desc": "Escribe el número de teléfono al que quieres realizar tu envío de prueba. El costo de este envío de prueba se descontará de tu dinero disponible.",
         "send_message_success": "El mensaje se ha enviado exitosamente",
         "send_message_error": "Ha ocurrido un error al intentar enviar el mensaje",
+        "file_uploader_button" : "Selecciona un archivo",
+        "upload_file_message_error" : "¡Ouch! hubo un error al subir el archivo <b>{{fileName}}</b>",
+        "upload_fileSize_message_error": "¡Ouch! El tamaño de tu archivo supera los <b>{{fileSize}}</b> MB",
       }
     },
     "steps": {
