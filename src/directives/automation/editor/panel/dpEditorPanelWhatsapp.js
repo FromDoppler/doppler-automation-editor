@@ -38,6 +38,25 @@
       scope.showWhatsappSendResultMessage = false;
       scope.sendWhatsappResultMessageText = '';
 
+      const multimediaConstraint = {
+        VIDEO: {
+          acceptedFileTypes: 'video/3gp, video/mp4',
+          maxSise: 16, //Mb
+        },
+        IMAGE: {
+          acceptedFileTypes: 'image/jpeg, image/png, image/jpg',
+          maxSise: 5, //Mb
+        },
+        DOCUMENTS: {
+          acceptedFileTypes: 'application/pdf',
+          maxSise: 10, //Mb
+        },
+        TEXT: {
+          acceptedFileTypes: '',
+          maxSise: 0, //Mb
+        }
+      };
+
       scope.statusUploader = 'init';
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
@@ -108,6 +127,8 @@
         if (iframeRef !== null && scope.selectedComponent.template) { 
           iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
         }
+
+        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
         const fileInput = document.getElementById('wspfileInput');
         if (fileInput !== null) {
           fileInput.addEventListener('change', uploadImageSelect, false); 
@@ -177,6 +198,7 @@
         scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
         scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
         iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
+        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
       };
 
       scope.getOptionLabel = function(id) {
