@@ -329,6 +329,7 @@
           service = whatsappDataservice.uploadWhatsappFile(formData).then(function(response){
             if(response.data.success) {
               scope.selectedComponent.template.link = response.data.imageUrl;
+              scope.selectedComponent.template.publicPreviewUrl = paramReplace(scope.selectedComponent.template.publicPreviewUrl, 'parameterHeader', response.data.imageUrl);
               iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
             } else {
               scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: imageFile.name});
@@ -341,6 +342,13 @@
            });
         }
       }
+
+      function paramReplace(urlString, queryParam, value) {
+        const re = new RegExp("[\\?&]" + queryParam + "=([^&#]*)"),
+            newString = urlString.replace(re, '&' + queryParam + "=" + value);
+        return newString;
+      }
+
       function setIncrementedNumber() {
         scope.selectedComponent.name = COMPONENT_TYPE.whatsapp.toUpperCase() + '_' + ++scope.rootComponent.lastWhatsappIdName;
       }
@@ -399,6 +407,5 @@
         }
       }
     }
-    
   }
 })();
