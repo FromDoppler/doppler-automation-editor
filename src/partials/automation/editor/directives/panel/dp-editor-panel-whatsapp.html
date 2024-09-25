@@ -112,6 +112,26 @@
     </div> 
   </div>
 
+  <div ng-if="selectedComponent.template.headerType != 'TEXT'">
+    <p class="title" >
+      {{ 'automation_editor.sidebar.whatsapp.set_head_file' | translate }}
+    </p>
+    <div class="input--group dp-library">
+        <button class="dp-button button-medium ctaTertiary"
+          ng-class="{'button--loading': statusUploader == 'pending'}"
+          ng-click="openSelectFileModal()"
+          ng-disabled="isReadOnly();">
+          {{ 'automation_editor.sidebar.whatsapp.file_uploader_button' | translate }}
+        </button>
+        <input hidden 
+          type="file" 
+          id="wspfileInput" 
+          accept="{{multimediaType.acceptedFileTypes}}"
+          ng-disabled="isReadOnly();"
+        >
+      </div>
+  </div>
+
   <div ng-if="bodyVariables.length > 0">
     <p class="title" >
       {{ 'automation_editor.sidebar.whatsapp.set_body_field' | translate }}

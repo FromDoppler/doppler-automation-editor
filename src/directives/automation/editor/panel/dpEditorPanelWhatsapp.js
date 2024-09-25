@@ -14,9 +14,10 @@
     'changesManager',
     '$translate',
     '$timeout',
+    'settingsService'
   ];
 
-  function dpEditorPanelWhatsapp(userFieldsDataservice, whatsappDataservice, REGEX, automation, COMPONENT_TYPE, changesManager, $translate, $timeout) {
+  function dpEditorPanelWhatsapp(userFieldsDataservice, whatsappDataservice, REGEX, automation, COMPONENT_TYPE, changesManager, $translate, $timeout, settingsService) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-whatsapp.html',
@@ -36,6 +37,11 @@
       scope.sendWhatsappMessageResultClass = '';
       scope.showWhatsappSendResultMessage = false;
       scope.sendWhatsappResultMessageText = '';
+
+      scope.statusUploader = 'init';
+      settingsService.getSettings().then(function(response) {
+        scope.idUser = response.idUser;
+      });
 
       var iti = null;
       var whatsappForm = null;
@@ -102,6 +108,11 @@
         if (iframeRef !== null && scope.selectedComponent.template) { 
           iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
         }
+        const fileInput = document.getElementById('wspfileInput');
+        if (fileInput !== null) {
+          fileInput.addEventListener('change', uploadImageSelect, false); 
+        }
+
         inputRef = document.getElementById('phone_whatsapp');
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
@@ -124,6 +135,10 @@
       interval = window.setInterval(applyIntlInput, 50);
 
       scope.changePhoneNumber = changePhoneNumber;
+
+      scope.openSelectFileModal = ()=> {
+        document.getElementById('wspfileInput').click();
+      };
 
       scope.test = function() {
         return scope.phoneOptions.length === 0;
@@ -265,6 +280,27 @@
         }
       }
 
+      function uploadImageSelect(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        scope.statusUploader = 'pending';
+        const imageFile = e.target.files[0];
+        if (imageFile) {
+          
+          const formData = new FormData();
+          formData.append('file', imageFile);
+          formData.append('idUser', scope.idUser);
+          formData.append('idAutomation', scope.automationId);
+          service = whatsappDataservice.uploadWhatsappFile(formData).then(function(response){
+            if(response.data.success) {
+              scope.selectedComponent.template.link = response.data.imageUrl;
+              iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
+            } else {
+            }
+            scope.statusUploader = 'init';
+           });
+        }
+      }
       function setIncrementedNumber() {
         scope.selectedComponent.name = COMPONENT_TYPE.whatsapp.toUpperCase() + '_' + ++scope.rootComponent.lastWhatsappIdName;
       }
