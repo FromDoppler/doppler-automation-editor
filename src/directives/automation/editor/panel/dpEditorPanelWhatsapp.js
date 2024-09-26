@@ -42,8 +42,8 @@
 
       const multimediaConstraint = {
         VIDEO: {
-          acceptedFileTypes: 'video/3gp, video/mp4',
-          maxSise: 16, //Mb
+          acceptedFileTypes: 'video/mp4',
+          maxSise: 10, //Mb
         },
         IMAGE: {
           acceptedFileTypes: 'image/jpeg, image/png, image/jpg',
@@ -332,7 +332,19 @@
               scope.selectedComponent.template.publicPreviewUrl = paramReplace(scope.selectedComponent.template.publicPreviewUrl, 'parameterHeader', response.data.imageUrl);
               iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
             } else {
-              scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: imageFile.name});
+              switch (response.data.errorCode) {
+                case 88: // file is null
+                scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_null_message_error');  
+                break;
+                case 101: // file is too big
+                scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_fileSize_message_error', {fileSize: maxSize});
+                break;
+                case 100: // file has invalid extension
+                scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_ext_message_error');
+                break;
+                default:
+                  scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: imageFile.name});
+              }
               scope.showWhatsappUploadFileResultMessage = true;
               $timeout(() => { 
                 scope.showWhatsappUploadFileResultMessage = false;

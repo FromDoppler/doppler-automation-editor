@@ -938,6 +938,8 @@ export const automation_es_translations = {
         "file_uploader_button" : "Selecciona un archivo",
         "upload_file_message_error" : "¡Ouch! hubo un error al subir el archivo <b>{{fileName}}</b>",
         "upload_fileSize_message_error": "¡Ouch! El tamaño de tu archivo supera los <b>{{fileSize}}</b> MB",
+        "upload_file_ext_message_error": "¡Ouch! La extensión de tu archivo es invalida",
+        "upload_file_null_message_error": "¡Ouch! EL archivo no tiene contenido",
       }
     },
     "steps": {
