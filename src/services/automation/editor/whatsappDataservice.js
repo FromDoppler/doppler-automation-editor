@@ -60,7 +60,7 @@
     }
 
     function uploadWhatsappFile(formData) {
-      return $http.post('/Automation/Automation/UploadPushImage', formData,
+      return $http.post('/Automation/Automation/UploadWhatsappFile', formData,
         {
           transformRequest: angular.identity,
           headers: { 'Content-Type': undefined }

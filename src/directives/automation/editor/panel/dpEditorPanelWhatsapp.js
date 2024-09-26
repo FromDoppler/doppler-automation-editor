@@ -328,7 +328,7 @@
           formData.append('idAutomation', scope.automationId);
           service = whatsappDataservice.uploadWhatsappFile(formData).then(function(response){
             if(response.data.success) {
-              scope.selectedComponent.template.link = response.data.imageUrl;
+              scope.selectedComponent.template.link = response.data.fileUrl;
               scope.selectedComponent.template.publicPreviewUrl = paramReplace(scope.selectedComponent.template.publicPreviewUrl, 'parameterHeader', response.data.imageUrl);
               iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
             } else {
