@@ -14,10 +14,9 @@
     'changesManager',
     '$translate',
     '$timeout',
-    'settingsService'
   ];
 
-  function dpEditorPanelWhatsapp(userFieldsDataservice, whatsappDataservice, REGEX, automation, COMPONENT_TYPE, changesManager, $translate, $timeout, settingsService) {
+  function dpEditorPanelWhatsapp(userFieldsDataservice, whatsappDataservice, REGEX, automation, COMPONENT_TYPE, changesManager, $translate, $timeout) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-whatsapp.html',
@@ -60,9 +59,6 @@
       };
 
       scope.statusUploader = 'init';
-      settingsService.getSettings().then(function(response) {
-        scope.idUser = response.idUser;
-      });
 
       var iti = null;
       var whatsappForm = null;
@@ -324,7 +320,6 @@
           
           const formData = new FormData();
           formData.append('file', imageFile);
-          formData.append('idUser', scope.idUser);
           formData.append('idAutomation', scope.automationId);
           service = whatsappDataservice.uploadWhatsappFile(formData).then(function(response){
             if(response.data.success) {
