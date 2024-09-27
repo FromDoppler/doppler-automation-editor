@@ -129,7 +129,7 @@
         scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
         const fileInput = document.getElementById('wspfileInput');
         if (fileInput !== null) {
-          fileInput.addEventListener('change', uploadImageSelect, false); 
+          fileInput.addEventListener('change', uploadFileSelect, false); 
         }
 
         inputRef = document.getElementById('phone_whatsapp');
@@ -300,14 +300,14 @@
         }
       }
 
-      function uploadImageSelect(e) {
+      function uploadFileSelect(e) {
         e.stopPropagation();
         e.preventDefault();
         scope.statusUploader = 'pending';
-        const imageFile = e.target.files[0];
-        if (imageFile) {
+        const file= e.target.files[0];
+        if (file) {
           const maxSize = scope.multimediaType.maxSise;
-          if(imageFile.size > maxSize * 1024 * 1024) {
+          if(file.size > maxSize * 1024 * 1024) {
             scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_fileSize_message_error', {fileSize: maxSize});
             scope.showWhatsappUploadFileResultMessage = true;
             scope.statusUploader = 'init';
@@ -319,7 +319,7 @@
           }
           
           const formData = new FormData();
-          formData.append('file', imageFile);
+          formData.append('file', file);
           formData.append('idAutomation', scope.automationId);
           service = whatsappDataservice.uploadWhatsappFile(formData).then(function(response){
             if(response.data.success) {
@@ -338,7 +338,7 @@
                 scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_ext_message_error');
                 break;
                 default:
-                  scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: imageFile.name});
+                  scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: file.name});
               }
               scope.showWhatsappUploadFileResultMessage = true;
               $timeout(() => { 
