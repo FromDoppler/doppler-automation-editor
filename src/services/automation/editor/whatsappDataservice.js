@@ -18,7 +18,8 @@
       getWhatsappTemplatesByRoom: getWhatsappTemplatesByRoom,
       sendWhatsappTest: sendWhatsappTest,
       getConversationsLink: getConversationsLink,
-      getConversationsPlanLink: getConversationsPlanLink
+      getConversationsPlanLink: getConversationsPlanLink,
+      uploadWhatsappFile: uploadWhatsappFile,
     };
 
     return service;
@@ -56,6 +57,15 @@
 
     function sendWhatsappTest(data) {
       return $http.post('/Automation/Automation/SendTestWhatsappMessage', data);
+    }
+
+    function uploadWhatsappFile(formData) {
+      return $http.post('/Automation/Automation/UploadWhatsappFile', formData,
+        {
+          transformRequest: angular.identity,
+          headers: { 'Content-Type': undefined }
+        }
+      )
     }
   }
 })();

@@ -36,6 +36,29 @@
       scope.sendWhatsappMessageResultClass = '';
       scope.showWhatsappSendResultMessage = false;
       scope.sendWhatsappResultMessageText = '';
+      scope.showWhatsappUploadFileResultMessage = false;
+      scope.sendWhatsappUploadFileResultMessageText = '';
+
+      const multimediaConstraint = {
+        VIDEO: {
+          acceptedFileTypes: 'video/mp4',
+          maxSise: 10, //Mb
+        },
+        IMAGE: {
+          acceptedFileTypes: 'image/jpeg, image/png, image/jpg',
+          maxSise: 5, //Mb
+        },
+        DOCUMENTS: {
+          acceptedFileTypes: 'application/pdf',
+          maxSise: 10, //Mb
+        },
+        TEXT: {
+          acceptedFileTypes: '',
+          maxSise: 0, //Mb
+        }
+      };
+
+      scope.statusUploader = 'init';
 
       var iti = null;
       var whatsappForm = null;
@@ -102,6 +125,13 @@
         if (iframeRef !== null && scope.selectedComponent.template) { 
           iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
         }
+
+        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+        const fileInput = document.getElementById('wspfileInput');
+        if (fileInput !== null) {
+          fileInput.addEventListener('change', uploadFileSelect, false); 
+        }
+
         inputRef = document.getElementById('phone_whatsapp');
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
@@ -124,6 +154,10 @@
       interval = window.setInterval(applyIntlInput, 50);
 
       scope.changePhoneNumber = changePhoneNumber;
+
+      scope.openSelectFileModal = ()=> {
+        document.getElementById('wspfileInput').click();
+      };
 
       scope.test = function() {
         return scope.phoneOptions.length === 0;
@@ -162,6 +196,7 @@
         scope.headerVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'header');
         scope.bodyVariables = scope.selectedComponent.template.variables.filter(({type}) => type === 'body');
         iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
+        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
       };
 
       scope.getOptionLabel = function(id) {
@@ -265,6 +300,62 @@
         }
       }
 
+      function uploadFileSelect(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        scope.statusUploader = 'pending';
+        const file= e.target.files[0];
+        if (file) {
+          const maxSize = scope.multimediaType.maxSise;
+          if(file.size > maxSize * 1024 * 1024) {
+            scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_fileSize_message_error', {fileSize: maxSize});
+            scope.showWhatsappUploadFileResultMessage = true;
+            scope.statusUploader = 'init';
+            scope.$apply();
+            $timeout(() => {
+              scope.showWhatsappUploadFileResultMessage = false;
+            }, SHOW_RESULT_SEND_MESSAGE_TIME_MS);
+            return;
+          }
+          
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('idAutomation', scope.automationId);
+          service = whatsappDataservice.uploadWhatsappFile(formData).then(function(response){
+            if(response.data.success) {
+              scope.selectedComponent.template.link = response.data.fileUrl;
+              scope.selectedComponent.template.publicPreviewUrl = paramReplace(scope.selectedComponent.template.publicPreviewUrl, 'parameterHeader', response.data.imageUrl);
+              iframeRef.src = scope.selectedComponent.template.publicPreviewUrl;
+            } else {
+              switch (response.data.errorCode) {
+                case 88: // file is null
+                scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_null_message_error');  
+                break;
+                case 101: // file is too big
+                scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_fileSize_message_error', {fileSize: maxSize});
+                break;
+                case 100: // file has invalid extension
+                scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_ext_message_error');
+                break;
+                default:
+                  scope.sendWhatsappUploadFileResultMessageText = $translate.instant('automation_editor.sidebar.whatsapp.upload_file_message_error', {fileName: file.name});
+              }
+              scope.showWhatsappUploadFileResultMessage = true;
+              $timeout(() => { 
+                scope.showWhatsappUploadFileResultMessage = false;
+              }, SHOW_RESULT_SEND_MESSAGE_TIME_MS);
+            }
+            scope.statusUploader = 'init';
+           });
+        }
+      }
+
+      function paramReplace(urlString, queryParam, value) {
+        const re = new RegExp("[\\?&]" + queryParam + "=([^&#]*)"),
+            newString = urlString.replace(re, '&' + queryParam + "=" + value);
+        return newString;
+      }
+
       function setIncrementedNumber() {
         scope.selectedComponent.name = COMPONENT_TYPE.whatsapp.toUpperCase() + '_' + ++scope.rootComponent.lastWhatsappIdName;
       }
@@ -323,6 +414,5 @@
         }
       }
     }
-    
   }
 })();
