@@ -163,6 +163,16 @@
         return scope.phoneOptions.length === 0;
       };
 
+      scope.hasRoomSelected = function () {
+        return scope.selectedComponent.room.id > 0;
+      };
+
+      scope.hasTemplateSelected = function () {
+        return scope.hasRoomSelected &&
+          scope.selectedComponent.template &&
+          scope.selectedComponent.template.id > 0;
+      };
+
       scope.onPhoneTypeSelected = function(rawFieldData, oldField) {
         if (oldField && oldField.name === rawFieldData.name) {
           return;
