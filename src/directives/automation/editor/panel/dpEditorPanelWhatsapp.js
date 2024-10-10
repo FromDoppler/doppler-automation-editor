@@ -321,6 +321,9 @@
             showWhatsAppFileUploadError($translate.instant('automation_editor.sidebar.whatsapp.upload_fileSize_message_error', {fileSize: maxSize}));
             return;
           }
+          const typesAccepted =  scope.multimediaType.acceptedFileTypes.split(',');
+          if(typesAccepted.indexOf(file.type) == -1) {
+            showWhatsAppFileUploadError($translate.instant('automation_editor.sidebar.whatsapp.upload_file_ext_message_error'));
             return;
           }
           const formData = new FormData();
