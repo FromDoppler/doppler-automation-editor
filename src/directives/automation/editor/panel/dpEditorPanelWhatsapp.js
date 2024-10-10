@@ -189,6 +189,7 @@
         scope.selectedComponent.room = rawFieldData;
         scope.showTemplateEmptyWarning = true;
         scope.selectedComponent.template = null;
+        iframeRef.src = '';
         whatsappDataservice.getWhatsappTemplatesByRoom(rawFieldData.id)
           .then(function(templateData){
             if(templateData.success){
