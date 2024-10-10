@@ -126,7 +126,9 @@
           iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
         }
 
-        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+        if(scope.hasTemplateSelected()){
+          scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+        }
         const fileInput = document.getElementById('wspfileInput');
         if (fileInput !== null) {
           fileInput.addEventListener('change', uploadFileSelect, false); 
