@@ -45,7 +45,7 @@
           maxSise: 10, //Mb
         },
         IMAGE: {
-          acceptedFileTypes: 'image/jpeg, image/png, image/jpg',
+          acceptedFileTypes: 'image/jpeg,image/png,image/jpg',
           maxSise: 5, //Mb
         },
         DOCUMENTS: {
@@ -113,8 +113,7 @@
           if (data.length === 1 && scope.selectedComponent) {
             scope.selectedComponent.field = scope.phoneOptions[0];
           }
-
-        });
+      });
       
       var inputRef = null;
       var iframeRef = null;
