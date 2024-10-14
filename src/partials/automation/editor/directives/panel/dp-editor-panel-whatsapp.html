@@ -57,7 +57,7 @@
       key-value="'id'"
       key-label="'name'"
       value-selected="selectedComponent.field.id"
-      ng-disabled="isReadOnly();">
+      ng-disabled="isReadOnly() || !hasRoomSelected">
     </dp-editor-dropdown>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
     <div class="error-messages--container" ng-if="phoneOptions.length === 0">
@@ -79,11 +79,11 @@
       key-value="'id'"
       key-label="'name'"
       value-selected="selectedComponent.template.id"
-      ng-disabled="isReadOnly();">
+      ng-disabled="isReadOnly() || !hasRoomSelected()">
     </dp-editor-dropdown>
 
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
-    <div class="error-messages--container" ng-if="templateOptions.length === 0">
+    <div class="error-messages--container" ng-if="hasRoomSelected() && templateOptions.length === 0">
       <div class="error">
       {{ 'automation_editor.sidebar.whatsapp_non_template_error' | translate }}
       <a ng-href="{{ conversationsLink }}">{{ 'automation_editor.sidebar.whatsapp_non_template_error_url_link' | translate }}</a>
@@ -93,7 +93,7 @@
 
   <iframe class="whatsapp-content" id="whatsapp_template_iframe"></iframe>
 
-  <div ng-if="headerVariables.length > 0 && (selectedComponent.template.headerType == 'TEXT' || selectedComponent.template.headerType == undefined)">
+  <div ng-if="hasTemplateSelected() && headerVariables.length > 0 && (selectedComponent.template.headerType == 'TEXT' || selectedComponent.template.headerType == undefined)">
     <p class="title" >
       {{ 'automation_editor.sidebar.whatsapp.set_head_field' | translate }}
     </p>
@@ -112,7 +112,7 @@
     </div> 
   </div>
 
-  <div ng-if="selectedComponent.template.headerType != 'TEXT'">
+  <div ng-if="hasTemplateSelected() && selectedComponent.template.headerType != 'TEXT'">
     <p class="title" >
       {{ 'automation_editor.sidebar.whatsapp.set_head_file' | translate }}
     </p>
@@ -138,7 +138,7 @@
       </div>
   </div>
 
-  <div ng-if="bodyVariables.length > 0">
+  <div ng-if="hasTemplateSelected() && bodyVariables.length > 0">
     <p class="title" >
       {{ 'automation_editor.sidebar.whatsapp.set_body_field' | translate }}
     </p>
@@ -167,7 +167,7 @@
         name="whatsappPhoneNumberTest"
         ng-class="{'hasErrors': whatsappForm.whatsappPhoneNumberTest.$error && whatsappForm.whatsappPhoneNumberTest.$dirty || isSmsPhoneNumberTestInvalidByChangeCountry}"
         maxlength="160"
-        ng-disabled="isReadOnly();"
+        ng-disabled="isReadOnly() || !hasTemplateSelected()"
         ng-change="changePhoneNumber(whatsappForm)" />
       <button class="button-test-sms button button--small button--primary"
         ng-class="{'button--spinner' : sendingWhatsappTest}"
