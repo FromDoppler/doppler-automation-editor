@@ -17,7 +17,8 @@
         <div class="aplication-types-description--container">
           <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
           <p class="text--small">{{ 'automationTypes.info.description' + item.Type | translate }}</p>
-          <p ng-if="item.Type == 9 || item.Type == 10" class="tiendanube-exclusive" ng-bind-html="'automationTypes.info.pending_or_confirmed_order_content' | translate"></p>
+          <p ng-if="item.Type == 9" class="tiendanube-exclusive" ng-bind-html="'automationTypes.info.pending_order_content' | translate"></p>
+          <p ng-if="item.Type == 10" class="tiendanube-exclusive" ng-bind-html="'automationTypes.info.confirmed_order_content' | translate"></p>
         </div>
         <div ng-if="item.Status !== 'active' || item.IsNewFeature" class="notification--container flex-grid">
           <p class="title">{{ 'automationTypes.info.title' + item.Type | translate }}</p>
