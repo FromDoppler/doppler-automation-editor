@@ -352,7 +352,8 @@ var IntegrationCodes = {
   BMWCRM: 12,
   MERCADOLIBRE: 13,
   MITIENDA: 14,
-  JUMPSELLER: 15
+  JUMPSELLER: 15,
+  EMPRETIENDA: 16
 }
 
 var VtexFieldType = {
