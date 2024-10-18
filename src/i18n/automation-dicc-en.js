@@ -1132,7 +1132,7 @@ export const automation_en_translations = {
       "start9_message": "Your Doppler account has already been integrated with ",
       "title10": "Successful Payment",
       "description10": "Schedule Emails to notify your customers when you receive their payment.",
-      "confirmed_order_content": "Now for Tiendanube, Woocommerce, <br />soon for everybody!",
+      "confirmed_order_content": "Now for Tiendanube and Woocommerce, <br />soon for everybody!",
       "start10_message": "Your Doppler account has already been integrated with ",
       "title11": "Push Notifications",
       "description11": "Send alerts with special offers or relevant information to your Website or E-commerce visitors.",
