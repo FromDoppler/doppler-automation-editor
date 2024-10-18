@@ -835,7 +835,8 @@ export const automation_es_translations = {
           "option10": "WooCommerce",
           "option11": "easycommerce",
           "option14": "MiTienda",
-          "option15": "Jumpseller"
+          "option15": "Jumpseller",
+          "option16": "Empretienda"
         },
         "drop_down_time_options": {
           "option0": "24 horas",
