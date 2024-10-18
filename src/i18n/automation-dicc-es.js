@@ -871,7 +871,8 @@ export const automation_es_translations = {
           "option6": "PrestaShop",
           "option7": "Shopify",
           "option8": "Adobe Commerce",
-          "option10": "WooCommerce"
+          "option10": "WooCommerce",
+          "option16": "Empretienda"
         },
         "drop_down_time_options": {
           "option120": "2 horas",
@@ -1127,7 +1128,7 @@ export const automation_es_translations = {
       "start8_message": "Ya has integrado Doppler con ",
       "title9": "Pago Pendiente",
       "description9": "Recuérdales a tus usuarios que tienen un Pago Pendiente y anímalos a completar la compra.",
-      "pending_or_confirmed_order_content": "Ahora para Tiendanube y Woocommerce, <br />¡pronto para todos!",
+      "pending_or_confirmed_order_content": "Ahora para Tiendanube, Woocommerce y Empretienda, <br />¡pronto para todos!",
       "start9_message": "Ya has integrado Doppler con ",
       "title10": "Pago Confirmado",
       "description10": "Programa Emails para notificar a tus clientes que has recibido su pago.",
