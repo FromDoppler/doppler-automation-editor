@@ -1128,7 +1128,7 @@ export const automation_en_translations = {
       "start8_message": "Your Doppler account has already been integrated with ",
       "title9": "Pending Payment",
       "description9": "Remind about Pending Payments and encourage your visitors to finish transactions.",
-      "pending_order_content": "Now for Tiendanube, Woocommerce and Empretienda, <br />soon for everybody!",
+      "pending_order_content": "Now for Tiendanube, Woocommerce and Empretienda, soon for everybody!",
       "start9_message": "Your Doppler account has already been integrated with ",
       "title10": "Successful Payment",
       "description10": "Schedule Emails to notify your customers when you receive their payment.",
