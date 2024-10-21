@@ -117,47 +117,60 @@
       
       var inputRef = null;
       var iframeRef = null;
+      let inputUploadFile = null;
       var interval;
+      let initIframeInterval;
+      let initInputFileInterval;
 
-      function applyIntlInput() {
+      function initIframe() {
         iframeRef = document.getElementById('whatsapp_template_iframe');
         if (iframeRef !== null && scope.selectedComponent.template) { 
           iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
+          window.clearInterval(initIframeInterval);
         }
+      }
 
-        if(scope.hasTemplateSelected()){
-          scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+      function initInputFile() {
+        inputUploadFile = document.getElementById('wspfileInput');
+        if (inputUploadFile !== null) {
+          inputUploadFile.addEventListener('change', uploadFileSelect, false);
+          window.clearInterval(initInputFileInterval);
         }
-        const fileInput = document.getElementById('wspfileInput');
-        if (fileInput !== null) {
-          fileInput.addEventListener('change', uploadFileSelect, false); 
-        }
+      }
 
+      function intInputTel() {
         inputRef = document.getElementById('phone_whatsapp');
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
             placeholderNumberType: 'MOBILE',
             validationNumberType: 'MOBILE',
-            nationalMode: false,
-            separateDialCode: true,
+            nationalMode: true,
+            separateDialCode: false,
             autoPlaceholder: 'aggressive',
             preferredCountries: ['ar', 'mx', 'co', 'es', 'ec', 'cl', 'pe', 'us'],
             initialCountry: 'ar'
           });
           window.clearInterval(interval);
-            changePhoneNumber(whatsappForm);
           evaluateName();
           inputRef.addEventListener('countrychange', function() {
             changePhoneNumber(whatsappForm);
           });
         }
       }
-      interval = window.setInterval(applyIntlInput, 50);
+
+      if(scope.selectedComponent != null) {
+        interval = window.setInterval(intInputTel, 50);
+        initIframeInterval = window.setInterval(initIframe, 50);
+        initInputFileInterval = window.setInterval(initInputFile, 50);
+      }
+      if(scope.selectedComponent.template && scope.selectedComponent.template.id > 0) {
+        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+      }
 
       scope.changePhoneNumber = changePhoneNumber;
 
       scope.openSelectFileModal = ()=> {
-        document.getElementById('wspfileInput').click();
+        inputUploadFile.click();
       };
 
       scope.test = function() {
@@ -317,6 +330,7 @@
         e.preventDefault();
         scope.statusUploader = 'pending';
         const file= e.target.files[0];
+        inputUploadFile.value = '';
         if (file) {
           const maxSize = scope.multimediaType.maxSise;
           if(file.size > maxSize * 1024 * 1024) {

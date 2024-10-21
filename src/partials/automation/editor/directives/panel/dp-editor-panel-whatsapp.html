@@ -91,7 +91,7 @@
     </div>
   </div>
 
-  <iframe class="whatsapp-content" id="whatsapp_template_iframe"></iframe>
+  <iframe class="whatsapp-content" id="whatsapp_template_iframe" ng-show ="hasTemplateSelected()" ></iframe>
 
   <div ng-if="hasTemplateSelected() && headerVariables.length > 0 && (selectedComponent.template.headerType == 'TEXT' || selectedComponent.template.headerType == undefined)">
     <p class="title" >
@@ -123,12 +123,6 @@
           ng-disabled="isReadOnly();">
           {{ 'automation_editor.sidebar.whatsapp.file_uploader_button' | translate }}
         </button>
-        <input hidden 
-          type="file" 
-          id="wspfileInput" 
-          accept="{{multimediaType.acceptedFileTypes}}"
-          ng-disabled="isReadOnly();"
-        >
         <div class="dp-temporal-message margin-t-15" ng-show="showWhatsappUploadFileResultMessage">
           <div class="dp-wrap-message dp-wrap-warning">
             <span class="dp-message-icon"></span>
@@ -137,6 +131,12 @@
         </div>
       </div>
   </div>
+  <input hidden 
+    type="file" 
+    id="wspfileInput" 
+    accept="{{multimediaType.acceptedFileTypes}}"
+    ng-disabled="isReadOnly();"
+  >
 
   <div ng-if="hasTemplateSelected() && bodyVariables.length > 0">
     <p class="title" >
@@ -157,10 +157,10 @@
     </div>
   </div>
 
-  <div class="input--group  dp-library">
+  <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.whatsapp.whatsapp_test' | translate }}</label>
     <span class="span--sms">{{ 'automation_editor.sidebar.whatsapp.whatsapp_test_desc' | translate }}</span>
-    <div class="display-flex">
+    <div class="display-flex dp-library">
       <input id="phone_whatsapp" type="tel" class="input--text"
         ng-model="selectedComponent.whatsappPhoneNumberTest"
         ng-required="whatsappForm.whatsappPhoneNumberTest.$dirty || selectedComponent.touched"
@@ -187,8 +187,8 @@
       <div ng-message="required" class="error">{{ 'validation_messages.required' | translate }}</div>
       <div ng-show="isWhatsappPhoneNumberTestInvalidByChangeCountry" class="error">{{ 'validation_messages.phone_pattern' | translate }}</div>
     </div>
-  
-    <div class="dp-temporal-message margin-t-15" ng-show="showWhatsappSendResultMessage">
+
+    <div class="dp-temporal-message margin-t-15 dp-library" ng-show="showWhatsappSendResultMessage">
       <div class="dp-wrap-message" ng-class="sendWhatsappMessageResultClass">
         <span class="dp-message-icon"></span>
         <div class="dp-content-message dp-content-full" ng-bind-html="sendWhatsappResultMessageText"></div>
