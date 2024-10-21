@@ -117,22 +117,28 @@
       
       var inputRef = null;
       var iframeRef = null;
+      let inputUploadFile = null;
       var interval;
+      let initIframeInterval;
+      let initInputFileInterval;
 
-      function applyIntlInput() {
+      function initIframe() {
         iframeRef = document.getElementById('whatsapp_template_iframe');
         if (iframeRef !== null && scope.selectedComponent.template) { 
           iframeRef.src = scope.selectedComponent.template.publicPreviewUrl || "";
+          window.clearInterval(initIframeInterval);
         }
+      }
 
-        if(scope.hasTemplateSelected()){
-          scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+      function initInputFile() {
+        inputUploadFile = document.getElementById('wspfileInput');
+        if (inputUploadFile !== null) {
+          inputUploadFile.addEventListener('change', uploadFileSelect, false);
+          window.clearInterval(initInputFileInterval);
         }
-        const fileInput = document.getElementById('wspfileInput');
-        if (fileInput !== null) {
-          fileInput.addEventListener('change', uploadFileSelect, false); 
-        }
+      }
 
+      function intInputTel() {
         inputRef = document.getElementById('phone_whatsapp');
         if (inputRef !== null) {
           iti = window.intlTelInput(inputRef, {
@@ -152,7 +158,15 @@
           });
         }
       }
-      interval = window.setInterval(applyIntlInput, 50);
+
+      if(scope.selectedComponent != null) {
+        interval = window.setInterval(intInputTel, 50);
+        initIframeInterval = window.setInterval(initIframe, 50);
+        initInputFileInterval = window.setInterval(initInputFile, 50);
+      }
+      if(scope.selectedComponent.template && scope.selectedComponent.template.id > 0) {
+        scope.multimediaType = multimediaConstraint[scope.selectedComponent.template.headerType || 'TEXT'];
+      }
 
       scope.changePhoneNumber = changePhoneNumber;
 
