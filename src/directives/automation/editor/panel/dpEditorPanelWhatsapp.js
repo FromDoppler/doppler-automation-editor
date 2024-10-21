@@ -144,8 +144,8 @@
           iti = window.intlTelInput(inputRef, {
             placeholderNumberType: 'MOBILE',
             validationNumberType: 'MOBILE',
-            nationalMode: false,
-            separateDialCode: true,
+            nationalMode: true,
+            separateDialCode: false,
             autoPlaceholder: 'aggressive',
             preferredCountries: ['ar', 'mx', 'co', 'es', 'ec', 'cl', 'pe', 'us'],
             initialCountry: 'ar'
