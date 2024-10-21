@@ -151,7 +151,6 @@
             initialCountry: 'ar'
           });
           window.clearInterval(interval);
-            changePhoneNumber(whatsappForm);
           evaluateName();
           inputRef.addEventListener('countrychange', function() {
             changePhoneNumber(whatsappForm);
