@@ -545,6 +545,7 @@ export const automation_es_translations = {
       "privates_description_confirmation_order": "Hemos diseñado Plantillas editables para notificar a tus clientes que su pago se procesó correctamente. ¡Elige la que mejor se ajuste a tus necesidades!"
     },
     "sidebar": {
+      "loading": "Cargando",
       "action_email_title": "Email",
       "action_title": "Define la Acción que quieres que se ejecute",
       "action_help_tip": "¿Tienes dudas sobre cómo crear una Acción dentro de tu Campaña de Automation?",
@@ -931,7 +932,7 @@ export const automation_es_translations = {
         "send_test_description": "Escribe el número de teléfono al que quieres realizar tu envío de prueba. El costo de este envío de prueba se descontará de tu dinero disponible.",
         "help_tip": "¿Tienes dudas sobre cómo crear tus campañas de Whatsapp Automation?",
         "help_tip_link": "Lee más en el HELP CENTER.",
-        "help_tip_link_url": "",
+        "help_tip_link_url": "https://help.fromdoppler.com/es/como-enviar-mensajes-masivos-por-whatsapp/",
         "variable": "Variable",
         "whatsapp_test": "Realiza un envío de prueba a un teléfono específico",
         "whatsapp_test_desc": "Escribe el número de teléfono al que quieres realizar tu envío de prueba. El costo de este envío de prueba se descontará de tu dinero disponible.",

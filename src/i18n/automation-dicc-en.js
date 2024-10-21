@@ -544,6 +544,7 @@ export const automation_en_translations = {
       "privates_description_confirmation_order": "We’ve created customizable Templates to notify customers when a payment is successfully processed. Choose the best option for your store!"
     },
     "sidebar": {
+      "loading": "Loading",
       "action_email_title": "Email",
       "action_title": "Define the Action you want to be executed",
       "action_help_tip": "Do you have any doubts about how to create Actions for your Automation Campaigns?",
@@ -931,7 +932,7 @@ export const automation_en_translations = {
         "send_test_description": "Enter the phone number to which you want to send your test shipment. The cost of this test shipment will be deducted from your available money.",
         "help_tip": "Do you have questions about how to create your WhatsApp Automation campaigns?",
         "help_tip_link": "Read more in the HELP CENTER.",
-        "help_tip_link_url": "",
+        "help_tip_link_url": "https://help.fromdoppler.com/en/como-enviar-mensajes-masivos-por-whatsapp/",
         "variable": "Changeable",
         "whatsapp_test": "Make a test send to a specific phone",
         "whatsapp_test_desc": "Enter the phone number to which you want to send your test shipment. The cost of this test shipment will be deducted from your available money.",
