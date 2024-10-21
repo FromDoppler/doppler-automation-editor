@@ -91,7 +91,7 @@
     </div>
   </div>
 
-  <iframe class="whatsapp-content" id="whatsapp_template_iframe"></iframe>
+  <iframe class="whatsapp-content" id="whatsapp_template_iframe" ng-show ="hasTemplateSelected()" ></iframe>
 
   <div ng-if="hasTemplateSelected() && headerVariables.length > 0 && (selectedComponent.template.headerType == 'TEXT' || selectedComponent.template.headerType == undefined)">
     <p class="title" >
