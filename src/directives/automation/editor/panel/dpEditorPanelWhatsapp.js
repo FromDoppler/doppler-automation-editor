@@ -330,6 +330,7 @@
         e.preventDefault();
         scope.statusUploader = 'pending';
         const file= e.target.files[0];
+        inputUploadFile.value = '';
         if (file) {
           const maxSize = scope.multimediaType.maxSise;
           if(file.size > maxSize * 1024 * 1024) {
