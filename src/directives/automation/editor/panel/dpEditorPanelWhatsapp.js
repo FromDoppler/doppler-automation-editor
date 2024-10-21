@@ -170,7 +170,7 @@
       scope.changePhoneNumber = changePhoneNumber;
 
       scope.openSelectFileModal = ()=> {
-        document.getElementById('wspfileInput').click();
+        inputUploadFile.click();
       };
 
       scope.test = function() {
