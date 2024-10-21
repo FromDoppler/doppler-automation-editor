@@ -123,12 +123,6 @@
           ng-disabled="isReadOnly();">
           {{ 'automation_editor.sidebar.whatsapp.file_uploader_button' | translate }}
         </button>
-        <input hidden 
-          type="file" 
-          id="wspfileInput" 
-          accept="{{multimediaType.acceptedFileTypes}}"
-          ng-disabled="isReadOnly();"
-        >
         <div class="dp-temporal-message margin-t-15" ng-show="showWhatsappUploadFileResultMessage">
           <div class="dp-wrap-message dp-wrap-warning">
             <span class="dp-message-icon"></span>
@@ -137,6 +131,12 @@
         </div>
       </div>
   </div>
+  <input hidden 
+    type="file" 
+    id="wspfileInput" 
+    accept="{{multimediaType.acceptedFileTypes}}"
+    ng-disabled="isReadOnly();"
+  >
 
   <div ng-if="hasTemplateSelected() && bodyVariables.length > 0">
     <p class="title" >
