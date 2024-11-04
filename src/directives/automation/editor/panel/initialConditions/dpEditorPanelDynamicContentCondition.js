@@ -66,6 +66,9 @@
           scope.selectedComponent.eventWaitMinutes = scope.selectedComponent.eventWaitMinutes
             || DYNAMIC_CONTENT_HOURS.ZERO_HOURS;
           scope.productsStoreTimeOptions = optionsListDataservice.getAbandonedCartTimeOptions();
+          if (scope.selectedComponent.idThirdPartyApp === INTEGRATION_CODES.MERCADOSHOPS) {
+            scope.productsStoreTimeOptions = scope.productsStoreTimeOptions.filter(item => item.value !== DYNAMIC_CONTENT_HOURS.TWO_HOURS);
+          }
           scope.productsStoreWaitOptions = optionsListDataservice.getAbandonedCartWaitOptions();
           if (scope.selectedComponent.idThirdPartyApp === INTEGRATION_CODES.TIENDANUBE) {
             scope.showDomainErrorMsg = automation.domainHaveErrors(scope.productsStoreOptions,
