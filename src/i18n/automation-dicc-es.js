@@ -1066,6 +1066,8 @@ export const automation_es_translations = {
       "title10": "Pago confirmado",
       "description10": "Envía un Email luego de que un cliente completa el pago de una compra.",
       "tiendanube_content": "Ahora para Tiendanube ¡pronto para todos!",
+      "title11": "Beneficio por comprador frecuente + cupon",
+      "description11": "Envía un Email posterior a compras frecuentes, con un cupón de descuento personalizado.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1079,6 +1081,7 @@ export const automation_es_translations = {
       "description8": "Complementa tu estrategia de Email Automation, con este servicio de mensajería instantánea. Descubre por qué esta herramienta aporta un diferencial para tu negocio.",
       "description9": "Mantén informados a tus clientes sobre el estado de sus compras para brindar una excelente experiencia y motivar futuras compras.<br> En caso de que un pago no se haya procesado correctamente, es importante <b>informar al cliente lo sucedido y ofrecerle instrucciones para reintentarlo</b> o medios de contacto para recibir ayuda.",
       "description10": "Informa a tus clientes sobre el estado de sus compras en cada paso del proceso. Brindar una excelente experiencia es algo <b>fundamental para motivar nuevas compras y recomendaciones</b>. En este caso se notifica sobre un pago que fue procesado con éxito.",
+      "description11": "Conecta y recompensa con tus clientes más fieles. Puedes enviar Emails con descuentos, regalos, acceso anticipado a nuevos productos o servicios, entre otros.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1108,6 +1111,9 @@ export const automation_es_translations = {
       "template_9_allow_item2": "Revisar los artículos pendientes de compra.",
       "template_10_allow_item0": "Enviar un Email notificando que el pago fue concretado.",
       "template_10_allow_item1": "Chequear los artículos comprados.",
+      "template_11_allow_item0": "Conseguir que sigan comprando tus productos o servicios.",
+      "template_11_allow_item1": "Ofrecer cupones de descuentos.",
+      "template_11_allow_item2": "Fidelizar a tus clientes y aumentar tus ventas.",
     },
   },
   "automationTypes": {
