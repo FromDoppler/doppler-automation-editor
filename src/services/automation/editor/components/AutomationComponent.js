@@ -20,6 +20,7 @@
           this.lastWhatsappIdName = 0;
           this.state = AUTOMATION_STATE.DRAFT;
           this.completed = AUTOMATION_COMPLETED_STATE.INCOMPLETE;
+          this.automationTemplateType = 'none';
 
           this.initialCondition = automation.createCondition({
             type: automation.getConditionType(this.automationType),
@@ -43,6 +44,9 @@
           }
           if (data.hasOwnProperty('automationType')) {
             this.automationType = data.automationType;
+          }
+          if (data.hasOwnProperty('automationTemplateType')) {
+            this.automationTemplateType = data.automationTemplateType;
           }
           if (data.hasOwnProperty('id')) {
             this.id = data.id;
