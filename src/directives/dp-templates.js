@@ -72,6 +72,15 @@
         window.location.href = templatesService.getEditorCampaignUrl(idCampaign, editorType);
       }
 
+      // TODO: improve way to set categoryFilter 
+      // Approach: set by one of the campaign attributes 
+      const automationTemplateType = automation.getModel().automationTemplateType;
+      const templateTypeAdapter = {
+        promo_code: 'promotions',
+      };
+      if (automationTemplateType !== 'none'){
+        $scope.categoryFilter = templateTypeAdapter[automationTemplateType];
+      }
       if (!$scope.categoryFilter && $location.search().automationType){
         switch ($location.search().automationType) {
         case AUTOMATION_TYPE.VISITED_PRODUCTS:
