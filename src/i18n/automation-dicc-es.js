@@ -1135,7 +1135,7 @@ export const automation_es_translations = {
       "start9_message": "Ya has integrado Doppler con ",
       "title10": "Pago Confirmado",
       "description10": "Programa Emails para notificar a tus clientes que has recibido su pago.",
-      "confirmed_order_content": "Ahora para Tiendanube y Woocommerce, <br />soon for everybody!",
+      "confirmed_order_content": "Ahora para Tiendanube y Woocommerce, <br />¡pronto para todos!",
       "start10_message": "Ya has integrado Doppler con ",
       "title11": "Notificaciones Push",
       "description11": "Envía alertas con ofertas o información relevante a los visitantes de tu Sitio Web o Tienda Online.",
