@@ -1070,6 +1070,8 @@ export const automation_en_translations = {
       "description11": "Send a follow-up email after frequent purchases with a personalized discount coupon.",
       "title12": "Customer anniversary coupon",
       "description12": "Send an email with a discount coupon when a customer reaches a certain date of contact with your brand.",
+      "title13": "Purchase completed with cross selling + coupon",
+      "description13": "Send a personalized discount coupon after a purchase, offering related products.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
@@ -1085,6 +1087,7 @@ export const automation_en_translations = {
       "description10": "It is important to keep your customers informed about the status of their purchases at every step of the process. An excellent experience is essential <b>to motivate new purchases and recommendations</b>. In this case, you are notified about a payment that was successfully processed.",
       "description11": "Connect with and reward your most loyal customers. You can send emails with discounts, gifts, early access to new products or services, among others.",
       "description12": "Send an Email to your Contacts with a discount coupon when they complete 1 year of their subscription or their first purchase at your business.",
+      "description13": "Encourage those who have already shopped at your store by sending emails with discount coupons. You’ll be able to send smart suggestions for products and services based on your users' preferences.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1119,6 +1122,9 @@ export const automation_en_translations = {
       "template_11_allow_item2": "Build customer loyalty and boost your sales.",
       "template_12_allow_item0": "Build customer loyalty by sending a coupon.",
       "template_12_allow_item1": "Personalize your communication.",
+      "template_13_allow_item0": "View suggested items according to the latest purchase.",
+      "template_13_allow_item1": "Send personalized emails to keep users engaged.",
+      "template_13_allow_item2": "Offer discount coupons to motivate additional sales.",
     },
   },
   "automationTypes": {
