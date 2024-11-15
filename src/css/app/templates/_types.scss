@@ -190,7 +190,7 @@ $imagesPath: "../images" !default;
     font-weight: normal;
   }
   p {
-    padding-right: 30px;
+    padding-right: 29px;
   }
   &.es {
     &::after {
@@ -233,7 +233,29 @@ dp-editor-types {
       left: -20px;
     }
     .aplication-types-description--container{
+      align-content: center;
       margin: 15px 0 0 18%;
+    }
+  }
+}
+
+dp-editor-template {
+  .aplication-types--items {
+    height: 164px;
+    .aplication-types-description--container {
+      min-height: 120px;
+    }
+    &::before {
+      content: '';
+      top: 10px;
+    }
+  }
+  :not(.aplication-types--new-feature){
+    .aplication-types-description--container{
+      .title {
+        max-width: 210px;
+        line-height: 1.2;
+      }
     }
   }
 }
