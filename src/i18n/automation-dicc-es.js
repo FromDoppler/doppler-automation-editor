@@ -1065,6 +1065,7 @@ export const automation_es_translations = {
       "description9": "Envía notificaciones por Email a un cliente que realizó una compra online y no finalizó el pago.",
       "title10": "Pago confirmado",
       "description10": "Envía un Email luego de que un cliente completa el pago de una compra.",
+      "tiendanube_content": "Ahora para Tiendanube ¡pronto para todos!",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",

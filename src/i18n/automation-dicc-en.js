@@ -1065,6 +1065,7 @@ export const automation_en_translations = {
       "description9": "Send Email Notifications to customers who make an online purchase and have not made payment.",
       "title10": "Payment confirmed",
       "description10": "Send an Email after a customer completes payment for a purchase.",
+      "tiendanube_content": "Now for Tiendanube, soon for everybody!",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
