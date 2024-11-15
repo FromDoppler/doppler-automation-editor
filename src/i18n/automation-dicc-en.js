@@ -1068,6 +1068,8 @@ export const automation_en_translations = {
       "tiendanube_content": "Now for Tiendanube, soon for everybody!",
       "title11": "Frequent buyer benefit + coupon",
       "description11": "Send a follow-up email after frequent purchases with a personalized discount coupon.",
+      "title12": "Customer anniversary coupon",
+      "description12": "Send an email with a discount coupon when a customer reaches a certain date of contact with your brand.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
@@ -1082,6 +1084,7 @@ export const automation_en_translations = {
       "description9": "Keeping customers informed about the status of their purchases is essential to providing a great experience and motivating future purchases.<br> In the event that a payment has not been processed correctly, it is important <b>to inform the customer what happened and offer instructions for retrying</b> or contact information for assistance.",
       "description10": "It is important to keep your customers informed about the status of their purchases at every step of the process. An excellent experience is essential <b>to motivate new purchases and recommendations</b>. In this case, you are notified about a payment that was successfully processed.",
       "description11": "Connect with and reward your most loyal customers. You can send emails with discounts, gifts, early access to new products or services, among others.",
+      "description12": "Send an Email to your Contacts with a discount coupon when they complete 1 year of their subscription or their first purchase at your business.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1114,6 +1117,8 @@ export const automation_en_translations = {
       "template_11_allow_item0": "Encourage repeat purchases of your products or services.",
       "template_11_allow_item1": "Offer discount coupons.",
       "template_11_allow_item2": "Build customer loyalty and boost your sales.",
+      "template_12_allow_item0": "Build customer loyalty by sending a coupon.",
+      "template_12_allow_item1": "Personalize your communication.",
     },
   },
   "automationTypes": {

@@ -1068,6 +1068,8 @@ export const automation_es_translations = {
       "tiendanube_content": "Ahora para Tiendanube ¡pronto para todos!",
       "title11": "Beneficio por comprador frecuente + cupon",
       "description11": "Envía un Email posterior a compras frecuentes, con un cupón de descuento personalizado.",
+      "title12": "Cupón aniversario de cliente",
+      "description12": "Envía un Email con un cupón de descuento, cuando un cliente cumpla cierta fecha de contacto con tu marca.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1082,6 +1084,7 @@ export const automation_es_translations = {
       "description9": "Mantén informados a tus clientes sobre el estado de sus compras para brindar una excelente experiencia y motivar futuras compras.<br> En caso de que un pago no se haya procesado correctamente, es importante <b>informar al cliente lo sucedido y ofrecerle instrucciones para reintentarlo</b> o medios de contacto para recibir ayuda.",
       "description10": "Informa a tus clientes sobre el estado de sus compras en cada paso del proceso. Brindar una excelente experiencia es algo <b>fundamental para motivar nuevas compras y recomendaciones</b>. En este caso se notifica sobre un pago que fue procesado con éxito.",
       "description11": "Conecta y recompensa con tus clientes más fieles. Puedes enviar Emails con descuentos, regalos, acceso anticipado a nuevos productos o servicios, entre otros.",
+      "description12": "Envía un Email a tus Contactos, con un cupón de descuento, cuando se cumple 1 año de su suscripción o de su primera compra en tu negocio.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1114,6 +1117,8 @@ export const automation_es_translations = {
       "template_11_allow_item0": "Conseguir que sigan comprando tus productos o servicios.",
       "template_11_allow_item1": "Ofrecer cupones de descuentos.",
       "template_11_allow_item2": "Fidelizar a tus clientes y aumentar tus ventas.",
+      "template_12_allow_item0": "Fidelizar tus clientes enviando un cupón.",
+      "template_12_allow_item1": "Personalizar tu comunicación.",
     },
   },
   "automationTypes": {
