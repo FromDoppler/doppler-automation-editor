@@ -1065,6 +1065,9 @@ export const automation_en_translations = {
       "description9": "Send Email Notifications to customers who make an online purchase and have not made payment.",
       "title10": "Payment confirmed",
       "description10": "Send an Email after a customer completes payment for a purchase.",
+      "tiendanube_content": "Now for Tiendanube, soon for everybody!",
+      "title11": "Frequent buyer benefit + coupon",
+      "description11": "Send a follow-up email after frequent purchases with a personalized discount coupon.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
@@ -1078,6 +1081,7 @@ export const automation_en_translations = {
       "description8": "Complement your Email Automation Strategy with this instant messaging service. Discover why this tool provides a differential for your business.",
       "description9": "Keeping customers informed about the status of their purchases is essential to providing a great experience and motivating future purchases.<br> In the event that a payment has not been processed correctly, it is important <b>to inform the customer what happened and offer instructions for retrying</b> or contact information for assistance.",
       "description10": "It is important to keep your customers informed about the status of their purchases at every step of the process. An excellent experience is essential <b>to motivate new purchases and recommendations</b>. In this case, you are notified about a payment that was successfully processed.",
+      "description11": "Connect with and reward your most loyal customers. You can send emails with discounts, gifts, early access to new products or services, among others.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1107,6 +1111,9 @@ export const automation_en_translations = {
       "template_9_allow_item2": "View items pending purchase.",
       "template_10_allow_item0": "Send an Email notifying that the payment has been completed.",
       "template_10_allow_item1": "View purchased items.",
+      "template_11_allow_item0": "Encourage repeat purchases of your products or services.",
+      "template_11_allow_item1": "Offer discount coupons.",
+      "template_11_allow_item2": "Build customer loyalty and boost your sales.",
     },
   },
   "automationTypes": {

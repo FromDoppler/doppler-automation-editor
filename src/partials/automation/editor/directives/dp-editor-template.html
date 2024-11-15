@@ -45,6 +45,7 @@
         <div class="aplication-types-description--container">
           <p class="title">{{ 'automationTemplates.info.title' + item.IdAutomationTemplate | translate }}</p>
           <p class="text--small">{{ 'automationTemplates.info.description' + item.IdAutomationTemplate | translate }}</p>
+          <p  ng-if="item.TemplateType === 1" class="tiendanube-exclusive" ng-bind-html="'automationTemplates.info.tiendanube_content' | translate"></p>
         </div>
         <div ng-if="item.Status !== 'active'" class="notification--container flex-grid">
           <p class="title">{{ 'automationTemplates.info.title' + item.IdAutomationTemplate | translate }}</p>
