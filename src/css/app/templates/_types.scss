@@ -190,7 +190,7 @@ $imagesPath: "../images" !default;
     font-weight: normal;
   }
   p {
-    padding-right: 29px;
+    padding-right: 30px;
   }
   &.es {
     &::after {
@@ -241,7 +241,7 @@ dp-editor-types {
 
 dp-editor-template {
   .aplication-types--items {
-    height: 164px;
+    height: 145px;
     .aplication-types-description--container {
       min-height: 120px;
     }
@@ -253,7 +253,7 @@ dp-editor-template {
   :not(.aplication-types--new-feature){
     .aplication-types-description--container{
       .title {
-        max-width: 210px;
+        max-width: 240px;
         line-height: 1.2;
       }
     }
