@@ -1072,6 +1072,8 @@ export const automation_es_translations = {
       "description12": "Envía un Email con un cupón de descuento, cuando un cliente cumpla cierta fecha de contacto con tu marca.",
       "title13": "Cupón cross selling",
       "description13": "Envía un cupón de descuento, luego de una compra, ofreciendo productos relacionados.",
+      "title14": "Cupón Carrito Abandonado",
+      "description14": "Envía un Email con un cupón de descuento para recuperar una compra.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1088,6 +1090,7 @@ export const automation_es_translations = {
       "description11": "Conecta y recompensa con tus clientes más fieles. Puedes enviar Emails con descuentos, regalos, acceso anticipado a nuevos productos o servicios, entre otros.",
       "description12": "Envía un Email a tus Contactos, con un cupón de descuento, cuando se cumple 1 año de su suscripción o de su primera compra en tu negocio.",
       "description13": "Motiva a quienes ya compraron en tu tienda, a través de la reactivación de Emails que utilizan las preferencias de otros compradores para hacer sugerencias más inteligentes y relevantes de productos y servicios. ",
+      "description14": "Recuerda a tus clientes que dejaron productos en sus Carritos de compras. Motiva a tus Contactos con un Email persuasivo y efectivo con un cupón de descuento.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1125,6 +1128,9 @@ export const automation_es_translations = {
       "template_13_allow_item0": "Ver los artículos sugeridos de acuerdo a ultima compra.",
       "template_13_allow_item1": "Ofrece cupones de descuento para motivar ventas adicionale",
       "template_13_allow_item2": "Enviar Emails personalizados para mantener conectado al usuario.",
+      "template_14_allow_item0": "Enviar un cupón de descuento.",
+      "template_14_allow_item1": "Incentiva a finalizar compras abandonadas.",
+      "template_14_allow_item2": "Aumentar tus ventas.",
     },
   },
   "automationTypes": {
