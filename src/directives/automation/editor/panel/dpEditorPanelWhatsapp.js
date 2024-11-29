@@ -202,12 +202,11 @@
         scope.showTemplateEmptyWarning = true;
         scope.selectedComponent.template = null;
         iframeRef.src = '';
+        scope.templateOptions = [];
         whatsappDataservice.getWhatsappTemplatesByRoom(rawFieldData.id)
           .then(function(templateData){
             if(templateData.success){
               scope.templateOptions = templateData.templates;
-            } else {
-              scope.templateOptions = [];
             }
           });
       };
