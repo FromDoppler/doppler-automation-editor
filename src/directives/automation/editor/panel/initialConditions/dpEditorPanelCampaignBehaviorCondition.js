@@ -13,7 +13,6 @@
     'SEND_TYPE',
     'changesManager',
     '$translate',
-    'AUTOMATION_TYPE',
     'LIST_SELECTION_STATE',
     'automation',
     '$timeout',
@@ -23,7 +22,7 @@
   ];
 
   function dpEditorPanelCampaignBehaviorCondition(FREQUENCY_TYPE, optionsListDataservice, settingsService, utils,
-    SEND_TYPE, changesManager, $translate, AUTOMATION_TYPE, LIST_SELECTION_STATE, automation, $timeout, CHANGE_TYPE, $q,
+    SEND_TYPE, changesManager, $translate, LIST_SELECTION_STATE, automation, $timeout, CHANGE_TYPE, $q,
     dateValidation) {
     var directive = {
       restrict: 'AE',
@@ -34,7 +33,6 @@
     return directive;
 
     function link(scope, element) {
-      scope.isCampaignBehaviorAutomationType = scope.$parent.automationData.automationType == AUTOMATION_TYPE.CAMPAIGN_BEHAVIOR;
       scope.confirmationEmailListTmp = _.cloneDeep(scope.selectedComponent.confirmationEmailList);
       scope.timeOptions = optionsListDataservice.getTimeOptions();
       scope.timeSelected = {};
