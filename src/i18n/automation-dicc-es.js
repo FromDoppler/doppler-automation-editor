@@ -1074,6 +1074,8 @@ export const automation_es_translations = {
       "description13": "Envía un cupón de descuento, luego de una compra, ofreciendo productos relacionados.",
       "title14": "Cupón Carrito Abandonado",
       "description14": "Envía un Email con un cupón de descuento para recuperar una compra.",
+      "title15": "Pedido de opinión de clientes",
+      "description15": "Envía un Email para conocer sus preferencias, fomentar nuevas compras y recomendaciones.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1091,6 +1093,7 @@ export const automation_es_translations = {
       "description12": "Envía un Email a tus Contactos, con un cupón de descuento, cuando se cumple 1 año de su suscripción o de su primera compra en tu negocio.",
       "description13": "Motiva a quienes ya compraron en tu tienda, a través de la reactivación de Emails que utilizan las preferencias de otros compradores para hacer sugerencias más inteligentes y relevantes de productos y servicios. ",
       "description14": "Recuerda a tus clientes que dejaron productos en sus Carritos de compras. Motiva a tus Contactos con un Email persuasivo y efectivo con un cupón de descuento.",
+      "description15": "Las estrategias de fidelización son fundamentales para crear una relación duradera con los clientes, generar confianza y fomentar nuevas compras y recomendaciones.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1131,6 +1134,10 @@ export const automation_es_translations = {
       "template_14_allow_item0": "Enviar un cupón de descuento.",
       "template_14_allow_item1": "Incentiva a finalizar compras abandonadas.",
       "template_14_allow_item2": "Aumentar tus ventas.",
+      "template_15_allow_item0": "Lograr que sigan comprando tus productos o servicios.",
+      "template_15_allow_item1": "Aportar un toque personal a tu comunicación.",
+      "template_15_allow_item2": "Dar la bienvenida a nuevos clientes a tu tienda.",
+      "template_15_allow_item3": "Puedes vincular a un formulario de Doppler o usar la integración de Typeform.",
     },
   },
   "automationTypes": {

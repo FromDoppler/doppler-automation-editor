@@ -1074,6 +1074,8 @@ export const automation_en_translations = {
       "description13": "Send a discount coupon after a purchase, offering related products.",
       "title14": "Abandonded Cart coupon",
       "description14": "Send an Email with a discount coupon to recover a purchase.",
+      "title15": "Request for customer opinion",
+      "description15": "Send an Email to find out the preferences, encourage new purchases and recommendations.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
@@ -1091,6 +1093,7 @@ export const automation_en_translations = {
       "description12": "Send an Email to your Contacts with a discount coupon when they complete 1 year of their subscription or their first purchase at your business.",
       "description13": "Encourage those who have already shopped at your store by sending emails with discount coupons. You’ll be able to send smart suggestions for products and services based on your users' preferences.",
       "description14": "Remind your customers that they left products in their Shopping Carts. Motivate your Contacts with a persuasive and effective Email with a discount coupon.",
+      "description15": "Loyalty strategies are essential to creating a lasting relationship with customers, generating trust and encouraging new purchases and recommendations.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1131,6 +1134,10 @@ export const automation_en_translations = {
       "template_14_allow_item0": "Send a discount coupon.",
       "template_14_allow_item1": "Encourage people to complete abandoned purchases.",
       "template_14_allow_item2": "Increase your sales.",
+      "template_15_allow_item0": "Get them to continue buying your products or services.",
+      "template_15_allow_item1": "Add a personal touch to your communication.",
+      "template_15_allow_item2": "Welcome new customers to your store.",
+      "template_15_allow_item3": "You can link to a Doppler form or using the Typeform integration.",
     },
   },
   "automationTypes": {
