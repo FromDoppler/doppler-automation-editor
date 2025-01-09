@@ -668,7 +668,10 @@
           automationSubscribersListsBlocked: 192
         }
         startAutomationCampaign().then(function(response) {
-          if (!response.data.success && response.data.ErrorCode) {
+          // when initialization is not success,
+          // the processing status should be false and it should be stay on the automation editor
+          if (!response.data.success) {
+            setIsProcessing(false);
             switch (response.data.ErrorCode) {
               case errCode.fieldUpdateFails:
                 updateAutomationFlowState();
@@ -677,10 +680,7 @@
                 showBlockedListModal();
                 break;
               default:
-                // TODO: this keeps previous behavior before this changes.
-                // Instead this, we should let user know about the error. 
-                model.state = AUTOMATION_STATE.ACTIVE;
-                $window.location.href = '/Automation/Automation/AutomationApp/';
+                // TODO: add treatment for an unexpected error
             }            
           } else {
             model.state = AUTOMATION_STATE.ACTIVE;
