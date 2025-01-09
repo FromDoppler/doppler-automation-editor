@@ -664,7 +664,7 @@
     function setAutomationAsActive() {
       saveChanges().then(function() {
         var errCode = {
-          fieldUpdateFails: 35,
+          fieldUpdateFails: 37,
           automationSubscribersListsBlocked: 192
         }
         startAutomationCampaign().then(function(response) {
