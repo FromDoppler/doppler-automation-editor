@@ -1236,7 +1236,7 @@ export const automation_es_translations = {
   },
   "modal_automation_initialization_unexpected_error": {
     "title": "Ouch! Algo salió mal iniciando tu Automation.",
-    "description": "Por favor comunícate con nuestro equipo de <a class='link--default' href='mailto:soporte@fromdoppler.com'>Atención al cliente</a>.",
+    "description": "Se ha producido un error inesperado. Por favor, revisa detenidamente la configuración.",
   },
   "General_Required_Field" : "¡Ouch! Este es un campo requerido.",
 
