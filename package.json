@@ -68,6 +68,7 @@
     "double-build": "npm run clean-win-dist; build; build",
     "build": "webpack",
     "build2": "webpack --config ./webpack2.config.js",
+    "build-n-start": "npm run build && npm run build2 && npm run start",
     "pretest": "npm install",
     "test": "",
     "test-single-run": "npm test -- --single-run",
