@@ -1234,6 +1234,10 @@ export const automation_es_translations = {
     "button_cancel": "Ir más tarde",
     "button_action": "Ver Listas"
   },
+  "modal_automation_initialization_unexpected_error": {
+    "title": "Ouch! Algo salió mal iniciando tu Automation.",
+    "description": "Por favor comunícate con nuestro equipo de <a class='link--default' href='mailto:soporte@fromdoppler.com'>Atención al cliente</a>.",
+  },
   "General_Required_Field" : "¡Ouch! Este es un campo requerido.",
 
 	"ScheduledTask_AutomationMain_Grid_Pager" : "Mostrar mas resultados",

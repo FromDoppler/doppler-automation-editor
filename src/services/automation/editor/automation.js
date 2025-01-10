@@ -680,7 +680,8 @@
                 showBlockedListModal();
                 break;
               default:
-                // TODO: add treatment for an unexpected error
+                showUnexpectedInitializationErrorModal();
+                break;
             }            
           } else {
             model.state = AUTOMATION_STATE.ACTIVE;
@@ -693,6 +694,16 @@
     function showBlockedListModal() {
       ModalService.showModal({
         templateUrl: 'angularjs/partials/automation/automationWithBlockedListModal.html',
+        controller: 'ModalYesOrNoCtrl',
+        inputs: {
+          data: {}
+        }
+      });
+    }
+
+    function showUnexpectedInitializationErrorModal() {
+      ModalService.showModal({
+        templateUrl: 'angularjs/partials/automation/automationStartUnexpectedError.html',
         controller: 'ModalYesOrNoCtrl',
         inputs: {
           data: {}
