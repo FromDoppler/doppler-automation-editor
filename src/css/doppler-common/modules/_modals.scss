@@ -103,6 +103,13 @@
         margin-right: 5px;
       }
     }
+
+    .modal__action-btn--center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: initial;
+    }
   }
 
   &.modal--full-height {

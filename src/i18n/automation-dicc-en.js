@@ -1234,6 +1234,10 @@ export const automation_en_translations = {
     "button_cancel": "Go later",
     "button_action": "View Lists"
   },
+  "modal_automation_initialization_unexpected_error": {
+    "title": "Ouch! Something went wrong starting Automation.",
+    "description": "An unexpected error has occurred. Please review the settings carefully.",
+  },
   "General_Required_Field" : "Ouch! This field is required.",
   "ScheduledTask_AutomationMain_Grid_Pager" : "Show More Results",
   "CompleteInformation_Title" : "Fill in the missing contact information",

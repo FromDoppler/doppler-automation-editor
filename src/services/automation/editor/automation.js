@@ -664,11 +664,14 @@
     function setAutomationAsActive() {
       saveChanges().then(function() {
         var errCode = {
-          fieldUpdateFails: 35,
+          fieldUpdateFails: 37,
           automationSubscribersListsBlocked: 192
         }
         startAutomationCampaign().then(function(response) {
-          if (!response.data.success && response.data.ErrorCode) {
+          // when initialization is not success,
+          // the processing status should be false and it should be stay on the automation editor
+          if (!response.data.success) {
+            setIsProcessing(false);
             switch (response.data.ErrorCode) {
               case errCode.fieldUpdateFails:
                 updateAutomationFlowState();
@@ -677,10 +680,8 @@
                 showBlockedListModal();
                 break;
               default:
-                // TODO: this keeps previous behavior before this changes.
-                // Instead this, we should let user know about the error. 
-                model.state = AUTOMATION_STATE.ACTIVE;
-                $window.location.href = '/Automation/Automation/AutomationApp/';
+                showUnexpectedInitializationErrorModal();
+                break;
             }            
           } else {
             model.state = AUTOMATION_STATE.ACTIVE;
@@ -693,6 +694,16 @@
     function showBlockedListModal() {
       ModalService.showModal({
         templateUrl: 'angularjs/partials/automation/automationWithBlockedListModal.html',
+        controller: 'ModalYesOrNoCtrl',
+        inputs: {
+          data: {}
+        }
+      });
+    }
+
+    function showUnexpectedInitializationErrorModal() {
+      ModalService.showModal({
+        templateUrl: 'angularjs/partials/automation/automationStartUnexpectedError.html',
         controller: 'ModalYesOrNoCtrl',
         inputs: {
           data: {}
