@@ -1076,6 +1076,8 @@ export const automation_es_translations = {
       "description14": "Envía un Email con un cupón de descuento para recuperar una compra.",
       "title15": "Pedido de opinión de clientes",
       "description15": "Envía un Email para conocer sus preferencias, fomentar nuevas compras y recomendaciones.",
+      "title16": "Notificaciones Push",
+      "description16": "Envía alertas con ofertas o información relevante a los visitantes de tu Sitio Web o Tienda Online.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",

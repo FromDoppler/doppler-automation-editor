@@ -1076,6 +1076,8 @@ export const automation_en_translations = {
       "description14": "Send an Email with a discount coupon to recover a purchase.",
       "title15": "Request for customer opinion",
       "description15": "Send an Email to find out the preferences, encourage new purchases and recommendations.",
+      "title16": "Push Notifications",
+      "description16": "Send alerts with special offers or relevant information to your Website or E-commerce visitors.",
     },
     "templatePreview" : {
       "flowAllow": "This flow will allow:",
