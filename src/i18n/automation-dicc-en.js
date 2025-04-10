@@ -1096,6 +1096,7 @@ export const automation_en_translations = {
       "description13": "Encourage those who have already shopped at your store by sending emails with discount coupons. You’ll be able to send smart suggestions for products and services based on your users' preferences.",
       "description14": "Remind your customers that they left products in their Shopping Carts. Motivate your Contacts with a persuasive and effective Email with a discount coupon.",
       "description15": "Loyalty strategies are essential to creating a lasting relationship with customers, generating trust and encouraging new purchases and recommendations.",
+      "description16": "Keep your visitors informed and increase engagement by sending direct messages to their devices. Ideal for promotions, news, and important reminders.",
       "template_1_allow_item0": "Know who wants to continue in contact with your brand",
       "template_1_allow_item1": "Segment your Contacts into two lists: interested and not interested",
       "template_1_allow_item2": "Strategically act on interested Contacts",
@@ -1140,6 +1141,9 @@ export const automation_en_translations = {
       "template_15_allow_item1": "Add a personal touch to your communication.",
       "template_15_allow_item2": "Welcome new customers to your store.",
       "template_15_allow_item3": "You can link to a Doppler form or using the Typeform integration.",
+      "template_16_allow_item0": "Inform about news and offers instantly.",
+      "template_16_allow_item1": "Link traffic to specific pages on your site.",
+      "template_16_allow_item2": "Direct and effective communication.",
     },
   },
   "automationTypes": {
