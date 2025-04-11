@@ -1076,6 +1076,8 @@ export const automation_es_translations = {
       "description14": "Envía un Email con un cupón de descuento para recuperar una compra.",
       "title15": "Pedido de opinión de clientes",
       "description15": "Envía un Email para conocer sus preferencias, fomentar nuevas compras y recomendaciones.",
+      "title16": "Notificaciones Push",
+      "description16": "Envía alertas con ofertas o información relevante a los visitantes de tu Sitio Web o Tienda Online.",
     },
     "templatePreview" : {
       "flowAllow": "Este flujo permitirá:",
@@ -1094,6 +1096,7 @@ export const automation_es_translations = {
       "description13": "Motiva a quienes ya compraron en tu tienda, a través de la reactivación de Emails que utilizan las preferencias de otros compradores para hacer sugerencias más inteligentes y relevantes de productos y servicios. ",
       "description14": "Recuerda a tus clientes que dejaron productos en sus Carritos de compras. Motiva a tus Contactos con un Email persuasivo y efectivo con un cupón de descuento.",
       "description15": "Las estrategias de fidelización son fundamentales para crear una relación duradera con los clientes, generar confianza y fomentar nuevas compras y recomendaciones.",
+      "description16": "Mantén a tus visitantes informados y aumenta el engagement enviando mensajes directos a sus dispositivos. Ideal para promociones, noticias y recordatorios importantes.",
       "template_1_allow_item0": "Conocer quienes desean continuar en contacto con tu marca",
       "template_1_allow_item1": "Segmentar a tus Contactos en dos listas: interesados y no interesados",
       "template_1_allow_item2": "Accionar estratégicamente sobre los Contactos interesados",
@@ -1138,6 +1141,9 @@ export const automation_es_translations = {
       "template_15_allow_item1": "Aportar un toque personal a tu comunicación.",
       "template_15_allow_item2": "Dar la bienvenida a nuevos clientes a tu tienda.",
       "template_15_allow_item3": "Puedes vincular a un formulario de Doppler o usar la integración de Typeform.",
+      "template_16_allow_item0": "Informar instantáneamente sobre novedades y ofertas.",
+      "template_16_allow_item1": "Dirigir tráfico a páginas específicas de tu sitio.",
+      "template_16_allow_item2": "Comunicarte de forma directa y efectiva.",
     },
   },
   "automationTypes": {
