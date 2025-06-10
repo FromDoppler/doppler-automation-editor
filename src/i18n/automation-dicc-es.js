@@ -489,7 +489,7 @@ export const automation_es_translations = {
 		"blocked_list": {
 		"tooltip_tag": "LISTA BLOQUEADA",
 		"link_text": "Entérate más.",
-		"help_link": "https://help.fromdoppler.com/en/como-depurar-una-lista-de-contactos-en-doppler/?utm_source=direct",
+		"help_link": "https://help.fromdoppler.com/es/como-revertir-una-lista-bloqueada?utm_source=direct",
 		"tooltip_text": "Hay Suscriptores que afectan la calidad de tu Lista."
 	},
 	"lists_grid": {
@@ -514,10 +514,10 @@ export const automation_es_translations = {
     "all_contacts": "Enviar a todos mis contactos",
     "blocked_list": "Hay Suscriptores que afectan la calidad de tu Lista. Entérate más.",
     "blocked_list_link": "Entérate más.",
-    "blocked_list_href":  "https://help.fromdoppler.com/es/como-depurar-una-lista-de-contactos-en-doppler/?utm_source=direct",
+    "blocked_list_href": "https://help.fromdoppler.com/es/como-revertir-una-lista-bloqueada?utm_source=direct",
     "blocked_list_text": "LISTA BLOQUEADA",
     "blocked_segment": "Hay Suscriptores que afectan la calidad de tu Segmento.",
-    "blocked_segment_href": "https://help.fromdoppler.com/es/como-depurar-una-lista-de-contactos-en-doppler/?utm_source=direct",
+    "blocked_segment_href": "https://help.fromdoppler.com/es/como-revertir-una-lista-bloqueada?utm_source=direct",
     "blocked_segment_text": "SEGMENTO BLOQUEADO" 
 	},
 	"tiny_editor": {
@@ -1236,7 +1236,7 @@ export const automation_es_translations = {
   },
   "modal_blocked_lists": {
     "title": "¡Ouch! Este Automation contiene Listas<br> y/o Segmentos bloqueados",
-    "description": "Para poder iniciarlo, te sugerimos <b>limpiar tus Listas</b> y eliminar a los Suscriptores que afectan su calidad. También puedes <b>revertir la última importación de Suscriptores</b> que hayas realizado en una Lista bloqueada. ¿Tienes dudas? Revisa nuestro <a class='link--default' href='https://help.fromdoppler.com/es/como-depurar-una-lista-de-contactos-en-doppler/?utm_source=direct' target='_blank'>HELP</a>.",
+    "description": "Para poder iniciarlo, te sugerimos <b>limpiar tus Listas</b> y eliminar a los Suscriptores que afectan su calidad. También puedes <b>revertir la última importación de Suscriptores</b> que hayas realizado en una Lista bloqueada. ¿Tienes dudas? Revisa nuestro <a class='link--default' href='https://help.fromdoppler.com/es/como-revertir-una-lista-bloqueada?utm_source=direct' target='_blank'>HELP</a>.",
     "button_cancel": "Ir más tarde",
     "button_action": "Ver Listas"
   },

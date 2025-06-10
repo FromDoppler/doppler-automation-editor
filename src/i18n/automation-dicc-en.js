@@ -488,7 +488,7 @@ export const automation_en_translations = {
     "blocked_list": {
       "tooltip_tag": "BLOCKED LIST",
       "link_text": "Learn more.",
-      "help_link": "https://help.fromdoppler.com/en/how-to-debug-a-contact-list-in-doppler/?utm_source=direct",
+      "help_link": "https://help.fromdoppler.com/en/how-to-revert-a-blocked-list?utm_source=direct",
       "tooltip_text": "There’re Subscribers that affect the quality of your List."
     },
     "lists_grid": {
@@ -513,10 +513,10 @@ export const automation_en_translations = {
       "all_contacts": "Send to all my contacts",
       "blocked_list": "There’re Subscribers that affect the quality of your List. Learn more.",
       "blocked_list_link": "Learn more.",
-      "blocked_list_href": "https://help.fromdoppler.com/en/how-to-debug-a-contact-list-in-doppler/?utm_source=direct",
+      "blocked_list_href": "https://help.fromdoppler.com/en/how-to-revert-a-blocked-list?utm_source=direct",
       "blocked_list_text": "BLOCKED LIST",
       "blocked_segment": "There’re Subscribers that affect the quality of your Segment.",
-      "blocked_segment_href": "https://help.fromdoppler.com/en/how-to-debug-a-contact-list-in-doppler/?utm_source=direct",
+      "blocked_segment_href": "https://help.fromdoppler.com/en/how-to-revert-a-blocked-list?utm_source=direct",
       "blocked_segment_text": "BLOCKED SEGMENT"
     },
     "tiny_editor": {
@@ -1236,7 +1236,7 @@ export const automation_en_translations = {
   },
   "modal_blocked_lists": {
     "title": "Ouch! This Automation has blocked<br> Lists and/or blocked Segments",
-    "description": "To start it, we suggest to <b>clean your Lists</b> and delete Subscribers that affect its quality. You can also <b>revert the last Subscribers' import</b> you have made in a blocked List. Any doubt? Take a look at our <a class='link--default' href='https://help.fromdoppler.com/en/how-to-debug-a-contact-list-in-doppler/?utm_source=direct' target='_blank'>HELP</a>.",
+    "description": "To start it, we suggest to <b>clean your Lists</b> and delete Subscribers that affect its quality. You can also <b>revert the last Subscribers' import</b> you have made in a blocked List. Any doubt? Take a look at our <a class='link--default' href='https://help.fromdoppler.com/en/how-to-revert-a-blocked-list?utm_source=direct' target='_blank'>HELP</a>.",
     "button_cancel": "Go later",
     "button_action": "View Lists"
   },
