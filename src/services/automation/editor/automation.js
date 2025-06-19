@@ -780,7 +780,9 @@
 
       settingsService.getSettings().then(function(response) {
         domains = response.domains;
-        siteTracking = response.siteTrackingActive;
+        // TODO: remove the 'siteTracking' flag and analyze the places where it is being used.
+        // siteTracking = response.siteTrackingActive;
+        siteTracking = true;
         $rootScope.thirdPartyAppsConnected = response.thirdPartyAppsListConnected;
         thirdPartyAppsConnected = response.thirdPartyAppsListConnected;
 
