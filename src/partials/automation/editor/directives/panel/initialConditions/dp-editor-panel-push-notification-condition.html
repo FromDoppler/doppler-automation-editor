@@ -35,6 +35,10 @@
       </div>
     </div>
 
+    <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE" style="display: grid;">
+      <p class="margin-t-25 description">{{'automation_editor.sidebar.Push_notification_campaign_send_repetitive_description' | translate }}</P>
+
+    </div>
     <!-- common fields -->
     <div ng-if="selectedComponent.frequency">
       <!-- time and timezone selectors -->
