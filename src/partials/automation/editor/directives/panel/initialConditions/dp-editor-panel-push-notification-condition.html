@@ -9,7 +9,7 @@
   </div>
   <button ng-click="showDomainsSelection()" class="button button--small button--primary" ng-disabled="isReadOnly();">{{selectedComponent.domains.length ? 'automation_editor.sidebar.Domains_replace_button' : 'automation_editor.sidebar.Domains_select_button' | translate }}</button>
 </div>
-<div ng-show="selectedComponent.domains.length">
+<div ng-show="selectedComponent.domains.length" class="dp-library">
   <p class="title title--alt">{{ 'automation_editor.sidebar.Push_notification_campaign_title' | translate }}</p>
   <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setSendType(SEND_TYPE.INMEDIATE)">
     <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_now_title' | translate }}</span>
