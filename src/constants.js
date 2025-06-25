@@ -222,7 +222,8 @@ var FrequencyType = {
   DAY_WEEK: 'day_week',
   DAY_MONTH: 'day_month',
   DAY_YEAR: 'day_year',
-  DATE: 'date'
+  DATE: 'date',
+  UNDEFINED: undefined
 };
 
 var FormIntegration = {
