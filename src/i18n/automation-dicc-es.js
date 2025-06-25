@@ -780,6 +780,7 @@ export const automation_es_translations = {
       "Push_notification_campaign_send_scheduled_title": "Envío Programado",
       "Push_notification_campaign_send_scheduled_description": "Las notificaciones Push se enviarán el día y la hora que tú determines.",
       "Push_notification_campaign_send_repetitive_title": "Envío Preriódico",
+      "Push_notification_campaign_send_repetitive_description": "Elige qué tipo de fecha utilizarás para darle una frecuencia a tu Campaña de Email Automation",
       "Push_notification_campaign_field_date": "Fecha:",
       "Push_notification_campaign_date_picker_current_text": "Hoy",
       "Push_notification_campaign_field_hour": "Hora:",
