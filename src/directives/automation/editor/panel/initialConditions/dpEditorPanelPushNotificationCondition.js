@@ -298,14 +298,14 @@
 
       scope.validateDate = function(time, timezoneId) {
         var defer = $q.defer();
-        isValidCurrentDate(time, timezoneId).then(function(valid) {
-          if (!valid) {
-            scope.validationForm['date'].$setValidity('invalidDate', false);
-          } else {
-            scope.validationForm['date'].$setValidity('invalidDate', true);
-          }
-          defer.resolve(valid);
-        });
+        if(scope.selectedComponent.sendType == SEND_TYPE.SCHEDULED_DATE) {
+          defer.resolve(true);
+        } else {
+          isValidCurrentDate(time, timezoneId).then(function(valid) {
+            scope.validationForm['date'].$setValidity('invalidDate', valid);
+            defer.resolve(valid);
+          });
+        }
         return defer.promise;
       };
 
