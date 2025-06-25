@@ -20,8 +20,8 @@
     'dateValidation'
   ];
 
-  function dpEditorPanelPushNotificationCondition(automation, DOMAINS_SELECTION_STATE, FREQUENCY_TYPE, optionsListDataservice, settingsService, utils,
-    SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q, dateValidation) {
+  function dpEditorPanelPushNotificationCondition(automation, DOMAINS_SELECTION_STATE, FREQUENCY_TYPE, optionsListDataservice, settingsService, userFieldsDataservice, utils,
+    FIELD_TYPE, SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q, dateValidation) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/initialConditions/dp-editor-panel-push-notification-condition.html',
@@ -34,8 +34,10 @@
       scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.HIDING);
       scope.isReadOnly = automation.isReadOnly;
       scope.timeOptions = optionsListDataservice.getTimeOptions();
+      scope.weekDays = optionsListDataservice.getWeekDays('short');
       scope.timeSelected = {};
       scope.SEND_TYPE = SEND_TYPE;
+      scope.FREQUENCY_TYPE = FREQUENCY_TYPE;
       scope.dpPopup = {
         show: false
       };
@@ -62,6 +64,7 @@
         scope.userTimeZone = response.idUserTimeZone;
         scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
         scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
+        scope.$watch('selectedComponent.frequency.days', updateDayWeeksSelected);
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
 
@@ -147,7 +150,9 @@
       }
 
       scope.onFrequencyAttributeSelected = function(key, value) {
-        if (key === 'time') {
+        if (key === 'days' || key === 'momentId' || key === 'customFields') {
+          utils.assign(scope.selectedComponent.frequency, key, value);
+        } else if (key === 'time') {
           scope.validateDate(value, undefined).then(function(valid) {
             if (valid) {
               utils.assign(scope.selectedComponent.frequency, key, value);
@@ -166,6 +171,32 @@
         scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
       };
 
+      scope.onDayWeekSelected = function(option) {
+        var isAlreadyAdded = _.includes(scope.selectedComponent.frequency.days, option.value);
+
+        if (option.selected && !isAlreadyAdded) {
+          scope.selectedComponent.frequency.days.push(option.value);
+          scope.onFrequencyAttributeSelected('days', _.sortBy(scope.selectedComponent.frequency.days, function(num) {
+            return num === 0 ? 7 : num;
+          }));
+        } else {
+          scope.onFrequencyAttributeSelected('days', _.without(scope.selectedComponent.frequency.days, option.value));
+        }
+      };
+
+      scope.setFrequency = function(frequencyType) { 
+        if(frequencyType === scope.selectedComponent.frequency.type) return;
+        const frequencyData = {
+          type: frequencyType,
+          timezone: scope.userTimeZone
+        };
+        if (scope.selectedComponent.frequency) {
+          frequencyData.time = scope.selectedComponent.frequency.time;
+          frequencyData.timezone = scope.selectedComponent.frequency.timezone;
+        }
+        scope.selectedComponent.setFrequency(frequencyData);
+        automation.updateAutomationFlowState();
+      };
       scope.setSendType = function(sendType) {
         if (sendType === scope.selectedComponent.sendType ) {
           return;
@@ -257,6 +288,14 @@
       scope.showDomainsSelection = function () {
         scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.SHOWING);
       };
+
+      function updateDayWeeksSelected() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency) {
+          angular.forEach(scope.weekDays, function(weekDay) {
+            weekDay.selected = _.includes(scope.selectedComponent.frequency.days, weekDay.value);
+          });
+        }
+      }
     }
   }
 })();
