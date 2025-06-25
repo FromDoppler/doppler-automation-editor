@@ -33,6 +33,11 @@
           <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
         </div>
       </div>
+    </div>
+
+    <!-- common fields -->
+    <div ng-if="selectedComponent.frequency">
+      <!-- time and timezone selectors -->
       <div class="box relative frequency-time--panel">
         <label class="label--panel">{{ 'automation_editor.sidebar.Push_notification_campaign_field_hour' | translate }}</label>
         <div class="flex-grid-v-center--s-between">
