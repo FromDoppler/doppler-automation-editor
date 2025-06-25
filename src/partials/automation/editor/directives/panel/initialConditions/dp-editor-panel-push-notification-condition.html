@@ -11,14 +11,14 @@
 </div>
 <div ng-show="selectedComponent.domains.length">
   <p class="title title--alt">{{ 'automation_editor.sidebar.Push_notification_campaign_title' | translate }}</p>
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setFrequency(SEND_TYPE.INMEDIATE)">
     <label class="frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_now_title' | translate }}</label>
     <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.Push_notification_campaign_send_now_description' | translate }} </p>
+  <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setSendType(SEND_TYPE.INMEDIATE)">
     <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.INMEDIATE"></span>
   </div>
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED}" ng-click="setFrequency(SEND_TYPE.SCHEDULED)">
     <label class="frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_scheduled_title' | translate }}</label>
     <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.Push_notification_campaign_send_scheduled_description' | translate }} </p>
+  <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED}" ng-click="setSendType(SEND_TYPE.SCHEDULED)">
     <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"></span>
   </div>
   <form name="validationForm" novalidate>

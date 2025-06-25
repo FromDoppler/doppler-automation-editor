@@ -166,8 +166,8 @@
         scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
       };
 
-      scope.setFrequency = function(frequencyType) {
-        if (frequencyType === scope.selectedComponent.sendType) {
+      scope.setSendType = function(sendType) {
+        if (sendType === scope.selectedComponent.sendType ) {
           return;
         }
 
@@ -181,13 +181,13 @@
           frequency: scope.selectedComponent.frequency
         };
         componentData = {
-          sendType: frequencyType,
-          frequency: frequencyType === SEND_TYPE.SCHEDULED ? scope.frequencyData : null
+          sendType: sendType,
+          frequency: sendType === SEND_TYPE.INMEDIATE ? null: scope.frequencyData
         };
         scope.selectedComponent.setData(componentData);
         changesManager.enable();
         newComponentData = {
-          sendType: frequencyType,
+          sendType: sendType,
           frequency: scope.selectedComponent.frequency
         };
 
