@@ -283,7 +283,8 @@ var ListSelectionState = {
 
 var SendType = {
   INMEDIATE: 'inmediate',
-  SCHEDULED: 'scheduled'
+  SCHEDULED: 'scheduled',
+  SCHEDULED_DATE: 'scheduled_date'
 };
 
 var TestOption = {

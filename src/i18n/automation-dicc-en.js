@@ -780,6 +780,7 @@ export const automation_en_translations = {
       "Push_notification_campaign_send_now_description": "Push notifications will be sent when you click the Start Automation button.",
       "Push_notification_campaign_send_scheduled_title": "Scheduled Send Out",
       "Push_notification_campaign_send_scheduled_description": "Push notifications will be sent at the day and time you define.",
+      "Push_notification_campaign_send_repetitive_title": "Repeated Send Out",
       "Push_notification_campaign_field_date": "Date:",
       "Push_notification_campaign_date_picker_current_text": "Today",
       "Push_notification_campaign_field_hour": "Hour:",
