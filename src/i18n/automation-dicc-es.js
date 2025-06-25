@@ -209,7 +209,7 @@ export const automation_es_translations = {
         "main_description": "El pago se ha registrado correctamente"
       },
       "push_notification": {
-        "scheduled_day": "Hacer un ",
+        "scheduled_day": "Hacer un Envio ",
         "scheduled_day_frequency": "Envío Programado",
         "scheduled_day_part2": "el ",
         "hours_pl": " a las ",

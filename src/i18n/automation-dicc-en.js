@@ -208,7 +208,7 @@ export const automation_en_translations = {
           "main_description": "A payment has been registered successfully"
         },
         "push_notification": {
-          "scheduled_day": "Make a ",
+          "scheduled_day": "Make a Send Out ",
           "scheduled_day_frequency": "Scheduled Send Out",
           "scheduled_day_part2": "on ",
           "hours_pl": " at ",
