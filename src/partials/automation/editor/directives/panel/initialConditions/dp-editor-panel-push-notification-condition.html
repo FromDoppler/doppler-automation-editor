@@ -20,6 +20,10 @@
     <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"></span>
   </div>
   <form name="validationForm" novalidate>
+  <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE}" ng-click="setSendType(SEND_TYPE.SCHEDULED_DATE)">
+    <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_repetitive_title' | translate }}</span>
+    <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE"></span>
+  </div>
     <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED">
       <div class="box relative">
         <label class="label--panel">{{ 'automation_editor.sidebar.Push_notification_campaign_field_date' | translate }}</label>
