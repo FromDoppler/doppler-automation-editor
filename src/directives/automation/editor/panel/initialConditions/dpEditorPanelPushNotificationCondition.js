@@ -35,6 +35,7 @@
       scope.isReadOnly = automation.isReadOnly;
       scope.timeOptions = optionsListDataservice.getTimeOptions();
       scope.weekDays = optionsListDataservice.getWeekDays('short');
+      scope.dayNumberOptions = optionsListDataservice.getDayNumberOptions();
       scope.timeSelected = {};
       scope.SEND_TYPE = SEND_TYPE;
       scope.FREQUENCY_TYPE = FREQUENCY_TYPE;
@@ -64,6 +65,7 @@
         scope.userTimeZone = response.idUserTimeZone;
         scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
         scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
+        scope.$watch('selectedComponent.frequency.day', updateDayMonthSelected);
         scope.$watch('selectedComponent.frequency.days', updateDayWeeksSelected);
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
@@ -288,6 +290,14 @@
       scope.showDomainsSelection = function () {
         scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.SHOWING);
       };
+
+      function updateDayMonthSelected() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency) {
+          scope.dayMonthSelected = _.find(scope.dayNumberOptions, function(option) {
+            return option.value === scope.selectedComponent.frequency.day;
+          });
+        }
+      }
 
       function updateDayWeeksSelected() {
         if (scope.selectedComponent && scope.selectedComponent.frequency) {
