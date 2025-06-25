@@ -38,6 +38,31 @@
     <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE" style="display: grid;">
       <p class="margin-t-25 description">{{'automation_editor.sidebar.Push_notification_campaign_send_repetitive_description' | translate }}</P>
 
+      <div class="dp-input--radio">
+        <label>
+          <input type="radio" name="frequencyType" 
+            ng-disabled="!canEdit() && false"
+            ng-checked="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK"
+            ng-click="setFrequency(FREQUENCY_TYPE.DAY_WEEK)">
+          <span class="text--small">{{ 'automation_editor.sidebar.scheduled_date_day_week_title' | translate }}</span>
+        </label>
+      </div>
+      <!-- day week frequency -->
+      <div ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK">
+        <div class="frequency--panel" >
+          <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_week_days_title' | translate }}</p>
+          <div class="day--selector disable--toggler" ng-repeat="day in weekDays">
+            <label class="dp-label-checkbox">
+              <input type="checkbox" 
+                ng-model="day.selected"
+                ng-disabled="isReadOnly();"
+                ng-change="onDayWeekSelected(day, false);"
+              />
+              <span>{{day.label}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- common fields -->
     <div ng-if="selectedComponent.frequency">
