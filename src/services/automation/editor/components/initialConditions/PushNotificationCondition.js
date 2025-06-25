@@ -20,6 +20,9 @@
       PushNotificationCondition.prototype.checkCompleted = function() {
         if (this.sendType === SEND_TYPE.INMEDIATE) {
           this.completed = this.domains.length > 0;
+        } else if (this.sendType === SEND_TYPE.SCHEDULED_DATE) {
+          this.completed = this.frequency !== null && this.frequency.type !== 'date' 
+            && this.frequency.checkCompleted() && this.domains.length > 0;
         } else {
           this.completed = this.frequency !== null && this.frequency.checkCompleted()
             && this.domains.length > 0;
