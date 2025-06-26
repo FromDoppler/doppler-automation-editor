@@ -222,7 +222,8 @@ var FrequencyType = {
   DAY_WEEK: 'day_week',
   DAY_MONTH: 'day_month',
   DAY_YEAR: 'day_year',
-  DATE: 'date'
+  DATE: 'date',
+  UNDEFINED: undefined
 };
 
 var FormIntegration = {
@@ -282,7 +283,8 @@ var ListSelectionState = {
 
 var SendType = {
   INMEDIATE: 'inmediate',
-  SCHEDULED: 'scheduled'
+  SCHEDULED: 'scheduled',
+  SCHEDULED_DATE: 'scheduled_date'
 };
 
 var TestOption = {

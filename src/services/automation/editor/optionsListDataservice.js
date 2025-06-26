@@ -427,13 +427,14 @@
       return visitedProductsWaitOptions;
     }
 
-    function getWeekDays() {
+    function getWeekDays(short) {
       var weekDays = [];
       var value;
+      const isShort = short? '_short' : '';
       for (var i = 1; i <= 7; i++) {
         value = i === 7 ? 0 : i;
         weekDays.push({
-          label: $translate.instant('automation_editor.sidebar.scheduled_date_day' + value),
+          label: $translate.instant('automation_editor.sidebar.scheduled_date' + isShort + '_day' + value),
           value: value
         });
       }
