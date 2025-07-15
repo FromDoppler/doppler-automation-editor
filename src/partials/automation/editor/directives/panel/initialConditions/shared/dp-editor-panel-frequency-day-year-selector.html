@@ -1,0 +1,89 @@
+<form name="validationDayYearForm" novalidate class="dp-validate">
+  <div class="frequency--panel">
+    <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_custom_field' | translate }}</p>
+
+    <div class="frequency--custom-field" ng-repeat="field in frequency.customFields track by $index">
+      <div class="item">
+        <dp-editor-dropdown
+          class="dropdown dropdown--full"
+          id="customField{{$index}}"
+          name="customField{{$index}}"
+          property="customField{{$index}}"
+          ng-class="{'hasErrors': validationDayYearForm['customField'+$index].$invalid}"
+          ng-model="field"
+          options="availableDateFields"
+          label="field.label"
+          on-select-option="onCustomFieldSelected(option, field, $index)"
+          value-selected="field"
+          ng-disabled="isReadOnly()">
+        </dp-editor-dropdown>
+        <span class="icon-delete"
+          ng-class="{'disabled' : frequency.customFields.length === 1 || isReadOnly()}"
+          ng-click="onCustomFieldRemoved(field)">
+        </span>
+        <span class="read-only--tooltip" ng-show="isReadOnly()">
+          {{ 'validation_messages.read_only_input' | translate }}
+        </span>
+      </div>
+      <div ng-messages="validationDayYearForm['customField'+$index].$error" class="dp-message dp-error-form" role="alert">
+        <p ng-message="deletedField">
+          {{ 'validation_messages.inexistent_field' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <p class="link--default text--small add-custom-field disable--toggler"
+      ng-show="availableDateFields.length"
+      ng-click="addNewCustomField()">
+      <span class="icon-add-element"></span>
+      {{ 'automation_editor.sidebar.scheduled_date_add_custom_field' | translate }}
+    </p>
+  </div>
+
+  <div class="frequency--panel">
+    <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_day_moment' | translate }}</p>
+    <div class="flex-grid-v-center--s-between">
+      <div class="frequency--moment-day"
+        ng-class="{'hasErrors': validationDayYearForm.momentDays.$invalid}"
+        ng-show="dayMomentSelected.value === 1 || dayMomentSelected.value === 2">
+       
+        <input class="number input--text"
+          name="momentDays"
+          type="text"
+          pattern="^[1-9][0-9]?$"
+          maxlength="2"
+          min="1"
+          placeholder="00"
+          ng-model="frequency.momentDays"
+          ng-model-options="{ updateOn: 'blur' }"
+          ng-disabled="isReadOnly()"
+          required />
+        <span>{{ frequency.momentDays == 1 ? 'automation_editor.sidebar.time_unit.day' : 'automation_editor.sidebar.time_unit.days' | translate }}</span>
+      </div>
+      <dp-editor-dropdown
+        class="dropdown dropdown--full"
+        ng-class="{'dropdown--large': dayMomentSelected.value === 1 || dayMomentSelected.value === 2}"
+        id="moment"
+        name="moment"
+        property="name"
+        options="dayMoments"
+        label="dayMomentSelected.label"
+        on-select-option="onSelectDayMoment(option)"
+        value-selected="dayMomentSelected.value"
+        ng-disabled="isReadOnly()">
+      </dp-editor-dropdown>
+      <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly()">
+        {{ 'validation_messages.read_only_input' | translate }}
+      </span>
+    </div>
+
+    <div class="dp-message dp-error-form" role="alert" ng-messages="validationDayYearForm.momentDays.$error">
+      <p ng-message="pattern">
+        {{ 'automation_editor.sidebar.scheduled_date_day_number_error' | translate }}
+      </p>
+    </div>
+  </div>       
+</form>
+<span class="tip">
+  {{ 'automation_editor.sidebar.scheduled_date_select_day_moment_tip' | translate }}
+</span>
