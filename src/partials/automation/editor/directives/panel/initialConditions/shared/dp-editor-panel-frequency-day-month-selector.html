@@ -1,0 +1,18 @@
+<div class="frequency--panel" >
+  <p class="text">
+    {{ monthSelectorTitle }}
+  </p>
+  <dp-editor-dropdown
+    class="dropdown dropdown--full"
+    id="dayMonth"
+    name="dayMonth"
+    property="name"
+    options="monthDays"
+    label="selectedLabel"
+    on-select-option="onSelect(option)"
+    value-selected="selectedValue"
+    ng-disabled="isReadOnly();">
+  </dp-editor-dropdown>
+  <span class="tip">{{ 'automation_editor.sidebar.scheduled_date_select_month_day_tip' | translate }}</span>
+  <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
+</div>
