@@ -1,15 +1,4 @@
-<div class="list-selection--panel">
-  <p class="title">{{ 'automation_editor.sidebar.Push_notification_domains_selection_title' | translate }}</p>
-  <div class="selected-list alt disable--toggler" ng-if="selectedComponent.domains.length">
-    <span class="text"><strong>{{ 'automation_editor.sidebar.Domains_Selected' | translate }}</strong></span>
-    <div ng-repeat="item in selectedComponent.domains" ng-if="selectedComponent.domains.length">
-      <span class="icon-check"></span>
-      <span class="name">{{ item.Domain }}</span>
-    </div>
-  </div>
-  <button ng-click="showDomainsSelection()" class="button button--small button--primary" ng-disabled="isReadOnly();">{{selectedComponent.domains.length ? 'automation_editor.sidebar.Domains_replace_button' : 'automation_editor.sidebar.Domains_select_button' | translate }}</button>
-</div>
-<div ng-show="selectedComponent.domains.length" class="dp-library">
+<dp-editor-panel-domain-list-selector></dp-editor-panel-domain-list-selector>
   <p class="title title--alt">{{ 'automation_editor.sidebar.Push_notification_campaign_title' | translate }}</p>
   <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setSendType(SEND_TYPE.INMEDIATE)">
     <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_now_title' | translate }}</span>

@@ -7,7 +7,6 @@
 
   dpEditorPanelPushNotificationCondition.$inject = [
     'automation',
-    'DOMAINS_SELECTION_STATE',
     'FREQUENCY_TYPE',
     'optionsListDataservice',
     'settingsService',
@@ -33,7 +32,6 @@
     return directive;
 
     function link(scope) {
-      scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.HIDING);
       scope.isReadOnly = automation.isReadOnly;
       scope.timeOptions = optionsListDataservice.getTimeOptions();
       scope.weekDays = optionsListDataservice.getWeekDays('short');
