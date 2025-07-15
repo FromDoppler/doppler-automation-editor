@@ -791,6 +791,7 @@
           model.completed = AUTOMATION_COMPLETED_STATE.INCOMPLETE;
         }
         if (model.automationType === AUTOMATION_TYPE.SCHEDULED_DATE
+          || model.automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION
           || model.automationType === AUTOMATION_TYPE.RSS_TO_EMAIL) {
           if (model.initialCondition.frequency && model.initialCondition.frequency.type === FREQUENCY_TYPE.DAY_YEAR) {
             deletedUserFields = userFieldsDataservice.getDeletedFieldsByType(
