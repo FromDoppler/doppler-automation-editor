@@ -3,10 +3,11 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .directive('dpEditorPushNotificationCondition', ['automation', 'COMPONENT_TYPE', 'SEND_TYPE', 'FREQUENCY_TYPE', 'MAX_ITEMS_TO_SHOW', '$translate',
-      'AUTOMATION_STATE', '$interval', 'dateValidation', 'settingsService', 'pushService', dpEditorPushNotificationCondition]);
+    .directive('dpEditorPushNotificationCondition', ['automation', 'SEND_TYPE', 'FREQUENCY_TYPE', 'MAX_ITEMS_TO_SHOW', 
+      'AUTOMATION_COMPLETED_STATE', '$translate', 'AUTOMATION_STATE', '$interval', 'dateValidation', 'settingsService', 'pushService',
+      dpEditorPushNotificationCondition]);
 
-  function dpEditorPushNotificationCondition(automation, COMPONENT_TYPE, SEND_TYPE, FREQUENCY_TYPE, MAX_ITEMS_TO_SHOW, $translate,
+  function dpEditorPushNotificationCondition(automation, SEND_TYPE, FREQUENCY_TYPE, MAX_ITEMS_TO_SHOW, AUTOMATION_COMPLETED_STATE, $translate,
     AUTOMATION_STATE, $interval, dateValidation, settingsService, pushService) {
     var directive = {
       restrict: 'E',
@@ -27,8 +28,10 @@
         scope.component.hasStartDateExpired = dateValidationService.isTrialExpired();
         automation.checkCompleted();
       });
+
+      scope.isFlowComplete = automation.getIsFlowComplete;
       scope.hasErrors = function() {
-        // TODO: determinate if current state has errors
+        return scope.isFlowComplete() === AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS;
       };
 
       var updateDateIfNotValidInterval = 900000;
