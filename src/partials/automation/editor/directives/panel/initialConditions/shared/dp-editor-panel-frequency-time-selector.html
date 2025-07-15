@@ -1,0 +1,36 @@
+<div class="box relative frequency-time--panel">
+  <label class="label--panel">
+    {{ 'automation_editor.sidebar.Push_notification_campaign_field_hour' | translate }}
+  </label>
+
+  <div class="flex-grid-v-center--s-between">
+    <dp-editor-dropdown
+      ng-class="{hasErrors: hasError}"
+      class="dropdown dropdown--small disable--toggler"
+      id="time"
+      name="time"
+      property="name"
+      options="timeOptions"
+      label="timeValue.label"
+      value-selected="timeValue.value"
+      on-select-option="onChange({ key: 'time', value: option.value })"
+      on-select-prev-option="onPrevTime()"
+      on-select-next-option="onNextTime()"
+      arrow-selection="true"
+      ng-disabled="isReadOnly()">
+    </dp-editor-dropdown>
+
+    <dp-editor-dropdown
+      ng-class="{hasErrors: hasError}"
+      class="dropdown dropdown--large"
+      id="timezone"
+      name="timezone"
+      property="name"
+      options="timezoneOptions"
+      label="timeZoneValue.label"
+      value-selected="timeZoneValue.value"
+      on-select-option="onChange({ key: 'timezone', value: option.value })"
+      ng-disabled="isReadOnly()">
+    </dp-editor-dropdown>
+  </div>
+</div>
