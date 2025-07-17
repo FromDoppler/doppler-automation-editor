@@ -34,7 +34,6 @@
     function link(scope) {
       scope.isReadOnly = automation.isReadOnly;
       scope.timeOptions = optionsListDataservice.getTimeOptions();
-      scope.weekDays = optionsListDataservice.getWeekDays('short');
       scope.dayNumberOptions = optionsListDataservice.getDayNumberOptions();
       scope.dateUserFields = userFieldsDataservice.getFieldsByType(FIELD_TYPE.DATE);
       scope.dayMoments = optionsListDataservice.getDayMoments();
@@ -70,7 +69,6 @@
         scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
         scope.$watch('selectedComponent.frequency.customFields', updateAvailableDateFields);
         scope.$watch('selectedComponent.frequency.day', updateDayMonthSelected);
-        scope.$watch('selectedComponent.frequency.days', updateDayWeeksSelected);
         scope.$watch('selectedComponent.frequency.momentId', updateDayMomentSelected);
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
@@ -188,19 +186,6 @@
           });
         }
         scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
-      };
-
-      scope.onDayWeekSelected = function(option) {
-        var isAlreadyAdded = _.includes(scope.selectedComponent.frequency.days, option.value);
-
-        if (option.selected && !isAlreadyAdded) {
-          scope.selectedComponent.frequency.days.push(option.value);
-          scope.onFrequencyAttributeSelected('days', _.sortBy(scope.selectedComponent.frequency.days, function(num) {
-            return num === 0 ? 7 : num;
-          }));
-        } else {
-          scope.onFrequencyAttributeSelected('days', _.without(scope.selectedComponent.frequency.days, option.value));
-        }
       };
 
       scope.setFrequency = function(frequencyType) { 
@@ -364,14 +349,6 @@
         if (scope.selectedComponent && scope.selectedComponent.frequency) {
           scope.dayMonthSelected = _.find(scope.dayNumberOptions, function(option) {
             return option.value === scope.selectedComponent.frequency.day;
-          });
-        }
-      }
-
-      function updateDayWeeksSelected() {
-        if (scope.selectedComponent && scope.selectedComponent.frequency) {
-          angular.forEach(scope.weekDays, function(weekDay) {
-            weekDay.selected = _.includes(scope.selectedComponent.frequency.days, weekDay.value);
           });
         }
       }

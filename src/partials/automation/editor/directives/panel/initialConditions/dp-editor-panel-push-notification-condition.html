@@ -58,21 +58,13 @@
       </div>
       
       <!-- day week frequency -->
-      <div ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK">
-        <div class="frequency--panel" >
-          <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_week_days_title' | translate }}</p>
-          <div class="day--selector disable--toggler" ng-repeat="day in weekDays">
-            <label class="dp-label-checkbox">
-              <input type="checkbox" 
-                ng-model="day.selected"
-                ng-disabled="isReadOnly();"
-                ng-change="onDayWeekSelected(day, false);"
-              />
-              <span>{{day.label}}</span>
-            </label>
-          </div>
-        </div>
-      </div>
+      <dp-editor-panel-frequency-day-week-selector
+        ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK"
+        selected-days="selectedComponent.frequency.days"
+        on-change="onFrequencyAttributeSelected('days', days)"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-day-week-selector>
+        
       <!-- day month frequency -->
       <div ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH">
         <div class="frequency--panel" >
