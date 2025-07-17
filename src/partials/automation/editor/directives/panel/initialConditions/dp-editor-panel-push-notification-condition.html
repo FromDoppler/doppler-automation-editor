@@ -74,52 +74,15 @@
       </dp-editor-panel-frequency-day-month-selector>
 
       <!-- day year frequency -->
-      <div ng-show="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR">
-        <!-- custom fields -->
-        <div class="frequency--panel">
-          <p class="text">{{'automation_editor.sidebar.scheduled_date_select_custom_field' | translate}}</p>
-          <div class="frequency--custom-field" ng-repeat="field in selectedComponent.frequency.customFields track by $index">
-            <div class="item">
-              <dp-editor-dropdown class="dropdown dropdown--full" id="customField{{$index}}" name="customField{{$index}}" property="customField{{$index}}"
-                ng-class="{'hasErrors': validationForm.customField{{$index}}.$invalid}"
-                ng-model="field"
-                options="availableDateFields"
-                label="field.label"
-                on-select-option="onCustomFieldSelected(option, field, $index)"
-                value-selected="field"
-                ng-disabled="isReadOnly();">
-              </dp-editor-dropdown>
-              <span class="icon-delete" ng-class="{'disabled' : selectedComponent.frequency.customFields.length === 1 || isReadOnly()}" ng-click="onCustomFieldRemoved(field)"></span>
-              <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
-            </div>
-            <div ng-messages="customFieldForm['customField'+$index].$error" class="error-messages--container" >
-                <div ng-message="deletedField" class="error">{{ 'validation_messages.inexistent_field' | translate }}</div>
-            </div>
-          </div>
-          <p class="link--default text--small add-custom-field disable--toggler" ng-show="availableDateFields.length" ng-click="addNewCustomField()">
-            <span class="icon-add-element"></span>
-            {{'automation_editor.sidebar.scheduled_date_add_custom_field' | translate}}
-          </p>
-        </div>
- 
-        <!-- day moment -->
-        <div class="frequency--panel">
-          <p class="text">{{'automation_editor.sidebar.scheduled_date_select_day_moment' | translate}}</p>
-          <div class="flex-grid-v-center--s-between">
-            <div class="frequency--moment-day" ng-class="{'hasErrors': momentDaysForm.days.$invalid}" ng-show="dayMomentSelected.value === 1 || dayMomentSelected.value === 2">
-              <input class="number input--text" ng-model="selectedComponent.frequency.momentDays" name="days" type="text" pattern="^[1-9][0-9]?$" maxlength="2" min="1" placeholder="00" ng-model-options="{updateOn: 'blur'}" ng-disabled="isReadOnly();" required>
-              <span>{{!selectedComponent.frequency.momentDays || selectedComponent.frequency.momentDays.toString() === '1' ? 'automation_editor.sidebar.time_unit.day' : 'automation_editor.sidebar.time_unit.days' | translate}}</span>
-            </div>
-            <dp-editor-dropdown class="dropdown dropdown--full" ng-class="{'dropdown--large': dayMomentSelected.value === 1 || dayMomentSelected.value === 2}" id="moment" name="moment" property="name" options="dayMoments" label="dayMomentSelected.label" on-select-option="onFrequencyAttributeSelected('momentId', option.value)" value-selected="dayMomentSelected.value" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-            <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
-          </div>
-          <!-- error messages -->
-          <div class="error-messages--container" ng-messages="momentDaysForm.days.$error">
-            <div ng-message="pattern" class="error">{{'automation_editor.sidebar.scheduled_date_day_number_error' | translate}}</div>
-          </div>
-          <span class="tip">{{ 'automation_editor.sidebar.scheduled_date_select_day_moment_tip' | translate }}</span>
-        </div>
-      </div>
+      <dp-editor-panel-frequency-day-year-selector
+        ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR"
+        frequency="selectedComponent.frequency"
+        moment-id="selectedComponent.frequency.momentId"
+        moment-days="selectedComponent.frequency.momentDays"
+        custom-fields="selectedComponent.frequency.customFields"
+        on-change="onFrequencyAttributeSelected(key, value)"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-day-year-selector>
     </div>
     <!-- common fields -->
     <div ng-if="selectedComponent.frequency">
