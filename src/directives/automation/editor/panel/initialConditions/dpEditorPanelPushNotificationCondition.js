@@ -33,7 +33,6 @@
 
     function link(scope) {
       scope.isReadOnly = automation.isReadOnly;
-      scope.timeOptions = optionsListDataservice.getTimeOptions();
       scope.timeSelected = {};
       scope.SEND_TYPE = SEND_TYPE;
       scope.FREQUENCY_TYPE = FREQUENCY_TYPE;
@@ -59,10 +58,7 @@
         dateValidationService = result;
       });
       settingsService.getSettings().then(function(response) {
-        scope.timeZones = mapTimeZones(response.timeZones);
-        scope.userTimeZone = response.idUserTimeZone;
-        scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
-        scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
+  
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
 
@@ -93,60 +89,6 @@
         }
       });
 
-      scope.onPrevTimeSelected = function() {
-        var index = _.findIndex(scope.timeOptions, function(option) {
-          return _.isEqual(option.value, scope.timeSelected.value);
-        });
-        if (index > 0) {
-          scope.onFrequencyAttributeSelected('time', scope.timeOptions[index - 1].value);
-        }
-      };
-
-      scope.onNextTimeSelected = function() {
-        var index = _.findIndex(scope.timeOptions, function(option) {
-          return _.isEqual(option.value, scope.timeSelected.value);
-        });
-        if (index < scope.timeOptions.length - 1) {
-          scope.onFrequencyAttributeSelected('time', scope.timeOptions[index + 1].value);
-        }
-      };
-
-      function updateTimeSelected(tempTime) {
-        if (tempTime) {
-          scope.timeSelected = _.find(scope.timeOptions, function(option) {
-            return _.isEqual(option.value, tempTime);
-          });
-        } else if (scope.selectedComponent && scope.selectedComponent.frequency) {
-          scope.timeSelected = _.find(scope.timeOptions, function(option) {
-            return _.isEqual(option.value, scope.selectedComponent.frequency.time);
-          });
-        }
-      }
-
-      function updateTimezoneSelected(tempTimezoneId) {
-        if (tempTimezoneId) {
-          scope.timezoneSelected = _.find(scope.timeZones, function(option) {
-            return _.isEqual(option.value, tempTimezoneId);
-          });
-        } else if (scope.selectedComponent && scope.selectedComponent.frequency) {
-          scope.timezoneSelected = _.find(scope.timeZones, function(option) {
-            return _.isEqual(option.value, scope.selectedComponent.frequency.timezone);
-          });
-        }
-      }
-
-      function mapTimeZones(timeZones) {
-        var timeZoneList = [];
-        angular.forEach(timeZones, function(time) {
-          var zone = {
-            value: time.IdUserTimeZone,
-            label: time.Name
-          };
-          timeZoneList.push(zone);
-        });
-        return timeZoneList;
-      }
-
       scope.onFrequencyAttributeSelected = function(key, value) {
         if (key === 'days' || key === 'momentId' || key === 'customFields') {
           utils.assign(scope.selectedComponent.frequency, key, value);
@@ -155,14 +97,11 @@
             if (valid) {
               utils.assign(scope.selectedComponent.frequency, key, value);
             }
-            updateTimeSelected(value);
           });
         } else {
           scope.validateDate(undefined, value).then(function(valid) {
             if (valid) {
               utils.assign(scope.selectedComponent.frequency, key, value);
-            } else {
-              updateTimezoneSelected(value);
             }
           });
         }
