@@ -23,14 +23,6 @@
 
     return directive;
 
-    function link(scope) {
-      scope.isInitialConditionComplete = function($event) {
-        scope.initialComponentCompleted = pushService.getInitialComponentCompleted();
-        if ($event && !scope.initialComponentCompleted) {
-          $event.stopPropagation();
-        }
-        return scope.initialComponentCompleted;
-      }
-    }
+    function link() {}
   }
 })();
