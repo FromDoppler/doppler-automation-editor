@@ -66,14 +66,13 @@
       </dp-editor-panel-frequency-day-week-selector>
         
       <!-- day month frequency -->
-      <div ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH">
-        <div class="frequency--panel" >
-          <p class="text">{{ 'automation_editor.sidebar.scheduled_date_select_month_day_title' | translate }}</p>
-          <dp-editor-dropdown class="dropdown dropdown--full" id="dayMonth" name="dayMonth" property="name" options="dayNumberOptions" label="dayMonthSelected.label" on-select-option="onFrequencyAttributeSelected('day', option.value)" value-selected="dayMonthSelected.value" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-          <span class="tip">{{ 'automation_editor.sidebar.scheduled_date_select_month_day_tip' | translate }}</span>
-          <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
-        </div>
-      </div>
+      <dp-editor-panel-frequency-day-month-selector
+        ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH"
+        selected-day="selectedComponent.frequency.day"
+        on-change="onFrequencyAttributeSelected('day', value)"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-day-month-selector>
+
       <!-- day year frequency -->
       <div ng-show="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR">
         <!-- custom fields -->
