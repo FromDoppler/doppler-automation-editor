@@ -11,7 +11,9 @@
     'FREQUENCY_TYPE',
     'optionsListDataservice',
     'settingsService',
+    'userFieldsDataservice',
     'utils',
+    'FIELD_TYPE',
     'SEND_TYPE',
     'changesManager',
     '$translate',
@@ -20,8 +22,8 @@
     'dateValidation'
   ];
 
-  function dpEditorPanelPushNotificationCondition(automation, DOMAINS_SELECTION_STATE, FREQUENCY_TYPE, optionsListDataservice, settingsService, utils,
-    SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q, dateValidation) {
+  function dpEditorPanelPushNotificationCondition(automation, DOMAINS_SELECTION_STATE, FREQUENCY_TYPE, optionsListDataservice, settingsService, userFieldsDataservice, utils,
+    FIELD_TYPE, SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q, dateValidation) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/initialConditions/dp-editor-panel-push-notification-condition.html',
@@ -34,8 +36,14 @@
       scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.HIDING);
       scope.isReadOnly = automation.isReadOnly;
       scope.timeOptions = optionsListDataservice.getTimeOptions();
+      scope.weekDays = optionsListDataservice.getWeekDays('short');
+      scope.dayNumberOptions = optionsListDataservice.getDayNumberOptions();
+      scope.dateUserFields = userFieldsDataservice.getFieldsByType(FIELD_TYPE.DATE);
+      scope.dayMoments = optionsListDataservice.getDayMoments();
+      scope.deletedFields = [];
       scope.timeSelected = {};
       scope.SEND_TYPE = SEND_TYPE;
+      scope.FREQUENCY_TYPE = FREQUENCY_TYPE;
       scope.dpPopup = {
         show: false
       };
@@ -62,6 +70,10 @@
         scope.userTimeZone = response.idUserTimeZone;
         scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
         scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
+        scope.$watch('selectedComponent.frequency.customFields', updateAvailableDateFields);
+        scope.$watch('selectedComponent.frequency.day', updateDayMonthSelected);
+        scope.$watch('selectedComponent.frequency.days', updateDayWeeksSelected);
+        scope.$watch('selectedComponent.frequency.momentId', updateDayMomentSelected);
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
 
@@ -110,6 +122,18 @@
         }
       };
 
+      scope.addNewCustomField = function() {
+        scope.onCustomFieldSelected(scope.availableDateFields[0]);
+        updateAvailableDateFields();
+      };
+
+      function updateAvailableDateFields() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency
+          && scope.selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR) {
+          scope.availableDateFields = _.sortBy(_.differenceBy(scope.dateUserFields, scope.selectedComponent.frequency.customFields, 'id'), 'label');
+        }
+      }
+
       function updateTimeSelected(tempTime) {
         if (tempTime) {
           scope.timeSelected = _.find(scope.timeOptions, function(option) {
@@ -147,7 +171,9 @@
       }
 
       scope.onFrequencyAttributeSelected = function(key, value) {
-        if (key === 'time') {
+        if (key === 'days' || key === 'momentId' || key === 'customFields') {
+          utils.assign(scope.selectedComponent.frequency, key, value);
+        } else if (key === 'time') {
           scope.validateDate(value, undefined).then(function(valid) {
             if (valid) {
               utils.assign(scope.selectedComponent.frequency, key, value);
@@ -166,8 +192,76 @@
         scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
       };
 
-      scope.setFrequency = function(frequencyType) {
-        if (frequencyType === scope.selectedComponent.sendType) {
+      scope.onDayWeekSelected = function(option) {
+        var isAlreadyAdded = _.includes(scope.selectedComponent.frequency.days, option.value);
+
+        if (option.selected && !isAlreadyAdded) {
+          scope.selectedComponent.frequency.days.push(option.value);
+          scope.onFrequencyAttributeSelected('days', _.sortBy(scope.selectedComponent.frequency.days, function(num) {
+            return num === 0 ? 7 : num;
+          }));
+        } else {
+          scope.onFrequencyAttributeSelected('days', _.without(scope.selectedComponent.frequency.days, option.value));
+        }
+      };
+
+      scope.setFrequency = function(frequencyType) { 
+        if(frequencyType === scope.selectedComponent.frequency.type) return;
+        const frequencyData = {
+          type: frequencyType,
+          timezone: scope.userTimeZone
+        };
+        if (scope.selectedComponent.frequency) {
+          frequencyData.time = scope.selectedComponent.frequency.time;
+          frequencyData.timezone = scope.selectedComponent.frequency.timezone;
+        }
+        scope.selectedComponent.setFrequency(frequencyData);
+        automation.updateAutomationFlowState();
+      };
+
+      scope.onCustomFieldSelected = function(newOption, oldOption, index) {
+        var newIndex;
+        var frequencyCustomFields = scope.selectedComponent.frequency.customFields;
+
+        if (oldOption) {
+          frequencyCustomFields = _.without(frequencyCustomFields, oldOption);
+        }
+        newIndex = index >= 0 ? index : frequencyCustomFields.length;
+        frequencyCustomFields.splice(newIndex, 0, newOption);
+        scope.onFrequencyAttributeSelected('customFields', frequencyCustomFields);
+        if (oldOption && scope.deletedFields.length) {
+          updateDeletedFields(newIndex);
+        }
+      };
+
+      scope.onCustomFieldRemoved = function(option) {
+        var warnedField = _.find(scope.deletedFields, function(item) {
+          return item.instance.id === option.id;
+        });
+        scope.onFrequencyAttributeSelected('customFields',
+          _.without(scope.selectedComponent.frequency.customFields, option));
+        if (warnedField) {
+          updateDeletedFields(warnedField.index);
+        }
+      };
+
+      function updateDeletedFields(index) {
+        if (Number.isInteger(index)) {
+          scope.validationForm['customField' + index].$setValidity('deletedField', true);
+        }
+        // we need to check if there are deleted fields and if there is not then update the automation warning state
+        scope.deletedFields = userFieldsDataservice.getDeletedFieldsByType(
+          scope.selectedComponent.frequency.customFields, FIELD_TYPE.DATE);
+        _.each(scope.deletedFields, function(deletedField) {
+          scope.validationForm['customField' + deletedField.index].$setValidity('deletedField', false);
+        });
+        if (!scope.deletedFields.length) {
+          automation.updateAutomationFlowState();
+        }
+      }
+
+      scope.setSendType = function(sendType) {
+        if (sendType === scope.selectedComponent.sendType ) {
           return;
         }
 
@@ -181,13 +275,13 @@
           frequency: scope.selectedComponent.frequency
         };
         componentData = {
-          sendType: frequencyType,
-          frequency: frequencyType === SEND_TYPE.SCHEDULED ? scope.frequencyData : null
+          sendType: sendType,
+          frequency: sendType === SEND_TYPE.INMEDIATE ? null: scope.frequencyData
         };
         scope.selectedComponent.setData(componentData);
         changesManager.enable();
         newComponentData = {
-          sendType: frequencyType,
+          sendType: sendType,
           frequency: scope.selectedComponent.frequency
         };
 
@@ -204,14 +298,14 @@
 
       scope.validateDate = function(time, timezoneId) {
         var defer = $q.defer();
-        isValidCurrentDate(time, timezoneId).then(function(valid) {
-          if (!valid) {
-            scope.validationForm['date'].$setValidity('invalidDate', false);
-          } else {
-            scope.validationForm['date'].$setValidity('invalidDate', true);
-          }
-          defer.resolve(valid);
-        });
+        if(scope.selectedComponent.sendType == SEND_TYPE.SCHEDULED_DATE) {
+          defer.resolve(true);
+        } else {
+          isValidCurrentDate(time, timezoneId).then(function(valid) {
+            scope.validationForm['date'].$setValidity('invalidDate', valid);
+            defer.resolve(valid);
+          });
+        }
         return defer.promise;
       };
 
@@ -257,6 +351,32 @@
       scope.showDomainsSelection = function () {
         scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.SHOWING);
       };
+
+      function updateDayMomentSelected() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency) {
+          scope.dayMomentSelected = _.find(scope.dayMoments, function(option) {
+            return option.value === scope.selectedComponent.frequency.momentId;
+          });
+          scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
+          automation.checkCompleted();
+        }
+      }
+
+      function updateDayMonthSelected() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency) {
+          scope.dayMonthSelected = _.find(scope.dayNumberOptions, function(option) {
+            return option.value === scope.selectedComponent.frequency.day;
+          });
+        }
+      }
+
+      function updateDayWeeksSelected() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency) {
+          angular.forEach(scope.weekDays, function(weekDay) {
+            weekDay.selected = _.includes(scope.selectedComponent.frequency.days, weekDay.value);
+          });
+        }
+      }
     }
   }
 })();
