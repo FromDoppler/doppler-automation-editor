@@ -90,15 +90,31 @@
       };
 
       function getSmsPartsCount(smsText) {
-        if (smsText.length >= 70) {
-          for (var i = 0; i < smsText.length; i++) {
-            if (REGEX.REGEX_SMS_STRING.indexOf(smsText.charAt(i)) === -1 &&
-              REGEX.REGEX_SMS_GSM_EXTENDED_STRING.indexOf(smsText.charAt(i)) === -1) {
-              return Math.ceil(smsText.length / 67);
-            }
+        let isUnicode = false;
+        let length = 0;
+
+        for (let char of smsText) {
+          if (REGEX.REGEX_GSM_7BIT_CHARS.includes(char)) {
+            length += 1;
+          } else if (REGEX.REGEX_GSM_7BIT_EXTENDED_CHARS.includes(char)) {
+            length += 2; // Extended characters use escape sequence
+          } else {
+            isUnicode = true;
+            break;
           }
         }
-        return 1;
+
+        if (isUnicode) {
+          // UCS-2 encoding: 70 chars per SMS, 67 for multipart
+          return smsText.length <= 70
+            ? 1
+            : Math.ceil(smsText.length / 67);
+        } else {
+          // GSM-7 encoding: 160 per SMS, 153 for multipart
+          return length <= 160
+            ? 1
+            : Math.ceil(length / 153);
+        }
       }
 
       function evaluateName() {
