@@ -29,8 +29,14 @@
         </div>
         <!-- subject -->
         <div class="input--group">
-            <label class="label label--panel">*{{ 'automation_editor.sidebar.campaign_subject' | translate }} <span data-static-tooltip="{{ 'automation_editor.sidebar.campaign_subject_tip' | translate }}" class="to-left all medium"><span class="icon-tip"></span></span></label>
-            <input type="text" class="input--text padding-r-buttons-place"
+          <label class="label label--panel">
+            *{{ 'automation_editor.sidebar.campaign_subject' | translate }}
+            <span data-static-tooltip="{{ 'automation_editor.sidebar.campaign_subject_tip' | translate }}" class="to-left all medium">
+              <span class="icon-tip"></span>
+            </span>
+          </label>
+          <div class="input-wrapper content-wrapper" ng-class="{'hasErrors': campaignForm.subject.$invalid}" >
+            <input type="text" class="form-control input--text"
               autocomplete="off"
               ng-model="selectedComponent.subject"
               ng-required="campaignForm.subject.$dirty || selectedComponent.touched"
@@ -38,18 +44,12 @@
               ng-focus="subjectFocus()"
               ng-keyup="subjectUpdate()"
               ng-change="subjectUpdate()"
-              ng-class="{'hasErrors': campaignForm.subject.$invalid}"
-              maxlength="100" ng-disabled="!canEdit();"/>
-            <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
-            <div class="dp-button-group">
-              <dp-editor-panel-campaign-custom-fields></dp-editor-panel-campaign-custom-fields>
-              <div class="dp-bd-box">
-                <button type="button" class="dp-button button-medium dp-button-bd" aria-controls="dp-menu-emojis" id="emoji-button">
-                  <img src="/img/icons/emoji.svg">
-                </button>
-              </div>
-            </div>
-            <dp-editor-panel-campaign-subject ng-show="smartSubjectEnabled"></dp-editor-panel-campaign-subject>
+              maxlength="100"
+              ng-disabled="!canEdit();" />
+            <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
+            <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
+          </div>
+          <dp-editor-panel-campaign-subject ng-show="smartSubjectEnabled"></dp-editor-panel-campaign-subject>
         </div>
         <!-- preheader -->
         <div class="input--group">
