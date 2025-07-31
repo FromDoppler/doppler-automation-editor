@@ -537,7 +537,7 @@
     border: 1px solid $color-sylver;
     box-shadow: 0 0 0 4px $color-snow;
     padding: 30px 30px 35px;
-    width: 480px;
+    min-width: 330px;
     margin: 15px auto 0;
     position: absolute;
     cursor: auto;
@@ -552,10 +552,11 @@
       margin: 0 auto;
     }
     span:not(.dp-span-tooltip) {
-      font-size: $font-size--tiny;
+      font-size: $font-size--small;
       color: $color-base;
     }
     p {
+      max-width: none;
       margin-bottom: 20px;
     }
     .arrow {
@@ -565,8 +566,15 @@
       top: -17px;
     }
     .item {
+      height: 75px;
+      width: 50px;
+      margin: 0 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       cursor: pointer;
       img {
+        height: 50px;
         margin: 0 auto;
       }
       &:hover {
@@ -580,9 +588,6 @@
     }
     img.hover {
       display: none;
-      &.sms_icon {
-        width: auto;
-      }
     }
   }
 
