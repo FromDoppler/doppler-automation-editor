@@ -947,8 +947,7 @@
     border-right: 1px solid #999;
   }
 
-  .component--container.goto > .component.concat-none::after,
-  .component--container.push > .component.concat-none::after {
+  .component--container.goto > .component.concat-none::after {
     border-right: 0px;
   }
 
