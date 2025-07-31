@@ -1451,6 +1451,10 @@ input[type="text"].padding-r-buttons-place {
 .column-wrapper,
 .input-wrapper {
 
+  input.form-control {
+    padding: 0.375rem 0.75rem;
+    height: 38px;
+  }
   button {
     width: 42px;
     height: 40px;

@@ -144,28 +144,6 @@
         };
       })();
       
-      var initEmogiDirective = function(elementId) {
-        dopplerScripts.emojiSubject.addons({
-          rootElement: document.getElementById('form-panel-push'),
-          buttonElement: document.getElementById('emoji-button-' + elementId),
-          inputElement: document.getElementById(elementId),
-          categoriesTranslation: {
-            categories: {
-              smileys: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Faces_Emotions'),
-              people: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_People_Body'),
-              animals: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Animals_Nature'),
-              food: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Food_Drinks'),
-              activities: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Activities'),
-              travel: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Travel'),
-              objects: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Objects'),
-              symbols: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Symbols'),
-              flags: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Flags')
-            }
-          }
-        });
-      }
-      initEmogiDirective('pushMessageTitle');
-      initEmogiDirective('pushMessageBody');
     }
   }
 })();
