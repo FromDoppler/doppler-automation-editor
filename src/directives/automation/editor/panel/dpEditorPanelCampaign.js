@@ -13,7 +13,6 @@
     'CAMPAIGN_TYPE',
     'CHANGE_TYPE',
     'changesManager',
-    'conditionsDataservice',
     'CONTENT_TYPE',
     'settingsService',
     'TEST_OPTION',
@@ -23,7 +22,7 @@
   ];
 
   function dpEditorPanelCampaign($rootScope, $translate, automation, AUTOMATION_TYPE, CAMPAIGN_TYPE, CHANGE_TYPE,
-    changesManager, conditionsDataservice, CONTENT_TYPE, settingsService, TEST_OPTION, utils, warningsStepsService,
+    changesManager, CONTENT_TYPE, settingsService, TEST_OPTION, utils, warningsStepsService,
     templatesService) {
     var directive = {
       restrict: 'AE',
@@ -98,9 +97,7 @@
         scope.maxSubsInList = response.sendTestMaxSubsInList;
         scope.isIgnoreContactPolicySetupCompleted = response.isIgnoreContactPolicySetupCompleted;
 
-
         scope.smartSubjectEnabled = response.smartSubjectEnabled;
-        scope.sortedUserFields = response.sortedUserFields;
         scope.idUser = response.idUser;
         scope.industriesList = response.userIndustryInfo.Industries;
         scope.userIndustry = response.userIndustryInfo.UserIndustry;
@@ -436,26 +433,6 @@
         }
       }
 
-      var emojiButtonElement = document.getElementById('emoji-button')
-
-      dopplerScripts.emojiSubject.addons({
-        rootElement: emojiButtonElement.closest('.dp-editor-panel-campaign-component'),
-        buttonElement: emojiButtonElement,
-        inputElement: document.getElementById('subject_property'),
-        categoriesTranslation: {
-          categories: {
-            smileys: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Faces_Emotions'),
-            people: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_People_Body'),
-            animals: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Animals_Nature'),
-            food: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Food_Drinks'),
-            activities: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Activities'),
-            travel: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Travel'),
-            objects: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Objects'),
-            symbols: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Symbols'),
-            flags: $translate.instant('automation_editor.sidebar.campaign_subject_emojis.emojis_categories.Emoji_Category_Flags')
-          }
-        }
-      });
     }
   }
 })();
