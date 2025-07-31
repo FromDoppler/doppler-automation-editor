@@ -31,7 +31,7 @@
       scope.phoneOptions = [];
       scope.charactersCount = scope.selectedComponent.smsText ? scope.selectedComponent.smsText.length : 0;
       scope.smsPartsCount = scope.selectedComponent.smsText ? getSmsPartsCount(scope.selectedComponent.smsText) : 0;
-      scope.REGEX_SMS = REGEX.REGEX_SMS;
+      scope.REGEX_SMS = new RegExp(REGEX.REGEX_SMS);
       scope.isLoaded = false;
       scope.getReadOnlyLabel = automation.getReadOnlyLabel;
       scope.hasColombiaCodeSmsActive = settingsService.getLoadedData().hasColombiaCountryCodeSmsActive;
