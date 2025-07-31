@@ -144,7 +144,7 @@
         var gotoStepOption = _.find(scope.stepOptions, function (stepOption) {
           return stepOption.type === COMPONENT_TYPE.GOTO_STEP;
         });
-        gotoStepOption.isEnable = gotoStepOption.isEnable && !scope.hasNext();
+        gotoStepOption.isEnable = gotoStepOption.isEnable && scope.branch && !scope.hasNext();
         if (!automation.isReadOnly()) {
           scope.showStepOptions = !scope.showStepOptions;
           selectedElementsService.unsetSelectedComponent();
