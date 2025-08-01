@@ -1476,6 +1476,9 @@ input[type="text"].padding-r-buttons-place {
     .search-wrapper {
       position: relative;
       input {
+        outline: 0;
+        height: 40px;
+        width: 100%;
         padding-right: 2rem; 
         border-radius: 0;
         border: 1px solid $color-sylver;
