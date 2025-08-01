@@ -899,42 +899,6 @@
     display: block;
   }
 
-  .dp-button-group {
-    position: absolute;
-    right: 0;
-    height: 40px;
-    top: 21px;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-    -moz-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
-
-  .dp-button.dp-button-bd {
-    font-size: 18px;
-    background-color: #eaeaea;
-    margin-left: 2px;
-    font-weight: 800;
-    color: #666;
-    width: 42px;
-    height: 32px;
-    position: relative;
-    right: 4px;
-  }
-
-  .form--container .input--group .dp-button-group .dp-button.dp-button-bd img {
-    margin-top: 4px;
-    display: inherit;
-  }
-
   .selected-component .input--group .automation-subject-input {
     padding-right: 50px;
   }

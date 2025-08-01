@@ -68,19 +68,25 @@
       </div>
     </div>
   </div>
-  <textarea type="text" class="textarea textarea-sms input--text width-full margin-t-10"
-    ng-model="selectedComponent.smsText"
-    ng-required="smsForm.smsText.$dirty || selectedComponent.touched"
-    name="smsText"
-    maxlength="160"
-    ng-disabled="isReadOnly();"
-    ng-change="charactersCountChange(selectedComponent.smsText);"
-    ng-trim="false"
-    ng-pattern="REGEX_SMS" >
-  </textarea>
-  <div class="flex-display flex-justify-between">
-    <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCount }}/160.</span>
-    <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.count_parts' | translate }} {{ smsPartsCount }}.</span>
+  <div class="column-wrapper content-wrapper" >
+    <textarea type="text" class="textarea textarea-sms input--text width-full margin-t-10"
+      ng-model="selectedComponent.smsText"
+      ng-class="{'hasErrors': smsForm.smsText.$invalid}" 
+      ng-required="smsForm.smsText.$dirty || selectedComponent.touched"
+      name="smsText"
+      maxlength="480"
+      ng-disabled="isReadOnly();"
+      ng-change="charactersCountChange(selectedComponent.smsText);"
+      ng-trim="false"
+      ng-pattern="REGEX_SMS" >
+    </textarea>
+    <div class="action-wrapper">
+      <div class="flex-display width-full text--lightgrey text--tiny text-bold">
+        <span class=" margin-r-30">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCount }}/160.</span>
+        <span>{{ 'automation_editor.sidebar.count_parts' | translate }} {{ smsPartsCount }}.</span>
+      </div>
+      <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
+    </div>
   </div>
   
   

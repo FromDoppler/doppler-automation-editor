@@ -1,0 +1,21 @@
+<button 
+  type="button" ng-click="toggleFieldsMenu()"
+  ng-class="{ 'active': showFieldsMenu }">
+  <i class="ms-icon icon-brackets"></i>
+</button>
+<div class="dp-content-field-menu" ng-show="showFieldsMenu">
+  <div ng-show="showSearch" class="search-wrapper">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="{{ 'grid.search' | translate }}"
+      ng-model="searchText" />
+    <span class="icon-search"></span>
+  </div>
+ 
+  <ul class="dp-list-cfield" id="dp-options-cf">
+    <li role="none" ng-repeat="field in sortedUserFields | filter:{ Name: searchText }">
+      <a role="menuitem" ng-click="clickCFItem(field.Name)">{{ field.Name }}</a>
+    </li>
+  </ul>
+</div>
