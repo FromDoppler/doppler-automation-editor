@@ -34,8 +34,9 @@ var Regex = {
   DOMAIN: /^((?!www\.)(([a-zA-Z0-9\-_ñÑ]+\.)+)([a-zA-Z]{2,16}))$/i, // eslint-disable-line
   DOMAIN_HTTP: /^((http(s)?(:\/\/))?(www\.)?(([a-zA-Z0-9\-_ñÑ]+\.)+)([a-zA-Z]{2,16}))$/i, // eslint-disable-line
   URL_WITH_SUBFOLDERS: /^((http(s)?(:\/\/))?(www\.)?(([a-zA-Z0-9\-_]+\.)+)([a-zA-Z]{2,16})(\/+(([a-zA-Z0-9\-_])+))*(\/\*?)?)$/i, // eslint-disable-line
-  REGEX_SMS_STRING: "@£$¥èéùìòÇ`Øø`ÅåΔ_ΦΓΛΩΠΨΣΘΞ`ÆæßÉ !\"#¤%&'()*=,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ`¿abcdefghijklmnopqrstuvwxyzäöñüà", // eslint-disable-line
-  REGEX_SMS_GSM_EXTENDED_STRING: "````````````````````^```````````````````{}`````\\````````````[~]`|````````````````````````````````````€``````````````````````````", // eslint-disable-line
+  REGEX_GSM_7BIT_CHARS: "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà", // eslint-disable-line
+  REGEX_GSM_7BIT_EXTENDED_CHARS: "^{}\\[~]|€",
+  REGEX_SMS: /^[\u000A\u000D\u0020-\u007A\u00A1\u00C0-\u00FF€^{}\[\]~|\\]*$/, // eslint-disable-line
   URL_WITH_SUBFOLDERS_HTTPS_ONLY: /^(https:\/\/(www\.)?(([a-zA-Z0-9\-_]+\.)+)([a-zA-Z]{2,23})(\/+(([a-zA-Z0-9\-_.?=&#])+))*(\/\*?)?)$/i, // eslint-disable-line
   STRICT_START_HTTPS: /^(https:\/\/)(\S+)?$/i,
 }
