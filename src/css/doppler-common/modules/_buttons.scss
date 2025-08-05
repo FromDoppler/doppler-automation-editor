@@ -85,13 +85,6 @@ button {
   color: $color-base;
 }
 
-.button--warning {
-  background: $color-primary;
-  &:hover {
-    background: $color-darkyellow;
-  }
-}
-
 [class*=button-outline-] {
   background: transparent;
   border-style: solid;

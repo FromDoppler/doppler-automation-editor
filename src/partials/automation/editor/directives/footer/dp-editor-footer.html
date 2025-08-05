@@ -10,8 +10,12 @@
             ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE || rootComponent.state === AUTOMATION_STATE.PAUSED"
             ng-click="stopCampaign();">{{ 'automation_editor.buttons.stop_campaign' | translate }}</button>
     <button class="dp-button button--small primary-green"
-            ng-class="{'button--warning': isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS, 'button--error': hasErrors(), 'button--loading': isProcessing() }"
-            ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE" ng-disabled="isFlowComplete() === AUTOMATION_COMPLETED_STATE.INCOMPLETE || hasErrors() || hasNotSmsCredits()"
+            ng-class="{ 'button--error': hasErrors(), 'button--loading': isProcessing() }"
+            ng-show="rootComponent.state !== AUTOMATION_STATE.ACTIVE" 
+            ng-disabled="isFlowComplete() === AUTOMATION_COMPLETED_STATE.INCOMPLETE 
+                || isFlowComplete() === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS
+                || hasErrors() 
+                || hasNotSmsCredits()"
             ng-click="startCampaignWithDynamicCheck();">{{ getAutomationBtnLabel() }}</button>
     <button class="dp-button button--small button--error"
             ng-show="rootComponent.state === AUTOMATION_STATE.ACTIVE"
