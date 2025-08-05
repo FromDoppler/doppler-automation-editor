@@ -129,6 +129,7 @@ export const automation_en_translations = {
             "at_least": " at least",
             "more_times": "times",
             "separator": "the URL ",
+            "with_param": "with paramater",
             "more_urls": " ...",
             "visited": " has visited ",
             "no_visited": " hasn't visit ",
@@ -156,6 +157,7 @@ export const automation_en_translations = {
               "url_has_parameters": "Ouch! The entered URL has parameters that can't be processed by the system. Try removing characters after the ?"
             },
             "placeholder": "URL",
+            "url_param_placeholder": "Filter URL parameters (optional)",
             "visited_page": "Visited the page",
             "visited_count": "time / times",
             "verification_time_title": "Define when you want we verify whether the Condition has been met",
