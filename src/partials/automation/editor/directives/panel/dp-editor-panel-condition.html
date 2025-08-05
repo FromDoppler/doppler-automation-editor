@@ -328,6 +328,12 @@
           ng-blur="onDomainBlur($event,conditional.domain)"
           ng-disabled="isReadOnly();"
           placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.placeholder' | translate}}"/>
+        <input class="input--text" type="text"
+          name="urlParam{{index}}"
+          ng-maxlength="200"
+          ng-model="conditional.domain.urlParam"
+          ng-disabled="isReadOnly();"
+          placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.url_param_placeholder' | translate}}" />
         <div class="error-messages--container" ng-if="conditional.duplicate !== DUPLICATE_STATE.FALSE && conditional.duplicate !== DUPLICATE_STATE.ORIGIN">
            <div class="error" ng-show="conditional.duplicate !== DUPLICATE_STATE.FALSE && conditional.duplicate !== DUPLICATE_STATE.ORIGIN">{{'automation_editor.components.condition.conditionals.error.duplicate_conditional' | translate}}</div>
         </div>
