@@ -9,7 +9,12 @@
           'automation_editor.components.initial_condition.site_behavior.canvas.no_visited' :
         'automation_editor.components.initial_condition.site_behavior.canvas.visited'
       | translate}}</span><span>{{'automation_editor.components.initial_condition.site_behavior.canvas.separator'
-        | translate}}</span><strong>{{domain.url}}</strong><span ng-if="domain.visitedTimes > 1 && domain.visitedPage">
+        | translate}}</span><strong>{{domain.url}}</strong>
+        <span ng-if="domain.urlParam && domain.urlParam.length > 1">
+          {{'automation_editor.components.initial_condition.site_behavior.canvas.with_param' | translate}}
+          <strong>{{domain.urlParam}}</strong>
+        </span>
+        <span ng-if="domain.visitedTimes > 1 && domain.visitedPage">
             {{'automation_editor.components.initial_condition.site_behavior.canvas.at_least' | translate}}
             {{domain.visitedTimes}} {{'automation_editor.components.initial_condition.site_behavior.canvas.more_times' | translate}}
             </span></span><span ng-if="index === 3">
