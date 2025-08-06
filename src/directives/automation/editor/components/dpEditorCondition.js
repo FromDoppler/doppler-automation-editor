@@ -246,6 +246,10 @@
               }
               innerHtml += '<strong class="selected">' + $translate.instant(conditional.domain.visitedPage ? 'automation_editor.components.condition.conditionals.site_behavior.visited' : 'automation_editor.components.condition.conditionals.site_behavior.no_visited') + '</strong>' + $translate.instant('automation_editor.components.condition.conditionals.site_behavior.separator');
               innerHtml += '<span class="h-break-word link--default">' + conditional.domain.url + '</span>';
+              if(conditional.domain.urlParam && conditional.domain.urlParam.length > 0) {
+                innerHtml += '&nbsp;' + $translate.instant('automation_editor.components.initial_condition.site_behavior.canvas.with_param');
+                innerHtml +='&nbsp;<strong>'+ conditional.domain.urlParam +'</strong>';
+              }
               innerHtml += conditional.domain.visitedTimes > 1 && conditional.domain.visitedPage ? $translate.instant('automation_editor.components.condition.conditionals.site_behavior.at_least') + ' ' + conditional.domain.visitedTimes : '';
               innerHtml += ' ' + $translate.instant(conditional.domain.visitedTimes > 1 && conditional.domain.visitedPage ? 'automation_editor.components.condition.conditionals.site_behavior.more_times' : '');
               innerHtml += '</span>';
