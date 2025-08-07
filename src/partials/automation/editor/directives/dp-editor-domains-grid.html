@@ -2,7 +2,7 @@
 	<h2>{{ 'automation_editor.Domains_grid.empty_title' | translate }}</h2>
 	<p>{{ 'automation_editor.Domains_grid.empty_description' | translate }}</p>
 </section>
-<section class="section--content section--default background--white" id="editorDomainsGrid" ng-if="!gridModel.isEmptyGrid">
+<section class="section--content section--default background--white dp-library" id="editorDomainsGrid" ng-if="!gridModel.isEmptyGrid">
 	<div class="dp-library">
 		<header class="hero-banner">
 			<div class="dp-container">
@@ -31,11 +31,12 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody>
 					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdDomain}}" ng-click="selectRow(row)">
 						<td class="status-column relative">
-							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdDomain}}" name="selectList" ng-checked="row.IsChecked"/>
-							<label></label>
+				<tbody class="awa-form">
+							<label class="dp-label-checkbox" >
+								<input type="checkbox" ng-change="selectRow(row)" ng-model="row.IsChecked"><span></span>
+							</label>
 						</td>
 						<td>{{ row.Domain }}</td>
 						<td class="col-md-2">{{ row.EnabledContactsCount || 0 }}</td>
