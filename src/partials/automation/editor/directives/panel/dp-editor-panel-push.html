@@ -11,24 +11,19 @@
   </div>
   <div class="input--group">
     <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_title' | translate }}</label>
-    <input type="text" class="input--text"
-           name="pushMessageTitle"
-           id="pushMessageTitle"
-           ng-model="selectedComponent.pushMessageTitle"
-           ng-class="{ 'hasErrors': pushForm.pushMessageTitle.$invalid }"
-           ng-required="pushForm.pushMessageTitle.$dirty || selectedComponent.touched"
-           maxlength="50"
-           ng-change="charactersCountTitleChange(selectedComponent.pushMessageTitle);"
-           ng-disabled="isReadOnly();"/>
-    <div class="dp-button-group">
-      <div class="dp-bd-box">
-        <button type="button" class="dp-button button-medium dp-button-bd" aria-controls="dp-menu-emojis" id="emoji-button-pushMessageTitle">
-          <img src="/img/icons/emoji.svg">
-        </button>
-      </div>
-    </div>
-    <div class="flex-display flex-justify-between">
-      <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
+    <div class="column-wrapper content-wrapper" ng-class="{'hasErrors': pushForm.pushMessageTitle.$invalid}" >
+      <input type="text" class="form-control input--text"
+        name="pushMessageTitle"
+        id="pushMessageTitle"
+        ng-model="selectedComponent.pushMessageTitle"
+        ng-required="pushForm.pushMessageTitle.$dirty || selectedComponent.touched"
+        maxlength="50"
+        ng-change="charactersCountTitleChange(selectedComponent.pushMessageTitle);"
+        ng-disabled="isReadOnly();"/>
+        <div class="action-wrapper">
+          <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
+          <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
+        </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
     <div ng-messages="pushForm.pushMessageTitle.$error" class="error-messages--container">
@@ -38,26 +33,24 @@
   </div>
   <div class="input--group">
     <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_body' | translate }}</label>
-    <span class="span--push">{{ 'automation_editor.sidebar.push_message_body_desc' | translate }}</span>
-    <textarea type="text" class="textarea input--text width-full"
-              name="pushMessageBody"
-              id="pushMessageBody"
-              ng-model="selectedComponent.pushMessageBody"
-              ng-change="charactersCountBodyChange(selectedComponent.pushMessageBody);"
-              ng-class="{ 'hasErrors': pushForm.pushMessageBody.$invalid }"
-              ng-required="pushForm.pushMessageBody.$dirty || selectedComponent.touched"
-              maxlength="250"
-              ng-disabled="isReadOnly();">
-    </textarea>
-    <div class="dp-button-group">
-      <div class="dp-bd-box">
-        <button type="button" class="dp-button button-medium dp-button-bd" aria-controls="dp-menu-emojis" id="emoji-button-pushMessageBody">
-          <img src="/img/icons/emoji.svg">
-        </button>
+    <!-- <span class="span--push">{{ 'automation_editor.sidebar.push_message_body_desc' | translate }}</span> -->
+
+    <div class="column-wrapper content-wrapper">
+       
+      <textarea type="text" class="textarea input--text width-full"
+        name="pushMessageBody"
+        id="pushMessageBody"
+        ng-model="selectedComponent.pushMessageBody"
+        ng-change="charactersCountBodyChange(selectedComponent.pushMessageBody);"
+        ng-class="{ 'hasErrors': pushForm.pushMessageBody.$invalid }"
+        ng-required="pushForm.pushMessageBody.$dirty || selectedComponent.touched"
+        maxlength="150"
+        ng-disabled="isReadOnly();">
+      </textarea>
+      <div class="action-wrapper">
+        <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/150.</span>
+        <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
       </div>
-    </div>
-    <div class="flex-display flex-justify-between">
-      <span class="text--lightgrey text--tiny">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/250.</span>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
     <div ng-messages="pushForm.pushMessageBody.$error" class="error-messages--container">
