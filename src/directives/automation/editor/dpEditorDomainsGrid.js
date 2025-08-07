@@ -63,22 +63,18 @@
       }
 
       $scope.selectRow = function(item) {
-        if (!document.getElementById('checkbox-' + item.IdDomain).disabled) {
-          var result;
-          item.IsChecked = !item.IsChecked;
-          if (item.IsChecked) {
+        if (item.IsChecked) {
+          const exists = $scope.gridModel.selectedItems.some(
+            data => data.IdDomain === item.IdDomain
+          );
+
+          if (!exists) {
             $scope.gridModel.selectedItems.push(item);
-          } else {
-            result = _.reject($scope.gridModel.selectedItems, function(data){
-              return data.IdDomain && data.IdDomain === item.IdDomain;
-            });
-            if (!Array.isArray(result)) {
-              $scope.gridModel.selectedItems = [];
-              $scope.gridModel.selectedItems.push(result);
-            } else {
-              $scope.gridModel.selectedItems = result;
-            }
           }
+        } else {
+          $scope.gridModel.selectedItems = $scope.gridModel.selectedItems.filter(
+            data => data.IdDomain !== item.IdDomain
+          );
         }
       };
 
