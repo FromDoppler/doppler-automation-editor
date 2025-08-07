@@ -26,7 +26,7 @@
 						<th class="col-md-4">
 							<a>{{ 'automation_editor.Domains_grid.header_domain_column' | translate }}</a>
 						</th>
-						<th class="col-md-2" ng-if="gridModel.displayed[0].EnabledContactsCount">
+						<th class="col-md-2" ng-if="gridModel.displayed[0].ActiveContactsCount">
 							<a>{{ 'automation_editor.lists_grid_headers.subscribers' | translate }}</a>
 						</th>
 					</tr>
@@ -39,7 +39,7 @@
 							</label>
 						</td>
 						<td>{{ row.Domain }}</td>
-						<td class="col-md-2" ng-if="gridModel.displayed[0].EnabledContactsCount">{{ row.EnabledContactsCount || 0 }}</td>
+						<td class="col-md-2" ng-if="gridModel.displayed[0].ActiveContactsCount">{{ row.ActiveContactsCount || 0 }}</td>
 					</tr>
 				</tbody>
 			</table>
