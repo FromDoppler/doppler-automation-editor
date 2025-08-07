@@ -22,8 +22,8 @@
 			<table class="grid--default" infinite-scroll="gridModel.onScroll" infinite-scroll-element="editorDomainsGrid" infinite-scroll-distance="200" ng-show="gridModel.displayed.length > 0">
 				<thead>
 					<tr>
-						<th><span class="icon-grid-check title"></span></th>
-						<th>
+						<th class="col-md-1"><a><span class="icon-grid-check"></span></a></th>
+						<th class="col-md-4">
 							<a>{{ 'automation_editor.Domains_grid.header_domain_column' | translate }}</a>
 						</th>
 						<th class="col-md-2">
@@ -32,8 +32,8 @@
 					</tr>
 				</thead>
 					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdDomain}}" ng-click="selectRow(row)">
-						<td class="status-column relative">
 				<tbody class="awa-form">
+						<td class="col-md-1">
 							<label class="dp-label-checkbox" >
 								<input type="checkbox" ng-change="selectRow(row)" ng-model="row.IsChecked"><span></span>
 							</label>
