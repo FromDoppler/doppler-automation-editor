@@ -31,8 +31,8 @@
 						</th>
 					</tr>
 				</thead>
-					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdDomain}}" ng-click="selectRow(row)">
 				<tbody class="awa-form">
+					<tr ng-repeat="row in gridModel.displayed">
 						<td class="col-md-1">
 							<label class="dp-label-checkbox" >
 								<input type="checkbox" ng-change="selectRow(row)" ng-model="row.IsChecked"><span></span>
