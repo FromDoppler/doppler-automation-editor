@@ -26,6 +26,9 @@
 						<th>
 							<a>{{ 'automation_editor.Domains_grid.header_domain_column' | translate }}</a>
 						</th>
+						<th class="col-md-2">
+							<a>{{ 'automation_editor.lists_grid_headers.subscribers' | translate }}</a>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,6 +38,7 @@
 							<label></label>
 						</td>
 						<td>{{ row.Domain }}</td>
+						<td class="col-md-2">{{ row.EnabledContactsCount || 0 }}</td>
 					</tr>
 				</tbody>
 			</table>
