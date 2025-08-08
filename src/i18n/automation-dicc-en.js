@@ -30,7 +30,6 @@ export const automation_en_translations = {
       "confirm": "Confirm",
       "confirm_selection": "Confirm selection",
       "start_campaign": "Start Automation",
-      "start_campaign_warning": "Start Automation anyway",
       "stop_campaign": "Stop Automation",
       "skip_selection": "Skip the selection ",
       "pause_campaign": "Pause Automation",

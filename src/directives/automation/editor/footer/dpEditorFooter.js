@@ -162,9 +162,7 @@
         	return;
         }
         if (scope.rootComponent.state !== AUTOMATION_STATE.ACTIVE) {
-          if (isFlowComplete === AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS) {
-            label = $translate.instant('automation_editor.buttons.start_campaign_warning');
-          } else if (scope.rootComponent.state === AUTOMATION_STATE.PAUSED) {
+          if (scope.rootComponent.state === AUTOMATION_STATE.PAUSED) {
             label = $translate.instant('automation_editor.buttons.restart_campaign');
           } else if (scope.rootComponent.state === AUTOMATION_STATE.STOPPED) {
             label = $translate.instant('automation_editor.buttons.reactivate_campaign');
