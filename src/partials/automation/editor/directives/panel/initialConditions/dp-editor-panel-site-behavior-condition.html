@@ -28,6 +28,12 @@
           ng-blur="onDomainBlur($event,domain)"
           ng-disabled="isReadOnly();"
           placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.placeholder' | translate}}" />
+        <input class="input--text" type="text"
+          name="urlParam{{index}}"
+          ng-maxlength="200"
+          ng-model="domain.urlParam"
+          ng-disabled="isReadOnly();"
+          placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.url_param_placeholder' | translate}}" />
         <div ng-show="showErrors" class="error-messages--container" ng-messages="siteBehaviorForm['url' + index].$error">
           <div ng-message="required"></div>
           <div ng-message="domain" class="error">
