@@ -44,6 +44,7 @@
       Model.isSelectElementGrid = options.isSelectElementGrid || false;
       Model.selectedItemOptions = options.selectedItemOptions || {};
       Model.mergeSelectedItemData = options.mergeSelectedItemData || false;
+      Model.deleteNonExistentElement = options.deleteNonExistentElement || false;
       Model.selectedItem = {};
       Model.selectedItems = [];
       Model.labelFilters = [{
@@ -114,6 +115,18 @@
               Model.displayed = data;
               Model.displayed = Model.formatDate(Model.displayed);
             }
+
+            // delete Non Existent Elements
+            if(Model.deleteNonExistentElement &&
+              Model.selectedItems.length !== 0 &&
+              Model.selectedItem[Model.selectedItemOptions.keyToCompare] !== 0) {
+              Model.selectedItems = Model.selectedItems.filter(sel =>
+              Model.displayed.some(d => 
+                  d[Model.selectedItemOptions.keyToCompare] === sel[Model.selectedItemOptions.keyToCompare]
+                )
+              );
+            }
+
             if (Model.isSelectElementGrid && Model.selectedItem && Object.keys(Model.selectedItem).length !== 0
               && Model.selectedItem.constructor === Object
               && Model.selectedItem[Model.selectedItemOptions.keyToCompare] !== 0) {

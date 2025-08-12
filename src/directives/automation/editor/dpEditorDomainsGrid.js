@@ -50,6 +50,7 @@
         selectedItemOptions: selectedItemOptions,
         automationId: selectedComponent.operation ? automationModel.id : 0,
         mergeSelectedItemData: true,
+        deleteNonExistentElement: true,
       });
 
       $translate.onReady().then(function() {
