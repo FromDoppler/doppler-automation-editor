@@ -43,6 +43,7 @@
       Model.automationId = options.automationId || 0;
       Model.isSelectElementGrid = options.isSelectElementGrid || false;
       Model.selectedItemOptions = options.selectedItemOptions || {};
+      Model.mergeSelectedItemData = options.mergeSelectedItemData || false;
       Model.selectedItem = {};
       Model.selectedItems = [];
       Model.labelFilters = [{
@@ -119,11 +120,21 @@
               Model.displayed = filterItemsSelected(Model.displayed, Model.selectedItem, false);
             }
             if (Model.isSelectElementGrid && Object.keys(Model.selectedItems).length !== 0) {
-              var filterSelecteds = Model.displayed;
-              _.each(Model.selectedItems, function(selectedItem) {
-                filterSelecteds = filterItemsSelected(filterSelecteds, selectedItem, true);
-              });
-              Model.displayed = Model.selectedItems.concat(filterSelecteds);
+             if (options.mergeSelectedItemData) {
+                const selectedIds = new Set(
+                  Model.selectedItems.map(item => item[Model.selectedItemOptions.keyToCompare])
+                );
+                Model.displayed = Model.displayed.map(item => ({
+                  ...item,
+                  [Model.selectedItemOptions.keyChecked]: selectedIds.has(item[Model.selectedItemOptions.keyToCompare])
+                }));
+              } else {
+                var filterSelecteds = Model.displayed;
+                _.each(Model.selectedItems, function(selectedItem) {
+                  filterSelecteds = filterItemsSelected(filterSelecteds, selectedItem, true);
+                });
+                Model.displayed = Model.selectedItems.concat(filterSelecteds);
+              }
             }
 
             deferred.resolve(response);

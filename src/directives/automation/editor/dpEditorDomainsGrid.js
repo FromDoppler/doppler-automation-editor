@@ -48,7 +48,8 @@
         getDataUrl: '/Automation/Task/GetPushValidDomains',
         isSelectElementGrid: true,
         selectedItemOptions: selectedItemOptions,
-        automationId: selectedComponent.operation ? automationModel.id : 0
+        automationId: selectedComponent.operation ? automationModel.id : 0,
+        mergeSelectedItemData: true,
       });
 
       $translate.onReady().then(function() {
