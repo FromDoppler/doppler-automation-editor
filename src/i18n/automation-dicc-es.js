@@ -121,6 +121,7 @@ export const automation_es_translations = {
           "at_least": " al menos",
           "more_times": "veces",
           "separator": "la URL ",
+          "with_param": "con parámetro",
           "more_urls": " ...",
           "visited": " ha visitado ",
           "no_visited": " no ha visitado ",
@@ -148,6 +149,7 @@ export const automation_es_translations = {
             "url_has_parameters": "¡Ouch! La URL ingresada posee parámetros que no pueden ser procesados por el sistema. Intenta quitar los caracteres ubicados después del ?"
           },
           "placeholder": "URL",
+          "url_param_placeholder": "filtrar parametros en URL (opcional)",
           "visited_page": "Visitó la página",
           "visited_count": "vez / veces",
           "verification_time_title": "Define cuándo quieres que verifiquemos si la Condición se ha cumplido",

@@ -328,6 +328,12 @@
           ng-blur="onDomainBlur($event,conditional.domain)"
           ng-disabled="isReadOnly();"
           placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.placeholder' | translate}}"/>
+        <input class="input--text" type="text"
+          name="urlParam{{index}}"
+          ng-maxlength="200"
+          ng-model="conditional.domain.urlParam"
+          ng-disabled="isReadOnly();"
+          placeholder="{{'automation_editor.components.initial_condition.site_behavior.panel.url_param_placeholder' | translate}}" />
         <div class="error-messages--container" ng-if="conditional.duplicate !== DUPLICATE_STATE.FALSE && conditional.duplicate !== DUPLICATE_STATE.ORIGIN">
            <div class="error" ng-show="conditional.duplicate !== DUPLICATE_STATE.FALSE && conditional.duplicate !== DUPLICATE_STATE.ORIGIN">{{'automation_editor.components.condition.conditionals.error.duplicate_conditional' | translate}}</div>
         </div>
@@ -443,7 +449,12 @@
       <!-- SITE_BEHAVIOR - COLLAPSED -->
       <div ng-if="conditional.completed && conditional.type === CONDITIONAL_TYPE.SITE_BEHAVIOR">
         {{ 'automation_editor.components.initial_condition.site_behavior.canvas.a_subscriber' | translate }} <strong> {{ conditional.domain.visitedPage ? 'automation_editor.components.initial_condition.site_behavior.canvas.visited' : 'automation_editor.components.initial_condition.site_behavior.canvas.no_visited' | translate}} </strong> {{ 'automation_editor.components.initial_condition.site_behavior.canvas.separator' | translate }}
-        <strong>{{conditional.domain.url}}</strong><span ng-if="conditional.domain.visitedPage && conditional.domain.visitedTimes > 1">
+        <strong>{{conditional.domain.url}}</strong>
+        <span ng-if="conditional.domain.urlParam &&conditional.domain.urlParam.length > 1">
+          {{'automation_editor.components.initial_condition.site_behavior.canvas.with_param' | translate}}
+          <strong>{{conditional.domain.urlParam}}</strong>
+        </span>
+        <span ng-if="conditional.domain.visitedPage && conditional.domain.visitedTimes > 1">
           {{'automation_editor.components.initial_condition.site_behavior.canvas.at_least' | translate}}
           {{conditional.domain.visitedTimes}}
           {{'automation_editor.components.initial_condition.site_behavior.canvas.more_times' | translate}}
