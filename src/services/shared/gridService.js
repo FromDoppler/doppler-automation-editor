@@ -43,6 +43,7 @@
       Model.automationId = options.automationId || 0;
       Model.isSelectElementGrid = options.isSelectElementGrid || false;
       Model.selectedItemOptions = options.selectedItemOptions || {};
+      Model.mergeSelectedItemData = options.mergeSelectedItemData || false;
       Model.selectedItem = {};
       Model.selectedItems = [];
       Model.labelFilters = [{
@@ -113,6 +114,12 @@
               Model.displayed = data;
               Model.displayed = Model.formatDate(Model.displayed);
             }
+            if(Model.mergeSelectedItemData  &&
+              Model.selectedItems.length > 0 &&
+              Model.selectedItem[Model.selectedItemOptions.keyToCompare] !== 0) {
+              mergeSelectedItemData();
+            }
+
             if (Model.isSelectElementGrid && Model.selectedItem && Object.keys(Model.selectedItem).length !== 0
               && Model.selectedItem.constructor === Object
               && Model.selectedItem[Model.selectedItemOptions.keyToCompare] !== 0) {
@@ -133,6 +140,18 @@
 
         return deferred.promise;
       };
+
+      function mergeSelectedItemData () {
+        const { keyToCompare } = Model.selectedItemOptions;
+        Model.selectedItems = Model.selectedItems.map(selected => {
+          const updated = Model.displayed.find(
+            item => item[keyToCompare] === selected[keyToCompare]
+          );
+          return updated
+            ? { ...updated, ...selected } // prioriza flags como IsChecked del seleccionado
+            : selected; // si no existe en displayed, lo deja como estaba
+        });
+      }
 
       Model.deleteRow = function(row, idPropertyName, params) {
         var deferred = $q.defer();
