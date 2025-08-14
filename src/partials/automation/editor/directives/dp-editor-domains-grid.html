@@ -32,10 +32,11 @@
 					</tr>
 				</thead>
 				<tbody class="awa-form">
-					<tr ng-repeat="row in gridModel.displayed">
+					<tr ng-repeat="row in gridModel.displayed" ng-click="selectRow(row, $event)">
 						<td class="col-md-1">
-							<label class="dp-label-checkbox" >
-								<input type="checkbox" ng-change="selectRow(row)" ng-model="row.IsChecked"><span></span>
+							<label class="dp-label-checkbox">
+								<input type="checkbox" ng-checked="row.IsChecked">
+								<span></span>
 							</label>
 						</td>
 						<td>{{ row.Domain }}</td>
