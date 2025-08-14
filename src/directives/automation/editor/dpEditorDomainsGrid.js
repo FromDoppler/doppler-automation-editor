@@ -64,13 +64,16 @@
         });
       }
 
-      $scope.selectRow = function(item) {
+      $scope.selectRow = function(item, $event) {
+        if ($event && $event.target.type === 'checkbox') {
+         $event.preventDefault();
+          return;
+        }
+        item.IsChecked = !item.IsChecked;
         if (item.IsChecked) {
-          const exists = $scope.gridModel.selectedItems.some(
+          if (!$scope.gridModel.selectedItems.some(
             data => data.IdDomain === item.IdDomain
-          );
-
-          if (!exists) {
+          )) {
             $scope.gridModel.selectedItems.push(item);
           }
         } else {
