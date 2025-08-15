@@ -2,7 +2,7 @@
 	<h2>{{ 'automation_editor.Domains_grid.empty_title' | translate }}</h2>
 	<p>{{ 'automation_editor.Domains_grid.empty_description' | translate }}</p>
 </section>
-<section class="section--content section--default background--white" id="editorDomainsGrid" ng-if="!gridModel.isEmptyGrid">
+<section class="section--content section--default background--white dp-library" id="editorDomainsGrid" ng-if="!gridModel.isEmptyGrid">
 	<div class="dp-library">
 		<header class="hero-banner">
 			<div class="dp-container">
@@ -22,19 +22,25 @@
 			<table class="grid--default" infinite-scroll="gridModel.onScroll" infinite-scroll-element="editorDomainsGrid" infinite-scroll-distance="200" ng-show="gridModel.displayed.length > 0">
 				<thead>
 					<tr>
-						<th><span class="icon-grid-check title"></span></th>
-						<th>
+						<th class="col-md-1"><a><span class="icon-grid-check"></span></a></th>
+						<th class="col-md-4">
 							<a>{{ 'automation_editor.Domains_grid.header_domain_column' | translate }}</a>
+						</th>
+						<th class="col-md-2" ng-if="gridModel.displayed[0].ActiveContactsCount">
+							<a>{{ 'automation_editor.Domains_grid.header_subscriber_column' | translate }}</a>
 						</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr ng-repeat="row in gridModel.displayed" id="tr-{{row.IdDomain}}" ng-click="selectRow(row)">
-						<td class="status-column relative">
-							<input class="check-custom" type="checkbox" id="checkbox-{{row.IdDomain}}" name="selectList" ng-checked="row.IsChecked"/>
-							<label></label>
+				<tbody class="awa-form">
+					<tr ng-repeat="row in gridModel.displayed" ng-click="selectRow(row, $event)">
+						<td class="col-md-1">
+							<label class="dp-label-checkbox">
+								<input type="checkbox" ng-checked="row.IsChecked">
+								<span></span>
+							</label>
 						</td>
 						<td>{{ row.Domain }}</td>
+						<td class="col-md-2" ng-if="gridModel.displayed[0].ActiveContactsCount">{{ row.ActiveContactsCount || 0 }}</td>
 					</tr>
 				</tbody>
 			</table>

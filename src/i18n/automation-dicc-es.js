@@ -1023,7 +1023,8 @@ export const automation_es_translations = {
       "empty_description": "Hazlo y luego regresa a continuar la edición de tu Automation.",
       "scheduled_title": "Selecciona los dominios que quieres asociar a tu Automation",
       "scheduled_subtitle": "Los dominios listados son tus dominios activos.",
-      "header_domain_column": "Dominios"
+      "header_domain_column": "Dominios",
+      "header_subscriber_column": "Suscriptores Push"
     }
   },
   "automationTemplates": {

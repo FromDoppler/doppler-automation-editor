@@ -48,7 +48,9 @@
         getDataUrl: '/Automation/Task/GetPushValidDomains',
         isSelectElementGrid: true,
         selectedItemOptions: selectedItemOptions,
-        automationId: selectedComponent.operation ? automationModel.id : 0
+        automationId: selectedComponent.operation ? automationModel.id : 0,
+        mergeSelectedItemData: true,
+        deleteNonExistentElement: true,
       });
 
       $translate.onReady().then(function() {
@@ -62,23 +64,22 @@
         });
       }
 
-      $scope.selectRow = function(item) {
-        if (!document.getElementById('checkbox-' + item.IdDomain).disabled) {
-          var result;
-          item.IsChecked = !item.IsChecked;
-          if (item.IsChecked) {
+      $scope.selectRow = function(item, $event) {
+        if ($event && $event.target.type === 'checkbox') {
+         $event.preventDefault();
+          return;
+        }
+        item.IsChecked = !item.IsChecked;
+        if (item.IsChecked) {
+          if (!$scope.gridModel.selectedItems.some(
+            data => data.IdDomain === item.IdDomain
+          )) {
             $scope.gridModel.selectedItems.push(item);
-          } else {
-            result = _.reject($scope.gridModel.selectedItems, function(data){
-              return data.IdDomain && data.IdDomain === item.IdDomain;
-            });
-            if (!Array.isArray(result)) {
-              $scope.gridModel.selectedItems = [];
-              $scope.gridModel.selectedItems.push(result);
-            } else {
-              $scope.gridModel.selectedItems = result;
-            }
           }
+        } else {
+          $scope.gridModel.selectedItems = $scope.gridModel.selectedItems.filter(
+            data => data.IdDomain !== item.IdDomain
+          );
         }
       };
 
