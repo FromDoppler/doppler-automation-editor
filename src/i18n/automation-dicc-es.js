@@ -116,17 +116,17 @@ export const automation_es_translations = {
       },
       "site_behavior": {
         "canvas": {
-          "intro": "Un Suscriptor ha visitado ",
+          "intro": "Un Contacto ha visitado ",
           "at_least": " al menos",
           "more_times": "veces",
-          "separator": "la URL ",
-          "with_param": "con parámetro",
+          "separator": "la página ",
+          "with_param": "con los parámetros",
           "more_urls": " ...",
           "visited": " ha visitado ",
           "no_visited": " no ha visitado ",
           "operator_and": " y",
           "operator_or": " o",
-          "a_subscriber": "Un Suscriptor"
+          "a_subscriber": "Un Contacto"
         },
         "panel": {
           "title": "Define la o las URL's de las páginas sobre las que deseas realizar el seguimiento de comportamiento",
@@ -148,7 +148,7 @@ export const automation_es_translations = {
             "url_has_parameters": "¡Ouch! La URL ingresada posee parámetros que no pueden ser procesados por el sistema. Intenta quitar los caracteres ubicados después del ?"
           },
           "placeholder": "URL",
-          "url_param_placeholder": "filtrar parametros en URL (opcional)",
+          "url_param_placeholder": "Parámetros en la URL (filtro opcional)",
           "visited_page": "Visitó la página",
           "visited_count": "vez / veces",
           "verification_time_title": "Define cuándo quieres que verifiquemos si la Condición se ha cumplido",
@@ -400,7 +400,7 @@ export const automation_es_translations = {
         },
         "site_behavior": {
           "label": "Comportamiento en Sitio",
-          "the_subscriber": " el Suscriptor",
+          "the_subscriber": " el Contacto",
           "no_visited": " no ha vistado ",
           "visited": " ha visitado ",
           "separator": "la URL ",
