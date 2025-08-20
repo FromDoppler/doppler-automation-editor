@@ -452,7 +452,7 @@ export const automation_en_translations = {
     "footer": {
       "tip_stop": "To edit the Automation, you must first stop it.",
       "tip_state_0": "Pst! Every step must be completed",
-      "tip_state_1": "Have you forgotten something? The last step has no associated action",
+      "tip_state_1": "Almost done! Just need to define the final step of your flow",
       "tip_state_2": "Pst! Every step must be completed",
       "tip_state_8": "This functionality is enabled only for accounts with Paid Plan. <a href='/ControlPanel/AccountPreferences/UpgradeAccount?Plan=monthly' target='_self'><strong>BUY NOW</strong></a>.",
       "tip_state_9": "Use it FREE for a limited time. <a href='/Automation/EditorConfig?idTaskType=0' target='_self'><strong>ACTIVATE YOUR TRIAL</strong></a>.",

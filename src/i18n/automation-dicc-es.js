@@ -453,7 +453,7 @@ export const automation_es_translations = {
     "footer": {
       "tip_stop": "Para editar tu Automation, primero deberás detenerla.",
       "tip_state_0": "¡Pst! Ningún paso debe quedar incompleto",
-      "tip_state_1": "¿Has olvidado algo? El último paso no tiene ninguna acción asociada",
+      "tip_state_1": "¡Casi listo! Solo falta definir el paso final de tu flujo",
       "tip_state_2": "¡Pst! Ningún paso debe quedar incompleto",
       "tip_state_8": "Esta funcionalidad está habilitada solo para cuentas con Plan Pago. <a href='/ControlPanel/AccountPreferences/UpgradeAccount?Plan=monthly' target='_self'><strong>COMPRAR</strong></a>.",
       "tip_state_9": "Utilízala GRATIS por tiempo limitado. <a href='/Automation/EditorConfig?idTaskType=0' target='_self'><strong>ACTIVA EL PERIODO DE PRUEBA</strong></a>.",
