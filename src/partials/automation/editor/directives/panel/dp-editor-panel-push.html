@@ -24,6 +24,7 @@
         <div class="action-wrapper">
           <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
           <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
+          <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
         </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
@@ -51,6 +52,7 @@
       <div class="action-wrapper">
         <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/150.</span>
         <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
+        <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
       </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
