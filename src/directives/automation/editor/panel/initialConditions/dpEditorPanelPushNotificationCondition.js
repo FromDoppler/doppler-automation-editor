@@ -61,7 +61,7 @@
 
         scope.frequencyData = {
           type: FREQUENCY_TYPE.DATE,
-          timezone: scope.userTimeZone,
+          timezone: response.idUserTimeZone,
           date: response.defaultISODate,
           time: {
             hour: roundedMinutes >= 60 ? scope.defaultISODate.getHours() + 1 : scope.defaultISODate.getHours(),
@@ -135,7 +135,7 @@
         };
         componentData = {
           sendType: sendType,
-          frequency: sendType === SEND_TYPE.INMEDIATE ? null: scope.frequencyData
+          frequency: sendType === SEND_TYPE.INMEDIATE ? null: getFrequencyData(sendType)
         };
         scope.selectedComponent.setData(componentData);
         changesManager.enable();
@@ -154,6 +154,17 @@
         scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
         automation.checkCompleted();
       };
+
+      function getFrequencyData(type) {
+        const frecuencyTpe = {
+          [SEND_TYPE.SCHEDULED]: FREQUENCY_TYPE.DATE,
+          [SEND_TYPE.SCHEDULED_DATE]: FREQUENCY_TYPE.DAY_WEEK,
+        }
+        return {
+          ...scope.frequencyData, 
+          type: frecuencyTpe[type]
+        }
+      }
 
       scope.validateDate = function(time, timezoneId) {
         var defer = $q.defer();
