@@ -87,12 +87,6 @@
     <!-- common fields -->
     <div ng-if="selectedComponent.frequency">
       <!-- time and timezone selectors -->
-      <div class="box relative frequency-time--panel">
-        <label class="label--panel">{{ 'automation_editor.sidebar.Push_notification_campaign_field_hour' | translate }}</label>
-        <div class="flex-grid-v-center--s-between">
-          <dp-editor-dropdown ng-class="{hasErrors: validationForm.date.$invalid}" class="dropdown dropdown--small disable--toggler" id="time" name="time" property="name" options="timeOptions" label="timeSelected.label" value-selected="timeSelected.value" on-select-option="onFrequencyAttributeSelected('time', option.value);" on-select-prev-option="onPrevTimeSelected()" on-select-next-option="onNextTimeSelected()" arrow-selection="true" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-          <dp-editor-dropdown ng-class="{hasErrors: validationForm.date.$invalid}" class="dropdown dropdown--large" id="timezone" name="timezone" property="name" options="timeZones" label="timezoneSelected.label" value-selected="timezoneSelected.value" on-select-option="onFrequencyAttributeSelected('timezone', option.value);" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-        </div>
         <div ng-messages="validationForm['date'].$error" class="error-messages--container">
           <div ng-message="invalidDate" class="error">{{ 'validation_messages.invalid_date_time' | translate }}</div>
         </div>
@@ -103,6 +97,13 @@
               <p>{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error' | translate }} <a class="dp-message-link" target="_self" href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation">{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade' | translate }}</a></p>
             </div>
           </div>
+      <dp-editor-panel-frequency-time-selector
+        time-selected="selectedComponent.frequency.time"
+        timezone-selected="selectedComponent.frequency.timezone"
+        on-change="onFrequencyAttributeSelected(key, value)"
+        has-error="validationForm.date.$invalid"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-time-selector>
         </div>
       </div>
     </div>
