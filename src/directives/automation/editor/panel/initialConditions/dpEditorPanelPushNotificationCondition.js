@@ -8,11 +8,8 @@
   dpEditorPanelPushNotificationCondition.$inject = [
     'automation',
     'FREQUENCY_TYPE',
-    'optionsListDataservice',
     'settingsService',
-    'userFieldsDataservice',
     'utils',
-    'FIELD_TYPE',
     'SEND_TYPE',
     'changesManager',
     '$translate',
@@ -21,8 +18,8 @@
     'dateValidation'
   ];
 
-  function dpEditorPanelPushNotificationCondition(automation, DOMAINS_SELECTION_STATE, FREQUENCY_TYPE, optionsListDataservice, settingsService, userFieldsDataservice, utils,
-    FIELD_TYPE, SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q, dateValidation) {
+  function dpEditorPanelPushNotificationCondition(automation, FREQUENCY_TYPE, settingsService, utils,
+    SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q,  dateValidation) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/initialConditions/dp-editor-panel-push-notification-condition.html',
@@ -210,9 +207,7 @@
         }
       };
 
-      scope.showDomainsSelection = function () {
-        scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.SHOWING);
-      };
+    
     }
   }
 })();
