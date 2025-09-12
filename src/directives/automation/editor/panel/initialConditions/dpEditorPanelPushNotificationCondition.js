@@ -87,16 +87,12 @@
       });
 
       scope.onFrequencyAttributeSelected = function(key, value) {
-        if (key === 'days' || key === 'momentId' || key === 'customFields') {
+        if (key === 'day' || key === 'days' || key === 'momentId' || key === 'customFields') {
           utils.assign(scope.selectedComponent.frequency, key, value);
-        } else if (key === 'time') {
-          scope.validateDate(value, undefined).then(function(valid) {
-            if (valid) {
-              utils.assign(scope.selectedComponent.frequency, key, value);
-            }
-          });
         } else {
-          scope.validateDate(undefined, value).then(function(valid) {
+          const time = key === 'time'? value: undefined;
+          const timeZone = key === 'timezone'? value: undefined;
+          scope.validateDate(time, timeZone).then(function(valid) {
             if (valid) {
               utils.assign(scope.selectedComponent.frequency, key, value);
             }
@@ -218,7 +214,6 @@
         }
       };
 
-    
     }
   }
 })();
