@@ -34,7 +34,6 @@
     function link(scope) {
       scope.isReadOnly = automation.isReadOnly;
       scope.timeOptions = optionsListDataservice.getTimeOptions();
-      scope.dayNumberOptions = optionsListDataservice.getDayNumberOptions();
       scope.dateUserFields = userFieldsDataservice.getFieldsByType(FIELD_TYPE.DATE);
       scope.dayMoments = optionsListDataservice.getDayMoments();
       scope.deletedFields = [];
@@ -68,7 +67,6 @@
         scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
         scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
         scope.$watch('selectedComponent.frequency.customFields', updateAvailableDateFields);
-        scope.$watch('selectedComponent.frequency.day', updateDayMonthSelected);
         scope.$watch('selectedComponent.frequency.momentId', updateDayMomentSelected);
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
@@ -342,14 +340,6 @@
           });
           scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
           automation.checkCompleted();
-        }
-      }
-
-      function updateDayMonthSelected() {
-        if (scope.selectedComponent && scope.selectedComponent.frequency) {
-          scope.dayMonthSelected = _.find(scope.dayNumberOptions, function(option) {
-            return option.value === scope.selectedComponent.frequency.day;
-          });
         }
       }
     }
