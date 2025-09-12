@@ -59,7 +59,8 @@
         && this.pushMessageBody !== undefined
         && this.pushMessageOnClickLink !== undefined
         && this.pushMessageImageUrl !== undefined
-        && this.name !== '';
+        && this.name !== ''
+        && this.domains.length > 0;
       };
 
       PushComponent.prototype.getPropertiesToWatch = function() {
