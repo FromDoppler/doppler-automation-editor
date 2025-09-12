@@ -53,7 +53,7 @@
         svg_path: '/../images/automation-push_notification.svg', // eslint-disable-line
         svg_hover_path: '/../images/automation-push_notification-hover.svg', // eslint-disable-line
         type: COMPONENT_TYPE.PUSH_NOTIFICATION,
-        isEnable: settings.isPushEnable && automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION
+        isEnable: settings.isPushEnable
       }, {
         label: 'condition_icon',
         svg_path: '/../images/automation-condition.svg', // eslint-disable-line
