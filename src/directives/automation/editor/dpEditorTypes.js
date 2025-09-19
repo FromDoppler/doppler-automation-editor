@@ -30,6 +30,7 @@
       scope.integrationsListLength = 0;
       automation.updateAutomationFlowState();
       automation.load(0);
+      scope.pushNotificationAddonsLink = mainMenuData.user.pushNotificationPlan.buttonUrl;
 
       taskService.getAutomationTypeList()
         .then(function(data) {
