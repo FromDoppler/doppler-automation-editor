@@ -21,6 +21,7 @@
     function link(scope) {
       scope.conversationsLink = whatsappDataservice.getConversationsLink();
       scope.conversationsPlanLink = whatsappDataservice.getConversationsPlanLink();
+      scope.pushNotificationAddonsLink = mainMenuData.user.pushNotificationPlan.buttonUrl;
       scope.templates = [];
       scope.isLoading = true;
 

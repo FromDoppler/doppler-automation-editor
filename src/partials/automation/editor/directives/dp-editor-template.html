@@ -60,6 +60,9 @@
             <a ng-if="item.Status === 'whatsappCredit'" ng-href="{{ conversationsPlanLink }}">{{ 'automationTypes.info.whatsappCredit' | translate }}</a>
             <a ng-if="item.Status === 'whatsappRoomTemplateUndefined'" ng-href="{{ conversationsLink }}">{{ 'automationTypes.info.whatsappRoomTemplateUndefined' | translate }}</a>
             <a ng-if="item.Status === 'buySms'" ng-href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
+            <a ng-if="item.Status === 'pushTrialExpired' || item.Status === 'pushConfigurationMissing'" ng-href="{{ pushNotificationAddonsLink }}">
+              {{ 'automationTypes.info.' + item.Status + '_action' | translate }}
+            </a>
             <a ng-if="item.Status === 'error' || item.Status === 'warning'" 
               href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings" class="text--uppercase">{{ item.Status === 'error' ? 'automationTypes.info.continue' : 'actions.start' | translate }}
             </a>
