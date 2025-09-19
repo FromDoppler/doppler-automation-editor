@@ -8,12 +8,11 @@
   dpEditorPanelPush.$inject = [
     'automation',
     'REGEX',
-    '$translate',
     'settingsService',
     'pushService'
   ];
 
-  function dpEditorPanelPush(automation, REGEX, $translate, settingsService, pushService) {
+  function dpEditorPanelPush(automation, REGEX, settingsService, pushService) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-push.html',
