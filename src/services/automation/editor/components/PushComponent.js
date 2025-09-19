@@ -33,7 +33,7 @@
           this.id = data.id;
         }
          if (data.hasOwnProperty('domains')) {
-          this.domains = data.domains;
+          this.domains = data.domains || [];
         }
         if (data.hasOwnProperty('name')) {
           this.name = data.name;
