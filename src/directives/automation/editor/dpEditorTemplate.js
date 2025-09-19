@@ -6,10 +6,10 @@
     .directive('dpEditorTemplate', dpEditorTemplate);
 
   dpEditorTemplate.$inject = [
-    'taskService', 'whatsappDataservice', '$window'
+    'taskService', 'whatsappDataservice'
   ];
 
-  function dpEditorTemplate(taskService, whatsappDataservice, $window) {
+  function dpEditorTemplate(taskService, whatsappDataservice) {
     var directive = {
       restrict: 'E',
       link: link,

@@ -9,13 +9,12 @@
     'automation',
     'taskService',
     'ModalService',
-    'selectedElementsService',
     '$rootScope',
     'AUTOMATION_TYPE_IDS',
     '$window'
   ];
 
-  function dpEditorTypes(automation, taskService, ModalService, selectedElementsService,
+  function dpEditorTypes(automation, taskService, ModalService,
     $rootScope, AUTOMATION_TYPE_IDS, $window) {
     var directive = {
       restrict: 'E',
