@@ -50,36 +50,16 @@
         <div ng-if="item.Status !== 'active'" class="notification--container flex-grid">
           <p class="title">{{ 'automationTemplates.info.title' + item.IdAutomationTemplate | translate }}</p>
           <span ng-if="item.Status !== 'active'" class="{{item.Status === 'error' ? '' : item.Status}}">
-            <span ng-if="item.Status === 'repeated'">
+            <span ng-if="item.Status === 'repeated'"> <!-- Analize if add MakeAvailableToEdition flag -->
               {{ 'automationTypes.info.repeated_message_for_unique_available_integration' | translate }}
             </span>
-            <span ng-if="item.Status === 'integration'">
+            <span ng-if="item.Status !== 'repeated'">
               {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
             </span>
             <a ng-if="item.Status === 'integration' || item.Status === 'repeated'" ng-href="{{webappUrl}}/integrations">{{ 'automationTypes.info.integration' | translate }}</a>
-            
-            <!-- buySms -->
-            <span ng-if="item.Status === 'buySms'">
-              {{ 'automationTypes.info.buySms_message' | translate }}
-            </span>
-            <a ng-if="item.Status === 'buySms'" ng-href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
-
-
-             <!-- buy whatsApp credit -->
-             <span ng-if="item.Status === 'whatsappCredit'">
-              {{ 'automationTypes.info.whatsappCredit_message' | translate }}
-            </span>
             <a ng-if="item.Status === 'whatsappCredit'" ng-href="{{ conversationsPlanLink }}">{{ 'automationTypes.info.whatsappCredit' | translate }}</a>
-
-             <!-- Configure chat room or template -->
-             <span ng-if="item.Status === 'whatsappRoomTemplateUndefined'">
-              {{ 'automationTypes.info.whatsappRoomTemplateUndefined_message' | translate }}
-            </span>
             <a ng-if="item.Status === 'whatsappRoomTemplateUndefined'" ng-href="{{ conversationsLink }}">{{ 'automationTypes.info.whatsappRoomTemplateUndefined' | translate }}</a>
-
-            <span ng-if="item.Status === 'error' || item.Status === 'warning'">
-              {{ 'automationTypes.info.' + item.Status + '_message' | translate }}
-            </span>
+            <a ng-if="item.Status === 'buySms'" ng-href="/ControlPanel/AccountPreferences/GetSmsConfiguration">{{ 'automationTypes.info.buySms' | translate }}</a>
             <a ng-if="item.Status === 'error' || item.Status === 'warning'" 
               href="/ControlPanel/CampaignsPreferences/SiteTrackingSettings" class="text--uppercase">{{ item.Status === 'error' ? 'automationTypes.info.continue' : 'actions.start' | translate }}
             </a>
