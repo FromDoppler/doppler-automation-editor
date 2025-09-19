@@ -22,6 +22,13 @@
     return directive;
 
     function link(scope) {
+      scope.hasExcededCredits = false;
+
+      pushService.GetPushNotificationSettings()
+        .then(function(res) {
+        scope.hasExcededCredits = res.hasExcededCredits;
+      });
+
       scope.automationId = automation.getModel().id;
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
@@ -29,6 +36,10 @@
 
       scope.acceptedFileTypes = 'image/jpeg, image/png, image/jpg';
       scope.statusUploader = 'init';
+
+      scope.hideExcededCreditsMessage = function () {
+        scope.hasExcededCredits = false;
+      }
 
       function saveImagePush() {
         var formData = new FormData();

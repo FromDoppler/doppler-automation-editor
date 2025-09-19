@@ -1,6 +1,17 @@
 <dp-editor-panel-domain-list-selector></dp-editor-panel-domain-list-selector>
 <p class="title margin-t-25">{{ 'automation_editor.sidebar.push_title' | translate }}</p>
 <form name="pushForm" class="form--container" id="form-panel-push" novalidate>
+<div ng-if="hasExcededCredits" class="dp-library">
+  <div class="margin-b-20 dp-wrap-message dp-wrap-warning">
+    <span style="display: none;" class="dp-message-icon"></span>
+    <div class="dp-content-message">
+      <p ng-bind-html="'automation_editor.sidebar.push_message_excess_warning' | translate"></p>
+      <a ng-href="#" class="dp-message-link" ng-click="hideExcededCreditsMessage(); $event.preve;">
+        {{'automation_editor.sidebar.push_message_excess_warning_agreed' | translate }}
+      </a>
+    </div>
+  </div>
+</div>
     <!-- push name -->
   <div class="input--group">
     <label class="label label--panel">*{{ 'automation_editor.sidebar.Push_name' | translate }}</label>

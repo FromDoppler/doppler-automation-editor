@@ -922,6 +922,8 @@ export const automation_en_translations = {
       "push_uploader_retry_button": "retry",
       "push_uploader_drag_title": "Drag here or",
       "push_uploader_button": "Select an image",
+      "push_message_excess_warning": "You have used up all the messages included in your plan. Your push notifications will continue to be sent using your <strong>Excess messages</strong> allowance.",
+      "push_message_excess_warning_agreed": "AGREED",
       "whatsapp_non_room_error": "To use this feature you need to have at least one room.",
       "whatsapp_non_room_error_url": "https://conversations.fromdoppler.com/apps/list-channels",
       "whatsapp_non_room_error_url_link": "Create Room",

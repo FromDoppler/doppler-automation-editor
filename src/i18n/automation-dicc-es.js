@@ -922,6 +922,8 @@ export const automation_es_translations = {
       "push_uploader_retry_button" : "reintentar",
       "push_uploader_drag_title" : "Arrastra aquí o",
       "push_uploader_button" : "Selecciona una imagen",
+      "push_message_excess_warning": "Consumiste todas los envíos disponibles en tu Plan, tus Notificaciones Push se continuan enviando con el consumo de <strong>Envíos Excedentes</strong>.",
+      "push_message_excess_warning_agreed": "ENTENDIDO",
       "whatsapp_non_room_error": "Para utilizar esta funcionalidad necesitas tener al menos una sala creada.",
       "whatsapp_non_room_error_url": "https://conversations.fromdoppler.com/apps/list-channels",
       "whatsapp_non_room_error_url_link": "Crear Sala",
