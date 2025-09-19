@@ -224,8 +224,6 @@
         }
 
         innerHtml += getTimeHtml();
-        innerHtml += getDomainListsHtml();
-
         return innerHtml;
       };
 
@@ -244,34 +242,6 @@
         timeHtml += '&#58;' + (scope.component.frequency.time.minute > 9 ? scope.component.frequency.time.minute : '0' + scope.component.frequency.time.minute) + '&nbsp;h</strong>';
         timeHtml += ' <strong>' + scope.timeZone + ')</strong>';
         return timeHtml;
-      }
-
-      function getDomainListsHtml() {
-        var subscriptionListsHtml = '';
-        if(scope.component.domains.length === 0) {
-          subscriptionListsHtml += $translate.instant('automation_editor.components.initial_condition.push_notification.domains_sg');
-          subscriptionListsHtml += '<span class="brackets">[[[...]]]</span>';
-          return subscriptionListsHtml;
-        } else if (scope.component.domains.length === 1) {
-          subscriptionListsHtml += $translate.instant('automation_editor.components.initial_condition.push_notification.domains_sg');
-        } else if (scope.component.domains.length > 1) {
-          subscriptionListsHtml += $translate.instant('automation_editor.components.initial_condition.push_notification.domains_pl');
-        }
-
-        for (var index = 0; index < scope.component.domains.length  && index < 4; index++) {  
-          if(scope.component.domains.length == 2  && index == 1 ||
-            scope.component.domains.length >= 3 && index == 2) {
-            subscriptionListsHtml += ( $translate.instant('automation_editor.components.initial_condition.push_notification.and') + '&nbsp;');
-          } 
-          subscriptionListsHtml +=('<strong>' + scope.component.domains[index].Domain + '</strong>');
-          if(scope.component.domains.length > 2  && index != 1 && index < (scope.component.domains.length - 1))
-            subscriptionListsHtml += ',&nbsp;';
-        }
-
-        if(scope.component.domains.length > 3) {
-          subscriptionListsHtml += '<strong>...</strong>';
-        }
-        return subscriptionListsHtml;
       }
     }
   }
