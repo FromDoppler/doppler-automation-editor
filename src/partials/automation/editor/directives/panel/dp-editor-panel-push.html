@@ -1,6 +1,3 @@
-<dp-editor-panel-domain-list-selector></dp-editor-panel-domain-list-selector>
-<p class="title margin-t-25">{{ 'automation_editor.sidebar.push_title' | translate }}</p>
-<form name="pushForm" class="form--container" id="form-panel-push" novalidate>
 <div ng-if="hasExcededCredits" class="dp-library">
   <div class="margin-b-20 dp-wrap-message dp-wrap-warning">
     <span style="display: none;" class="dp-message-icon"></span>
@@ -12,17 +9,39 @@
     </div>
   </div>
 </div>
+
+<h4>{{ 'automation_editor.sidebar.push_title' | translate }}</h4>
+
+<div class="margin-t-20">
+  <dp-editor-panel-domain-list-selector></dp-editor-panel-domain-list-selector>
+  <!-- <div ng-if="selectedComponent.domains.length === 0" class="dp-library">
+    <div class="margin-t-10 dp-wrap-message dp-wrap-warning">
+
+      <div class="dp-content-message">
+        <p>
+          la seleccion de dominios es requerida
+        </p>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+
+<form name="pushForm" class="form--container margin-t-25" id="form-panel-push" novalidate>
     <!-- push name -->
   <div class="input--group">
-    <label class="label label--panel">*{{ 'automation_editor.sidebar.Push_name' | translate }}</label>
+    <label class="label label--panel">{{ 'automation_editor.sidebar.Push_name' | translate }}:</label>
     <input type="text" class="input--text" ng-model="selectedComponent.name" ng-required="pushForm.name.$dirty || selectedComponent.touched" name="name" id="name_property" ng-class="{'hasErrors': pushForm.name.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'name')" ng-blur="emailNameOnBlur()"  ng-disabled="isReadOnly();" />
     <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
     <div class="error-messages--container" ng-show="showInputErrors.name">
       <div class="error">{{'automation_editor.sidebar.campaign_name_error' | translate }}</div>
     </div>
   </div>
-  <div class="input--group">
-    <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_title' | translate }}</label>
+
+  <label class="label label--panel margin-t-20">{{ 'automation_editor.sidebar.push_message' | translate }}</label>
+
+  <div class="input--group margin-t-10">
+    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_title' | translate }}:</label>
     <div class="column-wrapper content-wrapper" ng-class="{'hasErrors': pushForm.pushMessageTitle.$invalid}" >
       <input type="text" class="form-control input--text"
         name="pushMessageTitle"
@@ -34,8 +53,8 @@
         ng-disabled="isReadOnly();"/>
         <div class="action-wrapper">
           <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
-          <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
           <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
+          <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
         </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
@@ -45,9 +64,7 @@
     </div>
   </div>
   <div class="input--group">
-    <label class="label label--panel">*{{ 'automation_editor.sidebar.push_message_body' | translate }}</label>
-    <!-- <span class="span--push">{{ 'automation_editor.sidebar.push_message_body_desc' | translate }}</span> -->
-
+    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_body' | translate }}:</label>
     <div class="column-wrapper content-wrapper">
        
       <textarea type="text" class="textarea input--text width-full"
@@ -62,8 +79,8 @@
       </textarea>
       <div class="action-wrapper">
         <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/150.</span>
-        <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
         <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
+        <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
       </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>

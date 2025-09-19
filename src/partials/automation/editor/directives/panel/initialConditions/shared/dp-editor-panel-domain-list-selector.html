@@ -1,8 +1,9 @@
 <div class="list-selection--panel">
-  <p class="title">{{ 'automation_editor.sidebar.Push_notification_domains_selection_title' | translate }}</p>
+  <label class="label label--panel">
+     {{ selectedComponent.domains.length === 0 ? 'automation_editor.sidebar.Domains_Select' : 'automation_editor.sidebar.Domains_Selected' | translate }}
+  </label>
 
   <div class="selected-list alt disable--toggler" ng-if="selectedComponent.domains.length">
-    <span class="text"><strong>{{ 'automation_editor.sidebar.Domains_Selected' | translate }}</strong></span>
     <div ng-repeat="item in selectedComponent.domains">
       <span class="icon-check"></span>
       <span class="name">{{ item.Domain }}</span>

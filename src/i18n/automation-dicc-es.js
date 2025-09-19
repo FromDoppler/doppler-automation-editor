@@ -767,7 +767,8 @@ export const automation_es_translations = {
       "scheduled_date_short_day0": "Dom",
       "scheduled_date_select_list_title": "Elige la Lista o Segmento que quieres asociar a tu Campaña de Email Automation",
       "scheduled_date_select_list_button": "Seleccionar Lista o Segmento",
-      "Push_notification_domains_selection_title": "Enviar notificaciones Push a los visitantes del dominio:",
+      "Push_notification_domains_selection_title": "Seleccionar dominio:",
+      "Domains_Select": "Seleccionar dominio:",
       "Domains_Selected": "Has seleccionado",
       "Domains_replace_button": "Reemplazar dominio",
       "Domains_select_button": "Seleccionar dominio",
@@ -913,9 +914,10 @@ export const automation_es_translations = {
           "option10": "WooCommerce"
         }
       },
-      "push_title": "Define el contenido de la notificación Push",
+      "push_title": "Editor de contenidos",
+      "push_message": "Mensaje",
       "push_message_title": "Título",
-      "push_message_body": "Mensaje",
+      "push_message_body": "Texto",
       "push_message_body_desc": "Tip. Puedes usar emojis 😃🤩🥳. Los emojis cuentan como más de un caracter sobre el máximo permitido del mensaje.",
       "push_message_on_click_link": "URL de destino (opcional)",
       "push_uploader_title" : "Imagen (opcional)",
