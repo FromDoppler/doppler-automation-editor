@@ -1035,9 +1035,9 @@ export const automation_es_translations = {
       "empty_title": "Parece que aún no tienes dominios activos",
       "empty_description": "Hazlo y luego regresa a continuar la edición de tu Automation.",
       "scheduled_title": "Selecciona los dominios que quieres asociar a tu Automation",
-      "scheduled_subtitle": "Los dominios listados son tus dominios activos.",
+      "scheduled_subtitle": "Los dominios listados son los que se encuentran activos. Solo lo recibirán aquellos que haya aceptado la suscripción  a las Notificaciones Push.",
       "header_domain_column": "Dominios",
-      "header_subscriber_column": "Suscriptores Push"
+      "header_subscriber_column": "Suscriptores"
     }
   },
   "automationTemplates": {
