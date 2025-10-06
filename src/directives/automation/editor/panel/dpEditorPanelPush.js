@@ -32,6 +32,7 @@
       scope.automationId = automation.getModel().id;
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
+        scope.hasPushNotificationV2Enabled = response.hasPushNotificationV2Enabled;
       });
 
       scope.acceptedFileTypes = 'image/jpeg, image/png, image/jpg';

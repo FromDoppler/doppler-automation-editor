@@ -1,4 +1,4 @@
-<div ng-if="hasExcededCredits" class="dp-library">
+<div ng-if="hasExcededCredits && hasPushNotificationV2Enabled" class="dp-library">
   <div class="margin-b-20 dp-wrap-message dp-wrap-warning">
     <span style="display: none;" class="dp-message-icon"></span>
     <div class="dp-content-message">
@@ -53,7 +53,7 @@
         ng-disabled="isReadOnly();"/>
         <div class="action-wrapper">
           <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
-          <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
+          <dp-editor-panel-custom-fields-addons show-search ng-if="hasPushNotificationV2Enabled"></dp-editor-panel-custom-fields-addons>
           <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
         </div>
     </div>
@@ -79,7 +79,7 @@
       </textarea>
       <div class="action-wrapper">
         <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/150.</span>
-        <dp-editor-panel-custom-fields-addons show-search></dp-editor-panel-custom-fields-addons>
+        <dp-editor-panel-custom-fields-addons show-search ng-if="hasPushNotificationV2Enabled"></dp-editor-panel-custom-fields-addons>
         <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
       </div>
     </div>
