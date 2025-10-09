@@ -6,7 +6,6 @@
     .factory('PushNotificationCondition', ['BaseInitialConditionComponent', '$injector', 'SEND_TYPE', function (BaseInitialConditionComponent, $injector, SEND_TYPE) {
 
       function PushNotificationCondition(data) {
-        this.domains = [];
         this.frequency = null;
         this.sendType = null;
 
@@ -19,10 +18,9 @@
 
       PushNotificationCondition.prototype.checkCompleted = function() {
         if (this.sendType === SEND_TYPE.INMEDIATE) {
-          this.completed = this.domains.length > 0;
+          this.completed = true;
         } else {
-          this.completed = this.frequency !== null && this.frequency.checkCompleted()
-            && this.domains.length > 0;
+          this.completed = this.frequency !== null && this.frequency.checkCompleted();
         }
       };
 
@@ -33,9 +31,6 @@
 
       PushNotificationCondition.prototype.setData = function(data) {
         BaseInitialConditionComponent.prototype.setData.call(this, data);
-        if (data.hasOwnProperty('domains')) {
-          this.domains = data.domains;
-        }
 
         if (data.hasOwnProperty('frequency')) {
           data.frequency ? this.setFrequency(data.frequency) : this.frequency = data.frequency;

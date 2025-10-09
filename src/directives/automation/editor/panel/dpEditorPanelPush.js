@@ -8,12 +8,11 @@
   dpEditorPanelPush.$inject = [
     'automation',
     'REGEX',
-    '$translate',
     'settingsService',
     'pushService'
   ];
 
-  function dpEditorPanelPush(automation, REGEX, $translate, settingsService, pushService) {
+  function dpEditorPanelPush(automation, REGEX, settingsService, pushService) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/dp-editor-panel-push.html',
@@ -23,13 +22,25 @@
     return directive;
 
     function link(scope) {
+      scope.hasExcededCredits = false;
+
+      pushService.GetPushNotificationSettings()
+        .then(function(res) {
+        scope.hasExcededCredits = res.hasExcededCredits;
+      });
+
       scope.automationId = automation.getModel().id;
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
+        scope.hasPushNotificationV2Enabled = response.hasPushNotificationV2Enabled;
       });
 
       scope.acceptedFileTypes = 'image/jpeg, image/png, image/jpg';
       scope.statusUploader = 'init';
+
+      scope.hideExcededCreditsMessage = function () {
+        scope.hasExcededCredits = false;
+      }
 
       function saveImagePush() {
         var formData = new FormData();

@@ -7,9 +7,7 @@
 
   dpEditorPanelPushNotificationCondition.$inject = [
     'automation',
-    'DOMAINS_SELECTION_STATE',
     'FREQUENCY_TYPE',
-    'optionsListDataservice',
     'settingsService',
     'utils',
     'SEND_TYPE',
@@ -20,8 +18,8 @@
     'dateValidation'
   ];
 
-  function dpEditorPanelPushNotificationCondition(automation, DOMAINS_SELECTION_STATE, FREQUENCY_TYPE, optionsListDataservice, settingsService, utils,
-    SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q, dateValidation) {
+  function dpEditorPanelPushNotificationCondition(automation, FREQUENCY_TYPE, settingsService, utils,
+    SEND_TYPE, changesManager, $translate, CHANGE_TYPE, $q,  dateValidation) {
     var directive = {
       restrict: 'AE',
       templateUrl: 'angularjs/partials/automation/editor/directives/panel/initialConditions/dp-editor-panel-push-notification-condition.html',
@@ -31,11 +29,10 @@
     return directive;
 
     function link(scope) {
-      scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.HIDING);
       scope.isReadOnly = automation.isReadOnly;
-      scope.timeOptions = optionsListDataservice.getTimeOptions();
       scope.timeSelected = {};
       scope.SEND_TYPE = SEND_TYPE;
+      scope.FREQUENCY_TYPE = FREQUENCY_TYPE;
       scope.dpPopup = {
         show: false
       };
@@ -58,16 +55,13 @@
         dateValidationService = result;
       });
       settingsService.getSettings().then(function(response) {
-        scope.timeZones = mapTimeZones(response.timeZones);
-        scope.userTimeZone = response.idUserTimeZone;
-        scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
-        scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
+  
         scope.defaultISODate = moment(response.defaultISODate).toDate();
         var roundedMinutes = Math.ceil(Math.round(scope.defaultISODate.getMinutes() / 15) * 15);
 
         scope.frequencyData = {
           type: FREQUENCY_TYPE.DATE,
-          timezone: scope.userTimeZone,
+          timezone: response.idUserTimeZone,
           date: response.defaultISODate,
           time: {
             hour: roundedMinutes >= 60 ? scope.defaultISODate.getHours() + 1 : scope.defaultISODate.getHours(),
@@ -92,82 +86,37 @@
         }
       });
 
-      scope.onPrevTimeSelected = function() {
-        var index = _.findIndex(scope.timeOptions, function(option) {
-          return _.isEqual(option.value, scope.timeSelected.value);
-        });
-        if (index > 0) {
-          scope.onFrequencyAttributeSelected('time', scope.timeOptions[index - 1].value);
-        }
-      };
-
-      scope.onNextTimeSelected = function() {
-        var index = _.findIndex(scope.timeOptions, function(option) {
-          return _.isEqual(option.value, scope.timeSelected.value);
-        });
-        if (index < scope.timeOptions.length - 1) {
-          scope.onFrequencyAttributeSelected('time', scope.timeOptions[index + 1].value);
-        }
-      };
-
-      function updateTimeSelected(tempTime) {
-        if (tempTime) {
-          scope.timeSelected = _.find(scope.timeOptions, function(option) {
-            return _.isEqual(option.value, tempTime);
-          });
-        } else if (scope.selectedComponent && scope.selectedComponent.frequency) {
-          scope.timeSelected = _.find(scope.timeOptions, function(option) {
-            return _.isEqual(option.value, scope.selectedComponent.frequency.time);
-          });
-        }
-      }
-
-      function updateTimezoneSelected(tempTimezoneId) {
-        if (tempTimezoneId) {
-          scope.timezoneSelected = _.find(scope.timeZones, function(option) {
-            return _.isEqual(option.value, tempTimezoneId);
-          });
-        } else if (scope.selectedComponent && scope.selectedComponent.frequency) {
-          scope.timezoneSelected = _.find(scope.timeZones, function(option) {
-            return _.isEqual(option.value, scope.selectedComponent.frequency.timezone);
-          });
-        }
-      }
-
-      function mapTimeZones(timeZones) {
-        var timeZoneList = [];
-        angular.forEach(timeZones, function(time) {
-          var zone = {
-            value: time.IdUserTimeZone,
-            label: time.Name
-          };
-          timeZoneList.push(zone);
-        });
-        return timeZoneList;
-      }
-
       scope.onFrequencyAttributeSelected = function(key, value) {
-        if (key === 'time') {
-          scope.validateDate(value, undefined).then(function(valid) {
-            if (valid) {
-              utils.assign(scope.selectedComponent.frequency, key, value);
-            }
-            updateTimeSelected(value);
-          });
+        if (key === 'day' || key === 'days' || key === 'momentId' || key === 'customFields') {
+          utils.assign(scope.selectedComponent.frequency, key, value);
         } else {
-          scope.validateDate(undefined, value).then(function(valid) {
+          const time = key === 'time'? value: undefined;
+          const timeZone = key === 'timezone'? value: undefined;
+          scope.validateDate(time, timeZone).then(function(valid) {
             if (valid) {
               utils.assign(scope.selectedComponent.frequency, key, value);
-            } else {
-              updateTimezoneSelected(value);
             }
           });
         }
         scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
       };
 
-      scope.setFrequency = function(frequencyType) {
-        if (frequencyType === scope.selectedComponent.sendType) {
+      scope.setFrequency = function(frequencyType) { 
+        if(frequencyType === scope.selectedComponent.frequency.type) return;
+        const frequencyData = {
+          type: frequencyType,
+          timezone: scope.userTimeZone
+        };
+        if (scope.selectedComponent.frequency) {
+          frequencyData.time = scope.selectedComponent.frequency.time;
+          frequencyData.timezone = scope.selectedComponent.frequency.timezone;
+        }
+        scope.selectedComponent.setFrequency(frequencyData);
+        automation.updateAutomationFlowState();
+      };
+
+      scope.setSendType = function(sendType) {
+        if (sendType === scope.selectedComponent.sendType ) {
           return;
         }
 
@@ -181,13 +130,13 @@
           frequency: scope.selectedComponent.frequency
         };
         componentData = {
-          sendType: frequencyType,
-          frequency: frequencyType === SEND_TYPE.SCHEDULED ? scope.frequencyData : null
+          sendType: sendType,
+          frequency: sendType === SEND_TYPE.INMEDIATE ? null: getFrequencyData(sendType)
         };
         scope.selectedComponent.setData(componentData);
         changesManager.enable();
         newComponentData = {
-          sendType: frequencyType,
+          sendType: sendType,
           frequency: scope.selectedComponent.frequency
         };
 
@@ -202,16 +151,27 @@
         automation.checkCompleted();
       };
 
+      function getFrequencyData(type) {
+        const frecuencyTpe = {
+          [SEND_TYPE.SCHEDULED]: FREQUENCY_TYPE.DATE,
+          [SEND_TYPE.SCHEDULED_DATE]: FREQUENCY_TYPE.DAY_WEEK,
+        }
+        return {
+          ...scope.frequencyData, 
+          type: frecuencyTpe[type]
+        }
+      }
+
       scope.validateDate = function(time, timezoneId) {
         var defer = $q.defer();
-        isValidCurrentDate(time, timezoneId).then(function(valid) {
-          if (!valid) {
-            scope.validationForm['date'].$setValidity('invalidDate', false);
-          } else {
-            scope.validationForm['date'].$setValidity('invalidDate', true);
-          }
-          defer.resolve(valid);
-        });
+        if(scope.selectedComponent.sendType == SEND_TYPE.SCHEDULED_DATE) {
+          defer.resolve(true);
+        } else {
+          isValidCurrentDate(time, timezoneId).then(function(valid) {
+            scope.validationForm['date'].$setValidity('invalidDate', valid);
+            defer.resolve(valid);
+          });
+        }
         return defer.promise;
       };
 
@@ -254,9 +214,6 @@
         }
       };
 
-      scope.showDomainsSelection = function () {
-        scope.toggleDomainsSelection(DOMAINS_SELECTION_STATE.SHOWING);
-      };
     }
   }
 })();

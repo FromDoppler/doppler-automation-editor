@@ -1,27 +1,18 @@
-<div class="list-selection--panel">
-  <p class="title">{{ 'automation_editor.sidebar.Push_notification_domains_selection_title' | translate }}</p>
-  <div class="selected-list alt disable--toggler" ng-if="selectedComponent.domains.length">
-    <span class="text"><strong>{{ 'automation_editor.sidebar.Domains_Selected' | translate }}</strong></span>
-    <div ng-repeat="item in selectedComponent.domains" ng-if="selectedComponent.domains.length">
-      <span class="icon-check"></span>
-      <span class="name">{{ item.Domain }}</span>
-    </div>
-  </div>
-  <button ng-click="showDomainsSelection()" class="button button--small button--primary" ng-disabled="isReadOnly();">{{selectedComponent.domains.length ? 'automation_editor.sidebar.Domains_replace_button' : 'automation_editor.sidebar.Domains_select_button' | translate }}</button>
-</div>
-<div ng-show="selectedComponent.domains.length">
+<div class="dp-library">
   <p class="title title--alt">{{ 'automation_editor.sidebar.Push_notification_campaign_title' | translate }}</p>
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setFrequency(SEND_TYPE.INMEDIATE)">
-    <label class="frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_now_title' | translate }}</label>
-    <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.Push_notification_campaign_send_now_description' | translate }} </p>
+  <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setSendType(SEND_TYPE.INMEDIATE)">
+    <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_now_title' | translate }}</span>
     <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.INMEDIATE"></span>
   </div>
-  <div class="frequency--selector disable--toggler" ng-class="{'condensed': !!selectedComponent.sendType, 'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED}" ng-click="setFrequency(SEND_TYPE.SCHEDULED)">
-    <label class="frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_scheduled_title' | translate }}</label>
-    <p class="frequency-text" ng-if="!selectedComponent.sendType"> {{ 'automation_editor.sidebar.Push_notification_campaign_send_scheduled_description' | translate }} </p>
+  <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED}" ng-click="setSendType(SEND_TYPE.SCHEDULED)">
+    <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_scheduled_title' | translate }}</span>
     <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED"></span>
   </div>
-  <form name="validationForm" novalidate>
+  <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE}" ng-click="setSendType(SEND_TYPE.SCHEDULED_DATE)">
+    <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_repetitive_title' | translate }}</span>
+    <span class="icon-check" ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE"></span>
+  </div>
+  <form name="validationForm" novalidate class="awa-form">
     <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED">
       <div class="box relative">
         <label class="label--panel">{{ 'automation_editor.sidebar.Push_notification_campaign_field_date' | translate }}</label>
@@ -31,22 +22,87 @@
           <span class="read-only--tooltip" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
         </div>
       </div>
-      <div class="box relative frequency-time--panel">
-        <label class="label--panel">{{ 'automation_editor.sidebar.Push_notification_campaign_field_hour' | translate }}</label>
-        <div class="flex-grid-v-center--s-between">
-          <dp-editor-dropdown ng-class="{hasErrors: validationForm.date.$invalid}" class="dropdown dropdown--small disable--toggler" id="time" name="time" property="name" options="timeOptions" label="timeSelected.label" value-selected="timeSelected.value" on-select-option="onFrequencyAttributeSelected('time', option.value);" on-select-prev-option="onPrevTimeSelected()" on-select-next-option="onNextTimeSelected()" arrow-selection="true" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-          <dp-editor-dropdown ng-class="{hasErrors: validationForm.date.$invalid}" class="dropdown dropdown--large" id="timezone" name="timezone" property="name" options="timeZones" label="timezoneSelected.label" value-selected="timezoneSelected.value" on-select-option="onFrequencyAttributeSelected('timezone', option.value);" ng-disabled="isReadOnly();"></dp-editor-dropdown>
-        </div>
-        <div ng-messages="validationForm['date'].$error" class="error-messages--container">
-          <div ng-message="invalidDate" class="error">{{ 'validation_messages.invalid_date_time' | translate }}</div>
-        </div>
-        <div class="dp-library margin-t-25" ng-if="selectedComponent.hasStartDateExpired">
-          <div class="dp-wrap-message dp-wrap-cancel">
-            <span class="dp-message-icon"></span>
-            <div class="dp-content-message">
-              <p>{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error' | translate }} <a class="dp-message-link" target="_self" href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation">{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade' | translate }}</a></p>
-            </div>
-          </div>
+    </div>
+
+    <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE" style="display: grid;">
+      <p class="title--alt description">{{'automation_editor.sidebar.Push_notification_campaign_send_repetitive_description' | translate }}</p>
+
+      <div class="dp-input--radio">
+        <label>
+          <input type="radio" name="frequencyType" 
+            ng-disabled="!canEdit() && false"
+            ng-checked="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK"
+            ng-click="setFrequency(FREQUENCY_TYPE.DAY_WEEK)">
+          <span class="text--small">{{ 'automation_editor.sidebar.scheduled_date_day_week_title' | translate }}</span>
+        </label>
+      </div>
+  
+      <div class="dp-input--radio">
+        <label>
+          <input type="radio" name="frequencyType" 
+            ng-disabled="!canEdit() && false"
+            ng-checked="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH"
+            ng-click="setFrequency(FREQUENCY_TYPE.DAY_MONTH)">
+          <span class="text--small">{{ 'automation_editor.sidebar.scheduled_date_day_month_title' | translate }}</span>
+        </label>
+      </div>
+  
+      <div class="dp-input--radio">
+        <label>
+          <input type="radio" name="frequencyType"
+            ng-disabled="!canEdit() && false"
+            ng-checked="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR"
+            ng-click="setFrequency(FREQUENCY_TYPE.DAY_YEAR)">
+          <span class="text--small">{{ 'automation_editor.sidebar.scheduled_date_day_year_title' | translate }}</span>
+        </label>
+      </div>
+      
+      <!-- day week frequency -->
+      <dp-editor-panel-frequency-day-week-selector
+        ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_WEEK"
+        selected-days="selectedComponent.frequency.days"
+        on-change="onFrequencyAttributeSelected('days', days)"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-day-week-selector>
+        
+      <!-- day month frequency -->
+      <dp-editor-panel-frequency-day-month-selector
+        ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_MONTH"
+        selected-day="selectedComponent.frequency.day"
+        on-change="onFrequencyAttributeSelected('day', value)"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-day-month-selector>
+
+      <!-- day year frequency -->
+      <dp-editor-panel-frequency-day-year-selector
+        ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR"
+        frequency="selectedComponent.frequency"
+        moment-id="selectedComponent.frequency.momentId"
+        moment-days="selectedComponent.frequency.momentDays"
+        custom-fields="selectedComponent.frequency.customFields"
+        on-change="onFrequencyAttributeSelected(key, value)"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-day-year-selector>
+    </div>
+    <!-- common fields -->
+    <div ng-if="selectedComponent.frequency">
+      <!-- time and timezone selectors -->
+      <dp-editor-panel-frequency-time-selector
+        time-selected="selectedComponent.frequency.time"
+        timezone-selected="selectedComponent.frequency.timezone"
+        on-change="onFrequencyAttributeSelected(key, value)"
+        has-error="validationForm.date.$invalid"
+        is-read-only="isReadOnly()">
+      </dp-editor-panel-frequency-time-selector>
+    </div>
+    <div ng-messages="validationForm['date'].$error" class="error-messages--container">
+      <div ng-message="invalidDate" class="error">{{ 'validation_messages.invalid_date_time' | translate }}</div>
+    </div>
+    <div class="dp-library margin-t-25" ng-if="selectedComponent.hasStartDateExpired">
+      <div class="dp-wrap-message dp-wrap-cancel">
+        <span class="dp-message-icon"></span>
+        <div class="dp-content-message">
+          <p>{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_expired_error' | translate }} <a class="dp-message-link" target="_self" href="https://app.fromdoppler.com/plan-selection/premium/by-contacts?origin=warning_automation">{{ 'automation_editor.components.initial_condition.panel.validation_messages.trial_upgrade' | translate }}</a></p>
         </div>
       </div>
     </div>

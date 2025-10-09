@@ -16,7 +16,7 @@
 
   function componentsDataservice(COMPONENT_TYPE, automation, AUTOMATION_TYPE, WHATSAPP_WARNING_TYPE, CAMPAIGN_TYPE, settingsService) {
 
-    var settings = settingsService.getLoadedData();
+    const settings = settingsService.getLoadedData();
 
     var service = {
       getComponents: getComponents
@@ -53,7 +53,7 @@
         svg_path: '/../images/automation-push_notification.svg', // eslint-disable-line
         svg_hover_path: '/../images/automation-push_notification-hover.svg', // eslint-disable-line
         type: COMPONENT_TYPE.PUSH_NOTIFICATION,
-        isEnable: settings.isPushEnable && automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION
+        isEnable: settings.isPushEnable && (automationType === AUTOMATION_TYPE.PUSH_NOTIFICATION || settings.hasPushNotificationV2Enabled)
       }, {
         label: 'condition_icon',
         svg_path: '/../images/automation-condition.svg', // eslint-disable-line

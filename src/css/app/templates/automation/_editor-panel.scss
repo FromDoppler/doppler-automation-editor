@@ -858,7 +858,12 @@
   .dp-editor-panel-push-notification-condition {
     p {
       &.title--alt {
-        margin-top: 35px;
+        margin-top: 20px;
+      }
+      &.description {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18px;
       }
     }
 
@@ -1539,6 +1544,11 @@ input[type="text"].padding-r-buttons-place {
 }
 
 /* big-data dropdown */
+
+.dp-editor-panel-push-notification-condition .dp-library .dropdown-arrow {
+  right: 10px; 
+  top: 50%; 
+}
 
 .container-uploader {
   border: 1px solid #ccc;

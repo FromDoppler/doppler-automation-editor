@@ -179,7 +179,7 @@
               this.completed = AUTOMATION_COMPLETED_STATE.COMPLETE_WITH_WARNINGS;
             } else if (hasStartDateExpired) {
               this.completed = AUTOMATION_COMPLETED_STATE.WITH_TRIAL_EXPIRED;
-            } else {
+            } else if (this.completed !== AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS) {
               this.completed = AUTOMATION_COMPLETED_STATE.COMPLETED;
             }
           } else if (this.completed !== AUTOMATION_COMPLETED_STATE.WITH_DELETED_FIELDS

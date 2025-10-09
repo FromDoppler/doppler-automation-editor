@@ -5,12 +5,7 @@
     .module('dopplerApp.automation.editor')
     .directive('dpEditorPush', dpEditorPush);
 
-  dpEditorPush.$inject = [
-    'automation',
-    'pushService'
-  ];
-
-  function dpEditorPush(automation, pushService) {
+  function dpEditorPush() {
     var directive = {
       restrict: 'E',
       scope: {

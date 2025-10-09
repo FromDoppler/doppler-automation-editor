@@ -10,13 +10,14 @@
     'changesManager',
     'gridService',
     'selectedElementsService',
+    'warningsStepsService',
     'automation',
     '$translate',
     'DOMAINS_SELECTION_STATE'
   ];
 
   function dpEditorDomainsGrid(CHANGE_TYPE, changesManager, gridService,
-    selectedElementsService, automation, $translate, DOMAINS_SELECTION_STATE) {
+    selectedElementsService, warningsStepsService, automation, $translate, DOMAINS_SELECTION_STATE) {
     var directive = {
       restrict: 'E',
       templateUrl: 'angularjs/partials/automation/editor/directives/dp-editor-domains-grid.html',
@@ -92,6 +93,12 @@
         }
 
         selectedComponent.setData(data);
+        if(selectedComponent.type === 'push_notification')
+        {
+          selectedComponent.checkCompleted();
+          automation.checkCompleted();
+          warningsStepsService.checkWarningStep(selectedComponent);
+        }
         automation.checkActionsCompleted();      
 
         var newComponentData = JSON.parse(JSON.stringify({

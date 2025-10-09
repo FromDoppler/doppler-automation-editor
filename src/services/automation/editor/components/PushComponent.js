@@ -11,6 +11,7 @@
         });
 
         this.id = 0;
+        this.domains = [];
         this.name = '';
         this.pushMessageTitle = '';
         this.pushMessageBody = '';
@@ -30,6 +31,9 @@
         BaseComponent.prototype.setData.call(this, data);
         if (data.hasOwnProperty('id')) {
           this.id = data.id;
+        }
+         if (data.hasOwnProperty('domains')) {
+          this.domains = data.domains || [];
         }
         if (data.hasOwnProperty('name')) {
           this.name = data.name;
@@ -55,7 +59,8 @@
         && this.pushMessageBody !== undefined
         && this.pushMessageOnClickLink !== undefined
         && this.pushMessageImageUrl !== undefined
-        && this.name !== '';
+        && this.name !== ''
+        && this.domains.length > 0;
       };
 
       PushComponent.prototype.getPropertiesToWatch = function() {
