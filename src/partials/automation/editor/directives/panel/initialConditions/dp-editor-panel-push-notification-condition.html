@@ -1,4 +1,4 @@
-<div class="dp-library">
+<div class="dp-library-x">
   <p class="title title--alt">{{ 'automation_editor.sidebar.Push_notification_campaign_title' | translate }}</p>
   <div class="frequency--selector disable--toggler condensed" ng-class="{'selected': selectedComponent.sendType === SEND_TYPE.INMEDIATE}" ng-click="setSendType(SEND_TYPE.INMEDIATE)">
     <span class="title frequency-text">{{ 'automation_editor.sidebar.Push_notification_campaign_send_now_title' | translate }}</span>
@@ -27,7 +27,7 @@
     <div ng-if="selectedComponent.sendType === SEND_TYPE.SCHEDULED_DATE" style="display: grid;">
       <p class="title--alt description">{{'automation_editor.sidebar.Push_notification_campaign_send_repetitive_description' | translate }}</p>
 
-      <div class="dp-input--radio">
+      <div class="dp-input--radio margin-t-25">
         <label>
           <input type="radio" name="frequencyType" 
             ng-disabled="!canEdit() && false"
@@ -37,7 +37,7 @@
         </label>
       </div>
   
-      <div class="dp-input--radio">
+      <div class="dp-input--radio margin-t-10">
         <label>
           <input type="radio" name="frequencyType" 
             ng-disabled="!canEdit() && false"
@@ -47,7 +47,7 @@
         </label>
       </div>
   
-      <div class="dp-input--radio">
+      <!-- <div class="dp-input--radio">
         <label>
           <input type="radio" name="frequencyType"
             ng-disabled="!canEdit() && false"
@@ -55,7 +55,7 @@
             ng-click="setFrequency(FREQUENCY_TYPE.DAY_YEAR)">
           <span class="text--small">{{ 'automation_editor.sidebar.scheduled_date_day_year_title' | translate }}</span>
         </label>
-      </div>
+      </div> -->
       
       <!-- day week frequency -->
       <dp-editor-panel-frequency-day-week-selector
@@ -74,7 +74,7 @@
       </dp-editor-panel-frequency-day-month-selector>
 
       <!-- day year frequency -->
-      <dp-editor-panel-frequency-day-year-selector
+      <!-- <dp-editor-panel-frequency-day-year-selector
         ng-if="selectedComponent.frequency.type === FREQUENCY_TYPE.DAY_YEAR"
         frequency="selectedComponent.frequency"
         moment-id="selectedComponent.frequency.momentId"
@@ -82,7 +82,7 @@
         custom-fields="selectedComponent.frequency.customFields"
         on-change="onFrequencyAttributeSelected(key, value)"
         is-read-only="isReadOnly()">
-      </dp-editor-panel-frequency-day-year-selector>
+      </dp-editor-panel-frequency-day-year-selector> -->
     </div>
     <!-- common fields -->
     <div ng-if="selectedComponent.frequency">

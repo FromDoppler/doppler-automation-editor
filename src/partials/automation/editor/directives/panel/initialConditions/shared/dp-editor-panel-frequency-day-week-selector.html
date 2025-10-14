@@ -3,12 +3,21 @@
     {{ weekSelectorTitle }}
   </p>
   <div class="day--selector disable--toggler" ng-repeat="day in weekDays">
-    <label class="dp-label-checkbox">
+    <!-- se sincroniza los diseños de checkbox a fechas programadas-->
+    <!-- <label class="dp-label-checkbox">
       <input type="checkbox"
-             ng-model="day.selected"
-             ng-disabled="isReadOnly()"
-             ng-change="onDayToggled(day)" />
+        ng-model="day.selected"
+        ng-disabled="isReadOnly()"
+        ng-change="onDayToggled(day)" />
       <span>{{ day.label }}</span>
-    </label>
+    </label> -->
+
+    <input class="check-custom" id="check{{day.value}}" type="checkbox"
+      ng-class="{'checked': day.selected}"
+      ng-model="day.selected"
+      ng-change="onDayToggled(day)"
+      ng-disabled="isReadOnly();"/>
+    <label ng-click="day.selected = !day.selected; onDayToggled(day);"></label>
+    <label class="day" for="check{{day.value}}">{{day.label}}</label> 
   </div>
 </div>
