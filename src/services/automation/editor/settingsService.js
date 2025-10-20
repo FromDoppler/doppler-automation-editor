@@ -27,6 +27,7 @@
 
       if (_.isEmpty(editorSettings) && !promise) {
         automationDataservice.getSettings().then(function(response) {
+          response.data.hasPushNotificationV2Enabled = true; //force flag
           editorSettings = response.data;
           userFieldsDataservice.load(editorSettings.customFields);
           defer.resolve(response.data);
