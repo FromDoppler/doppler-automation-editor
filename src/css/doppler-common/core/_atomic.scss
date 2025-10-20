@@ -22,17 +22,12 @@
 .align-vertical-center {
   align-items:center;
 }
-.margin-t-10 {
-  margin-top: 10px;
-}
-.margin-t-15 {
-  margin-top: 15px;
-}
-.margin-t-20 {
-  margin-top: 20px;
-}
-.margin-t-25 {
-  margin-top: 25px;
+// generate margin-top from 10 to 30
+@for $i from 0 through 4 {
+  $value: 10 + ($i * 5);
+  .margin-t-#{$value} {
+    margin-top: #{$value}px;
+  }
 }
 .margin-b-20 {
   margin-bottom: 20px;
