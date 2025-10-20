@@ -155,4 +155,22 @@
       <div ng-show="invalidHttpsStart" class="error">{{ 'validation_messages.https_url_pattern_error_message' | translate }}</div>
     </div>
   </div>
+
+  <div class="dp-library">
+    <div class="flex-grid-v-center--s-between">
+      <strong>{{ 'automation_editor.sidebar.push_button_section' | translate }}</strong>
+      <div class="dp-tooltip-container">
+        <span class="ms-icon icon-info-icon"></span>
+        <div class="dp-tooltip-top dp-tooltip-top-right">
+          <span>{{ 'automation_editor.sidebar.push_button_section_info' | translate }}</span>
+        </div>
+      </div>
+    </div>
+    <button ng-if="selectedComponent.pushActions.length < 2"
+      class="dp-button link-green margin-t-30"
+      ng-click="addNewAction()"
+      type="button">
+      <strong>{{ 'automation_editor.sidebar.push_button_section_add_action' | translate }}</strong>
+    </button>
+  </div>
 </form>
