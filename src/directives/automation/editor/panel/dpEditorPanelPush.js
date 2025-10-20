@@ -38,6 +38,8 @@
       scope.acceptedFileTypes = 'image/jpeg, image/png, image/jpg';
       scope.statusUploader = 'init';
 
+      scope.pushIconOptions = getIconOptions();
+
       scope.hideExcededCreditsMessage = function () {
         scope.hasExcededCredits = false;
       }
@@ -117,6 +119,20 @@
         });
       }
 
+      scope.removePushAction = function (index) {
+        scope.selectedComponent.pushActions.splice(index, 1);
+      }
+
+      scope.actionIconSelected = function (index, option) {
+        scope.selectedComponent.pushActions[index].icon = option.value;
+      }
+      
+      scope.getIconLabel = function(action) {
+        return action.icon.length >0 ?
+          '<img src="'+ action.icon + '" alt="icon action" width="64" height="64">' :
+          '';
+      }
+
       var fileInput = document.getElementById('fileInput');
       var containerUploader = document.getElementById('containerUploader');
       
@@ -164,6 +180,33 @@
         };
       })();
       
+    }
+   
+    function getIconOptions() {
+      const PATH = "https://cdn.fromdoppler.com/doppler-automation-editor-mfe/static/images/";
+      const iconList = [
+        'glyph_641',
+        'glyph_660',
+        'glyph_861',
+        'glyph_886',
+        'glyph_918',
+        'glyph_1115',
+        'glyph_1123',
+        'glyph_1151',
+        'glyph_1474',
+        'glyph_1722',
+        'glyph_2191',
+        'glyph_2690',
+        'glyph_2750',
+        'glyph_2956',
+      ];
+
+      return iconList.map(iconName => {
+        return {
+          label: '<img src="'+ PATH.concat(iconName).concat(".png") + '" alt="icon action" width="64" height="64">',
+          value: PATH.concat(iconName).concat('.png')
+        }
+      })
     }
   }
 })();

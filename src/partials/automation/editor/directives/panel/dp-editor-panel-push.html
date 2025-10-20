@@ -166,6 +166,61 @@
         </div>
       </div>
     </div>
+    <div class="margin-t-30" ng-repeat="(index, action) in selectedComponent.pushActions">
+      <div class="box-type--container relative">
+        <div class="actions-element--container actions-element-top-position disable--toggler">
+          <dp-editor-delete-component on-delete-component="removePushAction(index)"></dp-editor-delete-component>
+        </div>
+        <div class="input--group--alt">
+          <div class="dp-rowflex">
+            <div class="col-md-9">
+              <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_text' | translate : {index:index +1 }  }}</label>
+              <input type="text" class="input--text"
+                name="labelAction{{index}}"
+                ng-model="selectedComponent.pushActions[index].label"
+                ng-class="{ 'hasErrors': pushForm.labelAction{{index}}.$invalid }"
+                ng-maxlength="50"
+                placeholder="{{ 'automation_editor.sidebar.push_button_section_text_placeholder' | translate }}"
+                ng-disabled="isReadOnly();"/>
+              <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+              <div ng-messages="pushForm['labelAction' + index].$error" class="error-messages--container">
+                <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_icon' | translate }}</label>
+              <dp-editor-dropdown
+                class="dropdown dropdown--full dropdown-list-item--image"
+                name="iconAction{{index}}"
+                property="name"
+                options="pushIconOptions"
+                on-select-option="actionIconSelected(index, option)"
+                value-selected="action.icon"
+                label="getIconLabel(action)"
+                ng-disabled="isReadOnly();">
+              </dp-editor-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="input--group--alt">
+          <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_url' | translate : {index:index +1 } }}</label>
+          <input type="text" class="input--text"
+            name="urlAction{{index}}"
+            ng-model="action.url"
+            ng-class="{ 'hasErrors': pushForm.urlAction{{index}}.$invalid }"
+            ng-maxlength="300"
+            ng-pattern="/^https:\/\/.+\..+$/"
+            placeholder="{{ 'automation_editor.sidebar.push_button_section_url_placeholder' | translate }}"
+            ng-disabled="isReadOnly();"/>
+            <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+            <div ng-messages="pushForm['urlAction' + index].$error" class="error-messages--container">
+              <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+              <div ng-message="pattern" class="error">{{ 'validation_messages.url_pattern_error_message' | translate}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <button ng-if="selectedComponent.pushActions.length < 2"
       class="dp-button link-green margin-t-30"
       ng-click="addNewAction()"
