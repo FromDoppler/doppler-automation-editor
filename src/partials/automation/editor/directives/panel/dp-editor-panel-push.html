@@ -172,6 +172,18 @@
           <dp-editor-delete-component on-delete-component="removePushAction(index)"></dp-editor-delete-component>
         </div>
         <div class="input--group--alt">
+          <!-- Verion emojis en linea
+          <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_text' | translate : {index:index +1 }  }}</label>
+          <div class="input-wrapper content-wrapper"  ng-class="{'hasErrors': pushForm.labelAction{{index}}.$invalid}" >
+            <input type="text" class="form-control input--text"
+              name="labelAction{{index}}"
+              ng-model="selectedComponent.pushActions[index].label"
+              ng-class="{ 'hasErrors': pushForm.labelAction{{index}}.$invalid }"
+              ng-maxlength="50"
+              placeholder="{{ 'automation_editor.sidebar.push_button_section_text_placeholder' | translate }}"
+              ng-disabled="isReadOnly();"/>
+            <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons> 
+          </div> -->
           <div class="dp-rowflex">
             <div class="col-md-9">
               <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_text' | translate : {index:index +1 }  }}</label>
