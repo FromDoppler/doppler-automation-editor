@@ -3,7 +3,7 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .factory('PushComponent', ['BaseComponent', 'COMPONENT_TYPE', function(BaseComponent, COMPONENT_TYPE) {
+    .factory('PushComponent', ['BaseComponent', 'COMPONENT_TYPE', 'REGEX', function(BaseComponent, COMPONENT_TYPE, REGEX) {
 
       function PushComponent(data) {
         BaseComponent.call(this, {
@@ -17,10 +17,23 @@
         this.pushMessageBody = '';
         this.pushMessageOnClickLink = '';
         this.pushMessageImageUrl = '';
+        this.pushPreferLargeImage =  false;
+        this.pushActions = [
+          {
+            name: 'primary',
+            label: '',
+            icon: '',
+            url: '',
+          }
+        ];
 
         if (data) {
           this.setData(data);
         }
+      }
+
+      function isFilled(value) {
+        return value !== undefined && value !== null && !(typeof value === 'string' && value.trim() === '');
       }
 
       PushComponent.prototype = Object.create(BaseComponent.prototype);
@@ -32,7 +45,7 @@
         if (data.hasOwnProperty('id')) {
           this.id = data.id;
         }
-         if (data.hasOwnProperty('domains')) {
+        if (data.hasOwnProperty('domains')) {
           this.domains = data.domains || [];
         }
         if (data.hasOwnProperty('name')) {
@@ -50,17 +63,45 @@
         if (data.hasOwnProperty('pushMessageImageUrl')) {
           this.pushMessageImageUrl = data.pushMessageImageUrl;
         }
+        if (data.hasOwnProperty('pushPreferLargeImage')) {
+          this.pushPreferLargeImage = data.pushPreferLargeImage;
+        }
+        if (data.hasOwnProperty('pushActions')) {
+          this.pushActions = data.pushActions;
+        }
       };
 
       PushComponent.prototype.checkCompleted = function() {
-        this.completed = this.pushMessageTitle !== ''
-        && this.pushMessageBody !== ''
-        && this.pushMessageTitle !== undefined
-        && this.pushMessageBody !== undefined
-        && this.pushMessageOnClickLink !== undefined
-        && this.pushMessageImageUrl !== undefined
-        && this.name !== ''
-        && this.domains.length > 0;
+        const hasValidPushActions =
+          Array.isArray(this.pushActions) &&
+          (
+            this.pushActions.length === 0 ||
+            this.pushActions.every(action =>
+              isFilled(action.label) && REGEX.STRICT_START_HTTPS.test(action.url)
+            )
+          );
+
+        const fields = [
+          this.pushMessageTitle,
+          this.pushMessageBody,
+          this.name
+        ];
+
+        const optionalUrlFields = [
+          this.pushMessageOnClickLink,
+          this.pushMessageImageUrl
+        ];
+
+        const areOptionalUrlsValid = optionalUrlFields.every(value =>
+          value === '' ||  REGEX.DOMAIN_HTTP.test(value)
+        );      
+
+        this.completed =
+          fields.every(isFilled) &&
+          Array.isArray(this.domains) &&
+          areOptionalUrlsValid &&
+          this.domains.length > 0 &&
+          hasValidPushActions;
       };
 
       PushComponent.prototype.getPropertiesToWatch = function() {
@@ -70,7 +111,9 @@
           'pushMessageTitle',
           'pushMessageBody',
           'pushMessageOnClickLink',
-          'pushMessageImageUrl'
+          'pushMessageImageUrl',
+          'pushPreferLargeImage',
+          'pushActions'
         ]);
       };
 
