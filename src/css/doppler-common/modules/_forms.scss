@@ -570,3 +570,7 @@ input.cmn-toggle-round {
   font-weight: 100;
   width: 400px;
 }
+
+form [ng-message].error {
+  display: inline-block;
+}
