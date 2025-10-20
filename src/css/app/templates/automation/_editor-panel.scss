@@ -1596,4 +1596,16 @@ input[type="text"].padding-r-buttons-place {
   }
 }
 
+.dp-library .dp-tooltip-container:hover {
+  .dp-tooltip-top.dp-tooltip-top-right {
+    transform: translate(-80%, -90%);
+    &:before{
+      left: 78%;
+    }
+    &:after{
+      left: 78%;
+    }      
+  }
+} 
+
 /* END: overwritten "UI library" section */
