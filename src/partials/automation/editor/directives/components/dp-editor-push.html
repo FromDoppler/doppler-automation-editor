@@ -5,21 +5,34 @@
   </div>
 
   <div class="uid-label-component">{{component.uid}}</div>
-  <img class="image-complete" src="/../images/automation-push_notification.svg" />
-  <img class="image-incomplete" src="/../images/automation-push_notification-grey.svg" />
-  <p class="container-name">
-    <span ng-show="!component.pushMessageTitle && !component.pushMessageBody" ng-bind-html="'automation_editor.canvas.push_placeholder' | translate"></span>
-    <span ng-show="component.pushMessageTitle || component.pushMessageBody">
-      {{ 'automation_editor.canvas.push_title_preview' | translate }}
-      <span ng-if="!component.pushMessageTitle" class="brackets">[[[...]]]</span>
-      <strong ng-if="component.pushMessageTitle">{{ component.pushMessageTitle }}</strong>
-      <br>
-      <br>
-      {{ 'automation_editor.canvas.push_body_preview' | translate }}
-      <span ng-if="!component.pushMessageBody" class="brackets">[[[...]]]</span>
-      <strong ng-if="component.pushMessageBody">{{ component.pushMessageBody }}</strong>
+  
+  <div class="notification-content">
+    <span class="chrome-icon">
+        <strong>Chrome</strong> • {{ 'automation_editor.canvas.push_domain' | translate }} • <strong>now</strong>
     </span>
-  </p>
+    <div class="notification-body">
+      <img ng-if = "getPushIconUrl() !== ''"
+        ng-src="{{ getPushIconUrl() }}"
+        style="width: 60px; height:60px;"
+        alt="Logo" class="notification-logo">
+      <div>
+        <strong ng-if="component.pushMessageTitle">{{ component.pushMessageTitle }}</strong>
+        <strong ng-if="!component.pushMessageTitle">{{ 'automation_editor.canvas.push_placeholder_title' | translate }}</strong>
+        <p ng-if="component.pushMessageBody">{{ component.pushMessageBody }}</p>
+        <p ng-if="!component.pushMessageBody">{{ 'automation_editor.canvas.push_placeholder_message' | translate }}</p>
+      </div>
+    </div>
+    <div class="notification-image-section" ng-if="component.pushPreferLargeImage && component.pushMessageImageUrl.length > 0">
+      <img ng-src="{{ component.pushMessageImageUrl }}"
+        style="width: 100%; height:auto;"
+        alt="image {{ component.pushMessageTitle }}" class="notification-image">
+    </div>
+     
+    <div ng-if="component.pushActions.length > 0" class="notification-actions">
+      <button class="btn" ng-bind-html="getLabelAction(0)"></button>
+      <button ng-if="component.pushActions.length > 1" class="btn" ng-bind-html="getLabelAction(1)"></button>
+    </div>
+  </div>
   <p class="container-name name">
     <strong><ellipsis-with-tooltip text="component.name" css-class="multiline medium" multi-line="true"></ellipsis-with-tooltip></strong>
   </p>
