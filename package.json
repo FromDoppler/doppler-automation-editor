@@ -53,6 +53,18 @@
     "webpack-cli": "5.0.0",
     "webpack-dev-server": "4.11.1"
   },
+  "cspell": {
+    "version": "0.2",
+    "dictionaryDefinitions": [
+        {
+            "name": "automation-editor-words",
+            "path": "./automation-editor-words.txt",
+            "addWords": true
+        }
+    ],
+    "dictionaries": ["automation-editor-words"],
+    "ignorePaths": ["node_modules", "/automation-editor-words.txt"]
+},
   "scripts": {
     "postinstall": "npm run copy-libs",
     "update-deps": "npm update",

@@ -1,0 +1,23 @@
+# This is a comment
+!forbiddenword
+angularJs
+are
+calidad
+Campaña
+Campañas
+Carrito
+cfield
+changeables
+Exceded
+favorite
+Lista
+Listas
+momentjs
+my
+templatecache
+these
+words
+FORTYEIGHT
+TWENTYFOUR_HOURS
+SEVENTYTWO
+amountofproducts
