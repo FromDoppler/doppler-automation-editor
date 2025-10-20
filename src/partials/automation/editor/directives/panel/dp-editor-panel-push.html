@@ -27,7 +27,7 @@
 </div>
 
 
-<form name="pushForm" class="form--container margin-t-25" id="form-panel-push" novalidate>
+<form name="pushForm" class="form--container awa-form margin-t-25" id="form-panel-push" novalidate>
     <!-- push name -->
   <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.Push_name' | translate }}:</label>
@@ -139,4 +139,19 @@
         ng-disabled="isReadOnly();"
       >
   </div>
+  <div ng-if="selectedComponent.pushMessageImageUrl.length > 0" class="input--group dp-library">
+    <label class="dp-label-checkbox">
+      <input type="checkbox" 
+        ng-checked="selectedComponent.pushPreferLargeImage" 
+        ng-model="selectedComponent.pushPreferLargeImage">
+      <span>{{ 'automation_editor.sidebar.push_image_size' | translate }}</span>
+      <div class="dp-tooltip-container">
+        <span class="ms-icon icon-info-icon"></span>
+        <div class="dp-tooltip-top dp-tooltip-top-right">
+          <span>{{ 'automation_editor.sidebar.push_image_size_tip' | translate }}</span>
+        </div>
+      </div>
+    </label>
+  </div>
+
 </form>

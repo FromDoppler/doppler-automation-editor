@@ -920,6 +920,8 @@ export const automation_es_translations = {
       "push_message_body": "Texto",
       "push_message_body_desc": "Tip. Puedes usar emojis 😃🤩🥳. Los emojis cuentan como más de un caracter sobre el máximo permitido del mensaje.",
       "push_message_on_click_link": "URL de destino (opcional)",
+      "push_image_size": "Usar imagen grande",
+      "push_image_size_tip": "(solo visible en algunos navegadores)",
       "push_uploader_title" : "Imagen (opcional)",
       "push_uploader_retry_button" : "reintentar",
       "push_uploader_drag_title" : "Arrastra aquí o",
