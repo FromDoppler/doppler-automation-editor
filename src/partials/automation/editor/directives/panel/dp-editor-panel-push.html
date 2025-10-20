@@ -89,23 +89,7 @@
       <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
     </div>
   </div>
-  <div class="input--group">
-    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_on_click_link' | translate }}</label>
-    <input type="text" class="input--text"
-           name="pushMessageOnClickLink"
-           ng-model="selectedComponent.pushMessageOnClickLink"
-           ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
-           ng-maxlength="300"
-           ng-pattern="validationLinkUrl"
-           ng-change="clearErrorsOnEmptyLink();"
-           ng-disabled="isReadOnly();"/>
-    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
-    <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
-      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
-      <div ng-show="invalidUrl" class="error">{{ 'validation_messages.url_pattern_error_message' | translate }}</div>
-      <div ng-show="invalidHttpsStart" class="error">{{ 'validation_messages.https_url_pattern_error_message' | translate }}</div>
-    </div>
-  </div>
+
   <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.push_uploader_title' | translate }}</label>
       <div class="container-uploader" id="containerUploader">
@@ -154,4 +138,21 @@
     </label>
   </div>
 
+  <div class="input--group">
+    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_on_click_link' | translate }}</label>
+    <input type="text" class="input--text"
+      name="pushMessageOnClickLink"
+      ng-model="selectedComponent.pushMessageOnClickLink"
+      ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
+      ng-maxlength="300"
+      ng-pattern="validationLinkUrl"
+      ng-change="clearErrorsOnEmptyLink();"
+      ng-disabled="isReadOnly();"/>
+    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+    <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+      <div ng-show="invalidUrl" class="error">{{ 'validation_messages.url_pattern_error_message' | translate }}</div>
+      <div ng-show="invalidHttpsStart" class="error">{{ 'validation_messages.https_url_pattern_error_message' | translate }}</div>
+    </div>
+  </div>
 </form>
