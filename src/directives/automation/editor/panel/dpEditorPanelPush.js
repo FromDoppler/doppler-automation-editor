@@ -108,6 +108,15 @@
         document.getElementById('fileInput').click();
       };
 
+      scope.addNewAction = function() {
+        scope.selectedComponent.pushActions.push({
+          name: 'secondary',
+          label: '',
+          icon: '',
+          url: '',
+        });
+      }
+
       var fileInput = document.getElementById('fileInput');
       var containerUploader = document.getElementById('containerUploader');
       
