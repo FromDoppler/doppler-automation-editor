@@ -146,7 +146,10 @@
               callParentMethod(scope, "toogleTinyEditorView", true);
               break;
             case CONTENT_TYPE.TEMPLATE:
-              window.location.href = templatesService.getEditorCampaignUrl(campaign.id, campaign.editorType);
+              const idThirdPartyApp = {
+                idThirdPartyApp: automation.getModel().initialCondition.idThirdPartyApp || 0,
+              };
+              window.location.href = templatesService.getEditorCampaignUrl(campaign.id, campaign.editorType, idThirdPartyApp);
               break;
             case CONTENT_TYPE.IMPORT:
               callParentMethod(scope, "toggleImportHtmlView", true);

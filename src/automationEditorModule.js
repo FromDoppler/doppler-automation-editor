@@ -99,13 +99,14 @@ app.config(['$routeProvider', function ($routeProvider) {//$stateProvider', '$lo
             $scope.showCreateListTemplate = value;
         };
 
-        $scope.toggleTemplateView = function(value, type) {
+        $scope.toggleTemplateView = function(value, type, idThirdPartyApp) {
             $scope.showTemplates = value;
             $scope.isDynamicAutomation = type === AUTOMATION_TYPE.ABANDONED_CART ||
             type === AUTOMATION_TYPE.VISITED_PRODUCTS ||
             type === AUTOMATION_TYPE.PENDING_ORDER ||
             type === AUTOMATION_TYPE.CONFIRMATION_ORDER;
             automationData.data.automationType = $scope.isDynamicAutomation ? type : null;
+            $scope.idThirdPartyApp = idThirdPartyApp || {};
         };
 
         $scope.$on('TEMPLATES.CLOSE_TEMPLATES_VIEW', function() {

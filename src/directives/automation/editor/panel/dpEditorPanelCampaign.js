@@ -165,6 +165,9 @@
       });
 
       scope.toggleTemplates = function(value) {
+        const idThirdPartyApp = {
+          idThirdPartyApp: automation.getModel().initialCondition.idThirdPartyApp || 0,
+        };
         if (value && changesManager.getUnsavedChanges()) {
           automation.setIsProcessing(true);
           automation.saveChanges().then(function() {
@@ -173,17 +176,17 @@
             if (scope.selectedComponent.thumbnailUrl === '') {
               scope.toggleTemplateView(true, scope.selectedComponent.campaignType);
             } else {
-              window.location.href = templatesService.getEditorCampaignUrl(scope.selectedComponent.id, scope.selectedComponent.editorType);
+              window.location.href = templatesService.getEditorCampaignUrl(scope.selectedComponent.id, scope.selectedComponent.editorType, idThirdPartyApp);
             }
           }, function() {
             automation.setIsProcessing(false);
           });
         } else if (value && scope.selectedComponent.thumbnailUrl !== '') {
-          window.location.href = templatesService.getEditorCampaignUrl(scope.selectedComponent.id, scope.selectedComponent.editorType);
+          window.location.href = templatesService.getEditorCampaignUrl(scope.selectedComponent.id, scope.selectedComponent.editorType, idThirdPartyApp);
         } else if (!value) {
-          scope.toggleTemplateView(true, scope.selectedComponent.campaignType);
+          scope.toggleTemplateView(true, scope.selectedComponent.campaignType, idThirdPartyApp);
         } else {
-          scope.toggleTemplateView(value, scope.selectedComponent.campaignType);
+          scope.toggleTemplateView(value, scope.selectedComponent.campaignType, idThirdPartyApp);
         }
       };
 
