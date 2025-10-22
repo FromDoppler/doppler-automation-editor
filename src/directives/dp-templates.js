@@ -414,7 +414,9 @@
 
       $scope.newAutomationCampaign = function(template) {
         var selectedComponent = selectedElementsService.getSelectedComponent();
-
+        const idThirdPartyApp = {
+          idThirdPartyApp: automation.getModel().initialCondition.idThirdPartyApp || 0,
+        };
         // This block is to allow history.back() to template selection
         // redirectToTemplates is not set because the campaign already has a thumbnail set.
         // See https://makingsense.atlassian.net/browse/DE-942
@@ -422,7 +424,9 @@
           if (!templatesService.tryToRedirectToSetCampaignFromTemplateIfUnlayerAndEdit(
             template.IdTemplate,
             template.EditorType,
-            selectedComponent.id))
+            selectedComponent.id,
+            idThirdPartyApp
+          ))
           {
             // This block is to allow history.back() to template selection
             // it works with MSEditor but not with Unlayer.
