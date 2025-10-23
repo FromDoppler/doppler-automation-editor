@@ -163,10 +163,8 @@ $imagesPath: "../images" !default;
 }
 
 .aplication-types--new-feature {
+  z-index: 3;
   position: relative;
-  div {
-    z-index: 1;
-  }
   &::before {
     content: '';
     display: block;
