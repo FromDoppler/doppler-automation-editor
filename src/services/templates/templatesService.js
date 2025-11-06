@@ -117,7 +117,7 @@
       switch (editorType) {
         case EMAIL_EDITOR_TYPE.UNLAYER: return unlayerEditorHelper.getUnlayerCampaignEditorUrl(idCampaign, ensureExitParameterWithCurrentUrl(parameters, idCampaign));
         case EMAIL_EDITOR_TYPE.MSEDITOR:
-        default: return '/MSEditor/Editor?idCampaign=' + idCampaign;
+        default: return '/MSEditor/Editor?idCampaign=' + idCampaign + '&idThirdPartyApp=' + parameters.idThirdPartyApp;
       }
     }
 
