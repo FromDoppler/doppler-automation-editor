@@ -17,7 +17,7 @@
         this.pushMessageBody = '';
         this.pushMessageOnClickLink = '';
         this.pushMessageImageUrl = '';
-        this.pushPreferLargeImage =  false;
+        this.pushPreferLargeImage =  true;
         this.pushActions = [
           {
             name: 'primary',

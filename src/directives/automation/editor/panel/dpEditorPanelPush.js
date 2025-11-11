@@ -33,6 +33,9 @@
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
         scope.hasPushNotificationV2Enabled = response.hasPushNotificationV2Enabled;
+        if(!scope.hasPushNotificationV2Enabled) {
+          scope.selectedComponent.pushActions = [];
+        }
       });
 
       scope.acceptedFileTypes = 'image/jpeg, image/png, image/jpg';
