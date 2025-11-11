@@ -77,7 +77,7 @@
           (
             this.pushActions.length === 0 ||
             this.pushActions.every(action =>
-              isFilled(action.label) && REGEX.STRICT_START_HTTPS.test(action.url)
+              isFilled(action.label)
             )
           );
 
@@ -87,14 +87,9 @@
           this.name
         ];
 
-        const optionalUrlFields = [
-          this.pushMessageOnClickLink,
-          this.pushMessageImageUrl
-        ];
-
-        const areOptionalUrlsValid = optionalUrlFields.every(value =>
-          value === '' ||  REGEX.DOMAIN_HTTP.test(value)
-        );      
+       const areOptionalUrlsValid =
+        (this.pushMessageOnClickLink === '' || REGEX.URL.test(this.pushMessageOnClickLink)) &&
+        (!this.pushMessageImageUrl || this.pushMessageImageUrl === '' || REGEX.URL_IMAGE.test(this.pushMessageImageUrl));
 
         this.completed =
           fields.every(isFilled) &&
