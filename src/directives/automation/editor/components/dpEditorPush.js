@@ -45,7 +45,7 @@
 
       scope.getPushIconUrl = function() {
         const defaultIconPath = '';
-        if(!scope.component.pushPreferLargeImage && scope.component.pushMessageImageUrl.length > 0) {
+        if(!scope.component.pushPreferLargeImage && scope.component.pushMessageImageUrl) {
           return scope.component.pushMessageImageUrl;
         }
         if(domains.length > 0) {
