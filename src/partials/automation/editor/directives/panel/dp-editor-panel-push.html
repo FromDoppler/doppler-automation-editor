@@ -233,7 +233,7 @@
       </div>
     </div>
 
-    <button ng-if="selectedComponent.pushActions.length < 2"
+    <button ng-if="!selectedComponent.pushActions || selectedComponent.pushActions.length < 2"
       class="dp-button link-green margin-t-30"
       ng-click="addNewAction()"
       type="button">

@@ -115,8 +115,10 @@
       };
 
       scope.addNewAction = function() {
+        if(!scope.selectedComponent.pushActions) {
+          scope.selectedComponent.pushActions = [];
+        }
         scope.selectedComponent.pushActions.push({
-          name: 'secondary',
           label: '',
           icon: '',
           url: '',
