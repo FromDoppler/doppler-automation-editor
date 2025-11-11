@@ -35,6 +35,7 @@
         scope.hasPushNotificationV2Enabled = response.hasPushNotificationV2Enabled;
         if(!scope.hasPushNotificationV2Enabled) {
           scope.selectedComponent.pushActions = [];
+          scope.selectedComponent.pushPreferLargeImage = true;
         }
       });
 
