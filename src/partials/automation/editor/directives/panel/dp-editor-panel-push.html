@@ -123,7 +123,7 @@
         ng-disabled="isReadOnly();"
       >
   </div>
-  <div ng-if="selectedComponent.pushMessageImageUrl.length > 0" class="input--group dp-library">
+  <div ng-if="selectedComponent.pushMessageImageUrl.length > 0 && hasPushNotificationV2Enabled" class="input--group dp-library">
     <label class="dp-label-checkbox">
       <input type="checkbox" 
         ng-checked="selectedComponent.pushPreferLargeImage" 
@@ -156,7 +156,7 @@
     </div>
   </div>
 
-  <div class="dp-library">
+  <div class="dp-library" ng-if="hasPushNotificationV2Enabled">
     <div class="flex-grid-v-center--s-between">
       <strong>{{ 'automation_editor.sidebar.push_button_section' | translate }}</strong>
       <div class="dp-tooltip-container">
