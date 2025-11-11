@@ -209,6 +209,9 @@
           label: '<img src="'+ PATH.concat(iconName).concat(".png") + '" alt="icon action" width="64" height="64">',
           value: PATH.concat(iconName).concat('.png')
         }
+      }).concat({
+        label: '<img src="'+ PATH.concat('empty').concat(".png") + '" alt="icon action" width="64" height="64">',
+        value: ''
       })
     }
   }
