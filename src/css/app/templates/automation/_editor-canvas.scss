@@ -900,7 +900,7 @@ $imagesPath: "../images" !default;
 
     .notification-content {
       width: 100%;
-      
+      margin-bottom: 50px;
 
       .chrome-icon {
         font-size: 12px;
@@ -928,8 +928,7 @@ $imagesPath: "../images" !default;
       .notification-actions {
         display: flex;
         justify-content: space-between;
-        margin: 15px 0;
-        height: 60px;
+        margin-top: 10px;
       }
   
       .notification-actions button {
