@@ -33,7 +33,7 @@ var Regex = {
   CUSTOMDOMAIN: /(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-ñÑ]{1,63}\.?)+(?:[a-zA-Z]{2,})$)/i,
   DOMAIN: /^((?!www\.)(([a-zA-Z0-9\-_ñÑ]+\.)+)([a-zA-Z]{2,16}))$/i, // eslint-disable-line
   DOMAIN_HTTP: /^((http(s)?(:\/\/))?(www\.)?(([a-zA-Z0-9\-_ñÑ]+\.)+)([a-zA-Z]{2,16}))$/i, // eslint-disable-line
-  URL: /^(https?:\/\/)?[^\s\/]+\.[^\s\/]+(\/[^\s]*)?$/i, // eslint-disable-line
+  URL: /^https?:\/\/[^\s]+$/i, // eslint-disable-line
   URL_IMAGE: /^(https?:\/\/.*\.(?:jpg|jpeg|png|gif|webp|bmp|svg))(\?.*)?$/i, // eslint-disable-line
   URL_WITH_SUBFOLDERS: /^((http(s)?(:\/\/))?(www\.)?(([a-zA-Z0-9\-_]+\.)+)([a-zA-Z]{2,16})(\/+(([a-zA-Z0-9\-_])+))*(\/\*?)?)$/i, // eslint-disable-line
   REGEX_GSM_7BIT_CHARS: "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà", // eslint-disable-line

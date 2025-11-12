@@ -160,32 +160,6 @@
       scope.charactersCountBodyChange = function(value) {
         scope.charactersCountBody = value ? value.length : 0;
       };
-
-      var clearLinkErrors = function() {
-        scope.invalidUrl = false;
-        scope.invalidHttpsStart = false;
-      }
-
-      scope.clearErrorsOnEmptyLink = function() {
-        return (scope.selectedComponent.pushMessageOnClickLink !== "") || clearLinkErrors();
-      }
-      
-      scope.validationLinkUrl = (function() {
-        return {
-          test: function(url) {
-            clearLinkErrors();
-            if (!scope.regexpHttps.test(url)) {
-                scope.invalidHttpsStart = true;
-              } else if (!scope.regexpUrl.test(url)) {
-                scope.invalidUrl = true;  
-              } else {
-                return true;  
-            }
-            return false;
-          }
-        };
-      })();
-      
     }
    
     function getIconOptions() {

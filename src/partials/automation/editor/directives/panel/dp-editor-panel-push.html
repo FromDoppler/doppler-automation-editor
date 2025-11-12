@@ -145,14 +145,12 @@
       ng-model="selectedComponent.pushMessageOnClickLink"
       ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
       ng-maxlength="300"
-      ng-pattern="validationLinkUrl"
-      ng-change="clearErrorsOnEmptyLink();"
+      ng-pattern="/^https?:\/\/[^\s]+$/"
       ng-disabled="isReadOnly();"/>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
     <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
       <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
-      <div ng-show="invalidUrl" class="error">{{ 'validation_messages.url_pattern_error_message' | translate }}</div>
-      <div ng-show="invalidHttpsStart" class="error">{{ 'validation_messages.https_url_pattern_error_message' | translate }}</div>
+      <div ng-message="pattern" class="error">{{ 'validation_messages.url_pattern_error_message' | translate}}</div>
     </div>
   </div>
 
@@ -191,7 +189,7 @@
                 name="labelAction{{index}}"
                 ng-model="selectedComponent.pushActions[index].label"
                 ng-class="{ 'hasErrors': pushForm.labelAction{{index}}.$invalid }"
-                ng-maxlength="50"
+                ng-maxlength="15"
                 placeholder="{{ 'automation_editor.sidebar.push_button_section_text_placeholder' | translate }}"
                 ng-disabled="isReadOnly();"/>
               <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
@@ -221,7 +219,7 @@
             ng-model="action.url"
             ng-class="{ 'hasErrors': pushForm.urlAction{{index}}.$invalid }"
             ng-maxlength="300"
-            ng-pattern="/^https:\/\/.+\..+$/"
+            ng-pattern="/^https?:\/\/[^\s]+$/"
             placeholder="{{ 'automation_editor.sidebar.push_button_section_url_placeholder' | translate }}"
             ng-disabled="isReadOnly();"/>
             <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
