@@ -145,7 +145,7 @@
       ng-model="selectedComponent.pushMessageOnClickLink"
       ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
       ng-maxlength="300"
-      ng-pattern="/^https?:\/\/[^\s]+$/"
+      ng-pattern="/^https:\/\/[^\s]+$/"
       ng-disabled="isReadOnly();"/>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
     <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
@@ -219,7 +219,7 @@
             ng-model="action.url"
             ng-class="{ 'hasErrors': pushForm.urlAction{{index}}.$invalid }"
             ng-maxlength="300"
-            ng-pattern="/^https?:\/\/[^\s]+$/"
+            ng-pattern="/^https:\/\/[^\s]+$/"
             placeholder="{{ 'automation_editor.sidebar.push_button_section_url_placeholder' | translate }}"
             ng-disabled="isReadOnly();"/>
             <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
