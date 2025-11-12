@@ -27,7 +27,7 @@
 </div>
 
 
-<form name="pushForm" class="form--container margin-t-25" id="form-panel-push" novalidate>
+<form name="pushForm" class="form--container awa-form margin-t-25" id="form-panel-push" novalidate>
     <!-- push name -->
   <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.Push_name' | translate }}:</label>
@@ -89,23 +89,7 @@
       <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
     </div>
   </div>
-  <div class="input--group">
-    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_on_click_link' | translate }}</label>
-    <input type="text" class="input--text"
-           name="pushMessageOnClickLink"
-           ng-model="selectedComponent.pushMessageOnClickLink"
-           ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
-           ng-maxlength="300"
-           ng-pattern="validationLinkUrl"
-           ng-change="clearErrorsOnEmptyLink();"
-           ng-disabled="isReadOnly();"/>
-    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
-    <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
-      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
-      <div ng-show="invalidUrl" class="error">{{ 'validation_messages.url_pattern_error_message' | translate }}</div>
-      <div ng-show="invalidHttpsStart" class="error">{{ 'validation_messages.https_url_pattern_error_message' | translate }}</div>
-    </div>
-  </div>
+
   <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.push_uploader_title' | translate }}</label>
       <div class="container-uploader" id="containerUploader">
@@ -138,5 +122,120 @@
         accept="{{acceptedFileTypes}}"
         ng-disabled="isReadOnly();"
       >
+  </div>
+  <div ng-if="selectedComponent.pushMessageImageUrl.length > 0 && hasPushNotificationV2Enabled" class="input--group dp-library">
+    <label class="dp-label-checkbox">
+      <input type="checkbox" 
+        ng-checked="selectedComponent.pushPreferLargeImage" 
+        ng-model="selectedComponent.pushPreferLargeImage">
+      <span>{{ 'automation_editor.sidebar.push_image_size' | translate }}</span>
+      <div class="dp-tooltip-container">
+        <span class="ms-icon icon-info-icon"></span>
+        <div class="dp-tooltip-top dp-tooltip-top-right">
+          <span>{{ 'automation_editor.sidebar.push_image_size_tip' | translate }}</span>
+        </div>
+      </div>
+    </label>
+  </div>
+
+  <div class="input--group">
+    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_on_click_link' | translate }}</label>
+    <input type="text" class="input--text"
+      name="pushMessageOnClickLink"
+      ng-model="selectedComponent.pushMessageOnClickLink"
+      ng-class="{ 'hasErrors': pushForm.pushMessageOnClickLink.$invalid }"
+      ng-maxlength="300"
+      ng-pattern="/^https?:\/\/[^\s]+$/"
+      ng-disabled="isReadOnly();"/>
+    <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+    <div ng-messages="pushForm.pushMessageOnClickLink.$error" class="error-messages--container">
+      <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+      <div ng-message="pattern" class="error">{{ 'validation_messages.url_pattern_error_message' | translate}}</div>
+    </div>
+  </div>
+
+  <div class="dp-library" ng-if="hasPushNotificationV2Enabled">
+    <div class="flex-grid-v-center--s-between">
+      <strong>{{ 'automation_editor.sidebar.push_button_section' | translate }}</strong>
+      <div class="dp-tooltip-container">
+        <span class="ms-icon icon-info-icon"></span>
+        <div class="dp-tooltip-top dp-tooltip-top-right">
+          <span>{{ 'automation_editor.sidebar.push_button_section_info' | translate }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="margin-t-30" ng-repeat="(index, action) in selectedComponent.pushActions">
+      <div class="box-type--container relative">
+        <div class="actions-element--container actions-element-top-position disable--toggler">
+          <dp-editor-delete-component on-delete-component="removePushAction(index)"></dp-editor-delete-component>
+        </div>
+        <div class="input--group--alt">
+          <!-- Verion emojis en linea
+          <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_text' | translate : {index:index +1 }  }}</label>
+          <div class="input-wrapper content-wrapper"  ng-class="{'hasErrors': pushForm.labelAction{{index}}.$invalid}" >
+            <input type="text" class="form-control input--text"
+              name="labelAction{{index}}"
+              ng-model="selectedComponent.pushActions[index].label"
+              ng-class="{ 'hasErrors': pushForm.labelAction{{index}}.$invalid }"
+              ng-maxlength="50"
+              placeholder="{{ 'automation_editor.sidebar.push_button_section_text_placeholder' | translate }}"
+              ng-disabled="isReadOnly();"/>
+            <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons> 
+          </div> -->
+          <div class="dp-rowflex">
+            <div class="col-md-9">
+              <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_text' | translate : {index:index +1 }  }}</label>
+              <input type="text" class="input--text"
+                name="labelAction{{index}}"
+                ng-model="selectedComponent.pushActions[index].label"
+                ng-class="{ 'hasErrors': pushForm.labelAction{{index}}.$invalid }"
+                ng-maxlength="15"
+                placeholder="{{ 'automation_editor.sidebar.push_button_section_text_placeholder' | translate }}"
+                ng-disabled="isReadOnly();"/>
+              <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+              <div ng-messages="pushForm['labelAction' + index].$error" class="error-messages--container">
+                <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_icon' | translate }}</label>
+              <dp-editor-dropdown
+                class="dropdown dropdown--full dropdown-list-item--image"
+                name="iconAction{{index}}"
+                property="name"
+                options="pushIconOptions"
+                on-select-option="actionIconSelected(index, option)"
+                value-selected="action.icon"
+                label="getIconLabel(action)"
+                ng-disabled="isReadOnly();">
+              </dp-editor-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="input--group--alt">
+          <label class="label label--panel">{{ 'automation_editor.sidebar.push_button_section_url' | translate : {index:index +1 } }}</label>
+          <input type="text" class="input--text"
+            name="urlAction{{index}}"
+            ng-model="action.url"
+            ng-class="{ 'hasErrors': pushForm.urlAction{{index}}.$invalid }"
+            ng-maxlength="300"
+            ng-pattern="/^https?:\/\/[^\s]+$/"
+            placeholder="{{ 'automation_editor.sidebar.push_button_section_url_placeholder' | translate }}"
+            ng-disabled="isReadOnly();"/>
+            <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
+            <div ng-messages="pushForm['urlAction' + index].$error" class="error-messages--container">
+              <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
+              <div ng-message="pattern" class="error">{{ 'validation_messages.url_pattern_error_message' | translate}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button ng-if="!selectedComponent.pushActions || selectedComponent.pushActions.length < 2"
+      class="dp-button link-green margin-t-30"
+      ng-click="addNewAction()"
+      type="button">
+      <strong>{{ 'automation_editor.sidebar.push_button_section_add_action' | translate }}</strong>
+    </button>
   </div>
 </form>

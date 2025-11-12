@@ -33,10 +33,16 @@
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
         scope.hasPushNotificationV2Enabled = response.hasPushNotificationV2Enabled;
+        if(!scope.hasPushNotificationV2Enabled) {
+          scope.selectedComponent.pushActions = [];
+          scope.selectedComponent.pushPreferLargeImage = true;
+        }
       });
 
       scope.acceptedFileTypes = 'image/jpeg, image/png, image/jpg';
       scope.statusUploader = 'init';
+
+      scope.pushIconOptions = getIconOptions();
 
       scope.hideExcededCreditsMessage = function () {
         scope.hasExcededCredits = false;
@@ -108,6 +114,31 @@
         document.getElementById('fileInput').click();
       };
 
+      scope.addNewAction = function() {
+        if(!scope.selectedComponent.pushActions) {
+          scope.selectedComponent.pushActions = [];
+        }
+        scope.selectedComponent.pushActions.push({
+          label: '',
+          icon: '',
+          url: '',
+        });
+      }
+
+      scope.removePushAction = function (index) {
+        scope.selectedComponent.pushActions.splice(index, 1);
+      }
+
+      scope.actionIconSelected = function (index, option) {
+        scope.selectedComponent.pushActions[index].icon = option.value;
+      }
+      
+      scope.getIconLabel = function(action) {
+        return action.icon.length >0 ?
+          '<img src="'+ action.icon + '" alt="icon action" width="64" height="64">' :
+          '';
+      }
+
       var fileInput = document.getElementById('fileInput');
       var containerUploader = document.getElementById('containerUploader');
       
@@ -129,32 +160,36 @@
       scope.charactersCountBodyChange = function(value) {
         scope.charactersCountBody = value ? value.length : 0;
       };
+    }
+   
+    function getIconOptions() {
+      const PATH = "https://cdn.fromdoppler.com/doppler-automation-editor-mfe/static/images/";
+      const iconList = [
+        'glyph_641',
+        'glyph_660',
+        'glyph_861',
+        'glyph_886',
+        'glyph_918',
+        'glyph_1115',
+        'glyph_1123',
+        'glyph_1151',
+        'glyph_1474',
+        'glyph_1722',
+        'glyph_2191',
+        'glyph_2690',
+        'glyph_2750',
+        'glyph_2956',
+      ];
 
-      var clearLinkErrors = function() {
-        scope.invalidUrl = false;
-        scope.invalidHttpsStart = false;
-      }
-
-      scope.clearErrorsOnEmptyLink = function() {
-        return (scope.selectedComponent.pushMessageOnClickLink !== "") || clearLinkErrors();
-      }
-      
-      scope.validationLinkUrl = (function() {
+      return iconList.map(iconName => {
         return {
-          test: function(url) {
-            clearLinkErrors();
-            if (!scope.regexpHttps.test(url)) {
-                scope.invalidHttpsStart = true;
-              } else if (!scope.regexpUrl.test(url)) {
-                scope.invalidUrl = true;  
-              } else {
-                return true;  
-            }
-            return false;
-          }
-        };
-      })();
-      
+          label: '<img src="'+ PATH.concat(iconName).concat(".png") + '" alt="icon action" width="64" height="64">',
+          value: PATH.concat(iconName).concat('.png')
+        }
+      }).concat({
+        label: '<img src="'+ PATH.concat('empty').concat(".png") + '" alt="icon action" width="64" height="64">',
+        value: ''
+      })
     }
   }
 })();

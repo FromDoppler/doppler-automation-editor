@@ -1544,7 +1544,7 @@ input[type="text"].padding-r-buttons-place {
 }
 
 /* big-data dropdown */
-
+#form-panel-push .dp-library .dropdown-arrow,
 .dp-editor-panel-push-notification-condition .dp-library .dropdown-arrow {
   right: 10px; 
   top: 50%; 
@@ -1595,5 +1595,17 @@ input[type="text"].padding-r-buttons-place {
     width: 45px;
   }
 }
+
+.dp-library .dp-tooltip-container:hover {
+  .dp-tooltip-top.dp-tooltip-top-right {
+    transform: translate(-80%, -90%);
+    &:before{
+      left: 78%;
+    }
+    &:after{
+      left: 78%;
+    }      
+  }
+} 
 
 /* END: overwritten "UI library" section */

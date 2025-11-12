@@ -7,5 +7,8 @@
   "pushMessageBody": "",
   "pushMessageOnClickLink": "",
   "pushMessageImageUrl": "",
-  "name": ""
+  "name": "",
+  "domains": [],
+  "pushActions": [],
+  "pushPreferLargeImage": false
 }
