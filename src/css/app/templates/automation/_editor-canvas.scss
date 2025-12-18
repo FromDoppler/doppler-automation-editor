@@ -440,9 +440,65 @@ $imagesPath: "../images" !default;
       }
     }
     &.push {
+      width: 480px;
       .component {
-        max-width: 230px;
-        padding: 10px 5px;
+        padding: 25px 30px 10px;
+        max-width: 460px;
+        .notification-content {
+          width: 100%;
+          margin-bottom: 50px;
+
+          .chrome-icon {
+            font-size: 14px;
+            &::before {
+            content: "";
+              display: inline-block;
+              width: 16px;
+              height: 16px;
+              background-image: url(#{$imagesPath}/chrome_push_preview.png);
+              background-size: contain;
+              background-repeat: no-repeat;
+              margin-right: 6px;
+              vertical-align: middle;   
+            }
+          }
+          
+          .notification-body {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0px;
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+            p {
+              margin: 8px 0;
+              font-size: 16px;
+            }
+          }
+      
+          .notification-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+          }
+      
+          .notification-actions button {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px;
+            font-size: 16px;
+            border: none;
+            width: 40%;
+            font-weight: 700;
+            color: #333;
+            height: 30px;
+            img {
+              margin-top: -6px;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
         .container-name {
           padding: 0 25px 35px;
           
@@ -897,56 +953,6 @@ $imagesPath: "../images" !default;
         display: none;
       }
     }
-
-    .notification-content {
-      width: 100%;
-      margin-bottom: 50px;
-
-      .chrome-icon {
-        font-size: 12px;
-        &::before {
-        content: "";
-          display: inline-block;
-          width: 16px;
-          height: 16px;
-          background-image: url(#{$imagesPath}/chrome_push_preview.png);
-          background-size: contain;
-          background-repeat: no-repeat;
-          margin-right: 6px;
-          vertical-align: middle;   
-        }
-      }
-      
-      .notification-body {
-        display: flex;
-        padding: 12px 0px;
-         font-size: 14px;
-        color: #333;
-        line-height: 1.4;
-      }
-  
-      .notification-actions {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-      }
-  
-      .notification-actions button {
-        display: inline-flex;
-        align-items: center;
-        padding: 5px;
-        font-size: 14px;
-        border: none;
-        width: 40%;
-        font-weight: 700;
-        color: #333;
-        height: 30px;
-        img {
-          margin-right: 5px;
-        }
-      }
-    }
-  }
 
   dp-editor-new-step {
     position: relative;

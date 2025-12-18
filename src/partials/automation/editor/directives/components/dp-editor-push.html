@@ -11,20 +11,20 @@
         <strong>Chrome</strong> • {{ 'automation_editor.canvas.push_domain' | translate }} • <strong>now</strong>
     </span>
     <div class="notification-body">
-      <img ng-if = "getPushIconUrl() !== ''"
-        ng-src="{{ getPushIconUrl() }}"
-        style="width: 60px; height:60px;"
-        alt="Logo" class="notification-logo">
       <div>
         <strong ng-if="component.pushMessageTitle">{{ component.pushMessageTitle }}</strong>
         <strong ng-if="!component.pushMessageTitle">{{ 'automation_editor.canvas.push_placeholder_title' | translate }}</strong>
         <p ng-if="component.pushMessageBody">{{ component.pushMessageBody }}</p>
         <p ng-if="!component.pushMessageBody">{{ 'automation_editor.canvas.push_placeholder_message' | translate }}</p>
       </div>
+      <img ng-if = "getPushIconUrl() !== ''"
+        ng-src="{{ getPushIconUrl() }}"
+        style="width: 72px; height:72px;"
+        alt="Logo" class="notification-logo">
     </div>
     <div class="notification-image-section" ng-if="component.pushPreferLargeImage && component.pushMessageImageUrl.length > 0">
       <img ng-src="{{ component.pushMessageImageUrl }}"
-        style="width: 100%; height:auto;"
+        style="width: 100%; height:150px;"
         alt="image {{ component.pushMessageTitle }}" class="notification-image">
     </div>
      
