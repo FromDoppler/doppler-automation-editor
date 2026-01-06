@@ -793,7 +793,7 @@ export const automation_es_translations = {
       "goto_help_tip": "Si tienes dudas, puedes visitar nuestro artículo",
       "goto_help_tip_link": "https://help.fromdoppler.com/es/como-conectar-ramas-en-tu-flujo-de-automation?utm_source=direct",
       "goto_help_tip_link_text": "”Cómo conectar pasos dentro de tu flujo de Automation”",
-      "replicaSetinitConditioMsg": "Cuando realizas una réplica es necesario que definas nuevamente la configuración inicial del flujo de automation.",
+      "replicaSetinitConditioMsg": "Cuando realizas un duplicado es necesario que definas nuevamente la configuración inicial del flujo de automation.",
       "abandoned_cart": {
         "title": "Configura tu Automation de Carrito Abandonado",
         "ecommerce_label": "E-commerce que deseas integrar",
@@ -1341,11 +1341,11 @@ export const automation_es_translations = {
   "automation_replicate": {
     "modal": {
       "title": "Elige el tipo de Automation",
-      "description": "Selecciona el tipo de Automation de la réplica. Luego podrás editar todos los elementos y configurar nuevas condiciones.",
-      "dropdown_title": "Tipo de Automation de la réplica",
+      "description": "Selecciona el tipo de Automation a duplicar. Luego podrás editar todos los elementos y configurar nuevas condiciones.",
+      "dropdown_title": "Tipo de Automation a duplicar",
       "cancel_button": "Cancelar",
       "submit_buttton": "Confirmar",
-      "warning_one_option": "Esta réplica no permite cambiar el tipo de automation."
+      "warning_one_option": "Este duplicado no permite cambiar el tipo de automation."
     }
   },
   "automation_grid_body": {
@@ -1577,7 +1577,7 @@ export const automation_es_translations = {
     "add": "Agregar",
     "copy": "Copiar",
     "verify": "Verificar",
-    "duplicate": "Replicar",
+    "duplicate": "Duplicar",
     "publish": "Tipos de Distribución",
     "start": "Comenzar",
     "enable": "Habilitar",
@@ -1589,9 +1589,9 @@ export const automation_es_translations = {
     "activate_now": "ACTÍVALO AHORA.",
     "buy_now": "COMPRA AHORA.",
     "coming_soon": "Próximamente",
-    "replicate_automation": "Replicar Automation",
-    "replicate_automation_coming_soon": "Replicar Automation (próximamente)",
-    "replicate_automation_disabled": "No es posible replicar"
+    "replicate_automation": "Duplicar Automation",
+    "replicate_automation_coming_soon": "Duplicar Automation (próximamente)",
+    "replicate_automation_disabled": "No es posible duplicar"
   },
   "modal_process_file": {
     "title": "Remueve varios Suscriptores de una vez",
