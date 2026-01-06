@@ -794,7 +794,7 @@ export const automation_en_translations = {
       "goto_help_tip": "If you have questions, you can visit our article",
       "goto_help_tip_link": "https://help.fromdoppler.com/en/how-to-connect-branches-in-your-automation-flow?utm_source=direct",
       "goto_help_tip_link_text": "”How to connect steps in your Automation flow”",
-      "replicaSetinitConditioMsg": "Initial configuration for automation flow needs to be redefined when a replica is done.",
+      "replicaSetinitConditioMsg": "Initial configuration for the automation flow needs to be redefined when a duplicate is created.",
       "abandoned_cart": {
         "title": "Set up your Abandoned Cart Automation",
         "ecommerce_label": "E-commerce you want to integrate",
@@ -1341,11 +1341,11 @@ export const automation_en_translations = {
   "automation_replicate": {
     "modal": {
       "title": "Choose the Automation type",
-      "description": "Select the Automation type for the replica. After this, you can edit all the elements and configure new conditions.",
-      "dropdown_title": "Replica’s Automation type",
+      "description": "Select the Automation type for the duplicate. After this, you can edit all the elements and configure new conditions.",
+      "dropdown_title": "Duplicate’s Automation type",
       "cancel_button": "Cancel",
       "submit_buttton": "Confirm",
-      "warning_one_option": "Automation type change is not allowed for this replica."
+      "warning_one_option": "Automation type change is not allowed for this duplicate."
     }
   },
   "automation_grid_body": {
@@ -1577,7 +1577,7 @@ export const automation_en_translations = {
     "add": "Add",
     "copy": "Copy",
     "verify": "Verify",
-    "duplicate": "Replicate",
+    "duplicate": "Duplicate",
     "publish": "Distribution Types",
     "start": "Start",
     "enable": "Enable",
@@ -1589,9 +1589,9 @@ export const automation_en_translations = {
     "activate_now": "ACTIVATE IT NOW.",
     "buy_now": "BUY NOW.",
     "coming_soon": "Coming soon",
-    "replicate_automation": "Replicate Automation",
-    "replicate_automation_coming_soon": "Replicate Automation (coming soon)",
-    "replicate_automation_disabled": "It's not possible to replicate"
+    "replicate_automation": "Duplicate Automation",
+    "replicate_automation_coming_soon": "Duplicate Automation (coming soon)",
+    "replicate_automation_disabled": "It's not possible to duplicate"
   },
   "modal_process_file": {
     "title" : "Remove multiple Subscribers at once",
