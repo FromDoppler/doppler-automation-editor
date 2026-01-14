@@ -49,7 +49,7 @@
           return scope.component.pushMessageImageUrl;
         }
         if(domains.length > 0) {
-          const REGEX_URL = /^https:\/\/.+\..+/;
+          const REGEX_URL = /^https?:\/\/.+\..+/;
           const firstWithValidIcon = domains.find(d => d.WebSiteLogoUrl && REGEX_URL.test(d.WebSiteLogoUrl));
           return firstWithValidIcon.WebSiteLogoUrl || defaultIconPath;
         }
