@@ -440,16 +440,16 @@ $imagesPath: "../images" !default;
       }
     }
     &.push {
-      width: 480px;
+      width: 359px;
       .component {
-        padding: 25px 30px 10px;
-        max-width: 460px;
+        padding: 18px;
+        max-width: 360px;
         .notification-content {
           width: 100%;
-          margin-bottom: 50px;
+          margin-bottom: 36px;
 
           .chrome-icon {
-            font-size: 14px;
+            font-size: 13px;
             &::before {
             content: "";
               display: inline-block;
@@ -465,27 +465,42 @@ $imagesPath: "../images" !default;
           
           .notification-body {
             display: flex;
+            justify-content: space-between;
             padding: 12px 0px;
-            font-size: 18px;
+            font-size: 13px;
             color: #333;
-            line-height: 1.4;
             p {
-              margin: 8px 0;
-              font-size: 16px;
+              margin-top: 6px;
+              font-size: 13px;
+              line-height: 18px;
+            }
+            img {
+              width: 72px;
+              height:72px;
+              margin: 0;
+            }
+          }
+
+          .notification-image-section {
+             img {
+              width: 100%; 
+              height:153px;
+              margin: 0;
             }
           }
       
           .notification-actions {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top:6px;
           }
       
           .notification-actions button {
             display: inline-flex;
             align-items: center;
             padding: 5px;
-            font-size: 16px;
+            font-size: 13px;
+            line-height: 12px;
             border: none;
             width: 40%;
             font-weight: 700;
