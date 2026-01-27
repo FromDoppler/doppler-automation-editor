@@ -217,6 +217,9 @@
           if (item.LastSentDate) {
             item.LastSentDate = new Date(parseFloat(pattern.exec(item.LastSentDate)[1]));
           }
+          if (item.ModelUpdateDate) {
+            item.ModelUpdateDate = new Date(parseFloat(pattern.exec(item.ModelUpdateDate)[1]));
+          }
           if (item.ListName) {
             item.ListName += item.IdSegment && item.IdSegment !== 0 ? $translate.instant('automation_editor.lists_scheduled_grid.segments') : '';
           }
