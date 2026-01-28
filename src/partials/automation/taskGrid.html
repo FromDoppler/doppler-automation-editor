@@ -80,8 +80,8 @@
                 </div>
               </div>
             </td>
-            <td class="date-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}">{{row.CreationDate | date: gridModel.dateFormat}}</td>
-            <td class="date-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'MODEL_UPDATE_DATE'}">{{row.ModelUpdateDate | date: gridModel.dateFormat}}</td>
+            <td class="date-column--xxs" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}">{{row.CreationDate | date: gridModel.dateFormat}}</td>
+            <td class="date-column--xs" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'MODEL_UPDATE_DATE'}">{{row.ModelUpdateDate | date: gridModel.dateFormat}}</td>
 
             <td class="actions-column" ng-show="!row.deleting && !row.cfDeleted">
               <div class="icons--container">

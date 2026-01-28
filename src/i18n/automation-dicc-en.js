@@ -1707,8 +1707,8 @@ export const automation_en_translations = {
       "status": "Status",
       "name": "Name",
       "type": "Type",
-      "creation_date": "Creation Date",
-      "model_update_date": "Update Date",
+      "creation_date": "Created",
+      "model_update_date": "Modified",
       "actions": "Actions",
       "country": "Country"
     },
