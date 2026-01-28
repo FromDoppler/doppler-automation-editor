@@ -1707,7 +1707,8 @@ export const automation_es_translations = {
       "status": "Estado",
       "name": "Nombre",
       "type": "Tipo",
-      "creation_date": "Fecha de Creación",
+      "creation_date": "Creación",
+      "model_update_date": "Modificación",
       "actions": "Acciones",
       "country":  "País"
     },

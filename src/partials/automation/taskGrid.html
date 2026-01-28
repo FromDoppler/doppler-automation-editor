@@ -47,6 +47,7 @@
             <th id="Type" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'TYPE'" ng-class="{'active' : gridModel.currentSort == 'TYPE'}"><a ng-click="gridModel.sort('TYPE')"> {{ 'grid.headers.type' | translate }} <span ng-class="gridModel.setArrowClass('TYPE')"></span></a></th>
             <th id="Name" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'NAME'" ng-class="{'active' : gridModel.currentSort == 'NAME'}"><a ng-click="gridModel.sort('NAME')">{{ 'grid.headers.name' | translate }} <span ng-class="gridModel.setArrowClass('NAME')"></span></a></th>
             <th id="CreationDate" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'CREATION_DATE'" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}"><a ng-click="gridModel.sort('CREATION_DATE')">{{ 'grid.headers.creation_date' | translate }} <span ng-class="gridModel.setArrowClass('CREATION_DATE')"></span></a></th>
+            <th id="ModelUpdateDate" ng-mouseleave="columnHover = ''" ng-mouseover="columnHover = 'MODEL_UPDATE_DATE'" ng-class="{'active' : gridModel.currentSort == 'MODEL_UPDATE_DATE'}"><a ng-click="gridModel.sort('MODEL_UPDATE_DATE')">{{ 'grid.headers.model_update_date' | translate }} <span ng-class="gridModel.setArrowClass('MODEL_UPDATE_DATE')"></span></a></th>
             <th id="Actions"><span>{{ 'grid.headers.actions' | translate }}</span></th>
           </tr>
         </thead>
@@ -79,7 +80,8 @@
                 </div>
               </div>
             </td>
-            <td class="date-column" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}">{{row.CreationDate | date: gridModel.dateFormat}}</td>
+            <td class="date-column--xxs" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'CREATION_DATE'}">{{row.CreationDate | date: gridModel.dateFormat}}</td>
+            <td class="date-column--xs" ng-show="!row.deleting && !row.cfDeleted" ng-class="{'active' : gridModel.currentSort == 'MODEL_UPDATE_DATE'}">{{row.ModelUpdateDate | date: gridModel.dateFormat}}</td>
 
             <td class="actions-column" ng-show="!row.deleting && !row.cfDeleted">
               <div class="icons--container">
