@@ -11,7 +11,8 @@
       restrict: 'AE',
       scope: {
         sortedUserFields: '<',
-        targetModel: '=?', 
+        targetModel: '=?',
+        isReadOnly: '&'
       },
       link: function (scope, element, attrs) {
 

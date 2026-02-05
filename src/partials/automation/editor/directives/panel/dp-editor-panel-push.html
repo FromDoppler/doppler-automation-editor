@@ -33,8 +33,9 @@
     <label class="label label--panel">{{ 'automation_editor.sidebar.Push_name' | translate }}:</label>
     <input type="text" class="input--text" ng-model="selectedComponent.name" ng-required="pushForm.name.$dirty || selectedComponent.touched" name="name" id="name_property" ng-class="{'hasErrors': pushForm.name.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'name')" ng-blur="emailNameOnBlur()"  ng-disabled="isReadOnly();" />
     <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
-    <div class="error-messages--container" ng-show="showInputErrors.name">
-      <div class="error">{{'automation_editor.sidebar.campaign_name_error' | translate }}</div>
+    <div ng-messages="pushForm.name.$error" class="error-messages--container">
+        <div ng-message="maxlength" class="error">{{ 'automation_editor.sidebar.campaign_name_error' | translate}}</div>
+        <div ng-message="required" class="error">{{ 'validation_messages.required' | translate}}</div>
     </div>
   </div>
 
@@ -53,8 +54,8 @@
         ng-disabled="isReadOnly();"/>
         <div class="action-wrapper">
           <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountTitle }}/50.</span>
-          <dp-editor-panel-custom-fields-addons show-search ng-if="hasPushNotificationV2Enabled"></dp-editor-panel-custom-fields-addons>
-          <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
+          <dp-editor-panel-custom-fields-addons show-search ng-if="hasPushNotificationV2Enabled" is-read-only="isReadOnly()"></dp-editor-panel-custom-fields-addons>
+          <dp-editor-panel-emojis-addons is-read-only="isReadOnly()"></dp-editor-panel-emojis-addons>
         </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
@@ -79,8 +80,8 @@
       </textarea>
       <div class="action-wrapper">
         <span class="text--lightgrey text--tiny text-bold width-full">{{ 'automation_editor.sidebar.characters' | translate }} {{ charactersCountBody }}/150.</span>
-        <dp-editor-panel-custom-fields-addons show-search ng-if="hasPushNotificationV2Enabled"></dp-editor-panel-custom-fields-addons>
-        <dp-editor-panel-emojis-addons></dp-editor-panel-emojis-addons>
+        <dp-editor-panel-custom-fields-addons show-search ng-if="hasPushNotificationV2Enabled" is-read-only="isReadOnly()"></dp-editor-panel-custom-fields-addons>
+        <dp-editor-panel-emojis-addons is-read-only="isReadOnly()"></dp-editor-panel-emojis-addons>
       </div>
     </div>
     <span class="read-only--tooltip" ng-show="isReadOnly();">{{ getReadOnlyLabel(); }}</span>
