@@ -31,7 +31,12 @@
     <!-- push name -->
   <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.Push_name' | translate }}:</label>
-    <input type="text" class="input--text" ng-model="selectedComponent.name" ng-required="pushForm.name.$dirty || selectedComponent.touched" name="name" id="name_property" ng-class="{'hasErrors': pushForm.name.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'name')" ng-blur="emailNameOnBlur()"  ng-disabled="isReadOnly();" />
+    <input type="text" class="input--text" ng-model="selectedComponent.name" 
+      ng-required="pushForm.name.$dirty || selectedComponent.touched"
+      ng-maxlength="100"
+      name="name" id="name_property"
+      ng-class="{'hasErrors': pushForm.name.$invalid}" 
+      ng-disabled="isReadOnly();" />
     <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
     <div ng-messages="pushForm.name.$error" class="error-messages--container">
         <div ng-message="maxlength" class="error">{{ 'automation_editor.sidebar.campaign_name_error' | translate}}</div>
