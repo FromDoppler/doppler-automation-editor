@@ -131,7 +131,8 @@
   </div>
   <div ng-if="selectedComponent.pushMessageImageUrl.length > 0 && hasPushNotificationV2Enabled" class="input--group dp-library">
     <label class="dp-label-checkbox">
-      <input type="checkbox" 
+      <input type="checkbox"
+        ng-disabled="isReadOnly();"
         ng-checked="selectedComponent.pushPreferLargeImage" 
         ng-model="selectedComponent.pushPreferLargeImage">
       <span>{{ 'automation_editor.sidebar.push_image_size' | translate }}</span>
@@ -142,6 +143,7 @@
         </div>
       </div>
     </label>
+    <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
   </div>
 
   <div class="input--group">
@@ -239,9 +241,11 @@
 
     <button ng-if="!selectedComponent.pushActions || selectedComponent.pushActions.length < 2"
       class="dp-button link-green margin-t-30"
+      ng-disabled="isReadOnly();"
       ng-click="addNewAction()"
       type="button">
       <strong>{{ 'automation_editor.sidebar.push_button_section_add_action' | translate }}</strong>
     </button>
+    <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
   </div>
 </form>
