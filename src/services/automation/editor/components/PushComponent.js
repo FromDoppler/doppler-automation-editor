@@ -19,12 +19,12 @@
         this.pushMessageImageUrl = '';
         this.pushPreferLargeImage =  true;
         this.pushActions = [
-          {
-            name: 'primary',
-            label: '',
-            icon: '',
-            url: '',
-          }
+          // {
+          //   name: 'primary',
+          //   label: '',
+          //   icon: '',
+          //   url: '',
+          // }
         ];
 
         if (data) {
