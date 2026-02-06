@@ -3,7 +3,7 @@
     <span style="display: none;" class="dp-message-icon"></span>
     <div class="dp-content-message">
       <p ng-bind-html="'automation_editor.sidebar.push_message_excess_warning' | translate"></p>
-      <a ng-href="#" class="dp-message-link" ng-click="hideExcededCreditsMessage(); $event.preve;">
+      <a ng-href="#" class="dp-message-link" ng-click="hideExcededCreditsMessage(); $event.preventDefault();">
         {{'automation_editor.sidebar.push_message_excess_warning_agreed' | translate }}
       </a>
     </div>
