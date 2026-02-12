@@ -9,10 +9,12 @@
     return {
       restrict: 'E',
       scope: {
-        inputTarget: '=?'
+        inputTarget: '=?',
+        isReadOnly: '&'
       },
       template: `
         <button
+          ng-disabled="isReadOnly();"
           type="button"
           aria-controls="dp-menu-emojis"
           type="button"
