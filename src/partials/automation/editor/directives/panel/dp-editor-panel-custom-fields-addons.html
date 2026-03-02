@@ -1,5 +1,6 @@
 <button 
   type="button" ng-click="toggleFieldsMenu()"
+  ng-disabled="isReadOnly();"
   ng-class="{ 'active': showFieldsMenu }">
   <i class="ms-icon icon-brackets"></i>
 </button>
