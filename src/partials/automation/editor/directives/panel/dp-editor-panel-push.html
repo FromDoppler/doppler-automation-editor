@@ -3,7 +3,7 @@
     <span style="display: none;" class="dp-message-icon"></span>
     <div class="dp-content-message">
       <p ng-bind-html="'automation_editor.sidebar.push_message_excess_warning' | translate"></p>
-      <a ng-href="#" class="dp-message-link" ng-click="hideExcededCreditsMessage(); $event.preve;">
+      <a ng-href="#" class="dp-message-link" ng-click="hideExcededCreditsMessage(); $event.preventDefault();">
         {{'automation_editor.sidebar.push_message_excess_warning_agreed' | translate }}
       </a>
     </div>
@@ -31,7 +31,12 @@
     <!-- push name -->
   <div class="input--group">
     <label class="label label--panel">{{ 'automation_editor.sidebar.Push_name' | translate }}:</label>
-    <input type="text" class="input--text" ng-model="selectedComponent.name" ng-required="pushForm.name.$dirty || selectedComponent.touched" name="name" id="name_property" ng-class="{'hasErrors': pushForm.name.$invalid}" maxlength="100" ng-keyup="inputKeyup($event, 'name')" ng-blur="emailNameOnBlur()"  ng-disabled="isReadOnly();" />
+    <input type="text" class="input--text" ng-model="selectedComponent.name" 
+      ng-required="pushForm.name.$dirty || selectedComponent.touched"
+      ng-maxlength="100"
+      name="name" id="name_property"
+      ng-class="{'hasErrors': pushForm.name.$invalid}" 
+      ng-disabled="isReadOnly();" />
     <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
     <div ng-messages="pushForm.name.$error" class="error-messages--container">
         <div ng-message="maxlength" class="error">{{ 'automation_editor.sidebar.campaign_name_error' | translate}}</div>
@@ -126,7 +131,8 @@
   </div>
   <div ng-if="selectedComponent.pushMessageImageUrl.length > 0 && hasPushNotificationV2Enabled" class="input--group dp-library">
     <label class="dp-label-checkbox">
-      <input type="checkbox" 
+      <input type="checkbox"
+        ng-disabled="isReadOnly();"
         ng-checked="selectedComponent.pushPreferLargeImage" 
         ng-model="selectedComponent.pushPreferLargeImage">
       <span>{{ 'automation_editor.sidebar.push_image_size' | translate }}</span>
@@ -137,6 +143,7 @@
         </div>
       </div>
     </label>
+    <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
   </div>
 
   <div class="input--group">
@@ -234,9 +241,11 @@
 
     <button ng-if="!selectedComponent.pushActions || selectedComponent.pushActions.length < 2"
       class="dp-button link-green margin-t-30"
+      ng-disabled="isReadOnly();"
       ng-click="addNewAction()"
       type="button">
       <strong>{{ 'automation_editor.sidebar.push_button_section_add_action' | translate }}</strong>
     </button>
+    <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
   </div>
 </form>

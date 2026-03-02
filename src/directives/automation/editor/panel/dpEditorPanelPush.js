@@ -29,6 +29,10 @@
         scope.hasExcededCredits = res.hasExcededCredits;
       });
 
+      scope.canEdit = function() {
+        return !automation.isReadOnly() || automation.isPaused();
+      };
+ 
       scope.automationId = automation.getModel().id;
       settingsService.getSettings().then(function(response) {
         scope.idUser = response.idUser;
