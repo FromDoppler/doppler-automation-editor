@@ -1596,19 +1596,20 @@ input[type="text"].padding-r-buttons-place {
   }
 }
 
-.dp-library .dp-tooltip-container:hover {
+.dp-library {
   .dp-tooltip-top.dp-tooltip-top-push {
-    transform: translate(-34%, -100%);
-    &:before{
+    transform: translate(-34%, -50%);
+    &:before,
+    &:after {
       left: 31%;
       right: 65%;
     }
-    &:after{
-      left: 31%;
-      right: 65%;
-    }      
   }
-} 
+
+  .dp-tooltip-container:hover .dp-tooltip-top.dp-tooltip-top-push {
+    transform: translate(-34%, -100%);
+  }
+}
 
 
  [dp-editor-panel-push]  {
