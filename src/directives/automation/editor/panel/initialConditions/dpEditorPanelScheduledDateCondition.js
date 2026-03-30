@@ -142,9 +142,14 @@
       };
 
       function getFrequencyValue() {
+        if (!scope.selectedComponent || !scope.selectedComponent.frequency) {
+          return 1;
+        }
+
         return scope.selectedComponent.frequency.momentDays ||
-              scope.selectedComponent.frequency.momentWeeks;
-      };
+          scope.selectedComponent.frequency.momentWeeks ||
+          1;
+      }
 
       scope.setFrequencyValue = function (value) {
         if (scope.selectedComponent.frequency.momentType === TIME_UNIT.DAYS) {
