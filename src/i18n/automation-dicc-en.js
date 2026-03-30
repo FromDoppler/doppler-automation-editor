@@ -112,7 +112,9 @@ export const automation_en_translations = {
           "default_part2": "at HH:MM.",
           "day_moment_after": "After",
           "day_moment_before": "Before",
-          "day_moment_now": "The exact day"
+          "day_moment_now": "The exact day",
+          "moment_type_day": "Day",
+          "moment_type_week": "Week"
         },
         "days_of_the_week": {
           "sunday": "Sunday",

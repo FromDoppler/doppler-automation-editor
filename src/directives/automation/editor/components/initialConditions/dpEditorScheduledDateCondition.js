@@ -8,6 +8,7 @@
   dpEditorScheduledDateCondition.$inject = [
     '$translate',
     'FREQUENCY_TYPE',
+    'TIME_UNIT',
     'MAX_ITEMS_TO_SHOW',
     'settingsService',
     'automation',
@@ -16,7 +17,7 @@
     'warningsStepsService'
   ];
 
-  function dpEditorScheduledDateCondition($translate, FREQUENCY_TYPE, MAX_ITEMS_TO_SHOW,
+  function dpEditorScheduledDateCondition($translate, FREQUENCY_TYPE, TIME_UNIT, MAX_ITEMS_TO_SHOW,
     settingsService, automation, AUTOMATION_COMPLETED_STATE, dateValidation, warningsStepsService) {
     var directive = {
       restrict: 'E',
@@ -108,17 +109,19 @@
 
           if (scope.component.frequency.customFields.length === 1
             && (scope.component.frequency.momentId === 1 || scope.component.frequency.momentId === 2)) {
+            var momentValue = scope.component.frequency.momentDays || scope.component.frequency.momentWeeks;
             innerHtml += $translate.instant('automation_editor.components.initial_condition.scheduled_date.canvas.day_year.intro');
-            if (scope.component.frequency.momentDays) {
-              innerHtml += '<strong>' + scope.component.frequency.momentDays + '</strong>';
+            if (momentValue) {
+              innerHtml += '<strong>' + momentValue + '</strong>';
             } else {
               innerHtml += '<strong>&#91;&#91;&#91;&hellip;&#93;&#93;&#93;</strong>';
             }
-            if (scope.component.frequency.momentDays.toString() === '1') {
-              innerHtml += $translate.instant('automation_editor.components.initial_condition.scheduled_date.canvas.day_year.day');
-            } else {
-              innerHtml += $translate.instant('automation_editor.components.initial_condition.scheduled_date.canvas.day_year.days');
-            }
+            innerHtml += $translate.instant(
+              'automation_editor.components.condition.canvas_description.' +
+              (momentValue === 1 ? 'singular' : 'plural') +
+              '_' +
+              (scope.component.frequency.momentType === TIME_UNIT.DAYS ? 'days' : 'weeks')
+            );
             if (scope.component.frequency.momentId === 1) {
               innerHtml += $translate.instant('automation_editor.components.initial_condition.scheduled_date.canvas.day_year.before');
             } else {
