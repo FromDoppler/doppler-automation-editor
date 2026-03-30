@@ -10,6 +10,7 @@
     'automation',
     'FIELD_TYPE',
     'FREQUENCY_TYPE',
+    'TIME_UNIT',
     'LIST_SELECTION_STATE',
     'optionsListDataservice',
     'settingsService',
@@ -19,7 +20,7 @@
     'AUTOMATION_COMPLETED_STATE'
   ];
 
-  function dpEditorPanelScheduledDateCondition($translate, automation, FIELD_TYPE, FREQUENCY_TYPE, LIST_SELECTION_STATE,
+  function dpEditorPanelScheduledDateCondition($translate, automation, FIELD_TYPE, FREQUENCY_TYPE, TIME_UNIT, LIST_SELECTION_STATE,
     optionsListDataservice, settingsService, userFieldsDataservice, utils, dateValidation, AUTOMATION_COMPLETED_STATE) {
     var directive = {
       restrict: 'AE',
@@ -35,10 +36,12 @@
       scope.timeOptions = optionsListDataservice.getTimeOptions();
       scope.weekDays = optionsListDataservice.getWeekDays();
       scope.dayMoments = optionsListDataservice.getDayMoments();
+      scope.momentType = optionsListDataservice.getMomentType();
       scope.dateUserFields = userFieldsDataservice.getFieldsByType(FIELD_TYPE.DATE);
       scope.deletedFields = [];
       scope.isFlowComplete = automation.getIsFlowComplete;
       scope.isReadOnly = automation.isReadOnly;
+      scope.frequencyValue = getFrequencyValue();
 
       settingsService.getSettings().then(function(response) {
         scope.timeZones = mapTimeZones(response.timeZones);
@@ -46,6 +49,7 @@
         scope.$watch('selectedComponent.frequency.day', updateDayMonthSelected);
         scope.$watch('selectedComponent.frequency.days', updateDayWeeksSelected);
         scope.$watch('selectedComponent.frequency.momentId', updateDayMomentSelected);
+        scope.$watch('selectedComponent.frequency.momentType', updateMomentTypeSelected);
         scope.$watch('selectedComponent.frequency.time', updateTimeSelected);
         scope.$watch('selectedComponent.frequency.timezone', updateTimezoneSelected);
         scope.$watch('selectedComponent.frequency.customFields', updateAvailableDateFields);
@@ -137,6 +141,21 @@
         }
       };
 
+      function getFrequencyValue() {
+        return scope.selectedComponent.frequency.momentDays ||
+              scope.selectedComponent.frequency.momentWeeks;
+      };
+
+      scope.setFrequencyValue = function (value) {
+        if (scope.selectedComponent.frequency.momentType === TIME_UNIT.DAYS) {
+          scope.selectedComponent.frequency.momentDays = value;
+          scope.selectedComponent.frequency.momentWeeks = 0;
+        } else {
+          scope.selectedComponent.frequency.momentWeeks = value;
+          scope.selectedComponent.frequency.momentDays = 0;
+        }
+      };
+
       function updateDeletedFields(index) {
         if (Number.isInteger(index)) {
           scope.customFieldForm['customField' + index].$setValidity('deletedField', true);
@@ -176,6 +195,16 @@
             return option.value === scope.selectedComponent.frequency.momentId;
           });
           scope.selectedComponent.hasStartDateExpired = dateValidationService.isTrialExpired();
+          automation.checkCompleted();
+        }
+      }
+
+      function updateMomentTypeSelected() {
+        if (scope.selectedComponent && scope.selectedComponent.frequency) {
+          scope.momentTypeSelected = _.find(scope.momentType, function(option) {
+            return option.value === scope.selectedComponent.frequency.momentType;
+          });
+          scope.setFrequencyValue(scope.frequencyValue);
           automation.checkCompleted();
         }
       }

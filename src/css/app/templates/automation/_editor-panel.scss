@@ -739,7 +739,7 @@
           border-color: $color-red !important;
         }
 
-      input {
+      input:not(.width-full) {
         border: none;
         width: 50%;
         height: $size-full;

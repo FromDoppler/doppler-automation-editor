@@ -86,15 +86,37 @@
       <form name="momentDaysForm">
         <div class="flex-grid-v-center--s-between">
           <div class="frequency--moment-day" ng-class="{'hasErrors': momentDaysForm.days.$invalid}" ng-show="dayMomentSelected.value === 1 || dayMomentSelected.value === 2">
-            <input class="number input--text" ng-model="selectedComponent.frequency.momentDays" name="days" type="text" pattern="^[1-9][0-9]?$" maxlength="2" min="1" placeholder="00" ng-model-options="{updateOn: 'blur'}" ng-disabled="isReadOnly();" required>
-            <span>{{!selectedComponent.frequency.momentDays || selectedComponent.frequency.momentDays.toString() === '1' ? 'automation_editor.sidebar.time_unit.day' : 'automation_editor.sidebar.time_unit.days' | translate}}</span>
+              <input
+                type="number"
+                class="number input--text width-full"
+                ng-model="frequencyValue"
+                ng-change="setFrequencyValue(frequencyValue)"
+                name="days"
+                max="999"
+                min="1"
+                ng-model-options="{updateOn: 'blur'}"
+                ng-disabled="isReadOnly();"
+                required
+              />
           </div>
-          <dp-editor-dropdown class="dropdown dropdown--full" ng-class="{'dropdown--large': dayMomentSelected.value === 1 || dayMomentSelected.value === 2}" id="moment" name="moment" property="name" options="dayMoments" label="dayMomentSelected.label" on-select-option="onFrequencyAttributeSelected('momentId', option.value)" value-selected="dayMomentSelected.value" ng-disabled="isReadOnly();"></dp-editor-dropdown>
+          <dp-editor-dropdown
+            class="dropdown dropdown--full" id="momentType"
+            ng-hide="dayMomentSelected.value === 0"
+            name="momentType" property="momentType"
+            options="momentType"
+            on-select-option="onFrequencyAttributeSelected('momentType', option.value)"
+            label="(momentTypeSelected.label + (frequencyValue === 1 ? '' : 's'))"
+            value-selected="momentTypeSelected.value"
+            ng-disabled="isReadOnly();">
+          </dp-editor-dropdown>
+          <dp-editor-dropdown class="dropdown dropdown--full" ng-class="{'dropdown--large': dayMomentSelected.value === 1 || dayMomentSelected.value === 2, 'margin-l-10': dayMomentSelected.value > 0}" id="moment" name="moment" property="name" options="dayMoments" label="dayMomentSelected.label" on-select-option="onFrequencyAttributeSelected('momentId', option.value)" value-selected="dayMomentSelected.value" ng-disabled="isReadOnly();"></dp-editor-dropdown>
           <span class="read-only--tooltip positive--alignment" ng-show="isReadOnly();">{{'validation_messages.read_only_input' | translate  }}</span>
         </div>
         <!-- error messages -->
         <div class="error-messages--container" ng-messages="momentDaysForm.days.$error">
-          <div ng-message="pattern" class="error">{{'automation_editor.sidebar.scheduled_date_day_number_error' | translate}}</div>
+          <div ng-message="required" class="error">{{ 'General_Required_Field' | translate }}</div>
+          <div ng-message="max" class="error">{{'automation_editor.sidebar.scheduled_date_day_number_error' | translate}}</div>
+          <div ng-message="min" class="error">{{'automation_editor.sidebar.scheduled_date_day_number_error' | translate}}</div>
         </div>
         <span class="tip">{{ 'automation_editor.sidebar.scheduled_date_select_day_moment_tip' | translate }}</span>
       </form>
