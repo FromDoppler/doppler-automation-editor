@@ -22,10 +22,21 @@
       // Prototype inherence from BaseFrequency.
       DayYearFrequency.prototype = Object.create(BaseFrequency.prototype);
       DayYearFrequency.prototype.checkCompleted = function() {
-        if (!this.momentDays && (this.momentId === 1 || this.momentId === 2)) {
-          return false;
+        var requiresOffset = this.momentId === 1 || this.momentId === 2;
+
+        if (!requiresOffset) {
+          return true;
         }
-        return true;
+
+        if (this.momentType === TIME_UNIT.DAYS) {
+          return Number(this.momentDays) > 0;
+        }
+
+        if (this.momentType === TIME_UNIT.WEEKS) {
+          return Number(this.momentWeeks) > 0;
+        }
+
+        return false;
       };
 
       DayYearFrequency.prototype.setData = function(data) {
