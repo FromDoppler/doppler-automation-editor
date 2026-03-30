@@ -75,6 +75,14 @@
       value: 2
     }];
 
+    var momentType = [{
+      label: $translate.instant('automation_editor.components.initial_condition.scheduled_date.moment_type_day'),
+      value: TIME_UNIT.DAYS
+    }, {
+      label: $translate.instant('automation_editor.components.initial_condition.scheduled_date.moment_type_week'),
+      value: TIME_UNIT.WEEKS
+    }];
+
     var pendingPaymentTimeOptions = [{
       label: $translate.instant('automation_editor.sidebar.pending_order.drop_down_time_options.option120'),
       value: DYNAMIC_CONTENT_HOURS.TWO_HOURS
@@ -339,6 +347,7 @@
       getCampaignBehaviorEvents: getCampaignBehaviorEvents,
       getComparisonOperators: getComparisonOperators,
       getDayMoments: getDayMoments,
+      getMomentType: getMomentType,
       getDayNumberOptions: getDayNumberOptions,
       getExitOptions: getExitOptions,
       getGenderFieldOptions: getGenderFieldOptions,
@@ -385,6 +394,10 @@
 
     function getDayMoments() {
       return dayMoments;
+    }
+
+     function getMomentType() {
+      return momentType;
     }
 
     function getGenderFieldOptions() {

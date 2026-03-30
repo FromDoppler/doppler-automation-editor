@@ -3,11 +3,14 @@
 
   angular
     .module('dopplerApp.automation.editor')
-    .factory('DayYearFrequency', ['$translate', 'BaseFrequency', function($translate, BaseFrequency) {
+    .factory('DayYearFrequency', ['$translate', 'BaseFrequency', 'TIME_UNIT', function($translate, BaseFrequency, TIME_UNIT) {
 
       function DayYearFrequency(data) {
         this.momentId = 0;
+        this.momentType = TIME_UNIT.DAYS;
+        // Note: in case to add more momentType update to unique value example this.frequencyValue
         this.momentDays = 1;
+        this.momentWeeks = 0;
         this.customFields = [{
           id: 323,
           label: $translate.instant('automation_editor.components.initial_condition.scheduled_date.custom_birthday')
@@ -35,6 +38,12 @@
         }
         if (data.hasOwnProperty('customFields')) {
           this.customFields = getFormattedCustomFields(this.customFields, data.customFields);
+        }
+        if (data.hasOwnProperty('momentWeeks')) {
+          this.momentWeeks = data.momentWeeks;
+          if( this.momentWeeks > 0) {
+            this.momentType = TIME_UNIT.WEEKS;
+          }
         }
       };
 

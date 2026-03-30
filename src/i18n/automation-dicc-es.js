@@ -112,7 +112,9 @@ export const automation_es_translations = {
         "default_part2": "a la/s HH:MM.",
         "day_moment_after": "Después",
         "day_moment_before": "Antes",
-        "day_moment_now": "El mismo día"
+        "day_moment_now": "El mismo día",
+        "moment_type_day": "Día",
+        "moment_type_week": "Semana",
       },
       "site_behavior": {
         "canvas": {

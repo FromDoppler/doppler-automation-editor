@@ -4,5 +4,6 @@
   "timezone": false,
   "momentId": 0,
   "momentDays": 0,
+  "momentWeeks": 0,
   "customFields": []
 }
