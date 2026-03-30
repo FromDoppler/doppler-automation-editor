@@ -745,6 +745,9 @@
         height: $size-full;
         padding: 12px 0px 11px 10px;
       }
+      input.width-full {
+        padding: 11px 10px;
+      }
     }
   }
   .read-only--tooltip {
