@@ -548,7 +548,7 @@
     function hasDynamicElement(idCampaign) {
       var defer = $q.defer();
       automationDataservice.hasDynamicContent(model.id, idCampaign).then(function(result) {
-        defer.resolve((JSON.parse(result.data)));
+        defer.resolve(result.data);
       });
       return defer.promise;
     }

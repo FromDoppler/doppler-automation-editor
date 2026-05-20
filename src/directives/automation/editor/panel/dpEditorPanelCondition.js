@@ -612,7 +612,7 @@
           || automationType === AUTOMATION_TYPE.PENDING_ORDER) {
           if (scope.selectedConditional.email) {
             automation.hasDynamicElement(scope.selectedConditional.email.idEmail).then(function(result) {
-              if (!result) {
+              if (!result.success) {
                 scope.campaignBehaviorEvents = _.filter(scope.campaignBehaviorEvents, function(event) {
                   return event.value !== CONDITIONAL_EVENT.ANY_DYNAMIC_LINK_CLICKED
                     && event.value !== CONDITIONAL_EVENT.NO_DYNAMIC_LINK_CLICKED;

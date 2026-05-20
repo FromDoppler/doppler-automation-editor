@@ -1042,6 +1042,7 @@ export const automation_en_translations = {
       "description_visited_products": "You are about to start this Automation without showing elements of Products Visited by your users in any Email.",
       "description_pending_order": "Your Email doesn’t have the <b>Order Detail element</b>, so the information about products with pending payments won’t be shown. Any doubt? Go to <a class=\"help-text\" href=\"https://help.fromdoppler.com/en/how-to-create-pending-payment-automation\" target=\"_blank\">HELP</a>.",
       "description_confirmation_order": "Your Email doesn’t have the <b>Order Detail element</b>, so the information about products won’t be shown. Any doubt? Go to <a class=\"help-text\" href=\"https://help.fromdoppler.com/en/how-to-create-successful-payment-automation\" target=\"_blank\">HELP</a>.",
+      "description_not_available": "Please review your campaign content. Some items are not available in your store",
       "cancel": "BACK",
       "start": "START ANYWAY"
     },
