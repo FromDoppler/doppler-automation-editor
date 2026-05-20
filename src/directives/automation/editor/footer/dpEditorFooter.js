@@ -53,7 +53,7 @@
           || automationType === AUTOMATION_TYPE.PENDING_ORDER
           || automationType === AUTOMATION_TYPE.CONFIRMATION_ORDER) {
           automation.hasDynamicElement().then(function(result) {
-            if (result) {
+            if (result.success) {
               scope.startCampaign();
             } else {
               ModalService.showModal({
@@ -61,6 +61,7 @@
                 controller: 'ModalNoDynamicElementCtrl',
                 inputs: {
                   data: {
+                    errorCode: result.errorCode,
                     automationType: automationType
                   }
                 }

@@ -1041,6 +1041,7 @@ export const automation_es_translations = {
       "description_visited_products": "Estás por iniciar el Automation sin mostrar elementos de Productos Visitados por tus usuarios en ningún Email.",
       "description_pending_order": "Tu Email no posee el <b>elemento Detalle de Compra</b>, por lo que la información sobre los productos pendientes de pago no se mostrará. ¿Tienes dudas? Revisa el <a class=\"help-text\" href=\"https://help.fromdoppler.com/es/como-crear-automation-de-pago-pendiente\" target=\"_blank\">HELP</a>.",
       "description_confirmation_order": "Tu Email no posee el <b>elemento Detalle de Compra</b>, por lo que la información sobre los productos no se mostrará. ¿Tienes dudas? Revisa el <a class=\"help-text\" href=\"https://help.fromdoppler.com/es/como-crear-automation-pago-confirmado\" target=\"_blank\">HELP</a>.",
+      "description_not_available": "Por favor, revisa el contenido de tus campañas ya que existen elementos no disponibles en tu tienda",
       "cancel": "VOLVER",
       "start": "INICIAR DE TODAS FORMAS"
     },
