@@ -1612,6 +1612,19 @@ input[type="text"].padding-r-buttons-place {
   .dp-tooltip-container:hover .dp-tooltip-top.dp-tooltip-top-push {
     transform: translate(-34%, -100%);
   }
+
+  .dp-tooltip-top.dp-tooltip-top-label-push {
+    transform: translate(-23%, -100%);
+    &:before,
+    &:after {
+      left: 21%;
+      right: 75%;
+    }
+  }
+
+  .dp-tooltip-container:hover .dp-tooltip-top.dp-tooltip-top-label-push {
+    transform: translate(-23%, -100%);
+  }
 }
 
 
