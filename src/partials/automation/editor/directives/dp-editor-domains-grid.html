@@ -1,6 +1,6 @@
 <section class="background--white section--grid-empty section--content" ng-if="gridModel.isEmptyGrid">
 	<h2>{{ 'automation_editor.Domains_grid.empty_title' | translate }}</h2>
-	<p>{{ 'automation_editor.Domains_grid.empty_description' | translate }}</p>
+	<p class="dp-library" ng-bind-html="'automation_editor.Domains_grid.empty_description' | translate"></p>
 </section>
 <section class="section--content section--default background--white dp-library" id="editorDomainsGrid" ng-if="!gridModel.isEmptyGrid">
 	<div class="dp-library">

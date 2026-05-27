@@ -69,8 +69,17 @@
       <div ng-message="maxlength" class="error">{{ 'validation_messages.maxlength' | translate}}</div>
     </div>
   </div>
-  <div class="input--group">
-    <label class="label label--panel">{{ 'automation_editor.sidebar.push_message_body' | translate }}:</label>
+  <div class="dp-library">
+    <label class="label label--panel dp-flex">{{ 'automation_editor.sidebar.push_message_body' | translate }}:
+      <div class="dp-tooltip-container margin-l-10">
+        <span class="ms-icon icon-info-icon"></span>
+        <div class="dp-tooltip-top dp-tooltip-top-label-push">
+          <span>{{ 'automation_editor.sidebar.push_label_custom_field_info' | translate }}
+            <a href="/Lists/MasterCustomFields/">{{ 'automation_editor.sidebar.push_label_custom_field_info-link' | translate }}</a>
+          </span>
+        </div>
+      </div>
+    </label>
     <div class="column-wrapper content-wrapper">
        
       <textarea type="text" class="textarea input--text width-full"
@@ -139,7 +148,13 @@
       <div class="dp-tooltip-container">
         <span class="ms-icon icon-info-icon"></span>
         <div class="dp-tooltip-top dp-tooltip-top-right">
-          <span>{{ 'automation_editor.sidebar.push_image_size_tip' | translate }}</span>
+          <span>
+            {{
+            selectedComponent.pushPreferLargeImage
+              ? ('automation_editor.sidebar.push_image_large_tip' | translate)
+              : ('automation_editor.sidebar.push_image_small_tip' | translate)
+            }}
+          </span>
         </div>
       </div>
     </label>
