@@ -358,7 +358,8 @@ var IntegrationCodes = {
   MERCADOLIBRE: 13,
   MITIENDA: 14,
   JUMPSELLER: 15,
-  EMPRETIENDA: 16
+  EMPRETIENDA: 16,
+  TIENDANEGOCIO: 19
 }
 
 var VtexFieldType = {
