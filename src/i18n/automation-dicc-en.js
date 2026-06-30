@@ -818,7 +818,8 @@ export const automation_en_translations = {
           "option10": "WooCommerce",
           "option11": "easycommerce",
           "option14": "MiTienda",
-          "option15": "Jumpseller"
+          "option15": "Jumpseller",
+          "option19": "Tienda Negocio"
         },
         "drop_down_time_options": {
           "option120": "2 hours",
@@ -851,7 +852,8 @@ export const automation_en_translations = {
           "option11": "easycommerce",
           "option14": "MiTienda",
           "option15": "Jumpseller",
-          "option16": "Empretienda"
+          "option16": "Empretienda",
+          "option19": "Tienda Negocio"
         },
         "drop_down_time_options": {
           "option0": "24 hours",
@@ -888,7 +890,8 @@ export const automation_en_translations = {
           "option7": "Shopify",
           "option8": "Adobe Commerce",
           "option10": "WooCommerce",
-          "option16": "Empretienda"
+          "option16": "Empretienda",
+          "option19": "Tienda Negocio"
         },
         "drop_down_time_options": {
           "option120": "2 hours",
@@ -914,7 +917,8 @@ export const automation_en_translations = {
           "option6": "PrestaShop",
           "option7": "Shopify",
           "option8": "Adobe Commerce",
-          "option10": "WooCommerce"
+          "option10": "WooCommerce",
+          "option19": "Tienda Negocio"
         }
       },
       "push_title": "Content Editor",
