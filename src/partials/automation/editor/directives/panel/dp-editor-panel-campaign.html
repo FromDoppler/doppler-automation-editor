@@ -88,7 +88,7 @@
               <span class="read-only--tooltip" ng-show="!canEdit();">{{getReadOnlyLabel();}}</span>
             <div class="error-messages--container">
               <div class="dp-library margin-t-10">
-                <div ng-if="ShowDmarcWarning" class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+                 <div ng-if="!hasManagedDomainEnabled && ShowDmarcWarning" class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
                   <span class="dp-message-icon"></span>
                   <div class="dp-content-message">
                     <span id="email-domain" class="text--small">
@@ -96,6 +96,14 @@
                       <a href="{{'automation_editor.sidebar.campaign_dmarc_validation_linkUrl' | translate}}" target="_blank" class="dp-message-link dmarc-info ng-binding">
                         {{'automation_editor.sidebar.campaign_dmarc_validation_linkText' | translate}}
                       </a>.
+                    </span>
+                  </div>
+                </div>
+                <div ng-if="hasManagedDomainEnabled && ShowDmarcWarning && !DMARCEmailSubscribers" class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+                  <span class="dp-message-icon"></span>
+                  <div class="dp-content-message">
+                    <span id="email-domain" class="text--small">
+                      {{'automation_editor.sidebar.campaign_dmarc_managed_domain_message' | translate:{ userName: dmarcSenderUserName, idUser: dmarcSenderUserId, managedSendingDomain: managedSendingDomain } }}
                     </span>
                   </div>
                 </div>

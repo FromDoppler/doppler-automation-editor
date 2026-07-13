@@ -37,6 +37,8 @@
       var selectedCampaignUid = scope.selectedComponent.uid;
 
       scope.DMARCAcceptedDomain = '';
+      scope.dmarcSenderUserName = '';
+      scope.dmarcSenderUserId = '';
       scope.listToSend = [{
         value: 0,
         label: $translate.instant('automation_editor.sidebar.campaign_send_test_subscribers_select_placeholder'),
@@ -54,11 +56,14 @@
       scope.smartSubjectEnabled = false;
 
       scope.$watch('selectedComponent.name', onEmailNameChange);
+      scope.$watch('selectedComponent.fromEmail', updateDmarcSenderUserName);
 
       if (scope.selectedComponent.campaignType === CAMPAIGN_TYPE.CAMPAIGN_RSS) {
         scope.rss = scope.selectedComponent.rss;
         scope.$watch('selectedComponent.rss', updateRssValue);
       }
+
+      updateDmarcSenderUserName();
 
       settingsService.getSettings().then(function(response) {
         changesManager.disable();
@@ -99,8 +104,11 @@
 
         scope.smartSubjectEnabled = response.smartSubjectEnabled;
         scope.idUser = response.idUser;
+        scope.dmarcSenderUserId = toBase32(response.idUser);
         scope.industriesList = response.userIndustryInfo.Industries;
         scope.userIndustry = response.userIndustryInfo.UserIndustry;
+        scope.hasManagedDomainEnabled = response.hasManagedDomainEnabled; 
+        scope.managedSendingDomain = response.managedSendingDomain;
         changesManager.enable();
       });
 
@@ -148,6 +156,28 @@
         scope.selectedComponent.DMARCAcceptedDomain = domain.split('.')[0].toLowerCase();
         scope.selectedComponent.confirmedDomain = domain;
       };
+
+      function updateDmarcSenderUserName() {
+        var fromEmail = scope.selectedComponent && scope.selectedComponent.fromEmail ? scope.selectedComponent.fromEmail : '';
+        scope.dmarcSenderUserName = fromEmail.indexOf('@') > -1 ? fromEmail.split('@')[0] : fromEmail;
+      }
+
+      function toBase32(value) {
+        var alphabet = '0123456789abcdefghijklmnopqrstuv';
+        var number = parseInt(value, 10);
+
+        if (!number || number < 0) {
+          return '';
+        }
+
+        var encoded = '';
+        while (number > 0) {
+          encoded = alphabet.charAt(number % 32) + encoded;
+          number = Math.floor(number / 32);
+        }
+
+        return encoded.toLowerCase();
+      }
 
       scope.includedInDmarcDomains = function (domain) {
         return scope.dmarcDomains && scope.dmarcDomains.includes(domain.toUpperCase().trim());
