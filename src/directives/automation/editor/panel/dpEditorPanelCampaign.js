@@ -56,14 +56,14 @@
       scope.smartSubjectEnabled = false;
 
       scope.$watch('selectedComponent.name', onEmailNameChange);
-      scope.$watch('selectedComponent.fromEmail', updateDmarcSenderUserName);
+      scope.$watch('selectedComponent.fromEmail', updateFromEmailUserName);
 
       if (scope.selectedComponent.campaignType === CAMPAIGN_TYPE.CAMPAIGN_RSS) {
         scope.rss = scope.selectedComponent.rss;
         scope.$watch('selectedComponent.rss', updateRssValue);
       }
 
-      updateDmarcSenderUserName();
+      updateFromEmailUserName();
 
       settingsService.getSettings().then(function(response) {
         changesManager.disable();
@@ -157,7 +157,7 @@
         scope.selectedComponent.confirmedDomain = domain;
       };
 
-      function updateDmarcSenderUserName() {
+      function updateFromEmailUserName() {
         var fromEmail = scope.selectedComponent && scope.selectedComponent.fromEmail ? scope.selectedComponent.fromEmail : '';
         scope.dmarcSenderUserName = fromEmail.indexOf('@') > -1 ? fromEmail.split('@')[0] : fromEmail;
       }
@@ -181,6 +181,15 @@
 
       scope.includedInDmarcDomains = function (domain) {
         return scope.dmarcDomains && scope.dmarcDomains.includes(domain.toUpperCase().trim());
+      };
+
+      scope.isFromEmailDomainConfirmed = function() {
+        if (!scope.selectedComponent || !scope.selectedComponent.confirmedDomain) {
+          return false;
+        }
+
+        var fromEmailDomain = scope.selectDomain(scope.selectedComponent.fromEmail);
+        return !!fromEmailDomain && fromEmailDomain === scope.selectedComponent.confirmedDomain.toLowerCase();
       };
 
       scope.removePrivateDomainMessage = function(domain) {

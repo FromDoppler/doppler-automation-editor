@@ -99,7 +99,7 @@
                     </span>
                   </div>
                 </div>
-                <div ng-if="hasManagedDomainEnabled && ShowDmarcWarning && !DMARCEmailSubscribers" class="dp-wrap-message dp-wrap-warning ng-binding ng-scope">
+                <div ng-if="hasManagedDomainEnabled && (ShowDmarcWarning || !domainKey) && !DMARCEmailSubscribers && isFromEmailDomainConfirmed()" class="dp-wrap-message dp-wrap-info ng-binding ng-scope">
                   <span class="dp-message-icon"></span>
                   <div class="dp-content-message">
                     <span id="email-domain" class="text--small">

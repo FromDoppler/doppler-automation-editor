@@ -34,14 +34,12 @@
         }
         var badEmail = false;
         var maxSubscribers = false;
-        var isPublicDoiman = false;
         if (domain !== null && domain.length > 0) {
           domain = domain[0];
           $scope.DMARCValidationDomain = domain.toLowerCase();
           if ($scope.dmarcDomains !== undefined){
             for (var i = 0 ; i < $scope.dmarcDomains.length && !badEmail ; i++) {
               if (domain.split('.')[0].toLowerCase() === $scope.dmarcDomains[i].toLowerCase().trim()) {
-                isPublicDoiman = true;
                 if ($scope.dmarcSubscribersExceeded) {
                   maxSubscribers = true;
                 } else {
@@ -50,11 +48,6 @@
                 }
               }
             }
-          }
-          if($scope.$parent.hasManagedDomainEnabled && !isPublicDoiman && !maxSubscribers && !$scope.$parent.selectedComponent.idDomainKeySelected)
-          {
-            $scope.$parent.MarkDMARCDomainWarningDisplayed();
-            badEmail = true;
           }
         }
         $scope.DMARCEmailActive = badEmail;
