@@ -46,7 +46,9 @@
       getCCMonths: getCCMonths,
       getCCYears: getCCYears,
       isValidExpDate: isValidExpDate,
-      getIdentificationLengthRange: getIdentificationLengthRange
+      getIdentificationLengthRange: getIdentificationLengthRange,
+      encodeFeistel: encodeFeistel,
+      decodeFeistel: decodeFeistel
     };
 
     return service;
@@ -111,6 +113,50 @@
 
     function isSubscriberEmail(value) {
       return REGEX_SUBSCRIBER_EMAIL.test(value);
+    }
+
+    function roundFunction(value, modulo) {
+      return (value * 73) % modulo;
+    }
+
+    function normalizeFeistelValue(value) {
+      var str = value.toString();
+
+      if (str.length % 2 !== 0) {
+        str = '0' + str;
+      }
+
+      return {
+        str: str,
+        half: str.length / 2,
+        modulo: Math.pow(10, str.length / 2)
+      };
+    }
+
+    function encodeFeistel(id) {
+      var normalizedValue = normalizeFeistelValue(id);
+      var str = normalizedValue.str;
+      var half = normalizedValue.half;
+      var modulo = normalizedValue.modulo;
+      var left = Number(str.substring(0, half));
+      var right = Number(str.substring(half));
+      var newLeft = right;
+      var newRight = (left + roundFunction(right, modulo)) % modulo;
+
+      return newLeft.toString().padStart(half, '0') + newRight.toString().padStart(half, '0');
+    }
+
+    function decodeFeistel(encoded) {
+      var normalizedValue = normalizeFeistelValue(encoded);
+      var str = normalizedValue.str;
+      var half = normalizedValue.half;
+      var modulo = normalizedValue.modulo;
+      var left = Number(str.substring(0, half));
+      var right = Number(str.substring(half));
+      var originalRight = left;
+      var originalLeft = (right - roundFunction(originalRight, modulo) + modulo) % modulo;
+
+      return Number(originalLeft.toString().padStart(half, '0') + originalRight.toString().padStart(half, '0'));
     }
 
     function validateCuit(value) {

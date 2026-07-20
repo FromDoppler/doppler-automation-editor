@@ -104,7 +104,7 @@
 
         scope.smartSubjectEnabled = response.smartSubjectEnabled;
         scope.idUser = response.idUser;
-        scope.dmarcSenderUserId = toBase32(response.idUser);
+        scope.dmarcSenderUserId = utils.encodeFeistel(response.idUser);
         scope.industriesList = response.userIndustryInfo.Industries;
         scope.userIndustry = response.userIndustryInfo.UserIndustry;
         scope.hasManagedDomainEnabled = response.hasManagedDomainEnabled; 
@@ -160,23 +160,6 @@
       function updateFromEmailUserName() {
         var fromEmail = scope.selectedComponent && scope.selectedComponent.fromEmail ? scope.selectedComponent.fromEmail : '';
         scope.dmarcSenderUserName = fromEmail.indexOf('@') > -1 ? fromEmail.split('@')[0] : fromEmail;
-      }
-
-      function toBase32(value) {
-        var alphabet = '0123456789abcdefghijklmnopqrstuv';
-        var number = parseInt(value, 10);
-
-        if (!number || number < 0) {
-          return '';
-        }
-
-        var encoded = '';
-        while (number > 0) {
-          encoded = alphabet.charAt(number % 32) + encoded;
-          number = Math.floor(number / 32);
-        }
-
-        return encoded.toLowerCase();
       }
 
       scope.includedInDmarcDomains = function (domain) {

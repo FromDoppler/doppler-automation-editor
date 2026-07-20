@@ -305,4 +305,20 @@ describe('Utils', function() {
     expect(utils.isValidExpDate(customToday, 7, 2020)).toBe(true);
     expect(utils.isValidExpDate(customToday, 1, 2021)).toBe(true);
   });
+
+  it('should encode user id using Feistel model', function() {
+    expect(utils.encodeFeistel(624866)).toBe('866842');
+  });
+
+  it('should decode Feistel encoded user id', function() {
+    expect(utils.decodeFeistel('866842')).toBe(624866);
+  });
+
+  it('should decode to the original id after encoding', function() {
+    var ids = [1, 12, 123, 1234, 624866, 9876543];
+
+    ids.forEach(function(id) {
+      expect(utils.decodeFeistel(utils.encodeFeistel(id))).toBe(id);
+    });
+  });
 });
